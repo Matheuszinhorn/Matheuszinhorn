@@ -61,11 +61,13 @@
 
 ---
 
+
 <div align="center">
   <br>
   <p align="center"><b>Contador de visitas</b></p>  
-  <img align="center" src="https://profile-counter.glitch.me/{Matheuszinhorn}/count.svg" />
+  <img align="center" src="https://profile-counter.glitch.me/Matheuszinhorn/count.svg" />
   <br><br>
 </div>
+
 
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=00bfbf&height=120&section=footer"/>
