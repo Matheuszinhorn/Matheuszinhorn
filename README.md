@@ -23,9 +23,9 @@
 
 ### 💡 Sobre mim:
 🎓 Estudante de Engenharia de Software na Estácio  
-📱 Focado em desenvolvimento mobile (Android & iOS)  
+📱 Focado em desenvolvimento mobile (Android & iOS), Software e Web.
 🚀 Entusiasta de tecnologia e inovação  
-💼 Buscando oportunidades como desenvolvedor mobile  
+💼 Buscando oportunidades como desenvolvedor  
 🌍 Porto Alegre, Brasil  
 
 ---
