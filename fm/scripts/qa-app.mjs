@@ -39,7 +39,7 @@ async function run(vp) {
   // innerText respeita text-transform (títulos em CAIXA ALTA): comparar sempre em minúsculas.
   const text = () => page.evaluate(() => document.body.innerText.toLowerCase());
 
-  await page.goto('file://' + join(ROOT, 'dist/app/index.html'));
+  await page.goto(process.env.APP_URL || 'file://' + join(ROOT, 'dist/app/index.html'));
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await shot('inicio');

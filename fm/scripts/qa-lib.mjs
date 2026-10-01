@@ -5,7 +5,8 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-export const APP_URL = 'file://' + join(ROOT, 'dist/app/index.html');
+// APP_URL=http://... testa o build servido por HTTP (como publicado); sem a variável, abre o arquivo local.
+export const APP_URL = process.env.APP_URL || 'file://' + join(ROOT, 'dist/app/index.html');
 export const SAVE_KEY = 'fm-brasileiro:carreira:v1';
 export const { chromium } = createRequire((process.env.NODE_PATH || '/home/claude/.npm-global/lib/node_modules') + '/')('playwright');
 export const shotDir = (...p) => { const d = join(ROOT, 'dist/qa', ...p); mkdirSync(d, { recursive: true }); return d; };
