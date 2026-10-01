@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { parseFormation } from '../../engine/index.ts';
-import { resolveUserLineup, userClub } from '../../game/career.ts';
+import { createRound, parseFormation, roundResults, simulateRound } from '../../engine/index.ts';
+import { ROUNDS_PER_SEASON, finishRound, isSeasonOver, planRound, resolveUserLineup, serializeCareer, userClub } from '../../game/career.ts';
 import type { Scheduler } from '../../game/session.ts';
 import { GameController, SAVE_KEY, SPEED_KEY, memoryStorage } from '../src/controller.ts';
 
@@ -225,4 +225,31 @@ test('abandonar a carreira apaga o salvamento e volta ao início', () => {
   assert.equal(b.ctrl.state.screen, 'START');
   assert.equal(b.storage.get(SAVE_KEY), null);
   assert.equal(b.ctrl.state.hasSave, false);
+});
+
+test('recarregar no fim da temporada (após a rodada 38, antes de INICIAR TEMPORADA): a carreira não trava e a virada funciona', () => {
+  const a = startedCareer();
+  // avança a carreira até o fim da temporada com rodadas só da CPU (mesmas funções do jogo) e salva como o app salva
+  let c = a.ctrl.state.career!;
+  while (!isSeasonOver(c)) {
+    const plan = planRound(c);
+    c = finishRound(c, roundResults(simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null)))).career;
+  }
+  assert.ok(c.pendingPromotion);
+  a.storage.set(SAVE_KEY, serializeCareer(c));
+  // "recarregar": outro controlador, mesma memória
+  const b = boot(a.storage);
+  b.ctrl.continueCareer();
+  assert.equal(b.ctrl.state.career!.roundNumber, ROUNDS_PER_SEASON + 1);
+  assert.equal(b.ctrl.state.phase, 'POST', 'temporada encerrada volta na tela de fim de temporada');
+  b.ctrl.startRound(); // não pode tentar jogar a "rodada 39"
+  assert.notEqual(b.ctrl.state.toast?.kind, 'error');
+  b.ctrl.nextRound(); // INICIAR TEMPORADA
+  const n = b.ctrl.state.career!;
+  assert.equal(n.season, c.season + 1);
+  assert.equal(n.roundNumber, 1);
+  assert.equal(n.pendingPromotion, null);
+  assert.equal(b.ctrl.state.phase, 'PRE');
+  playRound(b);
+  assert.equal(b.ctrl.state.career!.roundNumber, 2);
 });

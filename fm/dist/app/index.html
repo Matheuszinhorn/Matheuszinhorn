@@ -401,7 +401,10 @@ class GameController {
     try {
       const career = deserializeCareer(json);
       this.applied.clear();
-      this.set({ career, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null });
+      // Salvo depois da rodada 38 e antes de INICIAR TEMPORADA: volta para a tela de fim de temporada (POST),
+      // a única que oferece a virada. Em PRE só haveria JOGAR RODADA, que não existe mais nesta temporada.
+      const phase             = isSeasonOver(career) ? 'POST' : 'PRE';
+      this.set({ career, phase, plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null });
     } catch (e) {
       this.fail(e);
     }
