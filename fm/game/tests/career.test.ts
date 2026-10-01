@@ -4,6 +4,7 @@ import { autoLineup, createRound, roundResults, simulateRound, type MatchResult,
 import { suggestedCommand } from '../assist.ts';
 import {
   ROUNDS_PER_SEASON,
+  STARTING_DIVISION_LEVEL,
   applyConditions,
   careerOffers,
   clubsContext,
@@ -37,12 +38,30 @@ function cpuRound(c: CareerState) {
   return finishRound(c, roundResults(round));
 }
 
-test('ofertas de clube: 3 clubes distintos (um da 3ª e dois da 4ª divisão), sempre os mesmos para a mesma seed', () => {
+test('ofertas de clube: 3 clubes distintos, todos da 4ª divisão, sempre os mesmos para a mesma seed', () => {
   assert.equal(offers.length, 3);
   assert.equal(new Set(offers).size, 3);
   assert.deepStrictEqual(careerOffers(SEED), offers);
   const world = createCareer({ seed: SEED, coachName: 'A', clubId: offers[0] }).world;
-  assert.deepStrictEqual(offers.map((id) => world.clubs[id].divisionId), ['D3', 'D4', 'D4']);
+  assert.deepStrictEqual(offers.map((id) => world.clubs[id].divisionId), ['D4', 'D4', 'D4']);
+});
+
+test('início da carreira: em qualquer seed as 3 ofertas são da 4ª divisão e a carreira criada começa nela', () => {
+  for (let i = 0; i < 25; i++) {
+    const seed = `inicio-d4-${i}`;
+    const ids = careerOffers(seed);
+    assert.equal(new Set(ids).size, 3, seed);
+    for (const id of ids) {
+      const c = createCareer({ seed, coachName: 'A', clubId: id });
+      const div = c.world.divisions.find((d) => d.clubIds.includes(id))!;
+      assert.equal(div.level, STARTING_DIVISION_LEVEL, `${seed}: ${id} está no nível ${div.level}`);
+      assert.equal(userClub(c).divisionId, div.id);
+    }
+  }
+  // A restrição vale só para as ofertas iniciais: createCareer continua aceitando clube de outra divisão.
+  const world = createCareer({ seed: SEED, coachName: 'A', clubId: offers[0] }).world;
+  const d3 = world.divisions.find((d) => d.level === 3)!.clubIds[0];
+  assert.equal(userClub(createCareer({ seed: SEED, coachName: 'A', clubId: d3 })).divisionId, world.clubs[d3].divisionId);
 });
 
 test('criar carreira: 4 divisões × 20 clubes, calendário de 38 rodadas com 10 jogos por divisão, rodada 1', () => {

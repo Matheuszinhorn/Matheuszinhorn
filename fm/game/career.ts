@@ -85,13 +85,19 @@ export interface CareerState {
 
 // ---------- Criação ----------
 
-/** Três clubes oferecidos ao treinador novo: um da 3ª divisão e dois da 4ª (a carreira começa por baixo). */
+/** Divisão em que toda carreira nova começa (especificação: "começar carreira na 4ª divisão por padrão"). */
+export const STARTING_DIVISION_LEVEL = 4;
+
+/**
+ * Três clubes diferentes oferecidos ao treinador novo, todos da 4ª divisão (a carreira começa por baixo).
+ * Só vale para o INÍCIO da carreira: createCareer continua aceitando qualquer clube (ofertas futuras de divisões superiores).
+ */
 export function careerOffers(seed: string): string[] {
   const world = generateWorld(seed);
   const rng = createRng(deriveSeed(seed, 'ofertas'));
   const pool = (level: number) => (world.divisions.find((d) => d.level === level)?.clubIds ?? []).slice();
   const picks: string[] = [];
-  for (const level of [3, 4, 4]) {
+  for (const level of [STARTING_DIVISION_LEVEL, STARTING_DIVISION_LEVEL, STARTING_DIVISION_LEVEL]) {
     const options = pool(level).filter((id) => !picks.includes(id));
     picks.push(rng.pick(options));
   }
