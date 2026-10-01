@@ -10,6 +10,20 @@ Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos cl�
 | Engine | **0.2.0** (`engine/config.ts` → `engineVersion`), fechado: não recalibrar |
 | Artefato | `dist/app/index.html` — um único HTML estático, autocontido |
 
+## Documentação
+
+| Documento | Conteúdo |
+|---|---|
+| [docs/PRODUCT.md](docs/PRODUCT.md) | O que é o jogo e como ele se organiza |
+| [docs/GAMEPLAY.md](docs/GAMEPLAY.md) | Regras do jogo como funcionam hoje |
+| [docs/ENGINE.md](docs/ENGINE.md) | Engine 0.2.0, valores oficiais e determinismo |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Camadas app/game/engine, fluxo de dados, persistência, build |
+| [docs/QA.md](docs/QA.md) | Testes e validações executados |
+| [docs/RELEASE.md](docs/RELEASE.md) | Release 1.0.0-rc.1: instalar, testar, gerar, publicar |
+| [docs/BACKLOG.md](docs/BACKLOG.md) | Limitações aceitas e itens futuros |
+| [docs/DESIGN-DECISIONS.md](docs/DESIGN-DECISIONS.md) | Decisões de design em vigor |
+| [docs/HANDOFF-RC.md](docs/HANDOFF-RC.md) | Estado atual para quem continuar o trabalho |
+
 ## Requisitos
 
 - Node.js 22 (o código TypeScript roda direto no Node, com remoção de tipos nativa; sem bundler externo).
