@@ -6,8 +6,8 @@
 | Versão | 1.0.0-rc.1 (`package.json`) |
 | Engine | 0.2.0 (`engine/config.ts`) |
 | Commit auditado (RC) | `2c07826` |
-| Artefato | `dist/app/index.html` — 278.340 bytes, sha256 `089164b09de8ffd31fc4e65e0d6e21e1695df6c0ed434475957c2651ae97fbe6` (build da auditoria de release, com a correção do P1; reproduzido em cópia limpa) |
-| Status | Pronto para playtest humano; não publicado ([RELEASE-AUDIT.md](RELEASE-AUDIT.md)) |
+| Artefato | `dist/app/index.html` — 350.165 bytes, sha256 `1c9be0d33ecf06721035f52d2e8eb8e8c2e7dbded43b11ffbb57206a2b20a553` (identidade ELITE MANAGER, splash, infraestrutura de universos e displayName) |
+| Status | Publicado para playtest (Artifact claude.ai); universo padrão: fictício ([RELEASE-AUDIT.md](RELEASE-AUDIT.md), [UNIVERSES.md](UNIVERSES.md)) |
 
 ## Requisitos
 

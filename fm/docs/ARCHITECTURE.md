@@ -20,6 +20,11 @@ engine/  Engine 0.2.0, determinístico (ver ENGINE.md)
 
 Não há divisão servidor/cliente: o jogo inteiro é uma página estática.
 
+**Camada de dados (V1.1, branch `feature/real-rosters-2026`):** `data/` fornece mundos ao jogo a partir de
+universos de dados (ex.: Brasileirão 2026), pelo fluxo fonte → raw → normalização → validação → `Universe` →
+`World`. Ela depende só dos tipos e de `generateWorld` do engine; o engine não a conhece. Ainda não é usada por
+`game/` nem pelo build do app (o jogo continua no universo fictício). Detalhes em [UNIVERSES.md](UNIVERSES.md).
+
 ## Responsabilidades
 
 | Camada | Faz | Não faz |
@@ -27,6 +32,7 @@ Não há divisão servidor/cliente: o jogo inteiro é uma página estática.
 | `engine/` | Simula minutos, sorteia eventos, valida times e comandos, abre decisões, aplica a política da CPU, calcula tabela, acesso/rebaixamento e finanças. | Não sabe de telas, velocidade, armazenamento ou do clube "do jogador" além do `controlledClubId`. |
 | `game/` | Carreira entre rodadas (aplicar resultados uma vez, lesões, suspensões, finanças, virada de temporada), sessão da rodada (ritmo, pausas, fila de decisões), consultas, edição de escalação. | Não desenha nada e não muda regras de partida. |
 | `app/` | Mostra o estado, coleta escolhas, chama o controlador, salva e carrega. | Não decide resultado nem valida regras: quem valida é o engine. |
+| `data/` | Universos de dados: modelos, normalização, validação, importação JSON, conversão para `World`, registro de universos. | Não simula nada, não acessa a internet em runtime e não muda o engine. |
 
 ## Fluxo de dados
 
@@ -71,7 +77,9 @@ volta ao início da mesma rodada sem nada aplicado. Recarregar no fim da tempora
 
 - `npm run build` executa `scripts/build-app.mjs`: um empacotador próprio, sem dependências, que usa a remoção de
   tipos do Node, resolve os imports relativos a partir de `app/src/main.ts` e gera **um único**
-  `dist/app/index.html` com CSS e JavaScript embutidos.
+  `dist/app/index.html` com CSS e JavaScript embutidos. As imagens da marca também vão embutidas (data: URI): a logo
+  oficial `docs/brand/elite-manager-logo-referencia.png`, uma vez, no token `--brand-logo` do CSS, e o favicon e o
+  ícone de atalho de `app/assets/`. O jogo continua um arquivo único que funciona offline.
 - Por isso o código do app usa apenas imports relativos e sintaxe TypeScript "apagável" (sem `enum`, `namespace`
   ou parameter properties; `import type` para tipos).
 - O HTML resultante é estático e autocontido: funciona aberto direto (`file://`) ou servido por qualquer servidor

@@ -1,0 +1,5408 @@
+{
+ "format": "wikipedia-fs-player",
+ "source": "wikipedia-en",
+ "country": "Brasil",
+ "retrievedAt": "2026-10-01T21:38:26.876821Z",
+ "seasonArticle": {
+  "title": "2026 Campeonato Brasileiro Série A",
+  "url": "https://en.wikipedia.org/wiki/2026_Campeonato_Brasileiro_S%C3%A9rie_A",
+  "usedFor": "lista dos 20 clubes; nome popular, cidade, estado, estádio e capacidade (tabela \"Stadiums and locations\")"
+ },
+ "squadsUsedFor": "elenco principal: primeira seção do artigo do clube com {{Fs player}} (exclui base, reservas e emprestados a outros clubes)",
+ "clubs": [
+  {
+   "club": "athletico-pr",
+   "commonName": "Athletico Paranaense",
+   "fullName": "Club Athletico Paranaense",
+   "city": "Curitiba",
+   "state": "Paraná",
+   "stadium": "Arena da Baixada",
+   "capacity": 42372,
+   "article": "Club Athletico Paranaense",
+   "articleUrl": "https://en.wikipedia.org/wiki/Club_Athletico_Paranaense",
+   "articleRevision": "1376370525"
+  },
+  {
+   "club": "atletico-mg",
+   "commonName": "Atlético Mineiro",
+   "fullName": "Clube Atlético Mineiro",
+   "city": "Belo Horizonte",
+   "state": "Minas Gerais",
+   "stadium": "Arena MRV",
+   "capacity": 44892,
+   "article": "Clube Atlético Mineiro",
+   "articleUrl": "https://en.wikipedia.org/wiki/Clube_Atl%C3%A9tico_Mineiro",
+   "articleRevision": "1376375118"
+  },
+  {
+   "club": "bahia",
+   "commonName": "Bahia",
+   "fullName": "Esporte Clube Bahia",
+   "city": "Salvador",
+   "state": "Bahia",
+   "stadium": "Casa de Apostas Arena Fonte Nova",
+   "capacity": 50052,
+   "article": "Esporte Clube Bahia",
+   "articleUrl": "https://en.wikipedia.org/wiki/Esporte_Clube_Bahia",
+   "articleRevision": null
+  },
+  {
+   "club": "botafogo",
+   "commonName": "Botafogo",
+   "fullName": "Botafogo de Futebol e Regatas",
+   "city": "Rio de Janeiro",
+   "state": "Rio de Janeiro",
+   "stadium": "Olímpico Nilton Santos",
+   "capacity": 44661,
+   "article": "Botafogo FR",
+   "articleUrl": "https://en.wikipedia.org/wiki/Botafogo_FR",
+   "articleRevision": "1376171892"
+  },
+  {
+   "club": "bragantino",
+   "commonName": "Red Bull Bragantino",
+   "fullName": "Red Bull Bragantino",
+   "city": "Bragança Paulista",
+   "state": "São Paulo",
+   "stadium": "Cícero de Souza Marques",
+   "capacity": 12000,
+   "article": "Red Bull Bragantino",
+   "articleUrl": "https://en.wikipedia.org/wiki/Red_Bull_Bragantino",
+   "articleRevision": "1376544718"
+  },
+  {
+   "club": "chapecoense",
+   "commonName": "Chapecoense",
+   "fullName": "Associação Chapecoense de Futebol",
+   "city": "Chapecó",
+   "state": "Santa Catarina",
+   "stadium": "Arena Condá",
+   "capacity": 20089,
+   "article": "Associação Chapecoense de Futebol",
+   "articleUrl": "https://en.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Chapecoense_de_Futebol",
+   "articleRevision": "1376951240"
+  },
+  {
+   "club": "corinthians",
+   "commonName": "Corinthians",
+   "fullName": "Sport Club Corinthians Paulista",
+   "city": "São Paulo",
+   "state": "São Paulo",
+   "stadium": "Neo Química Arena",
+   "capacity": 47252,
+   "article": "SC Corinthians Paulista",
+   "articleUrl": "https://en.wikipedia.org/wiki/SC_Corinthians_Paulista",
+   "articleRevision": "1377033897"
+  },
+  {
+   "club": "coritiba",
+   "commonName": "Coritiba",
+   "fullName": "Coritiba Foot Ball Club",
+   "city": "Curitiba",
+   "state": "Paraná",
+   "stadium": "Couto Pereira",
+   "capacity": 40502,
+   "article": "Coritiba Foot Ball Club",
+   "articleUrl": "https://en.wikipedia.org/wiki/Coritiba_Foot_Ball_Club",
+   "articleRevision": null
+  },
+  {
+   "club": "cruzeiro",
+   "commonName": "Cruzeiro",
+   "fullName": "Cruzeiro Esporte Clube",
+   "city": "Belo Horizonte",
+   "state": "Minas Gerais",
+   "stadium": "Mineirão",
+   "capacity": 66658,
+   "article": "Cruzeiro EC",
+   "articleUrl": "https://en.wikipedia.org/wiki/Cruzeiro_EC",
+   "articleRevision": "1376370648"
+  },
+  {
+   "club": "flamengo",
+   "commonName": "Flamengo",
+   "fullName": "Clube de Regatas do Flamengo",
+   "city": "Rio de Janeiro",
+   "state": "Rio de Janeiro",
+   "stadium": "Maracanã",
+   "capacity": 78838,
+   "article": "CR Flamengo",
+   "articleUrl": "https://en.wikipedia.org/wiki/CR_Flamengo",
+   "articleRevision": "1376321543"
+  },
+  {
+   "club": "fluminense",
+   "commonName": "Fluminense",
+   "fullName": "Fluminense Football Club",
+   "city": "Rio de Janeiro",
+   "state": "Rio de Janeiro",
+   "stadium": "Maracanã",
+   "capacity": 78838,
+   "article": "Fluminense FC",
+   "articleUrl": "https://en.wikipedia.org/wiki/Fluminense_FC",
+   "articleRevision": null
+  },
+  {
+   "club": "gremio",
+   "commonName": "Grêmio",
+   "fullName": "Grêmio Foot-Ball Porto Alegrense",
+   "city": "Porto Alegre",
+   "state": "Rio Grande do Sul",
+   "stadium": "Arena do Grêmio",
+   "capacity": 60540,
+   "article": "Grêmio FBPA",
+   "articleUrl": "https://en.wikipedia.org/wiki/Gr%C3%AAmio_FBPA",
+   "articleRevision": "1376897038"
+  },
+  {
+   "club": "internacional",
+   "commonName": "Internacional",
+   "fullName": "Sport Club Internacional",
+   "city": "Porto Alegre",
+   "state": "Rio Grande do Sul",
+   "stadium": "Beira-Rio",
+   "capacity": 49055,
+   "article": "SC Internacional",
+   "articleUrl": "https://en.wikipedia.org/wiki/SC_Internacional",
+   "articleRevision": null
+  },
+  {
+   "club": "mirassol",
+   "commonName": "Mirassol",
+   "fullName": "Mirassol Futebol Clube",
+   "city": "Mirassol",
+   "state": "São Paulo",
+   "stadium": "Campos Maia",
+   "capacity": 14534,
+   "article": "Mirassol Futebol Clube",
+   "articleUrl": "https://en.wikipedia.org/wiki/Mirassol_Futebol_Clube",
+   "articleRevision": "1376373814"
+  },
+  {
+   "club": "palmeiras",
+   "commonName": "Palmeiras",
+   "fullName": "Sociedade Esportiva Palmeiras",
+   "city": "São Paulo",
+   "state": "São Paulo",
+   "stadium": "Nubank Parque",
+   "capacity": 43713,
+   "article": "SE Palmeiras",
+   "articleUrl": "https://en.wikipedia.org/wiki/SE_Palmeiras",
+   "articleRevision": "1376496995"
+  },
+  {
+   "club": "remo",
+   "commonName": "Remo",
+   "fullName": "Clube do Remo",
+   "city": "Belém",
+   "state": "Pará",
+   "stadium": "Mangueirão",
+   "capacity": 53645,
+   "article": "Clube do Remo",
+   "articleUrl": "https://en.wikipedia.org/wiki/Clube_do_Remo",
+   "articleRevision": null
+  },
+  {
+   "club": "santos",
+   "commonName": "Santos",
+   "fullName": "Santos Futebol Clube",
+   "city": "Santos",
+   "state": "São Paulo",
+   "stadium": "Vila Belmiro",
+   "capacity": 16068,
+   "article": "Santos FC",
+   "articleUrl": "https://en.wikipedia.org/wiki/Santos_FC",
+   "articleRevision": "1376959995"
+  },
+  {
+   "club": "sao-paulo",
+   "commonName": "São Paulo",
+   "fullName": "São Paulo Futebol Clube",
+   "city": "São Paulo",
+   "state": "São Paulo",
+   "stadium": "MorumBIS",
+   "capacity": 66671,
+   "article": "São Paulo FC",
+   "articleUrl": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC",
+   "articleRevision": "1377216184"
+  },
+  {
+   "club": "vasco",
+   "commonName": "Vasco da Gama",
+   "fullName": "Club de Regatas Vasco da Gama",
+   "city": "Rio de Janeiro",
+   "state": "Rio de Janeiro",
+   "stadium": "São Januário",
+   "capacity": 24584,
+   "article": "CR Vasco da Gama",
+   "articleUrl": "https://en.wikipedia.org/wiki/CR_Vasco_da_Gama",
+   "articleRevision": "1377897204"
+  },
+  {
+   "club": "vitoria",
+   "commonName": "Vitória",
+   "fullName": "Esporte Clube Vitória",
+   "city": "Salvador",
+   "state": "Bahia",
+   "stadium": "Barradão",
+   "capacity": 30793,
+   "article": "Esporte Clube Vitória",
+   "articleUrl": "https://en.wikipedia.org/wiki/Esporte_Clube_Vit%C3%B3ria",
+   "articleRevision": "1376370924"
+  }
+ ],
+ "players": [
+  {
+   "club": "athletico-pr",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Mycael]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "2",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Gilberto (footballer, born 2005)|Gilberto dos Santos]]",
+   "other": "on loan from [[SE Palmeiras|Palmeiras]]"
+  },
+  {
+   "club": "athletico-pr",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Léo Pelé]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "4",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Arthur Dias]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "5",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Felipinho (footballer, born 2001)|Felipinho]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Léo Derik]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "7",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Stiven Mendoza]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[João Cruz (footballer, born 2006)|João Cruz]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "9",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Kevin Viveros]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "10",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Bruno Zapelli]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "12",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Gilberto (footballer, born 1993)|Gilberto Moraes]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "14",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Luiz Gustavo]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "16",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Jadson (footballer, born 1993)|Jadson]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "17",
+   "nat": "Colombia",
+   "pos": "MF",
+   "name": "[[Alejandro García (footballer, born 2001)|Alejandro García]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "18",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Kerwin Vargas]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "19",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Jorge Rivaldo]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "21",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Leozinho (footballer, born 1998)|Leozinho]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "22",
+   "nat": "Colombia",
+   "pos": "DF",
+   "name": "[[Carlos Terán]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "23",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Santos (footballer, born 1990)|Santos]]",
+   "other": "[[Captain (association football)|captain]]; on loan from [[Fortaleza Esporte Clube|Fortaleza]]"
+  },
+  {
+   "club": "athletico-pr",
+   "no": "25",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Dantas (footballer)|Dantas]]",
+   "other": "on loan from [[Grêmio Novorizontino|Novorizontino]]"
+  },
+  {
+   "club": "athletico-pr",
+   "no": "26",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Claudinho (footballer, born 2005)|Claudinho]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "27",
+   "nat": "Colombia",
+   "pos": "MF",
+   "name": "[[Juan Portilla]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "29",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Gastón Benavídez]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "33",
+   "nat": "Colombia",
+   "pos": "DF",
+   "name": "[[Juan Felipe Aguirre]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "37",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Lucas Esquivel]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "42",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Matheus Soares Rocha|Matheus Soares]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "47",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Felipe Chiqueti]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "50",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Renan Rodrigues Fonseca Viana|Renan Viana]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "53",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Dudu (footballer, born 2006)|Dudu Kogitzki]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "63",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Riquelme (footballer, born 2005)|Riquelme]]",
+   "other": null
+  },
+  {
+   "club": "athletico-pr",
+   "no": "70",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Renan Peixoto]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Gabriel Delfim]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "2",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Natanael (footballer, born 2002)|Natanael]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Léo Duarte]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "4",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Ruan Tressoldi]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "5",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Alexsander (footballer, born 2003)|Alexsander]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Renan Lodi]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Fred (footballer, born 1993)|Fred]]",
+   "other": "[[Vice-captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "atletico-mg",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Maycon (footballer, born 1997)|Maycon]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "9",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Mateo Cassierra]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "10",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Gustavo Scarpa]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "11",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Bernard (footballer)|Bernard]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "13",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Lyanco]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "14",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Vitor Hugo (footballer, born 1991)|Vitor Hugo]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "15",
+   "nat": "Colombia",
+   "pos": "MF",
+   "name": "[[Kevin Castaño]]",
+   "other": "on loan from [[Club Atlético River Plate|River Plate]]"
+  },
+  {
+   "club": "atletico-mg",
+   "no": "17",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Igor Gomes]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "18",
+   "nat": "Uruguay",
+   "pos": "FW",
+   "name": "[[Thiago Borbas]]",
+   "other": "on loan from [[Red Bull Bragantino]]"
+  },
+  {
+   "club": "atletico-mg",
+   "no": "19",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Reinier Jesus|Reinier]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "21",
+   "nat": "Ecuador",
+   "pos": "MF",
+   "name": "[[Alan Franco (footballer, born 1998)|Alan Franco]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "22",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Everson (footballer, born 1990)|Everson]]",
+   "other": "[[captain (association football)|captain]]"
+  },
+  {
+   "club": "atletico-mg",
+   "no": "23",
+   "nat": "Ecuador",
+   "pos": "DF",
+   "name": "[[Ángelo Preciado]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "25",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Tomás Pérez (footballer)|Tomás Pérez]]",
+   "other": "on loan from [[FC Porto|Porto]]"
+  },
+  {
+   "club": "atletico-mg",
+   "no": "27",
+   "nat": "Ecuador",
+   "pos": "FW",
+   "name": "[[Alan Minda]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "28",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[Tomás Cuello]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "29",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Cauã Soares]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "30",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Victor Hugo (footballer, born 11 May 2004)|Victor Hugo]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "31",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Robert Pinto Alves Assunção|Robert]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "36",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Kauã Pascini]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "38",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Índio (footballer, born 2008)|Índio]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "39",
+   "nat": "Guinea",
+   "pos": "MF",
+   "name": "[[Mamady Cissé]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "40",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Vitão (footballer, born 2008)|Vitão]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "46",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Pedro Cobra]]",
+   "other": null
+  },
+  {
+   "club": "atletico-mg",
+   "no": "92",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Dudu (footballer, born 1992)|Dudu]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Ronaldo (footballer, born August 1996)|Ronaldo]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "3",
+   "nat": "ESP",
+   "pos": "DF",
+   "name": "[[Marco Moreno]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Kanu (footballer, born 1997)|Kanu]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "5",
+   "nat": "URU",
+   "pos": "MF",
+   "name": "[[Nicolás Acevedo]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Jean Lucas (footballer, born 1998)|Jean Lucas]]",
+   "other": "[[Captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "bahia",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Ademir (footballer, born 1995)|Ademir]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Caio Alexandre]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "9",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Alejo Véliz (footballer)|Alejo Véliz]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Éverton Ribeiro]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "bahia",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Rodrigo Nestor]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Willian José]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "14",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Erick (footballer, born November 1997)|Erick]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "15",
+   "nat": "URU",
+   "pos": "MF",
+   "name": "[[Michel Araújo]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "16",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Erick Pulga]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "17",
+   "nat": "ARG",
+   "pos": "GK",
+   "name": "[[Guido Herrera]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "18",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Lautaro López (footballer)|Lautaro López]]",
+   "other": "on loan from [[Montevideo City Torque]]"
+  },
+  {
+   "club": "bahia",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Léo (footballer, born 1990)|Léo Vieira]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "23",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Mateo Sanabria]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Everaldo (footballer, born 1991)|Everaldo]]",
+   "other": "on loan from [[Fluminense FC|Fluminense]]"
+  },
+  {
+   "club": "bahia",
+   "no": "31",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Román Gómez (footballer)|Román Gómez]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "33",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[David Duarte]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "43",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Luiz Gustavo (footballer, born April 2006)|Luiz Gustavo]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "44",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marcos Victor]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "46",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Luciano Juba]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "57",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Kauê Furquim]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "63",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[David Martins Almeida de Lira|David Martins]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "66",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[José Guilherme|Zé Guilherme]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "77",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Ruan Pablo]]",
+   "other": null
+  },
+  {
+   "club": "bahia",
+   "no": "99",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Cristian Olivera|Kike Olivera]]",
+   "other": "on loan from [[Grêmio FBPA|Grêmio]]"
+  },
+  {
+   "club": "botafogo",
+   "no": "2",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Vitinho (footballer, born July 1999)|Vitinho]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Arthur Chaves]]",
+   "other": "<small>on loan from [[TSG 1899 Hoffenheim|Hoffenheim 1899]]</small>"
+  },
+  {
+   "club": "botafogo",
+   "no": "4",
+   "nat": "Uruguay",
+   "pos": "DF",
+   "name": "[[Mateo Ponte]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "5",
+   "nat": "Venezuela",
+   "pos": "DF",
+   "name": "[[Nahuel Ferraresi]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "6",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Cristian Medina]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Júnior Santos (footballer, born 1994)|Júnior Santos]]",
+   "other": "<small>on loan from [[Clube Atlético Mineiro|Atlético Mineiro]]</small>"
+  },
+  {
+   "club": "botafogo",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Danilo (footballer, born 2001)|Danilo Santos]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Tiquinho Soares]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "10",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Álvaro Montoro]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "11",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Matheus Martins]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "12",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Gabriel Batista]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "13",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Alex Telles]]",
+   "other": "<small>[[Captain (association football)|captain]]</small>"
+  },
+  {
+   "club": "botafogo",
+   "no": "14",
+   "nat": "Colombia",
+   "pos": "MF",
+   "name": "[[Jordan Barrera]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "17",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Warleson]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "19",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Arthur Cabral]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "21",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Fernando Marçal|Marçal]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "22",
+   "nat": "Morocco",
+   "pos": "FW",
+   "name": "[[Hakim Ziyech]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "25",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Allan (footballer, born 1991)|Allan]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "26",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Anthony Wesley Ciriano Oliveira|Anthony]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "29",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Paulinho (footballer, born 1995)|Paulinho]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "31",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Kaio Pantaleão]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "33",
+   "nat": "Uruguay",
+   "pos": "DF",
+   "name": "[[Lucas Monzón (Uruguayan footballer)|Lucas Monzón]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "34",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Gabriel Pereira Justino|Gabriel Justino]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "37",
+   "nat": "Panama",
+   "pos": "FW",
+   "name": "[[Kadir Barría]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "42",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Kadu (footballer, born 2005)|Kadu]]",
+   "other": "<small>on loan from [[Clube do Remo|Remo]]</small>"
+  },
+  {
+   "club": "botafogo",
+   "no": "59",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Kauan Toledo]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "75",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Victor Hugo Custódio de Melo Moura|Huguinho]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "77",
+   "nat": "Uruguay",
+   "pos": "FW",
+   "name": "[[Lucas Villalba (footballer, born 2001)|Lucas Villalba]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "79",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Lucas Emanuel Jales do Nascimento|Lucas Emanuel]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "88",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Edenilson]]",
+   "other": null
+  },
+  {
+   "club": "botafogo",
+   "no": "90",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Danilo (footballer, born 1999)|Danilo Pereira]]",
+   "other": "<small>on loan from [[Rangers F.C.|Rangers]]</small>"
+  },
+  {
+   "club": "botafogo",
+   "no": "91",
+   "nat": "Angola",
+   "pos": "MF",
+   "name": "[[Domingos Andrade]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Cleiton (footballer, born 1997)|Cleiton]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "bragantino",
+   "no": "2",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[Guzmán Rodríguez]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Eduardo Santos (footballer)|Eduardo Santos]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Alix Vinicius]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "5",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Fabinho (footballer, born 2002)|Fabinho]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Gabriel (footballer, born July 1992)|Gabriel]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Eric Ramires]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Eduardo Sasha]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "9",
+   "nat": "PAR",
+   "pos": "FW",
+   "name": "[[Isidro Pitta]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Fernando (footballer, born March 1999)|Fernando]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Vanderlan]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "15",
+   "nat": "URU",
+   "pos": "MF",
+   "name": "[[Ignacio Sosa|Nacho Sosa]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "16",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gustavo Marques]]",
+   "other": "on loan from [[S.L. Benfica|Benfica]]"
+  },
+  {
+   "club": "bragantino",
+   "no": "17",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Vinicius Pereira|Vinicinho]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Tiago Volpi]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "19",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Bruno Gonçalves (footballer, born 2003)|Bruno Gonçalves]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Rodriguinho (footballer, born 2004)|Rodriguinho]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Lucas Barbosa (footballer, born 2001)|Lucas Barbosa]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Gustavinho (footballer, born 2004)|Gustavo Neves]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "23",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[Agustín Sant'Anna]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Davi Gomes]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "29",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Juninho Capixaba]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "30",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[Henry Mosquera]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "32",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[José María Herrera]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "34",
+   "nat": "ECU",
+   "pos": "DF",
+   "name": "[[José Hurtado (footballer)|Andrés Hurtado]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Matheus Fernandes]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "37",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Fabrício Oliveira de Souza|Fabrício]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "47",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Wallace Yan]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "51",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Cauê (footballer, born 2006)|Cauê Nascimento]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "56",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Gustavo Reis de Alcantara|Gustavo Reis]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "57",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Marcelinho (footballer, born 2004)|Marcelinho Braz]]",
+   "other": null
+  },
+  {
+   "club": "bragantino",
+   "no": "",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Patrick (footballer, born 2004)|Patrick]]",
+   "other": "on loan from [[Clube Atlético Mineiro|Atlético Mineiro]]"
+  },
+  {
+   "club": "chapecoense",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Rafael Santos (footballer, born 1989)|Rafael Santos]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Eduardo Doma]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "chapecoense",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Paulo Silveira dos Santos|João Paulo]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "5",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Heitor (footballer, born November 2000)|Heitor]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Mancha (footballer)|Mancha]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Marcinho (footballer, born June 1995)|Marcinho]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Robert Santos (footballer)|Robert Santos]]",
+   "other": "{{small|on loan from [[Clube Atlético Mineiro|Atlético Mineiro]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Túlio Eduardo]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Giovanni Augusto]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "11",
+   "nat": "COD",
+   "pos": "FW",
+   "name": "[[Yannick Bolasie]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Fernando (footballer, born September 1999)|Fernando]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "14",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Gabriel Werner]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "15",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Rafael Thyere]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "16",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Bruno Matias (footballer, born 1999)|Bruno Matias]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "17",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Vinicius Balieiro]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "19",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[David Antunes]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Bruno Tubarão]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Kauan Faria]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Max Alves]]",
+   "other": "{{small|on loan from [[Cuiabá Esporte Clube|Cuiabá]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Dudu (footballer, born 1997)|Dudu]]",
+   "other": "{{small|on loan from [[Guarani FC|Guarani]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "25",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Victor Caetano]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "26",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Everton (footballer, born April 1995)|Everton]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Camilo (footballer, born 1999)|Camilo]]",
+   "other": "{{small|on loan from [[Grêmio FBPA|Grêmio]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "29",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Franco Andrés Rossi Donazar|Franco Rossi]]",
+   "other": "{{small|on loan from [[Toluca FC|Toluca]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Matheus Aurélio]]",
+   "other": "{{small|on loan from [[Tombense Futebol Clube|Tombense]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "31",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Maurício Garcez]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "34",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Kainã Correa Dal Magro|Kainã]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Vinicius Eduardo]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Rosivan Macedo Soares|Rosivan]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "70",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Rubens Ricoldi]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "77",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[Dylan Borrero]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "80",
+   "nat": "ESP",
+   "pos": "MF",
+   "name": "[[Miguel Carvalho (footballer, born 2005)|Miguel Carvalho]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "88",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Yago Felipe]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "91",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Bruno Pacheco]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "94",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Kevin Ramírez (footballer, born 1994)|Kevin Ramírez]]",
+   "other": "{{small|on loan from [[Atlético Clube Goianiense|Atlético Goianiense]]}}"
+  },
+  {
+   "club": "chapecoense",
+   "no": "98",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Anderson (footballer, born March 1998)|Anderson]]",
+   "other": null
+  },
+  {
+   "club": "chapecoense",
+   "no": "99",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Rafael Carvalheira]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Hugo Souza]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "2",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Matheuzinho (footballer, born 2000)|Matheuzinho]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gabriel Paulista]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Pedro (footballer, born December 2003)|João Pedro]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "5",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[André Ramalho]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Breno Bidon]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "8",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Rodrigo Garro]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "corinthians",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Yuri Alberto]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "10",
+   "nat": "NED",
+   "pos": "FW",
+   "name": "[[Memphis Depay]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Vitinho (footballer, born October 1993)|Vitinho]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "13",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gustavo Henrique (footballer, born 1993)|Gustavo Henrique]]",
+   "other": "[[Vice-captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "corinthians",
+   "no": "14",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Raniele]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Pedro Raul]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "19",
+   "nat": "PER",
+   "pos": "MF",
+   "name": "[[André Carrillo]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "20",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[Pedro Milans]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Matheus Bidu]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Matheus Pereira (footballer, born 1998)|Matheus Pereira]]",
+   "other": "on loan from [[Fortaleza Esporte Clube|Fortaleza]]"
+  },
+  {
+   "club": "corinthians",
+   "no": "26",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Fabrizio Angileri]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "29",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Allan (footballer, born 1997)|Allan]]",
+   "other": "on loan from [[CR Flamengo|Flamengo]]"
+  },
+  {
+   "club": "corinthians",
+   "no": "31",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Kayke Ferrari|Kayke]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Charles (footballer, born 1996)|Charles]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "37",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Kaio César]]",
+   "other": "on loan from [[Al Hilal SFC|Al-Hilal]]"
+  },
+  {
+   "club": "corinthians",
+   "no": "40",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Felipe Longo]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "46",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Hugo (footballer, born 1997)|Hugo Farias]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "49",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[André Luiz (footballer, born 2006)|André]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "51",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Kauê (footballer, born february 2004)|Kauê]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "52",
+   "nat": "MAR",
+   "pos": "MF",
+   "name": "[[Zakaria Labyad]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "54",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Luiz Gustavo (footballer, born January 2006)|Luiz Gustavo]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Iago Machado]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "56",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Gui Negão]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "61",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Dieguinho (footballer, born 2007)|Dieguinho]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "77",
+   "nat": "ENG",
+   "pos": "MF",
+   "name": "[[Jesse Lingard]]",
+   "other": null
+  },
+  {
+   "club": "corinthians",
+   "no": "80",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Alex Santana]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Pedro Morisco]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "2",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Tinga (footballer, born 1993)|Tinga]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Maicon (footballer, born September 1988)|Maicon]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Rodrigo Moledo]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "5",
+   "nat": "URU",
+   "pos": "MF",
+   "name": "[[Nicolás Fonseca]]",
+   "other": "{{small|on loan from [[Club León|León]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Felipe Jonatan]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "7",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Joaquín Lavega]]",
+   "other": "{{small|on loan from [[Fluminense FC|Fluminense]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "10",
+   "nat": "POR",
+   "pos": "MF",
+   "name": "[[Josué Pesqueira]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Lucas Ronier]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "13",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Keiller (footballer)|Keiller]]",
+   "other": "{{small|on loan from [[SC Internacional|Internacional]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "14",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Fabricio Bustos]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "15",
+   "nat": "COL",
+   "pos": "MF",
+   "name": "Alejandro Ararat",
+   "other": "{{small|on loan from [[Independiente Yumbo]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "17",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Brian Ocampo]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Paulo Roberto da Silva Souza|Paulo Roberto]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "19",
+   "nat": "COL",
+   "pos": "MF",
+   "name": "[[Sebastián Gómez (Colombian footballer)|Sebastián Gómez]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "coritiba",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Keno (footballer)|Keno]]",
+   "other": "{{small|on loan from [[Fluminense FC|Fluminense]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Thiago Santos (footballer, born 1989)|Thiago Santos]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Pedro Rangel (footballer)|Pedro Rangel]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Tiago Cóser]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "25",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Richard (footballer, born 1994)|Richard]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "26",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Bruno Melo]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Fabinho (footballer, born 1999)|Fabinho]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "32",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Pedro Rocha (footballer, born 1994)|Pedro Rocha]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "36",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Vini Paulista]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "39",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Gustavo (footballer, born 2002)|Gustavo Silva]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "50",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Vitor Tissi]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Jacy (footballer)|Jacy Maranhão]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "66",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Rodrigo Gelado]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "67",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "Benassi",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "77",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Breno Lopes (footballer, born 1996)|Breno Lopes]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "78",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Renato Marques (Brazilian footballer)|Renato Marques]]",
+   "other": "{{small|on loan from [[Mirassol Futebol Clube|Mirassol]]}}"
+  },
+  {
+   "club": "coritiba",
+   "no": "86",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Lucas Taverna]]",
+   "other": null
+  },
+  {
+   "club": "coritiba",
+   "no": "99",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Rodrigo Rodrigues (footballer)|Rodrigo Rodrigues]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Cássio (footballer, born 1987)|Cássio]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "2",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Kauã Moraes Silva|Kauã Moraes]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "5",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Zé Lucas (footballer, born 2008)|Zé Lucas]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "6",
+   "nat": "Uruguay",
+   "pos": "DF",
+   "name": "[[Matías Viña]]",
+   "other": "on loan from [[CR Flamengo|Flamengo]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Matheus Henrique]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Gerson (footballer, born 1997)|Gerson]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Bruno Rodrigues (footballer, born 1997)|Bruno Rodrigues]]",
+   "other": "on loan from [[SE Palmeiras|Palmeiras]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "10",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Matheus Pereira (footballer, born 1996)|Matheus Pereira]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "11",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Marquinhos (footballer, born 2003)|Marquinhos]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "12",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[William (footballer, born 1995)|William]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "15",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Fabrício Bruno]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "16",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Lucas Silva (footballer, born 1993)|Lucas Silva]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "17",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Luis Sinisterra]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "19",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Kaio Jorge]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "20",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Wesley (footballer, born 2005)|Wesley]]",
+   "other": "on loan from [[Al Nassr|Al Nassr]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "22",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Néiser Villarreal]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "23",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Fagner (footballer, born 1989)|Fagner]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "24",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Marcelo Eráclito de Souza Filho|Marcelo Eráclito]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "25",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Lucas Villalba]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "27",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Gabriel Rojas (footballer, born 1997)|Gabriel Rojas]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "29",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Lucas Romero]]",
+   "other": "[[Captain (association football)#Vice-captain|vice-captain]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "34",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Jonathan Jesus]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "40",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Rhuan Gabriel]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "41",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Léo Aragão]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "43",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[João Marcelo (footballer, born 2000)|João Marcelo]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "51",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Vitor Lamounier Rego|Vitor Lamounier]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "57",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Rayan Passaglia Lelis|Rayan Lelis]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "67",
+   "nat": "Portugal",
+   "pos": "FW",
+   "name": "[[João Costa (footballer, born 28 March 2005)|João Costa]]",
+   "other": "on loan from [[Al-Ettifaq Club|Al-Ettifaq]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "70",
+   "nat": "Japan",
+   "pos": "FW",
+   "name": "[[Kaique Kenji]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "77",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Gabriel Pec]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "81",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Otávio (footballer, born 27 December 2005)|Otávio]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "94",
+   "nat": "Belgium",
+   "pos": "FW",
+   "name": "[[Wanderson (footballer, born 7 October 1994)|Wanderson]]",
+   "other": null
+  },
+  {
+   "club": "cruzeiro",
+   "no": "97",
+   "nat": "Uruguay",
+   "pos": "FW",
+   "name": "[[Luciano Rodríguez]]",
+   "other": "on loan from [[Neom SC|Neom]]"
+  },
+  {
+   "club": "cruzeiro",
+   "no": "99",
+   "nat": "Ecuador",
+   "pos": "FW",
+   "name": "[[Keny Arroyo]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "1",
+   "nat": "Argentina",
+   "pos": "GK",
+   "name": "[[Agustín Rossi (footballer)|Agustín Rossi]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "2",
+   "nat": "Uruguay",
+   "pos": "DF",
+   "name": "[[Guillermo Varela]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Léo Ortiz]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "4",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Léo Pereira (footballer, born 1996)|Léo Pereira]]",
+   "other": "[[Captain (association football)|3rd vice-captain]]"
+  },
+  {
+   "club": "flamengo",
+   "no": "5",
+   "nat": "Chile",
+   "pos": "MF",
+   "name": "[[Erick Pulgar]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Ayrton Lucas]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Luiz Araújo (footballer)|Luiz Araújo]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "8",
+   "nat": "Spain",
+   "pos": "MF",
+   "name": "[[Saúl (footballer, born 1994)|Saúl Ñíguez]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Pedro (footballer, born 1997)|Pedro]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "10",
+   "nat": "Uruguay",
+   "pos": "MF",
+   "name": "[[Giorgian de Arrascaeta]]",
+   "other": "[[Captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "flamengo",
+   "no": "11",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Lucas Paquetá]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "13",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Danilo (footballer, born July 1991)|Danilo]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "14",
+   "nat": "Ecuador",
+   "pos": "FW",
+   "name": "[[Anthony Valencia]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "15",
+   "nat": "Colombia",
+   "pos": "MF",
+   "name": "[[Jorge Carrascal]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "16",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Samuel Lino]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "18",
+   "nat": "Uruguay",
+   "pos": "MF",
+   "name": "[[Nicolás de la Cruz]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "19",
+   "nat": "Ecuador",
+   "pos": "FW",
+   "name": "[[Gonzalo Plata]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "21",
+   "nat": "Italy",
+   "pos": "MF",
+   "name": "[[Jorginho (footballer, born December 1991)|Jorginho]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "22",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Emerson Royal]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "26",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Alex Sandro]]",
+   "other": "[[Captain (association football)|2nd vice-captain]]"
+  },
+  {
+   "club": "flamengo",
+   "no": "27",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Bruno Henrique (footballer, born 1990)|Bruno Henrique]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "flamengo",
+   "no": "30",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[Joaquín Freitas]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "42",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Andrew (footballer)|Andrew]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "44",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Vitão (footballer, born February 2000)|Vitão]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "49",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Dyogo Alves]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "52",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Evertton Araújo]]",
+   "other": null
+  },
+  {
+   "club": "flamengo",
+   "no": "61",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[João Victor (footballer, born January 2007)|João Victor]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Fábio (footballer, born 1980)|Fábio]]",
+   "other": "[[Vice-captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "fluminense",
+   "no": "2",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Samuel Xavier]]",
+   "other": "[[Vice-captain (association football)|2nd vice-captain]]"
+  },
+  {
+   "club": "fluminense",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Thiago Silva]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "fluminense",
+   "no": "4",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Ignácio (footballer)|Ignácio]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Renê (footballer, born 1992)|Renê]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Hulk (footballer)|Hulk]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Matheus Martinelli]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[John Kennedy (footballer, born 2002)|John Kennedy]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "10",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Paulo Henrique Ganso|Ganso]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "11",
+   "nat": "Venezuela",
+   "pos": "MF",
+   "name": "[[Jefferson Savarino]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "13",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Guilherme Arana]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "14",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[Germán Cano]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "16",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Nonato (footballer, born 1998)|Nonato]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "17",
+   "nat": "Uruguay",
+   "pos": "FW",
+   "name": "[[Agustín Canobbio]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "19",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[Rodrigo Castillo (footballer, born 1999)|Rodrigo Castillo]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "21",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Igor Rabello]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "22",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Juan Pablo Freytes]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "23",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Guga (footballer, born 1998)|Guga]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "25",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Alisson (footballer, born 1993)|Alisson]]",
+   "other": "<small>on loan from [[São Paulo FC|São Paulo]]</small>"
+  },
+  {
+   "club": "fluminense",
+   "no": "27",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Marcelo Pitaluga]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "28",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Riquelme Felipe|Riquelme]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "29",
+   "nat": "Colombia",
+   "pos": "DF",
+   "name": "[[Julián Millán]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "30",
+   "nat": "Venezuela",
+   "pos": "FW",
+   "name": "[[Yeferson Soteldo]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "32",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Luciano Acosta|Lucho Acosta]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "35",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Hércules (footballer, born 2000)|Hércules]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "44",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Jemmes]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "46",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Júlio Fidelis]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "90",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Kevin Serna]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "94",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Otávio (footballer, born 1994)|Otávio]]",
+   "other": null
+  },
+  {
+   "club": "fluminense",
+   "no": "98",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Vitor Eudes]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Weverton (footballer, born 1987)|Weverton]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "2",
+   "nat": "PAR",
+   "pos": "DF",
+   "name": "[[Fabián Balbuena]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Wagner Leonardo]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "4",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Walter Kannemann]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "gremio",
+   "no": "5",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Juan Nardoni]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gustavo Martins]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "7",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Cristian Pavon]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "8",
+   "nat": "PER",
+   "pos": "MF",
+   "name": "[[Erick Noriega]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "9",
+   "nat": "GHA",
+   "pos": "FW",
+   "name": "[[Francis Amuzu]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "10",
+   "nat": "CRO",
+   "pos": "MF",
+   "name": "[[Filip Krovinović]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Tetê]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Gabriel Grando]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "14",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marcos Rocha]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "15",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Danilo Barbosa]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "17",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Dodi (footballer)|Dodi]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Pedro (footballer, born 15 November 1996)|João Pedro]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "20",
+   "nat": "PAR",
+   "pos": "MF",
+   "name": "[[Mathías Villasanti]]",
+   "other": "[[Vice-captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "gremio",
+   "no": "22",
+   "nat": "DEN",
+   "pos": "FW",
+   "name": "[[Martin Braithwaite]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marlon (footballer, born May 1997)|Marlon]]",
+   "other": "[[Vice-captain (association football)|3rd captain]]"
+  },
+  {
+   "club": "gremio",
+   "no": "24",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Thiago Beltrame]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Diego Caito]]",
+   "other": "on loan from [[Goiás Esporte Clube|Goiás]]"
+  },
+  {
+   "club": "gremio",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Matheus Nascimento (footballer, born 2004)|Matheus Nascimento]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "31",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Gabriel Menegon]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "38",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Caio Paulista]]",
+   "other": "on loan from [[SE Palmeiras|Palmeiras]]"
+  },
+  {
+   "club": "gremio",
+   "no": "39",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Tiago (footballer, born 2008)|Tiago]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "42",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "Athos",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "43",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Luis Eduardo]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "47",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Roger (footballer, born 2008)|Roger]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "54",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Pedro Gabriel]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "65",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Riquelme (footballer, born August 2006)|Riquelme]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "77",
+   "nat": "CPV",
+   "pos": "FW",
+   "name": "[[Jovane Cabral]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "82",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Wallace (footballer, born 2004)|Wallace]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "95",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Carlos Vinícius]]",
+   "other": null
+  },
+  {
+   "club": "gremio",
+   "no": "99",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[José Enamorado]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "1",
+   "nat": "URU",
+   "pos": "GK",
+   "name": "[[Sergio Rochet]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "3",
+   "nat": "CHI",
+   "pos": "DF",
+   "name": "[[Guillermo Maripán]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "4",
+   "nat": "ECU",
+   "pos": "DF",
+   "name": "[[Félix Torres (footballer, born 1997)|Félix Torres]]",
+   "other": "on loan from [[SC Corinthians Paulista|Corinthians]]"
+  },
+  {
+   "club": "internacional",
+   "no": "5",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Rodrigo Villagra]]",
+   "other": "on loan from [[PFC CSKA Moscow|CSKA Moscow]]"
+  },
+  {
+   "club": "internacional",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Matheus Bahia]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "7",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[Johan Carbonero]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Bruno Henrique (footballer, born 1989)|Bruno Henrique]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Alerrandro]]",
+   "other": "on loan from [[PFC CSKA Moscow|CSKA Moscow]]"
+  },
+  {
+   "club": "internacional",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Alan Patrick (footballer, born 1991)|Alan Patrick]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "internacional",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Kayky]]",
+   "other": "on loan from [[Esporte Clube Bahia|Bahia]]"
+  },
+  {
+   "club": "internacional",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Anthoni Spier Souza|Anthoni]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "15",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Bruno Gomes (footballer, born 2001)|Bruno Gomes]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "16",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Ronaldo (footballer, born October 1996)|Ronaldo]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "17",
+   "nat": "SWE",
+   "pos": "FW",
+   "name": "[[Niclas Eliasson]]",
+   "other": "on loan from [[AEK Athens F.C.|AEK Athens]]"
+  },
+  {
+   "club": "internacional",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Juninho (footballer, born February 1995)|Juninho]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Kauan Jesus Santos Oliveira|Kauan Jesus]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Matheus Cunha (footballer, born 2001)|Matheus Cunha]]",
+   "other": "on loan from [[Cruzeiro EC|Cruzeiro]]"
+  },
+  {
+   "club": "internacional",
+   "no": "25",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Gabriel Mercado]]",
+   "other": "[[Captain (association football)#Vice-captain|vice-captain]]"
+  },
+  {
+   "club": "internacional",
+   "no": "26",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Alexandro Bernabei]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Paulinho (footballer, born January 1997)|Paulinho]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Vitinho (footballer, born April 1999)|Vitinho]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "29",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Thiago Maia]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Calebe]]",
+   "other": "on loan from [[Fortaleza Esporte Clube|Fortaleza]]"
+  },
+  {
+   "club": "internacional",
+   "no": "32",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Diego Esser Pereira|Diego Esser]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "35",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Braian Aguirre]]",
+   "other": null
+  },
+  {
+   "club": "internacional",
+   "no": "41",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Victor Gabriel]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Georgemy]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "2",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Lucas Oliveira (footballer, born 1996)|Lucas Oliveira]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Willian Machado]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "5",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Japa (footballer, born 2004)|Japa]]",
+   "other": "on loan from [[Cruzeiro EC|Cruzeiro]]"
+  },
+  {
+   "club": "mirassol",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Reinaldo (footballer, born 1989)|Reinaldo]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "mirassol",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Shaylon]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Denilson (footballer, born 2001)|Denilson]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Zé Roberto (footballer, born 1993)|Zé Roberto]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Chico (footballer, born 1993)|Chico Kim]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Negueba (footballer, born 1999)|Negueba]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Victor Luis]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "16",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Gustavo Silva (footballer, born 1997)|Gustavo Silva]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "17",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Fernandinho (footballer, born July 1997)|Fernandinho]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Elias (footballer, born 1999)|Elias]]",
+   "other": "on loan from [[Vila Nova Futebol Clube|Vila Nova]]"
+  },
+  {
+   "club": "mirassol",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Daniel Borges]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[José Aldo (footballer)|José Aldo]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Walter (footballer, born 1987)|Walter]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Alex Muralha]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "25",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Neto Moura]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Bruno Santos (footballer, born 1996)|Bruno Santos]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "32",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Igor Formiga]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "33",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Carlos Eduardo (footballer, born 1989)|Eduardo]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "34",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Victor (footballer, born 1997)|João Victor]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "44",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gabriel (footballer, born 2003)|Gabriel Knesowitsch]]",
+   "other": "on loan from [[Cuiabá Esporte Clube|Cuiabá]]"
+  },
+  {
+   "club": "mirassol",
+   "no": "53",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marcelo Barbosa de Santos|Marcelinho]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Gustavo Cazonatti]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "77",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Alesson]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "80",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Wallisson]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "90",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Thomazella]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "95",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Edson Carioca]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "96",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Carlos Eduardo (footballer, born October 1996)|Carlos Eduardo]]",
+   "other": null
+  },
+  {
+   "club": "mirassol",
+   "no": "99",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[André Luis (footballer, born 1994)|André Luis]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Carlos Miguel (footballer, born 1998)|Carlos Miguel]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "2",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Alexander Barboza]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Bruno Fuchs (footballer)|Bruno Fuchs]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "4",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Agustín Giay]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Jefté]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Felipe Anderson]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Andreas Pereira]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Vitor Roque]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "10",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Paulinho (footballer, born July 2000)|Paulinho]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "11",
+   "nat": "Colombia",
+   "pos": "FW",
+   "name": "[[Jhon Arias (footballer)|Jhon Arias]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "12",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Khellven]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "14",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Marcelo Lomba]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "15",
+   "nat": "Paraguay",
+   "pos": "DF",
+   "name": "[[Gustavo Gómez]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "palmeiras",
+   "no": "17",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Marlon Freitas]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "18",
+   "nat": "Paraguay",
+   "pos": "MF",
+   "name": "[[Maurício (footballer, born 2001)|Maurício]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "19",
+   "nat": "Paraguay",
+   "pos": "FW",
+   "name": "[[Ramón Sosa]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "21",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Bruno Bertinato]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "22",
+   "nat": "Uruguay",
+   "pos": "DF",
+   "name": "[[Joaquín Piquerez]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "26",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Murilo Cerqueira|Murilo]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "30",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Lucas Evangelista]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "32",
+   "nat": "Uruguay",
+   "pos": "MF",
+   "name": "[[Emiliano Martínez (footballer, born 1999)|Emiliano Martínez]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "42",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[José Manuel López (footballer)|José Manuel López]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "43",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Luiz Benedetti]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "48",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Larson (footballer)|Larson]]",
+   "other": null
+  },
+  {
+   "club": "palmeiras",
+   "no": "56",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Arthur Gabriel Santana Marcolino|Arthur Gabriel]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Marcos Alexandre Ferreira Campos Filho|Alexandre]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "2",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Matheus Alexandre]]",
+   "other": "on loan from [[Sport Club do Recife|Sport]]"
+  },
+  {
+   "club": "remo",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Matheus Felipe]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "5",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Léo Andrade]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marlon (footballer, born 1994)|Marlon]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Jajá Silva|Jajá]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Patrick (footballer, born 1992)|Patrick]]",
+   "other": "on loan from [[Santos FC|Santos]]"
+  },
+  {
+   "club": "remo",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Gabriel Poveda]]",
+   "other": "on loan from [[Esporte Clube Primavera|Primavera]]"
+  },
+  {
+   "club": "remo",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Jáderson]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "13",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marllon]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "remo",
+   "no": "14",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Leonel Picco]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "15",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Vitor Bueno]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "17",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[Cristian Tassano]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "18",
+   "nat": "CMR",
+   "pos": "DF",
+   "name": "[[Duplexe Tchamba]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "19",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Gabriel Taliari]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "21",
+   "nat": "PAR",
+   "pos": "FW",
+   "name": "[[Antonio Galeano]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "22",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Yago Pikachu]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "23",
+   "nat": "URU",
+   "pos": "MF",
+   "name": "[[Franco Catarozzi]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "26",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[David Braga]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Zé Ivaldo]]",
+   "other": "on loan from [[Santos FC|Santos]]"
+  },
+  {
+   "club": "remo",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Zé Welison]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[João Victor Ferreira da Silva|João Victor]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Edson Fernando]]",
+   "other": "on loan from [[FC Karpaty Lviv|Karpaty Lviv]]"
+  },
+  {
+   "club": "remo",
+   "no": "39",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Eduardo Melo]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Zé Ricardo (footballer, born 1999)|Zé Ricardo]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "61",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Tico (footballer, born 2006)|Tico]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "77",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Mayk]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "79",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Marcelinho (footballer, born July 1998)|Marcelinho]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "88",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Marcelo Rangel]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "94",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Ygor Vinhas]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "97",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Ivan (footballer, born 1997)|Ivan]]",
+   "other": null
+  },
+  {
+   "club": "remo",
+   "no": "",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Lucas (footballer, born 1998)|João Lucas]]",
+   "other": "on loan from [[Grêmio FBPA|Grêmio]]"
+  },
+  {
+   "club": "santos",
+   "no": "1",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Diógenes (footballer, born 2001)|Diógenes]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "3",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Vinicius Lira]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "4",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Lucas Veríssimo]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "5",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[João Schmidt]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "6",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Arthur Melo|Arthur]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "7",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Everton Soares|Everton Cebolinha]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "8",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Gabriel Bontempo]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "9",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Gabriel Barbosa]]",
+   "other": "on loan from [[Cruzeiro EC|Cruzeiro]]"
+  },
+  {
+   "club": "santos",
+   "no": "10",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Neymar]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "santos",
+   "no": "11",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Philippe Coutinho]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "14",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Luan Peres]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "15",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Willian Arão]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "16",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Thaciano]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "17",
+   "nat": "Paraguay",
+   "pos": "FW",
+   "name": "[[Gustavo Caballero]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "18",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Igor Vinícius]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "20",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Pepê Fermino]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "21",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Moisés (footballer, born 1996)|Moisés]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "22",
+   "nat": "Argentina",
+   "pos": "FW",
+   "name": "[[Álvaro Barreal]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "23",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Rodinei]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "25",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Gabriel Menino]]",
+   "other": "on loan from [[Clube Atlético Mineiro|Atlético Mineiro]]"
+  },
+  {
+   "club": "santos",
+   "no": "26",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[João Ananias (footballer, born 2007)|João Ananias]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "27",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Davi Fernandes|Davizinho]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "28",
+   "nat": "Uruguay",
+   "pos": "MF",
+   "name": "[[Christian Oliva]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "30",
+   "nat": "Bolivia",
+   "pos": "MF",
+   "name": "[[Miguel Terceros]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "31",
+   "nat": "Argentina",
+   "pos": "DF",
+   "name": "[[Gonzalo Escobar (footballer)|Gonzalo Escobar]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "32",
+   "nat": "Argentina",
+   "pos": "MF",
+   "name": "[[Benjamín Rollheiser]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "33",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Rony (footballer)|Rony]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "34",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[João Paulo (footballer, born 1995)|João Paulo]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "38",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[Rafael Gonzaga]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "42",
+   "nat": "Brazil",
+   "pos": "DF",
+   "name": "[[João Alencar]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "45",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Lima (footballer, born 1996)|Lima]]",
+   "other": "on loan from [[Fluminense FC|Fluminense]]"
+  },
+  {
+   "club": "santos",
+   "no": "48",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Gustavo Henrique (footballer, born 2005)|Gustavo Henrique]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "57",
+   "nat": "Brazil",
+   "pos": "FW",
+   "name": "[[Nadson (footballer, born 2009)|Nadson]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "67",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Rodrigo Falcão]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "77",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[Gabriel Brazão]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "79",
+   "nat": "Brazil",
+   "pos": "GK",
+   "name": "[[João Pedro (footballer, born 2008)|João Pedro]]",
+   "other": null
+  },
+  {
+   "club": "santos",
+   "no": "81",
+   "nat": "Brazil",
+   "pos": "MF",
+   "name": "[[Samuel Pierri]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "2",
+   "nat": "ITA",
+   "pos": "DF",
+   "name": "[[Rafael Tolói]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "5",
+   "nat": "ECU",
+   "pos": "DF",
+   "name": "[[Robert Arboleda]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Lucas Moura]]",
+   "other": "[[captain (association football)|vice-captain]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Marcos Antônio (footballer, born 2000)|Marcos Antônio]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "9",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Jonathan Calleri]]",
+   "other": "[[captain (association football)|captain]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Luciano (footballer, born 1993)|Luciano]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Ferreira (footballer, born 1997)|Ferreira]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "12",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Iago (footballer, born 1997)|Iago Borduchi]]",
+   "other": "on loan from [[Esporte Clube Bahia|Bahia]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "13",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Enzo Díaz (footballer, born 1995)|Enzo Díaz]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "16",
+   "nat": "PAR",
+   "pos": "MF",
+   "name": "[[Damián Bobadilla]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "17",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[André Silva (footballer, born 1997)|André Silva]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Wendell (footballer, born 1993)|Wendell]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "19",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Lucas Ramon]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "20",
+   "nat": "POR",
+   "pos": "DF",
+   "name": "[[Aurélio Buta]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "21",
+   "nat": "POR",
+   "pos": "DF",
+   "name": "[[Cédric Soares]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "22",
+   "nat": "POR",
+   "pos": "DF",
+   "name": "[[Domingos Duarte]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Rafael (footballer, born 1989)|Rafael]]",
+   "other": "[[captain (association football)|3rd captain]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "27",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Victor Sá]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Newton (footballer, born 2000)|Newton]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "29",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Pablo Maia]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "31",
+   "nat": "PAR",
+   "pos": "GK",
+   "name": "[[Carlos Coronel]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "32",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Pedro Lima (footballer, born 2006)|Pedro Lima]]",
+   "other": "on loan from [[Wolverhampton Wanderers F.C.|Wolverhampton Wanderers]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "34",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Perivan dos Santos|Tetê]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Sabino (footballer, born 1996)|Sabino]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "37",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Artur (footballer, born 1998)|Artur]]",
+   "other": "on loan from [[Botafogo FR|Botafogo]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "41",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "João Pedro",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "43",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Gustavo Santana]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "45",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Lucca Marques]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "46",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Pedro Henrique Ferreira da Silva|Pedro Ferreira]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "48",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Djhordney]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "49",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Ryan Francisco]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "50",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Young (footballer)|Young]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "52",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "Felipe Preis",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "53",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Isac Silvestre|Isac]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "54",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Luis Osorio (footballer)|Luis Osorio]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "56",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Nicolas Bosshardt|Nicolas]]",
+   "other": null
+  },
+  {
+   "club": "sao-paulo",
+   "no": "80",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Cauly]]",
+   "other": "on loan from [[Esporte Clube Bahia|Bahia]]"
+  },
+  {
+   "club": "sao-paulo",
+   "no": "94",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Danielzinho (footballer, born 1994)|Danielzinho]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Léo Jardim]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "2",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[José Luis Rodríguez (footballer, born 1997)|Puma Rodríguez]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Tchê Tchê]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "4",
+   "nat": "URU",
+   "pos": "DF",
+   "name": "[[Alan Saldivia]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "5",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Santiago Sosa]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "6",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Lucas Piton]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[David (footballer, born October 1995)|David]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "8",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Jair (footballer, born 26 August 1994)|Jair]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "9",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Facundo Colidio]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "10",
+   "nat": "COL",
+   "pos": "MF",
+   "name": "[[Johan Rojas (footballer)|Johan Rojas]]",
+   "other": "<small>on loan from [[C.F. Monterrey|Monterrey]]</small>"
+  },
+  {
+   "club": "vasco",
+   "no": "11",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[Andrés Gómez (footballer)|Andrés Gómez]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "13",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Daniel Fuzato]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "17",
+   "nat": "POR",
+   "pos": "FW",
+   "name": "[[Nuno Moreira]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "18",
+   "nat": "COL",
+   "pos": "FW",
+   "name": "[[Marino Hinestroza]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "19",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Bruno Duarte]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Brenner (footballer, born 2000)|Brenner]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "22",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Alan Lescano]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Thiago Mendes]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "vasco",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Adson (footballer, born 2000)|Adson]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "29",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Paulinho (footballer, born 2004)|Paulinho]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "30",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Robert Renan]]",
+   "other": "<small>on loan from [[FC Zenit Saint Petersburg|Zenit]]</small>"
+  },
+  {
+   "club": "vasco",
+   "no": "37",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "Pablo",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "43",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Lucas Freitas]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "46",
+   "nat": "COL",
+   "pos": "DF",
+   "name": "[[Carlos Cuesta (footballer)|Carlos Cuesta]]",
+   "other": "<small>on loan from [[Galatasaray S.K. (football)|Galatasaray]]</small>"
+  },
+  {
+   "club": "vasco",
+   "no": "55",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Gabriel Pereira (footballer, born 2000)|Gabriel Pereira]]",
+   "other": "<small>on loan from [[F.C. Copenhagen|Copenhagen]]</small>"
+  },
+  {
+   "club": "vasco",
+   "no": "60",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[João Vitor Fonseca da Silva|João Vitor]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "64",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "Walace Falcão",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "66",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Cuiabano]]",
+   "other": "<small>on loan from [[Nottingham Forest F.C.|Nottingham Forest]]</small>"
+  },
+  {
+   "club": "vasco",
+   "no": "77",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Claudio Spinelli]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "83",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Ramon Rique]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "85",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Mateus Carvalho]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "88",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Cauan Barros]]",
+   "other": null
+  },
+  {
+   "club": "vasco",
+   "no": "96",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Paulo Henrique (footballer, born July 1996)|Paulo Henrique]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "1",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Lucas Arcanjo]]",
+   "other": "[[Captain (association football)#Vice-captain|vice-captain]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "2",
+   "nat": "ARG",
+   "pos": "DF",
+   "name": "[[Emanuel Brítez]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "3",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Darlan Silva Dutra|Darlan]]",
+   "other": "on loan from [[Grêmio Esportivo Anápolis|Grêmio Anápolis]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "4",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Camutanga (footballer)|Camutanga]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "6",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Emmanuel Martínez (footballer, born 1994)|Emmanuel Martínez]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "7",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Marinho (footballer, born 1990)|Marinho]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "8",
+   "nat": "ARG",
+   "pos": "MF",
+   "name": "[[Tomás Pochettino]]",
+   "other": "on loan from [[Fortaleza Esporte Clube|Fortaleza]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "9",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Alex Bruno (footballer, born 1999)|Alex Bruno]]",
+   "other": "on loan from [[Agremiação Sportiva Arapiraquense|ASA]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "10",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Matheuzinho (footballer, born 1997)|Matheuzinho]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "11",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Osvaldo (footballer, born 1987)|Osvaldo]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "12",
+   "nat": "ARG",
+   "pos": "FW",
+   "name": "[[Diego Tarzia]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "13",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Ramon (footballer, born 2001)|Ramon]]",
+   "other": "on loan from [[SC Internacional|Internacional]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "15",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Walace (footballer, born 1995)|Walace]]",
+   "other": "on loan from [[Cruzeiro EC|Cruzeiro]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "16",
+   "nat": "POR",
+   "pos": "MF",
+   "name": "[[Rúben Ismael]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "18",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Kauan Santos Neves Coutinho|Kauan Coutinho]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "20",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Lucas Rodrigues|Lucas Silva]]",
+   "other": "on loan from [[FC Seoul|Seoul]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "21",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Dudu (footballer, born June 1999)|Dudu]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "23",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Fabrício (footballer, born October 2000)|Fabrí]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "25",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Cacá (footballer, born 1999)|Cacá]]",
+   "other": "on loan from [[SC Corinthians Paulista|Corinthians]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "26",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Edenilson Santos Nascimento Filho|Edenilson]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "28",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Anderson Pato]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "33",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Erick (footballer, born December 1997)|Erick]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "35",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Alexandre Fintelman de Mello Ribeiro da Silva|Fintelman]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "36",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Luan Cândido]]",
+   "other": "on loan from [[Red Bull Bragantino]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "41",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Wendell Santos]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "43",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Edu (footballer, born 2000)|Edu Ribeiro]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "44",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Gabriel Baralhas]]",
+   "other": "[[Captain (association football)|captain]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "45",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Nathan Mendes]]",
+   "other": "on loan from [[Red Bull Bragantino]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "70",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Fabiano (footballer, born 2000)|Fabiano]]",
+   "other": "on loan from [[Moreirense F.C.|Moreirense]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "71",
+   "nat": "BRA",
+   "pos": "GK",
+   "name": "[[Yuri Sena]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "79",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Renato Kayzer]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "83",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Jamerson Bahia|Jamerson]]",
+   "other": "on loan from [[Coritiba Foot Ball Club|Coritiba]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "88",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Zé Vitor (footballer, born 2000)|Zé Vitor]]",
+   "other": "on loan from [[Maringá Futebol Clube|Maringá]]"
+  },
+  {
+   "club": "vitoria",
+   "no": "91",
+   "nat": "BRA",
+   "pos": "FW",
+   "name": "[[Renê (footballer, born 2003)|Renê]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "95",
+   "nat": "BRA",
+   "pos": "MF",
+   "name": "[[Caíque (footballer, born 1995)|Caíque Gonçalves]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "98",
+   "nat": "BRA",
+   "pos": "DF",
+   "name": "[[Mateusinho|Mateus Silva]]",
+   "other": null
+  },
+  {
+   "club": "vitoria",
+   "no": "",
+   "nat": "URU",
+   "pos": "FW",
+   "name": "[[Ignacio Laquintana]]",
+   "other": "on loan from [[Red Bull Bragantino]]"
+  }
+ ]
+}

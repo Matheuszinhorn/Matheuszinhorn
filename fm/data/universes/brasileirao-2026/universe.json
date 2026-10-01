@@ -1,0 +1,11 @@
+{
+  "id": "brasileirao-2026",
+  "name": "Brasileirão 2026",
+  "season": 2026,
+  "country": "Brasil",
+  "competitions": ["brasileirao-a-2026"],
+  "competitionFiles": ["competition.json"],
+  "defaultCompetitionId": "brasileirao-a-2026",
+  "primarySource": "cbf",
+  "dataStatus": "Clubes e elencos da Série A 2026 a partir da fonte de conferência (Wikipédia em inglês, snapshot de 01/10/2026). A fonte principal (CBF) não pôde ser consultada nesta etapa: nenhum registro está confirmado pela CBF. Idade, cores e força ELITE MANAGER ausentes."
+}

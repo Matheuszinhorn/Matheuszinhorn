@@ -16,7 +16,7 @@ export function renderStart(ctrl: GameController): HTMLElement {
   return h(
     'div',
     { class: 'start' },
-    h('div', { class: 'hero' }, h('div', { class: 'hero-mark' }, 'FM'), h('h1', null, 'FOOTBALL MANAGER', h('br'), 'BRASILEIRO'), h('p', null, 'Comande um clube do futebol de acesso até a elite. Quatro divisões, uma rodada por vez, decisões ao vivo.')),
+    h('div', { class: 'hero' }, h('div', { class: 'brand-logo', role: 'img', 'aria-label': 'ELITE MANAGER' }), h('h1', { class: 'sr-only' }, 'ELITE MANAGER'), h('p', null, 'Comande um clube do futebol de acesso até a elite. Quatro divisões, uma rodada por vez, decisões ao vivo.')),
     h(
       'div',
       { class: 'start-panel' },

@@ -10,10 +10,10 @@ anterior (30/09/2026) e não descreve mais o estado atual.
 | Produto | ELITE MANAGER — MVP Release Candidate 1.0.0-rc.1 (codinome FM Brasileiro; ver [BRAND.md](BRAND.md)) |
 | Engine | 0.2.0, fechado (não recalibrar) |
 | Commit do RC | `2c07826` (branch `ccr-9941e34c-pdjxb3` do repositório `Matheuszinhorn/Matheuszinhorn`, pasta `fm/`) |
-| Testes | `npm test` 159/159; `npm run typecheck` OK |
-| Build | `dist/app/index.html`, sha256 `089164b09de8ffd31fc4e65e0d6e21e1695df6c0ed434475957c2651ae97fbe6` (auditoria de release, com a correção do P1; reproduzido em cópia limpa) |
+| Testes | `npm test` 190/190; `npm run typecheck` OK |
+| Build | `dist/app/index.html`, sha256 `1c9be0d33ecf06721035f52d2e8eb8e8c2e7dbded43b11ffbb57206a2b20a553` (identidade ELITE MANAGER, splash, universos de dados, displayName) |
 | QA de interface | Temporada, goleiro, velocidades e decisões, MEU TIME, persistência e visual, em celular e desktop ([QA.md](QA.md)) |
-| Publicação | Não publicado; pronto para playtest humano, que está pendente ([RELEASE-AUDIT.md](RELEASE-AUDIT.md)) |
+| Publicação | Publicado para playtest (Artifact claude.ai); playtest humano pendente ([RELEASE-AUDIT.md](RELEASE-AUDIT.md)) |
 
 ## Estrutura
 

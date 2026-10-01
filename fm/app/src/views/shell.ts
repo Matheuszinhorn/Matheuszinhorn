@@ -1,7 +1,7 @@
 import { ROUNDS_PER_SEASON, divisionStandings, userClub } from '../../../game/career.ts';
 import type { GameController, Screen } from '../controller.ts';
 import { h } from '../dom.ts';
-import { money } from '../format.ts';
+import { money, useNamesOf } from '../format.ts';
 import { crest } from './common.ts';
 import { renderCareer } from './careerview.ts';
 import { renderClubs } from './clubs.ts';
@@ -52,6 +52,7 @@ function topbar(ctrl: GameController): HTMLElement {
 
 export function renderApp(ctrl: GameController): HTMLElement[] {
   const s = ctrl.state;
+  const fullNames = useNamesOf(s.career?.world);
   const toast = s.toast ? h('div', { class: `toast toast-${s.toast.kind}`, role: 'status', onClick: () => ctrl.dismissToast() }, s.toast.text) : null;
   if (s.screen === 'START' || !s.career) return [renderStart(ctrl), ...(toast ? [toast] : [])];
   const body = { TEAM: renderTeam, MATCH: renderMatch, LEAGUE: renderLeague, CLUBS: renderClubs, CAREER: renderCareer }[s.screen](ctrl);
@@ -59,8 +60,9 @@ export function renderApp(ctrl: GameController): HTMLElement[] {
   const nav = h(
     'nav',
     { class: 'nav', 'aria-label': 'Navegação principal' },
+    h('div', { class: 'brand-logo nav-brand', role: 'img', 'aria-label': 'ELITE MANAGER' }),
     NAV.map((n) => h('button', { type: 'button', class: `nav-btn${n.id === s.screen ? ' on' : ''}`, 'aria-current': n.id === s.screen ? 'page' : null, onClick: () => ctrl.go(n.id) }, icon(n.icon), h('span', { class: 'nav-l' }, n.label), n.id === 'MATCH' && s.phase === 'LIVE' ? h('span', { class: `nav-dot${deciding ? ' warn' : ''}` }) : null)),
   );
   const modal = renderDecision(ctrl);
-  return [h('div', { class: 'shell' }, topbar(ctrl), nav, h('main', { class: 'content' }, body)), ...(modal ? [modal] : []), ...(toast ? [toast] : [])];
+  return [h('div', { class: fullNames ? 'shell names-full' : 'shell' }, topbar(ctrl), nav, h('main', { class: 'content' }, body)), ...(modal ? [modal] : []), ...(toast ? [toast] : [])];
 }

@@ -28,7 +28,17 @@ export const FORMATIONS = ['4-4-2', '4-3-3', '3-5-2', '5-3-2', '4-5-1', '3-4-3',
 /** Força vinda das consultas pode ser decimal (média); a tela sempre mostra inteiro. */
 export const strengthLabel = (n: number | null | undefined): string => (n === null || n === undefined ? '—' : String(Math.round(n)));
 
+// Nomes de jogador. Mundo de universo de dados (World.nameStyle = 'display', ver data/to-world.ts): o nome já é o
+// displayName oficial e aparece INTEIRO ("Felipe Anderson", "João Pedro"). Mundo fictício da V1 (sem a marca):
+// abreviado como sempre ("Thiago Pacheco Lopes" → "T. Lopes"). A tela informa o mundo atual a cada desenho (shell.ts).
+let displayNames = false;
+export const useNamesOf = (world: object | null | undefined): boolean => {
+  displayNames = !!world && (world as { nameStyle?: unknown }).nameStyle === 'display';
+  return displayNames;
+};
+
 export const shortName = (full: string): string => {
+  if (displayNames) return full;
   const parts = full.trim().split(/\s+/);
   return parts.length <= 1 ? full : `${parts[0][0]}. ${parts[parts.length - 1]}`;
 };

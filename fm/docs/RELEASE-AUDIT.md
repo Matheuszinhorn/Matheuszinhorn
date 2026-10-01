@@ -138,8 +138,8 @@ Atualizada para ficar coerente com este build: README (índice), QA (159 testes,
 RELEASE (hash novo, status), HANDOFF-RC (testes, hash, status), PLAYTEST-13A (P1 corrigido), BACKLOG (itens da
 auditoria). GAMEPLAY, ENGINE, ARCHITECTURE, PRODUCT e DESIGN-DECISIONS conferidos: sem mudança de regra, nada a alterar.
 
-**Identidade:** o nome oficial passou a ser ELITE MANAGER. A documentação do produto foi atualizada; a tela ainda
-mostra o codinome (troca prevista na etapa de branding, [BRAND.md](BRAND.md)).
+**Identidade:** o nome oficial passou a ser ELITE MANAGER. A documentação do produto foi atualizada e, na correção de
+identidade da V1, a tela inicial e a aba do navegador passaram a mostrar ELITE MANAGER ([BRAND.md](BRAND.md)).
 
 ## Build
 

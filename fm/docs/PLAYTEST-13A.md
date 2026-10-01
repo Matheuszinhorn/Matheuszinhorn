@@ -179,8 +179,8 @@ Executado em 01/10/2026, no commit `b9fbe1b`:
 | `engine/` alterado | Não (0 linhas desde a importação do projeto) |
 | `engine/`, `game/`, `app/` alterados desde o commit da documentação | Não (0 linhas) |
 
-**Nome na tela:** o build do teste ainda mostra o codinome "FOOTBALL MANAGER BRASILEIRO" na tela inicial e na aba do
-navegador; o nome oficial ELITE MANAGER entra na etapa de branding ([BRAND.md](BRAND.md)). Não é um problema a registrar.
+**Identidade na tela:** o jogo abre com a splash da logo oficial e usa o nome ELITE MANAGER e a paleta oficial
+(`#071522` / `#B3FA46` / `#F2F4ED`), aplicados na V1 ([BRAND.md](BRAND.md)).
 
 **P1 corrigido no build do teste** (sha256 `089164b0…`): NOVA CARREIRA sem recarregar a página deixava a primeira
 rodada presa. Se ainda acontecer, registrar como erro funcional (regressão), anotar se a pessoa tentou recarregar, e

@@ -18,5 +18,13 @@ ctrl.subscribe(() => {
   });
 });
 draw();
+// Splash (index.html): fica na tela enquanto o app inicializa e sai assim que o jogo é desenhado pela primeira vez.
+// Não bloqueia toques (pointer-events: none); com "reduzir movimento", some na hora.
+const splash = document.getElementById('splash');
+if (splash) {
+  splash.addEventListener('animationend', (e) => { if (e.target === splash) splash.remove(); });
+  splash.classList.add('out');
+  if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) splash.remove();
+}
 // Gancho para inspeção e QA automatizado no navegador (não é usado pelo jogo).
 Object.assign(globalThis, { __fm: ctrl });

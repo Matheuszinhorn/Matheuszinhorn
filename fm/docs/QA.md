@@ -6,12 +6,13 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 
 ## Testes automatizados
 
-`npm test` (Node `--test`): **159/159**.
+`npm test` (Node `--test`): **190/190** na branch `feature/real-rosters-2026` (159 da V1 + 28 da camada de dados + 3 de `app/tests/format.test.ts`: displayName preservado na interface).
 
 | Conjunto | Arquivo(s) | Cobre |
 |---|---|---|
 | Engine | `engine/tests/*.test.ts` | Partida, chances e calibração, decisões, prioridade de eventos no mesmo minuto, fim de partida, rodada, finanças, promoção. |
 | Game | `game/tests/*.test.ts` | Carreira (ofertas na D4, rodadas, lesões/suspensões, finanças uma vez por rodada, virada, persistência), sessão (velocidades, pausas, decisões, determinismo entre velocidades), consultas, edição de escalação, decisões de goleiro. |
+| Data (V1.1) | `data/tests/*.test.ts` | Universo Brasileirão 2026: carga, 20 clubes, 644 jogadores, ids, posições, força, vínculos, conversão para o engine, partida, temporada de 380 jogos, determinismo; validador (posição "VOL" com sugestão, força fora de 1–50, duplicidades, clube/competição inexistente, número, idade, elenco mínimo, goleiro, JSON inválido) e normalização; regra do nome exibido (apelido → `displayName`, `fullName` só como referência, nunca no World nem na partida). O universo padrão continua idêntico a `generateWorld`. |
 | App | `app/tests/controller.test.ts` | Controlador sem tela: carreira, rodada, velocidades, CLUBES, MEU TIME, recarregar no fim da temporada, estados de save na tela inicial, NOVA CARREIRA na mesma página (regressão do P1 da auditoria). |
 
 `npm run typecheck` (TypeScript 6.0.3, `strict`): OK.
@@ -42,6 +43,13 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
   `qa-myteam` 51/51 ×2, `qa-speeds` 54/54 ×2, `qa-visual` 0 problemas nas 6 larguras. Rebaixamento pela interface
   (save preparado no 20º lugar da D3 antes da rodada 38) em 390 e 1280: aviso de rebaixamento, 2027 na D4 jogável.
   Detalhes em [RELEASE-AUDIT.md](RELEASE-AUDIT.md).
+
+- **Final Design Sprint (identidade ELITE MANAGER, 01/10/2026):** só camada de apresentação (`app/styles.css`,
+  `app/index.html`, `app/src/main.ts`, `views/start.ts`, `views/shell.ts`, `scripts/build-app.mjs`, `app/assets/`).
+  Typecheck OK, 159/159, `qa-splash` 13/13 nas 6 larguras (novo), `qa-visual` 0 problemas nas 6 larguras,
+  `qa-season` 12/12 nas 6 larguras com **os mesmos 1.520 placares do build anterior** (6/6 larguras idênticas),
+  `qa-app --season` 37/37 ×2, `qa-persist` 36/36 ×2, `qa-scenarios` 4/4, `qa-goalkeeper` A–E, `qa-myteam` 51/51 ×2,
+  `qa-speeds` 54/54 ×2, rebaixamento pela interface OK (390 e 1280). `engine/`, `game/` e `controller.ts` sem alteração.
 
 ## Análises
 

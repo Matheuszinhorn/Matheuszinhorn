@@ -1,0 +1,382 @@
+[
+ {
+  "id": "br-athletico-pr",
+  "name": "Athletico Paranaense",
+  "fullName": "Club Athletico Paranaense",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Curitiba",
+  "state": "Paraná",
+  "stadium": {
+   "name": "Arena da Baixada",
+   "capacity": 42372
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Club Athletico Paranaense",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-atletico-mg",
+  "name": "Atlético Mineiro",
+  "fullName": "Clube Atlético Mineiro",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Belo Horizonte",
+  "state": "Minas Gerais",
+  "stadium": {
+   "name": "Arena MRV",
+   "capacity": 44892
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Clube Atlético Mineiro",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-bahia",
+  "name": "Bahia",
+  "fullName": "Esporte Clube Bahia",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Salvador",
+  "state": "Bahia",
+  "stadium": {
+   "name": "Casa de Apostas Arena Fonte Nova",
+   "capacity": 50052
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Esporte Clube Bahia",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-botafogo",
+  "name": "Botafogo",
+  "fullName": "Botafogo de Futebol e Regatas",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "stadium": {
+   "name": "Olímpico Nilton Santos",
+   "capacity": 44661
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Botafogo FR",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-bragantino",
+  "name": "Red Bull Bragantino",
+  "fullName": "Red Bull Bragantino",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Bragança Paulista",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "Cícero de Souza Marques",
+   "capacity": 12000
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Red Bull Bragantino",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-chapecoense",
+  "name": "Chapecoense",
+  "fullName": "Associação Chapecoense de Futebol",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Chapecó",
+  "state": "Santa Catarina",
+  "stadium": {
+   "name": "Arena Condá",
+   "capacity": 20089
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Associação Chapecoense de Futebol",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-corinthians",
+  "name": "Corinthians",
+  "fullName": "Sport Club Corinthians Paulista",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "São Paulo",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "Neo Química Arena",
+   "capacity": 47252
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:SC Corinthians Paulista",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-coritiba",
+  "name": "Coritiba",
+  "fullName": "Coritiba Foot Ball Club",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Curitiba",
+  "state": "Paraná",
+  "stadium": {
+   "name": "Couto Pereira",
+   "capacity": 40502
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Coritiba Foot Ball Club",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-cruzeiro",
+  "name": "Cruzeiro",
+  "fullName": "Cruzeiro Esporte Clube",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Belo Horizonte",
+  "state": "Minas Gerais",
+  "stadium": {
+   "name": "Mineirão",
+   "capacity": 66658
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Cruzeiro EC",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-flamengo",
+  "name": "Flamengo",
+  "fullName": "Clube de Regatas do Flamengo",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "stadium": {
+   "name": "Maracanã",
+   "capacity": 78838
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:CR Flamengo",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-fluminense",
+  "name": "Fluminense",
+  "fullName": "Fluminense Football Club",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "stadium": {
+   "name": "Maracanã",
+   "capacity": 78838
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Fluminense FC",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-gremio",
+  "name": "Grêmio",
+  "fullName": "Grêmio Foot-Ball Porto Alegrense",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Porto Alegre",
+  "state": "Rio Grande do Sul",
+  "stadium": {
+   "name": "Arena do Grêmio",
+   "capacity": 60540
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Grêmio FBPA",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-internacional",
+  "name": "Internacional",
+  "fullName": "Sport Club Internacional",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Porto Alegre",
+  "state": "Rio Grande do Sul",
+  "stadium": {
+   "name": "Beira-Rio",
+   "capacity": 49055
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:SC Internacional",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-mirassol",
+  "name": "Mirassol",
+  "fullName": "Mirassol Futebol Clube",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Mirassol",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "Campos Maia",
+   "capacity": 14534
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Mirassol Futebol Clube",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-palmeiras",
+  "name": "Palmeiras",
+  "fullName": "Sociedade Esportiva Palmeiras",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "São Paulo",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "Nubank Parque",
+   "capacity": 43713
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:SE Palmeiras",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-remo",
+  "name": "Remo",
+  "fullName": "Clube do Remo",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Belém",
+  "state": "Pará",
+  "stadium": {
+   "name": "Mangueirão",
+   "capacity": 53645
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Clube do Remo",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-santos",
+  "name": "Santos",
+  "fullName": "Santos Futebol Clube",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Santos",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "Vila Belmiro",
+   "capacity": 16068
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Santos FC",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-sao-paulo",
+  "name": "São Paulo",
+  "fullName": "São Paulo Futebol Clube",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "São Paulo",
+  "state": "São Paulo",
+  "stadium": {
+   "name": "MorumBIS",
+   "capacity": 66671
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:São Paulo FC",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-vasco",
+  "name": "Vasco da Gama",
+  "fullName": "Club de Regatas Vasco da Gama",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Rio de Janeiro",
+  "state": "Rio de Janeiro",
+  "stadium": {
+   "name": "São Januário",
+   "capacity": 24584
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:CR Vasco da Gama",
+   "confirmedByPrimary": false
+  }
+ },
+ {
+  "id": "br-vitoria",
+  "name": "Vitória",
+  "fullName": "Esporte Clube Vitória",
+  "competitionId": "brasileirao-a-2026",
+  "division": 1,
+  "city": "Salvador",
+  "state": "Bahia",
+  "stadium": {
+   "name": "Barradão",
+   "capacity": 30793
+  },
+  "colors": null,
+  "source": {
+   "source": "wikipedia-en",
+   "ref": "enwiki:Esporte Clube Vitória",
+   "confirmedByPrimary": false
+  }
+ }
+]

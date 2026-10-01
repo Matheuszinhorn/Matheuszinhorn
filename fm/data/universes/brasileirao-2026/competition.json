@@ -1,0 +1,30 @@
+{
+ "id": "brasileirao-a-2026",
+ "name": "Campeonato Brasileiro Série A",
+ "season": 2026,
+ "country": "Brasil",
+ "division": 1,
+ "universeId": "brasileirao-2026",
+ "clubs": [
+  "br-athletico-pr",
+  "br-atletico-mg",
+  "br-bahia",
+  "br-botafogo",
+  "br-bragantino",
+  "br-chapecoense",
+  "br-corinthians",
+  "br-coritiba",
+  "br-cruzeiro",
+  "br-flamengo",
+  "br-fluminense",
+  "br-gremio",
+  "br-internacional",
+  "br-mirassol",
+  "br-palmeiras",
+  "br-remo",
+  "br-santos",
+  "br-sao-paulo",
+  "br-vasco",
+  "br-vitoria"
+ ]
+}

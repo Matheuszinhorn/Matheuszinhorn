@@ -1,15 +1,16 @@
 {
   "name": "football-manager-engine",
   "version": "1.0.0-rc.1",
-  "description": "FM Brasileiro — MVP Release Candidate (Engine 0.2.0)",
+  "description": "ELITE MANAGER — MVP Release Candidate (Engine 0.2.0)",
   "private": true,
   "type": "module",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json && tsc -p app/tsconfig.json",
-    "test": "node --test \"engine/tests/*.test.ts\" \"game/tests/*.test.ts\" \"app/tests/*.test.ts\"",
+    "test": "node --test \"engine/tests/*.test.ts\" \"game/tests/*.test.ts\" \"data/tests/*.test.ts\" \"app/tests/*.test.ts\"",
     "build": "node scripts/build-app.mjs",
     "qa": "node scripts/qa-app.mjs",
-    "balance": "node engine/sim/balance.ts"
+    "balance": "node engine/sim/balance.ts",
+    "universe": "node scripts/build-universe.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",

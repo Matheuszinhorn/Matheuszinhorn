@@ -1,0 +1,18 @@
+[
+  {
+    "id": "cbf",
+    "name": "Confederação Brasileira de Futebol (CBF) — tabelas e BID",
+    "role": "principal",
+    "url": "https://www.cbf.com.br/futebol-brasileiro/tabelas/campeonato-brasileiro/serie-a/2026",
+    "retrievedAt": null,
+    "notes": "Fonte principal definida pelo proprietário. Não consultada: www.cbf.com.br e bid.cbf.com.br falharam na conexão a partir do ambiente de desenvolvimento em 01/10/2026. Nenhum registro deste universo tem confirmedByPrimary = true."
+  },
+  {
+    "id": "wikipedia-en",
+    "name": "Wikipédia em inglês — artigo da temporada e artigos dos 20 clubes",
+    "role": "conferencia",
+    "url": "https://en.wikipedia.org/wiki/2026_Campeonato_Brasileiro_S%C3%A9rie_A",
+    "retrievedAt": "2026-10-01T21:38:26Z",
+    "notes": "Snapshot bruto em raw/wikipedia-en-2026.raw.json (URL e revisão de cada artigo de clube). Elenco = primeira seção do artigo com {{Fs player}}; base, reservas e emprestados a outros clubes ficam de fora. Elencos mudam ao longo da temporada."
+  }
+]

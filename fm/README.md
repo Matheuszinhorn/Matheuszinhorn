@@ -1,7 +1,7 @@
 # ELITE MANAGER — MVP Release Candidate
 
-> Nome oficial: **ELITE MANAGER**. "FM Brasileiro" era o codinome de desenvolvimento e ainda aparece na tela inicial
-> e em identificadores técnicos; ver [docs/BRAND.md](docs/BRAND.md).
+> Nome oficial: **ELITE MANAGER**. "FM Brasileiro" era o codinome de desenvolvimento; ele não aparece mais ao jogador e
+> continua só em identificadores técnicos (chaves de save `fm-brasileiro:*`) e no histórico; ver [docs/BRAND.md](docs/BRAND.md).
 
 Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos clássicos (sem copiar nenhum deles):
 4 divisões × 20 clubes fictícios, temporadas de 38 rodadas, partidas simuladas minuto a minuto com decisões ao vivo
@@ -27,6 +27,7 @@ Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos cl�
 | [docs/DESIGN-DECISIONS.md](docs/DESIGN-DECISIONS.md) | Decisões de design em vigor |
 | [docs/HANDOFF-RC.md](docs/HANDOFF-RC.md) | Estado atual para quem continuar o trabalho |
 | [docs/BRAND.md](docs/BRAND.md) | Identidade oficial: nome, logo, paleta, princípios |
+| [docs/UNIVERSES.md](docs/UNIVERSES.md) | Universos de dados (V1.1): elencos reais, formatos, normalização, validação, origem |
 | [docs/RELEASE-AUDIT.md](docs/RELEASE-AUDIT.md) | Auditoria de release: matriz de finalização e classificação |
 | [docs/PLAYTEST-13A.md](docs/PLAYTEST-13A.md) | Protocolo do playtest humano (pendente) |
 
@@ -68,9 +69,11 @@ O repositório não tem deploy automático nem credenciais de publicação.
 
 ```
 engine/   Engine 0.2.0 (contrato): partida, decisões, CPU, rodada, temporada, finanças, mundo, escalação. Não conhece UI.
+data/     Universos de dados (V1.1): Brasileirão 2026, normalização, validação, conversão para o World do engine.
 game/     Camada de jogo: carreira (career.ts), sessão e velocidades (session.ts), consultas (queries*.ts),
           edição de escalação (lineup-edit.ts), sugestão = política da CPU (assist.ts), decisões de goleiro (goalkeeper.ts).
-app/      Interface em TypeScript puro + DOM (sem framework): controller.ts (estado/ações), views/*, styles.css, index.html.
+app/      Interface em TypeScript puro + DOM (sem framework): controller.ts (estado/ações), views/*, styles.css (tokens da
+          marca ELITE MANAGER), index.html (splash), assets/ (favicon recortado da logo oficial em docs/brand/).
 scripts/  build-app.mjs (bundler próprio, sem dependências) e scripts de QA (qa-*.mjs).
 reports/  Relatórios históricos de calibração do engine.
 ```
@@ -96,6 +99,7 @@ npm install -D playwright && npx playwright install chromium   # ou: NODE_PATH=<
 npm run build
 node scripts/qa-app.mjs --season          # smoke: carreira, MEU TIME, rodadas, recarregar, temporada inteira, virada
 node scripts/qa-visual.mjs                # 6 larguras × telas principais e pop-ups
+node scripts/qa-splash.mjs                # 6 larguras: splash, logo oficial, título, favicon
 node scripts/qa-season.mjs --w=390 --h=844 --mobile
 node scripts/qa-persist.mjs --w=1280 --h=800
 node scripts/qa-scenarios.mjs && node scripts/qa-goalkeeper.mjs

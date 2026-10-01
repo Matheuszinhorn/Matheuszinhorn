@@ -65,8 +65,13 @@ collect(ENTRY);
 const body = [...modules.entries()].map(([id, code]) => `__defs[${JSON.stringify(id)}] = function (__exports, __req) {\n${code}\n};`).join('\n\n');
 const js = `(function () {\n'use strict';\nvar __defs = {}; var __cache = {};\nfunction __req(id) { var c = __cache[id]; if (c) return c.exports; c = __cache[id] = { exports: {} }; if (!__defs[id]) throw new Error('módulo ausente: ' + id); __defs[id](c.exports, __req); return c.exports; }\n${body}\n__req(${JSON.stringify(ENTRY)});\n})();`;
 
-const html = readFileSync(join(ROOT, 'app/index.html'), 'utf8');
-const css = readFileSync(join(ROOT, 'app/styles.css'), 'utf8');
+// Imagens da marca embutidas como data: URI (o HTML continua um arquivo único que funciona offline).
+// A logo é a referência oficial em docs/brand, sem alteração; o favicon é um recorte do símbolo dela (app/assets).
+const dataUri = (path) => `data:image/png;base64,${readFileSync(join(ROOT, path)).toString('base64')}`;
+const html = readFileSync(join(ROOT, 'app/index.html'), 'utf8')
+  .replace('__FAVICON_64__', () => dataUri('app/assets/favicon-64.png'))
+  .replace('__APPLE_TOUCH_ICON__', () => dataUri('app/assets/apple-touch-icon-180.png'));
+const css = readFileSync(join(ROOT, 'app/styles.css'), 'utf8').replace('__BRAND_LOGO__', () => dataUri('docs/brand/elite-manager-logo-referencia.png'));
 const out = html.replace('/*__CSS__*/', () => css).replace('/*__JS__*/', () => js.replace(/<\/script/gi, '<\\/script'));
 mkdirSync(join(ROOT, 'dist/app'), { recursive: true });
 writeFileSync(join(ROOT, 'dist/app/index.html'), out);

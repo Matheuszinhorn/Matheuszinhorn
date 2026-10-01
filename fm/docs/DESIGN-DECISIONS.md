@@ -6,7 +6,7 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 |---|---|
 | Filosofia | Poucas regras, muitas decisões: simplicidade, velocidade e consequências. Sem dezenas de atributos escondidos. |
 | Referência | Simplicidade e ritmo dos clássicos do gênero como conceito; identidade própria, sem copiar código, textos, imagens, áudio ou identidade visual de terceiros. |
-| Identidade visual | Azul, preto e branco, com estética de futebol/estádio, moderna e profissional. Verde como cor do produto foi considerado e **recusado**; o verde aparece só no gramado e em quadros de jogos. |
+| Identidade visual | **ELITE MANAGER** (decisão do proprietário, 01/10/2026, aplicada na V1): logo oficial, azul-marinho `#071522` como estrutura, verde-lima `#B3FA46` só como destaque/ação, off-white `#F2F4ED` para leitura; estética de futebol, moderna e profissional, sem excesso de efeitos. Substitui a decisão anterior (azul/preto/branco, verde recusado). Detalhes em [BRAND.md](BRAND.md). |
 | Tela PARTIDA | Formato de "rodada ao vivo": placar, relógio, lances e todos os jogos da rodada; não vira painel genérico de cards. |
 | Navegação | Cinco áreas: PARTIDA, MEU TIME, CAMPEONATO, CLUBES (só consulta) e CARREIRA. |
 | Identidade dos clubes | Nome e cor; sem escudos ou badges oficiais (por enquanto, iniciais em um círculo). |
