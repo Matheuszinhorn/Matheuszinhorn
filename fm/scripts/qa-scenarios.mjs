@@ -31,19 +31,22 @@ function firstDecision(career) {
 const wants = {
   'goleiro-lesionado-com-reserva': (d) => d.type === 'INJURY_SUBSTITUTION' && d.subjectPos === 'GK' && d.eligibleHasGK,
   'goleiro-lesionado-sem-reserva': (d) => d.type === 'INJURY_SUBSTITUTION' && d.subjectPos === 'GK' && !d.eligibleHasGK,
-  'goleiro-expulso': (d) => d.type === 'RED_CARD_ADJUSTMENT' && d.subjectPos === 'GK',
+  'goleiro-expulso-com-reserva': (d) => d.type === 'RED_CARD_ADJUSTMENT' && d.subjectPos === 'GK' && d.eligibleHasGK,
+  'goleiro-expulso-sem-reserva': (d) => d.type === 'RED_CARD_ADJUSTMENT' && d.subjectPos === 'GK' && !d.eligibleHasGK,
 };
+// Casos "sem reserva": mesma carreira, banco só com jogadores de linha (a escolha é do jogador, validada pelo engine).
+const NO_RESERVE = new Set(['goleiro-lesionado-sem-reserva', 'goleiro-expulso-sem-reserva']);
 const found = {};
 mkdirSync(join(ROOT, 'dist/qa/scenarios'), { recursive: true });
 const t0 = Date.now();
-for (let i = 0; i < 6000 && Object.keys(found).length < 3; i++) {
+const TOTAL = Object.keys(wants).length;
+for (let i = 0; i < 20000 && Object.keys(found).length < TOTAL; i++) {
   const seed = `qa-cenario-${i}`;
   const clubId = careerOffers(seed)[0];
   const base = createCareer({ seed, coachName: 'QA Goleiro', clubId });
   const d0 = firstDecision(base);
-  if (d0) for (const [name, want] of Object.entries(wants)) if (!found[name] && name !== 'goleiro-lesionado-sem-reserva' && want(d0)) found[name] = { career: base, decision: d0 };
-  // Sem goleiro reserva: mesma carreira, banco só com jogadores de linha (a escolha é do jogador, validada pelo engine).
-  if (!found['goleiro-lesionado-sem-reserva']) {
+  if (d0) for (const [name, want] of Object.entries(wants)) if (!found[name] && !NO_RESERVE.has(name) && want(d0)) found[name] = { career: base, decision: d0 };
+  if ([...NO_RESERVE].some((n) => !found[n])) {
     const players = base.world.players;
     const lineup = resolveUserLineup(base).lineup;
     const club = base.world.clubs[clubId];
@@ -52,7 +55,7 @@ for (let i = 0; i < 6000 && Object.keys(found).length < 3; i++) {
     try {
       const custom = withUserLineup(base, { ...lineup, bench });
       const d1 = firstDecision(custom);
-      if (d1 && wants['goleiro-lesionado-sem-reserva'](d1)) found['goleiro-lesionado-sem-reserva'] = { career: custom, decision: d1 };
+      if (d1) for (const name of NO_RESERVE) if (!found[name] && wants[name](d1)) found[name] = { career: custom, decision: d1 };
     } catch { /* banco sem goleiro não valeu para este clube: segue */ }
   }
 }
@@ -60,4 +63,4 @@ for (const [name, { career, decision }] of Object.entries(found)) {
   writeFileSync(join(ROOT, 'dist/qa/scenarios', `${name}.json`), JSON.stringify({ name, decision, save: serializeCareer(career) }));
   console.log(`${name}: seed ${career.seed}, decisão no minuto ${decision.minute} (${decision.type})`);
 }
-console.log(`${Object.keys(found).length}/3 cenários em ${((Date.now() - t0) / 1000).toFixed(0)} s`);
+console.log(`${Object.keys(found).length}/${TOTAL} cenários em ${((Date.now() - t0) / 1000).toFixed(0)} s`);

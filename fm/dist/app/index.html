@@ -5103,6 +5103,7 @@ __exports["renderClubs"] = renderClubs;
 __defs["app/src/views/decision.ts"] = function (__exports, __req) {
 const { DEFAULT_CONFIG, arrangeSlots, formationLabel, formationOf, parseFormation, penaltyChance,                                                                                                         } = __req("engine/index.ts");
 const { suggestedCommand } = __req("game/assist.ts");
+const { goalkeeperChanges, goalkeeperOptions, suggestedGoalkeeperChoice,                                               } = __req("game/goalkeeper.ts");
                                                             
                                                        
 const { h,            } = __req("app/src/dom.ts");
@@ -5125,12 +5126,14 @@ const { btn, segmented } = __req("app/src/views/common.ts");
                             
             
             
+                                                                                     
+                              
  
-const draft        = { decisionId: '', sub: null, style: null, behavior: null, pairs: [], out: '', inn: '', formation: null, swaps: [], a: '', b: '' };
+const draft        = { decisionId: '', sub: null, style: null, behavior: null, pairs: [], out: '', inn: '', formation: null, swaps: [], a: '', b: '', gk: null };
 
 function sync(decision          )       {
   if (draft.decisionId === decision.id) return;
-  Object.assign(draft, { decisionId: decision.id, sub: null, style: null, behavior: null, pairs: [], out: '', inn: '', formation: null, swaps: [], a: '', b: '' });
+  Object.assign(draft, { decisionId: decision.id, sub: null, style: null, behavior: null, pairs: [], out: '', inn: '', formation: null, swaps: [], a: '', b: '', gk: null });
 }
 
 const MAX_SUBS = DEFAULT_CONFIG.maxSubs;
@@ -5239,6 +5242,37 @@ function positionsBlock(ctrl                , m            , decision          )
   );
 }
 
+/** Pop-up de goleiro (lesionado ou expulso): o usuário escolhe; a sugestão vem pré-selecionada. Quem valida é o engine. */
+function goalkeeperModal(ctrl                , m            , decision          , opts                   , title        , subtitle        , withTactics         )              {
+  const team = m[decision.side];
+  const choice = (draft.gk ??= suggestedGoalkeeperChoice(m, decision));
+  const sug = suggestedGoalkeeperChoice(m, decision);
+  const set = (patch                           ) => { Object.assign(choice, patch); ctrl.notifyRender(); };
+  const name = (id        ) => `${POSITION_LABEL[team.players[id].position]} ${shortName(team.players[id].name)} (${team.players[id].strength})`;
+  const pick = (label        , ids          , value               , on                     ) =>
+    h('select', { 'aria-label': label, onChange: (e       ) => on((e.target                     ).value) }, [h('option', { value: '' }, label + '…'), ...ids.map((id) => h('option', { value: id, selected: id === value }, name(id)))]);
+  const body          = [];
+  if (opts.mode === 'RESERVE_GK') {
+    body.push(h('p', { class: 'notice' }, 'Há goleiro reserva: ele entra no gol no lugar de um jogador de linha, que você escolhe.'));
+    body.push(h('p', { class: 'label' }, 'Goleiro que entra'));
+    body.push(opts.reserveGks.map((id) => playerRow(m, decision, id, String(team.players[id].strength), () => set({ reserveIn: id }), id === choice.reserveIn, id === sug.reserveIn)));
+    body.push(h('p', { class: 'label' }, 'Jogador de linha que sai'), pick('Sai', opts.outfield, choice.out, (v) => set({ out: v || null })));
+  } else if (opts.mode === 'OUTFIELD_TO_GOAL') {
+    body.push(h('p', { class: 'notice' }, decision.type === 'RED_CARD_ADJUSTMENT' ? 'Sem goleiro reserva disponível: escolha o jogador de linha que vai para o gol (rende só 30% do normal).' : 'Sem troca possível: escolha o jogador de linha que vai para o gol (rende só 30% do normal).'));
+    body.push(h('p', { class: 'label' }, 'Vai para o gol'));
+    body.push(opts.outfield.map((id) => playerRow(m, decision, id, String(team.players[id].strength), () => set({ toGoal: id }), id === choice.toGoal, id === sug.toGoal)));
+  } else {
+    body.push(h('p', { class: 'notice' }, 'Sem goleiro reserva: escolha o reserva que entra e quem vai para o gol (um jogador de linha no gol rende só 30% do normal).'));
+    body.push(h('p', { class: 'label' }, 'Reserva que entra'));
+    body.push(opts.bench.map((id) => playerRow(m, decision, id, String(team.players[id].strength), () => set({ reserveIn: id, toGoal: choice.toGoal === choice.reserveIn ? id : choice.toGoal }), id === choice.reserveIn, id === sug.reserveIn)));
+    body.push(h('p', { class: 'label' }, 'Vai para o gol'), pick('Gol', [...(choice.reserveIn ? [choice.reserveIn] : []), ...opts.outfield], choice.toGoal, (v) => set({ toGoal: v || null })));
+  }
+  if (withTactics) body.push(tacticsBlock(ctrl, m, decision));
+  const changes = goalkeeperChanges(team, decision, opts, choice);
+  const confirm = () => { if (changes) ctrl.sendAdjustment(withTactics ? { ...changes, style: draft.style ?? team.style, behavior: draft.behavior ?? team.behavior } : changes); };
+  return modal(title, subtitle, body, [btn('CONFIRMAR', confirm, { kind: 'primary', disabled: !changes }), btn('ACEITAR SUGESTÃO', () => ctrl.acceptSuggestion(), { kind: 'ghost' })], 'red');
+}
+
 function renderDecision(ctrl                )                     {
   const decision = ctrl.state.snapshot.pending?.decision;
   const m = ctrl.pendingMatch();
@@ -5253,8 +5287,11 @@ function renderDecision(ctrl                )                     {
     return modal('PÊNALTI PARA O SEU TIME', 'Escolha o cobrador. A partida está parada.', list.map((id) => playerRow(m, decision, id, `${Math.round(penaltyChance(m, decision.side, id, DEFAULT_CONFIG) * 100)}%`, () => ctrl.choosePenaltyTaker(id), false, id === decision.suggested)), [suggest]);
   }
 
+  const gkOpts = goalkeeperOptions(team, decision);
+
   if (decision.type === 'INJURY_SUBSTITUTION') {
     const injured = team.players[decision.playerId ?? ''];
+    if (gkOpts) return goalkeeperModal(ctrl, m, decision, gkOpts, 'GOLEIRO LESIONADO', `${injured?.name ?? 'O goleiro'} se lesionou e sai de campo. A partida está parada.`, false);
     const isGK = injured?.position === 'GK';
     const reserves = decision.eligible.slice().sort((a, b) => (isGK ? Number(team.players[b].position === 'GK') - Number(team.players[a].position === 'GK') : 0) || team.players[b].strength - team.players[a].strength);
     const hasGK = reserves.some((id) => team.players[id].position === 'GK');
@@ -5281,6 +5318,7 @@ function renderDecision(ctrl                )                     {
     const expelled = team.players[decision.playerId ?? ''];
     const isGK = expelled?.position === 'GK';
     const remaining = MAX_SUBS - subsUsed;
+    if (gkOpts) return goalkeeperModal(ctrl, m, decision, gkOpts, 'GOLEIRO EXPULSO', `${expelled?.name ?? 'O goleiro'} foi expulso. O time precisa de exatamente um goleiro em campo. A partida está parada.`, true);
     if (isGK) {
       return modal('GOLEIRO EXPULSO', `${expelled.name} foi expulso. O time precisa de um goleiro em campo.`, [describeSuggestion(m, decision)], [btn('ACEITAR SUGESTÃO', () => ctrl.acceptSuggestion(), { kind: 'primary' })], 'red');
     }
@@ -5319,6 +5357,103 @@ function describeSuggestion(m            , decision          )              {
 
 __exports["buildChanges"] = buildChanges;
 __exports["renderDecision"] = renderDecision;
+};
+
+__defs["game/goalkeeper.ts"] = function (__exports, __req) {
+const { DEFAULT_CONFIG,                                                                 } = __req("engine/index.ts");
+const { suggestedCommand } = __req("game/assist.ts");
+                                                
+
+// Decisão do jogador quando o GOLEIRO sai (lesionado ou expulso): a tela só coleta a escolha,
+// este módulo monta o comando (trocas + posições) e quem valida é o engine (exatamente 1 goleiro, limite de trocas...).
+//
+// Modos:
+// - RESERVE_GK: expulsão com goleiro reserva e troca disponível → escolhe o goleiro reserva que entra e o jogador de linha que sai
+//   (o engine exige que o goleiro reserva entre).
+// - INJURY_NO_RESERVE_GK: lesão, há troca mas nenhum goleiro no banco → escolhe o reserva que entra e quem vai para o gol
+//   (o próprio reserva ou um jogador de linha que já está em campo).
+// - OUTFIELD_TO_GOAL: sem troca possível (ou expulsão sem goleiro reserva) → escolhe o jogador de linha que vai para o gol.
+// Lesão com goleiro no banco segue o pop-up comum de substituição (escolhe o reserva que entra no lugar do lesionado).
+
+                                                                                        
+
+                                    
+                       
+                                                                 
+                      
+                                        
+                       
+                                                          
+                  
+                                     
+                     
+ 
+
+                                   
+                           
+                     
+                        
+ 
+
+/** Opções da decisão de goleiro, ou null se a decisão não é de goleiro (ou é lesão com goleiro reserva no banco). */
+function goalkeeperOptions(team           , decision          , maxSubs = DEFAULT_CONFIG.maxSubs)                           {
+  if (decision.type !== 'INJURY_SUBSTITUTION' && decision.type !== 'RED_CARD_ADJUSTMENT') return null;
+  const vacated = decision.playerId ? team.vacated[decision.playerId] : undefined;
+  if (!vacated || vacated.sector !== 'GK' || team.onField.some((s) => s.sector === 'GK')) return null;
+  const canSub = team.subsUsed < maxSubs && team.bench.length > 0;
+  const reserveGks = canSub ? team.bench.filter((id) => team.players[id].position === 'GK') : [];
+  const outfield = team.onField.filter((s) => s.sector !== 'GK').map((s) => s.playerId);
+  const base = { vacated, reserveGks, bench: canSub ? [...team.bench] : [], outfield };
+  if (decision.type === 'RED_CARD_ADJUSTMENT') return { ...base, mode: reserveGks.length > 0 ? 'RESERVE_GK' : 'OUTFIELD_TO_GOAL' };
+  if (!canSub) return { ...base, mode: 'OUTFIELD_TO_GOAL' };
+  return reserveGks.length > 0 ? null : { ...base, mode: 'INJURY_NO_RESERVE_GK' };
+}
+
+/** Escolha pré-preenchida = a sugestão do jogo (mesma política da CPU). */
+function suggestedGoalkeeperChoice(match            , decision          )                   {
+  const cmd = suggestedCommand(match, decision);
+  const choice                   = { reserveIn: null, out: null, toGoal: null };
+  if (cmd.type !== 'ADJUST_TEAM') return choice;
+  const sub = cmd.substitutions[0];
+  if (sub) { choice.reserveIn = sub.in; choice.out = sub.out === decision.playerId ? null : sub.out; }
+  const gk = cmd.positions?.find((p) => p.sector === 'GK');
+  choice.toGoal = gk ? gk.playerId : sub && sub.out === decision.playerId ? sub.in : null;
+  return choice;
+}
+
+/** Monta as mudanças para o engine; null se a escolha está incompleta ou não pertence às opções. */
+function goalkeeperChanges(team           , decision          , opts                   , choice                  )                     {
+  const { vacated } = opts;
+  const atGoal = (s            )             => ({ ...s, sector: 'GK', x: vacated.x, y: vacated.y });
+
+  if (opts.mode === 'RESERVE_GK') {
+    const { reserveIn, out } = choice;
+    if (!reserveIn || !out || !opts.reserveGks.includes(reserveIn) || !opts.outfield.includes(out)) return null;
+    const positions = team.onField.filter((s) => s.playerId !== out).map((s) => ({ ...s })).concat(atGoal({ playerId: reserveIn, sector: 'GK', x: 0, y: 0 }));
+    return { substitutions: [{ out, in: reserveIn }], positions };
+  }
+
+  if (opts.mode === 'OUTFIELD_TO_GOAL') {
+    const { toGoal } = choice;
+    if (!toGoal || !opts.outfield.includes(toGoal)) return null;
+    return { substitutions: [], positions: team.onField.map((s) => (s.playerId === toGoal ? atGoal(s) : { ...s })) };
+  }
+
+  // INJURY_NO_RESERVE_GK: o reserva entra na vaga do goleiro; se outro for para o gol, os dois trocam de lugar.
+  const { reserveIn, toGoal } = choice;
+  if (!reserveIn || !toGoal || !opts.bench.includes(reserveIn) || (toGoal !== reserveIn && !opts.outfield.includes(toGoal))) return null;
+  const injured = decision.playerId ?? '';
+  let positions               = team.onField.map((s) => ({ ...s })).concat({ ...vacated, playerId: reserveIn });
+  if (toGoal !== reserveIn) {
+    const target = positions.find((s) => s.playerId === toGoal) ;
+    positions = positions.map((s) => (s.playerId === toGoal ? atGoal(s) : s.playerId === reserveIn ? { ...target, playerId: reserveIn } : s));
+  }
+  return { substitutions: [{ out: injured, in: reserveIn }], positions };
+}
+
+__exports["goalkeeperOptions"] = goalkeeperOptions;
+__exports["suggestedGoalkeeperChoice"] = suggestedGoalkeeperChoice;
+__exports["goalkeeperChanges"] = goalkeeperChanges;
 };
 
 __defs["app/src/views/league.ts"] = function (__exports, __req) {
