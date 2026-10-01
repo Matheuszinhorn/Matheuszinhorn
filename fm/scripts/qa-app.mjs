@@ -7,7 +7,14 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const { chromium } = createRequire((process.env.NODE_PATH || '/home/claude/.npm-global/lib/node_modules') + '/')('playwright');
+// Playwright é ferramenta de QA (não faz parte do produto): procura no projeto (npm install -D playwright) e depois em NODE_PATH.
+function loadPlaywright() {
+  const places = [import.meta.url, ...(process.env.NODE_PATH ?? '').split(':').filter(Boolean).map((p) => p.replace(/\/?$/, '/'))];
+  for (const base of places) { try { return createRequire(base)('playwright'); } catch { /* tenta o próximo */ } }
+  console.error('Playwright não encontrado. Instale (npm install -D playwright && npx playwright install chromium) ou aponte NODE_PATH para uma instalação existente.');
+  process.exit(2);
+}
+const { chromium } = loadPlaywright();
 const FULL_SEASON = process.argv.includes('--season');
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) ?? '').slice(7);
 const VIEWPORTS = [

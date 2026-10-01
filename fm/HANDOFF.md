@@ -1,3 +1,5 @@
+> **Documento histórico** (passagem de sessão de 30/09/2026). O estado atual, os comandos e as limitações estão em [README.md](README.md).
+
 # HANDOFF — Football Manager Brasileiro (para continuar no Claude Code)
 
 Leia este arquivo inteiro antes de qualquer ação. Responda em português.

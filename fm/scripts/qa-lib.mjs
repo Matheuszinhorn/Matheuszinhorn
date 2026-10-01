@@ -8,7 +8,14 @@ export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // APP_URL=http://... testa o build servido por HTTP (como publicado); sem a variável, abre o arquivo local.
 export const APP_URL = process.env.APP_URL || 'file://' + join(ROOT, 'dist/app/index.html');
 export const SAVE_KEY = 'fm-brasileiro:carreira:v1';
-export const { chromium } = createRequire((process.env.NODE_PATH || '/home/claude/.npm-global/lib/node_modules') + '/')('playwright');
+// Playwright é ferramenta de QA (não faz parte do produto): procura no projeto (npm install -D playwright) e depois em NODE_PATH.
+function loadPlaywright() {
+  const places = [import.meta.url, ...(process.env.NODE_PATH ?? '').split(':').filter(Boolean).map((p) => p.replace(/\/?$/, '/'))];
+  for (const base of places) { try { return createRequire(base)('playwright'); } catch { /* tenta o próximo */ } }
+  console.error('Playwright não encontrado. Instale (npm install -D playwright && npx playwright install chromium) ou aponte NODE_PATH para uma instalação existente.');
+  process.exit(2);
+}
+export const { chromium } = loadPlaywright();
 export const shotDir = (...p) => { const d = join(ROOT, 'dist/qa', ...p); mkdirSync(d, { recursive: true }); return d; };
 
 export function watch(page, errors) {

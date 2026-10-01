@@ -1,5 +1,7 @@
 {
   "name": "football-manager-engine",
+  "version": "1.0.0-rc.1",
+  "description": "FM Brasileiro — MVP Release Candidate (Engine 0.2.0)",
   "private": true,
   "type": "module",
   "scripts": {

@@ -4,7 +4,6 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "typeRoots": ["/home/claude/.npm-global/lib/node_modules/pptxgenjs/node_modules/@types"],
     "types": ["node"],
     "strict": true,
     "noEmit": true,
