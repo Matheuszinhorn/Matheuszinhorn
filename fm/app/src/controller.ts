@@ -51,6 +51,26 @@ export function browserStorage(): KeyValueStorage {
   }
 }
 
+export const SAVE_PROBLEM = 'A carreira salva neste navegador não pode ser carregada: o arquivo está corrompido ou é de uma versão incompatível.';
+
+/** Só para a TELA decidir o que mostrar. A validação continua sendo a de deserializeCareer; aqui também se confere que o
+ * clube do jogador existe, porque sem ele nenhuma tela da carreira abre. Texto vazio conta como "sem save". */
+function readSave(raw: string | null): { career: CareerState | null; problem: string | null } {
+  if (raw === null || raw.trim() === '') return { career: null, problem: null };
+  try {
+    const career = deserializeCareer(raw);
+    if (!career.world.clubs[career.userClubId]) return { career: null, problem: SAVE_PROBLEM };
+    return { career, problem: null };
+  } catch {
+    return { career: null, problem: SAVE_PROBLEM };
+  }
+}
+
+function saveStatus(raw: string | null): { hasSave: boolean; saveProblem: string | null } {
+  const r = readSave(raw);
+  return { hasSave: r.career !== null, saveProblem: r.problem };
+}
+
 export type Screen = 'START' | 'TEAM' | 'MATCH' | 'LEAGUE' | 'CLUBS' | 'CAREER';
 /** PRE = rodada ainda não jogada · LIVE = rodada em andamento · POST = rodada terminada e aplicada à carreira */
 export type MatchPhase = 'PRE' | 'LIVE' | 'POST';
@@ -64,6 +84,8 @@ export interface AppState {
   screen: Screen;
   career: CareerState | null;
   hasSave: boolean;
+  /** Existe algo salvo, mas não dá para carregar (corrompido/versão incompatível): a tela inicial avisa em vez de oferecer CONTINUAR. */
+  saveProblem: string | null;
   offers: { seed: string; clubIds: string[] } | null;
   phase: MatchPhase;
   plan: RoundPlan | null;
@@ -108,7 +130,7 @@ export class GameController {
     this.state = {
       screen: 'START',
       career: null,
-      hasSave: this.storage.get(SAVE_KEY) !== null,
+      ...saveStatus(this.storage.get(SAVE_KEY)),
       offers: null,
       phase: 'PRE',
       plan: null,
@@ -159,7 +181,7 @@ export class GameController {
     if (!career) return;
     try {
       this.storage.set(SAVE_KEY, serializeCareer(career));
-      this.state = { ...this.state, hasSave: true };
+      this.state = { ...this.state, hasSave: true, saveProblem: null };
     } catch {
       this.notify('Não foi possível salvar a carreira neste navegador.', 'error');
     }
@@ -187,10 +209,13 @@ export class GameController {
   }
 
   continueCareer(): void {
-    const json = this.storage.get(SAVE_KEY);
-    if (!json) return this.notify('Nenhuma carreira salva.', 'error');
+    const saved = readSave(this.storage.get(SAVE_KEY));
+    if (!saved.career) {
+      this.set(saveStatus(this.storage.get(SAVE_KEY)));
+      return this.notify(saved.problem ?? 'Nenhuma carreira salva.', 'error');
+    }
     try {
-      const career = deserializeCareer(json);
+      const career = saved.career;
       this.applied.clear();
       // Salvo depois da rodada 38 e antes de INICIAR TEMPORADA: volta para a tela de fim de temporada (POST),
       // a única que oferece a virada. Em PRE só haveria JOGAR RODADA, que não existe mais nesta temporada.
@@ -205,7 +230,7 @@ export class GameController {
     this.storage.remove(SAVE_KEY);
     this.session.dispose();
     this.applied.clear();
-    this.set({ career: null, hasSave: false, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
+    this.set({ career: null, hasSave: false, saveProblem: null, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
   }
 
   // ----- navegação -----

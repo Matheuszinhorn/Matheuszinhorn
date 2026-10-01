@@ -100,3 +100,33 @@ export function roundStats(page) {
     return o;
   });
 }
+
+/** Texto ilegível: palavra partida entre duas linhas (nomes) e aba de divisão cortada/fora da área visível. */
+export function textIssues(page) {
+  return page.evaluate(() => {
+    const issues = [];
+    const sel = '.sb-name, .mteam, .standings td, .clubrow, .prow-name, .chip-name, .topbar h1, .topbar .club-name, .offer h4, .next-vs span, .scorers li, .ev-txt, .card-title, .modal h2, .modal p, .btn, .tab, .nav-btn, .seg-btn, .pill, td, th, h2, h3, p, li';
+    const seen = new Set();
+    for (const el of document.querySelectorAll(sel)) {
+      const r0 = el.getBoundingClientRect(); if (!r0.width || !r0.height) continue;
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+        if (seen.has(n)) continue; seen.add(n);
+        const re = /\S{3,}/g; let m;
+        while ((m = re.exec(n.textContent))) {
+          const range = document.createRange(); range.setStart(n, m.index); range.setEnd(n, m.index + m[0].length);
+          const tops = new Set([...range.getClientRects()].filter((q) => q.width > 0).map((q) => Math.round(q.top)));
+          if (tops.size > 1) issues.push(`palavra partida: "${m[0]}" em <${el.tagName.toLowerCase()} class="${el.className}">`);
+        }
+      }
+    }
+    for (const b of document.querySelectorAll('button')) { const r = b.getBoundingClientRect(); if (r.width && r.height && b.scrollHeight > b.clientHeight + 2) issues.push(`conteúdo vazando do botão: "${b.textContent.trim().slice(0, 30)}" (${b.scrollHeight} > ${b.clientHeight})`); }
+    const tabs = document.querySelector('.tabs');
+    if (tabs) {
+      const tr = tabs.getBoundingClientRect();
+      if (tabs.scrollWidth > tabs.clientWidth + 1) issues.push(`abas com rolagem escondida (${tabs.scrollWidth} > ${tabs.clientWidth})`);
+      for (const t of tabs.querySelectorAll('.tab')) { const r = t.getBoundingClientRect(); if (r.right > tr.right + 1 || r.left < tr.left - 1) issues.push(`aba cortada: ${t.textContent}`); if (t.scrollWidth > t.clientWidth + 1) issues.push(`texto da aba cortado: ${t.textContent}`); }
+    }
+    return [...new Set(issues)];
+  });
+}

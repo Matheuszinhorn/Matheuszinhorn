@@ -8,7 +8,7 @@
 <style>/* Football Manager Brasileiro — identidade: azul profundo, preto e branco; gramado só onde há bola rolando. */
 :root {
   --bg: #050b1a; --bg2: #08122a; --panel: #0d1b3a; --panel2: #132650; --line: rgba(255,255,255,.11);
-  --text: #f4f7ff; --muted: #9fb2d8; --blue: #2d7dff; --blue-d: #1a55d0; --cyan: #4cc9ff;
+  --text: #f4f7ff; --muted: #9fb2d8; --blue: #2d7dff; --blue-d: #1a55d0; --blue-on: #2266e6; --cyan: #4cc9ff;
   --green: #2bd67b; --yellow: #ffd23f; --red: #ff4d5e; --pitch: #0f6a3a; --pitch2: #127a43;
   --r: 16px; --nav-h: 64px;
 }
@@ -63,12 +63,12 @@ h1, h2, h3, h4 { line-height: 1.15; letter-spacing: .02em; }
 .btn { min-height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.07); font-weight: 800; letter-spacing: .05em; font-size: 13px; text-transform: uppercase; transition: transform .08s, filter .15s; }
 .btn:active:not(:disabled) { transform: scale(.97); } .btn:hover:not(:disabled) { filter: brightness(1.15); }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
-.btn-primary { background: linear-gradient(180deg, #3f8fff, #1d59df); border-color: #6aa8ff; color: #fff; box-shadow: 0 6px 18px rgba(45,125,255,.35); }
+.btn-primary { background: linear-gradient(180deg, #3483ff, #1a55d0); border-color: #6aa8ff; color: #fff; box-shadow: 0 6px 18px rgba(45,125,255,.35); }
 .btn-danger { background: #7f1d2a; border-color: #c2414f; } .btn-good { background: #14804a; border-color: #2bd67b; }
 .btn-big { min-height: 54px; font-size: 15px; padding: 0 26px; }
 .seg { display: inline-flex; flex-wrap: wrap; background: rgba(0,0,0,.28); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; max-width: 100%; }
 .seg-btn { min-height: 38px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-weight: 800; font-size: 12px; letter-spacing: .03em; text-transform: uppercase; }
-.seg-btn.on { background: var(--blue); color: #fff; } .seg-btn:disabled { opacity: .5; }
+.seg-btn.on { background: var(--blue-on); color: #fff; } .seg-btn:disabled { opacity: .5; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 10px; margin: 6px 0 10px; }
 .stat { background: rgba(255,255,255,.05); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
 .stat-v { font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; } .stat-l { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
@@ -83,7 +83,9 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #08143
 .pos-GK { background: #a98400; color: #fff; } .pos-DEF { background: #1a55d0; } .pos-MID { background: #14804a; } .pos-ATT { background: #b62b3a; }
 .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 2px; scrollbar-width: none; }
 .tab { flex: none; min-height: 40px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); font-weight: 800; font-size: 13px; }
-.tab.on { background: var(--blue); border-color: #6aa8ff; }
+.tab.on { background: var(--blue-on); border-color: #6aa8ff; }
+/* Celular: as 4 divisões sempre visíveis, em colunas iguais (sem aba escondida atrás da rolagem). */
+@media (max-width: 520px) { .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; overflow: visible; } .tab { min-width: 0; padding: 0 4px; font-size: 12px; white-space: nowrap; letter-spacing: -.01em; } }
 .speedrow { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; margin: 4px 0 12px; } .speedrow .label { margin: 0; }
 @media (max-width: 520px) { .hs { display: none; } .standings td, .standings th { padding-left: 4px; padding-right: 4px; } .standings td.club { max-width: 150px; } }
 .tbl-wrap { overflow-x: auto; margin: 0 -4px; max-width: 100%; } .tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -120,10 +122,14 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #08143
 .sb-team.me .sb-name { color: var(--cyan); }
 .sb-mid { text-align: center; } .sb-score { font-size: clamp(38px, 11vw, 60px); font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: .02em; } .sb-score span { margin: 0 6px; color: var(--muted); font-weight: 400; }
 .sb-clock { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; padding: 3px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .06em; background: rgba(0,0,0,.35); }
+/* Celular: o relógio desce para uma linha própria, abaixo do placar, e os nomes ganham a largura da coluna do meio (sem partir palavra). */
+@media (max-width: 520px) { .scoreboard { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: 'home score away' 'clock clock clock'; row-gap: 6px; } .sb-team:first-child { grid-area: home; } .sb-team:last-child { grid-area: away; } .sb-mid { display: contents; } .sb-score { grid-area: score; text-align: center; } .sb-clock { grid-area: clock; justify-self: center; margin-top: 0; } .sb-name { font-size: 14px; } }
 .sb-clock .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); } .sb-clock.live .dot { background: var(--green); animation: pulse 1.4s infinite; } .sb-clock.paused .dot { background: var(--yellow); } .sb-clock.wait { color: var(--yellow); } .sb-clock.wait .dot { background: var(--yellow); animation: pulse 1s infinite; } .sb-clock.end .dot { background: var(--red); }
 .controls { display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 12px; } .controls .seg { justify-content: center; }
 .result-flag { text-align: center; margin-bottom: 10px; } .result-flag .badge { font-size: 13px; padding: 4px 16px; } .scorers { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 3px; text-align: center; font-size: 14px; }
-.next-vs { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: clamp(16px, 4.4vw, 22px); font-weight: 800; text-align: center; flex-wrap: wrap; margin: 4px 0 6px; } .next-vs b { color: var(--muted); } .next .muted { text-align: center; margin-bottom: 8px; }
+.next-vs { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: clamp(16px, 4.4vw, 22px); font-weight: 800; text-align: center; flex-wrap: wrap; margin: 4px 0 6px; } .next-vs b { color: var(--muted); }
+/* Celular: confronto empilhado (mandante / x / visitante) e botões da rodada na largura toda. */
+@media (max-width: 520px) { .next-vs { flex-direction: column; gap: 2px; } .pre-actions > .btn { flex: 1 1 100%; } } .next .muted { text-align: center; margin-bottom: 8px; }
 .feed { list-style: none; padding: 0; max-height: 340px; overflow-y: auto; display: grid; gap: 4px; }
 .ev { display: grid; grid-template-columns: 48px 22px 1fr; gap: 6px; align-items: center; padding: 6px 8px; border-radius: 10px; background: rgba(255,255,255,.04); font-size: 13.5px; } .ev.key { background: rgba(45,125,255,.16); font-weight: 700; } .ev-min { color: var(--muted); font-variant-numeric: tabular-nums; }
 .ev-ico { width: 18px; height: 18px; display: grid; place-items: center; font-size: 11px; font-weight: 900; border-radius: 4px; }
@@ -149,18 +155,18 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #08143
 .chip-GK .chip-n { background: #a98400; } .chip-MID .chip-n { background: #14804a; } .chip-ATT .chip-n { background: #b62b3a; }
 .chip-name { font-size: 10.5px; font-weight: 700; text-shadow: 0 1px 3px #000, 0 0 2px #000; white-space: nowrap; max-width: 62px; overflow: hidden; text-overflow: ellipsis; }
 .chip.sel .chip-n { box-shadow: 0 0 0 4px var(--yellow), 0 3px 8px rgba(0,0,0,.45); transform: scale(1.12); } .chip.off .chip-n { border-style: dashed; border-color: var(--yellow); } .chip:disabled { cursor: default; }
-.chips-row { display: flex; flex-wrap: wrap; gap: 6px; } .pill { min-height: 38px; padding: 0 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); font-weight: 800; font-size: 13px; } .pill.on { background: var(--blue); border-color: #6aa8ff; } .pill:disabled { opacity: .5; }
+.chips-row { display: flex; flex-wrap: wrap; gap: 6px; } .pill { min-height: 38px; padding: 0 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); font-weight: 800; font-size: 13px; } .pill.on { background: var(--blue-on); border-color: #6aa8ff; } .pill:disabled { opacity: .5; }
 
 /* ---------- pop-ups de decisão ---------- */
 .modal-back { position: fixed; inset: 0; z-index: 100; background: rgba(2,6,16,.8); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 12px; }
 .modal { width: min(580px, 100%); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; background: linear-gradient(180deg, #10265a, #0a1633); border: 1px solid rgba(255,255,255,.18); border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.65); animation: up .18s ease-out; overflow: hidden; }
 .modal-red { border-top: 4px solid var(--red); } .modal-blue { border-top: 4px solid var(--blue); } .modal-yellow { border-top: 4px solid var(--yellow); }
 .modal header { padding: 16px 18px 6px; } .modal h2 { font-size: 20px; letter-spacing: .05em; }
-.modal-body { padding: 8px 18px; overflow-y: auto; display: grid; gap: 8px; align-content: start; }
+.modal-body { padding: 8px 18px; overflow-y: auto; display: grid; gap: 8px; align-content: start; grid-auto-rows: max-content; } /* linhas na altura do conteúdo: em lista longa elas não encolhem (nome em 3 linhas não vaza) */
 .modal footer { display: flex; gap: 10px; flex-wrap: wrap; padding: 12px 18px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); } .modal footer .btn { flex: 1; min-width: 150px; }
 @keyframes up { from { transform: translateY(24px); opacity: .4; } }
-.prow { width: 100%; display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 6px 12px; border-radius: 12px; background: rgba(255,255,255,.05); border: 2px solid transparent; text-align: left; }
-.prow.on { border-color: var(--cyan); background: rgba(76,201,255,.15); } .prow-name { flex: 1; font-weight: 700; } .prow-r { font-weight: 900; color: var(--cyan); font-variant-numeric: tabular-nums; }
+.prow { width: 100%; display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 9px 12px; border-radius: 12px; background: rgba(255,255,255,.05); border: 2px solid transparent; text-align: left; }
+.prow.on { border-color: var(--cyan); background: rgba(76,201,255,.15); } .prow-name { flex: 1; min-width: 0; font-weight: 700; line-height: 1.25; } .prow .badge, .prow .pos { flex: none; } .prow-r { font-weight: 900; color: var(--cyan); font-variant-numeric: tabular-nums; }
 .suggestion { background: rgba(45,125,255,.14); border: 1px solid rgba(45,125,255,.4); border-radius: 12px; padding: 10px 12px; } .suggestion .label { margin-top: 0; }
 .pair { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.06); font-size: 14px; } .pair .x { width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(255,77,94,.25); font-size: 18px; }
 .pair-add { display: grid; gap: 8px; grid-template-columns: 1fr; } .subs, .tactics { display: grid; gap: 4px; }
@@ -171,6 +177,7 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #08143
 .start ~ .toast { bottom: 24px; }
 @media (min-width: 900px) { .toast { bottom: 26px; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.season-sub { margin-top: 12px; margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -260,6 +267,26 @@ function browserStorage()                  {
   }
 }
 
+const SAVE_PROBLEM = 'A carreira salva neste navegador não pode ser carregada: o arquivo está corrompido ou é de uma versão incompatível.';
+
+/** Só para a TELA decidir o que mostrar. A validação continua sendo a de deserializeCareer; aqui também se confere que o
+ * clube do jogador existe, porque sem ele nenhuma tela da carreira abre. Texto vazio conta como "sem save". */
+function readSave(raw               )                                                         {
+  if (raw === null || raw.trim() === '') return { career: null, problem: null };
+  try {
+    const career = deserializeCareer(raw);
+    if (!career.world.clubs[career.userClubId]) return { career: null, problem: SAVE_PROBLEM };
+    return { career, problem: null };
+  } catch {
+    return { career: null, problem: SAVE_PROBLEM };
+  }
+}
+
+function saveStatus(raw               )                                                   {
+  const r = readSave(raw);
+  return { hasSave: r.career !== null, saveProblem: r.problem };
+}
+
                                                                                 
 /** PRE = rodada ainda não jogada · LIVE = rodada em andamento · POST = rodada terminada e aplicada à carreira */
                                                  
@@ -273,6 +300,8 @@ function browserStorage()                  {
                  
                              
                    
+                                                                                                                                         
+                             
                                                      
                     
                          
@@ -317,7 +346,7 @@ class GameController {
     this.state = {
       screen: 'START',
       career: null,
-      hasSave: this.storage.get(SAVE_KEY) !== null,
+      ...saveStatus(this.storage.get(SAVE_KEY)),
       offers: null,
       phase: 'PRE',
       plan: null,
@@ -368,7 +397,7 @@ class GameController {
     if (!career) return;
     try {
       this.storage.set(SAVE_KEY, serializeCareer(career));
-      this.state = { ...this.state, hasSave: true };
+      this.state = { ...this.state, hasSave: true, saveProblem: null };
     } catch {
       this.notify('Não foi possível salvar a carreira neste navegador.', 'error');
     }
@@ -396,10 +425,13 @@ class GameController {
   }
 
   continueCareer()       {
-    const json = this.storage.get(SAVE_KEY);
-    if (!json) return this.notify('Nenhuma carreira salva.', 'error');
+    const saved = readSave(this.storage.get(SAVE_KEY));
+    if (!saved.career) {
+      this.set(saveStatus(this.storage.get(SAVE_KEY)));
+      return this.notify(saved.problem ?? 'Nenhuma carreira salva.', 'error');
+    }
     try {
-      const career = deserializeCareer(json);
+      const career = saved.career;
       this.applied.clear();
       // Salvo depois da rodada 38 e antes de INICIAR TEMPORADA: volta para a tela de fim de temporada (POST),
       // a única que oferece a virada. Em PRE só haveria JOGAR RODADA, que não existe mais nesta temporada.
@@ -414,7 +446,7 @@ class GameController {
     this.storage.remove(SAVE_KEY);
     this.session.dispose();
     this.applied.clear();
-    this.set({ career: null, hasSave: false, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
+    this.set({ career: null, hasSave: false, saveProblem: null, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
   }
 
   // ----- navegação -----
@@ -605,6 +637,7 @@ __exports["browserStorage"] = browserStorage;
 __exports["GameController"] = GameController;
 __exports["SAVE_KEY"] = SAVE_KEY;
 __exports["SPEED_KEY"] = SPEED_KEY;
+__exports["SAVE_PROBLEM"] = SAVE_PROBLEM;
 };
 
 __defs["game/assist.ts"] = function (__exports, __req) {
@@ -5673,7 +5706,7 @@ function renderPre(ctrl                )              {
       resolved.adjusted ? h('p', { class: 'notice' }, 'Sua escalação foi ajustada: havia titulares indisponíveis (lesão ou suspensão).') : null,
       out.length ? h('p', { class: 'muted' }, `Indisponíveis: ${out.map((p) => `${shortName(p.name)} (${p.injuredRounds > 0 ? `lesão ${p.injuredRounds}` : `suspenso ${p.suspendedRounds}`})`).join(', ')}`) : null,
       h('div', { class: 'speedrow' }, h('span', { class: 'label' }, 'Velocidade da rodada'), segmented(SPEED_ORDER.map((id) => ({ id, label: SPEEDS[id].label })), s.speed, (id) => ctrl.setSpeed(id))),
-      h('div', { class: 'row gap wrap' }, btn('JOGAR RODADA', () => ctrl.startRound(), { kind: 'primary', big: true }), btn('MEU TIME', () => ctrl.go('TEAM'))),
+      h('div', { class: 'row gap wrap pre-actions' }, btn('JOGAR RODADA', () => ctrl.startRound(), { kind: 'primary', big: true }), btn('MEU TIME', () => ctrl.go('TEAM'))),
     ),
     card('Jogos da rodada', roundBoard(ctrl, null)),
   );
@@ -5754,7 +5787,8 @@ function renderPost(ctrl                )              {
     );
   }
   parts.push(card('Classificação', h('p', null, `${club.name} é o ${pos}º colocado da ${career.world.divisions.find((d) => d.id === club.divisionId)?.name}, com ${row?.points ?? 0} pontos em ${row?.played ?? 0} jogos.`), h('div', { class: 'row gap wrap' }, btn('VER CLASSIFICAÇÃO', () => ctrl.go('LEAGUE')), btn('MEU TIME', () => ctrl.go('TEAM')))));
-  parts.push(card('Resultados da rodada', roundBoard(ctrl, m?.matchId ?? null)));
+  // Depois de recarregar, a rodada jogada não está mais em memória (não é salva): sem jogos para listar, o cartão some.
+  if (s.snapshot.round) parts.push(card('Resultados da rodada', roundBoard(ctrl, m?.matchId ?? null)));
   return h('div', { class: 'page' }, parts);
 }
 
@@ -5770,7 +5804,7 @@ function seasonCard(ctrl                )              {
     h('p', { class: 'season-line' }, `Você terminou em ${r.userPosition}º lugar na ${divName(r.userDivisionId)}.`),
     mv ? h('p', { class: mv.kind === 'PROMOTED' ? 'good' : 'bad' }, mv.kind === 'PROMOTED' ? `ACESSO! Você sobe para a ${divName(mv.toDivisionId)}${mv.champion ? ' como campeão' : ''}.` : `REBAIXAMENTO. Você cai para a ${divName(mv.toDivisionId)}.`) : h('p', { class: 'muted' }, 'Você permanece na mesma divisão.'),
     h('p', { class: 'muted' }, `Saldo financeiro da temporada: ${signedMoney(r.userNet)}`),
-    h('h4', null, 'Campeões'),
+    h('h4', { class: 'season-sub' }, 'Campeões'),
     h('ul', { class: 'plain' }, Object.entries(r.champions).map(([div, id]) => h('li', null, `${divName(div)}: ${name(id)}`))),
     h('p', { class: 'muted small' }, `${plural(r.movements.filter((x) => x.kind === 'PROMOTED').length, 'clube sobe', 'clubes sobem')} e ${plural(r.movements.filter((x) => x.kind === 'RELEGATED').length, 'desce', 'descem')} entre as divisões.`),
   );
@@ -5810,6 +5844,7 @@ function renderStart(ctrl                )              {
       'div',
       { class: 'start-panel' },
       s.hasSave && !offers ? h('div', { class: 'card' }, h('h3', { class: 'card-title' }, 'Carreira salva'), btn('CONTINUAR CARREIRA', () => ctrl.continueCareer(), { kind: 'primary', big: true })) : null,
+      s.saveProblem && !offers ? h('div', { class: 'card' }, h('h3', { class: 'card-title' }, 'Carreira salva'), h('p', { class: 'notice' }, s.saveProblem), h('p', { class: 'hint' }, 'Comece uma nova carreira abaixo. Ela substitui o salvamento antigo quando você aceitar um clube.')) : null,
       !offers
         ? h(
             'div',

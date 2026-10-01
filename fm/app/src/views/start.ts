@@ -21,6 +21,7 @@ export function renderStart(ctrl: GameController): HTMLElement {
       'div',
       { class: 'start-panel' },
       s.hasSave && !offers ? h('div', { class: 'card' }, h('h3', { class: 'card-title' }, 'Carreira salva'), btn('CONTINUAR CARREIRA', () => ctrl.continueCareer(), { kind: 'primary', big: true })) : null,
+      s.saveProblem && !offers ? h('div', { class: 'card' }, h('h3', { class: 'card-title' }, 'Carreira salva'), h('p', { class: 'notice' }, s.saveProblem), h('p', { class: 'hint' }, 'Comece uma nova carreira abaixo. Ela substitui o salvamento antigo quando você aceitar um clube.')) : null,
       !offers
         ? h(
             'div',

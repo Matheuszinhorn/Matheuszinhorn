@@ -156,7 +156,7 @@ function renderPre(ctrl: GameController): HTMLElement {
       resolved.adjusted ? h('p', { class: 'notice' }, 'Sua escalação foi ajustada: havia titulares indisponíveis (lesão ou suspensão).') : null,
       out.length ? h('p', { class: 'muted' }, `Indisponíveis: ${out.map((p) => `${shortName(p.name)} (${p.injuredRounds > 0 ? `lesão ${p.injuredRounds}` : `suspenso ${p.suspendedRounds}`})`).join(', ')}`) : null,
       h('div', { class: 'speedrow' }, h('span', { class: 'label' }, 'Velocidade da rodada'), segmented(SPEED_ORDER.map((id) => ({ id, label: SPEEDS[id].label })), s.speed, (id) => ctrl.setSpeed(id))),
-      h('div', { class: 'row gap wrap' }, btn('JOGAR RODADA', () => ctrl.startRound(), { kind: 'primary', big: true }), btn('MEU TIME', () => ctrl.go('TEAM'))),
+      h('div', { class: 'row gap wrap pre-actions' }, btn('JOGAR RODADA', () => ctrl.startRound(), { kind: 'primary', big: true }), btn('MEU TIME', () => ctrl.go('TEAM'))),
     ),
     card('Jogos da rodada', roundBoard(ctrl, null)),
   );
@@ -237,7 +237,8 @@ function renderPost(ctrl: GameController): HTMLElement {
     );
   }
   parts.push(card('Classificação', h('p', null, `${club.name} é o ${pos}º colocado da ${career.world.divisions.find((d) => d.id === club.divisionId)?.name}, com ${row?.points ?? 0} pontos em ${row?.played ?? 0} jogos.`), h('div', { class: 'row gap wrap' }, btn('VER CLASSIFICAÇÃO', () => ctrl.go('LEAGUE')), btn('MEU TIME', () => ctrl.go('TEAM')))));
-  parts.push(card('Resultados da rodada', roundBoard(ctrl, m?.matchId ?? null)));
+  // Depois de recarregar, a rodada jogada não está mais em memória (não é salva): sem jogos para listar, o cartão some.
+  if (s.snapshot.round) parts.push(card('Resultados da rodada', roundBoard(ctrl, m?.matchId ?? null)));
   return h('div', { class: 'page' }, parts);
 }
 
@@ -253,7 +254,7 @@ function seasonCard(ctrl: GameController): HTMLElement {
     h('p', { class: 'season-line' }, `Você terminou em ${r.userPosition}º lugar na ${divName(r.userDivisionId)}.`),
     mv ? h('p', { class: mv.kind === 'PROMOTED' ? 'good' : 'bad' }, mv.kind === 'PROMOTED' ? `ACESSO! Você sobe para a ${divName(mv.toDivisionId)}${mv.champion ? ' como campeão' : ''}.` : `REBAIXAMENTO. Você cai para a ${divName(mv.toDivisionId)}.`) : h('p', { class: 'muted' }, 'Você permanece na mesma divisão.'),
     h('p', { class: 'muted' }, `Saldo financeiro da temporada: ${signedMoney(r.userNet)}`),
-    h('h4', null, 'Campeões'),
+    h('h4', { class: 'season-sub' }, 'Campeões'),
     h('ul', { class: 'plain' }, Object.entries(r.champions).map(([div, id]) => h('li', null, `${divName(div)}: ${name(id)}`))),
     h('p', { class: 'muted small' }, `${plural(r.movements.filter((x) => x.kind === 'PROMOTED').length, 'clube sobe', 'clubes sobem')} e ${plural(r.movements.filter((x) => x.kind === 'RELEGATED').length, 'desce', 'descem')} entre as divisões.`),
   );

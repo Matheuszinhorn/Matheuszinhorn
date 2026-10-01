@@ -253,3 +253,31 @@ test('recarregar no fim da temporada (após a rodada 38, antes de INICIAR TEMPOR
   playRound(b);
   assert.equal(b.ctrl.state.career!.roundNumber, 2);
 });
+
+test('tela inicial e saves: só oferece CONTINUAR com save carregável; corrompido/incompatível avisa em português', () => {
+  const valid = startedCareer().storage.get(SAVE_KEY)!;
+  const cases: [string, string | null, boolean, boolean][] = [
+    ['sem save', null, false, false],
+    ['vazio', '', false, false],
+    ['corrompido', '{ruim', false, true],
+    ['versão 2', JSON.stringify({ ...JSON.parse(valid), version: 2 }), false, true],
+    ['clube inexistente', JSON.stringify({ ...JSON.parse(valid), userClubId: 'clb-nao-existe' }), false, true],
+    ['válido', valid, true, false],
+  ];
+  for (const [name, raw, hasSave, problem] of cases) {
+    const storage = memoryStorage();
+    if (raw !== null) storage.set(SAVE_KEY, raw);
+    const b = boot(storage);
+    assert.equal(b.ctrl.state.hasSave, hasSave, name);
+    assert.equal(b.ctrl.state.saveProblem !== null, problem, name);
+    b.ctrl.continueCareer();
+    if (hasSave) assert.ok(b.ctrl.state.career, name);
+    else {
+      assert.equal(b.ctrl.state.career, null, name);
+      assert.equal(b.ctrl.state.toast?.kind, 'error', name);
+      assert.doesNotMatch(b.ctrl.state.toast!.text, /Cannot|undefined|reading/, name);
+    }
+    // o que estava salvo não é apagado só por abrir o jogo
+    assert.equal(storage.get(SAVE_KEY), raw, name);
+  }
+});
