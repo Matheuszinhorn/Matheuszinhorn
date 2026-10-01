@@ -1,0 +1,71 @@
+Balanceamento — engineVersion 0.1.1 | seed "balance" | mundo "balance-world" | 10000 partidas por cenário
+
+=== Mundo: clubes da mesma divisão — 10.000 partidas ===
+(pares sorteados dentro de cada divisão, as 4 em rodízio)
+Resultado: mandante 42,6% | empate 21,8% | visitante 35,6%
+Gols por partida: 3,27 (mandante 1,73 | visitante 1,54) | 0×0: 4,2% | 7+ gols: 5,5% | máx. de um time: 11
+Placares mais comuns: 1×1 10,2% | 2×1 7,9% | 1×2 7,4% | 1×0 6,9% | 0×1 6,1% | 2×0 5,6% | 2×2 5,3% | 0×2 5,0% | 3×1 4,6% | 0×0 4,2%
+Gols por faixa de minutos: 1-15: 15,1% | 16-30: 15,2% | 31-45: 15,3% | 45+: 2,4% | 46-60: 15,5% | 61-75: 15,6% | 76-90: 15,5% | 90+: 5,4%
+Cartões por partida: amarelos 4,92 | vermelhos 0,69 (direto 0,11, 2º amarelo 0,58)
+Lesões por partida: 0,26 | Pênaltis por partida: 0,32 (conversão 77,1%) | Substituições por partida: 0,27
+Chances por partida: 9,42 | defesas: 3,59 | traves: 0,65 | posse do mandante: 49,9%
+Acréscimos médios: 1º tempo 2,2 min | 2º tempo 4,9 min
+Total de gols na partida: 0: 4,2% | 1: 12,9% | 2: 20,9% | 3: 21,1% | 4: 16,7% | 5: 12,0% | 6: 6,7% | 7+: 5,5%
+Minutos jogados por partida: 97,1 (fator de tempo 1,079 sobre os 90 minutos)
+Observado ÷ nominal (nominal = constantes do config × comportamento; se só o tempo importasse, todos seriam 1,079): amarelos 1,076 | vermelhos diretos 1,045 | lesões 1,061 | pênaltis 1,099
+Expulsões: 0,69 por partida, das quais 84,3% por 2º amarelo
+Tempo de execução: 108,8 s (10,9 ms por partida = preparação 0,04 ms + simulação 10,84 ms)
+Metas iniciais da especificação (seção 21), só informativas:
+  FORA  gols por partida: 3,27  (meta 2,40 a 2,80)
+  FORA  0×0 (% das partidas): 4,2%  (meta 7,0% a 10,0%)
+  ok    amarelos por partida: 4,92  (meta 4,00 a 5,00)
+  FORA  vermelhos por partida: 0,69  (meta 0,15 a 0,30)
+  ok    pênaltis por partida: 0,32  (meta 0,25 a 0,35)
+  ok    conversão de pênaltis (%): 77,1%  (meta 75,0% a 80,0%)
+  ok    lesões por partida: 0,26  (meta 0,20 a 0,30)
+  FORA  tempo para 10.000 partidas: 109 s  (meta < 5 s; medido com o processo compartilhado)
+Invariantes: nenhuma violação.
+
+=== Times iguais (clube contra o próprio espelho) — 10.000 partidas ===
+(isola o efeito do mando: forças, escalação e estilo idênticos)
+Resultado: mandante 42,4% | empate 23,2% | visitante 34,4%
+Gols por partida: 3,32 (mandante 1,76 | visitante 1,56) | 0×0: 3,8% | 7+ gols: 6,1% | máx. de um time: 10
+Placares mais comuns: 1×1 10,5% | 2×1 8,2% | 1×2 7,2% | 0×1 6,5% | 1×0 6,5% | 2×2 6,4% | 2×0 5,9% | 3×1 5,1% | 0×2 4,4% | 3×2 3,9%
+Gols por faixa de minutos: 1-15: 15,3% | 16-30: 15,5% | 31-45: 15,3% | 45+: 2,5% | 46-60: 15,2% | 61-75: 15,0% | 76-90: 15,7% | 90+: 5,4%
+Cartões por partida: amarelos 4,92 | vermelhos 0,69 (direto 0,12, 2º amarelo 0,58)
+Lesões por partida: 0,26 | Pênaltis por partida: 0,31 (conversão 76,3%) | Substituições por partida: 0,27
+Chances por partida: 9,60 | defesas: 3,64 | traves: 0,64 | posse do mandante: 50,0%
+Acréscimos médios: 1º tempo 2,2 min | 2º tempo 4,9 min
+Total de gols na partida: 0: 3,8% | 1: 12,9% | 2: 20,7% | 3: 20,6% | 4: 17,5% | 5: 11,9% | 6: 6,5% | 7+: 6,1%
+Minutos jogados por partida: 97,1 (fator de tempo 1,079 sobre os 90 minutos)
+Observado ÷ nominal (nominal = constantes do config × comportamento; se só o tempo importasse, todos seriam 1,079): amarelos 1,079 | vermelhos diretos 1,125 | lesões 1,067 | pênaltis 1,089
+Expulsões: 0,69 por partida, das quais 83,2% por 2º amarelo
+Tempo de execução: 106,8 s (10,7 ms por partida = preparação 0,04 ms + simulação 10,64 ms)
+Metas iniciais da especificação (seção 21), só informativas:
+  FORA  gols por partida: 3,32  (meta 2,40 a 2,80)
+  FORA  0×0 (% das partidas): 3,8%  (meta 7,0% a 10,0%)
+  ok    amarelos por partida: 4,92  (meta 4,00 a 5,00)
+  FORA  vermelhos por partida: 0,69  (meta 0,15 a 0,30)
+  ok    pênaltis por partida: 0,31  (meta 0,25 a 0,35)
+  ok    conversão de pênaltis (%): 76,3%  (meta 75,0% a 80,0%)
+  ok    lesões por partida: 0,26  (meta 0,20 a 0,30)
+  ok    mandante vence (%): 42,4%  (meta 42,0% a 48,0%)
+  FORA  empates (%): 23,2%  (meta 24,0% a 30,0%)
+  FORA  visitante vence (%): 34,4%  (meta 25,0% a 31,0%)
+  FORA  tempo para 10.000 partidas: 107 s  (meta < 5 s; medido com o processo compartilhado)
+Invariantes: nenhuma violação.
+
+=== RESUMO ===
+Invariantes: nenhuma violação em nenhum cenário.
+Fora da meta inicial (10):
+  - world: gols por partida = 3,27 (meta 2,40 a 2,80)
+  - world: 0×0 (% das partidas) = 4,2% (meta 7,0% a 10,0%)
+  - world: vermelhos por partida = 0,69 (meta 0,15 a 0,30)
+  - world: tempo para 10.000 partidas = 109 s (meta < 5 s)
+  - equal: gols por partida = 3,32 (meta 2,40 a 2,80)
+  - equal: 0×0 (% das partidas) = 3,8% (meta 7,0% a 10,0%)
+  - equal: vermelhos por partida = 0,69 (meta 0,15 a 0,30)
+  - equal: empates (%) = 23,2% (meta 24,0% a 30,0%)
+  - equal: visitante vence (%) = 34,4% (meta 25,0% a 31,0%)
+  - equal: tempo para 10.000 partidas = 107 s (meta < 5 s)
+JSON salvo em reports/balance-baseline-0.1.1-A.json

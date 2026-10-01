@@ -1,0 +1,2 @@
+Balanceamento — engineVersion 0.1.1 | seed "balance" | mundo "balance-world" | 10000 partidas por cenário
+

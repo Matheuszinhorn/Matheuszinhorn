@@ -1,0 +1,40 @@
+// QA visual nas 6 larguras: PARTIDA (pré, ao vivo, pop-up, resultado), MEU TIME, CAMPEONATO, CLUBES, CARREIRA. Capturas em dist/qa/visual/<largura>/.
+import { readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, driveRound, layoutIssues, nav, shotDir, watch } from './qa-lib.mjs';
+const scenario = JSON.parse(readFileSync(join(ROOT, 'dist/qa/scenarios/goleiro-lesionado-com-reserva.json'), 'utf8'));
+rmSync(join(ROOT, 'dist/qa/visual'), { recursive: true, force: true });
+const VPS = [[1280, 800, 0], [1440, 900, 0], [1920, 1080, 0], [360, 800, 1], [390, 844, 1], [412, 915, 1]];
+const browser = await chromium.launch(); const summary = {}; let failed = false;
+for (const [w, h, mobile] of VPS) {
+  const dir = shotDir('visual', String(w)); const errors = []; const issues = []; let n = 0;
+  const ctx = await browser.newContext(mobile ? { viewport: { width: w, height: h }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } : { viewport: { width: w, height: h } });
+  const page = await ctx.newPage(); watch(page, errors);
+  const lay = async (where) => { for (const i of await layoutIssues(page)) issues.push(`${where}: ${i}`); };
+  const shot = async (name) => page.screenshot({ path: join(dir, `${String(++n).padStart(2, '0')}-${name}.png`) });
+  await page.goto(APP_URL); await lay('inicio'); await shot('inicio');
+  await page.evaluate(([k, v]) => localStorage.setItem(k, v), [SAVE_KEY, scenario.save]); await page.reload(); await lay('inicio-continuar');
+  await page.getByRole('button', { name: 'CONTINUAR CARREIRA' }).click(); await page.waitForSelector('.topbar');
+  await lay('partida-pre'); await shot('partida-pre');
+  await nav(page, 'MEU TIME'); await lay('meu-time'); await shot('meu-time');
+  await page.locator('.pill', { hasText: '3-5-2' }).click(); await lay('meu-time-3-5-2');
+  await nav(page, 'CAMPEONATO'); await lay('campeonato'); await shot('campeonato');
+  await nav(page, 'CLUBES'); await lay('clubes'); await shot('clubes'); await page.locator('.clubrow').nth(3).click(); await lay('clube-detalhe'); await shot('clube-detalhe');
+  await nav(page, 'CARREIRA'); await lay('carreira'); await shot('carreira');
+  await nav(page, 'PARTIDA');
+  await page.getByRole('button', { name: 'MUITO RÁPIDA', exact: true }).click(); await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
+  await page.waitForFunction(() => (globalThis.__fm.userMatch()?.clock.minute ?? 0) >= 14, null, { timeout: 30000 });
+  await clickIn(page, '.controls', 'PAUSAR'); await lay('partida-ao-vivo'); await shot('partida-ao-vivo');
+  await clickIn(page, '.controls', 'MEU TIME', true); await page.waitForSelector('.modal'); await lay('modal-meu-time'); await shot('modal-meu-time'); await clickIn(page, '.modal footer', 'CANCELAR');
+  await clickIn(page, '.controls', 'CONTINUAR', true);
+  await page.waitForSelector('.modal-back', { timeout: 30000 }); await lay('modal-decisao'); await shot('modal-decisao');
+  await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO');
+  await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click().catch(() => {});
+  await driveRound(page, { policy: 'suggest' }); await lay('resultado'); await shot('resultado');
+  summary[w] = { issues, errors };
+  console.log(`${issues.length + errors.length === 0 ? 'OK    ' : 'FALHOU'} ${w}px: ${issues.length} problemas de layout, ${errors.length} erros de console${issues.length ? '\n   ' + [...new Set(issues)].slice(0, 6).join('\n   ') : ''}${errors.length ? '\n   ' + errors[0] : ''}`);
+  if (issues.length || errors.length) failed = true;
+  await ctx.close();
+}
+writeFileSync(join(ROOT, 'dist/qa/visual-summary.json'), JSON.stringify(summary, null, 1));
+await browser.close(); process.exit(failed ? 1 : 0);

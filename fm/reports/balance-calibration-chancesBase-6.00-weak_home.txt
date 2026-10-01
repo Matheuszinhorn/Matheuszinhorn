@@ -1,0 +1,36 @@
+Balanceamento — engineVersion 0.1.1 | seed "balance" | mundo "balance-world" | 10000 partidas por cenário | chancesBase 6 [varredura; DEFAULT_CONFIG = 6]
+
+=== Grande diferença: o fraco joga em casa — 10.000 partidas ===
+(Vale Quaresma Clube (força 47.6, 1ª div.) × Campo Pitanga Recreativo (força 10.4, última div.))
+Resultado: mandante 0,1% | empate 0,8% | visitante 99,1%
+Gols por partida: 6,60 (mandante 0,41 | visitante 6,19) | 0×0: 0,1% | 7+ gols: 49,0% | máx. de um time: 18
+Placares mais comuns: 0×6 10,7% | 0×5 10,0% | 0×7 9,2% | 0×4 8,6% | 0×8 6,9% | 0×3 5,3% | 0×9 5,3% | 1×5 4,5% | 1×6 4,3% | 1×7 4,2%
+Gols por faixa de minutos: 1-15: 15,3% | 16-30: 15,0% | 31-45: 15,5% | 45+: 2,9% | 46-60: 15,0% | 61-75: 15,3% | 76-90: 15,4% | 90+: 5,6%
+Cartões por partida: amarelos 4,01 | vermelhos 0,47 (direto 0,09, 2º amarelo 0,37)
+Lesões por partida: 0,25 | Pênaltis por partida: 0,28 (conversão 76,9%) | Substituições por partida: 0,25
+Chances por partida: 17,53 | defesas: 6,13 | traves: 1,11 | posse do mandante: 19,3%
+Acréscimos médios: 1º tempo 2,9 min | 2º tempo 5,5 min
+Total de gols na partida: 0: 0,1% | 1: 0,8% | 2: 3,1% | 3: 6,4% | 4: 11,0% | 5: 13,8% | 6: 15,8% | 7+: 49,0%
+Minutos jogados por partida: 98,4 (fator de tempo 1,093 sobre os 90 minutos)
+Observado ÷ nominal (nominal = constantes do config × comportamento; se só o tempo importasse, todos seriam 1,093): amarelos 1,014 | vermelhos diretos 1,003 | lesões 1,024 | pênaltis 1,000
+Expulsões: 0,47 por partida, das quais 80,6% por 2º amarelo
+Tempo de execução: 100,3 s (10,0 ms por partida = preparação 0,03 ms + simulação 10,00 ms)
+Metas iniciais da especificação (seção 21), só informativas:
+  FORA  gols por partida: 6,60  (meta 2,40 a 2,80)
+  FORA  0×0 (% das partidas): 0,1%  (meta 7,0% a 10,0%)
+  ok    amarelos por partida: 4,01  (meta 4,00 a 5,00)
+  FORA  vermelhos por partida: 0,47  (meta 0,15 a 0,30)
+  ok    pênaltis por partida: 0,28  (meta 0,25 a 0,35)
+  ok    conversão de pênaltis (%): 76,9%  (meta 75,0% a 80,0%)
+  ok    lesões por partida: 0,25  (meta 0,20 a 0,30)
+  FORA  tempo para 10.000 partidas: 100 s  (meta < 5 s; medido com o processo compartilhado)
+Invariantes: nenhuma violação.
+
+=== RESUMO ===
+Invariantes: nenhuma violação em nenhum cenário.
+Fora da meta inicial (4):
+  - weak_home: gols por partida = 6,60 (meta 2,40 a 2,80)
+  - weak_home: 0×0 (% das partidas) = 0,1% (meta 7,0% a 10,0%)
+  - weak_home: vermelhos por partida = 0,47 (meta 0,15 a 0,30)
+  - weak_home: tempo para 10.000 partidas = 100 s (meta < 5 s)
+JSON salvo em reports/balance-calibration-chancesBase-6.00-weak_home.json

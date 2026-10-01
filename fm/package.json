@@ -1,0 +1,16 @@
+{
+  "name": "football-manager-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json && tsc -p app/tsconfig.json",
+    "test": "node --test \"engine/tests/*.test.ts\" \"game/tests/*.test.ts\" \"app/tests/*.test.ts\"",
+    "build": "node scripts/build-app.mjs",
+    "qa": "node scripts/qa-app.mjs",
+    "balance": "node engine/sim/balance.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "typescript": "^6.0.0"
+  }
+}

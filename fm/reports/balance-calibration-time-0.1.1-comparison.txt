@@ -1,0 +1,169 @@
+RELATÓRIO balance-calibration-time-0.1.1 — RODADA 1 DE CALIBRAÇÃO: NORMALIZAÇÃO DO TEMPO
+Mudança única: probabilidade por minuto = taxa ÷ 97 (matchMinutes), em vez de ÷ 90. Nenhuma taxa, constante, RNG ou seed foi alterada.
+engineVersion 0.1.1 (inalterada nesta rodada). 10.000 partidas por cenário, seed "balance", mundo "balance-world".
+Baseline: reports/balance-baseline-0.1.1-A.txt (world, equal) e reruns do strong_home/weak_home (0.1.1, com a priorização do goleiro).
+Leitura do "Observado ÷ nominal" nos relatórios novos: o texto entre parênteses do balance.ts ainda cita o fator sobre 90 min; com o novo denominador o valor esperado é ~1,00.
+
+====================================================================================================
+CENÁRIO equal
+métrica                                             baseline    calibração              variação
+gols por partida                                        3,32          3,06         −0,26 (−7,8%)
+  gols do mandante                                      1,76          1,62         −0,14 (−8,0%)
+  gols do visitante                                     1,56          1,44         −0,12 (−7,7%)
+  média de gols por equipe                              1,66          1,53         −0,13 (−7,8%)
+  gols de jogo corrido (sem pênalti)                    3,08          2,84         −0,25 (−8,0%)
+chances por partida                                     9,60          8,86         −0,74 (−7,7%)
+conversão (gols de jogo corrido ÷ chances, %)          32,1%         32,0%                  −0,1
+defesas por partida                                     3,64          3,35         −0,29 (−8,0%)
+traves por partida                                      0,64          0,60         −0,04 (−6,3%)
+0×0 (%)                                                 3,8%          5,0%                  +1,2
+7+ gols (%)                                             6,1%          4,6%                  −1,5
+máx. de gols de um time                                   10             9                    −1
+mandante vence (%)                                     42,4%         41,8%                  −0,6
+empate (%)                                             23,2%         24,1%                  +0,9
+visitante vence (%)                                    34,4%         34,1%                  −0,3
+pênaltis por partida                                    0,31          0,29         −0,02 (−6,5%)
+  gols de pênalti por partida                           0,24          0,22         −0,01 (−6,2%)
+amarelos por partida                                    4,92          4,56         −0,36 (−7,3%)
+vermelhos por partida                                   0,69          0,61        −0,08 (−11,6%)
+  vermelhos diretos                                     0,12          0,11         −0,01 (−8,3%)
+  vermelhos por 2º amarelo                              0,58          0,50        −0,08 (−13,8%)
+  % das expulsões por 2º amarelo                       83,2%         82,4%                  −0,8
+lesões por partida                                      0,26          0,24         −0,02 (−7,7%)
+substituições por partida                               0,27          0,25         −0,02 (−7,4%)
+minutos jogados por partida                             97,1          96,9          −0,2 (−0,2%)
+acréscimo médio 1º tempo (min)                           2,2           2,2                  +0,0
+acréscimo médio 2º tempo (min)                           4,9           4,8                  −0,1
+tempo de execução (s por 10.000)                         107            93          −14 (−12,6%)
+  ms por partida                                        10,7           9,3         −1,4 (−13,1%)
+observado ÷ nominal (amarelos | vermelhos dir. | lesões | pênaltis):
+   baseline  : 1,079 | 1,125 | 1,067 | 1,089
+   calibração: 0,998 | 1,034 | 0,987 | 1,006
+placares mais comuns (baseline)  : 1×1 10,5% | 2×1 8,2% | 1×2 7,2% | 0×1 6,5% | 1×0 6,5%
+placares mais comuns (calibração): 1×1 11,3% | 2×1 8,3% | 1×0 7,6% | 1×2 7,5% | 0×1 7,4%
+gols totais na partida (baseline)  : 0: 3,8% | 1: 12,9% | 2: 20,7% | 3: 20,6% | 4: 17,5% | 5: 11,9% | 6: 6,5% | 7+: 6,1%
+gols totais na partida (calibração): 0: 5,0% | 1: 15,0% | 2: 22,6% | 3: 21,0% | 4: 16,3% | 5: 10,4% | 6: 5,1% | 7+: 4,6%
+invariantes: baseline = nenhuma violação | calibração = nenhuma violação
+
+====================================================================================================
+CENÁRIO world
+métrica                                             baseline    calibração              variação
+gols por partida                                        3,27          3,02         −0,25 (−7,6%)
+  gols do mandante                                      1,73          1,61         −0,12 (−6,9%)
+  gols do visitante                                     1,54          1,42         −0,12 (−7,8%)
+  média de gols por equipe                              1,64          1,51         −0,13 (−7,6%)
+  gols de jogo corrido (sem pênalti)                    3,02          2,79         −0,23 (−7,6%)
+chances por partida                                     9,42          8,72         −0,70 (−7,4%)
+conversão (gols de jogo corrido ÷ chances, %)          32,1%         32,1%                  −0,0
+defesas por partida                                     3,59          3,32         −0,27 (−7,5%)
+traves por partida                                      0,65          0,60         −0,05 (−7,7%)
+0×0 (%)                                                 4,2%          5,3%                  +1,1
+7+ gols (%)                                             5,5%          3,9%                  −1,6
+máx. de gols de um time                                   11            11                    +0
+mandante vence (%)                                     42,6%         42,0%                  −0,6
+empate (%)                                             21,8%         22,9%                  +1,1
+visitante vence (%)                                    35,6%         35,1%                  −0,5
+pênaltis por partida                                    0,32          0,29         −0,03 (−9,4%)
+  gols de pênalti por partida                           0,25          0,23         −0,02 (−8,8%)
+amarelos por partida                                    4,92          4,56         −0,36 (−7,3%)
+vermelhos por partida                                   0,69          0,61        −0,08 (−11,6%)
+  vermelhos diretos                                     0,11          0,10         −0,01 (−9,1%)
+  vermelhos por 2º amarelo                              0,58          0,50        −0,08 (−13,8%)
+  % das expulsões por 2º amarelo                       84,3%         83,3%                  −1,0
+lesões por partida                                      0,26          0,24         −0,02 (−7,7%)
+substituições por partida                               0,27          0,25         −0,02 (−7,4%)
+minutos jogados por partida                             97,1          96,9          −0,2 (−0,2%)
+acréscimo médio 1º tempo (min)                           2,2           2,1                  −0,1
+acréscimo médio 2º tempo (min)                           4,9           4,8                  −0,1
+tempo de execução (s por 10.000)                         109            94          −15 (−13,7%)
+  ms por partida                                        10,9           9,4         −1,5 (−13,8%)
+observado ÷ nominal (amarelos | vermelhos dir. | lesões | pênaltis):
+   baseline  : 1,076 | 1,045 | 1,061 | 1,099
+   calibração: 0,996 | 0,974 | 0,988 | 1,016
+placares mais comuns (baseline)  : 1×1 10,2% | 2×1 7,9% | 1×2 7,4% | 1×0 6,9% | 0×1 6,1%
+placares mais comuns (calibração): 1×1 11,1% | 1×0 8,3% | 2×1 7,8% | 1×2 7,4% | 0×1 7,1%
+gols totais na partida (baseline)  : 0: 4,2% | 1: 12,9% | 2: 20,9% | 3: 21,1% | 4: 16,7% | 5: 12,0% | 6: 6,7% | 7+: 5,5%
+gols totais na partida (calibração): 0: 5,3% | 1: 15,4% | 2: 22,4% | 3: 21,2% | 4: 15,8% | 5: 10,8% | 6: 5,2% | 7+: 3,9%
+invariantes: baseline = nenhuma violação | calibração = nenhuma violação
+
+====================================================================================================
+CENÁRIO strong_home
+métrica                                             baseline    calibração              variação
+gols por partida                                        7,18          6,65         −0,53 (−7,4%)
+  gols do mandante                                      6,77          6,27         −0,50 (−7,4%)
+  gols do visitante                                     0,41          0,38         −0,03 (−7,3%)
+  média de gols por equipe                              3,59          3,33         −0,26 (−7,4%)
+  gols de jogo corrido (sem pênalti)                    6,94          6,43         −0,51 (−7,4%)
+chances por partida                                    18,96         17,55         −1,41 (−7,4%)
+conversão (gols de jogo corrido ÷ chances, %)          36,6%         36,6%                  +0,0
+defesas por partida                                     6,66          6,16         −0,50 (−7,5%)
+traves por partida                                      1,20          1,11         −0,09 (−7,5%)
+0×0 (%)                                                 0,0%          0,1%                  +0,1
+7+ gols (%)                                            57,4%         49,7%                  −7,7
+máx. de gols de um time                                   20            20                    +0
+mandante vence (%)                                     99,6%         99,5%                  −0,1
+empate (%)                                              0,3%          0,4%                  +0,1
+visitante vence (%)                                     0,1%          0,1%                  +0,0
+pênaltis por partida                                    0,31          0,29         −0,02 (−6,5%)
+  gols de pênalti por partida                           0,24          0,22         −0,02 (−6,7%)
+amarelos por partida                                    4,33          4,01         −0,32 (−7,4%)
+vermelhos por partida                                   0,53          0,47        −0,06 (−11,3%)
+  vermelhos diretos                                     0,10          0,09        −0,01 (−10,0%)
+  vermelhos por 2º amarelo                              0,43          0,37        −0,06 (−14,0%)
+  % das expulsões por 2º amarelo                       81,2%         80,3%                  −0,9
+lesões por partida                                      0,26          0,24         −0,02 (−7,7%)
+substituições por partida                               0,26          0,24         −0,02 (−7,7%)
+minutos jogados por partida                             98,7          98,4          −0,3 (−0,3%)
+acréscimo médio 1º tempo (min)                           3,1           2,9                  −0,2
+acréscimo médio 2º tempo (min)                           5,6           5,5                  −0,1
+tempo de execução (s por 10.000)                         111           100           −11 (−9,5%)
+  ms por partida                                        11,1          10,0          −1,1 (−9,9%)
+observado ÷ nominal (amarelos | vermelhos dir. | lesões | pênaltis):
+   baseline  : 1,093 | 1,110 | 1,079 | 1,109
+   calibração: 1,013 | 1,019 | 0,994 | 1,025
+placares mais comuns (baseline)  : 6×0 10,4% | 7×0 9,7% | 5×0 9,2% | 8×0 8,0% | 4×0 6,7%
+placares mais comuns (calibração): 6×0 10,9% | 5×0 10,5% | 7×0 9,9% | 4×0 8,1% | 8×0 7,3%
+gols totais na partida (baseline)  : 0: 0,0% | 1: 0,5% | 2: 2,0% | 3: 4,6% | 4: 8,4% | 5: 12,2% | 6: 14,8% | 7+: 57,4%
+gols totais na partida (calibração): 0: 0,1% | 1: 0,9% | 2: 3,0% | 3: 6,5% | 4: 10,2% | 5: 14,0% | 6: 15,7% | 7+: 49,7%
+invariantes: baseline = nenhuma violação | calibração = nenhuma violação
+
+====================================================================================================
+CENÁRIO weak_home
+métrica                                             baseline    calibração              variação
+gols por partida                                        7,13          6,60         −0,53 (−7,4%)
+  gols do mandante                                      0,44          0,41         −0,03 (−6,8%)
+  gols do visitante                                     6,69          6,19         −0,50 (−7,5%)
+  média de gols por equipe                              3,56          3,30         −0,27 (−7,4%)
+  gols de jogo corrido (sem pênalti)                    6,90          6,38         −0,51 (−7,5%)
+chances por partida                                    18,92         17,53         −1,39 (−7,3%)
+conversão (gols de jogo corrido ÷ chances, %)          36,5%         36,4%                  −0,0
+defesas por partida                                     6,62          6,13         −0,49 (−7,4%)
+traves por partida                                      1,19          1,11         −0,08 (−6,7%)
+0×0 (%)                                                 0,1%          0,1%                  +0,0
+7+ gols (%)                                            57,0%         49,0%                  −8,0
+máx. de gols de um time                                   19            18                    −1
+mandante vence (%)                                      0,1%          0,1%                  +0,0
+empate (%)                                              0,5%          0,8%                  +0,3
+visitante vence (%)                                    99,3%         99,1%                  −0,2
+pênaltis por partida                                    0,30          0,28         −0,02 (−6,7%)
+  gols de pênalti por partida                           0,23          0,22         −0,02 (−6,5%)
+amarelos por partida                                    4,34          4,01         −0,33 (−7,6%)
+vermelhos por partida                                   0,54          0,47        −0,07 (−13,0%)
+  vermelhos diretos                                     0,10          0,09        −0,01 (−10,0%)
+  vermelhos por 2º amarelo                              0,44          0,37        −0,07 (−15,9%)
+  % das expulsões por 2º amarelo                       81,7%         80,6%                  −1,1
+lesões por partida                                      0,27          0,25         −0,02 (−7,4%)
+substituições por partida                               0,27          0,25         −0,02 (−7,4%)
+minutos jogados por partida                             98,7          98,4          −0,3 (−0,3%)
+acréscimo médio 1º tempo (min)                           3,1           2,9                  −0,2
+acréscimo médio 2º tempo (min)                           5,6           5,5                  −0,1
+tempo de execução (s por 10.000)                         111           101           −11 (−9,5%)
+  ms por partida                                        11,1          10,1          −1,0 (−9,0%)
+observado ÷ nominal (amarelos | vermelhos dir. | lesões | pênaltis):
+   baseline  : 1,097 | 1,090 | 1,113 | 1,084
+   calibração: 1,014 | 1,003 | 1,024 | 1,000
+placares mais comuns (baseline)  : 0×6 10,1% | 0×7 9,3% | 0×5 8,6% | 0×8 7,6% | 0×4 6,8%
+placares mais comuns (calibração): 0×6 10,7% | 0×5 10,0% | 0×7 9,2% | 0×4 8,6% | 0×8 6,9%
+gols totais na partida (baseline)  : 0: 0,1% | 1: 0,5% | 2: 2,1% | 3: 4,7% | 4: 8,9% | 5: 11,7% | 6: 15,0% | 7+: 57,0%
+gols totais na partida (calibração): 0: 0,1% | 1: 0,8% | 2: 3,1% | 3: 6,4% | 4: 11,0% | 5: 13,8% | 6: 15,8% | 7+: 49,0%
+invariantes: baseline = nenhuma violação | calibração = nenhuma violação

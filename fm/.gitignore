@@ -1,0 +1,3 @@
+node_modules/
+# Artefatos gerados pelos scripts de QA (capturas e relatórios JSON); recriados por scripts/qa-*.mjs
+dist/qa/

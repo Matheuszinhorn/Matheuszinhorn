@@ -1,0 +1,41 @@
+Balanceamento — engineVersion 0.1.1 | seed "balance" | mundo "balance-world" | 10000 partidas por cenário | chancesBase 6 [varredura; DEFAULT_CONFIG = 6]
+
+=== Times iguais (clube contra o próprio espelho) — 10.000 partidas ===
+(isola o efeito do mando: forças, escalação e estilo idênticos)
+Resultado: mandante 41,8% | empate 24,1% | visitante 34,1%
+Gols por partida: 3,06 (mandante 1,62 | visitante 1,44) | 0×0: 5,0% | 7+ gols: 4,6% | máx. de um time: 9
+Placares mais comuns: 1×1 11,3% | 2×1 8,3% | 1×0 7,6% | 1×2 7,5% | 0×1 7,4% | 2×0 6,4% | 2×2 5,9% | 3×1 5,0% | 0×0 5,0% | 0×2 4,9%
+Gols por faixa de minutos: 1-15: 15,4% | 16-30: 15,7% | 31-45: 15,4% | 45+: 2,4% | 46-60: 15,1% | 61-75: 15,1% | 76-90: 15,7% | 90+: 5,2%
+Cartões por partida: amarelos 4,56 | vermelhos 0,61 (direto 0,11, 2º amarelo 0,50)
+Lesões por partida: 0,24 | Pênaltis por partida: 0,29 (conversão 76,5%) | Substituições por partida: 0,25
+Chances por partida: 8,86 | defesas: 3,35 | traves: 0,60 | posse do mandante: 50,0%
+Acréscimos médios: 1º tempo 2,2 min | 2º tempo 4,8 min
+Total de gols na partida: 0: 5,0% | 1: 15,0% | 2: 22,6% | 3: 21,0% | 4: 16,3% | 5: 10,4% | 6: 5,1% | 7+: 4,6%
+Minutos jogados por partida: 96,9 (fator de tempo 1,077 sobre os 90 minutos)
+Observado ÷ nominal (nominal = constantes do config × comportamento; se só o tempo importasse, todos seriam 1,077): amarelos 0,998 | vermelhos diretos 1,034 | lesões 0,987 | pênaltis 1,006
+Expulsões: 0,61 por partida, das quais 82,4% por 2º amarelo
+Tempo de execução: 93,6 s (9,4 ms por partida = preparação 0,04 ms + simulação 9,32 ms)
+Metas iniciais da especificação (seção 21), só informativas:
+  FORA  gols por partida: 3,06  (meta 2,40 a 2,80)
+  FORA  0×0 (% das partidas): 5,0%  (meta 7,0% a 10,0%)
+  ok    amarelos por partida: 4,56  (meta 4,00 a 5,00)
+  FORA  vermelhos por partida: 0,61  (meta 0,15 a 0,30)
+  ok    pênaltis por partida: 0,29  (meta 0,25 a 0,35)
+  ok    conversão de pênaltis (%): 76,5%  (meta 75,0% a 80,0%)
+  ok    lesões por partida: 0,24  (meta 0,20 a 0,30)
+  FORA  mandante vence (%): 41,8%  (meta 42,0% a 48,0%)
+  ok    empates (%): 24,1%  (meta 24,0% a 30,0%)
+  FORA  visitante vence (%): 34,1%  (meta 25,0% a 31,0%)
+  FORA  tempo para 10.000 partidas: 94 s  (meta < 5 s; medido com o processo compartilhado)
+Invariantes: nenhuma violação.
+
+=== RESUMO ===
+Invariantes: nenhuma violação em nenhum cenário.
+Fora da meta inicial (6):
+  - equal: gols por partida = 3,06 (meta 2,40 a 2,80)
+  - equal: 0×0 (% das partidas) = 5,0% (meta 7,0% a 10,0%)
+  - equal: vermelhos por partida = 0,61 (meta 0,15 a 0,30)
+  - equal: mandante vence (%) = 41,8% (meta 42,0% a 48,0%)
+  - equal: visitante vence (%) = 34,1% (meta 25,0% a 31,0%)
+  - equal: tempo para 10.000 partidas = 94 s (meta < 5 s)
+JSON salvo em reports/balance-calibration-chancesBase-6.00-equal.json
