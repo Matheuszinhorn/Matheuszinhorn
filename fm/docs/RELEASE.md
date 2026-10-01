@@ -2,12 +2,12 @@
 
 | | |
 |---|---|
-| Produto | FM Brasileiro — MVP Release Candidate |
+| Produto | ELITE MANAGER — MVP Release Candidate (codinome FM Brasileiro) |
 | Versão | 1.0.0-rc.1 (`package.json`) |
 | Engine | 0.2.0 (`engine/config.ts`) |
 | Commit auditado (RC) | `2c07826` |
-| Artefato | `dist/app/index.html` — 277.683 bytes, sha256 `2c09004217685fdb414a5f1c58cf4c095d055a20288de9cafbe9a063ffd73de2` |
-| Status | Pronto para teste externo; não publicado |
+| Artefato | `dist/app/index.html` — 278.340 bytes, sha256 `089164b09de8ffd31fc4e65e0d6e21e1695df6c0ed434475957c2651ae97fbe6` (build da auditoria de release, com a correção do P1; reproduzido em cópia limpa) |
+| Status | Pronto para playtest humano; não publicado ([RELEASE-AUDIT.md](RELEASE-AUDIT.md)) |
 
 ## Requisitos
 
@@ -19,7 +19,7 @@
 ```bash
 npm ci               # ou npm install; instala typescript 6.0.3 e @types/node (package-lock.json)
 npm run typecheck
-npm test             # esperado: 158/158
+npm test             # esperado: 159/159
 ```
 
 ## Gerar o build

@@ -226,6 +226,22 @@ async function run(vp) {
       small.forEach((x) => r.smallTargets.push(`${s}: ${x}`));
     }
   }
+  // ----- NOVA CARREIRA na mesma página (sem recarregar) e jogar a rodada 1 dela -----
+  await nav('CARREIRA');
+  await click('NOVA CARREIRA');
+  await click('SIM, APAGAR E RECOMEÇAR');
+  await page.waitForSelector('.start');
+  await page.fill('input[type=text]', 'Segundo Treinador');
+  await click('RECEBER PROPOSTAS');
+  await page.locator('.offer').nth(1).getByRole('button').click();
+  await page.waitForSelector('.topbar');
+  await nav('PARTIDA');
+  await page.locator('.seg-btn', { hasText: 'INSTANTÂNEA' }).first().click();
+  await click('JOGAR RODADA');
+  await driveRound();
+  const second = await page.evaluate(() => { const c = globalThis.__fm.state; return { coach: c.career.coach.name, round: c.career.roundNumber, results: c.career.results.length, phase: c.phase }; });
+  check('nova carreira na mesma página: a rodada 1 é jogada e aplicada (não fica em "Preparando a rodada…")', second.coach === 'Segundo Treinador' && second.round === 2 && second.results === 40 && second.phase === 'POST', JSON.stringify(second));
+  await noOverflow('nova-carreira-r1');
   if (r.errors.length) failed = true;
   if (r.overflow.length) failed = true;
   await browser.close();

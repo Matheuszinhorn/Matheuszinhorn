@@ -281,3 +281,33 @@ test('tela inicial e saves: só oferece CONTINUAR com save carregável; corrompi
     assert.equal(storage.get(SAVE_KEY), raw, name);
   }
 });
+
+test('NOVA CARREIRA na mesma página: a carreira nova joga a rodada (antes ficava presa em "Preparando a rodada…")', () => {
+  // depois de uma rodada jogada
+  const a = startedCareer();
+  playRound(a);
+  a.ctrl.nextRound();
+  a.ctrl.abandonCareer();
+  a.ctrl.offerClubs('nova-carreira');
+  a.ctrl.startCareer('Outro Treinador', a.ctrl.state.offers!.clubIds[0]);
+  assert.equal(a.ctrl.state.snapshot.status, 'IDLE', 'a sessão nova começa sem rodada');
+  playRound(a);
+  assert.equal(a.ctrl.state.phase, 'POST');
+  assert.equal(a.ctrl.state.career!.roundNumber, 2);
+  assert.equal(a.ctrl.state.career!.results.length, 40);
+
+  // no meio de uma rodada em andamento: o relógio da sessão antiga para e não mexe na carreira nova
+  const b = startedCareer();
+  b.ctrl.startRound();
+  assert.ok(b.sched.fireNext());
+  assert.equal(b.ctrl.state.phase, 'LIVE');
+  b.ctrl.abandonCareer();
+  assert.equal(b.ctrl.state.phase, 'PRE');
+  b.ctrl.offerClubs('nova-carreira-2');
+  b.ctrl.startCareer('Outro', b.ctrl.state.offers!.clubIds[1]);
+  const career = b.ctrl.state.career;
+  playRound(b);
+  assert.equal(b.ctrl.state.career!.roundNumber, 2);
+  assert.equal(b.ctrl.state.career!.seed, career!.seed);
+  assert.equal(b.ctrl.state.career!.results.length, 40);
+});

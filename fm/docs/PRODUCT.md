@@ -1,6 +1,6 @@
-# FM Brasileiro — o produto
+# ELITE MANAGER — o produto
 
-FM Brasileiro é um jogo de gerenciamento de futebol para navegador: o jogador assume um clube fictício da
+ELITE MANAGER (codinome de desenvolvimento: FM Brasileiro; identidade em [BRAND.md](BRAND.md)) é um jogo de gerenciamento de futebol para navegador: o jogador assume um clube fictício da
 4ª divisão e tenta subi-lo até a elite, uma rodada por vez. A filosofia é **simplicidade + velocidade + decisões**:
 poucas regras, partidas rápidas e escolhas que pesam no resultado.
 

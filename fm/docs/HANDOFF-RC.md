@@ -7,13 +7,13 @@ anterior (30/09/2026) e não descreve mais o estado atual.
 
 | | |
 |---|---|
-| Produto | FM Brasileiro — MVP Release Candidate 1.0.0-rc.1 |
+| Produto | ELITE MANAGER — MVP Release Candidate 1.0.0-rc.1 (codinome FM Brasileiro; ver [BRAND.md](BRAND.md)) |
 | Engine | 0.2.0, fechado (não recalibrar) |
 | Commit do RC | `2c07826` (branch `ccr-9941e34c-pdjxb3` do repositório `Matheuszinhorn/Matheuszinhorn`, pasta `fm/`) |
-| Testes | `npm test` 158/158; `npm run typecheck` OK |
-| Build | `dist/app/index.html`, sha256 `2c09004217685fdb414a5f1c58cf4c095d055a20288de9cafbe9a063ffd73de2`, reproduzível em clone limpo |
+| Testes | `npm test` 159/159; `npm run typecheck` OK |
+| Build | `dist/app/index.html`, sha256 `089164b09de8ffd31fc4e65e0d6e21e1695df6c0ed434475957c2651ae97fbe6` (auditoria de release, com a correção do P1; reproduzido em cópia limpa) |
 | QA de interface | Temporada, goleiro, velocidades e decisões, MEU TIME, persistência e visual, em celular e desktop ([QA.md](QA.md)) |
-| Publicação | Não publicado; pronto para teste externo |
+| Publicação | Não publicado; pronto para playtest humano, que está pendente ([RELEASE-AUDIT.md](RELEASE-AUDIT.md)) |
 
 ## Estrutura
 

@@ -16,6 +16,14 @@ priorizar depois do teste externo.
 | Escopo das alterações táticas | Mudanças feitas durante a partida valem só para aquele jogo. |
 | Save local | Fica no navegador e no dispositivo (`localStorage`); não acompanha o jogador entre aparelhos. |
 | Migração de saves | Não existe: um save de outra versão é recusado com aviso. |
+| "Jogando agora" depois da rodada | No detalhe de um clube em CLUBES, depois que a rodada terminou e antes de PRÓXIMA RODADA, o texto diz "Jogando agora" com o placar final (`game/queries.ts` `liveMatchOf` não filtra partida encerrada; `app/src/views/clubs.ts`). Auditoria de release: bug de texto, não impede jogar. |
+| Campo com 5 defensores no celular | Nomes podem se sobrepor em 390 px com 5-3-2/5-4-1 (playtest simulado). O QA visual não mede sobreposição entre jogadores do campo. |
+| Nomes curtos repetidos | 30% dos clubes (481 de 1.600 em 20 mundos) têm pelo menos dois jogadores com o mesmo nome curto ("R. Uchoa"). Nomes completos não se repetem. |
+| Pop-ups de decisão | Sem placar e minuto; ACEITAR SUGESTÃO não diz o que faz na expulsão; goleiro improvisado sem o valor no gol. |
+| Pênalti | Chances dos cobradores próximas; o SUGERIDO (batedor do MEU TIME) nem sempre é o de maior %. |
+| MEU TIME com pausa do jogador | Se o jogador pausou antes de abrir MEU TIME, CONTINUAR no pop-up mantém a pausa; é preciso tocar CONTINUAR de novo. |
+| Clareza de força e finanças (P2 do playtest simulado) | A força exibida não reflete formação/setores; o caixa só cai e o jogador não tem alavanca. Aguardam o playtest humano. |
+| Outros P3 de UX do playtest simulado | Troca por toque não anunciada; abreviações no topo; jogo do próprio clube no fim do quadro; colunas escondidas na classificação no celular; CLUBES abre na 1ª divisão; "Escalação ajustada" sem detalhe; acesso pouco destacado no fim de temporada ([reports/playtest-01.md](../reports/playtest-01.md)). |
 
 ## Futuras funcionalidades (previstas na visão do produto, fora do MVP)
 

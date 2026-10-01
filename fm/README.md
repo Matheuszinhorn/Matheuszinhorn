@@ -1,4 +1,7 @@
-# FM Brasileiro — MVP Release Candidate
+# ELITE MANAGER — MVP Release Candidate
+
+> Nome oficial: **ELITE MANAGER**. "FM Brasileiro" era o codinome de desenvolvimento e ainda aparece na tela inicial
+> e em identificadores técnicos; ver [docs/BRAND.md](docs/BRAND.md).
 
 Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos clássicos (sem copiar nenhum deles):
 4 divisões × 20 clubes fictícios, temporadas de 38 rodadas, partidas simuladas minuto a minuto com decisões ao vivo
@@ -6,7 +9,7 @@ Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos cl�
 
 | | |
 |---|---|
-| Produto | **FM Brasileiro — MVP Release Candidate** (`package.json` → `1.0.0-rc.1`) |
+| Produto | **ELITE MANAGER — MVP Release Candidate** (`package.json` → `1.0.0-rc.1`; codinome FM Brasileiro) |
 | Engine | **0.2.0** (`engine/config.ts` → `engineVersion`), fechado: não recalibrar |
 | Artefato | `dist/app/index.html` — um único HTML estático, autocontido |
 
@@ -23,6 +26,9 @@ Jogo de gerenciamento de futebol no navegador, inspirado na simplicidade dos cl�
 | [docs/BACKLOG.md](docs/BACKLOG.md) | Limitações aceitas e itens futuros |
 | [docs/DESIGN-DECISIONS.md](docs/DESIGN-DECISIONS.md) | Decisões de design em vigor |
 | [docs/HANDOFF-RC.md](docs/HANDOFF-RC.md) | Estado atual para quem continuar o trabalho |
+| [docs/BRAND.md](docs/BRAND.md) | Identidade oficial: nome, logo, paleta, princípios |
+| [docs/RELEASE-AUDIT.md](docs/RELEASE-AUDIT.md) | Auditoria de release: matriz de finalização e classificação |
+| [docs/PLAYTEST-13A.md](docs/PLAYTEST-13A.md) | Protocolo do playtest humano (pendente) |
 
 ## Requisitos
 

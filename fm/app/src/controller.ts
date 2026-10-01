@@ -110,7 +110,8 @@ export interface ControllerOptions {
 const SPEED_IDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST', 'INSTANT'];
 
 export class GameController {
-  readonly session: Session;
+  /** Trocada por uma nova em abandonCareer: uma sessão descartada (dispose) não avisa mais a tela nem avança o relógio. */
+  session: Session;
   state: AppState;
   private readonly storage: KeyValueStorage;
   private readonly randomSeed: () => string;
@@ -119,6 +120,7 @@ export class GameController {
   private readonly applied = new Set<string>();
   private toastTimer: ReturnType<typeof setTimeout> | null = null;
   private clubsPause = false;
+  private readonly scheduler: Scheduler | undefined;
 
   constructor(options: ControllerOptions) {
     this.storage = options.storage;
@@ -126,7 +128,8 @@ export class GameController {
     this.toastMs = options.toastMs ?? 4200;
     const saved = this.storage.get(SPEED_KEY) as SpeedId | null;
     const speed: SpeedId = saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
-    this.session = createSession({ scheduler: options.scheduler, speed });
+    this.scheduler = options.scheduler;
+    this.session = this.newSession(speed);
     this.state = {
       screen: 'START',
       career: null,
@@ -142,7 +145,12 @@ export class GameController {
       selected: null,
       toast: null,
     };
-    this.session.subscribe((snap) => this.onSession(snap));
+  }
+
+  private newSession(speed: SpeedId): Session {
+    const session = createSession({ scheduler: this.scheduler, speed });
+    session.subscribe((snap) => this.onSession(snap));
+    return session;
   }
 
   // ----- infraestrutura -----
@@ -228,9 +236,13 @@ export class GameController {
 
   abandonCareer(): void {
     this.storage.remove(SAVE_KEY);
+    // A sessão antiga é descartada (para o relógio de uma rodada em andamento) e uma nova a substitui;
+    // reaproveitar a descartada deixava a primeira rodada da carreira nova presa em "Preparando a rodada…".
     this.session.dispose();
+    this.session = this.newSession(this.state.speed);
+    this.clubsPause = false;
     this.applied.clear();
-    this.set({ career: null, hasSave: false, saveProblem: null, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
+    this.set({ snapshot: this.session.getState(), career: null, hasSave: false, saveProblem: null, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
   }
 
   // ----- navegação -----
