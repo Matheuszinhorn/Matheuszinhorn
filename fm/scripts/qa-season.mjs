@@ -2,7 +2,7 @@
 // Uso: node scripts/qa-season.mjs --w=1280 --h=800 [--mobile]   → dist/qa/season-<w>.json + capturas em dist/qa/season-<w>/
 import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, chromium, clickIn, driveRound, layoutIssues, nav, roundStats, shotDir, startCareerUI, text, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, chromium, clickIn, driveRound, layoutIssues, nav, roundStats, shotDir, startCareerUI, text, watch, instant } from './qa-lib.mjs';
 
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];
 const W = Number(arg('w', 1280)), H = Number(arg('h', 800)), MOBILE = process.argv.includes('--mobile');
@@ -30,7 +30,7 @@ await startCareerUI(page);
 await lay('propostas/partida'); await shot('partida-antes');
 check('nome vazio recusado', true);
 await visitAll('r01', true);
-await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click();
+await instant(page);
 const t0 = Date.now(); let ok38 = false;
 for (let r = 1; r <= 38; r++) {
   if (r === 2) { // PARTIDA ao vivo (velocidade real) para captura e layout
@@ -39,7 +39,7 @@ for (let r = 1; r <= 38; r++) {
     await page.waitForFunction(() => (globalThis.__fm.userMatch()?.clock.minute ?? 0) >= 12 || globalThis.__fm.state.snapshot.pending, null, { timeout: 30000 });
     await lay('r02/PARTIDA-ao-vivo'); await shot('partida-ao-vivo');
     const nm = await page.locator('.mrow').count(); if (nm < 40) R.layout.push(`quadro com ${nm} jogos (esperado 40)`);
-    await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click();
+    await instant(page);
   } else await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   await driveRound(page, { limitMs: 300000, onModal: async () => { const t = (await page.locator('.modal h2').innerText()).trim(); R.decisions[t] = (R.decisions[t] ?? 0) + 1; if (!R.decisions['_shot' + t]) { R.decisions['_shot' + t] = 1; await lay(`modal ${t}`); await shot('modal-' + t.toLowerCase().replace(/[^a-z]+/g, '-')); } else { await lay(`modal ${t}`); } } });
   const st = await roundStats(page);

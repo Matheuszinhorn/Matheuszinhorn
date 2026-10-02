@@ -12,7 +12,7 @@
 // 5. MEU TIME durante a partida e durante uma decisão (fluxo existente; só teste).
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, layoutIssues, shotDir, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, layoutIssues, shotDir, watch, instant } from './qa-lib.mjs';
 const { careerOffers, createCareer, planRound, serializeCareer } = await import('../game/career.ts');
 const { awaitingMatch, createRound, stepRound } = await import('../engine/index.ts');
 const { SPEEDS, SPEED_ORDER } = await import('../game/session.ts');
@@ -22,6 +22,10 @@ const W = Number(arg('w', 1280)), H = Number(arg('h', 800)), MOBILE = process.ar
 const ctxOpts = MOBILE ? { viewport: { width: W, height: H }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } : { viewport: { width: W, height: H } };
 const dir = shotDir(`speeds-${W}`);
 const LABEL = Object.fromEntries(SPEED_ORDER.map((s) => [s, SPEEDS[s].label]));
+/** Escolhe a velocidade pela tela; a INSTANTÂNEA saiu da tela e é escolhida pelo controlador (só QA). */
+const pickSpeed = (page, speed) => (speed === 'INSTANT' ? instant(page) : page.getByRole('button', { name: LABEL[speed], exact: true }).first().click());
+/** O pop-up aberto é uma parada obrigatória (intervalo/lance), não uma decisão do engine. */
+const isStop = (page) => page.evaluate(() => { const s = globalThis.__fm.state.snapshot; return !!s.stop && s.status === 'PAUSED'; });
 const R = { width: W, checks: {}, scenarios: {}, realtime: {}, meuTime: {}, errors: [], layout: [] };
 let failed = false;
 const check = (name, ok, extra = '') => { R.checks[name] = ok ? 'ok' : `FALHOU ${extra}`; if (!ok) failed = true; console.log(`${ok ? 'OK    ' : 'FALHOU'} ${name}${extra && !ok ? ' — ' + extra : ''}`); };
@@ -108,9 +112,9 @@ async function runScenario(name, speed, policy) {
   await page.evaluate(([k, v]) => { localStorage.clear(); localStorage.setItem(k, v); }, [SAVE_KEY, scen[name].save]);
   await page.reload();
   await page.getByRole('button', { name: 'CONTINUAR CARREIRA' }).click();
-  await page.getByRole('button', { name: LABEL[speed], exact: true }).first().click();
+  await pickSpeed(page, speed);
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
-  const obs = { decisions: [], notes: [], problems: [], advanced: null, feed: [], statuses: new Set() };
+  const obs = { decisions: [], stops: [], notes: [], problems: [], advanced: null, feed: [], statuses: new Set() };
   const iv = SPEEDS[speed].intervalMs;
   // relógio avança: 10 intervalos ⇒ ~10 minutos (antes da primeira decisão)
   if (iv > 0) {
@@ -129,6 +133,16 @@ async function runScenario(name, speed, policy) {
     if (await finished(page)) break;
     const modals = await page.locator('.modal-back').count();
     if (modals > 1) obs.problems.push(`${modals} pop-ups ao mesmo tempo`);
+    if (modals && (await isStop(page))) {
+      // parada obrigatória (intervalo ou lance sem decisão): o relógio fica parado até o CONTINUAR
+      const c0 = await clocks(page);
+      const title = (await page.locator('.modal h2').innerText()).trim();
+      await page.clock.runFor(Math.max(iv, 100) * 30);
+      if ((await clocks(page)) !== c0) obs.problems.push(`relógio andou com a parada "${title}" aberta`);
+      obs.stops.push(title);
+      await page.locator('.modal footer').getByRole('button', { name: 'CONTINUAR', exact: true }).click();
+      continue;
+    }
     if (modals) {
       const p = await pend(page);
       const c0 = await clocks(page);
@@ -156,7 +170,8 @@ async function runScenario(name, speed, policy) {
       } else if (!p2.id) {
         // fila vazia: a partida retoma (status volta a PLAYING; o tempo andando move o relógio)
         const st = await sessionStatus(page);
-        if (!['PLAYING', 'ROUND_FINISHED', 'AWAITING_DECISION'].includes(st)) obs.problems.push(`após a decisão o status ficou ${st}`);
+        // PAUSED só vale se for uma parada obrigatória nova (na instantânea o jogo corre até o intervalo na hora)
+        if (!['PLAYING', 'ROUND_FINISHED', 'AWAITING_DECISION'].includes(st) && !(st === 'PAUSED' && (await isStop(page)))) obs.problems.push(`após a decisão o status ficou ${st}`);
         if (iv > 0 && st === 'PLAYING') { await page.clock.runFor(iv * 2); if ((await clocks(page)) === c2 && !(await page.locator('.modal-back').count())) obs.problems.push('a partida não retomou após a decisão'); }
       }
       continue;
@@ -211,7 +226,7 @@ for (const speed of SPEED_ORDER.filter((s) => SPEEDS[s].intervalMs > 0)) {
   await page.goto(APP_URL);
   await page.evaluate(([k, v]) => { localStorage.clear(); localStorage.setItem(k, v); }, [SAVE_KEY, scen.penalti.save]);
   await page.reload(); await page.getByRole('button', { name: 'CONTINUAR CARREIRA' }).click();
-  await page.getByRole('button', { name: LABEL[speed], exact: true }).first().click();
+  await pickSpeed(page, speed);
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   const ms = 3000; const t = Date.now(); const m0 = await userMinute(page);
   await page.waitForTimeout(ms);
@@ -247,7 +262,10 @@ for (const speed of SPEED_ORDER.filter((s) => SPEEDS[s].intervalMs > 0)) {
   const resumed = (await onlyClocks(page)) !== c0; const afterCancel = await team();
   check('MEU TIME durante a partida: abre pop-up, pausa o relógio, CANCELAR volta sem mudar o time e a partida retoma', t0m === 'MEU TIME' && pausedOk && resumed && afterCancel.style === before.style && afterCancel.behavior === before.behavior && afterCancel.onField === 11, JSON.stringify({ t0m, pausedOk, resumed, before, afterCancel }));
   // (b) segue até a decisão (expulsão): mesma decisão, no mesmo minuto do cenário (abrir/cancelar MEU TIME não perdeu nem mudou nada)
-  for (let g = 0; g < 200 && !(await page.locator('.modal-back').count()) && !(await finished(page)); g++) await page.clock.runFor(500);
+  for (let g = 0; g < 200 && !(await finished(page)); g++) {
+    if (await page.locator('.modal-back').count()) { if (await isStop(page)) { await page.locator('.modal footer').getByRole('button', { name: 'CONTINUAR', exact: true }).click(); continue; } break; }
+    await page.clock.runFor(500);
+  }
   const p = await pend(page);
   const decTitle = (await page.locator('.modal h2').count()) ? (await page.locator('.modal h2').innerText()).trim() : '(nenhuma)';
   let navBlocked = false;

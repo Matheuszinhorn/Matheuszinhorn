@@ -165,3 +165,23 @@ conversão = 0,33 × (1,2 − 0,4 × goleiro do rival ÷ 50)     → 0,33 com go
 | `engine/finance.ts` | Público, receitas e despesas por rodada. |
 | `engine/world/generate.ts` | Mundo fictício a partir da seed. |
 | `engine/sim/balance.ts` | Script de balanceamento (`npm run balance`); fora do build. |
+
+## Dependências pedidas pela camada de gestão (NÃO implementadas: o Engine 0.2.0 está fechado)
+
+A evolução "ELITE MANAGER" (gestão, mercado, notícias, árbitros) foi feita **sem mudar o engine**. Três pedidos da
+especificação dependem dele e ficam documentados aqui, para uma futura versão do engine com recalibração e testes de
+equivalência próprios:
+
+| Pedido | Por que depende do engine | Como está hoje |
+| --- | --- | --- |
+| Assistências | O evento `GOAL` não registra quem deu o passe (`relatedPlayerId` é null em gols). | O ELENCO mostra jogos, gols, amarelos, vermelhos e lesões, todos lidos dos eventos reais; assistências não aparecem. |
+| Árbitro influenciar cartões/pênaltis | As taxas são globais (`yellowRatePerTeam` 2,2; `directRedRatePerTeam` 0,05). Mudar por árbitro mexe no modelo de incidentes e na calibração. | Cada partida tem um árbitro (escolhido pelo id da partida); o perfil dele (cartões e pênaltis por jogo) é ESTATÍSTICA dos jogos que apitou. Não muda nenhum resultado. |
+| Faltas por partida | O engine não gera evento de falta. | Não exibido. |
+
+Outras decisões que **não** dependem do engine e foram verificadas:
+
+* **Público**: o engine só guarda `attendance` e a bilheteria o usa; nenhuma chance depende dele. A camada de jogo calcula o
+  público (`game/manager/stadium.ts`) e o passa no `Fixture`. Teste: placares idênticos com e sem o público dinâmico.
+* **Intervalo e lances importantes** param a rodada na SESSÃO (`stopOnEvents`), entre duas chamadas de `stepRound`.
+  Pausas não mudam o jogo (testes de sessão e QA de velocidades: mesmo resultado nas 5 velocidades, com e sem paradas).
+* **Velocidade INSTANTÂNEA** saiu da interface; continua na sessão para testes e QA.

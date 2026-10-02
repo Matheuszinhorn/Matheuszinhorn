@@ -9,14 +9,14 @@ import { badge, card, empty } from './common.ts';
 export function renderLeague(ctrl: GameController): HTMLElement {
   const s = ctrl.state;
   const career = s.career!;
-  const club = userClub(career);
-  const divId = s.leagueDivision ?? club.divisionId;
+  const club = career.userClubId ? userClub(career) : null;
+  const divId = s.leagueDivision ?? club?.divisionId ?? career.world.divisions[0].id;
   const div = career.world.divisions.find((d) => d.id === divId) ?? career.world.divisions[0];
   const table = divisionStandings(career, div.id);
   const size = table.length;
   const zone = (pos: number) => (div.level > 1 && pos <= 4 ? 'up' : div.level < 4 && pos > size - 4 ? 'down' : '');
   const last = career.results.filter((r) => r.round === career.roundNumber - 1 && career.world.clubs[r.homeClubId].divisionId === div.id);
-  const view = getClubView(ctrl.ctx!, club.id);
+  const view = club ? getClubView(ctrl.ctx!, club.id) : null;
   return h(
     'div',
     { class: 'page' },
@@ -43,8 +43,8 @@ export function renderLeague(ctrl: GameController): HTMLElement {
     h(
       'div',
       { class: 'two' },
-      card('Última rodada', last.length ? h('ul', { class: 'results' }, last.map((r) => h('li', { class: r.homeClubId === club.id || r.awayClubId === club.id ? 'me' : '' }, h('span', { class: 'r' }, career.world.clubs[r.homeClubId].name), h('b', null, `${r.homeGoals} – ${r.awayGoals}`), h('span', null, career.world.clubs[r.awayClubId].name)))) : empty('Nenhuma rodada jogada nesta divisão.')),
-      card('Seu clube', view.form.length ? h('ul', { class: 'results' }, view.form.map((f) => h('li', null, h('span', { class: `wdl wdl-${f.outcome}` }, f.outcome === 'W' ? 'V' : f.outcome === 'D' ? 'E' : 'D'), h('span', { class: 'r' }, `R${f.round} ${f.home ? 'x' : '@'} ${f.opponentName}`), h('b', null, `${f.goalsFor} – ${f.goalsAgainst}`)))) : empty('Ainda sem jogos.'), view.nextMatch ? h('p', { class: 'muted' }, `Próximo: rodada ${view.nextMatch.round}, ${view.nextMatch.home ? 'em casa' : 'fora'} contra ${view.nextMatch.opponentName}.`) : null),
+      card('Última rodada', last.length ? h('ul', { class: 'results' }, last.map((r) => h('li', { class: club && (r.homeClubId === club.id || r.awayClubId === club.id) ? 'me' : '' }, h('span', { class: 'r' }, career.world.clubs[r.homeClubId].name), h('b', null, `${r.homeGoals} – ${r.awayGoals}`), h('span', null, career.world.clubs[r.awayClubId].name)))) : empty('Nenhuma rodada jogada nesta divisão.')),
+      !view || !club ? card('Seu clube', empty('Você está sem clube.')) : card('Seu clube', view.form.length ? h('ul', { class: 'results' }, view.form.map((f) => h('li', null, h('span', { class: `wdl wdl-${f.outcome}` }, f.outcome === 'W' ? 'V' : f.outcome === 'D' ? 'E' : 'D'), h('span', { class: 'r' }, `R${f.round} ${f.home ? 'x' : '@'} ${f.opponentName}`), h('b', null, `${f.goalsFor} – ${f.goalsAgainst}`)))) : empty('Ainda sem jogos.'), view.nextMatch ? h('p', { class: 'muted' }, `Próximo: rodada ${view.nextMatch.round}, ${view.nextMatch.home ? 'em casa' : 'fora'} contra ${view.nextMatch.opponentName}.`) : null),
     ),
   );
 }

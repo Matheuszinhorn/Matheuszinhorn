@@ -25,6 +25,7 @@ import {
   type World,
 } from '../engine/index.ts';
 import { getStandings, type ClubsContext, type PlayedMatch } from './queries.ts';
+import type { ManagerState } from './manager/state.ts';
 
 // Carreira (camada game/): junta os módulos que já existem (calendário, classificação, promoção, finanças, mundo, escalação)
 // e faz o que faltava entre uma rodada e outra: aplicar lesões e suspensões, fechar as finanças UMA vez, virar a temporada.
@@ -52,8 +53,9 @@ export interface Coach {
 
 export interface SeasonReport {
   season: number;
-  userClubId: string;
-  userDivisionId: string;
+  /** null: o treinador terminou a temporada sem clube */
+  userClubId: string | null;
+  userDivisionId: string | null;
   userPosition: number;
   champions: Record<string, string>;
   movements: Movement[];
@@ -67,7 +69,8 @@ export interface CareerState {
   seed: string;
   season: number;
   coach: Coach;
-  userClubId: string;
+  /** Clube do treinador. null = sem clube (aguardando propostas): o mundo continua jogando as rodadas. */
+  userClubId: string | null;
   world: World;
   /** Calendário da temporada por divisão: rodada → partidas. */
   schedule: Record<string, ScheduledMatch[][]>;
@@ -81,6 +84,8 @@ export interface CareerState {
   /** Definido quando a temporada termina; aplicado por startNextSeason. */
   pendingPromotion: PromotionResult | null;
   history: SeasonReport[];
+  /** Camada de gestão (game/manager). Opcional: saves antigos não têm; ensureManager preenche. */
+  manager?: ManagerState;
 }
 
 // ---------- Criação ----------
@@ -110,11 +115,12 @@ function buildSchedule(world: World, seed: string, season: number): Record<strin
   return schedule;
 }
 
-export function createCareer(input: { seed: string; coachName: string; clubId: string; season?: number }): CareerState {
+/** clubId null cria a carreira de um treinador ainda sem clube (recusou as propostas iniciais e aguarda outras). */
+export function createCareer(input: { seed: string; coachName: string; clubId: string | null; season?: number }): CareerState {
   const name = input.coachName.trim();
   if (name.length === 0) throw new CareerError('COACH_NAME', 'o treinador precisa de um nome');
   const world = generateWorld(input.seed);
-  if (!world.clubs[input.clubId]) throw new CareerError('UNKNOWN_CLUB', `clube inexistente: ${input.clubId}`);
+  if (input.clubId !== null && !world.clubs[input.clubId]) throw new CareerError('UNKNOWN_CLUB', `clube inexistente: ${input.clubId}`);
   const season = input.season ?? FIRST_SEASON;
   return {
     version: CAREER_VERSION,
@@ -139,7 +145,12 @@ export function isSeasonOver(c: CareerState): boolean {
   return c.roundNumber > ROUNDS_PER_SEASON;
 }
 
+export function hasClub(c: CareerState): c is CareerState & { userClubId: string } {
+  return c.userClubId !== null;
+}
+
 export function userClub(c: CareerState): Club {
+  if (c.userClubId === null) throw new CareerError('NO_CLUB', 'o treinador está sem clube');
   return c.world.clubs[c.userClubId];
 }
 
@@ -197,8 +208,9 @@ export interface RoundPlan {
   roundId: string;
   seed: string;
   fixtures: Fixture[];
-  controlledClubId: string;
-  userMatchId: string;
+  /** null quando o treinador está sem clube: a CPU decide tudo */
+  controlledClubId: string | null;
+  userMatchId: string | null;
   lineupAdjusted: boolean;
 }
 
@@ -219,11 +231,11 @@ function scheduledFor(c: CareerState, round: number) {
 
 export function planRound(c: CareerState): RoundPlan {
   if (isSeasonOver(c)) throw new CareerError('SEASON_OVER', 'a temporada terminou: comece a próxima');
-  const resolved = resolveUserLineup(c);
-  const lineups = { [c.userClubId]: resolved.lineup };
+  const resolved = hasClub(c) ? resolveUserLineup(c) : null;
+  const lineups: Record<string, Lineup> = resolved && c.userClubId ? { [c.userClubId]: resolved.lineup } : {};
   const fixtures = scheduledFor(c, c.roundNumber).map((m) => prepareFixture(m.matchId, c.world.clubs[m.home], c.world.clubs[m.away], c.world.players, lineups));
-  const mine = scheduledFor(c, c.roundNumber).find((m) => m.home === c.userClubId || m.away === c.userClubId);
-  if (!mine) throw new CareerError('NO_MATCH', 'o clube do jogador não joga nesta rodada');
+  const mine = c.userClubId === null ? null : scheduledFor(c, c.roundNumber).find((m) => m.home === c.userClubId || m.away === c.userClubId);
+  if (c.userClubId !== null && !mine) throw new CareerError('NO_MATCH', 'o clube do jogador não joga nesta rodada');
   const roundId = `T${c.season}-R${pad(c.roundNumber)}`;
   return {
     roundNumber: c.roundNumber,
@@ -231,8 +243,8 @@ export function planRound(c: CareerState): RoundPlan {
     seed: deriveSeed(c.seed, roundId),
     fixtures,
     controlledClubId: c.userClubId,
-    userMatchId: mine.matchId,
-    lineupAdjusted: resolved.adjusted,
+    userMatchId: mine ? mine.matchId : null,
+    lineupAdjusted: resolved?.adjusted ?? false,
   };
 }
 
@@ -264,8 +276,8 @@ export function applyConditions(players: Record<string, Player>, results: readon
 
 export interface RoundOutcome {
   career: CareerState;
-  /** extrato do clube do jogador nesta rodada */
-  ledger: ClubFinanceEntry;
+  /** extrato do clube do jogador nesta rodada (null: treinador sem clube) */
+  ledger: ClubFinanceEntry | null;
   seasonEnded: boolean;
 }
 
@@ -280,13 +292,13 @@ export function finishRound(c: CareerState, results: readonly MatchResult[]): Ro
   const settled = settleRound(c.world.clubs, c.world.players, results, DEFAULT_FINANCE);
   const players = applyConditions(c.world.players, results);
   const played: PlayedMatch[] = results.map((r) => ({ round: c.roundNumber, homeClubId: r.homeClubId, awayClubId: r.awayClubId, homeGoals: r.homeGoals, awayGoals: r.awayGoals }));
-  const mine = settled.ledger.find((e) => e.clubId === c.userClubId);
-  if (!mine) throw new CareerError('NO_LEDGER', 'o clube do jogador não aparece nos resultados');
+  const mine = c.userClubId === null ? null : settled.ledger.find((e) => e.clubId === c.userClubId) ?? null;
+  if (c.userClubId !== null && !mine) throw new CareerError('NO_LEDGER', 'o clube do jogador não aparece nos resultados');
   let career: CareerState = {
     ...c,
     world: { ...c.world, clubs: settled.clubs, players },
     results: [...c.results, ...played],
-    userLedger: [...c.userLedger, mine],
+    userLedger: mine ? [...c.userLedger, mine] : c.userLedger,
     roundNumber: c.roundNumber + 1,
   };
   const seasonEnded = isSeasonOver(career);
@@ -300,8 +312,8 @@ function closeSeason(c: CareerState): CareerState {
     { divisions: c.world.divisions.map((d) => ({ id: d.id, name: d.name, level: d.level, standings: getStandings(ctx, d.id) })) },
     standardRules(c.world.divisions),
   );
-  const userDiv = userClub(c).divisionId;
-  const table = getStandings(ctx, userDiv);
+  const userDiv = c.userClubId === null ? null : userClub(c).divisionId;
+  const table = userDiv === null ? [] : getStandings(ctx, userDiv);
   const report: SeasonReport = {
     season: c.season,
     userClubId: c.userClubId,
@@ -309,7 +321,7 @@ function closeSeason(c: CareerState): CareerState {
     userPosition: table.findIndex((row) => row.clubId === c.userClubId) + 1,
     champions: promotion.champions,
     movements: promotion.movements,
-    userMovement: promotion.movements.find((m) => m.clubId === c.userClubId) ?? null,
+    userMovement: c.userClubId === null ? null : promotion.movements.find((m) => m.clubId === c.userClubId) ?? null,
     userNet: c.userLedger.reduce((sum, e) => sum + e.net, 0),
   };
   return { ...c, pendingPromotion: promotion, history: [...c.history, report] };
@@ -342,6 +354,6 @@ export function deserializeCareer(json: string): CareerState {
     throw new CareerError('BAD_SAVE', 'o arquivo de carreira está corrompido');
   }
   const c = data as Partial<CareerState> | null;
-  if (!c || c.version !== CAREER_VERSION || !c.world || !c.schedule || !c.userClubId) throw new CareerError('BAD_SAVE', 'carreira salva em formato desconhecido');
+  if (!c || c.version !== CAREER_VERSION || !c.world || !c.schedule || c.userClubId === undefined) throw new CareerError('BAD_SAVE', 'carreira salva em formato desconhecido');
   return c as CareerState;
 }

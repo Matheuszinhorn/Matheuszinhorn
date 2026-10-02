@@ -42,3 +42,11 @@ priorizar depois do teste externo.
 - IA como camada futura (personalidades, imprensa, entrevistas, negociações, assistente técnico), sem entrar no
   engine de partida, que deve continuar determinístico.
 - Estádios: ampliação de capacidade (o mundo já registra uma capacidade máxima por estádio).
+
+## Depois do ELITE MANAGER
+
+* Engine (precisa de versão nova com recalibração): assistências, influência do árbitro, faltas (ENGINE.md).
+* Modo online, contas reais, rankings Top Brasil/Global, Hall da Fama (ONLINE-ROADMAP.md, SECURITY-ONLINE.md).
+* Seleção com jogos e Copa (hoje: convite honorário na carreira).
+* Universo de dados real dentro do jogo (a camada `data/` existe; o app continua no universo fictício).
+* Propostas de compra da CPU pelos jogadores do treinador (hoje a venda é por leilão).

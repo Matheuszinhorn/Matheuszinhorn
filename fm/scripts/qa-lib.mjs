@@ -18,9 +18,63 @@ function loadPlaywright() {
 export const { chromium } = loadPlaywright();
 export const shotDir = (...p) => { const d = join(ROOT, 'dist/qa', ...p); mkdirSync(d, { recursive: true }); return d; };
 
-export function watch(page, errors) {
+/**
+ * Observa erros da página e a prepara para o QA (padrão): o splash de ~8 s não aparece (sessionStorage, o mesmo que
+ * acontece na 2ª abertura da sessão) e cada carregamento passa pela ENTRADA (perfil local "QA") e pelo MODO
+ * (CARREIRA OFFLINE) até a tela de início da carreira, onde os roteiros antigos começam.
+ * { start: false } deixa a página como o jogador a vê (o QA do splash e da entrada usam assim).
+ */
+export function watch(page, errors, { start = true } = {}) {
   page.on('pageerror', (e) => errors.push('pageerror: ' + String(e)));
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errors.push(`console.${m.type()}: ` + m.text()); });
+  if (!start) return;
+  void page.addInitScript(() => { try { sessionStorage.setItem('elite-manager:splash-visto', '1'); } catch { /* sem sessionStorage */ } });
+  for (const fn of ['goto', 'reload']) {
+    const orig = page[fn].bind(page);
+    page[fn] = async (...args) => { const r = await orig(...args); await toStart(page); return r; };
+  }
+}
+
+/** ENTRADA → MODO → início da carreira, pela interface (perfil local; nada é autenticado). */
+export async function toStart(page, name = 'QA') {
+  await page.waitForSelector('.entry, .start, .shell', { timeout: 15000 });
+  if (await page.locator('.entry .stack-btns').count()) {
+    const enterAs = page.getByRole('button', { name: /^ENTRAR COMO/ });
+    if (await enterAs.count()) await enterAs.click();
+    else {
+      await page.getByRole('button', { name: 'CRIAR CONTA', exact: true }).click();
+      await page.fill('.entry input[type=text]', name);
+      await page.getByRole('button', { name: 'CRIAR CONTA', exact: true }).click();
+    }
+  }
+  if (await page.locator('.mode-card').count()) await page.locator('.mode-card').first().click();
+  await page.waitForSelector('.start:not(.entry), .shell', { timeout: 15000 });
+}
+
+/**
+ * Espera o próximo pop-up de DECISÃO do engine, passando (CONTINUAR) pelas paradas obrigatórias do caminho:
+ * intervalo e lances importantes que não pedem decisão. Devolve quando há uma decisão aberta.
+ */
+export async function untilDecision(page, timeout = 20000) {
+  const t0 = Date.now();
+  for (;;) {
+    if (Date.now() - t0 > timeout) throw new Error('nenhuma decisão apareceu');
+    await page.waitForSelector('.modal-back', { timeout: Math.max(1000, timeout - (Date.now() - t0)) });
+    const st = await page.evaluate(() => { const s = globalThis.__fm.state.snapshot; return { stop: !!s.stop, status: s.status }; });
+    if (st.status === 'AWAITING_DECISION') return;
+    if (st.stop && st.status === 'PAUSED') { await page.locator('.modal footer').getByRole('button', { name: 'CONTINUAR', exact: true }).click(); await page.waitForTimeout(30); continue; }
+    await page.waitForTimeout(30);
+  }
+}
+
+/** Velocidade INSTANTÂNEA: saiu da interface, mas continua no controlador para o QA automatizado. */
+export const instant = (page) => page.evaluate(() => globalThis.__fm.setSpeed('INSTANT'));
+
+/** Aceita a proposta aberta no pop-up (ou abre a n-ésima e aceita). */
+export async function acceptOffer(page, n = 0) {
+  if (!(await page.locator('.modal').count())) await page.locator('.offer').nth(n).getByRole('button', { name: 'VER PROPOSTA' }).click();
+  await page.locator('.modal footer').getByRole('button', { name: 'ACEITAR', exact: true }).click();
+  await page.waitForSelector('.topbar');
 }
 
 /** Problemas de layout na tela atual: estouro horizontal, conteúdo fora da tela, botões sobrepostos, navegação coberta. */
@@ -35,7 +89,7 @@ export async function layoutIssues(page) {
       const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none') continue;
       if ((r.right > W + 1 || r.left < -1) && !contained(el)) { issues.push(`fora da tela: <${el.tagName.toLowerCase()} class="${el.className}"> ${Math.round(r.left)}..${Math.round(r.right)}`); if (issues.length > 6) break; }
     }
-    if (!document.querySelector('.modal-back')) document.querySelectorAll('.nav-btn').forEach((b) => { const r = b.getBoundingClientRect(); const t = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); if (!t || !t.closest('.nav-btn')) issues.push('navegação coberta: ' + b.textContent.trim()); });
+    if (!document.querySelector('.modal-back') && !document.querySelector('.more-back')) document.querySelectorAll('.nav .nav-btn').forEach((b) => { const r = b.getBoundingClientRect(); if (!r.width || !r.height) return; const t = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); if (!t || !t.closest('.nav-btn')) issues.push('navegação coberta: ' + b.textContent.trim()); });
     const scope = document.querySelector('.modal') ?? document;
     // Só botões realmente visíveis: o elemento no topo no centro do botão é ele mesmo (ignora o que rola por baixo da navegação fixa ou de um rodapé).
     const btns = [...scope.querySelectorAll('button:not(.chip):not(.nav-btn)')].map((b) => ({ b, r: b.getBoundingClientRect() })).filter(({ b, r }) => { if (r.width <= 0 || r.height <= 0) return false; const t = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !!t && (t === b || b.contains(t)); }).map((x) => { let r = x.r; for (let p = x.b.parentElement; p && p !== document.body; p = p.parentElement) { const o = getComputedStyle(p); if (o.overflowY !== 'visible' || o.overflowX !== 'visible') { const q = p.getBoundingClientRect(); r = { left: Math.max(r.left, q.left), right: Math.min(r.right, q.right), top: Math.max(r.top, q.top), bottom: Math.min(r.bottom, q.bottom), width: 0, height: 0 }; } } return { b: x.b, r }; });
@@ -51,15 +105,20 @@ export async function layoutIssues(page) {
 }
 
 export const text = (page) => page.evaluate(() => document.body.innerText.toLowerCase());
-export const nav = async (page, label) => { await page.locator('.nav-btn', { hasText: label }).click(); await page.waitForTimeout(120); };
+/** Navega pela barra (no celular, o que não cabe na barra fica no MAIS). */
+export const nav = async (page, label) => {
+  const direct = page.locator('.nav .nav-btn:visible', { hasText: label });
+  if (await direct.count()) await direct.first().click();
+  else { await page.locator('.nav-more').click(); await page.locator('.more-sheet .nav-btn', { hasText: label }).click(); }
+  await page.waitForTimeout(120);
+};
 export const clickIn = (page, scope, name, exact = false) => page.locator(scope).getByRole('button', { name, exact }).first().click({ timeout: 8000 });
 
 /** Cria a carreira pela interface (nome + primeira proposta). */
 export async function startCareerUI(page, name = 'Marcos Vilela') {
   await page.fill('input[type=text]', name);
   await page.getByRole('button', { name: 'RECEBER PROPOSTAS' }).click();
-  await page.locator('.offer').first().getByRole('button').click();
-  await page.waitForSelector('.topbar');
+  await acceptOffer(page, 0);
 }
 
 /** Resolve o pop-up aberto SÓ pela interface. policy 'suggest' sempre aceita a sugestão (reprodutível). */
@@ -71,7 +130,7 @@ export async function resolveModal(page, policy = 'ui', log = null) {
   if (policy === 'suggest' || title.includes('GOLEIRO')) {
     if (await has('ACEITAR SUGESTÃO')) return void (await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO'));
   }
-  if (title.startsWith('PÊNALTI')) return void (await page.locator('.modal .prow').first().click());
+  if (title.startsWith('PÊNALTI') && (await page.locator('.modal .prow').count())) return void (await page.locator('.modal .prow').first().click());
   const confirm = footer.getByRole('button', { name: 'CONFIRMAR SUBSTITUIÇÃO' });
   if (await confirm.count() && await confirm.isEnabled()) return void (await confirm.click());
   if (await has('ACEITAR SUGESTÃO') && !(await has('CONTINUAR', true))) return void (await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO'));

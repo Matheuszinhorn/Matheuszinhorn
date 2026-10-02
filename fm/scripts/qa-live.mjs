@@ -1,7 +1,8 @@
-// QA de velocidades e de MEU TIME durante a partida. Usa o cenário determinístico "goleiro lesionado com reserva" (decisão aos 36').
+// QA de velocidades e de MEU TIME durante a partida. Usa o cenário determinístico "goleiro lesionado com reserva"
+// (o minuto da decisão vem do próprio cenário gerado por qa-scenarios.mjs; hoje, 62').
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, driveRound, layoutIssues, nav, roundStats, shotDir, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, driveRound, layoutIssues, nav, roundStats, shotDir, watch, instant, untilDecision } from './qa-lib.mjs';
 
 const scenario = JSON.parse(readFileSync(join(ROOT, 'dist/qa/scenarios/goleiro-lesionado-com-reserva.json'), 'utf8'));
 const dir = shotDir('live');
@@ -26,16 +27,17 @@ const digests = {};
 for (const [label, interval] of SPEEDS) {
   const { ctx, page, errors } = await openCareer();
   const notes = []; let ok = true; const fail = (m) => { ok = false; notes.push('✗ ' + m); };
-  await page.getByRole('button', { name: label, exact: true }).click();
+  if (interval === 0) await instant(page); else await page.getByRole('button', { name: label, exact: true }).click();
   const t0 = Date.now();
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
-  await page.waitForSelector('.modal-back', { timeout: 120000 });
+  await untilDecision(page, 120000); // lances do adversário antes dos 36' também param (CONTINUAR)
   const elapsed = Date.now() - t0;
   const info = await page.evaluate(() => { const c = globalThis.__fm; const m = c.userMatch(); const d = c.state.snapshot.pending.decision; return { minute: d.createdAt.minute, half: d.createdAt.half, status: c.state.snapshot.status, type: c.state.snapshot.pending.decision.type, speed: c.state.snapshot.speed }; });
-  const lo = interval === 0 ? 0 : 0.8 * 35 * interval, hi = interval === 0 ? 8000 : 1.7 * 37 * interval + 3000;
+  const want = scenario.decision.minute; const wantHalf = want > 45 ? 2 : 1;
+  const lo = interval === 0 ? 0 : 0.8 * (want - 1) * interval, hi = interval === 0 ? 8000 : 1.7 * (want + 1) * interval + 3000;
   if (elapsed < lo || elapsed > hi) fail(`tempo até a decisão ${elapsed} ms fora de [${lo}, ${hi}]`); else notes.push(`decisão aos ${info.minute}' após ${(elapsed / 1000).toFixed(1)} s`);
   if (info.status !== 'AWAITING_DECISION' || info.type !== 'INJURY_SUBSTITUTION') fail('não parou na decisão de lesão');
-  if (info.minute !== 36 || info.half !== 1) fail(`decisão criada em ${info.half}T ${info.minute}' (esperado 1T 36' igual em todas as velocidades)`);
+  if (info.minute !== want || info.half !== wantHalf) fail(`decisão criada em ${info.half}T ${info.minute}' (esperado ${wantHalf}T ${want}' igual em todas as velocidades)`);
   // Tentativas de ultrapassar a decisão: velocidade instantânea, retomar, play.
   const before = await clocks(page);
   const attempt = await page.evaluate(() => { const c = globalThis.__fm; const r = []; for (const f of [() => c.setSpeed('INSTANT'), () => c.resume(), () => c.session.play(), () => c.pause(), () => c.resume()]) { try { f(); r.push('ok'); } catch (e) { r.push('lançou:' + e.code); } } return r; });
@@ -45,7 +47,7 @@ for (const [label, interval] of SPEEDS) {
   await page.evaluate((s) => globalThis.__fm.setSpeed(s), Object.fromEntries([['LENTA', 'SLOW'], ['NORMAL', 'NORMAL'], ['RÁPIDA', 'FAST'], ['MUITO RÁPIDA', 'VERY_FAST'], ['INSTANTÂNEA', 'INSTANT']])[label]);
   // resolve pela tela e vê o relógio voltar a andar
   await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO');
-  if (interval > 0) { await page.waitForFunction(() => globalThis.__fm.userMatch().clock.minute > 36 || globalThis.__fm.userMatch().clock.half === 2 || globalThis.__fm.state.snapshot.pending, null, { timeout: 8000 }).then(() => notes.push('partida continuou após resolver')).catch(() => fail('partida não continuou após resolver')); await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click().catch(() => {}); }
+  if (interval > 0) { await page.waitForFunction(() => globalThis.__fm.userMatch().clock.minute > 36 || globalThis.__fm.userMatch().clock.half === 2 || globalThis.__fm.state.snapshot.pending, null, { timeout: 8000 }).then(() => notes.push('partida continuou após resolver')).catch(() => fail('partida não continuou após resolver')); await instant(page); }
   await driveRound(page, { policy: 'suggest' });
   const st = await roundStats(page);
   if (st.gkIssues !== 0) fail('problemas de goleiro/estado ao fim');
@@ -122,7 +124,7 @@ out.identicalAcrossSpeeds = same;
   const st2 = await page.evaluate((pre) => globalThis.__fm.userMatch()[pre.side].style, pre);
   if (st2 !== 'DEFENSIVE') fail('CANCELAR alterou o estilo'); else notes.push('CANCELAR não altera o time');
   await clickIn(page, '.controls', 'CONTINUAR', true).catch(() => {});
-  await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click();
+  await instant(page);
   await driveRound(page, { policy: 'suggest' });
   const st = await roundStats(page);
   if (st.gkIssues !== 0) fail('estado inconsistente ao fim da rodada'); else notes.push('rodada terminou íntegra (40 encerradas, 1 goleiro de cada lado)');

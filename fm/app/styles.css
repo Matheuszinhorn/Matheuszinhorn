@@ -168,7 +168,8 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #050f1
 
 /* ---------- pop-ups de decisão ---------- */
 .modal-back { position: fixed; inset: 0; z-index: 100; background: rgba(3,10,17,.82); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 12px; }
-.modal { width: min(580px, 100%); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; background: var(--panel); border: 1px solid rgba(242,244,237,.16); border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.6); animation: up .18s ease-out; overflow: hidden; }
+.modal { width: min(580px, 100%); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; background: var(--panel); border: 1px solid rgba(242,244,237,.16); border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.6); overflow: hidden; }
+.modal.enter, .more-sheet.enter { animation: up .18s ease-out; }
 .modal-red { border-top: 4px solid var(--red); } .modal-blue { border-top: 4px solid var(--accent); } .modal-yellow { border-top: 4px solid var(--yellow); }
 .modal header { padding: 16px 18px 6px; } .modal h2 { font-size: 20px; letter-spacing: .05em; }
 .modal-body { padding: 8px 18px; overflow-y: auto; display: grid; gap: 8px; align-content: start; grid-auto-rows: max-content; } /* linhas na altura do conteúdo: em lista longa elas não encolhem (nome em 3 linhas não vaza) */
@@ -181,7 +182,8 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #050f1
 .pair-add { display: grid; gap: 8px; grid-template-columns: 1fr; } .subs, .tactics { display: grid; gap: 4px; }
 
 /* ---------- aviso ---------- */
-.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + 18px + env(safe-area-inset-bottom)); z-index: 200; max-width: min(92vw, 520px); padding: 12px 18px; border-radius: 14px; font-weight: 700; background: var(--panel2); border: 1px solid var(--accent-line); box-shadow: 0 10px 30px rgba(0,0,0,.5); animation: up .2s ease-out; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + 18px + env(safe-area-inset-bottom)); z-index: 200; max-width: min(92vw, 520px); padding: 12px 18px; border-radius: 14px; font-weight: 700; background: var(--panel2); border: 1px solid var(--accent-line); box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.toast.enter { animation: up .2s ease-out; }
 .toast-error { background: #5a1420; border-color: var(--red); } .toast-good { background: var(--panel2); border-color: var(--accent); }
 .start ~ .toast { bottom: 24px; }
 @media (min-width: 900px) { .toast { bottom: 26px; } }
@@ -192,13 +194,99 @@ input[type=text], select { min-height: 46px; padding: 0 12px; background: #050f1
 .nav-brand { display: none; }
 @media (min-width: 900px) { .nav-brand { display: block; grid-row: span 2; width: 132px; justify-self: center; align-self: center; } }
 
-/* ---------- splash: logo oficial enquanto o app inicializa; some no primeiro desenho do jogo (sem espera artificial) ---------- */
-.splash { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: var(--brand-navy); pointer-events: none; }
+/* ---------- splash: logo oficial + barra de carregamento (~8 s na primeira abertura da sessão; um toque pula) ---------- */
+.splash { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: var(--brand-navy); cursor: pointer; }
 .splash .brand-logo { width: min(78vw, 58dvh, 440px); }
-.splash-bar { width: 120px; height: 3px; border-radius: 3px; background: rgba(242,244,237,.12); overflow: hidden; }
-.splash-bar::before { content: ""; display: block; width: 40%; height: 100%; border-radius: 3px; background: var(--brand-lime); animation: splash-load 1s ease-in-out infinite; }
-@keyframes splash-load { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
-.splash.out { animation: splash-out .5s ease forwards; } .splash.out .brand-logo { animation: splash-logo .5s ease forwards; }
+.splash-bar { width: min(60vw, 240px); height: 4px; border-radius: 4px; background: rgba(242,244,237,.12); overflow: hidden; }
+.splash-bar i { display: block; width: 0; height: 100%; border-radius: 4px; background: var(--brand-lime); transition: width .12s linear; }
+.splash-hint { color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.splash.out { animation: splash-out .5s ease forwards; pointer-events: none; } .splash.out .brand-logo { animation: splash-logo .5s ease forwards; }
 @keyframes splash-out { to { opacity: 0; visibility: hidden; } }
 @keyframes splash-logo { to { transform: scale(1.04); } }
 @media (prefers-reduced-motion: reduce) { .splash.out { display: none; } }
+
+/* ---------- entrada e modos ---------- */
+.start-panel.narrow { max-width: 460px; }
+.stack-btns { display: grid; gap: 10px; margin: 8px 0; }
+.modes { display: grid; gap: 12px; max-width: 560px; }
+.mode-card { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 18px; border-radius: 16px; background: var(--panel); border: 1px solid var(--accent-line); }
+.mode-card strong { font-size: 20px; } .mode-k { font-size: 11px; letter-spacing: .14em; color: var(--accent); font-weight: 800; }
+.mode-card.soon { border-color: var(--line); opacity: .65; } .mode-card.soon .mode-k { color: var(--muted); }
+.offer.refused { opacity: .5; }
+.club-stripe { display: block; width: 48px; height: 4px; border-radius: 2px; margin: 2px 0; }
+.prop-head { display: flex; gap: 12px; align-items: center; } .prop-head > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; } .prop-name { font-size: 18px; }
+.objective { display: flex; flex-direction: column; gap: 2px; } .objective .label { margin: 0; }
+.modal-wide { width: min(720px, 100%); }
+.crest-none { background: var(--panel2); color: var(--muted); border-color: var(--line); }
+
+/* ---------- barra superior: cores do clube, moral, som ---------- */
+.topbar { border-bottom: 2px solid var(--club-a, var(--line)); }
+.tb-mood, .tb-sound { flex: none; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: rgba(242,244,237,.05); font-size: 17px; line-height: 1; display: grid; place-items: center; }
+@media (max-width: 400px) { .tb-cash-l { display: none; } .tb-sound { width: 32px; height: 32px; font-size: 14px; } .tb-mood { width: 32px; height: 32px; font-size: 14px; } .topbar { gap: 8px; padding-left: 10px; padding-right: 10px; } .tb-cash b { font-size: 13px; } }
+
+/* ---------- navegação com MAIS (celular) ---------- */
+.nav-more { display: flex; }
+.nav-extra { display: none; }
+.nav-btn.locked { opacity: .45; }
+.more-back { position: fixed; inset: 0; z-index: 25; background: rgba(3,10,17,.6); display: flex; align-items: flex-end; }
+.more-sheet { width: 100%; background: var(--panel); border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; padding: 12px 12px calc(var(--nav-h) + 16px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.more-sheet .nav-btn { border-radius: 12px; background: rgba(242,244,237,.04); min-height: 72px; font-size: 10.5px; }
+@media (min-width: 900px) {
+  .nav-more { display: none; } .nav-extra { display: flex; }
+  .nav { grid-auto-rows: 46px; gap: 2px; overflow-y: auto; }
+  .nav-brand { grid-row: span 2; }
+  .more-back { display: none; }
+}
+
+/* ---------- abas internas ---------- */
+.subtabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+.subtab { min-height: 38px; padding: 0 14px; border-radius: 999px; background: rgba(242,244,237,.05); border: 1px solid var(--line); font-weight: 800; font-size: 12.5px; }
+.subtab.on { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+
+/* ---------- quadro da rodada (público · placar · lances) ---------- */
+.mrow { grid-template-columns: 54px minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 1.1fr); }
+.mpub { font-size: 11px; color: #b9ccbf; font-variant-numeric: tabular-nums; }
+.mscore { border: 0; color: var(--text); display: inline-flex; gap: 6px; align-items: center; justify-content: center; min-height: 30px; }
+.mscore:hover { outline: 1px solid var(--accent-line); }
+.mscore .mmin { font-size: 10px; }
+.mev { display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 11px; color: #d7e4da; min-width: 0; }
+.bev { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+@media (max-width: 640px) {
+  .mrow { grid-template-columns: 44px minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: 'pub home score away' '. ev ev ev'; row-gap: 2px; }
+  .mpub { grid-area: pub; } .mrow > .mteam.r { grid-area: home; } .mrow > .mscore { grid-area: score; } .mrow > .mteam:not(.r) { grid-area: away; } .mev { grid-area: ev; justify-content: center; }
+  .mev:empty { display: none; }
+  .mrow .nm-full { display: none; } .mrow .nm-short { display: inline; }
+}
+.nm-short { display: none; }
+.match-card.detail { border-top-color: var(--muted); }
+
+/* ---------- adversário, árbitro, propostas ---------- */
+.opp-head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; } .opp-head > div { display: flex; flex-direction: column; min-width: 0; }
+.referee { display: flex; flex-direction: column; gap: 2px; margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(242,244,237,.04); border: 1px solid var(--line); } .referee .label { margin: 0; }
+.job-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; margin-bottom: 12px; border-radius: 14px; background: var(--accent-soft); border: 1px solid var(--accent-line); font-weight: 700; }
+
+/* ---------- listas de gestão ---------- */
+.deals, .upgrades, .newslist, .calendar { list-style: none; padding: 0; display: grid; gap: 8px; }
+.deals li, .upgrade { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(242,244,237,.04); flex-wrap: wrap; }
+.deal-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 220px; }
+.deal-side { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.window { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-radius: 14px; margin-bottom: 12px; border: 1px solid var(--line); background: var(--panel); }
+.window-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); } .window.open .window-dot { background: var(--green); } .window.open b { color: var(--accent); }
+.filters { display: grid; gap: 0 10px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.filters .field { margin: 6px 0; }
+input[type=number] { min-height: 46px; padding: 0 12px; background: #050f19; border: 1px solid var(--line); border-radius: 12px; width: 100%; }
+.field.grow { flex: 1 1 160px; }
+.fin-status { display: flex; align-items: center; gap: 10px; font-size: 18px; margin-bottom: 6px; } .fin-ico { font-size: 22px; }
+.wrap-cell { white-space: normal !important; min-width: 160px; }
+.tbl.compact td { padding: 6px; font-size: 13px; }
+.news { padding: 10px 12px; border-radius: 12px; background: rgba(242,244,237,.04); display: grid; gap: 4px; } .news.mine { box-shadow: inset 3px 0 var(--accent); }
+.news-top { display: flex; gap: 8px; align-items: center; }
+.cal { display: grid; grid-template-columns: 38px 76px minmax(0, 1fr) auto 18px; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 10px; background: rgba(242,244,237,.04); font-size: 13.5px; }
+.cal.past { opacity: .6; } .cal.now { background: var(--accent-soft); box-shadow: inset 3px 0 var(--accent); font-weight: 700; }
+.cal-r { color: var(--muted); font-variant-numeric: tabular-nums; } .cal-m { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .cal-s { font-weight: 800; font-variant-numeric: tabular-nums; } .cal-w { color: var(--accent); }
+.pcell { display: flex; flex-direction: column; line-height: 1.25; white-space: normal; min-width: 150px; }
+.modal-back ~ .toast { top: calc(14px + env(safe-area-inset-top)); bottom: auto; }
+/* ELENCO: a coluna do jogador fica presa à esquerda ao rolar as estatísticas (celular) */
+.squad-stats th:first-child, .squad-stats td:first-child { position: sticky; left: 0; z-index: 1; background: var(--panel); }
+.squad-stats tr.unavailable td:first-child { background: #0b1a28; }
+@media (max-width: 520px) { .squad-stats td, .squad-stats th { padding: 7px 5px; font-size: 12.5px; } .squad-stats td:first-child { white-space: normal; min-width: 140px; max-width: 160px; line-height: 1.25; } }

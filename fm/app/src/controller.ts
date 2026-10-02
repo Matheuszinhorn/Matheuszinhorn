@@ -3,20 +3,18 @@ import { suggestedCommand } from '../../game/assist.ts';
 import {
   careerOffers,
   clubsContext,
-  createCareer,
   deserializeCareer,
-  finishRound,
   isSeasonOver,
-  planRound,
   resolveUserLineup,
   serializeCareer,
-  startNextSeason,
   userClub,
   withUserLineup,
   type CareerState,
-  type RoundOutcome,
-  type RoundPlan,
 } from '../../game/career.ts';
+import * as actions from '../../game/manager/actions.ts';
+import { ensureManager } from '../../game/manager/core.ts';
+import { finishManagedRound, planManagedRound, startManagedSeason, type ManagedOutcome, type ManagedPlan } from '../../game/manager/flow.ts';
+import type { UpgradeId } from '../../game/manager/state.ts';
 import { applyFormation, bestLineup, setPenaltyTaker, setTactics, swapPlayers } from '../../game/lineup-edit.ts';
 import type { ClubsContext } from '../../game/queries.ts';
 import { createSession, type Scheduler, type Session, type SessionSnapshot, type SpeedId, type TeamChanges } from '../../game/session.ts';
@@ -26,6 +24,9 @@ import { createSession, type Scheduler, type Session, type SessionSnapshot, type
 
 export const SAVE_KEY = 'fm-brasileiro:carreira:v1';
 export const SPEED_KEY = 'fm-brasileiro:velocidade';
+/** Perfil LOCAL (sem servidor e sem senha): só um nome guardado neste navegador. Chave nova; não mexe no save. */
+export const PROFILE_KEY = 'elite-manager:perfil-local';
+export const AUDIO_KEY = 'elite-manager:som';
 
 export interface KeyValueStorage {
   get(key: string): string | null;
@@ -59,8 +60,8 @@ function readSave(raw: string | null): { career: CareerState | null; problem: st
   if (raw === null || raw.trim() === '') return { career: null, problem: null };
   try {
     const career = deserializeCareer(raw);
-    if (!career.world.clubs[career.userClubId]) return { career: null, problem: SAVE_PROBLEM };
-    return { career, problem: null };
+    if (career.userClubId !== null && !career.world.clubs[career.userClubId]) return { career: null, problem: SAVE_PROBLEM };
+    return { career: ensureManager(career), problem: null };
   } catch {
     return { career: null, problem: SAVE_PROBLEM };
   }
@@ -71,7 +72,35 @@ function saveStatus(raw: string | null): { hasSave: boolean; saveProblem: string
   return { hasSave: r.career !== null, saveProblem: r.problem };
 }
 
-export type Screen = 'START' | 'TEAM' | 'MATCH' | 'LEAGUE' | 'CLUBS' | 'CAREER';
+export type Screen =
+  | 'ENTRY' // entrar / criar conta (perfil local)
+  | 'MODE' // carreira offline / online (em desenvolvimento)
+  | 'START' // continuar ou nova carreira, propostas iniciais
+  | 'TEAM'
+  | 'MATCH'
+  | 'LEAGUE'
+  | 'CLUBS'
+  | 'CAREER'
+  | 'MARKET'
+  | 'NEWS'
+  | 'CALENDAR'
+  | 'STADIUM'
+  | 'FINANCE';
+
+/** Telas que só existem com clube (o treinador sem clube vê o mundo, mas não gere elenco, mercado, estádio nem caixa). */
+export const CLUB_SCREENS: readonly Screen[] = ['TEAM', 'MARKET', 'STADIUM', 'FINANCE'];
+
+export interface Profile {
+  name: string;
+  createdAt: string;
+}
+
+/** Pop-up de proposta: inicial (clubId das 3 ofertas) ou de emprego (jobId). analyze = tela ANALISAR CLUBE aberta. */
+export interface ProposalView {
+  clubId: string;
+  jobId: string | null;
+  analyze: boolean;
+}
 /** PRE = rodada ainda não jogada · LIVE = rodada em andamento · POST = rodada terminada e aplicada à carreira */
 export type MatchPhase = 'PRE' | 'LIVE' | 'POST';
 
@@ -86,11 +115,20 @@ export interface AppState {
   hasSave: boolean;
   /** Existe algo salvo, mas não dá para carregar (corrompido/versão incompatível): a tela inicial avisa em vez de oferecer CONTINUAR. */
   saveProblem: string | null;
-  offers: { seed: string; clubIds: string[] } | null;
+  offers: { seed: string; clubIds: string[]; refused: string[] } | null;
+  profile: Profile | null;
+  proposal: ProposalView | null;
+  /** partida aberta no detalhe (VOLTAR À RODADA fecha) */
+  matchView: string | null;
+  /** jogador aberto no perfil */
+  playerId: string | null;
+  /** menu MAIS (celular) */
+  more: boolean;
+  audio: boolean;
   phase: MatchPhase;
-  plan: RoundPlan | null;
+  plan: ManagedPlan | null;
   snapshot: SessionSnapshot;
-  outcome: RoundOutcome | null;
+  outcome: ManagedOutcome | null;
   speed: SpeedId;
   leagueDivision: string | null;
   clubId: string | null;
@@ -108,6 +146,8 @@ export interface ControllerOptions {
 }
 
 const SPEED_IDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST', 'INSTANT'];
+/** Velocidades oferecidas na tela. INSTANT continua existindo só para testes e QA automatizado (__fm.setSpeed). */
+export const UI_SPEEDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST'];
 
 export class GameController {
   /** Trocada por uma nova em abandonCareer: uma sessão descartada (dispose) não avisa mais a tela nem avança o relógio. */
@@ -127,14 +167,29 @@ export class GameController {
     this.randomSeed = options.randomSeed ?? (() => `carreira-${Date.now().toString(36)}-${Math.floor(Math.random() * 1e9).toString(36)}`);
     this.toastMs = options.toastMs ?? 4200;
     const saved = this.storage.get(SPEED_KEY) as SpeedId | null;
-    const speed: SpeedId = saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
+    // INSTANTÂNEA saiu da interface: quem a tinha salva volta como MUITO RÁPIDA
+    const speed: SpeedId = saved === 'INSTANT' ? 'VERY_FAST' : saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
+    let profile: Profile | null = null;
+    try {
+      const raw = this.storage.get(PROFILE_KEY);
+      const p = raw ? (JSON.parse(raw) as Profile) : null;
+      profile = p && typeof p.name === 'string' && p.name.trim() ? p : null;
+    } catch {
+      profile = null;
+    }
     this.scheduler = options.scheduler;
     this.session = this.newSession(speed);
     this.state = {
-      screen: 'START',
+      screen: 'ENTRY',
       career: null,
       ...saveStatus(this.storage.get(SAVE_KEY)),
       offers: null,
+      profile,
+      proposal: null,
+      matchView: null,
+      playerId: null,
+      more: false,
+      audio: this.storage.get(AUDIO_KEY) === '1',
       phase: 'PRE',
       plan: null,
       snapshot: this.session.getState(),
@@ -148,7 +203,7 @@ export class GameController {
   }
 
   private newSession(speed: SpeedId): Session {
-    const session = createSession({ scheduler: this.scheduler, speed });
+    const session = createSession({ scheduler: this.scheduler, speed, stopOnEvents: true });
     session.subscribe((snap) => this.onSession(snap));
     return session;
   }
@@ -197,20 +252,88 @@ export class GameController {
 
   // ----- início da carreira -----
 
+  // ----- entrada: perfil local e modo de jogo -----
+
+  /** CRIAR CONTA: perfil LOCAL (só um nome neste navegador). Não há senha nem servidor: nada é autenticado. */
+  createProfile(name: string): void {
+    const n = name.trim();
+    if (!n) return this.notify('Digite um nome para o perfil.', 'error');
+    const profile: Profile = { name: n.slice(0, 32), createdAt: new Date().toISOString() };
+    try {
+      this.storage.set(PROFILE_KEY, JSON.stringify(profile));
+    } catch {
+      /* sem armazenamento: o perfil vale enquanto a página estiver aberta */
+    }
+    this.set({ profile, screen: 'MODE' });
+  }
+
+  /** ENTRAR: usa o perfil local deste navegador. */
+  enter(): void {
+    if (!this.state.profile) return this.notify('Nenhum perfil neste navegador. Toque em CRIAR CONTA.', 'error');
+    this.set({ screen: 'MODE' });
+  }
+
+  /** CONTINUAR COM GOOGLE: precisa do servidor do modo online, que ainda não existe. Não finge um login. */
+  googleLogin(): void {
+    this.notify('Login com Google depende do servidor online, ainda em desenvolvimento. Use um perfil local.', 'info');
+  }
+
+  leaveProfile(): void {
+    this.set({ screen: 'ENTRY' });
+  }
+
+  chooseMode(mode: 'OFFLINE' | 'ONLINE'): void {
+    if (mode === 'ONLINE') return this.notify('Modo online em desenvolvimento.', 'info');
+    this.set({ screen: 'START' });
+  }
+
+  // ----- propostas iniciais -----
+
   offerClubs(seed?: string): void {
+    // sem "sortear de novo": as três propostas de uma carreira nova são estas; recusadas, o treinador aguarda outras
+    if (this.state.offers && !seed) return;
     const s = seed ?? this.randomSeed();
-    this.set({ offers: { seed: s, clubIds: careerOffers(s) } });
+    this.set({ offers: { seed: s, clubIds: careerOffers(s), refused: [] }, proposal: null });
+  }
+
+  openProposal(clubId: string | null, jobId: string | null = null): void {
+    this.set({ proposal: clubId ? { clubId, jobId, analyze: false } : null });
+  }
+
+  analyzeProposal(on: boolean): void {
+    if (this.state.proposal) this.set({ proposal: { ...this.state.proposal, analyze: on } });
+  }
+
+  refuseOffer(clubId: string): void {
+    const o = this.state.offers;
+    if (!o) return;
+    this.set({ offers: { ...o, refused: [...new Set([...o.refused, clubId])] }, proposal: null });
   }
 
   startCareer(coachName: string, clubId: string): void {
     const offers = this.state.offers;
-    if (!offers) return this.notify('Sorteie as ofertas de clube primeiro.', 'error');
+    if (!offers) return this.notify('Receba as propostas primeiro.', 'error');
     try {
-      const career = createCareer({ seed: offers.seed, coachName, clubId });
+      const career = actions.newManagedCareer(offers.seed, coachName, clubId);
       this.applied.clear();
-      this.set({ career, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null });
+      this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null, matchView: null });
       this.save();
       this.notify(`Bem-vindo ao ${userClub(career).name}, ${career.coach.name}!`, 'good');
+    } catch (e) {
+      this.fail(e);
+    }
+  }
+
+  /** AGUARDAR PROPOSTAS: a carreira começa sem clube; o mundo joga as rodadas e propostas chegam. */
+  waitForOffers(coachName: string): void {
+    const offers = this.state.offers;
+    if (!offers) return this.notify('Receba as propostas primeiro.', 'error');
+    try {
+      const career = actions.newManagedCareer(offers.seed, coachName, null);
+      this.applied.clear();
+      this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: career.world.divisions.find((d) => d.level === 4)?.id ?? null, clubId: null, selected: null, matchView: null });
+      this.save();
+      this.notify('Você está sem clube. Jogue as rodadas e acompanhe as propostas em CARREIRA.', 'info');
     } catch (e) {
       this.fail(e);
     }
@@ -228,7 +351,7 @@ export class GameController {
       // Salvo depois da rodada 38 e antes de INICIAR TEMPORADA: volta para a tela de fim de temporada (POST),
       // a única que oferece a virada. Em PRE só haveria JOGAR RODADA, que não existe mais nesta temporada.
       const phase: MatchPhase = isSeasonOver(career) ? 'POST' : 'PRE';
-      this.set({ career, phase, plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null });
+      this.set({ career, phase, plan: null, outcome: null, screen: 'MATCH', leagueDivision: career.userClubId ? userClub(career).divisionId : null, clubId: null, selected: null, matchView: null, proposal: null });
     } catch (e) {
       this.fail(e);
     }
@@ -242,15 +365,16 @@ export class GameController {
     this.session = this.newSession(this.state.speed);
     this.clubsPause = false;
     this.applied.clear();
-    this.set({ snapshot: this.session.getState(), career: null, hasSave: false, saveProblem: null, offers: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null });
+    this.set({ snapshot: this.session.getState(), career: null, hasSave: false, saveProblem: null, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'START', clubId: null, selected: null, matchView: null, playerId: null });
   }
 
   // ----- navegação -----
 
   go(screen: Screen): void {
-    if (!this.state.career && screen !== 'START') return;
+    if (!this.state.career && !['START', 'ENTRY', 'MODE'].includes(screen)) return;
+    if (this.state.career && this.state.career.userClubId === null && CLUB_SCREENS.includes(screen)) return this.notify('Você está sem clube. Veja as propostas em CARREIRA.', 'info');
     const wasClubs = this.state.screen === 'CLUBS';
-    this.set({ screen, selected: null });
+    this.set({ screen, selected: null, more: false, playerId: null });
     // Consultar CLUBES durante a rodada pausa a sessão (seção 24); sair de CLUBES retoma.
     if (this.state.phase === 'LIVE') {
       if (screen === 'CLUBS' && !wasClubs) {
@@ -271,6 +395,28 @@ export class GameController {
     this.set({ clubId: id });
   }
 
+  openMatch(matchId: string | null): void {
+    this.set({ matchView: matchId });
+  }
+
+  openPlayer(id: string | null): void {
+    this.set({ playerId: id });
+  }
+
+  toggleMore(open?: boolean): void {
+    this.set({ more: open ?? !this.state.more });
+  }
+
+  toggleAudio(): void {
+    const audio = !this.state.audio;
+    try {
+      this.storage.set(AUDIO_KEY, audio ? '1' : '0');
+    } catch {
+      /* preferência só nesta página */
+    }
+    this.set({ audio });
+  }
+
   // ----- rodada -----
 
   get ctx(): ClubsContext | null {
@@ -288,8 +434,8 @@ export class GameController {
     const career = this.state.career;
     if (!career || this.state.phase !== 'PRE') return;
     try {
-      const plan = planRound(career);
-      this.set({ plan, outcome: null });
+      const plan = planManagedRound(career);
+      this.set({ plan, outcome: null, matchView: null });
       this.session.startRound({ roundId: plan.roundId, seed: plan.seed, fixtures: plan.fixtures, controlledClubId: plan.controlledClubId });
       this.set({ phase: 'LIVE' });
       this.session.play();
@@ -308,6 +454,11 @@ export class GameController {
     this.session.pause();
   }
 
+  /** CONTINUAR do intervalo ou de um lance que parou a partida. */
+  continueStop(): void {
+    this.session.continueStop();
+  }
+
   resume(): void {
     this.session.resume();
   }
@@ -322,10 +473,12 @@ export class GameController {
     const { career, plan } = this.state;
     if (!career || !plan || this.applied.has(plan.roundId)) return;
     try {
-      const outcome = finishRound(career, this.session.results());
+      const round = this.state.snapshot.round;
+      const outcome = finishManagedRound(career, this.session.results(), round ? round.matches : []);
       this.applied.add(plan.roundId);
       this.set({ career: outcome.career, outcome, phase: 'POST' });
       this.save();
+      if (outcome.fired) this.notify('Você foi demitido. Acompanhe as propostas em CARREIRA.', 'error');
     } catch (e) {
       this.fail(e);
     }
@@ -336,13 +489,93 @@ export class GameController {
     const career = this.state.career;
     if (!career || this.state.phase !== 'POST') return;
     try {
-      const next = isSeasonOver(career) ? startNextSeason(career) : career;
-      this.set({ career: next, phase: 'PRE', plan: null, outcome: null, leagueDivision: userClub(next).divisionId });
+      const next = isSeasonOver(career) ? startManagedSeason(career).career : career;
+      this.set({ career: next, phase: 'PRE', plan: null, outcome: null, matchView: null, leagueDivision: next.userClubId ? userClub(next).divisionId : this.state.leagueDivision });
       this.save();
       if (next !== career) this.notify(`Temporada ${next.season} começou.`, 'good');
     } catch (e) {
       this.fail(e);
     }
+  }
+
+  // ----- gestão (fora da rodada) -----
+
+  /** Executa uma ação da camada de gestão: só fora da rodada; salva e mostra a mensagem dela. */
+  act(fn: (c: CareerState) => actions.ActionResult): boolean {
+    const career = this.state.career;
+    if (!career) return false;
+    if (this.state.phase === 'LIVE') {
+      this.notify('Espere a rodada terminar.', 'error');
+      return false;
+    }
+    try {
+      const res = fn(career);
+      this.set({ career: res.career });
+      this.save();
+      this.notify(res.message, res.kind);
+      return true;
+    } catch (e) {
+      this.fail(e);
+      return false;
+    }
+  }
+
+  toggleWish(id: string): void {
+    this.act((c) => actions.toggleWish(c, id));
+  }
+  makeOffer(id: string, amount: number): void {
+    this.act((c) => actions.makeOffer(c, id, amount));
+  }
+  acceptCounter(negId: string): void {
+    this.act((c) => actions.acceptCounter(c, negId));
+  }
+  cancelNegotiation(negId: string): void {
+    this.act((c) => actions.cancelNegotiation(c, negId));
+  }
+  signFreeAgent(id: string): void {
+    this.act((c) => actions.signFreeAgent(c, id));
+  }
+  requestLoan(id: string): void {
+    this.act((c) => actions.requestLoan(c, id));
+  }
+  loanOut(id: string): void {
+    this.act((c) => actions.loanOut(c, id));
+  }
+  openAuction(id: string, price: number): void {
+    this.act((c) => actions.openAuction(c, id, price));
+  }
+  withdrawAuction(id: string): void {
+    this.act((c) => actions.withdrawAuction(c, id));
+  }
+  startRenewal(id: string): void {
+    this.act((c) => actions.startRenewal(c, id));
+  }
+  proposeRenewal(id: string, salary: number, years: number): void {
+    this.act((c) => actions.proposeRenewal(c, id, salary, years));
+  }
+  startWork(id: UpgradeId): void {
+    this.act((c) => actions.startWork(c, id));
+  }
+  takeBankLoan(amount: number, rounds: number): void {
+    this.act((c) => actions.takeBankLoan(c, amount, rounds));
+  }
+  payOffBankLoan(id: string): void {
+    this.act((c) => actions.payOffBankLoan(c, id));
+  }
+  chooseSponsor(id: string): void {
+    this.act((c) => actions.chooseSponsor(c, id));
+  }
+  acceptJob(id: string): void {
+    if (this.act((c) => actions.acceptJob(c, id))) {
+      const c = this.state.career!;
+      this.set({ proposal: null, screen: 'MATCH', leagueDivision: c.userClubId ? userClub(c).divisionId : this.state.leagueDivision });
+    }
+  }
+  refuseJob(id: string): void {
+    if (this.act((c) => actions.refuseJob(c, id))) this.set({ proposal: null });
+  }
+  answerNational(accept: boolean): void {
+    this.act((c) => actions.answerNational(c, accept));
   }
 
   // ----- decisões (pop-ups) -----

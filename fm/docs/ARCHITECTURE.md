@@ -13,6 +13,10 @@ game/    regras de jogo fora da partida e orquestração
   │        queries.ts / queries-lite.ts: consultas só de leitura (CLUBES, tabela, força)
   │        lineup-edit.ts: troca, formação, tática, batedor · assist.ts: sugestão = política da CPU
   │        goalkeeper.ts: monta o comando das decisões de goleiro a partir da escolha do jogador
+  │        manager/: camada de GESTÃO (ELITE MANAGER) — state (tipos), core (criação/migração), flow (rodada e
+  │          virada gerenciadas), actions (mercado, contratos, estádio, finanças, emprego), market, contracts,
+  │          finance, stadium (obras + público), news, board (objetivo/moral), people (personalidade, árbitros,
+  │          técnicos, bandeiras, cores, datas), stats (estatísticas reais), world (mundo vivo)
   ▼
 engine/  Engine 0.2.0, determinístico (ver ENGINE.md)
            partida, decisões, comandos, CPU, rodada, temporada, finanças, mundo, escalação, RNG
@@ -24,6 +28,13 @@ Não há divisão servidor/cliente: o jogo inteiro é uma página estática.
 universos de dados (ex.: Brasileirão 2026), pelo fluxo fonte → raw → normalização → validação → `Universe` →
 `World`. Ela depende só dos tipos e de `generateWorld` do engine; o engine não a conhece. Ainda não é usada por
 `game/` nem pelo build do app (o jogo continua no universo fictício). Detalhes em [UNIVERSES.md](UNIVERSES.md).
+
+**Camada de gestão (`game/manager/`):** tudo o que acontece fora da partida e que a especificação ELITE MANAGER pede
+(estatísticas, mercado, contratos, estádio, finanças, notícias, moral, árbitros, técnicos da CPU, mundo vivo).
+Determinística (seed + dados + decisões do jogador) e sem nenhuma regra de partida: o engine recebe os mesmos elencos e
+as mesmas seeds; só o público de cada jogo é calculado aqui (o engine apenas o guarda). `planManagedRound` e
+`finishManagedRound` envolvem `planRound`/`finishRound`; `startManagedSeason` envolve `startNextSeason`.
+O estado vive em `CareerState.manager` (campo opcional; save antigo recebe os padrões em `ensureManager`).
 
 ## Responsabilidades
 
@@ -85,3 +96,16 @@ volta ao início da mesma rodada sem nada aplicado. Recarregar no fim da tempora
 - O HTML resultante é estático e autocontido: funciona aberto direto (`file://`) ou servido por qualquer servidor
   de arquivos. Não faz chamadas de rede.
 - Testes e scripts de balanceamento não entram no build.
+
+## ELITE MANAGER: telas e fluxo
+
+* Telas (`Screen`): ENTRY, MODE, START, TEAM, MATCH, LEAGUE, MARKET, CLUBS, NEWS, CALENDAR, STADIUM, FINANCE, CAREER.
+  Sem clube, TEAM/MARKET/STADIUM/FINANCE ficam bloqueadas.
+* Navegação: barra de baixo no celular com MEU TIME, PARTIDA, CAMPEONATO, MERCADO e **MAIS** (as outras seis numa folha);
+  coluna lateral com as 10 telas no computador.
+* Pop-ups (um por vez, nesta ordem): decisão do engine → parada da sessão (intervalo/lance) → proposta → perfil do jogador.
+  A animação de entrada roda só no primeiro desenho (a tela é redesenhada a cada minuto de jogo).
+* Ações de gestão passam por `GameController.act`: recusadas durante a rodada, salvas logo depois.
+* Persistência: mesma chave de save (`fm-brasileiro:carreira:v1`, versão 1). Chaves novas só de preferência:
+  `elite-manager:perfil-local` (perfil local), `elite-manager:som` (som da torcida), `sessionStorage`
+  `elite-manager:splash-visto` (splash longo só na 1ª abertura da sessão).

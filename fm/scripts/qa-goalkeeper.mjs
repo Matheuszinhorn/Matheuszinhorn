@@ -5,7 +5,7 @@
 // E:   a CPU perde o goleiro: mesma máquina de estados (decisão → comando de origem CPU), 1 goleiro até o fim.
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, driveRound, layoutIssues, roundStats, shotDir, startCareerUI, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, driveRound, layoutIssues, roundStats, shotDir, startCareerUI, watch, instant, untilDecision } from './qa-lib.mjs';
 const { effectiveStrength, DEFAULT_CONFIG } = await import('../engine/index.ts');
 
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];
@@ -60,11 +60,11 @@ for (const [name, spec] of Object.entries(cases)) {
   await page.evaluate(([k, v]) => localStorage.setItem(k, v), [SAVE_KEY, scenario.save]);
   await page.reload();
   await page.getByRole('button', { name: 'CONTINUAR CARREIRA' }).click();
-  await page.locator('.seg-btn', { hasText: 'INSTANTÂNEA' }).first().click(); // decisão precisa pausar até no instantâneo
+  await instant(page); // decisão precisa pausar até no instantâneo
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   const notes = []; let ok = true; const fail = (m) => { ok = false; notes.push('✗ ' + m); };
   try {
-    await page.waitForSelector('.modal-back', { timeout: 20000 });
+    await untilDecision(page, 20000); // passa pelo intervalo (a decisão do cenário pode ser no 2º tempo)
     const title = (await page.locator('.modal h2').innerText()).trim();
     if (title !== spec.title) fail(`título "${title}" ≠ "${spec.title}"`); else notes.push(`pop-up "${title}"`);
     if (spec.needText && !(await page.locator('.modal').innerText()).toLowerCase().includes(spec.needText)) fail('faltou explicação: ' + spec.needText);
@@ -109,7 +109,7 @@ for (const [name, spec] of Object.entries(cases)) {
   await page.addInitScript(() => { Math.random = () => 0.4242; Date.now = () => 1_700_000_000_000; });
   await page.goto(APP_URL); await page.evaluate(() => localStorage.clear()); await page.reload();
   await startCareerUI(page, 'QA CPU');
-  await page.locator('.seg-btn', { hasText: 'INSTANTÂNEA' }).first().click();
+  await instant(page);
   const cases = []; let ok = true; const notes = []; let rounds = 0;
   for (; rounds < 20 && cases.length < 3; rounds++) {
     await page.getByRole('button', { name: 'JOGAR RODADA' }).click();

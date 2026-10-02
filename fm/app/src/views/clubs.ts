@@ -2,7 +2,8 @@ import { getClubView, listClubs, type ClubView } from '../../../game/queries.ts'
 import type { GameController } from '../controller.ts';
 import { h } from '../dom.ts';
 import { POSITION_LABEL, money, num, shortName, strengthLabel } from '../format.ts';
-import { btn, card, crest, stat } from './common.ts';
+import { flagOf } from '../../../game/manager/people.ts';
+import { btn, card, clubStripe, crest, stat } from './common.ts';
 
 // CLUBES: consulta somente leitura (seção 24). Abrir esta tela durante a rodada pausa a sessão; sair retoma.
 
@@ -12,7 +13,7 @@ function detail(ctrl: GameController, v: ClubView): HTMLElement {
     'div',
     { class: 'page' },
     btn('← VOLTAR À LISTA', () => ctrl.openClub(null)),
-    h('div', { class: 'team-head' }, crest(v, 'lg'), h('div', null, h('h2', null, v.name), h('p', { class: 'muted' }, `${v.division?.name ?? ''} · ${v.city}`))),
+    h('div', { class: 'team-head' }, crest(v, 'lg'), h('div', null, h('h2', null, v.name), h('p', { class: 'muted' }, `${flagOf(v.country)} ${v.division?.name ?? ''} · ${v.city}${ctrl.state.career?.manager?.coaches[v.id] ? ` · técnico ${ctrl.state.career.manager.coaches[v.id].name}` : ''}`), clubStripe(v))),
     h('div', { class: 'stats' }, stat('Força', strengthLabel(v.strength)), stat('Reputação', v.reputation), stat('Posição', v.standing ? `${v.standing.position}º de ${v.standing.clubsInDivision}` : '—'), stat('Pontos', v.standing?.points ?? 0)),
     v.live ? h('p', { class: 'notice' }, `Jogando agora: ${v.live.minute}' · ${v.live.score.for} × ${v.live.score.against} contra ${v.live.opponentName}`) : null,
     h('div', { class: 'two' }, card('Estádio e finanças', h('p', null, `${v.stadium.name} · ${num(v.stadium.capacity)} lugares`), h('p', { class: 'muted' }, `Folha salarial: ${money(v.finance.payrollPerRound)} por rodada · público estimado ${num(v.finance.estimatedAttendance)}`), h('p', null, `Caixa: ${balance}`)), card(v.lineup ? `Time (${v.lineup.formationLabel})` : 'Time', v.lineup ? h('ul', { class: 'plain' }, v.lineup.starters.map((p) => h('li', null, h('span', { class: `pos pos-${p.sector}` }, POSITION_LABEL[p.sector]), ` ${shortName(p.name)} `, h('b', null, p.strength)))) : h('p', { class: 'muted' }, 'Sem 11 jogadores disponíveis.'))),

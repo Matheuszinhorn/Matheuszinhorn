@@ -152,3 +152,50 @@ amarelos acumulados, mantém o histórico das temporadas anteriores e volta para
 - Público = capacidade do estádio × (30% + 0,5% × reputação), até 100%. Bilheteria só para o mandante.
 - Toda rodada: salários do elenco inteiro e manutenção de R$ 1 por lugar do estádio.
 - O caixa pode ficar negativo. Não há premiação de fim de temporada.
+
+## ELITE MANAGER: gestão da carreira
+
+### Entrada e modos
+Splash (logo, barra de carregamento, ~8 s na primeira abertura da sessão; um toque pula) → **ENTRAR / CRIAR CONTA /
+CONTINUAR COM GOOGLE** (perfil local: só um nome neste navegador; Google depende do modo online) → **OFFLINE · CARREIRA**
+(ONLINE: em desenvolvimento) → início da carreira.
+
+### Propostas
+Três propostas da 4ª divisão, sem novo sorteio. Cada uma abre um pop-up com **ACEITAR / RECUSAR / ANALISAR CLUBE**; a
+análise mostra elenco, finanças, estádio, objetivo da diretoria e a divisão, e **VOLTAR À PROPOSTA** não perde nada.
+**AGUARDAR PROPOSTAS** começa a carreira sem clube: as rodadas seguem (o treinador assiste à rodada) e propostas chegam
+— primeiro de clubes que acabaram de demitir, depois de clubes da metade de baixo das divisões ao alcance da reputação.
+Na carreira, propostas novas aparecem num aviso na PARTIDA e em CARREIRA (válidas por 3 rodadas).
+
+### Diretoria, moral e demissão
+Objetivo da temporada pela força do elenco na divisão (título, topo, meio, acesso, permanência). Moral 0–100 (começa em
+65): vitória +3, derrota −3; da 6ª rodada em diante, +1 dentro da meta e −2 bem abaixo dela. Barra superior: 🟢 ≥ 60,
+🟡 35–59, 🔴 < 35. Moral < 15 depois da 10ª rodada (ou < 20 no fim da temporada) = demissão; a carreira continua sem
+clube. No fim da temporada a moral e a reputação sobem ou caem pelo resultado; reputação ≥ 60 traz o convite da seleção
+(cargo honorário, nunca pago). Boa moral (≥ 70) no fim da temporada traz proposta de um clube da divisão de cima.
+
+### Elenco
+MEU TIME → **Elenco e estatísticas**: nacionalidade (bandeira), jogos, gols, amarelos, vermelhos, situação (🩹 lesão
+bloqueia a escalação; suspensão também), salário e contrato. Toque no jogador: perfil com personalidade, estatísticas da
+temporada e da carreira e as ações (renovar, leilão, emprestar). Assistências: ver ENGINE.md.
+
+### Próximo adversário e árbitro
+Antes da rodada: posição, forma (V/E/D), força, técnico, artilheiro e desfalques do adversário, e o **árbitro** escalado
+com o perfil estatístico dos jogos que apitou (Rigoroso, Equilibrado, Deixa o jogo correr; "marca pênaltis com
+frequência"). O árbitro não muda o resultado (ENGINE.md).
+
+### Rodada
+Quadro com as 4 divisões: público à esquerda, placar no centro (toque abre só aquele jogo, somente leitura, com **VOLTAR
+À RODADA**), gols e expulsões à direita. Paradas obrigatórias no jogo do treinador: **INTERVALO** (resumo + MEU TIME +
+CONTINUAR) e **pênalti, lesão e expulsão** (o pop-up da decisão do engine ou, sem decisão, um aviso com CONTINUAR).
+Velocidades na tela: Lenta, Normal, Rápida, Muito rápida. Som de torcida original (sintetizado), desligado por padrão.
+
+### Mercado, contratos, estádio, finanças, notícias, calendário
+Ver MARKET.md, CONTRACTS.md, STADIUM.md, FINANCE.md e NEWS.md. CALENDÁRIO: as 38 rodadas com data (domingo; meio de
+semana a cada 5ª rodada), adversário, resultado e as janelas de transferência.
+
+### Mundo vivo
+Técnicos da CPU caem (3 últimos da divisão, 3 derrotas nos 4 últimos jogos, a partir da 6ª rodada; até 2 por rodada) e
+são substituídos. Na virada: jogadores envelhecem e evoluem (jovens sobem, veteranos caem; aposentadoria aos 37), a CPU
+renova contratos e transfere, e a base repõe elencos curtos. Durante a temporada a CPU não mexe em jogadores: a 1ª
+temporada joga exatamente as mesmas partidas da versão anterior.

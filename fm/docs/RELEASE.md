@@ -19,7 +19,7 @@
 ```bash
 npm ci               # ou npm install; instala typescript 6.0.3 e @types/node (package-lock.json)
 npm run typecheck
-npm test             # esperado: 159/159
+npm test             # esperado: 212/212
 ```
 
 ## Gerar o build
@@ -65,12 +65,14 @@ faz os scripts testarem o build servido.
 
 - A partida em andamento não é salva; recarregar volta ao início da mesma rodada, sem nada aplicado em dobro.
 - Mudanças táticas durante a partida valem só para aquele jogo.
-- O batedor padrão não muda durante a partida; no pênalti o jogador escolhe o cobrador.
 - Durante a partida, a aba MEU TIME é só consulta (ajustes pelo botão MEU TIME da tela PARTIDA).
-- Save local ao navegador/dispositivo; sem migração entre versões de save.
-- Sem mercado de transferências, evolução de jogadores, premiação de fim de temporada, multiplayer, seleção ou
-  narração.
-- No celular: as 5 velocidades ocupam duas linhas; nomes no quadro da rodada com reticências; o aviso temporário
-  cobre a parte de baixo da tela por cerca de 4 s.
+- Save local ao navegador/dispositivo (mesma chave e versão de antes; save antigo recebe a camada de gestão com os
+  valores padrão ao ser carregado).
+- Perfil local (só um nome), sem servidor: ENTRAR/CRIAR CONTA não autenticam ninguém; Google e o modo online estão
+  em desenvolvimento ([SECURITY-ONLINE.md](SECURITY-ONLINE.md), [ONLINE-ROADMAP.md](ONLINE-ROADMAP.md)).
+- Dependências do engine não implementadas (Engine 0.2.0 fechado): assistências, influência do árbitro, faltas
+  ([ENGINE.md](ENGINE.md)).
+- Seleção: convite honorário; jogos da seleção e Copa no roadmap.
+- No celular, o quadro da rodada mostra a cidade do clube no lugar do nome completo.
 
 Lista completa e itens futuros: [BACKLOG.md](BACKLOG.md).

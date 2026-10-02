@@ -10,6 +10,7 @@ import {
   type Decision,
   type Fixture,
   type LineupSlot,
+  type MatchEvent,
   type MatchResult,
   type RoundState,
   type Style,
@@ -70,8 +71,21 @@ export type SessionStatus =
   | 'AWAITING_DECISION' // o engine espera uma decisão do jogador
   | 'ROUND_FINISHED';
 
-/** Por que a rodada está parada, do ponto de vista da interface. Decisões obrigatórias não entram aqui: vêm do engine. */
-export type PauseReason = 'USER' | 'CLUBS';
+/**
+ * Por que a rodada está parada, do ponto de vista da interface. Decisões obrigatórias não entram aqui: vêm do engine.
+ * HALFTIME e EVENT só existem com a opção stopOnEvents: intervalo, pênalti, lesão e expulsão na partida do clube
+ * controlado sempre param a rodada (quando o próprio engine não abriu uma decisão para o lance).
+ */
+export type PauseReason = 'USER' | 'CLUBS' | 'HALFTIME' | 'EVENT';
+
+/** Lances que param a partida do clube controlado. */
+export const STOP_EVENTS: readonly MatchEvent['type'][] = ['PENALTY_AWARDED', 'INJURY', 'RED_CARD'];
+
+export interface SessionStop {
+  kind: 'HALFTIME' | 'EVENT';
+  matchId: string;
+  event: MatchEvent;
+}
 
 export interface PendingDecision {
   matchId: string;
@@ -85,6 +99,8 @@ export interface SessionSnapshot {
   speed: SpeedId;
   pauses: PauseReason[];
   pending: PendingDecision | null;
+  /** Parada obrigatória atual (intervalo ou lance importante), se houver. */
+  stop: SessionStop | null;
 }
 
 export interface StartRoundInput {
@@ -120,6 +136,8 @@ export interface Session {
   openClubs(): void;
   closeClubs(): void;
   setSpeed(speed: SpeedId): void;
+  /** CONTINUAR depois do intervalo ou de um lance que parou a partida. */
+  continueStop(): void;
   /** MEU TIME: pausa a partida do clube controlado e abre o ajuste do time. */
   openTeamAdjustment(opts?: { commandId?: string }): CommandResult;
   choosePenaltyTaker(playerId: string, opts?: { commandId?: string }): CommandResult;
@@ -134,6 +152,8 @@ export interface Session {
 export interface SessionOptions {
   scheduler?: Scheduler;
   speed?: SpeedId;
+  /** Para no intervalo e nos lances importantes da partida do clube controlado (o app liga; os testes antigos não). */
+  stopOnEvents?: boolean;
 }
 
 // Nunca chega perto disso: 90 minutos + acréscimos (máx. 8 + 8) + extensões de pênalti.
@@ -149,6 +169,11 @@ export function createSession(options: SessionOptions = {}): Session {
   let timer: unknown = null;
   let commandSeq = 0;
   let disposed = false;
+  const stopOnEvents = options.stopOnEvents ?? false;
+  /** quantos eventos da partida controlada já foram examinados */
+  let seen = 0;
+  let stop: SessionStop | null = null;
+  const queue: SessionStop[] = [];
   const listeners = new Set<(snapshot: SessionSnapshot) => void>();
 
   // ----- leitura -----
@@ -168,7 +193,7 @@ export function createSession(options: SessionOptions = {}): Session {
   }
 
   function snapshot(): SessionSnapshot {
-    return { status: statusOf(), round, controlledClubId, speed, pauses: [...pauses], pending: pendingDecision() };
+    return { status: statusOf(), round, controlledClubId, speed, pauses: [...pauses], pending: pendingDecision(), stop };
   }
 
   function emit(): void {
@@ -190,10 +215,33 @@ export function createSession(options: SessionOptions = {}): Session {
     }
   }
 
+  /** Examina os eventos novos da partida controlada e para a rodada no intervalo e nos lances importantes. */
+  function checkStops(): void {
+    if (!stopOnEvents || !round || !controlledClubId) return;
+    const m = round.matches.find((x) => x.home.clubId === controlledClubId || x.away.clubId === controlledClubId);
+    if (!m) return;
+    const fresh = m.events.slice(seen);
+    seen = m.events.length;
+    for (const e of fresh) {
+      if (e.type === 'HALF_TIME') queue.push({ kind: 'HALFTIME', matchId: m.matchId, event: e });
+      else if (STOP_EVENTS.includes(e.type)) {
+        // o engine já abriu uma decisão do jogador para este lance (pênalti a favor, lesão ou expulsão no time dele):
+        // o pop-up da decisão é a parada; não empilha outra
+        const ownDecision = e.side !== null && m[e.side].clubId === controlledClubId && (m.decision !== null || m.decisionQueue.length > 0);
+        if (!ownDecision) queue.push({ kind: 'EVENT', matchId: m.matchId, event: e });
+      }
+    }
+    if (!stop && queue.length) {
+      stop = queue.shift() as SessionStop;
+      pauses.add(stop.kind);
+    }
+  }
+
   function tick(): void {
     timer = null;
     if (!canAdvance()) return;
     round = stepRound(round as RoundState);
+    checkStops();
     emit();
     scheduleNext();
   }
@@ -204,6 +252,7 @@ export function createSession(options: SessionOptions = {}): Session {
     while (canAdvance()) {
       if (++stepped > MAX_STEPS) throw new SessionError('RUNAWAY', 'a rodada não terminou');
       round = stepRound(round as RoundState);
+      checkStops();
     }
     if (stepped > 0) emit();
   }
@@ -272,6 +321,9 @@ export function createSession(options: SessionOptions = {}): Session {
       playing = false;
       pauses.clear();
       commandSeq = 0;
+      seen = 0;
+      stop = null;
+      queue.length = 0;
       emit();
     },
 
@@ -302,6 +354,18 @@ export function createSession(options: SessionOptions = {}): Session {
 
     closeClubs() {
       pauses.delete('CLUBS');
+      emit();
+      scheduleNext();
+    },
+
+    continueStop() {
+      if (!stop) return;
+      pauses.delete(stop.kind);
+      stop = null;
+      if (queue.length) {
+        stop = queue.shift() as SessionStop;
+        pauses.add(stop.kind);
+      }
       emit();
       scheduleNext();
     },

@@ -27,3 +27,19 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 | IA | Fora do engine de partida; camada futura. |
 | Plataforma | Página web estática e responsiva (celular e desktop), TypeScript puro sem framework; Next.js foi descartado porque o ambiente original não tinha rede npm. |
 | Persistência | Carreira inteira salva no navegador a cada ponto estável; a rodada em andamento não é salva. |
+
+## ELITE MANAGER (evolução da gestão)
+
+* **Engine fechado.** Toda a gestão mora em `game/manager/`. Assistências, influência do árbitro e faltas dependem do
+  engine e estão documentadas em ENGINE.md como dependências, não implementadas.
+* **Mundo esportivo da CPU parado durante a temporada.** Evolução, transferências da CPU e renovações só na virada:
+  a 1ª temporada joga as mesmas partidas da versão anterior (verificado: 1.520 placares idênticos no QA da temporada).
+* **Negociação por regra fixa**, não por IA: mesmo pedido, mesmo estado → mesma resposta (MARKET.md, CONTRACTS.md).
+* **Notícias só de fatos reais** (NEWS.md).
+* **Perfil local, não login.** Não existe servidor; a tela não finge autenticação; Google explica que depende do online.
+* **Sem sorteio de novas propostas.** Três propostas; recusou, aguarda (o mundo joga e propostas chegam).
+* **Paradas obrigatórias na sessão**, não no engine: intervalo, pênalti, lesão e expulsão no jogo do treinador.
+* **INSTANTÂNEA fora da tela**, mantida no código para testes; quem a tinha salva volta como MUITO RÁPIDA.
+* **Cores do clube com moderação**: borda da barra superior, faixa do clube, escudo de iniciais; a marca (marinho, lima,
+  off-white) continua sendo a identidade do jogo. Sem escudos oficiais, sem imagens de jogadores.
+* **Som original**: ruído filtrado sintetizado no navegador; desligado por padrão; nenhuma narração ou gravação.

@@ -5,6 +5,7 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { acceptOffer, instant, toStart } from './qa-lib.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // Playwright é ferramenta de QA (não faz parte do produto): procura no projeto (npm install -D playwright) e depois em NODE_PATH.
@@ -34,6 +35,8 @@ async function run(vp) {
   const browser = await chromium.launch();
   const ctx = await browser.newContext(vp.opts);
   const page = await ctx.newPage();
+  // splash de ~8 s só na 1ª abertura da sessão: o QA abre como numa 2ª visita (o QA do splash testa o splash)
+  await page.addInitScript(() => { try { sessionStorage.setItem('elite-manager:splash-visto', '1'); } catch { /* */ } });
   const r = { errors: [], overflow: [], shots: [], decisions: {}, rounds: 0, checks: {}, smallTargets: [] };
   report.viewports[vp.name] = r;
   page.on('pageerror', (e) => r.errors.push('pageerror: ' + String(e)));
@@ -44,7 +47,12 @@ async function run(vp) {
   const noOverflow = async (where) => { const w = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]); if (w[0] > w[1] + 1) { r.overflow.push(`${where}: ${w[0]} > ${w[1]}`); } };
   const click = (text, opts = {}) => page.getByRole('button', { name: text, exact: opts.exact ?? false }).first().click({ timeout: 8000 });
   const clickIn = (scope, name, exact = false) => page.locator(scope).getByRole('button', { name, exact }).first().click({ timeout: 8000 });
-  const nav = async (label) => { await page.locator('.nav-btn', { hasText: label }).click(); await page.waitForTimeout(150); };
+  const navClick = async (label, timeout) => {
+    const direct = page.locator('.nav .nav-btn:visible', { hasText: label });
+    if (await direct.count()) await direct.first().click({ timeout });
+    else { await page.locator('.nav-more').click({ timeout }); await page.locator('.more-sheet .nav-btn', { hasText: label }).click({ timeout }); }
+  };
+  const nav = async (label) => { await navClick(label); await page.waitForTimeout(150); };
   // innerText respeita text-transform (títulos em CAIXA ALTA): comparar sempre em minúsculas.
   const text = () => page.evaluate(() => document.body.innerText.toLowerCase());
 
@@ -55,7 +63,7 @@ async function run(vp) {
     const title = (await page.locator('.modal h2').innerText()).trim();
     r.decisions[title] = (r.decisions[title] ?? 0) + 1;
     if (!r.decisions._shot?.[title]) { (r.decisions._shot ??= {})[title] = 1; await shot('modal-' + title.toLowerCase().replace(/[^a-z]+/g, '-')); await noOverflow('modal ' + title); }
-    if (title.startsWith('PÊNALTI')) await page.locator('.modal .prow').first().click();
+    if (title.startsWith('PÊNALTI') && (await page.locator('.modal .prow').count())) await page.locator('.modal .prow').first().click();
     else if (title === 'MEU TIME') await clickIn('.modal footer', 'CONTINUAR', true);
     else {
       const confirm = page.locator('.modal footer').getByRole('button', { name: 'CONFIRMAR SUBSTITUIÇÃO' });
@@ -88,9 +96,24 @@ async function run(vp) {
     check('depois de resolver a decisão o jogo continua', c.status !== 'AWAITING_DECISION' || c.decision !== a.decision, JSON.stringify(c));
     decisionRulesChecked = true;
   };
+  let stopRulesChecked = false;
+  /** Primeiro INTERVALO: a rodada fica parada (relógios congelados) até o CONTINUAR. */
+  const checkStopRules = async () => {
+    const a = await live();
+    await page.waitForTimeout(600);
+    const b = await live();
+    check('intervalo: a rodada para (PAUSED) e os relógios não andam até CONTINUAR', a.status === 'PAUSED' && a.clocks === b.clocks, JSON.stringify(a));
+    check('intervalo: pop-up com resumo e CONTINUAR', (await page.locator('.modal footer').getByRole('button', { name: 'CONTINUAR', exact: true }).count()) === 1 && (await page.locator('.modal .stat').count()) >= 3);
+    await resolve();
+    const c = await live();
+    check('intervalo: CONTINUAR retoma o segundo tempo', c.status !== 'PAUSED' || c.clocks !== a.clocks, JSON.stringify(c));
+    stopRulesChecked = true;
+  };
   const handleDecision = async () => {
     const title = await modalTitle();
-    if (!decisionRulesChecked && title !== 'MEU TIME' && (await page.locator('.controls').count())) return checkDecisionRules();
+    const st = await live();
+    if (!stopRulesChecked && title === 'INTERVALO' && (await page.locator('.controls').count())) return checkStopRules();
+    if (!decisionRulesChecked && title !== 'MEU TIME' && st.status === 'AWAITING_DECISION' && (await page.locator('.controls').count())) return checkDecisionRules();
     return resolve();
   };
   const settle = async () => { while (await page.locator('.modal-back').count()) await handleDecision(); };
@@ -105,7 +128,7 @@ async function run(vp) {
     }
     throw new Error(`${what}: decisões em sequência demais`);
   };
-  const liveNav = (label) => whenNoDecision(`aba ${label}`, async () => { await page.locator('.nav-btn', { hasText: label }).click({ timeout: 3000 }); await page.waitForTimeout(150); });
+  const liveNav = (label) => whenNoDecision(`aba ${label}`, async () => { await navClick(label, 3000); await page.waitForTimeout(150); });
   const driveRound = async () => {
     const t0 = Date.now();
     for (;;) {
@@ -119,8 +142,16 @@ async function run(vp) {
   await page.goto(process.env.APP_URL || 'file://' + join(ROOT, 'dist/app/index.html'));
   await page.evaluate(() => localStorage.clear());
   await page.reload();
+  await page.waitForSelector('.entry');
+  await shot('entrada');
+  check('entrada: ENTRAR, CRIAR CONTA e CONTINUAR COM GOOGLE', (await page.getByRole('button', { name: 'CRIAR CONTA', exact: true }).count()) === 1 && (await page.getByRole('button', { name: 'CONTINUAR COM GOOGLE' }).count()) === 1 && (await page.getByRole('button', { name: 'ENTRAR', exact: true }).count()) === 1);
+  await click('CONTINUAR COM GOOGLE');
+  check('Google não finge login (avisa e fica na entrada)', (await page.locator('.entry').count()) === 1 && (await text()).includes('online'));
+  await toStart(page, 'Perfil QA');
+  check('perfil local criado e modo CARREIRA abriu o início', (await page.locator('.start').count()) === 1 && (await page.evaluate(() => JSON.parse(localStorage.getItem('elite-manager:perfil-local') || '{}').name)) === 'Perfil QA');
   await shot('inicio');
   check('inicio mostra o título', (await text()).includes('elite manager'));
+  await page.fill('input[type=text]', '');
 
   // ----- iniciar carreira -----
   await click('RECEBER PROPOSTAS'); // sem nome: deve avisar, não avançar
@@ -131,11 +162,22 @@ async function run(vp) {
   await page.evaluate((seed) => globalThis.__fm.offerClubs(seed), QA_SEED);
   await shot('propostas');
   check('3 propostas de clube', (await page.locator('.offer').count()) === 3);
-  await page.locator('.offer').first().getByRole('button').click();
+  check('sem sortear outras propostas', (await page.getByRole('button', { name: /SORTEAR/ }).count()) === 0 && (await page.getByRole('button', { name: 'AGUARDAR PROPOSTAS' }).count()) === 1);
+  await page.locator('.offer').nth(0).getByRole('button', { name: 'VER PROPOSTA' }).click();
+  check('pop-up da proposta: ACEITAR, RECUSAR e ANALISAR CLUBE', (await modalTitle()) === 'PROPOSTA DE TRABALHO' && (await page.locator('.modal footer .btn').count()) === 3);
+  await shot('proposta');
+  await clickIn('.modal footer', 'ANALISAR CLUBE');
+  const analysis = (await page.locator('.modal').innerText()).toLowerCase();
+  check('análise: elenco, finanças, estádio, objetivo e divisão', ['elenco', 'finanças', 'estádio', 'objetivo', 'divisão', 'diretoria'].every((w) => analysis.includes(w)) && (await page.locator('.modal tbody tr').count()) >= 36, analysis.slice(0, 120));
+  await shot('proposta-analise');
+  await noOverflow('proposta-analise');
+  await clickIn('.modal footer', 'VOLTAR À PROPOSTA');
+  check('VOLTAR devolve à proposta sem perdê-la', (await modalTitle()) === 'PROPOSTA DE TRABALHO');
+  await acceptOffer(page, 0);
   await page.waitForSelector('.topbar');
   await shot('partida-antes');
   await noOverflow('partida-antes');
-  check('nav com 5 abas', (await page.locator('.nav-btn').count()) === 5);
+  check('navegação com as 10 telas (+ MAIS no celular)', (await page.locator('.nav > .nav-btn').count()) === 11 && (await page.locator('.nav .nav-btn:visible').count()) === (vp.name === 'mobile' ? 5 : 10));
   check('mostra a rodada 1', (await text()).includes('rodada 1 de 38'));
 
   // ----- MEU TIME -----
@@ -202,11 +244,18 @@ async function run(vp) {
   await page.locator('.tab').first().click();
   check('divisão 1 lista 20 clubes', (await page.locator('.standings tbody tr').count()) === 20);
   await nav('CARREIRA'); await shot('carreira'); await noOverflow('carreira');
-  check('carreira mostra o histórico de finanças', (await text()).includes('finanças') && (await page.locator('.tbl tbody tr').count()) >= 1);
+  check('carreira mostra moral, objetivo e propostas', (await text()).includes('objetivo da temporada') && (await text()).includes('propostas de trabalho'));
+  await nav('FINANÇAS'); await shot('financas'); await noOverflow('financas');
+  const fin = await text();
+  check('finanças mostram situação, temporada, patrocínio e empréstimo', ['situação', 'temporada', 'patrocínio', 'empréstimo bancário'].every((w) => fin.includes(w)));
+  for (const [label, word] of [['MERCADO', 'mercado aberto'], ['NOTÍCIAS', 'jornal do dia'], ['CALENDÁRIO', 'calendário 2026'], ['ESTÁDIO', 'obras disponíveis']]) {
+    await nav(label); await shot(label.toLowerCase().normalize('NFD').replace(/[^a-z]/g, '')); await noOverflow(label);
+    check(`${label} abre`, (await text()).includes(word));
+  }
 
   // ----- salvar/continuar: recarregar a página mantém a carreira -----
   await page.reload();
-  await page.waitForSelector('.start, .topbar');
+  await toStart(page);
   check('após recarregar existe carreira salva para continuar', (await text()).includes('continuar carreira'));
   await click('CONTINUAR CARREIRA');
   await page.waitForSelector('.topbar');
@@ -215,7 +264,7 @@ async function run(vp) {
   // ----- rodadas seguintes (ou a temporada inteira) -----
   await nav('PARTIDA');
   const target = FULL_SEASON ? 38 : 4;
-  await page.locator('.seg-btn', { hasText: 'INSTANTÂNEA' }).first().click();
+  await instant(page);
   const roundStart = Date.now();
   const st = () => page.evaluate(() => { const c = globalThis.__fm; const k = c.state.career; return { season: k.season, round: k.roundNumber, history: k.history.length, phase: c.state.phase, pending: c.state.snapshot.pending ? c.state.snapshot.pending.decision.type : null, status: c.state.snapshot.status, modals: document.querySelectorAll('.modal-back').length, ledger: k.userLedger.length, results: k.results.length }; });
   let seasonEnded = false;
@@ -261,6 +310,7 @@ async function run(vp) {
     await noOverflow(`pos-rodada-${r.rounds}`);
     if (r.rounds % 10 === 0) console.log(`  [${vp.name}] ${r.rounds} rodadas... (${((Date.now() - roundStart) / 1000).toFixed(0)} s)`);
   }
+  check('intervalo verificado (para, resume e CONTINUAR)', stopRulesChecked);
   check('regras da decisão verificadas numa decisão real (pausa, relógio parado, PAUSAR bloqueado, pop-up obrigatório, retomada)', decisionRulesChecked);
   if (FULL_SEASON) check('as 38 rodadas da temporada 2026 foram jogadas pela UI e a virada foi executada pela UI', seasonEnded && r.rounds >= 39, `rodadas=${r.rounds} virada=${seasonEnded}`);
   else r.checks.temporadaCompleta = 'não executado (use --season)';
@@ -283,10 +333,10 @@ async function run(vp) {
   await page.fill('input[type=text]', 'Segundo Treinador');
   await click('RECEBER PROPOSTAS');
   await page.evaluate((seed) => globalThis.__fm.offerClubs(seed), `${QA_SEED}-nova`);
-  await page.locator('.offer').nth(1).getByRole('button').click();
+  await acceptOffer(page, 1);
   await page.waitForSelector('.topbar');
   await nav('PARTIDA');
-  await page.locator('.seg-btn', { hasText: 'INSTANTÂNEA' }).first().click();
+  await instant(page);
   await click('JOGAR RODADA');
   await driveRound();
   const second = await page.evaluate(() => { const c = globalThis.__fm.state; return { coach: c.career.coach.name, round: c.career.roundNumber, results: c.career.results.length, phase: c.phase }; });

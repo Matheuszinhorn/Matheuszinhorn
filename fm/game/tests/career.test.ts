@@ -100,7 +100,7 @@ test('finishRound: classificação, finanças e rodada avançam; resultados de o
   const out = finishRound(c, results);
   assert.equal(out.career.roundNumber, 2);
   assert.equal(out.career.results.length, 40);
-  assert.equal(userClub(out.career).money, before + out.ledger.net, 'o caixa muda exatamente pelo extrato');
+  assert.equal(userClub(out.career).money, before + out.ledger!.net, 'o caixa muda exatamente pelo extrato');
   assert.equal(out.career.userLedger.length, 1);
   for (const d of out.career.world.divisions) {
     const table = divisionStandings(out.career, d.id);
@@ -243,7 +243,7 @@ test('temporada inteira (CPU): 38 rodadas, finanças, tabela final, acesso e reb
   let net = 0;
   for (let r = 1; r <= ROUNDS_PER_SEASON; r++) {
     const out = cpuRound(c);
-    net += out.ledger.net;
+    net += out.ledger!.net;
     c = out.career;
     assert.equal(out.seasonEnded, r === ROUNDS_PER_SEASON);
   }

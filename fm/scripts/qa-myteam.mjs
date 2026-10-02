@@ -5,7 +5,7 @@
 // expulso/lesionado/substituído fora, limite de trocas) e que o relógio retoma ao voltar para a PARTIDA.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, layoutIssues, shotDir, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, SAVE_KEY, chromium, clickIn, layoutIssues, shotDir, watch, untilDecision, nav } from './qa-lib.mjs';
 const { careerOffers, createCareer, serializeCareer } = await import('../game/career.ts');
 const { DEFAULT_CONFIG } = await import('../engine/index.ts');
 
@@ -30,7 +30,8 @@ async function open(saveStr, speedLabel = 'NORMAL') {
   await page.evaluate(([k, v]) => { localStorage.clear(); localStorage.setItem(k, v); }, [SAVE_KEY, saveStr]);
   await page.reload();
   await page.getByRole('button', { name: 'CONTINUAR CARREIRA' }).click();
-  await page.getByRole('button', { name: speedLabel, exact: true }).first().click();
+  if (speedLabel === 'INSTANTÂNEA') await page.evaluate(() => globalThis.__fm.setSpeed('INSTANT')); // fora da tela; só QA
+  else await page.getByRole('button', { name: speedLabel, exact: true }).first().click();
   return { ctx, page, errors };
 }
 const clocks = (page) => page.evaluate(() => globalThis.__fm.state.snapshot.round.matches.map((m) => `${m.clock.half}:${m.clock.minute}:${m.clock.added}`).join('|'));
@@ -63,7 +64,9 @@ async function clearDecisions(page, log) {
   for (let g = 0; g < 10; g++) {
     const t = await modalTitle(page); if (!t || t === 'MEU TIME') return;
     log.push(`${await minute(page)}' ${t}`);
-    await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO', true);
+    const stop = await page.evaluate(() => { const s = globalThis.__fm.state.snapshot; return !!s.stop && s.status === 'PAUSED'; });
+    if (stop) await clickIn(page, '.modal footer', 'CONTINUAR', true); // intervalo/lance: só segue
+    else await clickIn(page, '.modal footer', 'ACEITAR SUGESTÃO', true);
   }
 }
 /** Abre o pop-up MEU TIME pelo botão da PARTIDA e confirma: pausa (relógio parado com o tempo correndo) e 1 pop-up. */
@@ -173,7 +176,7 @@ async function mainFlow(tag) {
       c = await continueMatch(page);
       const v1 = (await team(page))[kind];
       const sb = (await page.locator('.match-card .sb-team.me .sb-style, .sb-team.me .sb-style').first().innerText()).toLowerCase();
-      await page.locator('.nav-btn', { hasText: 'CLUBES' }).click(); await page.waitForTimeout(60);
+      await nav(page, 'CLUBES'); // no celular, CLUBES fica no MAIS
       await page.locator('.nav-btn', { hasText: 'MEU TIME' }).click(); await page.waitForTimeout(60);
       await page.locator('.nav-btn', { hasText: 'PARTIDA' }).click(); await page.waitForTimeout(60);
       o = await openMeuTime(page, log);
@@ -250,7 +253,7 @@ async function penaltyFlow(mode) {
   const shownAfter = await sel.inputValue();
   await page.locator('.nav-btn', { hasText: 'PARTIDA' }).click(); await page.waitForTimeout(80);
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
-  await page.waitForSelector('.modal-back', { timeout: 10000 });
+  await untilDecision(page, 10000);
   const title = await modalTitle(page);
   const st = await team(page);
   const sugName = (await page.locator('.modal .prow:has(.badge) .prow-name').first().innerText().catch(() => '')).trim();

@@ -6,7 +6,7 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 
 ## Testes automatizados
 
-`npm test` (Node `--test`): **190/190** na branch `feature/real-rosters-2026` (159 da V1 + 28 da camada de dados + 3 de `app/tests/format.test.ts`: displayName preservado na interface).
+`npm test` (Node `--test`): **213/213** (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
 
 | Conjunto | Arquivo(s) | Cobre |
 |---|---|---|
@@ -50,6 +50,20 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
   `qa-season` 12/12 nas 6 larguras com **os mesmos 1.520 placares do build anterior** (6/6 larguras idênticas),
   `qa-app --season` 37/37 ×2, `qa-persist` 36/36 ×2, `qa-scenarios` 4/4, `qa-goalkeeper` A–E, `qa-myteam` 51/51 ×2,
   `qa-speeds` 54/54 ×2, rebaixamento pela interface OK (390 e 1280). `engine/`, `game/` e `controller.ts` sem alteração.
+
+- **ELITE MANAGER — gestão (02/10/2026, build final sha256 `af5d2c04…`):** `engine/` sem nenhuma alteração.
+  Typecheck OK, **213/213**. Interface: `qa-splash` 17/17 nas 6 larguras (splash ~8 s, toque pula, 2ª abertura e
+  "reduzir movimento" sem espera); `qa-scenarios` 4/4; `qa-goalkeeper` A–E em 360, 390 e 1280; `qa-speeds` 54/54 em 1280
+  e 390 (paradas obrigatórias não mudam o resultado nas 5 velocidades); `qa-myteam` 51/51 em 360, 390 e 1280;
+  `qa-persist` 36/36 em 1280 e 390; `qa-live` 7/7; `qa-app --season` **59/59** em desktop e celular (entrada, Google sem
+  falso login, perfil local, 3 propostas sem sorteio, pop-up e análise da proposta, 10 telas, intervalo, decisões,
+  temporada e virada); `qa-season` 12/12 nas 6 larguras com **os mesmos 1.520 placares, 897 vermelhos, 6.872 amarelos e
+  356 lesões da V1.1** (6/6 larguras idênticas à linha de base; só o saldo financeiro muda: público dinâmico);
+  `qa-visual` **0 problemas** nas 6 larguras, 42–43 telas por largura (entrada, modos, proposta, análise, sem clube,
+  mercado, perfil do jogador, elenco, notícias, calendário, estádio, finanças, MAIS, intervalo, detalhe do jogo).
+  Durante a bateria, `qa-myteam` em 360/390 falhou por causa do ROTEIRO (clicava em CLUBES, que no celular fica no MAIS);
+  roteiro corrigido e reexecutado: 51/51. `qa-live` esperava a decisão do cenário aos 36', constante já desatualizada na
+  linha de base (os cenários de `597abb3` também dão 62'); o roteiro agora lê o minuto do cenário.
 
 ## Análises
 

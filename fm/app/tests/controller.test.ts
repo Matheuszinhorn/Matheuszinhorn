@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { createRound, parseFormation, roundResults, simulateRound } from '../../engine/index.ts';
 import { ROUNDS_PER_SEASON, finishRound, isSeasonOver, planRound, resolveUserLineup, serializeCareer, userClub } from '../../game/career.ts';
 import type { Scheduler } from '../../game/session.ts';
-import { GameController, SAVE_KEY, SPEED_KEY, memoryStorage } from '../src/controller.ts';
+import { GameController, PROFILE_KEY, SAVE_KEY, SPEED_KEY, UI_SPEEDS, memoryStorage } from '../src/controller.ts';
 
 // Fluxo do app sem tela: iniciar carreira, jogar rodadas (com decisões), editar o time, salvar e continuar.
 
@@ -48,7 +48,9 @@ function playRound(b: ReturnType<typeof boot>): number {
   for (let guard = 0; ctrl.state.phase !== 'POST'; guard++) {
     assert.ok(guard < 6000, 'a rodada deveria terminar');
     const snap = ctrl.state.snapshot;
-    if (snap.status === 'AWAITING_DECISION' && snap.pending) {
+    if (snap.stop && snap.status === 'PAUSED') {
+      ctrl.continueStop(); // intervalo ou lance importante: a tela mostra o resumo e o jogador toca CONTINUAR
+    } else if (snap.status === 'AWAITING_DECISION' && snap.pending) {
       const d = snap.pending.decision;
       if (d.type === 'PENALTY_TAKER') ctrl.choosePenaltyTaker(d.suggested ?? d.eligible[0]);
       else ctrl.acceptSuggestion();
@@ -61,7 +63,7 @@ function playRound(b: ReturnType<typeof boot>): number {
 
 test('iniciar carreira: treinador + clube da oferta → tela PARTIDA antes da rodada 1, carreira salva', () => {
   const { ctrl, storage } = boot();
-  assert.equal(ctrl.state.screen, 'START');
+  assert.equal(ctrl.state.screen, 'ENTRY');
   assert.equal(ctrl.state.hasSave, false);
   ctrl.offerClubs('semente-app');
   assert.equal(ctrl.state.offers!.clubIds.length, 3);
@@ -103,7 +105,7 @@ test('jogar uma rodada inteira: decisões resolvidas, resultado aplicado UMA vez
   assert.equal(b.ctrl.state.phase, 'POST');
   assert.equal(career!.roundNumber, 2);
   assert.equal(career!.results.length, 40);
-  assert.equal(userClub(career!).money, before + outcome!.ledger.net);
+  assert.equal(userClub(career!).money, before + outcome!.ledger!.net + outcome!.extras.reduce((a, e) => a + e.amount, 0));
   assert.equal(b.ctrl.state.snapshot.status, 'ROUND_FINISHED');
   for (const side of ['home', 'away'] as const) assert.equal(b.ctrl.userMatch()![side].onField.filter((s) => s.sector === 'GK').length, 1);
   // Não dá para aplicar de novo: reiniciar a rodada não é permitido em POST.
@@ -117,7 +119,7 @@ test('jogar uma rodada inteira: decisões resolvidas, resultado aplicado UMA vez
   assert.equal(b.ctrl.state.career!.roundNumber, 3);
 });
 
-test('velocidade: as cinco existem, a escolha é lembrada, a pausa do jogador segura o relógio e o instantâneo só para em decisão ou no fim', () => {
+test('velocidade: as cinco existem no controlador (a tela mostra quatro), a escolha é lembrada, a pausa do jogador segura o relógio e o instantâneo só para em decisão ou no fim', () => {
   const b = startedCareer();
   for (const s of ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST', 'INSTANT', 'NORMAL'] as const) {
     b.ctrl.setSpeed(s);
@@ -143,6 +145,8 @@ test('velocidade instantânea: joga sem esperar temporizador e só para em uma d
   const b = startedCareer();
   b.ctrl.setSpeed('INSTANT');
   b.ctrl.startRound();
+  // o intervalo (e lances importantes do jogo do treinador) também param o instantâneo: CONTINUAR segue
+  while (b.ctrl.state.snapshot.stop && b.ctrl.state.snapshot.status === 'PAUSED') b.ctrl.continueStop();
   const snap = b.ctrl.state.snapshot;
   assert.ok(snap.status === 'AWAITING_DECISION' || snap.status === 'ROUND_FINISHED', `parou em ${snap.status}`);
   assert.equal(b.sched.fireNext(), false, 'nenhum temporizador foi necessário');
@@ -310,4 +314,85 @@ test('NOVA CARREIRA na mesma página: a carreira nova joga a rodada (antes ficav
   assert.equal(b.ctrl.state.career!.roundNumber, 2);
   assert.equal(b.ctrl.state.career!.seed, career!.seed);
   assert.equal(b.ctrl.state.career!.results.length, 40);
+});
+
+// ---------- ELITE MANAGER: entrada, propostas, sem clube, gestão ----------
+
+test('entrada: perfil LOCAL (sem senha), Google não finge login, online em desenvolvimento, carreira offline abre o início', () => {
+  const { ctrl, storage } = boot();
+  assert.equal(ctrl.state.screen, 'ENTRY');
+  ctrl.enter();
+  assert.equal(ctrl.state.screen, 'ENTRY', 'sem perfil não entra');
+  ctrl.googleLogin();
+  assert.equal(ctrl.state.screen, 'ENTRY');
+  assert.match(ctrl.state.toast!.text, /online/i);
+  ctrl.createProfile('  Ana  ');
+  assert.equal(ctrl.state.screen, 'MODE');
+  assert.equal(JSON.parse(storage.get(PROFILE_KEY)!).name, 'Ana');
+  ctrl.chooseMode('ONLINE');
+  assert.equal(ctrl.state.screen, 'MODE');
+  ctrl.chooseMode('OFFLINE');
+  assert.equal(ctrl.state.screen, 'START');
+  // o perfil é lembrado
+  const again = boot(storage);
+  assert.equal(again.ctrl.state.profile!.name, 'Ana');
+  again.ctrl.enter();
+  assert.equal(again.ctrl.state.screen, 'MODE');
+});
+
+test('propostas iniciais: três, sem sortear de novo; recusar marca; AGUARDAR começa sem clube e o mundo joga', () => {
+  const b = boot();
+  b.ctrl.offerClubs('semente-app');
+  const first = b.ctrl.state.offers!.clubIds;
+  b.ctrl.offerClubs(); // sem seed: não sorteia outra
+  assert.deepStrictEqual(b.ctrl.state.offers!.clubIds, first);
+  b.ctrl.openProposal(first[0]);
+  b.ctrl.analyzeProposal(true);
+  assert.equal(b.ctrl.state.proposal!.analyze, true);
+  b.ctrl.analyzeProposal(false);
+  assert.deepStrictEqual(b.ctrl.state.proposal, { clubId: first[0], jobId: null, analyze: false }, 'voltar não perde a proposta');
+  b.ctrl.refuseOffer(first[0]);
+  assert.deepStrictEqual(b.ctrl.state.offers!.refused, [first[0]]);
+  b.ctrl.waitForOffers('Sem Clube');
+  const c = b.ctrl.state.career!;
+  assert.equal(c.userClubId, null);
+  assert.equal(b.ctrl.state.screen, 'MATCH');
+  b.ctrl.go('MARKET');
+  assert.equal(b.ctrl.state.screen, 'MATCH', 'sem clube não há mercado');
+  for (let r = 0; r < 3; r++) {
+    playRound(b);
+    b.ctrl.nextRound();
+  }
+  const offers = b.ctrl.state.career!.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
+  assert.ok(offers.length > 0, 'propostas chegam enquanto o mundo joga');
+  b.ctrl.acceptJob(offers[0].id);
+  assert.equal(b.ctrl.state.career!.userClubId, offers[0].clubId);
+  playRound(b);
+  assert.equal(b.ctrl.state.career!.roundNumber, 5);
+});
+
+test('gestão: ações bloqueadas durante a rodada, liberadas fora dela e salvas', () => {
+  const b = startedCareer();
+  const c = b.ctrl.state.career!;
+  b.ctrl.startRound();
+  b.ctrl.chooseSponsor(c.manager!.finance.sponsorOffers[0].id);
+  assert.equal(b.ctrl.state.toast!.kind, 'error');
+  assert.equal(b.ctrl.state.career!.manager!.finance.sponsor, null);
+  for (let g = 0; b.ctrl.state.phase !== 'POST' && g < 6000; g++) {
+    const s = b.ctrl.state.snapshot;
+    if (s.stop && s.status === 'PAUSED') b.ctrl.continueStop();
+    else if (s.status === 'AWAITING_DECISION') b.ctrl.acceptSuggestion();
+    else b.sched.fireNext();
+  }
+  b.ctrl.chooseSponsor(c.manager!.finance.sponsorOffers[0].id);
+  assert.ok(b.ctrl.state.career!.manager!.finance.sponsor);
+  const saved = JSON.parse(b.storage.get(SAVE_KEY)!);
+  assert.ok(saved.manager.finance.sponsor, 'a escolha foi salva');
+});
+
+test('velocidade INSTANTÂNEA salva de versões antigas volta como MUITO RÁPIDA; a tela oferece só quatro', () => {
+  const storage = memoryStorage();
+  storage.set(SPEED_KEY, 'INSTANT');
+  assert.equal(boot(storage).ctrl.state.speed, 'VERY_FAST');
+  assert.deepStrictEqual(UI_SPEEDS, ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST']);
 });

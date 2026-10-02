@@ -565,3 +565,60 @@ test('MESMA SEED + MESMOS DADOS + MESMAS DECISÕES + VELOCIDADES DIFERENTES = ME
   assert.ok(playerCommands.length >= 3, 'MEU TIME (abrir + continuar) e ao menos uma decisão obrigatória');
   assert.ok(playerCommands.some((c) => c.commandId.startsWith('jogador:')), 'houve decisão obrigatória respondida');
 });
+
+// ---------- Paradas obrigatórias (intervalo e lances importantes) ----------
+
+function stopSession(speed: SpeedId, seed: string) {
+  const sched = new FakeScheduler();
+  const session = createSession({ scheduler: sched, speed, stopOnEvents: true });
+  session.startRound({ roundId: 'R1', seed, fixtures: fixtures(), controlledClubId: CONTROLLED });
+  return { sched, session };
+}
+
+/** Joga até o fim respondendo decisões e paradas; devolve as paradas vistas. */
+function finishWithStops(session: Session, sched: FakeScheduler): string[] {
+  const seen: string[] = [];
+  for (let guard = 0; guard < 6000; guard++) {
+    const st = session.getState();
+    if (st.status === 'ROUND_FINISHED') return seen;
+    if (st.status === 'AWAITING_DECISION') resolveDecision(session);
+    else if (st.status === 'PAUSED' && st.stop) {
+      seen.push(`${st.stop.kind}:${st.stop.event.type}`);
+      session.continueStop();
+    } else if (st.status === 'PLAYING') assert.ok(sched.fireNext(), 'PLAYING deveria ter um temporizador pendente');
+    else throw new Error(`status inesperado: ${st.status}`);
+  }
+  throw new Error('a rodada não terminou');
+}
+
+test('intervalo sempre para a partida do clube controlado; CONTINUAR segue e o resultado é o mesmo sem paradas', () => {
+  for (const seed of ['para-1', 'para-2', decisionSeed()]) {
+    const a = stopSession('NORMAL', seed);
+    a.session.play();
+    const stops = finishWithStops(a.session, a.sched);
+    assert.equal(stops.filter((x) => x.startsWith('HALFTIME')).length, 1, `${seed}: um intervalo`);
+    const b = newSession('NORMAL', 6, CONTROLLED, seed);
+    b.session.play();
+    finish(b.session, b.sched);
+    assert.deepStrictEqual(a.session.results(), b.session.results(), `${seed}: paradas não mudam o jogo`);
+  }
+});
+
+test('lances importantes (pênalti, lesão, expulsão) param a rodada quando o engine não abriu decisão; instantânea também para', () => {
+  let found = false;
+  for (let i = 1; i <= 40 && !found; i++) {
+    const s = stopSession('INSTANT', `lance-${i}`);
+    s.session.play();
+    const stops = finishWithStops(s.session, s.sched);
+    if (stops.some((x) => x.startsWith('EVENT'))) found = true;
+    for (const x of stops) assert.match(x, /^(HALFTIME:HALF_TIME|EVENT:(PENALTY_AWARDED|INJURY|RED_CARD))$/);
+  }
+  assert.ok(found, 'em 40 rodadas houve ao menos um lance que parou a partida');
+});
+
+test('sem stopOnEvents a sessão segue como antes (nenhuma parada)', () => {
+  const { session, sched } = newSession('FAST', 6, CONTROLLED, 'sem-paradas');
+  session.play();
+  finish(session, sched);
+  assert.equal(session.getState().stop, null);
+});

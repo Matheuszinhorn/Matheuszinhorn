@@ -5,7 +5,7 @@
 // localStorage['fm-brasileiro:velocidade']. CONTINUAR CARREIRA = deserializeCareer. A rodada em andamento NÃO é salva.
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { APP_URL, ROOT, SAVE_KEY, chromium, driveRound, layoutIssues, nav, startCareerUI, text, watch } from './qa-lib.mjs';
+import { APP_URL, ROOT, SAVE_KEY, chromium, driveRound, layoutIssues, nav, startCareerUI, text, watch, instant } from './qa-lib.mjs';
 const { careerOffers, createCareer, finishRound, isSeasonOver, planRound, serializeCareer, ROUNDS_PER_SEASON } = await import('../game/career.ts');
 const { createRound, roundResults, simulateRound } = await import('../engine/index.ts');
 
@@ -79,7 +79,7 @@ await page.reload(); await continueUI(page);
 check('7A) antes da 1ª rodada: refresh devolve exatamente a carreira nova', (await snap(page)).json === s0.json);
 
 // rodadas até haver lesão ou suspensão no elenco (no máx. 12)
-await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click();
+await instant(page);
 let rounds = 0; let s;
 do { await playRoundUI(page); rounds++; s = await snap(page); if (rounds === 1) check('7B) depois da rodada (tela de resultado): carreira já salva (gravado == memória)', s.raw === s.json && s.round === 2 && s.phase === 'POST'); await nextRoundUI(page); s = await snap(page); } while (rounds < 15 && (rounds < 3 || s.injured.length === 0 || s.suspended.length === 0));
 R.notes.rodadasAteLesaoOuSuspensao = rounds;
@@ -157,7 +157,7 @@ check('refresh depois da rodada: não reaplica (mesma rodada, caixa, extrato e r
   await page.reload(); await continueUI(page);
   const mid = await snap(page);
   check(`11) refresh no meio da partida (${midMinute}'): carreira intacta = antes da rodada (sem rodada duplicada, sem resultado parcial, sem cobrança)`, mid.json === pre.json && mid.phase === 'PRE', JSON.stringify({ round: mid.round, results: mid.results, ledger: mid.ledger }));
-  await page.getByRole('button', { name: 'INSTANTÂNEA', exact: true }).first().click();
+  await instant(page);
   await playRoundUI(page); const after = await snap(page);
   check('11) a rodada interrompida é jogada depois normalmente, UMA vez', after.round === pre.round + 1 && after.results === pre.results + 40 && after.resultIds === after.results && after.ledger === pre.ledger + 1);
   await nextRoundUI(page);

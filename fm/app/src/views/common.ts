@@ -32,3 +32,31 @@ export function badge(text: string, tone: 'blue' | 'green' | 'red' | 'yellow' | 
 export function empty(text: string): HTMLElement {
   return h('p', { class: 'empty' }, text);
 }
+
+/** Pop-up genérico (mesma estrutura dos pop-ups de decisão: h2 no cabeçalho, botões no rodapé). */
+export function modalBox(title: string, subtitle: Child, body: Child[], footer: Child[], tone: 'blue' | 'red' | 'yellow' = 'blue', extraClass = ''): HTMLElement {
+  return h('div', { class: 'modal-back', role: 'dialog', 'aria-modal': 'true', 'aria-label': title }, h('div', { class: `modal modal-${tone} ${extraClass}` }, h('header', null, h('h2', null, title), subtitle ? h('p', { class: 'muted' }, subtitle) : null), h('div', { class: 'modal-body', 'data-keep': 'modal' }, body), h('footer', null, footer)));
+}
+
+/** Faixa discreta com as cores do clube (identidade sem escudo oficial). */
+export function clubStripe(club: Pick<Club, 'primaryColor' | 'secondaryColor'>): HTMLElement {
+  return h('span', { class: 'club-stripe', style: `background:linear-gradient(90deg, ${club.primaryColor} 0 50%, ${club.secondaryColor} 50% 100%)`, 'aria-hidden': 'true' });
+}
+
+export function tabsRow<T extends string>(options: readonly { id: T; label: string }[], current: T, onPick: (id: T) => void, cls = 'subtabs'): HTMLElement {
+  return h('div', { class: cls, role: 'tablist' }, options.map((o) => h('button', { type: 'button', role: 'tab', class: `subtab${o.id === current ? ' on' : ''}`, 'aria-selected': o.id === current ? 'true' : 'false', onClick: () => onPick(o.id) }, o.label)));
+}
+
+/** Tabela simples: cabeçalhos e linhas (cada linha é uma lista de células). */
+export function table(headers: readonly string[], rows: readonly { cells: Child[]; cls?: string; onClick?: () => void }[], cls = 'tbl compact', numeric: readonly number[] = []): HTMLElement {
+  return h(
+    'div',
+    { class: 'tbl-wrap' },
+    h(
+      'table',
+      { class: cls },
+      h('thead', null, h('tr', null, headers.map((t, i) => h('th', { class: numeric.includes(i) ? 'n' : '' }, t)))),
+      h('tbody', null, rows.map((r) => h('tr', { class: r.cls ?? '', onClick: r.onClick }, r.cells.map((c, i) => h('td', { class: numeric.includes(i) ? 'n' : '' }, c))))),
+    ),
+  );
+}
