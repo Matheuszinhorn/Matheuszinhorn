@@ -65,13 +65,13 @@ for (const [w, h, mobile] of VPS) {
   await nav(page, 'CLUBES'); await check(page, 'clubes'); await page.locator('.clubrow').nth(3).click(); await check(page, 'clube-detalhe');
   await nav(page, 'CARREIRA'); await check(page, 'carreira');
   for (const [label, slug] of [['MERCADO', 'mercado'], ['NOTÍCIAS', 'noticias'], ['CALENDÁRIO', 'calendario'], ['ESTÁDIO', 'estadio'], ['FINANÇAS', 'financas']]) { await nav(page, label); await check(page, slug); }
-  await nav(page, 'MERCADO'); await page.locator('.market tbody tr').first().click(); await check(page, 'popup-jogador-mercado'); await clickIn(page, '.modal footer', 'FECHAR');
+  await nav(page, 'MERCADO'); await page.locator('.market tbody tr').first().click(); await check(page, 'popup-jogador-mercado'); await clickIn(page, '.modal footer', 'VOLTAR', true);
   await nav(page, 'MEU TIME'); await page.getByRole('tab', { name: /Elenco e/ }).click(); await check(page, 'elenco-estatisticas');
-  await page.locator('.squad-stats tbody tr').first().click(); await check(page, 'popup-jogador-elenco'); await clickIn(page, '.modal footer', 'FECHAR');
+  await page.locator('.squad-stats tbody tr').first().click(); await check(page, 'popup-jogador-elenco'); await clickIn(page, '.modal footer', 'VOLTAR', true);
   await page.getByRole('tab', { name: 'Escalação' }).click();
   if (mobile) { await page.locator('.nav-more').click(); await check(page, 'menu-mais'); await page.locator('.nav-more').click(); }
   await nav(page, 'PARTIDA');
-  await page.getByRole('button', { name: 'MUITO RÁPIDA', exact: true }).click(); await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
+  await page.getByRole('button', { name: 'RÁPIDA', exact: true }).click(); await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   await page.waitForFunction(() => (globalThis.__fm.userMatch()?.clock.minute ?? 0) >= 14, null, { timeout: 30000 });
   await clickIn(page, '.controls', 'PAUSAR'); await check(page, 'partida-ao-vivo');
   await clickIn(page, '.controls', 'MEU TIME', true); await page.waitForSelector('.modal'); await check(page, 'popup-meu-time'); await clickIn(page, '.modal footer', 'CANCELAR');

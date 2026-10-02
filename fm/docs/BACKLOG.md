@@ -50,3 +50,10 @@ priorizar depois do teste externo.
 * Seleção com jogos e Copa (hoje: convite honorário na carreira).
 * Universo de dados real dentro do jogo (a camada `data/` existe; o app continua no universo fictício).
 * Propostas de compra da CPU pelos jogadores do treinador (hoje a venda é por leilão).
+
+## Depois da etapa Força + Economia
+
+* Empréstimos entre clubes da CPU; patrocínio da CPU; problemas financeiros da CPU com efeito (hoje só notícia).
+* Jogos da seleção, datas FIFA e Copa (a cada 4 temporadas) — roadmap.
+* Força dos jogadores do universo real: só com metodologia aprovada (continua null).
+* Corpo das notícias mais longo, com contexto gravado no momento do fato.

@@ -41,3 +41,13 @@ divisão) e bônus de 50% da base, e uma **arriscada** (acesso; top 4 na 1ª) co
 
 Fim da temporada, para todos os clubes: o campeão leva o valor cheio da divisão (D1 R$ 5 mi, D2 R$ 1,5 mi, D3 R$ 500 mil,
 D4 R$ 150 mil); o 20º leva 5% dele, linear entre os dois.
+
+## Salários por temporada (etapa Força + Economia)
+
+* O contrato mostra o salário **por temporada**. Internamente ele continua guardado **por rodada** — a unidade que
+  `engine/finance.ts` cobra a cada rodada (não alterado). Conversão: temporada = rodada × 38; rodada = temporada ÷ 38.
+* FINANÇAS mostra a **folha salarial por temporada** e o **custo da folha nesta rodada**.
+* 🟠 passou a se chamar **Risco** (regra igual).
+* Empréstimo: antes de confirmar a tela mostra valor recebido, juros (% e R$), prazo, total a pagar, parcela por rodada e
+  o impacto (parcela comparada com a folha da rodada).
+* Patrocínio: cada empresa fictícia tem **setor** (banco, energia, telecomunicações...) e duração de 1 temporada.

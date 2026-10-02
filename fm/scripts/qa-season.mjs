@@ -34,7 +34,7 @@ await instant(page);
 const t0 = Date.now(); let ok38 = false;
 for (let r = 1; r <= 38; r++) {
   if (r === 2) { // PARTIDA ao vivo (velocidade real) para captura e layout
-    await page.getByRole('button', { name: 'MUITO RÁPIDA', exact: true }).first().click();
+    await page.getByRole('button', { name: 'RÁPIDA', exact: true }).first().click();
     await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
     await page.waitForFunction(() => (globalThis.__fm.userMatch()?.clock.minute ?? 0) >= 12 || globalThis.__fm.state.snapshot.pending, null, { timeout: 30000 });
     await lay('r02/PARTIDA-ao-vivo'); await shot('partida-ao-vivo');

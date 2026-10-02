@@ -2,6 +2,7 @@ import { createRng, deriveSeed, type Club, type Player, type Position, type Worl
 import { personalityOf } from './people.ts';
 import type { Auction, Bid, Negotiation, Personality } from './state.ts';
 import { roundTo } from './finance.ts';
+import { divisionMeans, relativeOf, starPremium, type Relative } from './progression.ts';
 
 // Mercado: janela, busca, propostas com contraproposta, empréstimo, leilão e jogadores livres.
 // A negociação é uma regra fixa e determinística (preço pedido, personalidade, tentativas): não há sorteio na resposta
@@ -37,7 +38,8 @@ export function squadRank(world: World, club: Club, playerId: string): number {
 const levelOf = (world: World, club: Club | null | undefined) => (club ? (world.divisions.find((d) => d.id === club.divisionId)?.level ?? 4) : 5);
 
 /** Preço pedido pelo clube dono: valor de mercado ajustado pela importância do jogador e pela situação do vendedor. */
-export function askingPrice(world: World, seed: string, playerId: string, buyer: Club | null): number {
+/** Preço pedido. means = médias das divisões (passe quando calcular para muitos jogadores de uma vez). */
+export function askingPrice(world: World, seed: string, playerId: string, buyer: Club | null, means: Record<string, number> = divisionMeans(world)): number {
   const p = world.players[playerId];
   const seller = p.clubId ? world.clubs[p.clubId] : null;
   if (!seller) return 0;
@@ -48,13 +50,19 @@ export function askingPrice(world: World, seed: string, playerId: string, buyer:
   if (pers === 'AMBICIOSO' && buyer && levelOf(world, buyer) < levelOf(world, seller)) f *= 0.95;
   if (seller.money < 0) f *= 0.85;
   if (p.contract.endSeason <= 0) f *= 0.8;
+  f *= starPremium(relativeOf(world, means, p)); // destaque da divisão custa mais (até +30%)
   return Math.max(5_000, roundTo(p.marketValue * f, 5_000));
 }
 
 const SALARY_FACTOR: Record<Personality, number> = { LEAL: 1.05, AMBICIOSO: 1.2, FINANCEIRO: 1.3, COMPETITIVO: 1.15, JOVEM: 1.05, VETERANO: 1.0 };
 
-export function salaryDemand(seed: string, p: Player): number {
-  return roundTo(Math.max(p.salary, 100) * SALARY_FACTOR[personalityOf(seed, p)], 100);
+/**
+ * Salário pedido (por rodada, a unidade guardada; a tela mostra × 38 = por temporada). Com o mundo, o destaque da
+ * divisão pede até 15% a mais.
+ */
+export function salaryDemand(seed: string, p: Player, world?: World): number {
+  const premium = world ? 1 + (starPremium(relativeOf(world, divisionMeans(world), p)) - 1) / 2 : 1;
+  return roundTo(Math.max(p.salary, 100) * SALARY_FACTOR[personalityOf(seed, p)] * premium, 100);
 }
 
 export function contractYears(seed: string, p: Player): number {
@@ -92,6 +100,7 @@ export interface MarketRow {
   level: number;
   price: number;
   wish: boolean;
+  rel: Relative | null;
 }
 
 const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -99,6 +108,7 @@ const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCa
 /** Busca no mercado (jogadores de outros clubes e livres). Ordena por força e depois por preço. */
 export function searchPlayers(world: World, seed: string, userClubId: string | null, wishlist: readonly string[], f: SearchFilters, limit = 60): MarketRow[] {
   const buyer = userClubId ? world.clubs[userClubId] : null;
+  const means = divisionMeans(world);
   const text = f.text ? fold(f.text.trim()) : '';
   const out: MarketRow[] = [];
   for (const p of Object.values(world.players)) {
@@ -113,9 +123,9 @@ export function searchPlayers(world: World, seed: string, userClubId: string | n
     const level = levelOf(world, club);
     if (f.divisionLevel && level !== f.divisionLevel) continue;
     if (text && !fold(p.name).includes(text) && !(club && fold(club.name).includes(text))) continue;
-    const price = club ? askingPrice(world, seed, p.id, buyer) : 0;
+    const price = club ? askingPrice(world, seed, p.id, buyer, means) : 0;
     if (f.maxPrice && price > f.maxPrice) continue;
-    out.push({ player: p, club, level, price, wish: wishlist.includes(p.id) });
+    out.push({ player: p, club, level, price, wish: wishlist.includes(p.id), rel: relativeOf(world, means, p) });
   }
   out.sort((a, b) => b.player.strength - a.player.strength || a.price - b.price || a.player.id.localeCompare(b.player.id));
   return out.slice(0, limit);

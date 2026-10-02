@@ -27,7 +27,8 @@ const digests = {};
 for (const [label, interval] of SPEEDS) {
   const { ctx, page, errors } = await openCareer();
   const notes = []; let ok = true; const fail = (m) => { ok = false; notes.push('✗ ' + m); };
-  if (interval === 0) await instant(page); else await page.getByRole('button', { name: label, exact: true }).click();
+  // MUITO RÁPIDA e INSTANTÂNEA não estão na tela (só LENTA, NORMAL, RÁPIDA): o QA as escolhe pelo controlador
+  if (['MUITO RÁPIDA', 'INSTANTÂNEA'].includes(label)) await page.evaluate((id) => globalThis.__fm.setSpeed(id), label === 'INSTANTÂNEA' ? 'INSTANT' : 'VERY_FAST'); else await page.getByRole('button', { name: label, exact: true }).click();
   const t0 = Date.now();
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   await untilDecision(page, 120000); // lances do adversário antes dos 36' também param (CONTINUAR)
@@ -67,7 +68,7 @@ out.identicalAcrossSpeeds = same;
 {
   const { ctx, page, errors } = await openCareer();
   const notes = []; let ok = true; const fail = (m) => { ok = false; notes.push('✗ ' + m); };
-  await page.getByRole('button', { name: 'MUITO RÁPIDA', exact: true }).click();
+  await page.getByRole('button', { name: 'RÁPIDA', exact: true }).click();
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click();
   await page.waitForFunction(() => (globalThis.__fm.userMatch()?.clock.minute ?? 0) >= 8, null, { timeout: 30000 });
   await clickIn(page, '.controls', 'PAUSAR');

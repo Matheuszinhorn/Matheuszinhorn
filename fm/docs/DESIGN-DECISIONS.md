@@ -43,3 +43,12 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 * **Cores do clube com moderação**: borda da barra superior, faixa do clube, escudo de iniciais; a marca (marinho, lima,
   off-white) continua sendo a identidade do jogo. Sem escudos oficiais, sem imagens de jogadores.
 * **Som original**: ruído filtrado sintetizado no navegador; desligado por padrão; nenhuma narração ou gravação.
+
+## Etapa Força + Economia
+
+* **Força esperada = média real da divisão**, não as referências fixas (regerar o mundo mudaria todos os placares).
+* **Evolução em checkpoints (rodada 19 e virada), ±1**: gradual e determinística; a virada roda antes do
+  acesso/rebaixamento, para que subir ou cair não mude ninguém na hora.
+* **Salário guardado por rodada, mostrado por temporada**: preserva `engine/finance.ts` e os saves.
+* **Propostas só por eventos reais**: removido o "preenchimento" que gerava proposta a cada rodada sem clube.
+* **Três velocidades na tela**; VERY_FAST/INSTANT ficam só na sessão para testes.

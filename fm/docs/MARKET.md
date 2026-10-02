@@ -68,3 +68,11 @@ Marcação livre (★) em qualquer jogador de outro clube ou livre. Não gera pr
 
 Na virada da temporada a CPU contrata: os 8 mais fortes de cada divisão de baixo têm 50% de chance de subir para um clube
 da divisão de cima que pague 3× a taxa; clubes de elenco curto contratam livres; a base repõe quem ficar com menos de 18.
+
+## Força relativa e mercado (etapa Força + Economia)
+
+* O preço pedido inclui o fator de destaque da divisão (`starPremium`): até +30% para quem está muito acima da média
+  da divisão dele. O salário pedido sobe até 15% pelo mesmo motivo. Ver PLAYER-PROGRESSION.md.
+* A busca mostra ⭐ para os destaques. A compra continua sendo uma OFERTA (aceita, recusa ou contraproposta).
+* Salários aparecem **por temporada** (valor guardado por rodada × 38). Ver FINANCE.md.
+* Leilões abertos contam como saídas ao validar novas vendas e empréstimos: o elenco nunca fica abaixo de 16.

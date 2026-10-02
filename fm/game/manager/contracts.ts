@@ -18,9 +18,43 @@ export function expiring(p: Player, season: number): boolean {
   return p.contract.endSeason <= season;
 }
 
-export function openTalk(seed: string, p: Player): ContractTalk {
+/** Contexto da conversa: tudo vem do estado real do jogo (estatísticas, divisão, caixa). */
+export interface TalkContext {
+  season: number;
+  /** jogos do jogador / rodadas jogadas na temporada (0–1); null antes da 1ª rodada */
+  appsShare: number | null;
+  roundsPlayed: number;
+  /** diferença da força para a média da divisão do clube */
+  relDelta: number | null;
+  financeCritical: boolean;
+}
+
+export type Mood = { happy: boolean; reason: string };
+
+/** Satisfação (sem atributo oculto): quem quer jogar e não joga fica insatisfeito. */
+export function satisfaction(seed: string, p: Player, appsShare: number | null, roundsPlayed: number): Mood {
   const pers = personalityOf(seed, p);
-  const askSalary = roundTo(Math.max(p.salary, 100) * ASK[pers], 100);
+  if (appsShare !== null && roundsPlayed >= 8 && appsShare < 0.3 && (pers === 'JOVEM' || pers === 'COMPETITIVO' || pers === 'AMBICIOSO')) {
+    return { happy: false, reason: pers === 'JOVEM' ? 'Quer minutos em campo.' : 'Não aceita o banco de reservas.' };
+  }
+  return { happy: true, reason: appsShare !== null && appsShare >= 0.6 ? 'Titular e satisfeito.' : 'Satisfeito.' };
+}
+
+/**
+ * Pedido de renovação. Base = personalidade; ajustes fixos: destaque da divisão (até +15%), titular (+5%),
+ * insatisfeito (+10%), contrato ainda longe do fim (−5%: sem pressa), financeiro com o clube em crise (+5%).
+ */
+export function openTalk(seed: string, p: Player, ctx?: TalkContext): ContractTalk {
+  const pers = personalityOf(seed, p);
+  let f = ASK[pers];
+  if (ctx) {
+    if (ctx.relDelta !== null && ctx.relDelta > 3) f *= 1 + Math.min(0.15, (ctx.relDelta - 3) * 0.015);
+    if (ctx.appsShare !== null && ctx.appsShare >= 0.6) f *= 1.05;
+    if (!satisfaction(seed, p, ctx.appsShare, ctx.roundsPlayed).happy) f *= 1.1;
+    if (p.contract.endSeason > ctx.season) f *= 0.95;
+    if (ctx.financeCritical && pers === 'FINANCEIRO') f *= 1.05;
+  }
+  const askSalary = roundTo(Math.max(p.salary, 100) * f, 100);
   const askYears = p.age >= 33 ? 1 : YEARS[pers];
   return { playerId: p.id, askSalary, askYears, minSalary: roundTo(askSalary * FLOOR[pers], 100), attempts: 0, status: 'OPEN', message: messageFor(pers) };
 }

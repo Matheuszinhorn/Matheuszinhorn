@@ -20,6 +20,7 @@ import { coachName, refereeFor } from './people.ts';
 import { applyWork, attendanceFor, homeExtras, upgradeInfo, youthBonus } from './stadium.ts';
 import { addLines, addReferee, matchStatLines, refereeLine } from './stats.ts';
 import { absRound, ROUNDS, type ExtraLine, type JobOffer, type ManagerState, type Referee } from './state.ts';
+import { evolveWorld, type StrengthChange } from './progression.ts';
 import { agePlayers, cpuCoachChanges, cpuRenewals, cpuTransfers, youthIntake, CPU_MIN_SQUAD } from './world.ts';
 import { MIN_SQUAD } from './market.ts';
 
@@ -74,7 +75,26 @@ export interface ManagedOutcome extends RoundOutcome {
 }
 
 /** Fecha a rodada (finishRound) e aplica a gestão: estatísticas, árbitros, dinheiro extra, obras, leilões, moral, notícias. */
-export function finishManagedRound(career: CareerState, results: readonly MatchResult[], matches: readonly MatchState[]): ManagedOutcome {
+export interface FlowOptions {
+  /** checkpoints de evolução da força (padrão: ligados). Desligar só serve para provar que o resto não muda placares. */
+  evolution?: boolean;
+}
+
+/** Rodada do checkpoint de evolução do meio da temporada (fim do 1º turno). */
+export const MID_CHECKPOINT = 19;
+
+/** Notícia do checkpoint para o clube do treinador: quem evoluiu e quem perdeu força (fato real, já aplicado). */
+function evolutionNews(c: CareerState, changes: readonly StrengthChange[], when: string): Draft[] {
+  const mine = changes.filter((x) => x.clubId !== null && x.clubId === c.userClubId);
+  if (!mine.length) return [];
+  const name = (id: string) => c.world.players[id]?.name ?? 'Jogador';
+  const up = mine.filter((x) => x.to > x.from).map((x) => `${name(x.playerId)} (${x.from}→${x.to})`);
+  const down = mine.filter((x) => x.to < x.from).map((x) => `${name(x.playerId)} (${x.from}→${x.to})`);
+  const body = [up.length ? `Evoluíram: ${up.join(', ')}.` : '', down.length ? `Perderam força: ${down.join(', ')}.` : ''].filter(Boolean).join(' ');
+  return [draft('ANALISE', `Avaliação ${when}: ${up.length} jogador(es) evoluíram e ${down.length} perderam força`, { body, clubId: c.userClubId, mine: true })];
+}
+
+export function finishManagedRound(career: CareerState, results: readonly MatchResult[], matches: readonly MatchState[], opts: FlowOptions = {}): ManagedOutcome {
   const before = ensureManager(career);
   const season = before.season;
   const round = before.roundNumber;
@@ -175,6 +195,13 @@ export function finishManagedRound(career: CareerState, results: readonly MatchR
     if (!fired) m = { ...m, morale };
   }
 
+  // checkpoint de evolução do meio da temporada (depois do 1º turno): ±1 no máximo, para todos os clubes
+  if (opts.evolution !== false && round === MID_CHECKPOINT) {
+    const evo = evolveWorld(c.world, { seed: c.seed, season, checkpoint: 'MEIO', stats: m.stats.season, roundsPlayed: round, youthBonus: (p) => (p.clubId === c.userClubId && p.age <= 23 ? 0.3 * youthBonus(m.stadium.levels) : 0) });
+    c = { ...c, world: evo.world };
+    drafts.push(...evolutionNews(c, evo.changes, 'do 1º turno'));
+  }
+
   // técnicos da CPU
   const cpu = cpuCoachChanges(c, m.coaches, round);
   m = { ...m, coaches: cpu.coaches };
@@ -272,24 +299,23 @@ export function reachLevel(reputation: number): number {
 export function addJobOffer(c: CareerState, m: ManagerState, clubId: string, round: number, reason: string, drafts: Draft[]): ManagerState {
   if (m.jobs.offers.some((o) => o.clubId === clubId && o.status === 'OPEN')) return m;
   const seq = m.jobs.seq + 1;
-  const offer: JobOffer = { id: `job${seq}`, clubId, season: c.season, round, expiresRound: absRound(c.season, round) + 3, reason, status: 'OPEN' };
+  // válida por 3 rodadas; no fim da temporada, até a 3ª rodada da seguinte
+  const expiresRound = round >= ROUNDS ? absRound(c.season + 1, 3) : absRound(c.season, round) + 3;
+  const offer: JobOffer = { id: `job${seq}`, clubId, season: c.season, round, expiresRound, reason, status: 'OPEN' };
   drafts.push(draft('URGENTE', `Proposta de trabalho: ${c.world.clubs[clubId].name} quer ${c.coach.name}`, { body: reason, clubId, mine: true }));
   return { ...m, jobs: { ...m.jobs, seq, offers: [...m.jobs.offers, offer] } };
 }
 
-/** Treinador sem clube: clubes que acabaram de demitir chamam primeiro; fora isso, de vez em quando surge uma proposta. */
+/**
+ * Treinador sem clube: proposta só nasce de um EVENTO REAL do mundo — um clube ao alcance da reputação dele que acabou
+ * de demitir o técnico (na rodada ou, no fim da temporada, por rebaixamento). Nada é sorteado só porque o tempo passou.
+ */
 function organicOffers(c: CareerState, m: ManagerState, round: number, firedClubs: string[], drafts: Draft[]): { m: ManagerState } {
   const reach = reachLevel(m.reputation);
   const open = m.jobs.offers.filter((o) => o.status === 'OPEN').length;
   if (open >= 3) return { m };
   for (const id of firedClubs) {
     if (levelOf(c, id) >= reach) m = addJobOffer(c, m, id, round, 'O clube acabou de trocar de técnico e procura um nome para a sequência da temporada.', drafts);
-  }
-  const rng = createRng(deriveSeed(c.seed, `emprego:${c.season}:${round}`));
-  if (m.jobs.offers.filter((o) => o.status === 'OPEN').length === 0 || rng.next() < 0.3) {
-    const pool = c.world.divisions.filter((d) => d.level >= reach).flatMap((d) => divisionStandings(c, d.id).slice(-8).map((r) => r.clubId)).sort();
-    const options = pool.filter((id) => !m.jobs.offers.some((o) => o.clubId === id && o.status === 'OPEN'));
-    if (options.length) m = addJobOffer(c, m, options[rng.int(0, options.length - 1)], round, 'A diretoria quer mudar o rumo da temporada e gostou do seu perfil.', drafts);
   }
   return { m };
 }
@@ -309,6 +335,19 @@ function closeManagedSeason(c: CareerState, m: ManagerState, drafts: Draft[], ex
   for (const [divId, clubId] of Object.entries(report.champions)) {
     const d = world.divisions.find((x) => x.id === divId);
     drafts.push(draft('NOTICIA', `${world.clubs[clubId].name} é campeão da ${d?.name ?? divId}`, { clubId, mine: clubId === c.userClubId }));
+  }
+  // clubes da CPU que fecham a temporada no vermelho (depois da premiação): fato real, vira análise
+  const red = Object.values(world.clubs).filter((cl) => cl.id !== c.userClubId && cl.money < 0).sort((x, y) => x.money - y.money).slice(0, 3);
+  for (const cl of red) drafts.push(draft('ANALISE', `${cl.name} fecha a temporada no vermelho`, { body: `O caixa terminou negativo depois da premiação. Crise financeira pode pesar no mercado da intertemporada.`, clubId: cl.id }));
+  // rebaixados da CPU trocam de técnico (evento real: vaga aberta, que vira proposta para o treinador sem clube)
+  const reach = reachLevel(m.reputation);
+  for (const mv of report.movements.filter((x) => x.kind === 'RELEGATED' && x.clubId !== c.userClubId)) {
+    const old = m.coaches[mv.clubId];
+    const fresh = { name: coachName(c.seed, `${mv.clubId}:${c.season}:rebaixado`), since: absRound(c.season, round) };
+    m = { ...m, coaches: { ...m.coaches, [mv.clubId]: fresh } };
+    drafts.push(draft('URGENTE', `${world.clubs[mv.clubId].name} é rebaixado e demite ${old?.name ?? 'o técnico'}`, { clubId: mv.clubId }));
+    const toLevel = world.divisions.find((d) => d.id === mv.toDivisionId)?.level ?? 4;
+    if (!c.userClubId && toLevel >= reach) m = addJobOffer({ ...c, world }, m, mv.clubId, round, 'Rebaixado, o clube recomeça com outro técnico e procura um nome para a próxima temporada.', drafts);
   }
   if (c.userClubId) {
     const mv = report.userMovement;
@@ -351,11 +390,19 @@ export interface SeasonTurnover {
   cpuMoves: number;
 }
 
-export function startManagedSeason(career: CareerState): SeasonTurnover {
-  const c0 = ensureManager(career);
+export function startManagedSeason(career: CareerState, opts: FlowOptions = {}): SeasonTurnover {
+  let c0 = ensureManager(career);
   let m = c0.manager;
+  const drafts0: Draft[] = [];
+  // checkpoint de evolução do fim da temporada, ANTES do acesso/rebaixamento: quem sobe ou cai começa a temporada nova
+  // com a mesma força e se adapta nos checkpoints seguintes
+  if (opts.evolution !== false) {
+    const evo = evolveWorld(c0.world, { seed: c0.seed, season: c0.season, checkpoint: 'FIM', stats: m.stats.season, roundsPlayed: ROUNDS, youthBonus: (p) => (p.clubId === c0.userClubId && p.age <= 23 ? 0.3 * youthBonus(m.stadium.levels) : 0) });
+    c0 = { ...c0, world: evo.world };
+    drafts0.push(...evolutionNews(c0, evo.changes, 'do fim da temporada'));
+  }
   const newSeason = c0.season + 1;
-  const drafts: Draft[] = [];
+  const drafts: Draft[] = [...drafts0];
   let world = c0.world;
   const userId = c0.userClubId;
 
@@ -389,7 +436,7 @@ export function startManagedSeason(career: CareerState): SeasonTurnover {
   // acesso/rebaixamento e calendário novo
   let c = startNextSeason({ ...c0, world });
   world = c.world;
-  const aged = agePlayers(world, c.seed, newSeason, (p) => (p.clubId === userId && p.age < 23 ? youthBonus(m.stadium.levels) : 0));
+  const aged = agePlayers(world);
   world = aged.world;
   const moves = cpuTransfers(world, c.seed, newSeason, userId);
   world = moves.world;

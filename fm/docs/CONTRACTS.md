@@ -32,3 +32,18 @@ O contrato renovado vai até `max(fim atual, temporada atual + anos)`.
 `personalityOf(seed, jogador)`: 21 anos ou menos pode ser JOVEM, 32 ou mais pode ser VETERANO; os demais saem de um hash
 estável do id (LEAL, AMBICIOSO, FINANCEIRO, COMPETITIVO). Não é atributo esportivo: a força continua sendo a única coisa
 que o engine usa.
+
+## Contexto da renovação (etapa Força + Economia)
+
+O pedido parte da personalidade e recebe ajustes fixos, todos vindos do estado real do jogo (`TalkContext`):
+
+| Situação | Ajuste |
+| --- | --- |
+| Destaque da divisão (força acima da média) | até +15% |
+| Titular (jogou ≥ 60% das rodadas) | +5% |
+| Insatisfeito (jovem, competitivo ou ambicioso com < 30% de jogos depois de 8 rodadas) | +10% |
+| Contrato ainda não vence nesta temporada | −5% (sem pressa) |
+| Financeiro, com o clube em situação crítica | +5% |
+
+**Satisfação** (`satisfaction`): mostrada no perfil (🙂/😠). Não é atributo oculto: sai dos jogos da temporada e da
+personalidade. A tela negocia salário **por temporada**; o valor é convertido para por rodada (÷ 38) ao enviar.

@@ -162,6 +162,12 @@ async function run(vp) {
   await page.evaluate((seed) => globalThis.__fm.offerClubs(seed), QA_SEED);
   await shot('propostas');
   check('3 propostas de clube', (await page.locator('.offer').count()) === 3);
+  // anti-reroll: recarregar com as propostas abertas mostra as MESMAS (e a recusa continua)
+  const offerNames = await page.locator('.offer h4').allInnerTexts();
+  await page.locator('.offer').nth(2).getByRole('button', { name: 'VER PROPOSTA' }).click();
+  await clickIn('.modal footer', 'RECUSAR');
+  await page.reload(); await toStart(page);
+  check('anti-reroll: recarregar mostra as mesmas 3 propostas, com a recusa', JSON.stringify(await page.locator('.offer h4').allInnerTexts()) === JSON.stringify(offerNames) && (await page.locator('.offer.refused').count()) === 1, JSON.stringify(offerNames));
   check('sem sortear outras propostas', (await page.getByRole('button', { name: /SORTEAR/ }).count()) === 0 && (await page.getByRole('button', { name: 'AGUARDAR PROPOSTAS' }).count()) === 1);
   await page.locator('.offer').nth(0).getByRole('button', { name: 'VER PROPOSTA' }).click();
   check('pop-up da proposta: ACEITAR, RECUSAR e ANALISAR CLUBE', (await modalTitle()) === 'PROPOSTA DE TRABALHO' && (await page.locator('.modal footer .btn').count()) === 3);
@@ -198,13 +204,13 @@ async function run(vp) {
 
   // ----- PARTIDA: velocidades, pausa, CLUBES -----
   await nav('PARTIDA');
-  await page.locator('.seg-btn', { hasText: 'MUITO RÁPIDA' }).first().click();
+  await page.getByRole('button', { name: 'RÁPIDA', exact: true }).first().click();
   await click('JOGAR RODADA');
   await page.waitForSelector('.scoreboard');
   const minute = () => page.locator('.match-card .sb-clock').innerText();
   await page.waitForTimeout(1500);
   const m1 = await minute();
-  check('relógio avança em MUITO RÁPIDA', /\d+/.test(m1) && !m1.startsWith('0\''), m1);
+  check('relógio avança em RÁPIDA', /\d+/.test(m1) && !m1.startsWith('0\''), m1);
   await shot('partida-ao-vivo');
   await noOverflow('partida-ao-vivo');
   await whenNoDecision('PAUSAR', () => page.locator('.controls').getByRole('button', { name: 'PAUSAR' }).first().click({ timeout: 3000 }));
@@ -248,6 +254,14 @@ async function run(vp) {
   await nav('FINANÇAS'); await shot('financas'); await noOverflow('financas');
   const fin = await text();
   check('finanças mostram situação, temporada, patrocínio e empréstimo', ['situação', 'temporada', 'patrocínio', 'empréstimo bancário'].every((w) => fin.includes(w)));
+  await nav('NOTÍCIAS');
+  if (await page.locator('.news').count()) {
+    await page.locator('.news').first().click();
+    const np = await text();
+    check('notícia abre a página completa (categoria, fonte, tags, VOLTAR PARA NOTÍCIAS)', np.includes('voltar para notícias') && np.includes('fonte:') && (await page.locator('.news-tags .badge').count()) >= 2);
+    await shot('noticia-pagina'); await noOverflow('noticia-pagina');
+    await click('VOLTAR PARA NOTÍCIAS');
+  } else check('notícia abre a página completa', false, 'sem notícias depois da rodada');
   for (const [label, word] of [['MERCADO', 'mercado aberto'], ['NOTÍCIAS', 'jornal do dia'], ['CALENDÁRIO', 'calendário 2026'], ['ESTÁDIO', 'obras disponíveis']]) {
     await nav(label); await shot(label.toLowerCase().normalize('NFD').replace(/[^a-z]/g, '')); await noOverflow(label);
     check(`${label} abre`, (await text()).includes(word));

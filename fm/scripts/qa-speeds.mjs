@@ -22,8 +22,8 @@ const W = Number(arg('w', 1280)), H = Number(arg('h', 800)), MOBILE = process.ar
 const ctxOpts = MOBILE ? { viewport: { width: W, height: H }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } : { viewport: { width: W, height: H } };
 const dir = shotDir(`speeds-${W}`);
 const LABEL = Object.fromEntries(SPEED_ORDER.map((s) => [s, SPEEDS[s].label]));
-/** Escolhe a velocidade pela tela; a INSTANTÂNEA saiu da tela e é escolhida pelo controlador (só QA). */
-const pickSpeed = (page, speed) => (speed === 'INSTANT' ? instant(page) : page.getByRole('button', { name: LABEL[speed], exact: true }).first().click());
+/** Escolhe a velocidade pela tela (LENTA, NORMAL, RÁPIDA); MUITO RÁPIDA e INSTANTÂNEA só pelo controlador (QA). */
+const pickSpeed = (page, speed) => (['INSTANT', 'VERY_FAST'].includes(speed) ? page.evaluate((id) => globalThis.__fm.setSpeed(id), speed) : page.getByRole('button', { name: LABEL[speed], exact: true }).first().click());
 /** O pop-up aberto é uma parada obrigatória (intervalo/lance), não uma decisão do engine. */
 const isStop = (page) => page.evaluate(() => { const s = globalThis.__fm.state.snapshot; return !!s.stop && s.status === 'PAUSED'; });
 const R = { width: W, checks: {}, scenarios: {}, realtime: {}, meuTime: {}, errors: [], layout: [] };

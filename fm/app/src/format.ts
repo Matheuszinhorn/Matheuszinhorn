@@ -52,3 +52,14 @@ export const initials = (name: string): string =>
     .join('') || name.slice(0, 2).toUpperCase();
 
 export const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`;
+
+/** Salário: guardado POR RODADA (a unidade que as finanças cobram); mostrado POR TEMPORADA (38 rodadas). */
+export const SEASON_ROUNDS = 38;
+export const seasonSalary = (perRound: number): number => perRound * SEASON_ROUNDS;
+export const perRoundFromSeason = (perSeason: number): number => Math.round(perSeason / SEASON_ROUNDS);
+
+/** Lesão contada em PARTIDAS: 1–2 leve, 3–5 moderada, 6+ grave. */
+export function injuryLabel(matches: number): string {
+  const grade = matches >= 6 ? 'grave' : matches >= 3 ? 'moderada' : 'leve';
+  return `🩹 Lesão ${grade} · fora por ${matches} partida${matches === 1 ? '' : 's'}`;
+}

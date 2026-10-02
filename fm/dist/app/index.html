@@ -301,6 +301,15 @@ input[type=number] { min-height: 46px; padding: 0 12px; background: #050f19; bor
 .squad-stats th:first-child, .squad-stats td:first-child { position: sticky; left: 0; z-index: 1; background: var(--panel); }
 .squad-stats tr.unavailable td:first-child { background: #0b1a28; }
 @media (max-width: 520px) { .squad-stats td, .squad-stats th { padding: 7px 5px; font-size: 12.5px; } .squad-stats td:first-child { white-space: normal; min-width: 140px; max-width: 160px; line-height: 1.25; } }
+/* notícia: página completa */
+.news { cursor: pointer; } .news:hover { background: rgba(242,244,237,.07); }
+.news-head { font-size: clamp(20px, 5vw, 28px); margin: 10px 0 6px; line-height: 1.2; }
+.news-body p { margin: 10px 0; line-height: 1.6; } .news-entities { display: grid; gap: 6px; margin-top: 10px; }
+.news-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.linkish { background: none; border: 0; padding: 4px 0; text-align: left; font-weight: 700; color: var(--text); text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+.loan-quote { margin: 8px 0; }
+.cal-c { display: block; font-size: 11px; color: var(--muted); }
+.club-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; box-shadow: 0 0 0 1px rgba(242,244,237,.25); }
 </style>
 </head>
 <body>
@@ -491,6 +500,8 @@ const SPEED_KEY = 'fm-brasileiro:velocidade';
 /** Perfil LOCAL (sem servidor e sem senha): só um nome guardado neste navegador. Chave nova; não mexe no save. */
 const PROFILE_KEY = 'elite-manager:perfil-local';
 const AUDIO_KEY = 'elite-manager:som';
+/** Propostas iniciais de uma carreira ainda não criada: geradas UMA vez e guardadas (recarregar não sorteia de novo). */
+const OFFERS_KEY = 'elite-manager:propostas-iniciais';
 
                                   
                                   
@@ -586,6 +597,8 @@ const CLUB_SCREENS                    = ['TEAM', 'MARKET', 'STADIUM', 'FINANCE']
                            
                                  
                           
+                                                     
+                        
                             
                 
                  
@@ -610,8 +623,8 @@ const CLUB_SCREENS                    = ['TEAM', 'MARKET', 'STADIUM', 'FINANCE']
  
 
 const SPEED_IDS            = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST', 'INSTANT'];
-/** Velocidades oferecidas na tela. INSTANT continua existindo só para testes e QA automatizado (__fm.setSpeed). */
-const UI_SPEEDS            = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST'];
+/** Velocidades oferecidas na tela: LENTA, NORMAL e RÁPIDA. VERY_FAST e INSTANT existem só para testes e QA (__fm.setSpeed). */
+const UI_SPEEDS            = ['SLOW', 'NORMAL', 'FAST'];
 
 class GameController {
   /** Trocada por uma nova em abandonCareer: uma sessão descartada (dispose) não avisa mais a tela nem avança o relógio. */
@@ -631,8 +644,8 @@ class GameController {
     this.randomSeed = options.randomSeed ?? (() => `carreira-${Date.now().toString(36)}-${Math.floor(Math.random() * 1e9).toString(36)}`);
     this.toastMs = options.toastMs ?? 4200;
     const saved = this.storage.get(SPEED_KEY)                  ;
-    // INSTANTÂNEA saiu da interface: quem a tinha salva volta como MUITO RÁPIDA
-    const speed          = saved === 'INSTANT' ? 'VERY_FAST' : saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
+    // MUITO RÁPIDA e INSTANTÂNEA saíram da interface: quem as tinha salvas volta como RÁPIDA
+    const speed          = saved === 'INSTANT' || saved === 'VERY_FAST' ? 'FAST' : saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
     let profile                 = null;
     try {
       const raw = this.storage.get(PROFILE_KEY);
@@ -647,11 +660,12 @@ class GameController {
       screen: 'ENTRY',
       career: null,
       ...saveStatus(this.storage.get(SAVE_KEY)),
-      offers: null,
+      offers: this.loadOffers(),
       profile,
       proposal: null,
       matchView: null,
       playerId: null,
+      newsId: null,
       more: false,
       audio: this.storage.get(AUDIO_KEY) === '1',
       phase: 'PRE',
@@ -753,11 +767,39 @@ class GameController {
 
   // ----- propostas iniciais -----
 
+          loadOffers()                     {
+    try {
+      const raw = this.storage.get(OFFERS_KEY);
+      const o = raw ? (JSON.parse(raw)                      ) : null;
+      return o && typeof o.seed === 'string' && Array.isArray(o.clubIds) && o.clubIds.length === 3 && Array.isArray(o.refused) ? o : null;
+    } catch {
+      return null;
+    }
+  }
+
+          storeOffers(o                    )       {
+    try {
+      if (o) this.storage.set(OFFERS_KEY, JSON.stringify(o));
+      else this.storage.remove(OFFERS_KEY);
+    } catch {
+      /* sem armazenamento: valem enquanto a página estiver aberta */
+    }
+  }
+
+  /**
+   * As três propostas da carreira nova. Sem "sortear de novo": se já existem (nesta página ou salvas de antes de
+   * recarregar), são as mesmas, com as recusas. Uma seed explícita (testes/QA) define a carreira testada.
+   */
   offerClubs(seed         )       {
-    // sem "sortear de novo": as três propostas de uma carreira nova são estas; recusadas, o treinador aguarda outras
-    if (this.state.offers && !seed) return;
+    const kept = this.state.offers ?? this.loadOffers();
+    if (kept && !seed) {
+      if (kept !== this.state.offers) this.set({ offers: kept });
+      return;
+    }
     const s = seed ?? this.randomSeed();
-    this.set({ offers: { seed: s, clubIds: careerOffers(s), refused: [] }, proposal: null });
+    const offers = { seed: s, clubIds: careerOffers(s), refused: []             };
+    this.storeOffers(offers);
+    this.set({ offers, proposal: null });
   }
 
   openProposal(clubId               , jobId                = null)       {
@@ -771,7 +813,9 @@ class GameController {
   refuseOffer(clubId        )       {
     const o = this.state.offers;
     if (!o) return;
-    this.set({ offers: { ...o, refused: [...new Set([...o.refused, clubId])] }, proposal: null });
+    const offers = { ...o, refused: [...new Set([...o.refused, clubId])] };
+    this.storeOffers(offers);
+    this.set({ offers, proposal: null });
   }
 
   startCareer(coachName        , clubId        )       {
@@ -780,6 +824,7 @@ class GameController {
     try {
       const career = actions.newManagedCareer(offers.seed, coachName, clubId);
       this.applied.clear();
+      this.storeOffers(null);
       this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null, matchView: null });
       this.save();
       this.notify(`Bem-vindo ao ${userClub(career).name}, ${career.coach.name}!`, 'good');
@@ -795,6 +840,7 @@ class GameController {
     try {
       const career = actions.newManagedCareer(offers.seed, coachName, null);
       this.applied.clear();
+      this.storeOffers(null);
       this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: career.world.divisions.find((d) => d.level === 4)?.id ?? null, clubId: null, selected: null, matchView: null });
       this.save();
       this.notify('Você está sem clube. Jogue as rodadas e acompanhe as propostas em CARREIRA.', 'info');
@@ -823,6 +869,7 @@ class GameController {
 
   abandonCareer()       {
     this.storage.remove(SAVE_KEY);
+    this.storeOffers(null); // carreira nova = propostas novas (é outra carreira, não um novo sorteio da mesma)
     // A sessão antiga é descartada (para o relógio de uma rodada em andamento) e uma nova a substitui;
     // reaproveitar a descartada deixava a primeira rodada da carreira nova presa em "Preparando a rodada…".
     this.session.dispose();
@@ -838,7 +885,7 @@ class GameController {
     if (!this.state.career && !['START', 'ENTRY', 'MODE'].includes(screen)) return;
     if (this.state.career && this.state.career.userClubId === null && CLUB_SCREENS.includes(screen)) return this.notify('Você está sem clube. Veja as propostas em CARREIRA.', 'info');
     const wasClubs = this.state.screen === 'CLUBS';
-    this.set({ screen, selected: null, more: false, playerId: null });
+    this.set({ screen, selected: null, more: false, playerId: null, newsId: null });
     // Consultar CLUBES durante a rodada pausa a sessão (seção 24); sair de CLUBES retoma.
     if (this.state.phase === 'LIVE') {
       if (screen === 'CLUBS' && !wasClubs) {
@@ -865,6 +912,11 @@ class GameController {
 
   openPlayer(id               )       {
     this.set({ playerId: id });
+  }
+
+  /** Abre a página completa de uma notícia (null volta para a lista). */
+  openNews(id               )       {
+    this.set({ newsId: id, screen: 'NEWS', more: false, playerId: null });
   }
 
   toggleMore(open          )       {
@@ -1132,6 +1184,7 @@ __exports["SAVE_KEY"] = SAVE_KEY;
 __exports["SPEED_KEY"] = SPEED_KEY;
 __exports["PROFILE_KEY"] = PROFILE_KEY;
 __exports["AUDIO_KEY"] = AUDIO_KEY;
+__exports["OFFERS_KEY"] = OFFERS_KEY;
 __exports["SAVE_PROBLEM"] = SAVE_PROBLEM;
 __exports["CLUB_SCREENS"] = CLUB_SCREENS;
 __exports["UI_SPEEDS"] = UI_SPEEDS;
@@ -4899,7 +4952,8 @@ __defs["game/manager/actions.ts"] = function (__exports, __req) {
 const { CareerError, createCareer, isSeasonOver,                  } = __req("game/career.ts");
 const { objectiveFor } = __req("game/manager/board.ts");
 const { ensureManager } = __req("game/manager/core.ts");
-const { openTalk, proposeRenewal : talkPropose } = __req("game/manager/contracts.ts");
+const { openTalk, proposeRenewal : talkPropose,                  } = __req("game/manager/contracts.ts");
+const { divisionMeans, relativeOf } = __req("game/manager/progression.ts");
 const { creditLimit, debtOf, financeStatus, line, quoteLoan, sponsorOffers } = __req("game/manager/finance.ts");
 const {
   addMoney,
@@ -4922,7 +4976,7 @@ const { draft, publish,            } = __req("game/manager/news.ts");
 const { coachName } = __req("game/manager/people.ts");
 const { canStartWork, upgradeInfo } = __req("game/manager/stadium.ts");
 const { absRound,                                                                     } = __req("game/manager/state.ts");
-const { payroll } = __req("engine/index.ts");
+const { payroll,             } = __req("engine/index.ts");
 
 // Ações do treinador fora da partida. Cada uma devolve uma carreira NOVA (ou lança CareerError com o motivo, em
 // português, pronto para a tela). Nenhuma mexe em partida em andamento: a interface só as oferece fora da rodada.
@@ -4975,7 +5029,7 @@ function executeTransfer(c         , m              , playerId        , price   
   const p = c.world.players[playerId];
   const sellerId = p.clubId          ;
   const seller = c.world.clubs[sellerId];
-  let world = movePlayer(c.world, playerId, c.userClubId, { salary: salaryDemand(c.seed, p), contract: { endSeason: c.season + contractYears(c.seed, p) } });
+  let world = movePlayer(c.world, playerId, c.userClubId, { salary: salaryDemand(c.seed, p, c.world), contract: { endSeason: c.season + contractYears(c.seed, p) } });
   world = addMoney(world, sellerId, price);
   extras.push(line(c.season, nowRound(c), `Compra de ${p.name} (${seller.name})`, -price));
   drafts.push(draft('NOTICIA', `${c.world.clubs[c.userClubId].name} contrata ${p.name}, ex-${seller.name}`, { body: `Valor: R$ ${price.toLocaleString('pt-BR')}.`, clubId: c.userClubId, playerId, mine: true }));
@@ -5060,7 +5114,7 @@ function signFreeAgent(career             , playerId        )               {
   if (inErr) fail(inErr);
   const accept = playerAccepts(c.world, c.seed, p, c.world.clubs[c.userClubId]);
   if (!accept.ok) fail(accept.reason);
-  const salary = salaryDemand(c.seed, p);
+  const salary = salaryDemand(c.seed, p, c.world);
   const world = movePlayer(c.world, playerId, c.userClubId, { salary, contract: { endSeason: c.season + contractYears(c.seed, p) } });
   const drafts = [draft('NOTICIA', `${p.name} assina com o ${c.world.clubs[c.userClubId].name} sem custo de transferência`, { clubId: c.userClubId, playerId, mine: true })];
   return { career: commit({ ...c, world }, c.manager, drafts), message: `${p.name} contratado (salário R$ ${salary.toLocaleString('pt-BR')} por rodada).`, kind: 'good' };
@@ -5147,6 +5201,14 @@ function withdrawAuction(career             , auctionId        )               {
 
 // ---------- contratos ----------
 
+/** Contexto real da conversa de contrato (estatísticas da temporada, força relativa, caixa). */
+function talkContext(c         , p        )              {
+  const roundsPlayed = Math.min(c.roundNumber - 1, 38);
+  const apps = c.manager.stats.season[p.id]?.apps ?? 0;
+  const rel = relativeOf(c.world, divisionMeans(c.world), p);
+  return { season: c.season, appsShare: roundsPlayed > 0 ? apps / roundsPlayed : null, roundsPlayed, relDelta: rel ? rel.delta : null, financeCritical: financeView(c).status === 'CRITICO' };
+}
+
 function startRenewal(career             , playerId        )               {
   const c = managed(career);
   const p = c.world.players[playerId];
@@ -5154,7 +5216,7 @@ function startRenewal(career             , playerId        )               {
   if (c.manager.market.loans.some((l) => l.playerId === playerId)) fail('Jogador emprestado: o contrato é com o clube dono.');
   const existing = c.manager.contracts[playerId];
   if (existing && existing.status !== 'AGREED') return { career: c, message: existing.message, kind: 'info' };
-  const talk = openTalk(c.seed, p);
+  const talk = openTalk(c.seed, p, talkContext(c, p));
   const m = c.manager;
   return { career: { ...c, manager: { ...m, contracts: { ...m.contracts, [playerId]: talk } } }, message: talk.message, kind: 'info' };
 }
@@ -5314,6 +5376,7 @@ __exports["requestLoan"] = requestLoan;
 __exports["loanOut"] = loanOut;
 __exports["openAuction"] = openAuction;
 __exports["withdrawAuction"] = withdrawAuction;
+__exports["talkContext"] = talkContext;
 __exports["startRenewal"] = startRenewal;
 __exports["proposeRenewal"] = proposeRenewal;
 __exports["startWork"] = startWork;
@@ -5647,7 +5710,7 @@ const { createRng, deriveSeed } = __req("engine/index.ts");
 
                                                                           
 const STATUS_ICON                                = { SAUDAVEL: '🟢', ATENCAO: '🟡', ALERTA: '🟠', CRITICO: '🔴' };
-const STATUS_LABEL                                = { SAUDAVEL: 'Saudável', ATENCAO: 'Atenção', ALERTA: 'Alerta', CRITICO: 'Crítico' };
+const STATUS_LABEL                                = { SAUDAVEL: 'Saudável', ATENCAO: 'Atenção', ALERTA: 'Risco', CRITICO: 'Crítico' };
 
 function debtOf(loans                     )         {
   return loans.reduce((s, l) => s + l.remaining, 0);
@@ -5699,7 +5762,14 @@ function payInstallment(l          )                                   {
 
 // ---------- patrocínio ----------
 
-const SPONSOR_NAMES = ['Banco Horizonte', 'Construtora Pilar', 'Laticínios Serra Azul', 'Rede Farma Vida', 'Auto Peças Rota', 'Café Tropeiro', 'Seguros Âncora', 'Móveis Carvalho', 'Telecom Sinal', 'Supermercados Bom Preço', 'Energia Vale Verde', 'Transportes Estrela'];
+/** Patrocinadores FICTÍCIOS, com o setor de cada um. */
+const SPONSOR_SECTOR                         = {
+  'Banco Horizonte': 'Banco', 'Construtora Pilar': 'Construção', 'Laticínios Serra Azul': 'Alimentos', 'Rede Farma Vida': 'Farmácia',
+  'Auto Peças Rota': 'Automotivo', 'Café Tropeiro': 'Bebidas', 'Seguros Âncora': 'Seguros', 'Móveis Carvalho': 'Varejo',
+  'Telecom Sinal': 'Telecomunicações', 'Supermercados Bom Preço': 'Supermercado', 'Energia Vale Verde': 'Energia', 'Transportes Estrela': 'Logística',
+};
+const SPONSOR_NAMES = Object.keys(SPONSOR_SECTOR);
+const sponsorSector = (name        )         => SPONSOR_SECTOR[name] ?? 'Empresa';
 const SPONSOR_BASE                         = { 1: 6_000_000, 2: 2_000_000, 3: 600_000, 4: 180_000 };
 
 /**
@@ -5775,6 +5845,8 @@ __exports["roundTo"] = roundTo;
 __exports["STATUS_ICON"] = STATUS_ICON;
 __exports["STATUS_LABEL"] = STATUS_LABEL;
 __exports["LOAN_TERMS"] = LOAN_TERMS;
+__exports["SPONSOR_SECTOR"] = SPONSOR_SECTOR;
+__exports["sponsorSector"] = sponsorSector;
 };
 
 __defs["game/manager/contracts.ts"] = function (__exports, __req) {
@@ -5798,9 +5870,43 @@ function expiring(p        , season        )          {
   return p.contract.endSeason <= season;
 }
 
-function openTalk(seed        , p        )               {
+/** Contexto da conversa: tudo vem do estado real do jogo (estatísticas, divisão, caixa). */
+                              
+                 
+                                                                                       
+                           
+                       
+                                                            
+                          
+                           
+ 
+
+                                                      
+
+/** Satisfação (sem atributo oculto): quem quer jogar e não joga fica insatisfeito. */
+function satisfaction(seed        , p        , appsShare               , roundsPlayed        )       {
   const pers = personalityOf(seed, p);
-  const askSalary = roundTo(Math.max(p.salary, 100) * ASK[pers], 100);
+  if (appsShare !== null && roundsPlayed >= 8 && appsShare < 0.3 && (pers === 'JOVEM' || pers === 'COMPETITIVO' || pers === 'AMBICIOSO')) {
+    return { happy: false, reason: pers === 'JOVEM' ? 'Quer minutos em campo.' : 'Não aceita o banco de reservas.' };
+  }
+  return { happy: true, reason: appsShare !== null && appsShare >= 0.6 ? 'Titular e satisfeito.' : 'Satisfeito.' };
+}
+
+/**
+ * Pedido de renovação. Base = personalidade; ajustes fixos: destaque da divisão (até +15%), titular (+5%),
+ * insatisfeito (+10%), contrato ainda longe do fim (−5%: sem pressa), financeiro com o clube em crise (+5%).
+ */
+function openTalk(seed        , p        , ctx              )               {
+  const pers = personalityOf(seed, p);
+  let f = ASK[pers];
+  if (ctx) {
+    if (ctx.relDelta !== null && ctx.relDelta > 3) f *= 1 + Math.min(0.15, (ctx.relDelta - 3) * 0.015);
+    if (ctx.appsShare !== null && ctx.appsShare >= 0.6) f *= 1.05;
+    if (!satisfaction(seed, p, ctx.appsShare, ctx.roundsPlayed).happy) f *= 1.1;
+    if (p.contract.endSeason > ctx.season) f *= 0.95;
+    if (ctx.financeCritical && pers === 'FINANCEIRO') f *= 1.05;
+  }
+  const askSalary = roundTo(Math.max(p.salary, 100) * f, 100);
   const askYears = p.age >= 33 ? 1 : YEARS[pers];
   return { playerId: p.id, askSalary, askYears, minSalary: roundTo(askSalary * FLOOR[pers], 100), attempts: 0, status: 'OPEN', message: messageFor(pers) };
 }
@@ -5842,9 +5948,151 @@ function proposeRenewal(seed        , p        , talk              , salary     
 }
 
 __exports["expiring"] = expiring;
+__exports["satisfaction"] = satisfaction;
 __exports["openTalk"] = openTalk;
 __exports["proposeRenewal"] = proposeRenewal;
 __exports["MAX_TALKS"] = MAX_TALKS;
+};
+
+__defs["game/manager/progression.ts"] = function (__exports, __req) {
+                                                           
+const { stableHash } = __req("game/manager/people.ts");
+const { roundTo } = __req("game/manager/finance.ts");
+                                           
+
+// FORÇA RELATIVA e EVOLUÇÃO (docs/PLAYER-PROGRESSION.md).
+// A força (1–50) continua sendo o único atributo; a divisão NÃO limita a força. O que muda com a divisão é a LEITURA:
+// força 30 é destaque na 4ª e abaixo da média na 1ª. A "força esperada" de uma divisão é a média real dos elencos dela.
+// Evolução: dois checkpoints por temporada (meio, depois da rodada 19, e fim, antes do acesso/rebaixamento), cada um
+// com no máximo ±1. Subir de divisão não aumenta ninguém na hora; cair não derruba ninguém na hora: a adaptação ao novo
+// nível vem nos checkpoints seguintes. Tudo sai de um hash estável (seed + temporada + checkpoint + jogador).
+
+                                                             
+const TIER_LABEL                       = { DESTAQUE: '⭐ Destaque da divisão', ACIMA: 'Acima da média da divisão', MEDIA: 'Na média da divisão', ABAIXO: 'Abaixo da média da divisão' };
+/** Diferença para a média da divisão a partir da qual o jogador é destaque (⭐). */
+const STAR_GAP = 8;
+
+/** Média de força dos elencos de cada divisão (por id da divisão). */
+function divisionMeans(world       )                         {
+  const out                         = {};
+  for (const d of world.divisions) {
+    let sum = 0;
+    let n = 0;
+    for (const id of d.clubIds) for (const pid of world.clubs[id]?.squad ?? []) {
+      const p = world.players[pid];
+      if (p) {
+        sum += p.strength;
+        n += 1;
+      }
+    }
+    out[d.id] = n ? sum / n : 0;
+  }
+  return out;
+}
+
+                           
+                     
+               
+                
+             
+                
+ 
+
+/** Leitura da força em relação à divisão do clube do jogador (null para jogador sem clube). */
+function relativeOf(world       , means                        , p                                     )                  {
+  const club = p.clubId ? world.clubs[p.clubId] : null;
+  if (!club) return null;
+  const mean = means[club.divisionId] ?? 0;
+  const delta = p.strength - mean;
+  const tier       = delta >= STAR_GAP ? 'DESTAQUE' : delta >= 3 ? 'ACIMA' : delta > -3 ? 'MEDIA' : 'ABAIXO';
+  return { divisionId: club.divisionId, mean, delta, tier, star: tier === 'DESTAQUE' };
+}
+
+                                        
+
+                                 
+               
+                 
+                         
+                                                         
+                                  
+                                        
+                       
+                                                                        
+                                    
+ 
+
+                                 
+                   
+                        
+               
+             
+ 
+
+/** Pontuação de tendência (positiva = tende a subir). Pequena por construção: o passo é sempre ±1 ou 0. */
+function evolutionScore(p        , mean               , line                      , roundsPlayed        , youth        )         {
+  let score = p.age <= 21 ? 0.6 : p.age <= 24 ? 0.3 : p.age <= 29 ? 0 : p.age <= 32 ? -0.3 : -0.6;
+  if (mean !== null) {
+    const gap = mean - p.strength;
+    if (gap >= 6) score += 0.3; // abaixo do nível da divisão: o nível puxa para cima (ex.: clube que subiu)
+    else if (gap <= -6) score -= 0.3; // acima: adapta-se para baixo devagar (ex.: clube que caiu)
+  }
+  const apps = line?.apps ?? 0;
+  if (roundsPlayed > 0) {
+    if (apps / roundsPlayed >= 0.5) score += 0.2; // jogando
+    else if (apps === 0 && p.age >= 23) score -= 0.2; // sem jogar
+    if ((p.position === 'ATT' || p.position === 'MID') && (line?.goals ?? 0) >= roundsPlayed * 0.3) score += 0.2; // decidindo
+  }
+  return score + youth;
+}
+
+/** Passo do checkpoint: +1, 0 ou −1, decidido por um hash estável (sem RNG de partida). */
+function evolutionStep(score        , u        )             {
+  const clamp = (v        ) => Math.max(0.02, Math.min(0.85, v));
+  const up = clamp(0.12 + 0.6 * score);
+  const down = clamp(0.12 - 0.6 * score);
+  if (u < up) return 1;
+  if (u >= 1 - down) return -1;
+  return 0;
+}
+
+/** Aplica um checkpoint de evolução a todos os jogadores com clube. Valor de mercado acompanha a força. */
+function evolveWorld(world       , i                )                                              {
+  const means = divisionMeans(world);
+  const players                         = { ...world.players };
+  const changes                   = [];
+  for (const id of Object.keys(world.players).sort()) {
+    const p = world.players[id];
+    if (!p.clubId) continue;
+    const club = world.clubs[p.clubId];
+    const mean = club ? (means[club.divisionId] ?? null) : null;
+    const score = evolutionScore(p, mean, i.stats[id], i.roundsPlayed, i.youthBonus(p));
+    const u = stableHash(`${i.seed}|evolucao|${i.season}|${i.checkpoint}|${id}`) / 0x100000000;
+    const step = evolutionStep(score, u);
+    if (step === 0) continue;
+    const strength = Math.max(1, Math.min(50, p.strength + step));
+    if (strength === p.strength) continue;
+    const ratio = strength / p.strength;
+    players[id] = { ...p, strength, marketValue: Math.max(1_000, roundTo(p.marketValue * ratio * ratio, 1_000)) };
+    changes.push({ playerId: id, clubId: p.clubId, from: p.strength, to: strength });
+  }
+  return { world: { ...world, players }, changes };
+}
+
+/** Fator de mercado do destaque: quanto mais acima da média da divisão, mais caro e mais bem pago (teto de +30%). */
+function starPremium(rel                 )         {
+  if (!rel || rel.delta <= 3) return 1;
+  return 1 + Math.min(0.3, (rel.delta - 3) * 0.03);
+}
+
+__exports["divisionMeans"] = divisionMeans;
+__exports["relativeOf"] = relativeOf;
+__exports["evolutionScore"] = evolutionScore;
+__exports["evolutionStep"] = evolutionStep;
+__exports["evolveWorld"] = evolveWorld;
+__exports["starPremium"] = starPremium;
+__exports["TIER_LABEL"] = TIER_LABEL;
+__exports["STAR_GAP"] = STAR_GAP;
 };
 
 __defs["game/manager/market.ts"] = function (__exports, __req) {
@@ -5852,6 +6100,7 @@ const { createRng, deriveSeed,                                                  
 const { personalityOf } = __req("game/manager/people.ts");
                                                                          
 const { roundTo } = __req("game/manager/finance.ts");
+const { divisionMeans, relativeOf, starPremium,               } = __req("game/manager/progression.ts");
 
 // Mercado: janela, busca, propostas com contraproposta, empréstimo, leilão e jogadores livres.
 // A negociação é uma regra fixa e determinística (preço pedido, personalidade, tentativas): não há sorteio na resposta
@@ -5887,7 +6136,8 @@ function squadRank(world       , club      , playerId        )         {
 const levelOf = (world       , club                         ) => (club ? (world.divisions.find((d) => d.id === club.divisionId)?.level ?? 4) : 5);
 
 /** Preço pedido pelo clube dono: valor de mercado ajustado pela importância do jogador e pela situação do vendedor. */
-function askingPrice(world       , seed        , playerId        , buyer             )         {
+/** Preço pedido. means = médias das divisões (passe quando calcular para muitos jogadores de uma vez). */
+function askingPrice(world       , seed        , playerId        , buyer             , means                         = divisionMeans(world))         {
   const p = world.players[playerId];
   const seller = p.clubId ? world.clubs[p.clubId] : null;
   if (!seller) return 0;
@@ -5898,13 +6148,19 @@ function askingPrice(world       , seed        , playerId        , buyer        
   if (pers === 'AMBICIOSO' && buyer && levelOf(world, buyer) < levelOf(world, seller)) f *= 0.95;
   if (seller.money < 0) f *= 0.85;
   if (p.contract.endSeason <= 0) f *= 0.8;
+  f *= starPremium(relativeOf(world, means, p)); // destaque da divisão custa mais (até +30%)
   return Math.max(5_000, roundTo(p.marketValue * f, 5_000));
 }
 
 const SALARY_FACTOR                              = { LEAL: 1.05, AMBICIOSO: 1.2, FINANCEIRO: 1.3, COMPETITIVO: 1.15, JOVEM: 1.05, VETERANO: 1.0 };
 
-function salaryDemand(seed        , p        )         {
-  return roundTo(Math.max(p.salary, 100) * SALARY_FACTOR[personalityOf(seed, p)], 100);
+/**
+ * Salário pedido (por rodada, a unidade guardada; a tela mostra × 38 = por temporada). Com o mundo, o destaque da
+ * divisão pede até 15% a mais.
+ */
+function salaryDemand(seed        , p        , world        )         {
+  const premium = world ? 1 + (starPremium(relativeOf(world, divisionMeans(world), p)) - 1) / 2 : 1;
+  return roundTo(Math.max(p.salary, 100) * SALARY_FACTOR[personalityOf(seed, p)] * premium, 100);
 }
 
 function contractYears(seed        , p        )         {
@@ -5942,6 +6198,7 @@ function playerAccepts(world       , seed        , p        , buyer      )      
                 
                 
                 
+                       
  
 
 const fold = (s        ) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -5949,6 +6206,7 @@ const fold = (s        ) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCa
 /** Busca no mercado (jogadores de outros clubes e livres). Ordena por força e depois por preço. */
 function searchPlayers(world       , seed        , userClubId               , wishlist                   , f               , limit = 60)              {
   const buyer = userClubId ? world.clubs[userClubId] : null;
+  const means = divisionMeans(world);
   const text = f.text ? fold(f.text.trim()) : '';
   const out              = [];
   for (const p of Object.values(world.players)) {
@@ -5963,9 +6221,9 @@ function searchPlayers(world       , seed        , userClubId               , wi
     const level = levelOf(world, club);
     if (f.divisionLevel && level !== f.divisionLevel) continue;
     if (text && !fold(p.name).includes(text) && !(club && fold(club.name).includes(text))) continue;
-    const price = club ? askingPrice(world, seed, p.id, buyer) : 0;
+    const price = club ? askingPrice(world, seed, p.id, buyer, means) : 0;
     if (f.maxPrice && price > f.maxPrice) continue;
-    out.push({ player: p, club, level, price, wish: wishlist.includes(p.id) });
+    out.push({ player: p, club, level, price, wish: wishlist.includes(p.id), rel: relativeOf(world, means, p) });
   }
   out.sort((a, b) => b.player.strength - a.player.strength || a.price - b.price || a.player.id.localeCompare(b.player.id));
   return out.slice(0, limit);
@@ -6239,7 +6497,7 @@ const UPGRADES                         = [
   { id: 'LOJA', label: 'Loja do clube', description: '+R$ 1,20 por torcedor em cada jogo em casa.', maxLevel: 3, cost: 110_000, rounds: 3, perFan: 1.2 },
   { id: 'VIP', label: 'Área VIP', description: '+R$ 4.000 por jogo em casa.', maxLevel: 2, cost: 250_000, rounds: 5, perGame: 4000 },
   { id: 'CONFORTO', label: 'Conforto', description: 'Assentos e cobertura: mais ocupação.', maxLevel: 2, cost: 200_000, rounds: 4, fill: 0.03 },
-  { id: 'CT', label: 'Centro de treinamento', description: 'Jogadores de até 23 anos evoluem mais no fim da temporada.', maxLevel: 2, cost: 400_000, rounds: 8, youth: 1 },
+  { id: 'CT', label: 'Centro de treinamento', description: 'Jogadores de até 23 anos têm mais chance de evoluir nas avaliações do meio e do fim da temporada.', maxLevel: 2, cost: 400_000, rounds: 8, youth: 1 },
 ];
 
 const MAX_WORKS = 2;
@@ -6554,6 +6812,7 @@ const { coachName, refereeFor } = __req("game/manager/people.ts");
 const { applyWork, attendanceFor, homeExtras, upgradeInfo, youthBonus } = __req("game/manager/stadium.ts");
 const { addLines, addReferee, matchStatLines, refereeLine } = __req("game/manager/stats.ts");
 const { absRound, ROUNDS,                                                                } = __req("game/manager/state.ts");
+const { evolveWorld,                     } = __req("game/manager/progression.ts");
 const { agePlayers, cpuCoachChanges, cpuRenewals, cpuTransfers, youthIntake, CPU_MIN_SQUAD } = __req("game/manager/world.ts");
 const { MIN_SQUAD } = __req("game/manager/market.ts");
 
@@ -6608,7 +6867,26 @@ function planManagedRound(career             )              {
  
 
 /** Fecha a rodada (finishRound) e aplica a gestão: estatísticas, árbitros, dinheiro extra, obras, leilões, moral, notícias. */
-function finishManagedRound(career             , results                        , matches                       )                 {
+                              
+                                                                                                                         
+                      
+ 
+
+/** Rodada do checkpoint de evolução do meio da temporada (fim do 1º turno). */
+const MID_CHECKPOINT = 19;
+
+/** Notícia do checkpoint para o clube do treinador: quem evoluiu e quem perdeu força (fato real, já aplicado). */
+function evolutionNews(c             , changes                           , when        )          {
+  const mine = changes.filter((x) => x.clubId !== null && x.clubId === c.userClubId);
+  if (!mine.length) return [];
+  const name = (id        ) => c.world.players[id]?.name ?? 'Jogador';
+  const up = mine.filter((x) => x.to > x.from).map((x) => `${name(x.playerId)} (${x.from}→${x.to})`);
+  const down = mine.filter((x) => x.to < x.from).map((x) => `${name(x.playerId)} (${x.from}→${x.to})`);
+  const body = [up.length ? `Evoluíram: ${up.join(', ')}.` : '', down.length ? `Perderam força: ${down.join(', ')}.` : ''].filter(Boolean).join(' ');
+  return [draft('ANALISE', `Avaliação ${when}: ${up.length} jogador(es) evoluíram e ${down.length} perderam força`, { body, clubId: c.userClubId, mine: true })];
+}
+
+function finishManagedRound(career             , results                        , matches                       , opts              = {})                 {
   const before = ensureManager(career);
   const season = before.season;
   const round = before.roundNumber;
@@ -6709,6 +6987,13 @@ function finishManagedRound(career             , results                        
     if (!fired) m = { ...m, morale };
   }
 
+  // checkpoint de evolução do meio da temporada (depois do 1º turno): ±1 no máximo, para todos os clubes
+  if (opts.evolution !== false && round === MID_CHECKPOINT) {
+    const evo = evolveWorld(c.world, { seed: c.seed, season, checkpoint: 'MEIO', stats: m.stats.season, roundsPlayed: round, youthBonus: (p) => (p.clubId === c.userClubId && p.age <= 23 ? 0.3 * youthBonus(m.stadium.levels) : 0) });
+    c = { ...c, world: evo.world };
+    drafts.push(...evolutionNews(c, evo.changes, 'do 1º turno'));
+  }
+
   // técnicos da CPU
   const cpu = cpuCoachChanges(c, m.coaches, round);
   m = { ...m, coaches: cpu.coaches };
@@ -6806,24 +7091,23 @@ function reachLevel(reputation        )         {
 function addJobOffer(c             , m              , clubId        , round        , reason        , drafts         )               {
   if (m.jobs.offers.some((o) => o.clubId === clubId && o.status === 'OPEN')) return m;
   const seq = m.jobs.seq + 1;
-  const offer           = { id: `job${seq}`, clubId, season: c.season, round, expiresRound: absRound(c.season, round) + 3, reason, status: 'OPEN' };
+  // válida por 3 rodadas; no fim da temporada, até a 3ª rodada da seguinte
+  const expiresRound = round >= ROUNDS ? absRound(c.season + 1, 3) : absRound(c.season, round) + 3;
+  const offer           = { id: `job${seq}`, clubId, season: c.season, round, expiresRound, reason, status: 'OPEN' };
   drafts.push(draft('URGENTE', `Proposta de trabalho: ${c.world.clubs[clubId].name} quer ${c.coach.name}`, { body: reason, clubId, mine: true }));
   return { ...m, jobs: { ...m.jobs, seq, offers: [...m.jobs.offers, offer] } };
 }
 
-/** Treinador sem clube: clubes que acabaram de demitir chamam primeiro; fora isso, de vez em quando surge uma proposta. */
+/**
+ * Treinador sem clube: proposta só nasce de um EVENTO REAL do mundo — um clube ao alcance da reputação dele que acabou
+ * de demitir o técnico (na rodada ou, no fim da temporada, por rebaixamento). Nada é sorteado só porque o tempo passou.
+ */
 function organicOffers(c             , m              , round        , firedClubs          , drafts         )                      {
   const reach = reachLevel(m.reputation);
   const open = m.jobs.offers.filter((o) => o.status === 'OPEN').length;
   if (open >= 3) return { m };
   for (const id of firedClubs) {
     if (levelOf(c, id) >= reach) m = addJobOffer(c, m, id, round, 'O clube acabou de trocar de técnico e procura um nome para a sequência da temporada.', drafts);
-  }
-  const rng = createRng(deriveSeed(c.seed, `emprego:${c.season}:${round}`));
-  if (m.jobs.offers.filter((o) => o.status === 'OPEN').length === 0 || rng.next() < 0.3) {
-    const pool = c.world.divisions.filter((d) => d.level >= reach).flatMap((d) => divisionStandings(c, d.id).slice(-8).map((r) => r.clubId)).sort();
-    const options = pool.filter((id) => !m.jobs.offers.some((o) => o.clubId === id && o.status === 'OPEN'));
-    if (options.length) m = addJobOffer(c, m, options[rng.int(0, options.length - 1)], round, 'A diretoria quer mudar o rumo da temporada e gostou do seu perfil.', drafts);
   }
   return { m };
 }
@@ -6843,6 +7127,19 @@ function closeManagedSeason(c             , m              , drafts         , ex
   for (const [divId, clubId] of Object.entries(report.champions)) {
     const d = world.divisions.find((x) => x.id === divId);
     drafts.push(draft('NOTICIA', `${world.clubs[clubId].name} é campeão da ${d?.name ?? divId}`, { clubId, mine: clubId === c.userClubId }));
+  }
+  // clubes da CPU que fecham a temporada no vermelho (depois da premiação): fato real, vira análise
+  const red = Object.values(world.clubs).filter((cl) => cl.id !== c.userClubId && cl.money < 0).sort((x, y) => x.money - y.money).slice(0, 3);
+  for (const cl of red) drafts.push(draft('ANALISE', `${cl.name} fecha a temporada no vermelho`, { body: `O caixa terminou negativo depois da premiação. Crise financeira pode pesar no mercado da intertemporada.`, clubId: cl.id }));
+  // rebaixados da CPU trocam de técnico (evento real: vaga aberta, que vira proposta para o treinador sem clube)
+  const reach = reachLevel(m.reputation);
+  for (const mv of report.movements.filter((x) => x.kind === 'RELEGATED' && x.clubId !== c.userClubId)) {
+    const old = m.coaches[mv.clubId];
+    const fresh = { name: coachName(c.seed, `${mv.clubId}:${c.season}:rebaixado`), since: absRound(c.season, round) };
+    m = { ...m, coaches: { ...m.coaches, [mv.clubId]: fresh } };
+    drafts.push(draft('URGENTE', `${world.clubs[mv.clubId].name} é rebaixado e demite ${old?.name ?? 'o técnico'}`, { clubId: mv.clubId }));
+    const toLevel = world.divisions.find((d) => d.id === mv.toDivisionId)?.level ?? 4;
+    if (!c.userClubId && toLevel >= reach) m = addJobOffer({ ...c, world }, m, mv.clubId, round, 'Rebaixado, o clube recomeça com outro técnico e procura um nome para a próxima temporada.', drafts);
   }
   if (c.userClubId) {
     const mv = report.userMovement;
@@ -6885,11 +7182,19 @@ function closeManagedSeason(c             , m              , drafts         , ex
                    
  
 
-function startManagedSeason(career             )                 {
-  const c0 = ensureManager(career);
+function startManagedSeason(career             , opts              = {})                 {
+  let c0 = ensureManager(career);
   let m = c0.manager;
+  const drafts0          = [];
+  // checkpoint de evolução do fim da temporada, ANTES do acesso/rebaixamento: quem sobe ou cai começa a temporada nova
+  // com a mesma força e se adapta nos checkpoints seguintes
+  if (opts.evolution !== false) {
+    const evo = evolveWorld(c0.world, { seed: c0.seed, season: c0.season, checkpoint: 'FIM', stats: m.stats.season, roundsPlayed: ROUNDS, youthBonus: (p) => (p.clubId === c0.userClubId && p.age <= 23 ? 0.3 * youthBonus(m.stadium.levels) : 0) });
+    c0 = { ...c0, world: evo.world };
+    drafts0.push(...evolutionNews(c0, evo.changes, 'do fim da temporada'));
+  }
   const newSeason = c0.season + 1;
-  const drafts          = [];
+  const drafts          = [...drafts0];
   let world = c0.world;
   const userId = c0.userClubId;
 
@@ -6923,7 +7228,7 @@ function startManagedSeason(career             )                 {
   // acesso/rebaixamento e calendário novo
   let c = startNextSeason({ ...c0, world });
   world = c.world;
-  const aged = agePlayers(world, c.seed, newSeason, (p) => (p.clubId === userId && p.age < 23 ? youthBonus(m.stadium.levels) : 0));
+  const aged = agePlayers(world);
   world = aged.world;
   const moves = cpuTransfers(world, c.seed, newSeason, userId);
   world = moves.world;
@@ -6974,6 +7279,7 @@ __exports["reachLevel"] = reachLevel;
 __exports["addJobOffer"] = addJobOffer;
 __exports["startManagedSeason"] = startManagedSeason;
 __exports["requireManagedClub"] = requireManagedClub;
+__exports["MID_CHECKPOINT"] = MID_CHECKPOINT;
 };
 
 __defs["game/manager/stats.ts"] = function (__exports, __req) {
@@ -7094,7 +7400,7 @@ const levelOfClub = (world       , clubId        ) => world.divisions.find((d) =
 
 /**
  * Demissões na CPU depois da rodada: a partir da 6ª, quem está entre os 3 últimos da divisão e perdeu 3 dos últimos
- * 4 jogos, com o técnico há pelo menos 6 rodadas no cargo. No máximo 2 por rodada no mundo todo.
+ * 4 jogos, com o técnico há pelo menos 6 rodadas no cargo. No máximo 1 por divisão por rodada.
  */
 function cpuCoachChanges(c             , coaches                          , playedRound        )                                                                {
   if (playedRound < 6) return { coaches, changes: [] };
@@ -7103,8 +7409,9 @@ function cpuCoachChanges(c             , coaches                          , play
   const next = { ...coaches };
   for (const d of [...c.world.divisions].sort((a, b) => a.level - b.level)) {
     const table = divisionStandings(c, d.id);
+    let inDivision = 0;
     for (const row of table.slice(-3)) {
-      if (row.clubId === c.userClubId || changes.length >= 2) continue;
+      if (row.clubId === c.userClubId || inDivision >= 1) continue;
       const coach = next[row.clubId];
       if (!coach || now - coach.since < 6) continue;
       const losses = recentForm(c.results, row.clubId, 4).filter((x) => x === 'D').length;
@@ -7112,6 +7419,7 @@ function cpuCoachChanges(c             , coaches                          , play
       const fresh           = { name: coachName(c.seed, `${row.clubId}:${c.season}:${playedRound}`), since: now };
       changes.push({ clubId: row.clubId, out: coach.name, in: fresh.name });
       next[row.clubId] = fresh;
+      inDivision += 1;
     }
   }
   return { coaches: next, changes };
@@ -7173,11 +7481,10 @@ function youthIntake(world       , seed        , season        , minSquad       
 }
 
 /**
- * Envelhecimento e evolução (uma vez por virada): +1 ano; até 23 anos sobe 0 a 2 (+ bônus do CT no clube do treinador),
- * 24–29 varia de −1 a +1, 30–32 cai 0 a 1, 33+ cai 0 a 2. Valor de mercado e salário-base acompanham a nova força.
- * Quem chega a 37 anos se aposenta.
+ * Envelhecimento na virada: +1 ano; quem chega a 37 anos se aposenta; a partir dos 31 o valor de mercado cai 15% ao ano.
+ * A FORÇA não muda aqui: ela evolui nos checkpoints de progression.ts (±1 no meio e no fim da temporada).
  */
-function agePlayers(world       , seed        , season        , bonus                       )                                      {
+function agePlayers(world       )                                      {
   const players                         = {};
   const retired           = [];
   const clubs = { ...world.clubs };
@@ -7189,12 +7496,7 @@ function agePlayers(world       , seed        , season        , bonus           
       if (p.clubId && clubs[p.clubId]) clubs[p.clubId] = { ...clubs[p.clubId], squad: clubs[p.clubId].squad.filter((x) => x !== id), penaltyTakerId: clubs[p.clubId].penaltyTakerId === id ? null : clubs[p.clubId].penaltyTakerId };
       continue;
     }
-    const h = stableHash(`${seed}|evolucao|${season}|${id}`);
-    const roll = (lo        , hi        ) => lo + (h % (hi - lo + 1));
-    const delta = age <= 23 ? roll(0, 2) + bonus(p) : age <= 29 ? roll(-1, 1) : age <= 32 ? roll(-1, 0) : roll(-2, 0);
-    const strength = Math.max(1, Math.min(50, p.strength + delta));
-    const ratio = strength / Math.max(1, p.strength);
-    players[id] = { ...p, age, strength, marketValue: Math.max(1_000, roundTo(p.marketValue * ratio * ratio * (age >= 31 ? 0.85 : 1), 1_000)) };
+    players[id] = { ...p, age, marketValue: age >= 31 ? Math.max(1_000, roundTo(p.marketValue * 0.85, 1_000)) : p.marketValue };
   }
   return { world: { ...world, players, clubs }, retired };
 }
@@ -8024,7 +8326,19 @@ const initials = (name        )         =>
 
 const plural = (n        , one        , many        )         => `${n} ${n === 1 ? one : many}`;
 
+/** Salário: guardado POR RODADA (a unidade que as finanças cobram); mostrado POR TEMPORADA (38 rodadas). */
+const SEASON_ROUNDS = 38;
+const seasonSalary = (perRound        )         => perRound * SEASON_ROUNDS;
+const perRoundFromSeason = (perSeason        )         => Math.round(perSeason / SEASON_ROUNDS);
+
+/** Lesão contada em PARTIDAS: 1–2 leve, 3–5 moderada, 6+ grave. */
+function injuryLabel(matches        )         {
+  const grade = matches >= 6 ? 'grave' : matches >= 3 ? 'moderada' : 'leve';
+  return `🩹 Lesão ${grade} · fora por ${matches} partida${matches === 1 ? '' : 's'}`;
+}
+
 __exports["money"] = money;
+__exports["injuryLabel"] = injuryLabel;
 __exports["num"] = num;
 __exports["signedMoney"] = signedMoney;
 __exports["POSITION_LABEL"] = POSITION_LABEL;
@@ -8039,6 +8353,9 @@ __exports["useNamesOf"] = useNamesOf;
 __exports["shortName"] = shortName;
 __exports["initials"] = initials;
 __exports["plural"] = plural;
+__exports["SEASON_ROUNDS"] = SEASON_ROUNDS;
+__exports["seasonSalary"] = seasonSalary;
+__exports["perRoundFromSeason"] = perRoundFromSeason;
 };
 
 __defs["app/src/views/common.ts"] = function (__exports, __req) {
@@ -8152,7 +8469,7 @@ function renderCareer(ctrl                )              {
     card(
       'Propostas de trabalho',
       offers.length
-        ? h('ul', { class: 'deals' }, offers.map((o) => { const cl = career.world.clubs[o.clubId]; return h('li', null, h('div', { class: 'deal-main' }, h('b', null, cl.name), h('span', { class: 'muted' }, `${flagOf(cl.country)} ${divName(cl.divisionId)} · válida até a rodada ${o.expiresRound % 100}`), h('span', { class: 'small' }, o.reason)), btn('VER PROPOSTA', () => ctrl.openProposal(o.clubId, o.id), { kind: 'primary', disabled: live })); }))
+        ? h('ul', { class: 'deals' }, offers.map((o) => { const cl = career.world.clubs[o.clubId]; return h('li', null, h('div', { class: 'deal-main' }, h('b', null, cl.name), h('span', { class: 'muted' }, `${flagOf(cl.country)} ${divName(cl.divisionId)} · válida até a rodada ${o.expiresRound % 100} de ${Math.floor(o.expiresRound / 100)}`), h('span', { class: 'small' }, o.reason)), btn('VER PROPOSTA', () => ctrl.openProposal(o.clubId, o.id), { kind: 'primary', disabled: live })); }))
         : empty(club ? 'Nenhuma proposta no momento. Bons trabalhos atraem clubes maiores.' : 'Nenhuma proposta ainda. Jogue as rodadas: clubes que trocam de técnico procuram nomes.'),
     ),
     m.jobs.national === 'INVITED'
@@ -8176,7 +8493,7 @@ __defs["app/src/views/club-admin.ts"] = function (__exports, __req) {
 const { payroll } = __req("engine/index.ts");
 const { isSeasonOver, userClub } = __req("game/career.ts");
 const { financeView } = __req("game/manager/actions.ts");
-const { LOAN_TERMS, STATUS_ICON, STATUS_LABEL, goalLabel, interestRate } = __req("game/manager/finance.ts");
+const { LOAN_TERMS, STATUS_ICON, STATUS_LABEL, goalLabel, interestRate, sponsorSector,                    } = __req("game/manager/finance.ts");
 const { MAX_WORKS, UPGRADES } = __req("game/manager/stadium.ts");
 const { ROUNDS } = __req("game/manager/state.ts");
                                                        
@@ -8223,6 +8540,19 @@ function renderStadium(ctrl                )              {
 
 const loanForm = { amount: '', rounds: 19 };
 
+/** Simulação antes de confirmar: valor recebido, juros, prazo, total, parcela e o peso dela na rodada. */
+function loanQuote(amount        , rounds        , status               , payrollPerRound        )              {
+  const rate = interestRate(rounds, status);
+  const total = Math.round(amount * (1 + rate));
+  const installment = Math.ceil(total / rounds);
+  return h(
+    'div',
+    { class: 'loan-quote' },
+    h('div', { class: 'stats' }, stat('Valor recebido', money(amount)), stat('Juros', `${Math.round(rate * 100)}% · ${money(total - amount)}`), stat('Prazo', `${rounds} rodadas`), stat('Total a pagar', money(total)), stat('Parcela por rodada', money(installment))),
+    h('p', { class: 'muted small' }, `Impacto: a parcela soma ${money(installment)} por rodada às despesas (hoje a folha custa ${money(payrollPerRound)} por rodada). Dívida alta piora a situação financeira, o crédito futuro e o patrocínio. Dinheiro do jogo: não existe compra com dinheiro real.`),
+  );
+}
+
 function renderFinance(ctrl                )              {
   const c = ctrl.state.career ;
   const club = userClub(c);
@@ -8241,7 +8571,7 @@ function renderFinance(ctrl                )              {
     card(
       'Situação',
       h('div', { class: 'fin-status' }, h('span', { class: 'fin-ico' }, STATUS_ICON[v.status]), h('b', null, STATUS_LABEL[v.status])),
-      h('div', { class: 'stats' }, stat('Caixa', money(club.money), club.money >= 0 ? 'default' : 'bad'), stat('Folha/rodada', money(payroll(club, c.world.players))), stat('Dívida bancária', money(v.debt), v.debt > 0 ? 'bad' : 'default'), stat('Limite de crédito', money(v.limit))),
+      h('div', { class: 'stats' }, stat('Caixa', money(club.money), club.money >= 0 ? 'default' : 'bad'), stat('Folha salarial/temporada', money(payroll(club, c.world.players) * ROUNDS)), stat('Custo da folha nesta rodada', money(payroll(club, c.world.players))), stat('Dívida bancária', money(v.debt), v.debt > 0 ? 'bad' : 'default'), stat('Limite de crédito', money(v.limit))),
     ),
     card(
       'Temporada',
@@ -8251,16 +8581,16 @@ function renderFinance(ctrl                )              {
     card(
       'Patrocínio',
       sp && sp.season >= c.season
-        ? h('div', null, h('p', null, h('b', null, sp.name), ` · ${money(sp.amount)} na temporada (pagos ${money(sp.paid)})`), h('p', { class: 'muted' }, `Meta: ${goalLabel(sp.goal)}${sp.bonus ? ` · bônus ${money(sp.bonus)}` : ''}`))
+        ? h('div', null, h('p', null, h('b', null, sp.name), ` (${sponsorSector(sp.name)}) · ${money(sp.amount)} na temporada ${sp.season} (pagos ${money(sp.paid)})`), h('p', { class: 'muted' }, `Meta: ${goalLabel(sp.goal)}${sp.bonus ? ` · bônus ${money(sp.bonus)}` : ''}`))
         : m.finance.sponsorOffers.length
-          ? h('ul', { class: 'deals' }, m.finance.sponsorOffers.map((o) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, o.name), h('span', { class: 'muted' }, `${money(o.amount)} na temporada, pagos rodada a rodada (${money(Math.floor(o.amount / ROUNDS))})`), h('span', { class: 'small' }, `Meta: ${goalLabel(o.goal)}${o.bonus ? ` · bônus de ${money(o.bonus)} se cumprir` : ''}`)), btn('ASSINAR', () => ctrl.chooseSponsor(o.id), { kind: 'primary', disabled: ctrl.state.phase === 'LIVE' }))))
+          ? h('ul', { class: 'deals' }, m.finance.sponsorOffers.map((o) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, `${o.name} · ${sponsorSector(o.name)}`), h('span', { class: 'muted' }, `${money(o.amount)} · duração: 1 temporada · pagos rodada a rodada (${money(Math.floor(o.amount / ROUNDS))})`), h('span', { class: 'small' }, `Meta: ${goalLabel(o.goal)}${o.bonus ? ` · bônus de ${money(o.bonus)} se cumprir` : ''}`)), btn('ASSINAR', () => ctrl.chooseSponsor(o.id), { kind: 'primary', disabled: ctrl.state.phase === 'LIVE' }))))
           : empty('Sem propostas de patrocínio agora. Novas chegam na virada da temporada.'),
     ),
     card(
       'Empréstimo bancário',
       v.status === 'CRITICO' ? h('p', { class: 'notice' }, 'Com caixa negativo o banco não empresta.') : null,
       h('div', { class: 'row gap wrap' }, h('label', { class: 'field grow' }, h('span', null, `Valor (até ${money(v.limit)})`), h('input', { type: 'number', min: '50000', step: '10000', value: loanForm.amount || String(Math.min(v.limit, 100_000)), onInput: (e       ) => (loanForm.amount = (e.target                    ).value) })), h('label', { class: 'field grow' }, h('span', null, 'Prazo'), h('select', { onChange: (e       ) => { loanForm.rounds = Number((e.target                     ).value); ctrl.notifyRender(); } }, LOAN_TERMS.map((t) => h('option', { value: String(t), selected: loanForm.rounds === t }, `${t} rodadas · juros ${Math.round(interestRate(t, v.status) * 100)}%`))))),
-      h('p', { class: 'muted small' }, `Total a devolver: ${money(Math.round(amount * (1 + interestRate(loanForm.rounds, v.status))))} em ${loanForm.rounds} parcelas. Dinheiro do jogo: não existe compra com dinheiro real.`),
+      loanQuote(amount, loanForm.rounds, v.status, payroll(club, c.world.players)),
       btn('PEDIR EMPRÉSTIMO', () => ctrl.takeBankLoan(Number(loanForm.amount || Math.min(v.limit, 100_000)), loanForm.rounds), { kind: 'primary', disabled: v.limit < 50_000 || ctrl.state.phase === 'LIVE' }),
       m.finance.loans.length ? h('ul', { class: 'deals' }, m.finance.loans.map((l) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, `${money(l.principal)} em ${l.rounds}x`), h('span', { class: 'muted' }, `Parcela ${money(l.installment)} · falta ${money(l.remaining)}`)), btn('QUITAR', () => ctrl.payOffBankLoan(l.id), { disabled: ctrl.state.phase === 'LIVE' })))) : null,
     ),
@@ -8780,7 +9110,7 @@ function renderLeague(ctrl                )              {
           h(
             'tbody',
             null,
-            table.map((r) => h('tr', { class: `${r.isControlled ? 'me' : ''} ${zone(r.position)}`, onClick: () => { ctrl.openClub(r.clubId); ctrl.go('CLUBS'); } }, h('td', { class: 'pos-n' }, r.position), h('td', { class: 'club' }, r.clubName), h('td', { class: 'n' }, h('b', null, r.points)), h('td', { class: 'n' }, r.played), h('td', { class: 'n' }, r.won), h('td', { class: 'n' }, r.drawn), h('td', { class: 'n' }, r.lost), h('td', { class: 'n hs' }, r.goalsFor), h('td', { class: 'n hs' }, r.goalsAgainst), h('td', { class: 'n' }, r.goalDiff > 0 ? `+${r.goalDiff}` : r.goalDiff))),
+            table.map((r) => h('tr', { class: `${r.isControlled ? 'me' : ''} ${zone(r.position)}`, onClick: () => { ctrl.openClub(r.clubId); ctrl.go('CLUBS'); } }, h('td', { class: 'pos-n' }, r.position), h('td', { class: 'club' }, h('span', { class: 'club-dot', style: `background:${career.world.clubs[r.clubId]?.primaryColor ?? '#888'}`, 'aria-hidden': 'true' }), r.clubName), h('td', { class: 'n' }, h('b', null, r.points)), h('td', { class: 'n' }, r.played), h('td', { class: 'n' }, r.won), h('td', { class: 'n' }, r.drawn), h('td', { class: 'n' }, r.lost), h('td', { class: 'n hs' }, r.goalsFor), h('td', { class: 'n hs' }, r.goalsAgainst), h('td', { class: 'n' }, r.goalDiff > 0 ? `+${r.goalDiff}` : r.goalDiff))),
           ),
         ),
       ),
@@ -8851,9 +9181,9 @@ function renderMarket(ctrl                )              {
           )
         : null,
       rows.length
-        ? table(['', 'Jogador', 'For.', 'Idade', 'Preço', ''], rows.map((r) => ({ onClick: () => ctrl.openPlayer(r.player.id), cells: [h('span', { class: `pos pos-${r.player.position}` }, POSITION_LABEL[r.player.position]), h('div', { class: 'pcell' }, h('span', null, `${flagOf(r.player.nationality)} ${r.player.name}`), h('span', { class: 'muted small' }, r.club ? r.club.name : 'Livre')), h('b', null, r.player.strength), r.player.age, r.club ? money(r.price) : '—', r.wish ? '★' : ''] })), 'tbl market', [2, 3, 4])
+        ? table(['', 'Jogador', 'For.', 'Idade', 'Preço', ''], rows.map((r) => ({ onClick: () => ctrl.openPlayer(r.player.id), cells: [h('span', { class: `pos pos-${r.player.position}` }, POSITION_LABEL[r.player.position]), h('div', { class: 'pcell' }, h('span', null, `${flagOf(r.player.nationality)} ${r.player.name}`), h('span', { class: 'muted small' }, r.club ? r.club.name : 'Livre')), h('b', { title: r.rel ? `${Math.round(r.rel.delta) >= 0 ? '+' : ''}${Math.round(r.rel.delta)} sobre a média da divisão` : '' }, `${r.rel?.star ? '⭐' : ''}${r.player.strength}`), r.player.age, r.club ? money(r.price) : '—', r.wish ? '★' : ''] })), 'tbl market', [2, 3, 4])
         : empty(ui.tab === 'DESEJOS' ? 'Nenhum jogador na lista. Abra um jogador e toque em ★ LISTA DE DESEJOS.' : 'Nenhum jogador com esses filtros.'),
-      h('p', { class: 'muted small' }, 'Toque num jogador para ver o perfil, fazer oferta ou pedir emprestado.'),
+      h('p', { class: 'muted small' }, 'Toque num jogador para ver o perfil, fazer oferta ou pedir emprestado. ⭐ = destaque da divisão dele (contexto: força 30 é destaque na 4ª e abaixo da média na 1ª).'),
     );
   } else if (ui.tab === 'NEGOCIACOES') {
     const list = [...m.market.negotiations].reverse();
@@ -8881,6 +9211,7 @@ __defs["app/src/views/match.ts"] = function (__exports, __req) {
                                                                                     
 const { ROUNDS_PER_SEASON, divisionStandings, isSeasonOver, matchIdFor, resolveUserLineup, userClub } = __req("game/career.ts");
 const { recentForm } = __req("game/manager/board.ts");
+const { roundAttendance } = __req("game/manager/flow.ts");
 const { dailyPaper } = __req("game/manager/news.ts");
 const { flagOf, refereeFor, roundDate } = __req("game/manager/people.ts");
 const { refereeProfile } = __req("game/manager/stats.ts");
@@ -9085,9 +9416,15 @@ function opponentCard(ctrl                )                     {
   const ref = refereeFor(m.referees, career.seed, matchId);
   const prof = refereeProfile(m.refereeStats[ref.id], Object.values(m.refereeStats));
   const coach = m.coaches[oppId];
+  const oppDiv = career.world.divisions.find((d) => d.id === opp.divisionId);
+  const venueClub = career.world.clubs[fx.home];
+  const estimate = roundAttendance(career, m, fx.home, fx.away);
+  const key = opp.squad.map((id) => career.world.players[id]).filter(Boolean).sort((a, b) => b.strength - a.strength).slice(0, 3);
   return card(
     'Próximo adversário',
-    h('div', { class: 'opp-head' }, crest(opp, 'md'), h('div', null, h('b', null, opp.name), h('span', { class: 'muted small' }, `${flagOf(opp.country)} ${career.results.length ? `${pos}º colocado` : 'sem jogos'} · força ${clubStrength(career.world.players, opp)}${coach ? ` · técnico ${coach.name}` : ''}`))),
+    h('div', { class: 'opp-head' }, crest(opp, 'md'), h('div', null, h('b', null, opp.name), h('span', { class: 'muted small' }, `${flagOf(opp.country)} ${opp.city} · ${oppDiv?.name ?? ''} · ${career.results.length ? `${pos}º colocado` : 'sem jogos'} · força ${clubStrength(career.world.players, opp)}${coach ? ` · técnico ${coach.name}` : ''}`))),
+    h('p', { class: 'small' }, `${fx.home === uid ? 'Em casa' : 'Fora'} · ${venueClub.stadium.name} · público estimado ${num(estimate)} · estilo ${STYLE_LABEL[opp.defaultTactics.style].toLowerCase()}`),
+    key.length ? h('p', { class: 'small' }, `Principais jogadores: ${key.map((p) => `${shortName(p.name)} (${p.strength})`).join(', ')}`) : null,
     h('div', { class: 'row gap wrap' }, h('span', { class: 'label' }, 'Forma'), form.length ? form.map((x) => h('span', { class: `wdl wdl-${x === 'V' ? 'W' : x === 'E' ? 'D' : 'L'}` }, x)) : h('span', { class: 'muted small' }, 'sem jogos')),
     top && top.g > 0 ? h('p', { class: 'small' }, `Artilheiro: ${career.world.players[top.id].name} (${top.g} gols)`) : null,
     out.length ? h('p', { class: 'small muted' }, `Desfalques: ${out.map((p) => `${shortName(p.name)} ${p.condition.injuryRounds > 0 ? '🩹' : '🟥'}`).join(', ')}`) : null,
@@ -9226,7 +9563,7 @@ function renderPost(ctrl                )              {
     );
   }
   const news = career.manager ? dailyPaper(career.manager.news).slice(0, 5) : [];
-  if (news.length) parts.push(card('Jornal do Dia', h('ul', { class: 'plain' }, news.map((n) => h('li', null, h('b', null, n.title)))), btn('VER NOTÍCIAS', () => ctrl.go('NEWS'))));
+  if (news.length) parts.push(card('Jornal do Dia', h('ul', { class: 'plain' }, news.map((n) => h('li', null, h('button', { type: 'button', class: 'linkish', onClick: () => ctrl.openNews(n.id) }, n.title)))), btn('VER NOTÍCIAS', () => ctrl.go('NEWS'))));
   if (club) {
     const table = divisionStandings(career, club.divisionId);
     const pos = table.findIndex((r) => r.clubId === club.id) + 1;
@@ -9268,22 +9605,24 @@ __exports["renderMatch"] = renderMatch;
 
 __defs["app/src/views/player.ts"] = function (__exports, __req) {
 const { isSeasonOver } = __req("game/career.ts");
+const { satisfaction } = __req("game/manager/contracts.ts");
 const { askingPrice, loanFee, minAuctionPrice, salaryDemand, windowOpen } = __req("game/manager/market.ts");
 const { PERSONALITY_LABEL, flagOf, personalityOf } = __req("game/manager/people.ts");
+const { TIER_LABEL, divisionMeans, relativeOf } = __req("game/manager/progression.ts");
 const { EMPTY_LINE } = __req("game/manager/state.ts");
                                                        
 const { h,            } = __req("app/src/dom.ts");
-const { POSITION_NAME, money } = __req("app/src/format.ts");
-const { btn, modalBox, stat } = __req("app/src/views/common.ts");
+const { POSITION_NAME, injuryLabel, money, perRoundFromSeason, seasonSalary } = __req("app/src/format.ts");
+const { btn, clubStripe, modalBox, stat } = __req("app/src/views/common.ts");
 
-// Perfil do jogador: dados, estatísticas reais (temporada e carreira), personalidade, contrato e as ações possíveis.
-// As negociações mesmo acontecem nas telas MERCADO e MEU TIME; aqui ficam os atalhos.
+// Perfil do jogador: dados, força relativa à divisão, estatísticas reais (temporada e carreira), personalidade,
+// satisfação, contrato (salário POR TEMPORADA) e as ações possíveis. As regras moram em game/manager.
 
 const draft = { offer: '', salary: '', years: '', auction: '', id: '' };
 
 function statusOf(p                                                                   )         {
-  if (p.condition.injuryRounds > 0) return `🩹 Lesionado (${p.condition.injuryRounds} rod.)`;
-  if (p.condition.suspensionRounds > 0) return `🟥 Suspenso (${p.condition.suspensionRounds} rod.)`;
+  if (p.condition.injuryRounds > 0) return injuryLabel(p.condition.injuryRounds);
+  if (p.condition.suspensionRounds > 0) return `🟥 Suspenso · fora por ${p.condition.suspensionRounds} partida${p.condition.suspensionRounds === 1 ? '' : 's'}`;
   return '✅ Disponível';
 }
 
@@ -9306,12 +9645,18 @@ function renderPlayer(ctrl                )                     {
   const neg = m?.market.negotiations.find((n) => n.playerId === id && (n.status === 'OPEN' || n.status === 'COUNTER'));
   const wish = m?.market.wishlist.includes(id) ?? false;
   const loaned = m?.market.loans.find((l) => l.playerId === id);
+  const rel = relativeOf(c.world, divisionMeans(c.world), p);
+  const divName = rel ? (c.world.divisions.find((d) => d.id === rel.divisionId)?.name ?? '') : '';
+  const roundsPlayed = Math.min(c.roundNumber - 1, 38);
+  const mood = satisfaction(c.seed, p, roundsPlayed > 0 ? season.apps / roundsPlayed : null, roundsPlayed);
   const body          = [
-    h('div', { class: 'stats' }, stat('Força', p.strength), stat('Idade', p.age), stat('Posição', POSITION_NAME[p.position]), stat('Valor', money(p.marketValue))),
+    club ? clubStripe(club) : null,
+    h('div', { class: 'stats' }, stat('Força', `${rel?.star ? '⭐ ' : ''}${p.strength}`), stat('Idade', p.age), stat('Posição', POSITION_NAME[p.position]), stat('Valor', money(p.marketValue))),
+    rel ? h('p', null, h('span', { class: 'label' }, 'Na divisão '), `${TIER_LABEL[rel.tier]} (média da ${divName}: ${rel.mean.toFixed(1).replace('.', ',')})`) : null,
     h('p', null, `${flagOf(p.nationality)} ${p.nationality} · ${club ? club.name : 'Sem clube (livre)'}${loaned ? ' · emprestado' : ''}`),
     h('p', null, h('span', { class: 'label' }, 'Situação '), statusOf(p)),
-    h('p', null, h('span', { class: 'label' }, 'Personalidade '), PERSONALITY_LABEL[pers]),
-    h('p', null, h('span', { class: 'label' }, 'Contrato '), `até ${p.contract.endSeason} · salário ${money(p.salary)} por rodada`),
+    h('p', null, h('span', { class: 'label' }, 'Personalidade '), `${PERSONALITY_LABEL[pers]} · ${mood.happy ? '🙂' : '😠'} ${mood.reason}`),
+    h('p', null, h('span', { class: 'label' }, 'Contrato '), `até ${p.contract.endSeason} · salário ${money(seasonSalary(p.salary))} por temporada (${money(p.salary)} por rodada)`),
     h('h4', { class: 'season-sub' }, 'Estatísticas'),
     h('div', { class: 'tbl-wrap' }, h('table', { class: 'tbl compact' }, h('thead', null, h('tr', null, ['', 'J', 'Gols', 'Amarelos', 'Vermelhos', 'Lesões'].map((t) => h('th', null, t)))), h('tbody', null, [['Temporada', season], ['Carreira', career]].map(([label, l]) => { const x = l                     ; return h('tr', null, h('td', null, label          ), h('td', null, x.apps), h('td', null, x.goals), h('td', null, x.yellows), h('td', null, x.reds), h('td', null, x.injuries)); })))),
     h('p', { class: 'muted small' }, 'Assistências não aparecem: o motor de partida não registra o passe do gol (ver docs/ENGINE.md).'),
@@ -9319,12 +9664,13 @@ function renderPlayer(ctrl                )                     {
   const actions          = [];
   if (!live && c.userClubId && mine && !loaned) {
     if (talk && talk.status === 'OPEN') {
+      const askSeason = seasonSalary(talk.askSalary);
       body.push(
         h('h4', { class: 'season-sub' }, 'Renovação'),
-        h('p', { class: 'notice' }, `${talk.message} Pede ${money(talk.askSalary)} por rodada, ${talk.askYears} temporada(s). Tentativa ${talk.attempts} de 3.`),
-        h('div', { class: 'row gap wrap' }, h('label', { class: 'field grow' }, h('span', null, 'Salário por rodada (R$)'), h('input', { type: 'number', min: '0', step: '100', value: draft.salary || String(talk.askSalary), onInput: (e       ) => (draft.salary = (e.target                    ).value) })), h('label', { class: 'field grow' }, h('span', null, 'Temporadas'), h('input', { type: 'number', min: '1', max: '5', value: draft.years || String(talk.askYears), onInput: (e       ) => (draft.years = (e.target                    ).value) }))),
+        h('p', { class: 'notice' }, `${talk.message} Pede ${money(askSeason)} por temporada, ${talk.askYears} temporada(s). Tentativa ${talk.attempts} de 3.`),
+        h('div', { class: 'row gap wrap' }, h('label', { class: 'field grow' }, h('span', null, 'Salário por temporada (R$)'), h('input', { type: 'number', min: '0', step: '10000', value: draft.salary || String(askSeason), onInput: (e       ) => (draft.salary = (e.target                    ).value) })), h('label', { class: 'field grow' }, h('span', null, 'Temporadas'), h('input', { type: 'number', min: '1', max: '5', value: draft.years || String(talk.askYears), onInput: (e       ) => (draft.years = (e.target                    ).value) }))),
       );
-      actions.push(btn('PROPOR RENOVAÇÃO', () => ctrl.proposeRenewal(id, Number(draft.salary || talk.askSalary), Number(draft.years || talk.askYears)), { kind: 'primary' }));
+      actions.push(btn('PROPOR RENOVAÇÃO', () => ctrl.proposeRenewal(id, perRoundFromSeason(Number(draft.salary || askSeason)), Number(draft.years || talk.askYears)), { kind: 'primary' }));
     } else if (talk && talk.status === 'BROKEN') {
       body.push(h('p', { class: 'notice' }, 'Sem acordo de renovação: sai ao fim do contrato.'));
     } else actions.push(btn('RENOVAR CONTRATO', () => ctrl.startRenewal(id)));
@@ -9334,13 +9680,14 @@ function renderPlayer(ctrl                )                     {
     }
   }
   if (!live && c.userClubId && !mine) {
+    const demand = salaryDemand(c.seed, p, c.world);
     actions.push(btn(wish ? 'TIRAR DOS DESEJOS' : '★ LISTA DE DESEJOS', () => ctrl.toggleWish(id)));
-    if (!club) actions.push(btn(`CONTRATAR LIVRE (${money(salaryDemand(c.seed, p))}/rod.)`, () => ctrl.signFreeAgent(id), { kind: 'primary' }));
+    if (!club) actions.push(btn(`CONTRATAR LIVRE (${money(seasonSalary(demand))}/temp.)`, () => ctrl.signFreeAgent(id), { kind: 'primary' }));
     else if (open) {
       const asking = askingPrice(c.world, c.seed, id, c.world.clubs[c.userClubId]);
       body.push(
         h('h4', { class: 'season-sub' }, 'Negociação'),
-        h('p', null, `Preço pedido pelo ${club.name}: `, h('b', null, money(asking)), `. Salário pedido: ${money(salaryDemand(c.seed, p))} por rodada.`),
+        h('p', null, `Preço pedido pelo ${club.name}: `, h('b', null, money(asking)), `. Salário pedido: ${money(seasonSalary(demand))} por temporada. A compra é uma OFERTA: o clube aceita, recusa ou faz contraproposta.`),
         neg ? h('p', { class: 'notice' }, neg.status === 'COUNTER' ? `Contraproposta do clube: ${money(neg.counter ?? 0)}. ${neg.message}` : neg.message) : null,
         h('label', { class: 'field' }, h('span', null, 'Sua oferta (R$)'), h('input', { type: 'number', min: '0', step: '5000', value: draft.offer || String(Math.round(asking * 0.8 / 5000) * 5000), onInput: (e       ) => (draft.offer = (e.target                    ).value) })),
       );
@@ -9349,7 +9696,8 @@ function renderPlayer(ctrl                )                     {
       actions.push(btn(`PEDIR EMPRESTADO (${money(loanFee(p))})`, () => ctrl.requestLoan(id)));
     } else body.push(h('p', { class: 'muted' }, 'Janela de transferências fechada.'));
   }
-  return modalBox(p.name, `${club ? club.name : 'Livre'} · ${POSITION_NAME[p.position]}`, body, [...actions, btn('FECHAR', () => ctrl.openPlayer(null))], 'blue', 'modal-wide');
+  if (!live && c.userClubId) actions.push(btn('PROCURAR JOGADORES', () => { ctrl.openPlayer(null); ctrl.go('MARKET'); }));
+  return modalBox(p.name, `${club ? club.name : 'Livre'} · ${POSITION_NAME[p.position]}`, body, [...actions, btn('VOLTAR', () => ctrl.openPlayer(null))], 'blue', 'modal-wide');
 }
 
 __exports["statusOf"] = statusOf;
@@ -9581,10 +9929,11 @@ const { resolveUserLineup, userClub } = __req("game/career.ts");
 const { getClubView } = __req("game/queries.ts");
                                                        
 const { h } = __req("app/src/dom.ts");
-const { BEHAVIORS, BEHAVIOR_LABEL, FORMATIONS, POSITION_LABEL, STYLES, STYLE_LABEL, money, shortName, strengthLabel } = __req("app/src/format.ts");
+const { BEHAVIORS, BEHAVIOR_LABEL, FORMATIONS, POSITION_LABEL, STYLES, STYLE_LABEL, money, seasonSalary, shortName, strengthLabel } = __req("app/src/format.ts");
 const { flagOf } = __req("game/manager/people.ts");
 const { EMPTY_LINE } = __req("game/manager/state.ts");
-const { badge, btn, card, crest, segmented, stat, table, tabsRow } = __req("app/src/views/common.ts");
+const { TIER_LABEL, divisionMeans, relativeOf } = __req("game/manager/progression.ts");
+const { badge, btn, card, clubStripe, crest, segmented, stat, table, tabsRow } = __req("app/src/views/common.ts");
 
                               
 let tab      = 'LINEUP';
@@ -9595,6 +9944,7 @@ function squadTable(ctrl                )              {
   const club = userClub(career);
   const m = career.manager;
   const loans = new Set(m?.market.loans.filter((l) => l.toClubId === club.id).map((l) => l.playerId) ?? []);
+  const means = divisionMeans(career.world);
   const rows = club.squad
     .map((id) => career.world.players[id])
     .filter(Boolean)
@@ -9602,15 +9952,17 @@ function squadTable(ctrl                )              {
   return card(
     `Elenco (${rows.length}) · temporada ${career.season}`,
     table(
-      ['Jogador', 'For.', 'Idade', 'J', 'G', 'CA', 'CV', 'Situação', 'Salário', 'Contrato'],
+      ['Jogador', 'For.', 'Idade', 'J', 'G', 'CA', 'CV', 'Situação', 'Salário/temp.', 'Contrato'],
       rows.map((p) => {
         const l = m?.stats.season[p.id] ?? EMPTY_LINE;
-        const status = p.condition.injuryRounds > 0 ? badge(`🩹 ${p.condition.injuryRounds}`, 'red') : p.condition.suspensionRounds > 0 ? badge(`SUSP. ${p.condition.suspensionRounds}`, 'yellow') : loans.has(p.id) ? badge('EMPRESTADO', 'blue') : p.contract.endSeason <= career.season ? badge('CONTRATO VENCE', 'yellow') : badge('OK', 'green');
-        return { onClick: () => ctrl.openPlayer(p.id), cls: p.condition.injuryRounds > 0 || p.condition.suspensionRounds > 0 ? 'unavailable' : '', cells: [h('span', { class: 'pname' }, h('span', { class: `pos pos-${p.position}` }, POSITION_LABEL[p.position]), ` ${flagOf(p.nationality)} ${p.name}`), h('b', null, p.strength), p.age, l.apps, l.goals, l.yellows, l.reds, status, money(p.salary), String(p.contract.endSeason)] };
+        const rel = relativeOf(career.world, means, p);
+        const status = p.condition.injuryRounds > 0 ? badge(`🩹 ${p.condition.injuryRounds} part.`, 'red') : p.condition.suspensionRounds > 0 ? badge(`SUSP. ${p.condition.suspensionRounds}`, 'yellow') : loans.has(p.id) ? badge('EMPRESTADO', 'blue') : p.contract.endSeason <= career.season ? badge('CONTRATO VENCE', 'yellow') : badge('OK', 'green');
+        return { onClick: () => ctrl.openPlayer(p.id), cls: p.condition.injuryRounds > 0 || p.condition.suspensionRounds > 0 ? 'unavailable' : '', cells: [h('span', { class: 'pname' }, h('span', { class: `pos pos-${p.position}` }, POSITION_LABEL[p.position]), ` ${flagOf(p.nationality)} ${p.name}`), h('b', { title: rel ? TIER_LABEL[rel.tier] : '' }, `${rel?.star ? '⭐' : ''}${p.strength}`), p.age, l.apps, l.goals, l.yellows, l.reds, status, money(seasonSalary(p.salary)), String(p.contract.endSeason)] };
       }),
       'tbl squad-stats',
       [1, 2, 3, 4, 5, 6, 8],
     ),
+    h('p', { class: 'muted small' }, `Folha salarial: ${money(seasonSalary(rows.reduce((a, p) => a + p.salary, 0)))} por temporada. ⭐ = destaque da divisão (força bem acima da média dela, ${(means[club.divisionId] ?? 0).toFixed(1).replace('.', ',')}).`),
     h('p', { class: 'muted small' }, 'J jogos · G gols · CA amarelos · CV vermelhos. Toque num jogador para ver o perfil, renovar, emprestar ou vender. Assistências dependem do motor de partida (docs/ENGINE.md).'),
   );
 }
@@ -9658,12 +10010,12 @@ function renderTeam(ctrl                )              {
   );
 
   const tabs = tabsRow     ([{ id: 'LINEUP', label: 'Escalação' }, { id: 'SQUAD', label: 'Elenco e estatísticas' }], tab, (t) => { tab = t; ctrl.notifyRender(); });
-  if (tab === 'SQUAD') return h('div', { class: 'page' }, h('div', { class: 'team-head' }, crest(club, 'lg'), h('div', null, h('h2', null, club.name), h('p', { class: 'muted' }, `Formação ${current} · força ${strength}`))), tabs, squadTable(ctrl));
+  if (tab === 'SQUAD') return h('div', { class: 'page' }, h('div', { class: 'team-head' }, crest(club, 'lg'), h('div', null, h('h2', null, club.name), h('p', { class: 'muted' }, `Formação ${current} · força ${strength}`), clubStripe(club))), tabs, squadTable(ctrl));
   return h(
     'div',
     { class: 'page' },
     tabs,
-    h('div', { class: 'team-head' }, crest(club, 'lg'), h('div', null, h('h2', null, club.name), h('p', { class: 'muted' }, `Formação ${current} · força ${strength}`))),
+    h('div', { class: 'team-head' }, crest(club, 'lg'), h('div', null, h('h2', null, club.name), h('p', { class: 'muted' }, `Formação ${current} · força ${strength}`), clubStripe(club))),
     live ? h('p', { class: 'notice' }, 'Rodada em andamento. Para trocar jogadores ou mudar a tática agora, use o botão MEU TIME na tela PARTIDA.') : null,
     s.selected ? h('p', { class: 'notice' }, `Selecionado: ${shortName(players[s.selected]?.name ?? '')}. Toque em outro jogador para trocar (ou no mesmo para cancelar).`) : null,
     h(
@@ -9726,12 +10078,12 @@ __exports["renderTeam"] = renderTeam;
 __defs["app/src/views/world.ts"] = function (__exports, __req) {
 const { ROUNDS_PER_SEASON, isSeasonOver } = __req("game/career.ts");
 const { KIND_LABEL, dailyPaper } = __req("game/manager/news.ts");
-const { roundDate } = __req("game/manager/people.ts");
+const { flagOf, roundDate, stableHash } = __req("game/manager/people.ts");
 const { WINDOWS } = __req("game/manager/market.ts");
                                                                          
                                                        
 const { h } = __req("app/src/dom.ts");
-const { badge, card, empty, tabsRow } = __req("app/src/views/common.ts");
+const { badge, btn, card, crest, empty, tabsRow } = __req("app/src/views/common.ts");
 
 // NOTÍCIAS (Jornal do Dia + arquivo por categoria) e CALENDÁRIO da temporada.
 
@@ -9739,22 +10091,68 @@ const { badge, card, empty, tabsRow } = __req("app/src/views/common.ts");
 let filter         = 'TODAS';
 const TONE                                                                 = { NOTICIA: 'blue', RUMOR: 'yellow', OPINIAO: 'gray', URGENTE: 'red', ANALISE: 'green' };
 
-function item(n          )              {
-  return h('li', { class: `news${n.mine ? ' mine' : ''}` }, h('div', { class: 'news-top' }, badge(KIND_LABEL[n.kind].toUpperCase(), TONE[n.kind]), h('span', { class: 'muted small' }, n.round > 0 ? `T${n.season} · R${n.round}` : `T${n.season} · pré-temporada`)), h('b', null, n.title), n.body ? h('p', { class: 'small muted' }, n.body) : null);
+const SOURCE                           = { NOTICIA: 'Gazeta da Rodada', RUMOR: 'Bastidores do Mercado', OPINIAO: 'Coluna da Arquibancada', URGENTE: 'Plantão ELITE', ANALISE: 'Central de Análise' };
+
+/** Hora de publicação: estável por notícia (mesmo id = mesma hora), entre 08h e 22h59. */
+function newsTime(n          )         {
+  const h_ = stableHash(`hora|${n.id}`);
+  return `${String(8 + (h_ % 15)).padStart(2, '0')}:${String((h_ >> 4) % 60).padStart(2, '0')}`;
+}
+
+function newsDate(n          )         {
+  return n.round > 0 ? roundDate(n.season, Math.min(n.round, ROUNDS_PER_SEASON)).label : `pré-temporada ${n.season}`;
+}
+
+/** Página completa da notícia: tudo vem do fato registrado (manchete e corpo) e das entidades ligadas a ele. */
+function newsPage(ctrl                , n          )              {
+  const c = ctrl.state.career ;
+  const club = n.clubId ? c.world.clubs[n.clubId] : null;
+  const player = n.playerId ? c.world.players[n.playerId] : null;
+  const div = club ? c.world.divisions.find((d) => d.id === club.divisionId) : null;
+  const tags = [KIND_LABEL[n.kind], n.mine ? 'Meu clube' : null, club?.name ?? null, player?.name ?? null, `Temporada ${n.season}`].filter((x)              => !!x);
+  return h(
+    'div',
+    { class: 'page' },
+    h('div', { class: 'row gap wrap' }, btn('← VOLTAR PARA NOTÍCIAS', () => ctrl.openNews(null), { kind: 'primary' })),
+    h(
+      'article',
+      { class: 'card news-page' },
+      h('div', { class: 'news-top' }, badge(KIND_LABEL[n.kind].toUpperCase(), TONE[n.kind]), h('span', { class: 'muted small' }, `${newsDate(n)} · ${newsTime(n)}${n.round > 0 ? ` · rodada ${n.round}` : ''}`)),
+      h('h2', { class: 'news-head' }, n.title),
+      h('p', { class: 'muted small' }, `Fonte: ${SOURCE[n.kind]} (veículo fictício do jogo)`),
+      h('div', { class: 'news-body' }, h('p', null, n.body ?? n.title), h('p', { class: 'muted' }, 'Registro do acontecimento no jogo: o texto descreve só o que aconteceu, sem fatos inventados.')),
+      club || player
+        ? h(
+            'div',
+            { class: 'news-entities' },
+            h('h4', { class: 'season-sub' }, 'Relacionados'),
+            club ? h('button', { type: 'button', class: 'clubrow', onClick: () => { ctrl.openClub(club.id); ctrl.go('CLUBS'); } }, crest(club, 'sm'), h('span', { class: 'cname' }, club.name), h('span', { class: 'muted small' }, `${flagOf(club.country)} ${club.city}${div ? ` · hoje na ${div.name}` : ''}`)) : null,
+            player ? h('button', { type: 'button', class: 'clubrow', onClick: () => ctrl.openPlayer(player.id) }, h('span', { class: `pos pos-${player.position}` }, player.position === 'GK' ? 'GOL' : player.position === 'DEF' ? 'DEF' : player.position === 'MID' ? 'MEI' : 'ATA'), h('span', { class: 'cname' }, player.name), h('span', { class: 'muted small' }, `hoje: ${player.age} anos · força ${player.strength}`)) : null,
+          )
+        : null,
+      h('div', { class: 'news-tags' }, tags.map((t) => h('span', { class: 'badge badge-gray' }, `#${t}`))),
+    ),
+  );
+}
+
+function item(ctrl                , n          )              {
+  return h('li', { class: `news${n.mine ? ' mine' : ''}`, role: 'button', tabindex: '0', onClick: () => ctrl.openNews(n.id), onKeydown: (e               ) => { if (e.key === 'Enter') ctrl.openNews(n.id); } }, h('div', { class: 'news-top' }, badge(KIND_LABEL[n.kind].toUpperCase(), TONE[n.kind]), h('span', { class: 'muted small' }, n.round > 0 ? `T${n.season} · R${n.round}` : `T${n.season} · pré-temporada`)), h('b', null, n.title), n.body ? h('p', { class: 'small muted' }, n.body) : null);
 }
 
 function renderNews(ctrl                )              {
   const m = ctrl.state.career .manager ;
+  const open = ctrl.state.newsId ? m.news.find((x) => x.id === ctrl.state.newsId) : null;
+  if (open) return newsPage(ctrl, open);
   const paper = dailyPaper(m.news);
   const all = [...m.news].reverse().filter((n) => filter === 'TODAS' || (filter === 'MEU' ? n.mine : n.kind === filter));
   return h(
     'div',
     { class: 'page' },
-    card('Jornal do Dia', paper.length ? h('ul', { class: 'newslist' }, paper.slice(0, 8).map(item)) : empty('Nada publicado ainda. As notícias saem dos jogos e das decisões.')),
+    card('Jornal do Dia', paper.length ? h('ul', { class: 'newslist' }, paper.slice(0, 8).map((n) => item(ctrl, n))) : empty('Nada publicado ainda. As notícias saem dos jogos e das decisões.')),
     card(
       'Arquivo',
       tabsRow        ([{ id: 'TODAS', label: 'Todas' }, { id: 'MEU', label: 'Meu clube' }, { id: 'URGENTE', label: 'Urgente' }, { id: 'NOTICIA', label: 'Notícia' }, { id: 'RUMOR', label: 'Rumor' }, { id: 'OPINIAO', label: 'Opinião' }, { id: 'ANALISE', label: 'Análise' }], filter, (f) => { filter = f; ctrl.notifyRender(); }),
-      all.length ? h('ul', { class: 'newslist' }, all.slice(0, 60).map(item)) : empty('Nenhuma notícia nesta categoria.'),
+      all.length ? h('ul', { class: 'newslist' }, all.slice(0, 60).map((n) => item(ctrl, n))) : empty('Nenhuma notícia nesta categoria.'),
     ),
   );
 }
@@ -9765,6 +10163,8 @@ function renderCalendar(ctrl                )              {
   const div = uid ? c.world.clubs[uid].divisionId : null;
   const rounds = Array.from({ length: ROUNDS_PER_SEASON }, (_, i) => i + 1);
   const over = isSeasonOver(c);
+  const compName = div ? `${c.world.divisions.find((d) => d.id === div)?.name ?? ''} ${c.season}` : '';
+  const out = uid ? c.world.clubs[uid].squad.map((id) => c.world.players[id]).filter((p) => p && (p.condition.injuryRounds > 0 || p.condition.suspensionRounds > 0)) : [];
   return h(
     'div',
     { class: 'page' },
@@ -9782,13 +10182,21 @@ function renderCalendar(ctrl                )              {
           { class: `cal${now ? ' now' : ''}${r < c.roundNumber ? ' past' : ''}` },
           h('span', { class: 'cal-r' }, `R${r}`),
           h('span', { class: 'cal-d' }, d.label),
-          h('span', { class: 'cal-m' }, fx ? `${fx.home === uid ? 'x' : '@'} ${opp}` : 'Rodada (sem clube)'),
+          h('span', { class: 'cal-m' }, fx ? `${fx.home === uid ? 'Casa' : 'Fora'} · ${opp}` : 'Rodada (sem clube)', h('span', { class: 'cal-c' }, compName)),
           h('span', { class: 'cal-s' }, res ? `${res.homeGoals}–${res.awayGoals}` : now ? 'PRÓXIMA' : ''),
           isWindow ? h('span', { class: 'cal-w', title: 'Janela de transferências aberta' }, '⇄') : h('span', { class: 'cal-w' }),
         );
       })),
       h('p', { class: 'muted small' }, '⇄ janela de transferências aberta (rodadas 1–6 e 19–24 e intertemporada). Rodadas de meio de semana caem na quarta.'),
     ),
+    uid
+      ? card(
+          'Desfalques',
+          out.length
+            ? h('ul', { class: 'plain' }, out.map((p) => { const n = p.condition.injuryRounds || p.condition.suspensionRounds; const back = Math.min(c.roundNumber + n, ROUNDS_PER_SEASON + 1); return h('li', null, `${p.condition.injuryRounds > 0 ? '🩹 Lesão' : '🟥 Suspensão'} · ${p.name} · fora por ${n} partida${n === 1 ? '' : 's'}${back <= ROUNDS_PER_SEASON ? ` · volta na rodada ${back}` : ''}`); }))
+            : empty('Nenhum lesionado ou suspenso.'),
+        )
+      : null,
   );
 }
 

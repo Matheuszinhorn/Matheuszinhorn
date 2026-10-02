@@ -34,7 +34,7 @@ export const UPGRADES: readonly UpgradeInfo[] = [
   { id: 'LOJA', label: 'Loja do clube', description: '+R$ 1,20 por torcedor em cada jogo em casa.', maxLevel: 3, cost: 110_000, rounds: 3, perFan: 1.2 },
   { id: 'VIP', label: 'Área VIP', description: '+R$ 4.000 por jogo em casa.', maxLevel: 2, cost: 250_000, rounds: 5, perGame: 4000 },
   { id: 'CONFORTO', label: 'Conforto', description: 'Assentos e cobertura: mais ocupação.', maxLevel: 2, cost: 200_000, rounds: 4, fill: 0.03 },
-  { id: 'CT', label: 'Centro de treinamento', description: 'Jogadores de até 23 anos evoluem mais no fim da temporada.', maxLevel: 2, cost: 400_000, rounds: 8, youth: 1 },
+  { id: 'CT', label: 'Centro de treinamento', description: 'Jogadores de até 23 anos têm mais chance de evoluir nas avaliações do meio e do fim da temporada.', maxLevel: 2, cost: 400_000, rounds: 8, youth: 1 },
 ];
 
 export const MAX_WORKS = 2;

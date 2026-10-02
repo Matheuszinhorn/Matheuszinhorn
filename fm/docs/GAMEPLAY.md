@@ -199,3 +199,19 @@ Técnicos da CPU caem (3 últimos da divisão, 3 derrotas nos 4 últimos jogos, 
 são substituídos. Na virada: jogadores envelhecem e evoluem (jovens sobem, veteranos caem; aposentadoria aos 37), a CPU
 renova contratos e transfere, e a base repõe elencos curtos. Durante a temporada a CPU não mexe em jogadores: a 1ª
 temporada joga exatamente as mesmas partidas da versão anterior.
+
+## Etapa Força + Economia
+
+* **Propostas iniciais persistentes**: as 3 propostas são geradas uma vez e guardadas (`elite-manager:propostas-iniciais`)
+  com as recusas; recarregar, sair ou continuar mostra as mesmas. Recusou todas: só AGUARDAR PROPOSTAS. Proposta nova só
+  por evento real: clube que demitiu o técnico na rodada (no máximo 1 por divisão por rodada) ou rebaixado que troca de
+  técnico no fim da temporada. Propostas de fim de temporada valem até a 3ª rodada da seguinte.
+* **Velocidades**: LENTA, NORMAL e RÁPIDA. Quem tinha MUITO RÁPIDA ou INSTANTÂNEA salva volta como RÁPIDA.
+* **Força relativa, ⭐ e evolução gradual**: PLAYER-PROGRESSION.md.
+* **Salário por temporada**, folha por temporada e custo da rodada: FINANCE.md.
+* **Lesão em partidas**: leve (1–2), moderada (3–5), grave (6+); calendário lista desfalques e a rodada de volta.
+* **Próximo adversário**: cidade, divisão, posição, estádio, público estimado, estilo, técnico, forma, artilheiro,
+  principais jogadores, desfalques e árbitro.
+* **Calendário**: casa/fora, competição, resultado, próxima rodada, janelas, desfalques.
+* **Cores dos clubes**: ponto na tabela, faixa no elenco e no perfil, escudo de iniciais e borda da barra superior. A
+  identidade do jogo (marinho, lima, off-white) continua dominante; sem escudos oficiais.

@@ -34,7 +34,7 @@ export function renderLeague(ctrl: GameController): HTMLElement {
           h(
             'tbody',
             null,
-            table.map((r) => h('tr', { class: `${r.isControlled ? 'me' : ''} ${zone(r.position)}`, onClick: () => { ctrl.openClub(r.clubId); ctrl.go('CLUBS'); } }, h('td', { class: 'pos-n' }, r.position), h('td', { class: 'club' }, r.clubName), h('td', { class: 'n' }, h('b', null, r.points)), h('td', { class: 'n' }, r.played), h('td', { class: 'n' }, r.won), h('td', { class: 'n' }, r.drawn), h('td', { class: 'n' }, r.lost), h('td', { class: 'n hs' }, r.goalsFor), h('td', { class: 'n hs' }, r.goalsAgainst), h('td', { class: 'n' }, r.goalDiff > 0 ? `+${r.goalDiff}` : r.goalDiff))),
+            table.map((r) => h('tr', { class: `${r.isControlled ? 'me' : ''} ${zone(r.position)}`, onClick: () => { ctrl.openClub(r.clubId); ctrl.go('CLUBS'); } }, h('td', { class: 'pos-n' }, r.position), h('td', { class: 'club' }, h('span', { class: 'club-dot', style: `background:${career.world.clubs[r.clubId]?.primaryColor ?? '#888'}`, 'aria-hidden': 'true' }), r.clubName), h('td', { class: 'n' }, h('b', null, r.points)), h('td', { class: 'n' }, r.played), h('td', { class: 'n' }, r.won), h('td', { class: 'n' }, r.drawn), h('td', { class: 'n' }, r.lost), h('td', { class: 'n hs' }, r.goalsFor), h('td', { class: 'n hs' }, r.goalsAgainst), h('td', { class: 'n' }, r.goalDiff > 0 ? `+${r.goalDiff}` : r.goalDiff))),
           ),
         ),
       ),

@@ -16,3 +16,12 @@ e o cartão "Jornal do Dia" no resultado da rodada.
 * Ids sequenciais (`n1`, `n2`...): mesma seed + mesmas decisões = mesmas notícias.
 * Ficam as 300 mais recentes no save.
 * **Jornal do Dia** = as notícias da rodada mais recente, as do clube do treinador primeiro.
+
+## Página da notícia (etapa Força + Economia)
+
+Tocar numa notícia (lista, Jornal do Dia ou resultado da rodada) abre a **página completa**: categoria, manchete, data
+(dia da rodada), hora (estável por notícia), corpo, fonte (veículo fictício por categoria), tags, entidades relacionadas
+(clube e jogador, que abrem as próprias telas; os dados delas são marcados como "hoje") e **VOLTAR PARA NOTÍCIAS**.
+
+Novos fatos que viram notícia: avaliação de evolução do clube (meio e fim da temporada), clube da CPU que fecha a
+temporada no vermelho, clube rebaixado que demite o técnico.

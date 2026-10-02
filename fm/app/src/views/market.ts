@@ -50,9 +50,9 @@ export function renderMarket(ctrl: GameController): HTMLElement {
           )
         : null,
       rows.length
-        ? table(['', 'Jogador', 'For.', 'Idade', 'Preço', ''], rows.map((r) => ({ onClick: () => ctrl.openPlayer(r.player.id), cells: [h('span', { class: `pos pos-${r.player.position}` }, POSITION_LABEL[r.player.position]), h('div', { class: 'pcell' }, h('span', null, `${flagOf(r.player.nationality)} ${r.player.name}`), h('span', { class: 'muted small' }, r.club ? r.club.name : 'Livre')), h('b', null, r.player.strength), r.player.age, r.club ? money(r.price) : '—', r.wish ? '★' : ''] })), 'tbl market', [2, 3, 4])
+        ? table(['', 'Jogador', 'For.', 'Idade', 'Preço', ''], rows.map((r) => ({ onClick: () => ctrl.openPlayer(r.player.id), cells: [h('span', { class: `pos pos-${r.player.position}` }, POSITION_LABEL[r.player.position]), h('div', { class: 'pcell' }, h('span', null, `${flagOf(r.player.nationality)} ${r.player.name}`), h('span', { class: 'muted small' }, r.club ? r.club.name : 'Livre')), h('b', { title: r.rel ? `${Math.round(r.rel.delta) >= 0 ? '+' : ''}${Math.round(r.rel.delta)} sobre a média da divisão` : '' }, `${r.rel?.star ? '⭐' : ''}${r.player.strength}`), r.player.age, r.club ? money(r.price) : '—', r.wish ? '★' : ''] })), 'tbl market', [2, 3, 4])
         : empty(ui.tab === 'DESEJOS' ? 'Nenhum jogador na lista. Abra um jogador e toque em ★ LISTA DE DESEJOS.' : 'Nenhum jogador com esses filtros.'),
-      h('p', { class: 'muted small' }, 'Toque num jogador para ver o perfil, fazer oferta ou pedir emprestado.'),
+      h('p', { class: 'muted small' }, 'Toque num jogador para ver o perfil, fazer oferta ou pedir emprestado. ⭐ = destaque da divisão dele (contexto: força 30 é destaque na 4ª e abaixo da média na 1ª).'),
     );
   } else if (ui.tab === 'NEGOCIACOES') {
     const list = [...m.market.negotiations].reverse();

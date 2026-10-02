@@ -30,7 +30,7 @@ export interface CoachChange {
 
 /**
  * Demissões na CPU depois da rodada: a partir da 6ª, quem está entre os 3 últimos da divisão e perdeu 3 dos últimos
- * 4 jogos, com o técnico há pelo menos 6 rodadas no cargo. No máximo 2 por rodada no mundo todo.
+ * 4 jogos, com o técnico há pelo menos 6 rodadas no cargo. No máximo 1 por divisão por rodada.
  */
 export function cpuCoachChanges(c: CareerState, coaches: Record<string, CpuCoach>, playedRound: number): { coaches: Record<string, CpuCoach>; changes: CoachChange[] } {
   if (playedRound < 6) return { coaches, changes: [] };
@@ -39,8 +39,9 @@ export function cpuCoachChanges(c: CareerState, coaches: Record<string, CpuCoach
   const next = { ...coaches };
   for (const d of [...c.world.divisions].sort((a, b) => a.level - b.level)) {
     const table = divisionStandings(c, d.id);
+    let inDivision = 0;
     for (const row of table.slice(-3)) {
-      if (row.clubId === c.userClubId || changes.length >= 2) continue;
+      if (row.clubId === c.userClubId || inDivision >= 1) continue;
       const coach = next[row.clubId];
       if (!coach || now - coach.since < 6) continue;
       const losses = recentForm(c.results, row.clubId, 4).filter((x) => x === 'D').length;
@@ -48,6 +49,7 @@ export function cpuCoachChanges(c: CareerState, coaches: Record<string, CpuCoach
       const fresh: CpuCoach = { name: coachName(c.seed, `${row.clubId}:${c.season}:${playedRound}`), since: now };
       changes.push({ clubId: row.clubId, out: coach.name, in: fresh.name });
       next[row.clubId] = fresh;
+      inDivision += 1;
     }
   }
   return { coaches: next, changes };
@@ -109,11 +111,10 @@ export function youthIntake(world: World, seed: string, season: number, minSquad
 }
 
 /**
- * Envelhecimento e evolução (uma vez por virada): +1 ano; até 23 anos sobe 0 a 2 (+ bônus do CT no clube do treinador),
- * 24–29 varia de −1 a +1, 30–32 cai 0 a 1, 33+ cai 0 a 2. Valor de mercado e salário-base acompanham a nova força.
- * Quem chega a 37 anos se aposenta.
+ * Envelhecimento na virada: +1 ano; quem chega a 37 anos se aposenta; a partir dos 31 o valor de mercado cai 15% ao ano.
+ * A FORÇA não muda aqui: ela evolui nos checkpoints de progression.ts (±1 no meio e no fim da temporada).
  */
-export function agePlayers(world: World, seed: string, season: number, bonus: (p: Player) => number): { world: World; retired: Player[] } {
+export function agePlayers(world: World): { world: World; retired: Player[] } {
   const players: Record<string, Player> = {};
   const retired: Player[] = [];
   const clubs = { ...world.clubs };
@@ -125,12 +126,7 @@ export function agePlayers(world: World, seed: string, season: number, bonus: (p
       if (p.clubId && clubs[p.clubId]) clubs[p.clubId] = { ...clubs[p.clubId], squad: clubs[p.clubId].squad.filter((x) => x !== id), penaltyTakerId: clubs[p.clubId].penaltyTakerId === id ? null : clubs[p.clubId].penaltyTakerId };
       continue;
     }
-    const h = stableHash(`${seed}|evolucao|${season}|${id}`);
-    const roll = (lo: number, hi: number) => lo + (h % (hi - lo + 1));
-    const delta = age <= 23 ? roll(0, 2) + bonus(p) : age <= 29 ? roll(-1, 1) : age <= 32 ? roll(-1, 0) : roll(-2, 0);
-    const strength = Math.max(1, Math.min(50, p.strength + delta));
-    const ratio = strength / Math.max(1, p.strength);
-    players[id] = { ...p, age, strength, marketValue: Math.max(1_000, roundTo(p.marketValue * ratio * ratio * (age >= 31 ? 0.85 : 1), 1_000)) };
+    players[id] = { ...p, age, marketValue: age >= 31 ? Math.max(1_000, roundTo(p.marketValue * 0.85, 1_000)) : p.marketValue };
   }
   return { world: { ...world, players, clubs }, retired };
 }

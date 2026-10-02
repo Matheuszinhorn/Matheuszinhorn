@@ -1,7 +1,7 @@
 import { payroll } from '../../../engine/index.ts';
 import { isSeasonOver, userClub } from '../../../game/career.ts';
 import { financeView } from '../../../game/manager/actions.ts';
-import { LOAN_TERMS, STATUS_ICON, STATUS_LABEL, goalLabel, interestRate } from '../../../game/manager/finance.ts';
+import { LOAN_TERMS, STATUS_ICON, STATUS_LABEL, goalLabel, interestRate, sponsorSector, type FinanceStatus } from '../../../game/manager/finance.ts';
 import { MAX_WORKS, UPGRADES } from '../../../game/manager/stadium.ts';
 import { ROUNDS } from '../../../game/manager/state.ts';
 import type { GameController } from '../controller.ts';
@@ -48,6 +48,19 @@ export function renderStadium(ctrl: GameController): HTMLElement {
 
 const loanForm = { amount: '', rounds: 19 };
 
+/** Simulação antes de confirmar: valor recebido, juros, prazo, total, parcela e o peso dela na rodada. */
+function loanQuote(amount: number, rounds: number, status: FinanceStatus, payrollPerRound: number): HTMLElement {
+  const rate = interestRate(rounds, status);
+  const total = Math.round(amount * (1 + rate));
+  const installment = Math.ceil(total / rounds);
+  return h(
+    'div',
+    { class: 'loan-quote' },
+    h('div', { class: 'stats' }, stat('Valor recebido', money(amount)), stat('Juros', `${Math.round(rate * 100)}% · ${money(total - amount)}`), stat('Prazo', `${rounds} rodadas`), stat('Total a pagar', money(total)), stat('Parcela por rodada', money(installment))),
+    h('p', { class: 'muted small' }, `Impacto: a parcela soma ${money(installment)} por rodada às despesas (hoje a folha custa ${money(payrollPerRound)} por rodada). Dívida alta piora a situação financeira, o crédito futuro e o patrocínio. Dinheiro do jogo: não existe compra com dinheiro real.`),
+  );
+}
+
 export function renderFinance(ctrl: GameController): HTMLElement {
   const c = ctrl.state.career!;
   const club = userClub(c);
@@ -66,7 +79,7 @@ export function renderFinance(ctrl: GameController): HTMLElement {
     card(
       'Situação',
       h('div', { class: 'fin-status' }, h('span', { class: 'fin-ico' }, STATUS_ICON[v.status]), h('b', null, STATUS_LABEL[v.status])),
-      h('div', { class: 'stats' }, stat('Caixa', money(club.money), club.money >= 0 ? 'default' : 'bad'), stat('Folha/rodada', money(payroll(club, c.world.players))), stat('Dívida bancária', money(v.debt), v.debt > 0 ? 'bad' : 'default'), stat('Limite de crédito', money(v.limit))),
+      h('div', { class: 'stats' }, stat('Caixa', money(club.money), club.money >= 0 ? 'default' : 'bad'), stat('Folha salarial/temporada', money(payroll(club, c.world.players) * ROUNDS)), stat('Custo da folha nesta rodada', money(payroll(club, c.world.players))), stat('Dívida bancária', money(v.debt), v.debt > 0 ? 'bad' : 'default'), stat('Limite de crédito', money(v.limit))),
     ),
     card(
       'Temporada',
@@ -76,16 +89,16 @@ export function renderFinance(ctrl: GameController): HTMLElement {
     card(
       'Patrocínio',
       sp && sp.season >= c.season
-        ? h('div', null, h('p', null, h('b', null, sp.name), ` · ${money(sp.amount)} na temporada (pagos ${money(sp.paid)})`), h('p', { class: 'muted' }, `Meta: ${goalLabel(sp.goal)}${sp.bonus ? ` · bônus ${money(sp.bonus)}` : ''}`))
+        ? h('div', null, h('p', null, h('b', null, sp.name), ` (${sponsorSector(sp.name)}) · ${money(sp.amount)} na temporada ${sp.season} (pagos ${money(sp.paid)})`), h('p', { class: 'muted' }, `Meta: ${goalLabel(sp.goal)}${sp.bonus ? ` · bônus ${money(sp.bonus)}` : ''}`))
         : m.finance.sponsorOffers.length
-          ? h('ul', { class: 'deals' }, m.finance.sponsorOffers.map((o) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, o.name), h('span', { class: 'muted' }, `${money(o.amount)} na temporada, pagos rodada a rodada (${money(Math.floor(o.amount / ROUNDS))})`), h('span', { class: 'small' }, `Meta: ${goalLabel(o.goal)}${o.bonus ? ` · bônus de ${money(o.bonus)} se cumprir` : ''}`)), btn('ASSINAR', () => ctrl.chooseSponsor(o.id), { kind: 'primary', disabled: ctrl.state.phase === 'LIVE' }))))
+          ? h('ul', { class: 'deals' }, m.finance.sponsorOffers.map((o) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, `${o.name} · ${sponsorSector(o.name)}`), h('span', { class: 'muted' }, `${money(o.amount)} · duração: 1 temporada · pagos rodada a rodada (${money(Math.floor(o.amount / ROUNDS))})`), h('span', { class: 'small' }, `Meta: ${goalLabel(o.goal)}${o.bonus ? ` · bônus de ${money(o.bonus)} se cumprir` : ''}`)), btn('ASSINAR', () => ctrl.chooseSponsor(o.id), { kind: 'primary', disabled: ctrl.state.phase === 'LIVE' }))))
           : empty('Sem propostas de patrocínio agora. Novas chegam na virada da temporada.'),
     ),
     card(
       'Empréstimo bancário',
       v.status === 'CRITICO' ? h('p', { class: 'notice' }, 'Com caixa negativo o banco não empresta.') : null,
       h('div', { class: 'row gap wrap' }, h('label', { class: 'field grow' }, h('span', null, `Valor (até ${money(v.limit)})`), h('input', { type: 'number', min: '50000', step: '10000', value: loanForm.amount || String(Math.min(v.limit, 100_000)), onInput: (e: Event) => (loanForm.amount = (e.target as HTMLInputElement).value) })), h('label', { class: 'field grow' }, h('span', null, 'Prazo'), h('select', { onChange: (e: Event) => { loanForm.rounds = Number((e.target as HTMLSelectElement).value); ctrl.notifyRender(); } }, LOAN_TERMS.map((t) => h('option', { value: String(t), selected: loanForm.rounds === t }, `${t} rodadas · juros ${Math.round(interestRate(t, v.status) * 100)}%`))))),
-      h('p', { class: 'muted small' }, `Total a devolver: ${money(Math.round(amount * (1 + interestRate(loanForm.rounds, v.status))))} em ${loanForm.rounds} parcelas. Dinheiro do jogo: não existe compra com dinheiro real.`),
+      loanQuote(amount, loanForm.rounds, v.status, payroll(club, c.world.players)),
       btn('PEDIR EMPRÉSTIMO', () => ctrl.takeBankLoan(Number(loanForm.amount || Math.min(v.limit, 100_000)), loanForm.rounds), { kind: 'primary', disabled: v.limit < 50_000 || ctrl.state.phase === 'LIVE' }),
       m.finance.loans.length ? h('ul', { class: 'deals' }, m.finance.loans.map((l) => h('li', null, h('div', { class: 'deal-main' }, h('b', null, `${money(l.principal)} em ${l.rounds}x`), h('span', { class: 'muted' }, `Parcela ${money(l.installment)} · falta ${money(l.remaining)}`)), btn('QUITAR', () => ctrl.payOffBankLoan(l.id), { disabled: ctrl.state.phase === 'LIVE' })))) : null,
     ),

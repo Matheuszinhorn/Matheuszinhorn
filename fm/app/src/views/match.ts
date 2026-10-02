@@ -1,6 +1,7 @@
 import type { Clock, MatchEvent, MatchState, Side } from '../../../engine/index.ts';
 import { ROUNDS_PER_SEASON, divisionStandings, isSeasonOver, matchIdFor, resolveUserLineup, userClub } from '../../../game/career.ts';
 import { recentForm } from '../../../game/manager/board.ts';
+import { roundAttendance } from '../../../game/manager/flow.ts';
 import { dailyPaper } from '../../../game/manager/news.ts';
 import { flagOf, refereeFor, roundDate } from '../../../game/manager/people.ts';
 import { refereeProfile } from '../../../game/manager/stats.ts';
@@ -205,9 +206,15 @@ function opponentCard(ctrl: GameController): HTMLElement | null {
   const ref = refereeFor(m.referees, career.seed, matchId);
   const prof = refereeProfile(m.refereeStats[ref.id], Object.values(m.refereeStats));
   const coach = m.coaches[oppId];
+  const oppDiv = career.world.divisions.find((d) => d.id === opp.divisionId);
+  const venueClub = career.world.clubs[fx.home];
+  const estimate = roundAttendance(career, m, fx.home, fx.away);
+  const key = opp.squad.map((id) => career.world.players[id]).filter(Boolean).sort((a, b) => b.strength - a.strength).slice(0, 3);
   return card(
     'Próximo adversário',
-    h('div', { class: 'opp-head' }, crest(opp, 'md'), h('div', null, h('b', null, opp.name), h('span', { class: 'muted small' }, `${flagOf(opp.country)} ${career.results.length ? `${pos}º colocado` : 'sem jogos'} · força ${clubStrength(career.world.players, opp)}${coach ? ` · técnico ${coach.name}` : ''}`))),
+    h('div', { class: 'opp-head' }, crest(opp, 'md'), h('div', null, h('b', null, opp.name), h('span', { class: 'muted small' }, `${flagOf(opp.country)} ${opp.city} · ${oppDiv?.name ?? ''} · ${career.results.length ? `${pos}º colocado` : 'sem jogos'} · força ${clubStrength(career.world.players, opp)}${coach ? ` · técnico ${coach.name}` : ''}`))),
+    h('p', { class: 'small' }, `${fx.home === uid ? 'Em casa' : 'Fora'} · ${venueClub.stadium.name} · público estimado ${num(estimate)} · estilo ${STYLE_LABEL[opp.defaultTactics.style].toLowerCase()}`),
+    key.length ? h('p', { class: 'small' }, `Principais jogadores: ${key.map((p) => `${shortName(p.name)} (${p.strength})`).join(', ')}`) : null,
     h('div', { class: 'row gap wrap' }, h('span', { class: 'label' }, 'Forma'), form.length ? form.map((x) => h('span', { class: `wdl wdl-${x === 'V' ? 'W' : x === 'E' ? 'D' : 'L'}` }, x)) : h('span', { class: 'muted small' }, 'sem jogos')),
     top && top.g > 0 ? h('p', { class: 'small' }, `Artilheiro: ${career.world.players[top.id].name} (${top.g} gols)`) : null,
     out.length ? h('p', { class: 'small muted' }, `Desfalques: ${out.map((p) => `${shortName(p.name)} ${p.condition.injuryRounds > 0 ? '🩹' : '🟥'}`).join(', ')}`) : null,
@@ -346,7 +353,7 @@ function renderPost(ctrl: GameController): HTMLElement {
     );
   }
   const news = career.manager ? dailyPaper(career.manager.news).slice(0, 5) : [];
-  if (news.length) parts.push(card('Jornal do Dia', h('ul', { class: 'plain' }, news.map((n) => h('li', null, h('b', null, n.title)))), btn('VER NOTÍCIAS', () => ctrl.go('NEWS'))));
+  if (news.length) parts.push(card('Jornal do Dia', h('ul', { class: 'plain' }, news.map((n) => h('li', null, h('button', { type: 'button', class: 'linkish', onClick: () => ctrl.openNews(n.id) }, n.title)))), btn('VER NOTÍCIAS', () => ctrl.go('NEWS'))));
   if (club) {
     const table = divisionStandings(career, club.divisionId);
     const pos = table.findIndex((r) => r.clubId === club.id) + 1;

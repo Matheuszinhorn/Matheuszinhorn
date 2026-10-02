@@ -151,7 +151,7 @@ check('refresh depois da rodada: não reaplica (mesma rodada, caixa, extrato e r
 // 11) refresh DURANTE a partida: volta ao início da mesma rodada, sem cobrar/aplicar nada; jogar de novo dá o mesmo resultado
 {
   const pre = await snap(page);
-  await page.getByRole('button', { name: 'MUITO RÁPIDA', exact: true }).first().click();
+  await page.getByRole('button', { name: 'RÁPIDA', exact: true }).first().click();
   await page.getByRole('button', { name: 'JOGAR RODADA' }).click(); await page.waitForTimeout(1500);
   const midMinute = await page.evaluate(() => globalThis.__fm.userMatch()?.clock.minute ?? null);
   await page.reload(); await continueUI(page);

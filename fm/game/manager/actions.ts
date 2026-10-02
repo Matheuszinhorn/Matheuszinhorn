@@ -1,7 +1,8 @@
 import { CareerError, createCareer, isSeasonOver, type CareerState } from '../career.ts';
 import { objectiveFor } from './board.ts';
 import { ensureManager } from './core.ts';
-import { openTalk, proposeRenewal as talkPropose } from './contracts.ts';
+import { openTalk, proposeRenewal as talkPropose, type TalkContext } from './contracts.ts';
+import { divisionMeans, relativeOf } from './progression.ts';
 import { creditLimit, debtOf, financeStatus, line, quoteLoan, sponsorOffers } from './finance.ts';
 import {
   addMoney,
@@ -24,7 +25,7 @@ import { draft, publish, type Draft } from './news.ts';
 import { coachName } from './people.ts';
 import { canStartWork, upgradeInfo } from './stadium.ts';
 import { absRound, type ExtraLine, type ManagerState, type Negotiation, type UpgradeId } from './state.ts';
-import { payroll } from '../../engine/index.ts';
+import { payroll, type Player } from '../../engine/index.ts';
 
 // Ações do treinador fora da partida. Cada uma devolve uma carreira NOVA (ou lança CareerError com o motivo, em
 // português, pronto para a tela). Nenhuma mexe em partida em andamento: a interface só as oferece fora da rodada.
@@ -77,7 +78,7 @@ function executeTransfer(c: Managed, m: ManagerState, playerId: string, price: n
   const p = c.world.players[playerId];
   const sellerId = p.clubId as string;
   const seller = c.world.clubs[sellerId];
-  let world = movePlayer(c.world, playerId, c.userClubId, { salary: salaryDemand(c.seed, p), contract: { endSeason: c.season + contractYears(c.seed, p) } });
+  let world = movePlayer(c.world, playerId, c.userClubId, { salary: salaryDemand(c.seed, p, c.world), contract: { endSeason: c.season + contractYears(c.seed, p) } });
   world = addMoney(world, sellerId, price);
   extras.push(line(c.season, nowRound(c), `Compra de ${p.name} (${seller.name})`, -price));
   drafts.push(draft('NOTICIA', `${c.world.clubs[c.userClubId].name} contrata ${p.name}, ex-${seller.name}`, { body: `Valor: R$ ${price.toLocaleString('pt-BR')}.`, clubId: c.userClubId, playerId, mine: true }));
@@ -162,7 +163,7 @@ export function signFreeAgent(career: CareerState, playerId: string): ActionResu
   if (inErr) fail(inErr);
   const accept = playerAccepts(c.world, c.seed, p, c.world.clubs[c.userClubId]);
   if (!accept.ok) fail(accept.reason);
-  const salary = salaryDemand(c.seed, p);
+  const salary = salaryDemand(c.seed, p, c.world);
   const world = movePlayer(c.world, playerId, c.userClubId, { salary, contract: { endSeason: c.season + contractYears(c.seed, p) } });
   const drafts = [draft('NOTICIA', `${p.name} assina com o ${c.world.clubs[c.userClubId].name} sem custo de transferência`, { clubId: c.userClubId, playerId, mine: true })];
   return { career: commit({ ...c, world }, c.manager, drafts), message: `${p.name} contratado (salário R$ ${salary.toLocaleString('pt-BR')} por rodada).`, kind: 'good' };
@@ -249,6 +250,14 @@ export function withdrawAuction(career: CareerState, auctionId: string): ActionR
 
 // ---------- contratos ----------
 
+/** Contexto real da conversa de contrato (estatísticas da temporada, força relativa, caixa). */
+export function talkContext(c: Managed, p: Player): TalkContext {
+  const roundsPlayed = Math.min(c.roundNumber - 1, 38);
+  const apps = c.manager.stats.season[p.id]?.apps ?? 0;
+  const rel = relativeOf(c.world, divisionMeans(c.world), p);
+  return { season: c.season, appsShare: roundsPlayed > 0 ? apps / roundsPlayed : null, roundsPlayed, relDelta: rel ? rel.delta : null, financeCritical: financeView(c).status === 'CRITICO' };
+}
+
 export function startRenewal(career: CareerState, playerId: string): ActionResult {
   const c = managed(career);
   const p = c.world.players[playerId];
@@ -256,7 +265,7 @@ export function startRenewal(career: CareerState, playerId: string): ActionResul
   if (c.manager.market.loans.some((l) => l.playerId === playerId)) fail('Jogador emprestado: o contrato é com o clube dono.');
   const existing = c.manager.contracts[playerId];
   if (existing && existing.status !== 'AGREED') return { career: c, message: existing.message, kind: 'info' };
-  const talk = openTalk(c.seed, p);
+  const talk = openTalk(c.seed, p, talkContext(c, p));
   const m = c.manager;
   return { career: { ...c, manager: { ...m, contracts: { ...m.contracts, [playerId]: talk } } }, message: talk.message, kind: 'info' };
 }

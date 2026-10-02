@@ -185,3 +185,7 @@ Outras decisões que **não** dependem do engine e foram verificadas:
 * **Intervalo e lances importantes** param a rodada na SESSÃO (`stopOnEvents`), entre duas chamadas de `stepRound`.
   Pausas não mudam o jogo (testes de sessão e QA de velocidades: mesmo resultado nas 5 velocidades, com e sem paradas).
 * **Velocidade INSTANTÂNEA** saiu da interface; continua na sessão para testes e QA.
+* **Velocidades na tela** (etapa Força + Economia): só LENTA, NORMAL e RÁPIDA. MUITO RÁPIDA e INSTANTÂNEA continuam na
+  sessão apenas para testes e QA.
+* **Evolução da força** acontece na camada de gestão (`game/manager/progression.ts`), entre rodadas; o engine recebe os
+  elencos já atualizados e calcula a partida como sempre.

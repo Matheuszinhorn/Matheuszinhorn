@@ -27,6 +27,8 @@ export const SPEED_KEY = 'fm-brasileiro:velocidade';
 /** Perfil LOCAL (sem servidor e sem senha): só um nome guardado neste navegador. Chave nova; não mexe no save. */
 export const PROFILE_KEY = 'elite-manager:perfil-local';
 export const AUDIO_KEY = 'elite-manager:som';
+/** Propostas iniciais de uma carreira ainda não criada: geradas UMA vez e guardadas (recarregar não sorteia de novo). */
+export const OFFERS_KEY = 'elite-manager:propostas-iniciais';
 
 export interface KeyValueStorage {
   get(key: string): string | null;
@@ -122,6 +124,8 @@ export interface AppState {
   matchView: string | null;
   /** jogador aberto no perfil */
   playerId: string | null;
+  /** notícia aberta na página completa (NOTÍCIAS) */
+  newsId: string | null;
   /** menu MAIS (celular) */
   more: boolean;
   audio: boolean;
@@ -146,8 +150,8 @@ export interface ControllerOptions {
 }
 
 const SPEED_IDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST', 'INSTANT'];
-/** Velocidades oferecidas na tela. INSTANT continua existindo só para testes e QA automatizado (__fm.setSpeed). */
-export const UI_SPEEDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST'];
+/** Velocidades oferecidas na tela: LENTA, NORMAL e RÁPIDA. VERY_FAST e INSTANT existem só para testes e QA (__fm.setSpeed). */
+export const UI_SPEEDS: SpeedId[] = ['SLOW', 'NORMAL', 'FAST'];
 
 export class GameController {
   /** Trocada por uma nova em abandonCareer: uma sessão descartada (dispose) não avisa mais a tela nem avança o relógio. */
@@ -167,8 +171,8 @@ export class GameController {
     this.randomSeed = options.randomSeed ?? (() => `carreira-${Date.now().toString(36)}-${Math.floor(Math.random() * 1e9).toString(36)}`);
     this.toastMs = options.toastMs ?? 4200;
     const saved = this.storage.get(SPEED_KEY) as SpeedId | null;
-    // INSTANTÂNEA saiu da interface: quem a tinha salva volta como MUITO RÁPIDA
-    const speed: SpeedId = saved === 'INSTANT' ? 'VERY_FAST' : saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
+    // MUITO RÁPIDA e INSTANTÂNEA saíram da interface: quem as tinha salvas volta como RÁPIDA
+    const speed: SpeedId = saved === 'INSTANT' || saved === 'VERY_FAST' ? 'FAST' : saved && SPEED_IDS.includes(saved) ? saved : 'NORMAL';
     let profile: Profile | null = null;
     try {
       const raw = this.storage.get(PROFILE_KEY);
@@ -183,11 +187,12 @@ export class GameController {
       screen: 'ENTRY',
       career: null,
       ...saveStatus(this.storage.get(SAVE_KEY)),
-      offers: null,
+      offers: this.loadOffers(),
       profile,
       proposal: null,
       matchView: null,
       playerId: null,
+      newsId: null,
       more: false,
       audio: this.storage.get(AUDIO_KEY) === '1',
       phase: 'PRE',
@@ -289,11 +294,39 @@ export class GameController {
 
   // ----- propostas iniciais -----
 
+  private loadOffers(): AppState['offers'] {
+    try {
+      const raw = this.storage.get(OFFERS_KEY);
+      const o = raw ? (JSON.parse(raw) as AppState['offers']) : null;
+      return o && typeof o.seed === 'string' && Array.isArray(o.clubIds) && o.clubIds.length === 3 && Array.isArray(o.refused) ? o : null;
+    } catch {
+      return null;
+    }
+  }
+
+  private storeOffers(o: AppState['offers']): void {
+    try {
+      if (o) this.storage.set(OFFERS_KEY, JSON.stringify(o));
+      else this.storage.remove(OFFERS_KEY);
+    } catch {
+      /* sem armazenamento: valem enquanto a página estiver aberta */
+    }
+  }
+
+  /**
+   * As três propostas da carreira nova. Sem "sortear de novo": se já existem (nesta página ou salvas de antes de
+   * recarregar), são as mesmas, com as recusas. Uma seed explícita (testes/QA) define a carreira testada.
+   */
   offerClubs(seed?: string): void {
-    // sem "sortear de novo": as três propostas de uma carreira nova são estas; recusadas, o treinador aguarda outras
-    if (this.state.offers && !seed) return;
+    const kept = this.state.offers ?? this.loadOffers();
+    if (kept && !seed) {
+      if (kept !== this.state.offers) this.set({ offers: kept });
+      return;
+    }
     const s = seed ?? this.randomSeed();
-    this.set({ offers: { seed: s, clubIds: careerOffers(s), refused: [] }, proposal: null });
+    const offers = { seed: s, clubIds: careerOffers(s), refused: [] as string[] };
+    this.storeOffers(offers);
+    this.set({ offers, proposal: null });
   }
 
   openProposal(clubId: string | null, jobId: string | null = null): void {
@@ -307,7 +340,9 @@ export class GameController {
   refuseOffer(clubId: string): void {
     const o = this.state.offers;
     if (!o) return;
-    this.set({ offers: { ...o, refused: [...new Set([...o.refused, clubId])] }, proposal: null });
+    const offers = { ...o, refused: [...new Set([...o.refused, clubId])] };
+    this.storeOffers(offers);
+    this.set({ offers, proposal: null });
   }
 
   startCareer(coachName: string, clubId: string): void {
@@ -316,6 +351,7 @@ export class GameController {
     try {
       const career = actions.newManagedCareer(offers.seed, coachName, clubId);
       this.applied.clear();
+      this.storeOffers(null);
       this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: userClub(career).divisionId, clubId: null, selected: null, matchView: null });
       this.save();
       this.notify(`Bem-vindo ao ${userClub(career).name}, ${career.coach.name}!`, 'good');
@@ -331,6 +367,7 @@ export class GameController {
     try {
       const career = actions.newManagedCareer(offers.seed, coachName, null);
       this.applied.clear();
+      this.storeOffers(null);
       this.set({ career, offers: null, proposal: null, phase: 'PRE', plan: null, outcome: null, screen: 'MATCH', leagueDivision: career.world.divisions.find((d) => d.level === 4)?.id ?? null, clubId: null, selected: null, matchView: null });
       this.save();
       this.notify('Você está sem clube. Jogue as rodadas e acompanhe as propostas em CARREIRA.', 'info');
@@ -359,6 +396,7 @@ export class GameController {
 
   abandonCareer(): void {
     this.storage.remove(SAVE_KEY);
+    this.storeOffers(null); // carreira nova = propostas novas (é outra carreira, não um novo sorteio da mesma)
     // A sessão antiga é descartada (para o relógio de uma rodada em andamento) e uma nova a substitui;
     // reaproveitar a descartada deixava a primeira rodada da carreira nova presa em "Preparando a rodada…".
     this.session.dispose();
@@ -374,7 +412,7 @@ export class GameController {
     if (!this.state.career && !['START', 'ENTRY', 'MODE'].includes(screen)) return;
     if (this.state.career && this.state.career.userClubId === null && CLUB_SCREENS.includes(screen)) return this.notify('Você está sem clube. Veja as propostas em CARREIRA.', 'info');
     const wasClubs = this.state.screen === 'CLUBS';
-    this.set({ screen, selected: null, more: false, playerId: null });
+    this.set({ screen, selected: null, more: false, playerId: null, newsId: null });
     // Consultar CLUBES durante a rodada pausa a sessão (seção 24); sair de CLUBES retoma.
     if (this.state.phase === 'LIVE') {
       if (screen === 'CLUBS' && !wasClubs) {
@@ -401,6 +439,11 @@ export class GameController {
 
   openPlayer(id: string | null): void {
     this.set({ playerId: id });
+  }
+
+  /** Abre a página completa de uma notícia (null volta para a lista). */
+  openNews(id: string | null): void {
+    this.set({ newsId: id, screen: 'NEWS', more: false, playerId: null });
   }
 
   toggleMore(open?: boolean): void {

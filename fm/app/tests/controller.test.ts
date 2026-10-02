@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { createRound, parseFormation, roundResults, simulateRound } from '../../engine/index.ts';
 import { ROUNDS_PER_SEASON, finishRound, isSeasonOver, planRound, resolveUserLineup, serializeCareer, userClub } from '../../game/career.ts';
 import type { Scheduler } from '../../game/session.ts';
-import { GameController, PROFILE_KEY, SAVE_KEY, SPEED_KEY, UI_SPEEDS, memoryStorage } from '../src/controller.ts';
+import { GameController, OFFERS_KEY, PROFILE_KEY, SAVE_KEY, SPEED_KEY, UI_SPEEDS, memoryStorage } from '../src/controller.ts';
 
 // Fluxo do app sem tela: iniciar carreira, jogar rodadas (com decisões), editar o time, salvar e continuar.
 
@@ -136,9 +136,9 @@ test('velocidade: as cinco existem no controlador (a tela mostra quatro), a esco
   assert.notEqual(b.ctrl.state.snapshot.status, 'PAUSED');
   assert.equal(b.ctrl.userMatch()!.clock.minute, minute);
   // A velocidade escolhida é lembrada num novo início.
-  b.ctrl.setSpeed('VERY_FAST');
-  assert.equal(b.storage.get(SPEED_KEY), 'VERY_FAST');
-  assert.equal(boot(b.storage).ctrl.state.speed, 'VERY_FAST');
+  b.ctrl.setSpeed('FAST');
+  assert.equal(b.storage.get(SPEED_KEY), 'FAST');
+  assert.equal(boot(b.storage).ctrl.state.speed, 'FAST');
 });
 
 test('velocidade instantânea: joga sem esperar temporizador e só para em uma decisão do jogador ou no fim da rodada', () => {
@@ -359,16 +359,18 @@ test('propostas iniciais: três, sem sortear de novo; recusar marca; AGUARDAR co
   assert.equal(b.ctrl.state.screen, 'MATCH');
   b.ctrl.go('MARKET');
   assert.equal(b.ctrl.state.screen, 'MATCH', 'sem clube não há mercado');
-  for (let r = 0; r < 3; r++) {
+  let offers = b.ctrl.state.career!.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
+  for (let r = 0; r < 30 && offers.length === 0; r++) {
     playRound(b);
     b.ctrl.nextRound();
+    offers = b.ctrl.state.career!.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
   }
-  const offers = b.ctrl.state.career!.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
   assert.ok(offers.length > 0, 'propostas chegam enquanto o mundo joga');
   b.ctrl.acceptJob(offers[0].id);
   assert.equal(b.ctrl.state.career!.userClubId, offers[0].clubId);
+  const round = b.ctrl.state.career!.roundNumber;
   playRound(b);
-  assert.equal(b.ctrl.state.career!.roundNumber, 5);
+  assert.equal(b.ctrl.state.career!.roundNumber, round + 1);
 });
 
 test('gestão: ações bloqueadas durante a rodada, liberadas fora dela e salvas', () => {
@@ -390,9 +392,30 @@ test('gestão: ações bloqueadas durante a rodada, liberadas fora dela e salvas
   assert.ok(saved.manager.finance.sponsor, 'a escolha foi salva');
 });
 
-test('velocidade INSTANTÂNEA salva de versões antigas volta como MUITO RÁPIDA; a tela oferece só quatro', () => {
-  const storage = memoryStorage();
-  storage.set(SPEED_KEY, 'INSTANT');
-  assert.equal(boot(storage).ctrl.state.speed, 'VERY_FAST');
-  assert.deepStrictEqual(UI_SPEEDS, ['SLOW', 'NORMAL', 'FAST', 'VERY_FAST']);
+test('velocidades da tela: só LENTA, NORMAL e RÁPIDA; MUITO RÁPIDA/INSTANTÂNEA salvas voltam como RÁPIDA', () => {
+  for (const old of ['INSTANT', 'VERY_FAST']) {
+    const storage = memoryStorage();
+    storage.set(SPEED_KEY, old);
+    assert.equal(boot(storage).ctrl.state.speed, 'FAST');
+  }
+  assert.deepStrictEqual(UI_SPEEDS, ['SLOW', 'NORMAL', 'FAST']);
+});
+
+test('anti-reroll: as 3 propostas sobrevivem a recarregar/reabrir, com as recusas; nada é sorteado de novo', () => {
+  const a = boot();
+  a.ctrl.offerClubs(); // seed aleatória (randomSeed do boot é fixa, então troca-se depois por outra)
+  const first = a.ctrl.state.offers!;
+  a.ctrl.refuseOffer(first.clubIds[0]);
+  // "fechar e abrir": outro controlador com o mesmo armazenamento e OUTRA fonte de seed
+  const b = new GameController({ storage: a.storage, scheduler: a.sched, randomSeed: () => 'outra-seed-qualquer', toastMs: 0 });
+  assert.deepStrictEqual(b.state.offers, { ...first, refused: [first.clubIds[0]] }, 'mesmas propostas e mesma recusa após reabrir');
+  b.offerClubs(); // pedir de novo não sorteia
+  assert.deepStrictEqual(b.state.offers!.clubIds, first.clubIds);
+  b.refuseOffer(first.clubIds[1]);
+  b.refuseOffer(first.clubIds[2]);
+  const c = new GameController({ storage: a.storage, scheduler: a.sched, randomSeed: () => 'mais-uma-seed', toastMs: 0 });
+  assert.equal(c.state.offers!.refused.length, 3, 'recusou todas: continua sem novas (só AGUARDAR)');
+  assert.deepStrictEqual(c.state.offers!.clubIds, first.clubIds);
+  c.waitForOffers('Aguardando');
+  assert.equal(a.storage.get(OFFERS_KEY), null, 'a carreira criada leva as propostas; a chave é limpa');
 });

@@ -6,7 +6,7 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 
 ## Testes automatizados
 
-`npm test` (Node `--test`): **213/213** (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
+`npm test` (Node `--test`): **217/217** (etapa Força + Economia; antes 213/213 (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
 
 | Conjunto | Arquivo(s) | Cobre |
 |---|---|---|
@@ -64,6 +64,16 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
   Durante a bateria, `qa-myteam` em 360/390 falhou por causa do ROTEIRO (clicava em CLUBES, que no celular fica no MAIS);
   roteiro corrigido e reexecutado: 51/51. `qa-live` esperava a decisão do cenário aos 36', constante já desatualizada na
   linha de base (os cenários de `597abb3` também dão 62'); o roteiro agora lê o minuto do cenário.
+
+- **Etapa Força + Economia (02/10/2026, build `b545f8c5…`):** `engine/` sem alteração. Typecheck OK, **217/217**
+  (novos: propostas persistentes ao reabrir, força relativa/⭐, evolução ±1 com 1ª metade idêntica, virada sem salto de
+  força; regressão com evolução desligada = 1.520 placares idênticos). Interface: `qa-splash` 17/17 ×6; `qa-scenarios`
+  4/4; `qa-goalkeeper` A–E em 360/390/1280; `qa-speeds` 54/54 em 1280 e 390; `qa-myteam` 51/51 em 360/390/1280;
+  `qa-persist` 36/36 ×2; `qa-live` 7/7; `qa-app --season` **61/61** ×2 (novos: anti-reroll recarregando a página com as
+  propostas e uma recusa; página completa da notícia); `qa-season` 12/12 nas 6 larguras; `qa-visual` 0 problemas ×6.
+  **Regressão contra a V3:** rodadas 1–19 idênticas nas 6 larguras; a partir da rodada 20 (checkpoint de evolução do meio)
+  16 das 19 rodadas mudam — efeito esperado da evolução de força, não do engine; as 6 larguras continuam idênticas entre si
+  (907 vermelhos, 6.871 amarelos, 356 lesões na temporada).
 
 ## Análises
 

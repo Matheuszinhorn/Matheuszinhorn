@@ -22,7 +22,8 @@ import { moodOf, moraleAfterRound, objectiveFor } from '../manager/board.ts';
 import { openTalk, proposeRenewal as talk } from '../manager/contracts.ts';
 import { ensureManager } from '../manager/core.ts';
 import { creditLimit, financeStatus, prizeMoney, quoteLoan, sponsorInstallment } from '../manager/finance.ts';
-import { finishManagedRound, planManagedRound, startManagedSeason } from '../manager/flow.ts';
+import { MID_CHECKPOINT, finishManagedRound, planManagedRound, startManagedSeason, type FlowOptions } from '../manager/flow.ts';
+import { STAR_GAP, divisionMeans, evolutionStep, relativeOf } from '../manager/progression.ts';
 import { askingPrice, evaluateOffer, searchPlayers, windowOpen } from '../manager/market.ts';
 import { personalityOf, refereeFor, roundDate, clubColors, flagOf } from '../manager/people.ts';
 import { attendanceFor, canStartWork } from '../manager/stadium.ts';
@@ -34,10 +35,10 @@ const SEED = 'gestao-teste';
 const offers = careerOffers(SEED);
 const fresh = () => newManagedCareer(SEED, 'Ana Souza', offers[0]);
 
-function managedRound(c: CareerState) {
+function managedRound(c: CareerState, opts: FlowOptions = {}) {
   const plan = planManagedRound(c);
   const round = simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null));
-  return finishManagedRound(c, roundResults(round), round.matches);
+  return finishManagedRound(c, roundResults(round), round.matches, opts);
 }
 
 test('mesma seed = mesmo estado de gestão (árbitros, técnicos, patrocínios, objetivo)', () => {
@@ -70,13 +71,13 @@ test('público dinâmico não muda placares: a rodada gerenciada tem os mesmos r
   for (const f of managed.fixtures) assert.ok(f.attendance <= f.home.club.stadium.capacity && f.attendance > 0);
 });
 
-test('temporada inteira gerenciada: mesmos placares da carreira sem gestão, estatísticas e notícias reais', () => {
+test('temporada inteira gerenciada (evolução desligada): mesmos placares da carreira sem gestão, estatísticas e notícias reais', () => {
   let plain: CareerState = createCareer({ seed: SEED, coachName: 'Ana', clubId: offers[0] });
   let c: CareerState = fresh();
   const scores: string[] = [];
   const scoresPlain: string[] = [];
   for (let r = 1; r <= 38; r++) {
-    const out = managedRound(c);
+    const out = managedRound(c, { evolution: false });
     c = out.career;
     scores.push(c.results.slice(-80).map((x) => `${x.homeGoals}-${x.awayGoals}`).join(','));
     const plan = planRound(plain);
@@ -96,7 +97,7 @@ test('temporada inteira gerenciada: mesmos placares da carreira sem gestão, est
   assert.equal(refMatches, 38 * 40);
   assert.ok(m.finance.ledger.some((l) => l.label.startsWith('Premiação')));
   // virada
-  const turn = startManagedSeason(c);
+  const turn = startManagedSeason(c, { evolution: false });
   const n = turn.career;
   assert.equal(n.season, c.season + 1);
   assert.deepStrictEqual(n.manager!.stats.season, {});
@@ -105,17 +106,24 @@ test('temporada inteira gerenciada: mesmos placares da carreira sem gestão, est
     assert.ok(club.squad.filter((id) => n.world.players[id].position === 'GK').length >= 2, `${club.id} sem goleiros`);
     for (const id of club.squad) assert.equal(n.world.players[id].clubId, club.id);
   }
-  assert.deepStrictEqual(startManagedSeason(c).career, n, 'virada determinística');
+  assert.deepStrictEqual(startManagedSeason(c, { evolution: false }).career, n, 'virada determinística');
   // a 2ª temporada roda
   const r1 = managedRound(n);
   assert.equal(r1.career.roundNumber, 2);
 });
 
-test('treinador sem clube: o mundo roda e chegam propostas; aceitar troca o clube', () => {
+test('treinador sem clube: proposta só nasce de evento real (técnico demitido); aceitar troca o clube', () => {
   let c: CareerState = newManagedCareer(SEED, 'Sem Clube', null);
-  for (let r = 1; r <= 3; r++) c = managedRound(c).career;
-  const open = c.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
-  assert.ok(open.length >= 1, 'chegou ao menos uma proposta');
+  for (let r = 1; r <= 5; r++) c = managedRound(c).career;
+  assert.equal(c.manager!.jobs.offers.length, 0, 'sem demissão, sem proposta (nada é sorteado só porque o tempo passou)');
+  let open = c.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
+  for (let r = 6; r <= 30 && open.length === 0; r++) {
+    c = managedRound(c).career;
+    open = c.manager!.jobs.offers.filter((o) => o.status === 'OPEN');
+  }
+  assert.ok(open.length >= 1, 'uma demissão abriu vaga e virou proposta');
+  const fired = c.manager!.news.find((n) => n.kind === 'URGENTE' && n.clubId === open[0].clubId && /demite/.test(n.title));
+  assert.ok(fired, 'a proposta vem do clube que demitiu (notícia do fato)');
   const res = acceptJob(c, open[0].id);
   assert.equal(res.career.userClubId, open[0].clubId);
   assert.ok(res.career.manager!.objective);
@@ -307,4 +315,47 @@ test('leilões simultâneos não levam o elenco abaixo do mínimo (o 2º conta o
   const [a, b] = keep.filter((id) => c.world.players[id].position !== 'GK');
   c = openAuction(c, a, c.world.players[a].marketValue).career;
   assert.throws(() => openAuction(c, b, c.world.players[b].marketValue), /menos de 16/);
+});
+
+test('força relativa: 30 é destaque na 4ª e abaixo da média na 1ª; ⭐ só pelo contexto', () => {
+  const c = fresh();
+  const means = divisionMeans(c.world);
+  const d4 = c.world.divisions.find((d) => d.level === 4)!;
+  const d1 = c.world.divisions.find((d) => d.level === 1)!;
+  const a = { strength: 30, clubId: d4.clubIds[0] };
+  const b = { strength: 30, clubId: d1.clubIds[0] };
+  assert.ok(means[d4.id] + STAR_GAP <= 30, `média da 4ª ${means[d4.id]}`);
+  assert.equal(relativeOf(c.world, means, a)!.star, true);
+  assert.equal(relativeOf(c.world, means, b)!.tier, 'ABAIXO');
+});
+
+test('evolução: passo ±1 no máximo, determinístico; meio da temporada muda só depois da rodada 19', () => {
+  for (let i = 0; i < 1000; i++) assert.ok([-1, 0, 1].includes(evolutionStep((i % 21 - 10) / 5, (i * 7919 % 1000) / 1000)));
+  let plain: CareerState = fresh();
+  let evo: CareerState = fresh();
+  for (let r = 1; r <= MID_CHECKPOINT + 1; r++) {
+    const before = evo.world.players;
+    plain = managedRound(plain, { evolution: false }).career;
+    evo = managedRound(evo).career;
+    if (r <= MID_CHECKPOINT) assert.deepStrictEqual(evo.results.slice(-80), plain.results.slice(-80), `rodada ${r}: mesmos placares`);
+    for (const [id, p] of Object.entries(evo.world.players)) if (before[id]) assert.ok(Math.abs(p.strength - before[id].strength) <= 1, `${id} mudou mais de 1`);
+    if (r < MID_CHECKPOINT) assert.deepStrictEqual(Object.values(evo.world.players).map((p) => p.strength), Object.values(plain.world.players).map((p) => p.strength), `rodada ${r}: nenhuma força muda antes do checkpoint`);
+  }
+  const changed = Object.keys(evo.world.players).filter((id) => evo.world.players[id].strength !== plain.world.players[id]?.strength);
+  assert.ok(changed.length > 50, `o checkpoint do meio mudou ${changed.length} jogadores`);
+});
+
+test('acesso/rebaixamento: na virada ninguém muda mais de 1 ponto de força (adaptação gradual)', () => {
+  let c: CareerState = fresh();
+  while (!isSeasonOver(c)) c = managedRound(c, { evolution: false }).career;
+  const before = c.world.players;
+  const n = startManagedSeason(c).career;
+  const moved = c.history[c.history.length - 1].movements.map((m) => m.clubId);
+  let checked = 0;
+  for (const [id, p] of Object.entries(n.world.players)) {
+    if (!before[id]) continue;
+    assert.ok(Math.abs(p.strength - before[id].strength) <= 1, `${id}: ${before[id].strength} → ${p.strength}`);
+    if (p.clubId && moved.includes(p.clubId)) checked++;
+  }
+  assert.ok(checked > 100, 'jogadores de clubes que subiram ou caíram conferidos');
 });

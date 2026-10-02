@@ -6,7 +6,7 @@ import type { BankLoan, ExtraLine, SponsorGoal, SponsorOffer } from './state.ts'
 
 export type FinanceStatus = 'SAUDAVEL' | 'ATENCAO' | 'ALERTA' | 'CRITICO';
 export const STATUS_ICON: Record<FinanceStatus, string> = { SAUDAVEL: '🟢', ATENCAO: '🟡', ALERTA: '🟠', CRITICO: '🔴' };
-export const STATUS_LABEL: Record<FinanceStatus, string> = { SAUDAVEL: 'Saudável', ATENCAO: 'Atenção', ALERTA: 'Alerta', CRITICO: 'Crítico' };
+export const STATUS_LABEL: Record<FinanceStatus, string> = { SAUDAVEL: 'Saudável', ATENCAO: 'Atenção', ALERTA: 'Risco', CRITICO: 'Crítico' };
 
 export function debtOf(loans: readonly BankLoan[]): number {
   return loans.reduce((s, l) => s + l.remaining, 0);
@@ -58,7 +58,14 @@ export function payInstallment(l: BankLoan): { loan: BankLoan; paid: number } {
 
 // ---------- patrocínio ----------
 
-const SPONSOR_NAMES = ['Banco Horizonte', 'Construtora Pilar', 'Laticínios Serra Azul', 'Rede Farma Vida', 'Auto Peças Rota', 'Café Tropeiro', 'Seguros Âncora', 'Móveis Carvalho', 'Telecom Sinal', 'Supermercados Bom Preço', 'Energia Vale Verde', 'Transportes Estrela'];
+/** Patrocinadores FICTÍCIOS, com o setor de cada um. */
+export const SPONSOR_SECTOR: Record<string, string> = {
+  'Banco Horizonte': 'Banco', 'Construtora Pilar': 'Construção', 'Laticínios Serra Azul': 'Alimentos', 'Rede Farma Vida': 'Farmácia',
+  'Auto Peças Rota': 'Automotivo', 'Café Tropeiro': 'Bebidas', 'Seguros Âncora': 'Seguros', 'Móveis Carvalho': 'Varejo',
+  'Telecom Sinal': 'Telecomunicações', 'Supermercados Bom Preço': 'Supermercado', 'Energia Vale Verde': 'Energia', 'Transportes Estrela': 'Logística',
+};
+const SPONSOR_NAMES = Object.keys(SPONSOR_SECTOR);
+export const sponsorSector = (name: string): string => SPONSOR_SECTOR[name] ?? 'Empresa';
 const SPONSOR_BASE: Record<number, number> = { 1: 6_000_000, 2: 2_000_000, 3: 600_000, 4: 180_000 };
 
 /**

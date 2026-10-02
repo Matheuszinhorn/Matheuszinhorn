@@ -31,7 +31,7 @@ export function renderCareer(ctrl: GameController): HTMLElement {
     card(
       'Propostas de trabalho',
       offers.length
-        ? h('ul', { class: 'deals' }, offers.map((o) => { const cl = career.world.clubs[o.clubId]; return h('li', null, h('div', { class: 'deal-main' }, h('b', null, cl.name), h('span', { class: 'muted' }, `${flagOf(cl.country)} ${divName(cl.divisionId)} · válida até a rodada ${o.expiresRound % 100}`), h('span', { class: 'small' }, o.reason)), btn('VER PROPOSTA', () => ctrl.openProposal(o.clubId, o.id), { kind: 'primary', disabled: live })); }))
+        ? h('ul', { class: 'deals' }, offers.map((o) => { const cl = career.world.clubs[o.clubId]; return h('li', null, h('div', { class: 'deal-main' }, h('b', null, cl.name), h('span', { class: 'muted' }, `${flagOf(cl.country)} ${divName(cl.divisionId)} · válida até a rodada ${o.expiresRound % 100} de ${Math.floor(o.expiresRound / 100)}`), h('span', { class: 'small' }, o.reason)), btn('VER PROPOSTA', () => ctrl.openProposal(o.clubId, o.id), { kind: 'primary', disabled: live })); }))
         : empty(club ? 'Nenhuma proposta no momento. Bons trabalhos atraem clubes maiores.' : 'Nenhuma proposta ainda. Jogue as rodadas: clubes que trocam de técnico procuram nomes.'),
     ),
     m.jobs.national === 'INVITED'
