@@ -153,3 +153,30 @@ test('0.2: teto sazonal opcional (calibração) limita subidas por temporada', (
   for (let round = 1; round <= 38; round++) d = developRound(d, { season: 1, round, age: 18, position: 'ATA', environmentLevel: 45, evidence: titular(2, 3, 0) }, cfg);
   assert.ok(d.strengthCurrent - 15 <= 2);
 });
+
+// ---------- validação no mundo real (leitura de partidas do engine) ----------
+
+test('evidência lida de uma rodada real do engine: titulares, minutos, gols e placar coerentes; só leitura', async () => {
+  const { createRound, roundResults, simulateRound } = await import('../../engine/index.ts');
+  const { careerOffers } = await import('../career.ts');
+  const { newManagedCareer } = await import('../manager/actions.ts');
+  const { planManagedRound } = await import('../manager/flow.ts');
+  const { evidenceFromMatch } = await import('../development/evidence.ts');
+  const c = newManagedCareer('dev-evidencia', 'T', careerOffers('dev-evidencia')[0]);
+  const plan = planManagedRound(c);
+  const sim = simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null));
+  const frozen = JSON.stringify(sim.matches);
+  for (const m of sim.matches) {
+    const ev = evidenceFromMatch(m);
+    for (const side of ['home', 'away'] as const) {
+      const mine = [...ev.entries()].filter(([id]) => m[side].players[id]);
+      assert.equal(mine.filter(([, e]) => e.started).length, 11, `${m.matchId} ${side}: 11 titulares`);
+      for (const [, e] of mine) assert.ok(e.played && e.minutes >= 1 && e.minutes <= 90 && e.teamGoalsFor === m.score[side]);
+      assert.ok(mine.reduce((a, [, e]) => a + e.goals, 0) <= m.score[side]);
+    }
+  }
+  assert.equal(JSON.stringify(sim.matches), frozen, 'a leitura não altera a partida');
+  // o mundo A não muda com o observador: mesma rodada simulada de novo = mesmos placares
+  const again = roundResults(simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null)));
+  assert.deepStrictEqual(again.map((r) => `${r.homeGoals}-${r.awayGoals}`), roundResults(sim).map((r) => `${r.homeGoals}-${r.awayGoals}`));
+});

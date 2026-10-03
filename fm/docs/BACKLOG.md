@@ -87,3 +87,6 @@ priorizar depois do teste externo.
   de idade com rendimento ruim) e registrar minutos, titularidade e defesas na camada de gestão.
 * Integração: substituir os checkpoints de `progression.ts`, migração compatível de save (`strengthBase =
   strengthCurrent = strength`), engine inalterado.
+* Validação no mundo real (docs/PLAYER-DEVELOPMENT.md, `npm run development:world`): recalibrar antes de integrar —
+  perda por inatividade sem limite (146 jogadores chegam a 1; deflação −2,3) e ambiente que não muda com acesso ou
+  rebaixamento (é o próprio elenco). Medir também o efeito de volta da força nas partidas (só com aprovação).
