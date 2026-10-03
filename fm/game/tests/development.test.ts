@@ -315,3 +315,26 @@ test('feedback: a composição só troca Player.strength por strengthCurrent; o 
   const key = (p: ReturnType<typeof planManagedRound>) => `${p.roundId}|${p.seed}|${p.fixtures.map((f) => `${f.matchId}:${f.home.club.id}-${f.away.club.id}`).join(',')}`;
   assert.equal(key(planManagedRound({ ...c1, world: w })), key(planManagedRound(c1)));
 });
+
+test('feedback 10 temporadas (auditoria): transferência e envelhecimento preservam strengthCurrent; nova divisão não muda a força na hora', async () => {
+  const { careerOffers } = await import('../career.ts');
+  const { newManagedCareer } = await import('../manager/actions.ts');
+  const { movePlayer } = await import('../manager/market.ts');
+  const { agePlayers } = await import('../manager/world.ts');
+  const { devProto04, developRound, newDevelopment } = await import('../development/development.ts');
+  const { withDevelopedStrength } = await import('../development/feedback.ts');
+  const c = newManagedCareer('dev-feedback-10', 'T', careerOffers('dev-feedback-10')[0]);
+  const w = c.world;
+  const d4 = w.divisions.find((d) => d.level === 4)!, d1 = w.divisions.find((d) => d.level === 1)!;
+  const id = w.clubs[d4.clubIds[0]].squad[0];
+  const p = w.players[id];
+  const dev = { ...newDevelopment(id, p.strength), strengthCurrent: Math.min(50, p.strength + 2) };
+  const composed = withDevelopedStrength(w, new Map([[id, dev]]));
+  const moved = movePlayer(composed, id, d1.clubIds[0]);
+  assert.equal(moved.players[id].strength, dev.strengthCurrent, 'transferência leva a strengthCurrent');
+  assert.equal(agePlayers(moved).world.players[id]?.strength ?? dev.strengthCurrent, dev.strengthCurrent, 'envelhecimento não mexe na força');
+  // 1ª rodada no clube novo (ambiente bem mais forte): nada muda antes do fim da janela
+  const after = developRound(dev, { season: 2, round: 1, age: p.age + 1, position: 'MEI', environmentLevel: 40, divisionLevel: 40, evidence: { played: true, minutes: 90, started: true, goals: 0, saves: 0, teamGoalsFor: 1, teamGoalsAgainst: 0, redCard: false, injured: false } }, devProto04('B', 'B'));
+  assert.equal(after.strengthCurrent, dev.strengthCurrent);
+  assert.equal(after.strengthBase, p.strength, 'strengthBase nunca muda');
+});
