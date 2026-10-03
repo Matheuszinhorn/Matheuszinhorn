@@ -222,6 +222,12 @@ Por isso a retirada não foi feita nesta etapa.
 - Ao aplicar (etapa futura, com aprovação): `strength`, `strengthMethodVersion` e `strengthNotes` por jogador.
   Carreiras em andamento não mudam.
 
+## Evolução depois da força inicial
+
+A EM-RATING define só o ponto de partida (`strengthBase`). A evolução durante a carreira é outra camada, em projeto:
+[PLAYER-DEVELOPMENT.md](PLAYER-DEVELOPMENT.md). Contratação não muda a força, e o clube é ambiente de desenvolvimento,
+não bônus.
+
 ## O que não muda
 
 - **Engine 0.2.0:** sem alteração (o teste compara o sha256 das 22 fontes).

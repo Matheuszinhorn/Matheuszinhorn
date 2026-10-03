@@ -79,3 +79,11 @@ priorizar depois do teste externo.
 * Regra do goleiro quando a produção pesa mais (o neutro fixo 0,5 limita o teto do goleiro: 46/44/41 em A/B/C).
 * Fator da experiência limitada (×1, ×0,5 ou ×0) para os 60 atletas com carreira anterior fora da base.
 * Repetir a calibração depois da curadoria das posições (hoje "sem posição" produz quase todos os 50).
+
+## Evolução contextual (PlayerDevelopment) — projeto
+
+* Protótipo e simulação em docs/PLAYER-DEVELOPMENT.md (`npm run development:sim`); não integrado.
+* Antes de implementar: calibrar com partidas reais do engine (rendimento do goleiro, queda do veterano, tendência
+  de idade com rendimento ruim) e registrar minutos, titularidade e defesas na camada de gestão.
+* Integração: substituir os checkpoints de `progression.ts`, migração compatível de save (`strengthBase =
+  strengthCurrent = strength`), engine inalterado.

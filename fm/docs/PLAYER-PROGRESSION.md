@@ -1,5 +1,8 @@
 # Força relativa e evolução dos jogadores
 
+> Em estudo: uma evolução contextual por rodada (ambiente do clube, minutos e rendimento), só como projeto e
+> simulação, em [PLAYER-DEVELOPMENT.md](PLAYER-DEVELOPMENT.md). Enquanto não for aprovada, vale o que está abaixo.
+
 Camada: `game/manager/progression.ts`. Nada aqui altera o Engine 0.2.0: a força (1–50) continua sendo o único atributo
 que a partida usa, e o engine já faz o jogador mais forte pesar mais em cada chance. Sem atributos ocultos e sem potencial
 escondido.

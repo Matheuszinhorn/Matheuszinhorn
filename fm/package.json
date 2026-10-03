@@ -11,7 +11,8 @@
     "qa": "node scripts/qa-app.mjs",
     "balance": "node engine/sim/balance.ts",
     "universe": "node scripts/build-universe.ts",
-    "rating:sim": "node scripts/simulate-em-rating-2.ts"
+    "rating:sim": "node scripts/simulate-em-rating-2.ts",
+    "development:sim": "node scripts/simulate-development.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",

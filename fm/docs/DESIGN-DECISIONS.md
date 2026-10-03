@@ -99,3 +99,12 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 * **Sem teto artificial:** a calibração mexe em pesos, curva e tratamento da experiência; 50 continua possível.
 * **Modelos A/B/C comparados sem ranking;** a escolha é do proprietário. A curva de participação, o fator da
   experiência limitada e o tratamento do goleiro são configuráveis por variante, gravados com a força.
+
+## Evolução contextual (projeto)
+
+* **Princípio do Elifoot 98, não o código:** passo de ±1, rendimento pós-jogo e o nível do time como limite do
+  ganho. Referência histórica registrada em PLAYER-DEVELOPMENT.md (engenharia reversa pública de trsthales).
+* **Clube como ambiente, não bônus:** teto de ganho = média dos 16 mais fortes do elenco + margem por idade;
+  contratação não muda a força.
+* **Sem piso pelo ambiente:** o jogador forte num clube fraco não cai por isso (diferente do Elifoot).
+* **Sem sorteio:** janelas de 5 rodadas com acúmulo determinístico; recarregar não muda nada.
