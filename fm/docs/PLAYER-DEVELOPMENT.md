@@ -705,3 +705,92 @@ ordena por força):
 - A força só muda a partir da rodada 20, com ±1 por janela, então o efeito de volta é pequeno por construção.
 - Sem virada de temporada (envelhecimento, aposentadoria, acesso, mercado).
 - **Não avançar para 10 temporadas sem decisão do responsável.**
+
+## Teste de feedback — 10 temporadas
+
+> **DEV-INTEGRATION-0.2 — simulação/validação EXPERIMENTAL.** Não é integração oficial. Nada entra no produto, nos
+> saves, na UI, no gameplay, no calendário ou no deploy. Engine 0.2.0 intocado e nenhum balanceamento alterado.
+> Relatório completo: `reports/development-feedback-10-seasons.md`; dados: `reports/development-feedback-10-seasons.json`;
+> comando: `npm run development:feedback10` (~15 min, roda o experimento duas vezes).
+
+**Montagem**
+
+- Mesma composição da temporada 1 (`game/development/feedback.ts`, DEV-PROTO-0.4-B).
+- Agora com 10 temporadas e todas as regras do jogo: acesso/rebaixamento, CPU (transferências e renovações), base,
+  aposentadoria, finanças, lesões e suspensões.
+- **A — Controle:** força fixa. **B — Desenvolvimento:** strengthCurrent no engine.
+- Os checkpoints antigos de `progression.ts` ficam desligados nos dois mundos.
+
+**Auditoria**
+
+- O engine não teve nenhum commit desde o snapshot, e a impressão digital confere.
+- A única escrita de força no jogo é `progression.ts`.
+- `movePlayer`, `agePlayers`, renovações e acesso/rebaixamento não tocam na força. Isso foi conferido em toda virada,
+  e há teste novo para transferência e envelhecimento.
+- strengthBase nunca muda.
+- A nova divisão só altera o ambiente das rodadas seguintes.
+
+**Divergências**
+
+Nenhum erro. Ficaram idênticos:
+
+- o universo;
+- id e seed das 380 rodadas;
+- o mundo e os placares até a 1ª mudança de força;
+- a força fixa do Controle.
+
+Divergências derivadas da força:
+
+- **Calendário a partir da T2:** o sorteio usa a ordem dos clubes, que vem da classificação final
+  (`applyPromotionRelegation`). Por isso a mesma divisão com outra ordem gera outro calendário.
+- **A partir da T3:** clubes diferentes sobem e caem nos dois mundos.
+- **Juniores:** nascem com o mesmo id mas outra posição ou força.
+- **Placares:** 31 diferentes na T1, cerca de 550–630 por temporada depois.
+
+**Resultado (10 temporadas)**
+
+- **Média de força (todos com clube):**
+  - A: 25,49 → 23,72; B: 25,58 → 23,44.
+  - A cai sozinho por aposentadorias e juniores.
+  - A diferença B − A fica entre −0,7 e +0,1. Não há inflação nem deflação forte.
+- **Mesmo conjunto** (1.111 jogadores do início ao fim): −0,91 em 10 anos, já com o envelhecimento.
+- **Mudança acumulada:**
+  - maior ganho +13, maior queda −10;
+  - +5 ou mais: 167; −5 ou mais: 613;
+  - nenhum jogador chegou a 50.
+- **Mudança por temporada:** ±2 a ±3 no máximo; magnitude média 1,05–1,20 entre quem mudou.
+- **Engine (10 temporadas, A → B):**
+  - gols por partida 2,710 → 2,686;
+  - conversão 35,3% → 35,0%;
+  - vitória do favorito 45,3% → 44,5%, do azarão 30,0% → 30,3%;
+  - 4+ gols 28,8% → 28,3%.
+  - Nenhuma temporada passa de ±5% em gols ou conversão.
+- **Divisões (A × B no fim da T10):**
+  - D1−D2 6,76 × 5,58;
+  - D2−D3 5,74 × 6,30;
+  - D3−D4 7,37 × 7,46;
+  - D1−D4 19,87 × 19,35.
+  - No próprio Controle essas distâncias oscilam bastante, por exemplo D1−D2 de 2,4 a 7,2.
+- **Retroalimentação pela tabela:** a diferença de variação entre os 4 primeiros e os 4 últimos fica entre −0,24 e
+  +0,47 por temporada. Fica longe do alerta (+1,0), mas é positiva na maioria das temporadas da D1 e da D4.
+- **Casos:**
+  - jovem fraco titular da D1: 28 → 34;
+  - jovem reserva sem minutos: 22 → 21;
+  - jovem forte da D4: 28 → 29, limitado pelo ambiente;
+  - veterano bom titular: 42 → 42 até se aposentar;
+  - veterano ruim: 22 → 16;
+  - veterano sem minutos: 45 → 41;
+  - estrela de força 50: mantém até os 34 e chega a 48 aos 36;
+  - transferido para a D1: 43 → 41, por idade.
+
+**Critérios de segurança que dispararam** (registrados; nada foi calibrado)
+
+- **Concentração em 1, da T6 à T10:** 11 a 20 jogadores com força 1 em B, contra 0 em A. Os 31 que chegaram a 1 começaram
+  todos com força ≤ 10. É a mesma anomalia da validação em observador: sem piso pela força inicial, que é proibido
+  nesta etapa.
+- **Divisão inferior forte demais, só na T9:** D1−D2 ficou em 4,75 em B, contra 6,48 em A (73% de A). Na T10 voltou a
+  5,58 × 6,76, e o valor fica dentro da oscilação natural do Controle. Está registrado, sem conclusão.
+
+**Determinismo:** duas execuções completas com hashes iguais (placares de A e B, evolução e relatório).
+
+**Não decidido aqui:** integração oficial, piso para força muito baixa e qualquer ajuste de calibração.

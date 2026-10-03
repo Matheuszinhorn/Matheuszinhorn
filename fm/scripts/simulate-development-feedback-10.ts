@@ -208,9 +208,12 @@ function experiment() {
   const early = (w: WorldRun) => w.matches.filter((m) => m.season === 1 && m.round <= firstChange).map((m) => `${m.matchId}:${m.hg}-${m.ag}`).join(',');
   if (early(ctl) !== early(dev)) errors.push(`placares da T1 até a rodada ${firstChange} diferentes`);
   const STATIC: (keyof Player)[] = ['name', 'nationality', 'position', 'temperament'];
-  let staticDiff = 0;
-  for (const [id, a] of ctl.info) { const b = dev.info.get(id); if (b && STATIC.some((k) => a[k] !== b[k])) staticDiff++; }
-  if (staticDiff) errors.push(`${staticDiff} jogador(es) com o mesmo id e identidade diferente`);
+  // juniores: o id (clube-bTemporada-n) não depende da posição nem da divisão, mas a geração depende (necessidade do
+  // elenco e nível do clube) — nos dois mundos podem nascer juniores diferentes com o mesmo id. Isso é derivado.
+  const YOUTH = /-b\d+-\d+$/;
+  let staticDiff = 0, youthDiff = 0;
+  for (const [id, a] of ctl.info) { const b = dev.info.get(id); if (b && STATIC.some((k) => a[k] !== b[k])) { if (YOUTH.test(id)) youthDiff++; else staticDiff++; } }
+  if (staticDiff) errors.push(`${staticDiff} jogador(es) (não juniores) com o mesmo id e identidade diferente`);
   const strengthTouched = [...devs.values()].filter((d) => d.strengthBase !== (dev.info.get(d.playerId)?.strength ?? d.strengthBase)).length;
   if (strengthTouched) errors.push(`${strengthTouched} strengthBase diferente(s) da força do 1º encontro`);
 
@@ -222,6 +225,7 @@ function experiment() {
   const onlyIn = (a: WorldRun, b: WorldRun) => [...a.info.keys()].filter((id) => !b.info.has(id)).length;
   derived.push(`jogadores que só existem em um mundo (base gerada por necessidade do elenco): ${onlyIn(ctl, dev)} só no Controle, ${onlyIn(dev, ctl)} só no Desenvolvimento`);
   derived.push(`transferências entre divisões na intertemporada: Controle ${ctl.moves.length}, Desenvolvimento ${dev.moves.length}`);
+  derived.push(`juniores gerados com o mesmo id mas outra posição/força (o id é clube-temporada-número; posição vem da necessidade do elenco e força da divisão do clube): ${youthDiff}`);
 
   // ---------- por temporada ----------
   const seasonRows = SEASON_LIST.map((s) => {
@@ -365,6 +369,8 @@ function experiment() {
   for (const r of seasonRows) L.push(`| ${r.s} | ${levels.map((lv) => `${f2(r.cDiv[lv])}/${f2(r.dDiv[lv])}`).join(' | ')} | ${f2(gap(r.cDiv, 1, 2))}/${f2(gap(r.dDiv, 1, 2))} | ${f2(gap(r.cDiv, 2, 3))}/${f2(gap(r.dDiv, 2, 3))} | ${f2(gap(r.cDiv, 3, 4))}/${f2(gap(r.dDiv, 3, 4))} | ${f2(gap(r.cDiv, 1, 4))}/${f2(gap(r.dDiv, 1, 4))} |`);
   const last = seasonRows[SEASONS - 1];
   const verdict = (a: number, b: number) => (b > a + 0.25 ? 'divergiu' : b < a - 0.25 ? 'convergiu' : 'estável');
+  const rng = (a: number, b: number) => { const v = seasonRows.map((r) => gap(r.cDiv, a, b)); return `${f2(Math.min(...v))} a ${f2(Math.max(...v))}`; };
+  L.push('', `Oscilação natural no Controle (força fixa; só acesso/rebaixamento, mercado, base e aposentadoria): D1−D2 ${rng(1, 2)}; D2−D3 ${rng(2, 3)}; D3−D4 ${rng(3, 4)}; D1−D4 ${rng(1, 4)}. Como os dois mundos sobem e rebaixam clubes diferentes a partir da T3, a comparação B × A temporada a temporada mistura o efeito do desenvolvimento com essa oscilação.`);
   L.push('', `Após ${SEASONS} temporadas (B comparado com A): ${levels.slice(1).map((lv) => `D${lv - 1}−D${lv} ${verdict(gap(last.cDiv, lv - 1, lv), gap(last.dDiv, lv - 1, lv))}`).join('; ')}; D1−D4 ${verdict(gap(last.cDiv, 1, 4), gap(last.dDiv, 1, 4))} (tolerância ±0,25).`, '');
 
   L.push('## Feedback', '', ...H(['Pergunta', 'Resposta']));
