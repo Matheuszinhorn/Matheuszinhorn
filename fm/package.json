@@ -19,7 +19,8 @@
     "development:world04": "node scripts/simulate-development-world-v04.ts",
     "development:synthetic04": "node scripts/simulate-development-v04-synthetic.ts",
     "development:feedback1": "node scripts/simulate-development-feedback-s1.ts",
-    "development:feedback10": "node scripts/simulate-development-feedback-10.ts"
+    "development:feedback10": "node scripts/simulate-development-feedback-10.ts",
+    "development:diagnostic05": "node scripts/diagnose-development-05.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",

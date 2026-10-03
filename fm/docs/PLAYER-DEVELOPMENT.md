@@ -794,3 +794,101 @@ Divergências derivadas da força:
 **Determinismo:** duas execuções completas com hashes iguais (placares de A e B, evolução e relatório).
 
 **Não decidido aqui:** integração oficial, piso para força muito baixa e qualquer ajuste de calibração.
+
+## Diagnóstico de extremos — DEV-DIAGNOSTIC-0.5
+
+> **Somente diagnóstico.** DEV-PROTO-0.4-B não foi alterada. Nada foi calibrado ou integrado. Não há piso. A Seleção
+> não foi implementada. O Engine 0.2.0 está intocado e não houve deploy.
+>
+> - Relatório: `reports/development-diagnostic-05.md`
+> - Dados: `reports/development-diagnostic-05.json`
+> - Comando: `npm run development:diagnostic05`
+> - Regras e arquitetura da Seleção: `docs/NATIONAL-TEAM.md`
+
+**Invariante do produto:** 1 ≤ força ≤ 50, inteira. Testes novos em `game/tests/strength-invariants.test.ts` cobrem:
+
+- geração do mundo e dos juniores;
+- desenvolvimento nos extremos;
+- transferência e envelhecimento;
+- a evolução antiga;
+- a composição experimental;
+- virada com acesso e rebaixamento;
+- persistência;
+- importação do universo real.
+
+Nenhum caminho produziu valor inválido, então nenhuma proteção precisou de correção. Também há um teste de
+"convocação ≠ força".
+
+**Bloqueio estrutural (causa de 50 inalcançável)**
+
+O limite do ganho é `round(contexto + margem(idade))`, com contexto = 0,5 × clube + 0,5 × divisão.
+
+- O melhor clube da D1 (45,69) com o nível da D1 (35,64) dá contexto 40,66.
+- O limite fica em 46 aos 20 anos, 45 dos 21 aos 24, 43 aos 27 e 41 aos 30.
+- Mesmo um elenco inteiro de força 50 dá limite 48 aos 20.
+- Para o limite chegar a 50, o contexto precisaria ser ≥ 44,75 aos 21.
+
+Consequências:
+
+- Ninguém ganha força acima de 45/46.
+- Quem nasce 46–50 só se mantém (rendimento bom compensa a idade) ou cai.
+- Num dos melhores caminhos testados (45 aos 21 anos, D1, titular, destaque, campeão todo ano), o jogador descarta cerca
+  de 3 pontos de rendimento por temporada no limite.
+
+**Caminho até 50**
+
+- Nenhum cenário sintético chega a 50 (bases 40–49; cenários A–I; idades 21, 24 e 27).
+- Nos casos reais, 0 jogadores chegaram a 49 por ganho. Os únicos 50 são de nascimento (50 → 48/49 com a idade).
+- **Sonda** (não é proposta): sem o peso da divisão, o mesmo jogador de 45 vai a 48 → 49 → 50 em **3 temporadas**.
+  Remover o bloqueio sozinho tornaria o 50 fácil demais.
+
+**Seleção**
+
+- Na fórmula atual, a seleção não tem efeito, porque não há entrada para ela.
+- Sonda com 8 jogos internacionais excelentes por ano (ambiente 46,63): no máximo +1 em 10 anos, e 0 para quem está
+  no limite. O +1 é decidido no fim da janela do clube.
+- Não há explosão, mas também não há acelerador de elite.
+
+**Caminho até 1**
+
+- Nos casos reais, 31 jogadores chegaram a 1. Todos tinham base entre 3 e 9, idade entre 25 e 36, e jogavam na D3/D4.
+  - Metade das temporadas deles foi sem minutos.
+  - Das quedas, 102 foram por inatividade, 29 por idade e 18 por rendimento.
+- Nos sintéticos, o jovem (≤ 22) sem minutos não perde nada. A partir dos 23 anos, quem fica sem minutos perde até 0,75
+  por temporada (limite conjunto). O titular ruim perde até −2/−3 por ano depois dos 25.
+- Base ≥ 12 só chega a 1 sendo titular ruim por mais de 10 anos (25 → 36).
+
+**Respostas**
+
+| # | Pergunta | Resposta |
+|---|---|---|
+| 1 | Existe caminho legítimo até 50? | NÃO |
+| 2 | 50 está excessivamente fácil? | NÃO |
+| 3 | 50 está excessivamente difícil? | SIM, é inalcançável por desenvolvimento |
+| 4 | Existe bloqueio estrutural? | SIM, o limite contextual com 50% da divisão |
+| 5 | A Seleção pode ser acelerador de elite sem quebrar o sistema? | SIM, mas exige uma entrada de contexto de elite |
+| 6 | Força 1 aparece em excesso? | NÃO para jogadores normais (ver nota) |
+| 7 | Principal causa da força 1 | INTERAÇÃO: base ≤ 9 + inatividade (maior parte) + idade |
+| 8 | Precisamos de piso? | NÃO |
+| 9 | Precisamos alterar idade? | NÃO |
+| 10 | Precisamos alterar inatividade? | NÃO |
+| 11 | Precisamos alterar performance? | NÃO; o problema é o limite, não o rendimento |
+| 12 | A arquitetura suporta Seleção sem modificar o Engine 0.2.0? | SIM |
+
+Nota sobre a pergunta 6: a força 1 é uma cauda de 31 em 2.261 jogadores, e ninguém com base ≥ 10 chegou a 1.
+
+**Decisão sugerida para DEV-PROTO-0.5** (a decidir; nada implementado)
+
+1. **Faixa de elite, separada do limite contextual atual:**
+   - Acima de 45, o ganho deixa de ser limitado pelo contexto 50/50 e passa a exigir excelência sustentada **por
+     temporada**: titular, ≥ 70% dos minutos, rendimento alto.
+   - No máximo +1 por temporada na faixa 46–50.
+   - O peso da divisão continua valendo abaixo da faixa de elite.
+2. **Aceleradores de elite** (títulos, destaque individual, Seleção) reduzem quantas temporadas excelentes são
+   necessárias, mas **nunca dão força direta**. A Seleção entra como evidência de partida com contexto de elite.
+3. **Alvos a medir** antes de aceitar:
+   - 45 → 50 em 4–6 temporadas excepcionais com títulos e Seleção;
+   - mais lento sem Seleção;
+   - nunca para quem é médio, reserva ou da D2–D4;
+   - poucos 50 por década no mundo (≤ 5).
+4. Não mexer em idade, inatividade, desempenho, piso ou strengthBase. Reavaliar a cauda da força 1 depois.
