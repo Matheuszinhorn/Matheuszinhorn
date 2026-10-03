@@ -102,3 +102,54 @@ test('protótipo isolado: nada em engine/, game/ (fora de development/) ou app/ 
   for (const d of ['engine', 'game', 'app']) walk(d);
   for (const f of files) assert.ok(!readFileSync(join(ROOT, f), 'utf8').includes('development/development'), f);
 });
+
+// ---------- calibração DEV-PROTO-0.2 ----------
+
+test('0.2: ritmo de 10 temporadas — promessa titular cresce ≤ 6 por temporada e nunca chega a 50', () => {
+  let dev = newDevelopment('p', 22);
+  for (let s = 1; s <= 10; s++) {
+    const start = dev.strengthCurrent;
+    dev = season(dev, { age: 20 + s, env: 32, season: s, ev: (r) => titular(r % 5 === 0 || r % 5 === 2 ? 1 : 0, 2, r % 4 === 0 ? 1 : 0) }).dev;
+    assert.ok(dev.strengthCurrent - start <= 6, `temporada ${s}: +${dev.strengthCurrent - start}`);
+  }
+  assert.ok(dev.strengthCurrent < 50 && dev.strengthCurrent > 22);
+});
+
+test('0.2: ambiente é oportunidade, não alvo — 23/35/43 em ambiente 40 têm espaços diferentes e 43 não sobe para "acompanhar"', () => {
+  const after = (base: number) => {
+    let d = newDevelopment(`e${base}`, base);
+    for (let s = 1; s <= 3; s++) d = season(d, { age: 23 + s, env: 40, pos: 'MEI', season: s, ev: (r) => titular(r % 5 === 0 ? 1 : 0) }).dev;
+    return d.strengthCurrent - base;
+  };
+  const [a, b, c] = [after(23), after(35), after(43)];
+  assert.ok(a > b && b >= c, `${a} ${b} ${c}`);
+  assert.ok(c <= 1);
+});
+
+test('0.2: acima do limite, bons jogos compensam os ruins — ambiente fraco não derruba quem rende (sem deriva)', () => {
+  const mixed = (r: number) => (r % 2 ? titular(1, 2, 0) : titular(0, 0, 1)); // vitória com gol / derrota sem gol, alternadas
+  const weak = season(newDevelopment('w', 45), { age: 27, env: 25, ev: mixed }).dev;
+  assert.equal(weak.strengthCurrent, 45);
+  assert.ok(weak.progress <= 0, 'sem crédito de ganho guardado acima do limite');
+  const bad = season(newDevelopment('b', 45), { age: 27, env: 25, ev: () => titular(0, 0, 2) }).dev;
+  assert.ok(bad.strengthCurrent < 45, 'rendimento ruim persistente ainda derruba');
+});
+
+test('0.2: idade é curva suave e o rendimento compensa parte do envelhecimento; reserva veterano cai mais que titular', () => {
+  const vet = (ev: (r: number) => MatchEvidence) => {
+    let d = newDevelopment('v', 40);
+    for (let s = 1; s <= 3; s++) d = season(d, { age: 32 + s, env: 38, pos: 'DEF', season: s, ev }).dev;
+    return d.strengthCurrent;
+  };
+  const good = vet(() => titular(0, 2, 0));
+  const reserve = vet((r) => (r % 3 === 0 ? { ...titular(0, 1, 1), minutes: 25 } : bench));
+  assert.ok(good >= 38, `titular bom aos 33–35: ${good}`);
+  assert.ok(reserve < good, `reserva ${reserve} × titular ${good}`);
+});
+
+test('0.2: teto sazonal opcional (calibração) limita subidas por temporada', () => {
+  const cfg = { ...DEVELOPMENT_PROTO, seasonGainCap: 2 };
+  let d = newDevelopment('cap', 15);
+  for (let round = 1; round <= 38; round++) d = developRound(d, { season: 1, round, age: 18, position: 'ATA', environmentLevel: 45, evidence: titular(2, 3, 0) }, cfg);
+  assert.ok(d.strengthCurrent - 15 <= 2);
+});

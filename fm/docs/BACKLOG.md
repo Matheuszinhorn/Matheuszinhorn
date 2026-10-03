@@ -82,7 +82,7 @@ priorizar depois do teste externo.
 
 ## Evolução contextual (PlayerDevelopment) — projeto
 
-* Protótipo e simulação em docs/PLAYER-DEVELOPMENT.md (`npm run development:sim`); não integrado.
+* Protótipo DEV-PROTO-0.2 calibrado em 10 temporadas (docs/PLAYER-DEVELOPMENT.md, `npm run development:sim10`); não integrado.
 * Antes de implementar: calibrar com partidas reais do engine (rendimento do goleiro, queda do veterano, tendência
   de idade com rendimento ruim) e registrar minutos, titularidade e defesas na camada de gestão.
 * Integração: substituir os checkpoints de `progression.ts`, migração compatível de save (`strengthBase =

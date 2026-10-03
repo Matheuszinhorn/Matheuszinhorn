@@ -12,7 +12,8 @@
     "balance": "node engine/sim/balance.ts",
     "universe": "node scripts/build-universe.ts",
     "rating:sim": "node scripts/simulate-em-rating-2.ts",
-    "development:sim": "node scripts/simulate-development.ts"
+    "development:sim": "node scripts/simulate-development.ts",
+    "development:sim10": "node scripts/simulate-development-10.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",

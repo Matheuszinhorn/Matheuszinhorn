@@ -1,0 +1,5605 @@
+{
+ "version": "DEV-PROTO-0.2",
+ "applied": false,
+ "integrated": false,
+ "config": {
+  "version": "DEV-PROTO-0.2",
+  "windowRounds": 5,
+  "seasonRounds": 38,
+  "accumulatorCap": 1.5,
+  "ageTrend": [
+   [
+    18,
+    0.08
+   ],
+   [
+    21,
+    0.07
+   ],
+   [
+    24,
+    0.05
+   ],
+   [
+    27,
+    0.02
+   ],
+   [
+    29,
+    0
+   ],
+   [
+    32,
+    -0.02
+   ],
+   [
+    35,
+    -0.04
+   ],
+   [
+    38,
+    -0.06
+   ]
+  ],
+  "agingCompensation": 0.7,
+  "ceilingMargin": [
+   [
+    20,
+    5
+   ],
+   [
+    24,
+    4
+   ],
+   [
+    27,
+    2
+   ],
+   [
+    30,
+    0
+   ],
+   [
+    33,
+    -2
+   ]
+  ],
+  "ceilingTaper": 3,
+  "opportunity": {
+   "atEnvironment": 0.6,
+   "farBelow": 1,
+   "farBelowGap": 12,
+   "aboveEnvironment": 0.5
+  },
+  "performanceWeight": 0.1,
+  "idleRoundsBeforeDecline": 6,
+  "idleDeclinePerRound": 0.04,
+  "idleMinAge": 23,
+  "goalkeeperGainFactor": 0.75,
+  "environmentCore": 16,
+  "seasonGainCap": null
+ },
+ "note": "partidas sintéticas com padrões fixos; pontos de desenvolvimento por componente somados por temporada",
+ "checks": [
+  {
+   "objective": "nenhum jovem chega a 50",
+   "ok": true,
+   "measure": "maior força final entre promessas: 34"
+  },
+  {
+   "objective": "caso excepcional ≤ 6 por temporada",
+   "ok": true,
+   "measure": "maior ganho numa temporada (todos os casos): +3"
+  },
+  {
+   "objective": "nenhuma queda > 3 numa temporada",
+   "ok": true,
+   "measure": "maior queda numa temporada: -3"
+  },
+  {
+   "objective": "reservas não evoluem mais que titulares",
+   "ok": true,
+   "measure": "C2 22 × C1 34; C9 20 → 19"
+  },
+  {
+   "objective": "titulares com bom rendimento evoluem",
+   "ok": true,
+   "measure": "C1 22 → 34; C10 20 → 31"
+  },
+  {
+   "objective": "bom > médio > ruim (mesmo jogador)",
+   "ok": true,
+   "measure": "C3 32 · C4 30 · C5 24"
+  },
+  {
+   "objective": "veterano não desaparece rápido",
+   "ok": true,
+   "measure": "C6 após 3 temporadas 40; C7 37"
+  },
+  {
+   "objective": "veterano titular bom cai menos que reserva",
+   "ok": true,
+   "measure": "C6 32 × C7 22"
+  },
+  {
+   "objective": "ambiente não cria força: 43 em ambiente 40 não sobe para \"acompanhar\"",
+   "ok": true,
+   "measure": "E43: 43 → 43"
+  },
+  {
+   "objective": "espaço: 23 > 35 > 43 em ambiente 40",
+   "ok": true,
+   "measure": "ganhos: +8 · +5 · +0"
+  },
+  {
+   "objective": "transferência mantém a força na chegada",
+   "ok": true,
+   "measure": "T41 20→20, T32 25→25, T21 32→32, T12 37→37, T14 36→36, S46 46→46"
+  },
+  {
+   "objective": "estrela não cai por ir para clube fraco (igual ao controle no clube forte)",
+   "ok": true,
+   "measure": "S46 (ambiente 30): 46 → 46; controle (ambiente 42): 46 → 46"
+  },
+  {
+   "objective": "jogador forte em ambiente fraco não cai pelo ambiente (caso 8 não cai mais que o controle; só não cresce)",
+   "ok": true,
+   "measure": "C8 (ambiente 25): 45 → 45; controle (ambiente 45): 45 → 46"
+  },
+  {
+   "objective": "lesão não provoca queda grande",
+   "ok": true,
+   "measure": "C11 T2: 31 → 32"
+  },
+  {
+   "objective": "sem inflação geral",
+   "ok": true,
+   "measure": "variação média dos 11 casos de 10 temporadas: 0,1"
+  }
+ ],
+ "cases": [
+  {
+   "id": "C1",
+   "group": "10 temporadas",
+   "title": "Caso 1 — promessa 21 anos, força 22, titular, bom rendimento",
+   "position": "ATA",
+   "startAge": 21,
+   "strengthBase": 22,
+   "strengthFinal": 34,
+   "maxGainPerSeason": 3,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 15,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 21,
+     "env": 32,
+     "ceiling": 37,
+     "label": "titular, bom",
+     "start": 22,
+     "end": 25,
+     "ups": 3,
+     "downs": 0,
+     "points": {
+      "age": 2.39,
+      "performance": 1.23,
+      "aging": 0,
+      "idle": 0,
+      "total": 3.62
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 22,
+     "env": 32,
+     "ceiling": 37,
+     "label": "titular, bom",
+     "start": 25,
+     "end": 28,
+     "ups": 3,
+     "downs": 0,
+     "points": {
+      "age": 1.89,
+      "performance": 1.08,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.97
+     },
+     "meanOpportunity": 0.79,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 23,
+     "env": 32,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 28,
+     "end": 31,
+     "ups": 3,
+     "downs": 0,
+     "points": {
+      "age": 1.5,
+      "performance": 0.96,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.46
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 24,
+     "env": 32,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 31,
+     "end": 33,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.17,
+      "performance": 0.85,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.02
+     },
+     "meanOpportunity": 0.62,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 25,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, bom",
+     "start": 33,
+     "end": 34,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.51,
+      "performance": 0.46,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.96
+     },
+     "meanOpportunity": 0.33,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 26,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 34,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.16,
+      "performance": 0.26,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.42
+     },
+     "meanOpportunity": 0.17,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 27,
+     "env": 32,
+     "ceiling": 34,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 34,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 28,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 34,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 29,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 34,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 30,
+     "env": 32,
+     "ceiling": 32,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 34,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 15,
+     "from": 22,
+     "to": 23,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 21,
+      "windowPoints": 1.4838
+     }
+    },
+    {
+     "season": 1,
+     "round": 25,
+     "from": 23,
+     "to": 24,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 21,
+      "windowPoints": 1.4378
+     }
+    },
+    {
+     "season": 1,
+     "round": 35,
+     "from": 24,
+     "to": 25,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 21,
+      "windowPoints": 1.3566
+     }
+    },
+    {
+     "season": 2,
+     "round": 5,
+     "from": 25,
+     "to": 26,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 22,
+      "windowPoints": 1.0371
+     }
+    },
+    {
+     "season": 2,
+     "round": 20,
+     "from": 26,
+     "to": 27,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 22,
+      "windowPoints": 1.2296
+     }
+    },
+    {
+     "season": 2,
+     "round": 35,
+     "from": 27,
+     "to": 28,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 37,
+      "age": 22,
+      "windowPoints": 1.3709
+     }
+    },
+    {
+     "season": 3,
+     "round": 10,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 36,
+      "age": 23,
+      "windowPoints": 1.2706
+     }
+    },
+    {
+     "season": 3,
+     "round": 25,
+     "from": 29,
+     "to": 30,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 36,
+      "age": 23,
+      "windowPoints": 1.2441
+     }
+    },
+    {
+     "season": 3,
+     "round": 38,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 36,
+      "age": 23,
+      "windowPoints": 1.0486
+     }
+    },
+    {
+     "season": 4,
+     "round": 20,
+     "from": 31,
+     "to": 32,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 36,
+      "age": 24,
+      "windowPoints": 1.1382
+     }
+    },
+    {
+     "season": 4,
+     "round": 38,
+     "from": 32,
+     "to": 33,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 36,
+      "age": 24,
+      "windowPoints": 1.0682
+     }
+    },
+    {
+     "season": 5,
+     "round": 38,
+     "from": 33,
+     "to": 34,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 25,
+      "windowPoints": 1.031
+     }
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "group": "10 temporadas",
+   "title": "Caso 2 — promessa 21 anos, força 22, reserva",
+   "position": "ATA",
+   "startAge": 21,
+   "strengthBase": 22,
+   "strengthFinal": 22,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 21,
+     "env": 32,
+     "ceiling": 37,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.22,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.21
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 2,
+     "age": 22,
+     "env": 32,
+     "ceiling": 37,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.2,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.19
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 3,
+     "age": 23,
+     "env": 32,
+     "ceiling": 36,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.18,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.17
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 4,
+     "age": 24,
+     "env": 32,
+     "ceiling": 36,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.16,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.15
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 5,
+     "age": 25,
+     "env": 32,
+     "ceiling": 35,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.12,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.12
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 6,
+     "age": 26,
+     "env": 32,
+     "ceiling": 35,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.09,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.09
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 7,
+     "age": 27,
+     "env": 32,
+     "ceiling": 34,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.04,
+      "performance": 0.02,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.06
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 8,
+     "age": 28,
+     "env": 32,
+     "ceiling": 33,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.02,
+      "performance": 0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.02
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 9,
+     "age": 29,
+     "env": 32,
+     "ceiling": 33,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": -0.01
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 10,
+     "age": 30,
+     "env": 32,
+     "ceiling": 32,
+     "label": "reserva (25 min a cada 3 rodadas)",
+     "start": 22,
+     "end": 22,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.01,
+      "aging": -0.25,
+      "idle": 0,
+      "total": -0.26
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 12
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "C3",
+   "group": "10 temporadas",
+   "title": "Caso 3 — 25 anos, força 28, titular, bom rendimento",
+   "position": "MEI",
+   "startAge": 25,
+   "strengthBase": 28,
+   "strengthFinal": 32,
+   "maxGainPerSeason": 2,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 25,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 25,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, bom",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.1,
+      "performance": 0.77,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.87
+     },
+     "meanOpportunity": 0.72,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 26,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, bom",
+     "start": 29,
+     "end": 31,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 0.76,
+      "performance": 0.71,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.47
+     },
+     "meanOpportunity": 0.66,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 27,
+     "env": 32,
+     "ceiling": 34,
+     "label": "titular, bom",
+     "start": 31,
+     "end": 32,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.34,
+      "performance": 0.67,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.01
+     },
+     "meanOpportunity": 0.55,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 28,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.06,
+      "performance": 0.17,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.23
+     },
+     "meanOpportunity": 0.2,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 29,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.1,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.1
+     },
+     "meanOpportunity": 0.2,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 30,
+     "env": 32,
+     "ceiling": 32,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.2,
+      "idle": 0,
+      "total": 0.87
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 31,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.39,
+      "idle": 0,
+      "total": 0.68
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 32,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.59,
+      "idle": 0,
+      "total": 0.48
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 33,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.79,
+      "idle": 0,
+      "total": 0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 34,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, bom",
+     "start": 32,
+     "end": 32,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.98,
+      "idle": 0,
+      "total": 0.09
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 25,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 25,
+      "windowPoints": 1.2394
+     }
+    },
+    {
+     "season": 2,
+     "round": 5,
+     "from": 29,
+     "to": 30,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 26,
+      "windowPoints": 1.0654
+     }
+    },
+    {
+     "season": 2,
+     "round": 30,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 26,
+      "windowPoints": 1.0319
+     }
+    },
+    {
+     "season": 3,
+     "round": 25,
+     "from": 31,
+     "to": 32,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 34,
+      "age": 27,
+      "windowPoints": 1.0892
+     }
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "group": "10 temporadas",
+   "title": "Caso 4 — 25 anos, força 28, titular, rendimento médio",
+   "position": "MEI",
+   "startAge": 25,
+   "strengthBase": 28,
+   "strengthFinal": 30,
+   "maxGainPerSeason": 1,
+   "maxDropPerSeason": -1,
+   "firstUpRound": 30,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 25,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, médio",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.1,
+      "performance": 0.29,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.39
+     },
+     "meanOpportunity": 0.73,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 26,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, médio",
+     "start": 29,
+     "end": 30,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.79,
+      "performance": 0.27,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.06
+     },
+     "meanOpportunity": 0.69,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 27,
+     "env": 32,
+     "ceiling": 34,
+     "label": "titular, médio",
+     "start": 30,
+     "end": 31,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.41,
+      "performance": 0.36,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.76
+     },
+     "meanOpportunity": 0.66,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 28,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.13,
+      "performance": 0.16,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.29
+     },
+     "meanOpportunity": 0.42,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 29,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.09,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.09
+     },
+     "meanOpportunity": 0.42,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 30,
+     "env": 32,
+     "ceiling": 32,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.03,
+      "aging": -0.23,
+      "idle": 0,
+      "total": -0.25
+     },
+     "meanOpportunity": 0.21,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 31,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.46,
+      "idle": 0,
+      "total": -0.06
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 32,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.68,
+      "idle": 0,
+      "total": -0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 33,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.91,
+      "idle": 0,
+      "total": -0.51
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 34,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 30,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -1.14,
+      "idle": 0,
+      "total": -0.74
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 30,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 25,
+      "windowPoints": 1.0998
+     }
+    },
+    {
+     "season": 2,
+     "round": 25,
+     "from": 29,
+     "to": 30,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 26,
+      "windowPoints": 1.0938
+     }
+    },
+    {
+     "season": 3,
+     "round": 30,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 34,
+      "age": 27,
+      "windowPoints": 1.0537
+     }
+    },
+    {
+     "season": 10,
+     "round": 10,
+     "from": 31,
+     "to": 30,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 30,
+      "age": 34,
+      "windowPoints": -1.077
+     }
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "group": "10 temporadas",
+   "title": "Caso 5 — 25 anos, força 28, titular, rendimento ruim",
+   "position": "MEI",
+   "startAge": 25,
+   "strengthBase": 28,
+   "strengthFinal": 24,
+   "maxGainPerSeason": 1,
+   "maxDropPerSeason": -2,
+   "firstUpRound": 48,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 25,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, ruim",
+     "start": 28,
+     "end": 28,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 1.11,
+      "performance": -0.24,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.88
+     },
+     "meanOpportunity": 0.73,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 26,
+     "env": 32,
+     "ceiling": 35,
+     "label": "titular, ruim",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.81,
+      "performance": -0.23,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.58
+     },
+     "meanOpportunity": 0.71,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 27,
+     "env": 32,
+     "ceiling": 34,
+     "label": "titular, ruim",
+     "start": 29,
+     "end": 29,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.21,
+      "performance": 0.1,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.31
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 28,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, ruim",
+     "start": 29,
+     "end": 29,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.11,
+      "performance": -0.13,
+      "aging": 0,
+      "idle": 0,
+      "total": -0.03
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 29,
+     "env": 32,
+     "ceiling": 33,
+     "label": "titular, ruim",
+     "start": 29,
+     "end": 29,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.36,
+      "aging": 0,
+      "idle": 0,
+      "total": -0.36
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 30,
+     "env": 32,
+     "ceiling": 32,
+     "label": "titular, ruim",
+     "start": 29,
+     "end": 29,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.36,
+      "aging": -0.25,
+      "idle": 0,
+      "total": -0.61
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 31,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, ruim",
+     "start": 29,
+     "end": 28,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": -0.39,
+      "aging": -0.49,
+      "idle": 0,
+      "total": -0.89
+     },
+     "meanOpportunity": 0.49,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 32,
+     "env": 32,
+     "ceiling": 31,
+     "label": "titular, ruim",
+     "start": 28,
+     "end": 27,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": -0.36,
+      "aging": -0.74,
+      "idle": 0,
+      "total": -1.1
+     },
+     "meanOpportunity": 0.74,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 33,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, ruim",
+     "start": 27,
+     "end": 26,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": -0.35,
+      "aging": -0.99,
+      "idle": 0,
+      "total": -1.34
+     },
+     "meanOpportunity": 0.78,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 34,
+     "env": 32,
+     "ceiling": 30,
+     "label": "titular, ruim",
+     "start": 26,
+     "end": 24,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": -0.35,
+      "aging": -1.23,
+      "idle": 0,
+      "total": -1.58
+     },
+     "meanOpportunity": 0.82,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 2,
+     "round": 10,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 35,
+      "age": 26,
+      "windowPoints": 1.0417
+     }
+    },
+    {
+     "season": 7,
+     "round": 35,
+     "from": 29,
+     "to": 28,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 31,
+      "age": 31,
+      "windowPoints": -1.036
+     }
+    },
+    {
+     "season": 8,
+     "round": 35,
+     "from": 28,
+     "to": 27,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 31,
+      "age": 32,
+      "windowPoints": -1.1134
+     }
+    },
+    {
+     "season": 9,
+     "round": 25,
+     "from": 27,
+     "to": 26,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 30,
+      "age": 33,
+      "windowPoints": -1.0854
+     }
+    },
+    {
+     "season": 10,
+     "round": 15,
+     "from": 26,
+     "to": 25,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 30,
+      "age": 34,
+      "windowPoints": -1.1706
+     }
+    },
+    {
+     "season": 10,
+     "round": 38,
+     "from": 25,
+     "to": 24,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 32,
+      "ceiling": 30,
+      "age": 34,
+      "windowPoints": -1.1299
+     }
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "group": "10 temporadas",
+   "title": "Caso 6 — veterano 33 anos, força 40, titular, bom rendimento",
+   "position": "DEF",
+   "startAge": 33,
+   "strengthBase": 40,
+   "strengthFinal": 32,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": -2,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 33,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -0.83,
+      "idle": 0,
+      "total": 0.01
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 34,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.04,
+      "idle": 0,
+      "total": -0.2
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 35,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.25,
+      "idle": 0,
+      "total": -0.41
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 36,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 40,
+     "end": 39,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.45,
+      "idle": 0,
+      "total": -0.61
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 37,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 39,
+     "end": 38,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.66,
+      "idle": 0,
+      "total": -0.82
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 38,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 38,
+     "end": 37,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.87,
+      "idle": 0,
+      "total": -1.03
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 39,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 37,
+     "end": 36,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.84,
+      "aging": -1.87,
+      "idle": 0,
+      "total": -1.03
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 40,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 36,
+     "end": 35,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.79,
+      "aging": -1.87,
+      "idle": 0,
+      "total": -1.08
+     },
+     "meanOpportunity": 0.02,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 41,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 35,
+     "end": 34,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.21,
+      "aging": -1.87,
+      "idle": 0,
+      "total": -1.66
+     },
+     "meanOpportunity": 0.35,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 42,
+     "env": 38,
+     "ceiling": 36,
+     "label": "titular, bom",
+     "start": 34,
+     "end": 32,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.58,
+      "aging": -1.87,
+      "idle": 0,
+      "total": -1.29
+     },
+     "meanOpportunity": 0.73,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 4,
+     "round": 25,
+     "from": 40,
+     "to": 39,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 36,
+      "windowPoints": -1.0375
+     }
+    },
+    {
+     "season": 5,
+     "round": 35,
+     "from": 39,
+     "to": 38,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 37,
+      "windowPoints": -1.0031
+     }
+    },
+    {
+     "season": 6,
+     "round": 35,
+     "from": 38,
+     "to": 37,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 38,
+      "windowPoints": -1.027
+     }
+    },
+    {
+     "season": 7,
+     "round": 35,
+     "from": 37,
+     "to": 36,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 39,
+      "windowPoints": -1.0554
+     }
+    },
+    {
+     "season": 8,
+     "round": 35,
+     "from": 36,
+     "to": 35,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 40,
+      "windowPoints": -1.0838
+     }
+    },
+    {
+     "season": 9,
+     "round": 20,
+     "from": 35,
+     "to": 34,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 41,
+      "windowPoints": -1.158
+     }
+    },
+    {
+     "season": 10,
+     "round": 5,
+     "from": 34,
+     "to": 33,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 42,
+      "windowPoints": -1.082
+     }
+    },
+    {
+     "season": 10,
+     "round": 35,
+     "from": 33,
+     "to": 32,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 42,
+      "windowPoints": -1.0768
+     }
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "group": "10 temporadas",
+   "title": "Caso 7 — veterano 33 anos, força 40, reserva",
+   "position": "DEF",
+   "startAge": 33,
+   "strengthBase": 40,
+   "strengthFinal": 22,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": -3,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 33,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -1.01,
+      "idle": 0,
+      "total": -1
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 2,
+     "age": 34,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 40,
+     "end": 38,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -1.26,
+      "idle": 0,
+      "total": -1.25
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 3,
+     "age": 35,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 38,
+     "end": 37,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -1.51,
+      "idle": 0,
+      "total": -1.5
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 4,
+     "age": 36,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 37,
+     "end": 35,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -1.76,
+      "idle": 0,
+      "total": -1.75
+     },
+     "meanOpportunity": 0.04,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 5,
+     "age": 37,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 35,
+     "end": 33,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": -0.01,
+      "aging": -2.01,
+      "idle": 0,
+      "total": -2.02
+     },
+     "meanOpportunity": 0.47,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 6,
+     "age": 38,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 33,
+     "end": 31,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0,
+      "aging": -2.26,
+      "idle": 0,
+      "total": -2.26
+     },
+     "meanOpportunity": 0.8,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 7,
+     "age": 39,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 31,
+     "end": 28,
+     "ups": 0,
+     "downs": 3,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -2.26,
+      "idle": 0,
+      "total": -2.26
+     },
+     "meanOpportunity": 0.88,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 8,
+     "age": 40,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 28,
+     "end": 26,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -2.26,
+      "idle": 0,
+      "total": -2.25
+     },
+     "meanOpportunity": 0.95,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 9,
+     "age": 41,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 26,
+     "end": 24,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -2.26,
+      "idle": 0,
+      "total": -2.25
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 10,
+     "age": 42,
+     "env": 38,
+     "ceiling": 36,
+     "label": "reserva",
+     "start": 24,
+     "end": 22,
+     "ups": 0,
+     "downs": 2,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -2.26,
+      "idle": 0,
+      "total": -2.25
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    }
+   ],
+   "history": [
+    {
+     "season": 2,
+     "round": 5,
+     "from": 40,
+     "to": 39,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 34,
+      "windowPoints": -1.1621
+     }
+    },
+    {
+     "season": 2,
+     "round": 35,
+     "from": 39,
+     "to": 38,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 34,
+      "windowPoints": -1.1357
+     }
+    },
+    {
+     "season": 3,
+     "round": 20,
+     "from": 38,
+     "to": 37,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 35,
+      "windowPoints": -1.0275
+     }
+    },
+    {
+     "season": 4,
+     "round": 10,
+     "from": 37,
+     "to": 36,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 36,
+      "windowPoints": -1.1878
+     }
+    },
+    {
+     "season": 4,
+     "round": 30,
+     "from": 36,
+     "to": 35,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 36,
+      "windowPoints": -1.105
+     }
+    },
+    {
+     "season": 5,
+     "round": 10,
+     "from": 35,
+     "to": 34,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 37,
+      "windowPoints": -1.0143
+     }
+    },
+    {
+     "season": 5,
+     "round": 30,
+     "from": 34,
+     "to": 33,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 37,
+      "windowPoints": -1.0756
+     }
+    },
+    {
+     "season": 6,
+     "round": 10,
+     "from": 33,
+     "to": 32,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 38,
+      "windowPoints": -1.0967
+     }
+    },
+    {
+     "season": 6,
+     "round": 30,
+     "from": 32,
+     "to": 31,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 38,
+      "windowPoints": -1.283
+     }
+    },
+    {
+     "season": 7,
+     "round": 5,
+     "from": 31,
+     "to": 30,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 39,
+      "windowPoints": -1.0742
+     }
+    },
+    {
+     "season": 7,
+     "round": 25,
+     "from": 30,
+     "to": 29,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 39,
+      "windowPoints": -1.2425
+     }
+    },
+    {
+     "season": 7,
+     "round": 38,
+     "from": 29,
+     "to": 28,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 39,
+      "windowPoints": -1.0264
+     }
+    },
+    {
+     "season": 8,
+     "round": 20,
+     "from": 28,
+     "to": 27,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 40,
+      "windowPoints": -1.2169
+     }
+    },
+    {
+     "season": 8,
+     "round": 35,
+     "from": 27,
+     "to": 26,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 40,
+      "windowPoints": -1.1011
+     }
+    },
+    {
+     "season": 9,
+     "round": 15,
+     "from": 26,
+     "to": 25,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 41,
+      "windowPoints": -1.1647
+     }
+    },
+    {
+     "season": 9,
+     "round": 30,
+     "from": 25,
+     "to": 24,
+     "reason": "queda: rendimento",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 41,
+      "windowPoints": -1.0483
+     }
+    },
+    {
+     "season": 10,
+     "round": 10,
+     "from": 24,
+     "to": 23,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 42,
+      "windowPoints": -1.1198
+     }
+    },
+    {
+     "season": 10,
+     "round": 25,
+     "from": 23,
+     "to": 22,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 38,
+      "ceiling": 36,
+      "age": 42,
+      "windowPoints": -1.0034
+     }
+    }
+   ]
+  },
+  {
+   "id": "C8",
+   "group": "10 temporadas",
+   "title": "Caso 8 — jogador forte 45 (27 anos) em ambiente 25, titular",
+   "position": "ATA",
+   "startAge": 27,
+   "strengthBase": 45,
+   "strengthFinal": 45,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 27,
+     "env": 25,
+     "ceiling": 27,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 28,
+     "env": 25,
+     "ceiling": 26,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 29,
+     "env": 25,
+     "ceiling": 26,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 30,
+     "env": 25,
+     "ceiling": 25,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 31,
+     "env": 25,
+     "ceiling": 24,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.35,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 32,
+     "env": 25,
+     "ceiling": 24,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.53,
+      "idle": 0,
+      "total": 0.84
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 33,
+     "env": 25,
+     "ceiling": 23,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.7,
+      "idle": 0,
+      "total": 0.67
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 34,
+     "env": 25,
+     "ceiling": 23,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.88,
+      "idle": 0,
+      "total": 0.49
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 35,
+     "env": 25,
+     "ceiling": 23,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -1.06,
+      "idle": 0,
+      "total": 0.31
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 36,
+     "env": 25,
+     "ceiling": 23,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -1.23,
+      "idle": 0,
+      "total": 0.14
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "C9",
+   "group": "10 temporadas",
+   "title": "Caso 9 — jogador fraco 20 (24 anos) em ambiente 40, reserva",
+   "position": "DEF",
+   "startAge": 24,
+   "strengthBase": 20,
+   "strengthFinal": 19,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": -1,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 40,
+     "ceiling": 44,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.17,
+      "performance": 0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.18
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 40,
+     "ceiling": 43,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.13,
+      "performance": 0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.14
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 40,
+     "ceiling": 43,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.1,
+      "performance": 0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.11
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 40,
+     "ceiling": 42,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.04,
+      "performance": 0.04,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.08
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 40,
+     "ceiling": 41,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.02,
+      "performance": 0.03,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.04
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 6,
+     "age": 29,
+     "env": 40,
+     "ceiling": 41,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.01
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 7,
+     "age": 30,
+     "env": 40,
+     "ceiling": 40,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -0.25,
+      "idle": 0,
+      "total": -0.24
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 8,
+     "age": 31,
+     "env": 40,
+     "ceiling": 39,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -0.5,
+      "idle": 0,
+      "total": -0.49
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 9,
+     "age": 32,
+     "env": 40,
+     "ceiling": 39,
+     "label": "reserva",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -0.75,
+      "idle": 0,
+      "total": -0.74
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    },
+    {
+     "season": 10,
+     "age": 33,
+     "env": 40,
+     "ceiling": 38,
+     "label": "reserva",
+     "start": 20,
+     "end": 19,
+     "ups": 0,
+     "downs": 1,
+     "points": {
+      "age": 0,
+      "performance": 0.01,
+      "aging": -1.01,
+      "idle": 0,
+      "total": -1
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 12
+    }
+   ],
+   "history": [
+    {
+     "season": 10,
+     "round": 5,
+     "from": 20,
+     "to": 19,
+     "reason": "queda: idade",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 38,
+      "age": 33,
+      "windowPoints": -1.0485
+     }
+    }
+   ]
+  },
+  {
+   "id": "C10",
+   "group": "10 temporadas",
+   "title": "Caso 10 — jogador fraco 20 (24 anos) em ambiente 40, titular, bom rendimento",
+   "position": "DEF",
+   "startAge": 24,
+   "strengthBase": 20,
+   "strengthFinal": 31,
+   "maxGainPerSeason": 3,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 15,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 40,
+     "ceiling": 44,
+     "label": "titular, bom",
+     "start": 20,
+     "end": 22,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.9,
+      "performance": 0.84,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.74
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 22,
+     "end": 25,
+     "ups": 3,
+     "downs": 0,
+     "points": {
+      "age": 1.52,
+      "performance": 0.84,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.36
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 25,
+     "end": 27,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.14,
+      "performance": 0.84,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.98
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 40,
+     "ceiling": 42,
+     "label": "titular, bom",
+     "start": 27,
+     "end": 28,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.62,
+      "performance": 0.98,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.6
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, bom",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.3,
+      "performance": 0.89,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0.98,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 29,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, bom",
+     "start": 29,
+     "end": 30,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.78,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.78
+     },
+     "meanOpportunity": 0.94,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 30,
+     "env": 40,
+     "ceiling": 40,
+     "label": "titular, bom",
+     "start": 30,
+     "end": 31,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.76,
+      "aging": -0.21,
+      "idle": 0,
+      "total": 0.56
+     },
+     "meanOpportunity": 0.92,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 31,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, bom",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.74,
+      "aging": -0.41,
+      "idle": 0,
+      "total": 0.33
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 32,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, bom",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.74,
+      "aging": -0.62,
+      "idle": 0,
+      "total": 0.12
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 33,
+     "env": 40,
+     "ceiling": 38,
+     "label": "titular, bom",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.74,
+      "aging": -0.83,
+      "idle": 0,
+      "total": -0.09
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 15,
+     "from": 20,
+     "to": 21,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 44,
+      "age": 24,
+      "windowPoints": 1.08
+     }
+    },
+    {
+     "season": 1,
+     "round": 30,
+     "from": 21,
+     "to": 22,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 44,
+      "age": 24,
+      "windowPoints": 1.16
+     }
+    },
+    {
+     "season": 2,
+     "round": 5,
+     "from": 22,
+     "to": 23,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.05
+     }
+    },
+    {
+     "season": 2,
+     "round": 25,
+     "from": 23,
+     "to": 24,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.29
+     }
+    },
+    {
+     "season": 2,
+     "round": 38,
+     "from": 24,
+     "to": 25,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.1
+     }
+    },
+    {
+     "season": 3,
+     "round": 20,
+     "from": 25,
+     "to": 26,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 26,
+      "windowPoints": 1.14
+     }
+    },
+    {
+     "season": 3,
+     "round": 38,
+     "from": 26,
+     "to": 27,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 26,
+      "windowPoints": 1.08
+     }
+    },
+    {
+     "season": 4,
+     "round": 25,
+     "from": 27,
+     "to": 28,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 42,
+      "age": 27,
+      "windowPoints": 1.13
+     }
+    },
+    {
+     "season": 5,
+     "round": 10,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 41,
+      "age": 28,
+      "windowPoints": 1
+     }
+    },
+    {
+     "season": 6,
+     "round": 10,
+     "from": 29,
+     "to": 30,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 41,
+      "age": 29,
+      "windowPoints": 1.0799
+     }
+    },
+    {
+     "season": 7,
+     "round": 25,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 40,
+      "age": 30,
+      "windowPoints": 1.0218
+     }
+    }
+   ]
+  },
+  {
+   "id": "C11",
+   "group": "10 temporadas",
+   "title": "Caso 11 — lesão de 10 rodadas na 2ª temporada (26 anos, força 30, ambiente 34)",
+   "position": "MEI",
+   "startAge": 26,
+   "strengthBase": 30,
+   "strengthFinal": 33,
+   "maxGainPerSeason": 1,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 25,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 26,
+     "env": 34,
+     "ceiling": 37,
+     "label": "titular, bom (lesão na T2)",
+     "start": 30,
+     "end": 31,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.82,
+      "performance": 0.77,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.6
+     },
+     "meanOpportunity": 0.72,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 27,
+     "env": 34,
+     "ceiling": 36,
+     "label": "titular, bom (lesão na T2)",
+     "start": 31,
+     "end": 32,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.31,
+      "performance": 0.61,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.92
+     },
+     "meanOpportunity": 0.68,
+     "roundsPlayed": 28
+    },
+    {
+     "season": 3,
+     "age": 28,
+     "env": 34,
+     "ceiling": 35,
+     "label": "titular, bom (lesão na T2)",
+     "start": 32,
+     "end": 33,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.17,
+      "performance": 0.6,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.77
+     },
+     "meanOpportunity": 0.55,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 29,
+     "env": 34,
+     "ceiling": 35,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.37
+     },
+     "meanOpportunity": 0.42,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 30,
+     "env": 34,
+     "ceiling": 34,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.12,
+      "aging": -0.2,
+      "idle": 0,
+      "total": -0.08
+     },
+     "meanOpportunity": 0.21,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 31,
+     "env": 34,
+     "ceiling": 33,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.39,
+      "idle": 0,
+      "total": 0.68
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 32,
+     "env": 34,
+     "ceiling": 33,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.59,
+      "idle": 0,
+      "total": 0.48
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 33,
+     "env": 34,
+     "ceiling": 32,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.79,
+      "idle": 0,
+      "total": 0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 34,
+     "env": 34,
+     "ceiling": 32,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.98,
+      "idle": 0,
+      "total": 0.09
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 35,
+     "env": 34,
+     "ceiling": 32,
+     "label": "titular, bom (lesão na T2)",
+     "start": 33,
+     "end": 33,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -1.18,
+      "idle": 0,
+      "total": -0.11
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 25,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 34,
+      "ceiling": 37,
+      "age": 26,
+      "windowPoints": 1.0635
+     }
+    },
+    {
+     "season": 2,
+     "round": 25,
+     "from": 31,
+     "to": 32,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 34,
+      "ceiling": 36,
+      "age": 27,
+      "windowPoints": 1.0995
+     }
+    },
+    {
+     "season": 3,
+     "round": 20,
+     "from": 32,
+     "to": 33,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 34,
+      "ceiling": 35,
+      "age": 28,
+      "windowPoints": 1.013
+     }
+    }
+   ]
+  },
+  {
+   "id": "E23",
+   "group": "Força × ambiente (40)",
+   "title": "Força 23 em ambiente 40 (24 anos, titular médio)",
+   "position": "MEI",
+   "startAge": 24,
+   "strengthBase": 23,
+   "strengthFinal": 31,
+   "maxGainPerSeason": 2,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 20,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 40,
+     "ceiling": 44,
+     "label": "titular, médio",
+     "start": 23,
+     "end": 25,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.9,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.3
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 25,
+     "end": 27,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.52,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.92
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 27,
+     "end": 28,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.14,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.54
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 40,
+     "ceiling": 42,
+     "label": "titular, médio",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.6,
+      "performance": 0.53,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.13
+     },
+     "meanOpportunity": 0.98,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 29,
+     "end": 30,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.29,
+      "performance": 0.44,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.73
+     },
+     "meanOpportunity": 0.94,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 29,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 30,
+     "end": 30,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.36,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.36
+     },
+     "meanOpportunity": 0.93,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 30,
+     "env": 40,
+     "ceiling": 40,
+     "label": "titular, médio",
+     "start": 30,
+     "end": 31,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.35,
+      "aging": -0.23,
+      "idle": 0,
+      "total": 0.12
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 31,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.35,
+      "aging": -0.46,
+      "idle": 0,
+      "total": -0.11
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 32,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.35,
+      "aging": -0.68,
+      "idle": 0,
+      "total": -0.34
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 33,
+     "env": 40,
+     "ceiling": 38,
+     "label": "titular, médio",
+     "start": 31,
+     "end": 31,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.35,
+      "aging": -0.91,
+      "idle": 0,
+      "total": -0.57
+     },
+     "meanOpportunity": 0.9,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 20,
+     "from": 23,
+     "to": 24,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 44,
+      "age": 24,
+      "windowPoints": 1.2
+     }
+    },
+    {
+     "season": 1,
+     "round": 35,
+     "from": 24,
+     "to": 25,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 44,
+      "age": 24,
+      "windowPoints": 1.1
+     }
+    },
+    {
+     "season": 2,
+     "round": 15,
+     "from": 25,
+     "to": 26,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.05
+     }
+    },
+    {
+     "season": 2,
+     "round": 35,
+     "from": 26,
+     "to": 27,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.05
+     }
+    },
+    {
+     "season": 3,
+     "round": 20,
+     "from": 27,
+     "to": 28,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 26,
+      "windowPoints": 1.02
+     }
+    },
+    {
+     "season": 4,
+     "round": 10,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 42,
+      "age": 27,
+      "windowPoints": 1.06
+     }
+    },
+    {
+     "season": 5,
+     "round": 10,
+     "from": 29,
+     "to": 30,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 41,
+      "age": 28,
+      "windowPoints": 1.0841
+     }
+    },
+    {
+     "season": 7,
+     "round": 5,
+     "from": 30,
+     "to": 31,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 40,
+      "age": 30,
+      "windowPoints": 1.0013
+     }
+    }
+   ]
+  },
+  {
+   "id": "E35",
+   "group": "Força × ambiente (40)",
+   "title": "Força 35 em ambiente 40 (24 anos, titular médio)",
+   "position": "MEI",
+   "startAge": 24,
+   "strengthBase": 35,
+   "strengthFinal": 40,
+   "maxGainPerSeason": 2,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 25,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 40,
+     "ceiling": 44,
+     "label": "titular, médio",
+     "start": 35,
+     "end": 36,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.43,
+      "performance": 0.3,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.74
+     },
+     "meanOpportunity": 0.76,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 36,
+     "end": 38,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.08,
+      "performance": 0.28,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.36
+     },
+     "meanOpportunity": 0.71,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 38,
+     "end": 39,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.76,
+      "performance": 0.26,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0.66,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 40,
+     "ceiling": 42,
+     "label": "titular, médio",
+     "start": 39,
+     "end": 39,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.39,
+      "performance": 0.34,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.73
+     },
+     "meanOpportunity": 0.63,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 39,
+     "end": 40,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.11,
+      "performance": 0.12,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.22
+     },
+     "meanOpportunity": 0.35,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 29,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": -0.03,
+      "aging": 0,
+      "idle": 0,
+      "total": -0.03
+     },
+     "meanOpportunity": 0.2,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 30,
+     "env": 40,
+     "ceiling": 40,
+     "label": "titular, médio",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.23,
+      "idle": 0,
+      "total": 0.17
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 31,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.46,
+      "idle": 0,
+      "total": -0.06
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 32,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.68,
+      "idle": 0,
+      "total": -0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 33,
+     "env": 40,
+     "ceiling": 38,
+     "label": "titular, médio",
+     "start": 40,
+     "end": 40,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.91,
+      "idle": 0,
+      "total": -0.51
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 25,
+     "from": 35,
+     "to": 36,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 44,
+      "age": 24,
+      "windowPoints": 1.15
+     }
+    },
+    {
+     "season": 2,
+     "round": 10,
+     "from": 36,
+     "to": 37,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.1033
+     }
+    },
+    {
+     "season": 2,
+     "round": 38,
+     "from": 37,
+     "to": 38,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 25,
+      "windowPoints": 1.0973
+     }
+    },
+    {
+     "season": 3,
+     "round": 35,
+     "from": 38,
+     "to": 39,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 43,
+      "age": 26,
+      "windowPoints": 1.0304
+     }
+    },
+    {
+     "season": 5,
+     "round": 25,
+     "from": 39,
+     "to": 40,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 40,
+      "ceiling": 41,
+      "age": 28,
+      "windowPoints": 1.0265
+     }
+    }
+   ]
+  },
+  {
+   "id": "E43",
+   "group": "Força × ambiente (40)",
+   "title": "Força 43 em ambiente 40 (24 anos, titular médio)",
+   "position": "MEI",
+   "startAge": 24,
+   "strengthBase": 43,
+   "strengthFinal": 43,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 40,
+     "ceiling": 44,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.32,
+      "performance": 0.07,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.38
+     },
+     "meanOpportunity": 0.17,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.4
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 40,
+     "ceiling": 43,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.4
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 40,
+     "ceiling": 42,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.4
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.4
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 29,
+     "env": 40,
+     "ceiling": 41,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.4
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 30,
+     "env": 40,
+     "ceiling": 40,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.23,
+      "idle": 0,
+      "total": 0.17
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 31,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.46,
+      "idle": 0,
+      "total": -0.06
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 32,
+     "env": 40,
+     "ceiling": 39,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.68,
+      "idle": 0,
+      "total": -0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 33,
+     "env": 40,
+     "ceiling": 38,
+     "label": "titular, médio",
+     "start": 43,
+     "end": 43,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.4,
+      "aging": -0.91,
+      "idle": 0,
+      "total": -0.51
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "T41",
+   "group": "Transferências",
+   "title": "D4 → D1: força 20, 22 anos (ambiente 16 → 39)",
+   "position": "ATA",
+   "startAge": 22,
+   "strengthBase": 20,
+   "strengthFinal": 28,
+   "maxGainPerSeason": 3,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 48,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 20,
+     "afterFirstRound": 20
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 22,
+     "env": 16,
+     "ceiling": 21,
+     "label": "D4, titular",
+     "start": 20,
+     "end": 20,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.4,
+      "performance": 0.23,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.63
+     },
+     "meanOpportunity": 0.17,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 23,
+     "env": 39,
+     "ceiling": 43,
+     "label": "D1, titular médio",
+     "start": 20,
+     "end": 23,
+     "ups": 3,
+     "downs": 0,
+     "points": {
+      "age": 2.15,
+      "performance": 0.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.52
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 24,
+     "env": 39,
+     "ceiling": 43,
+     "label": "D1, titular médio",
+     "start": 23,
+     "end": 25,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.9,
+      "performance": 0.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 2.27
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 25,
+     "env": 39,
+     "ceiling": 42,
+     "label": "D1, titular médio",
+     "start": 25,
+     "end": 27,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.52,
+      "performance": 0.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.89
+     },
+     "meanOpportunity": 1,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 26,
+     "env": 39,
+     "ceiling": 42,
+     "label": "D1, titular médio",
+     "start": 27,
+     "end": 28,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.89,
+      "performance": 0.6,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.49
+     },
+     "meanOpportunity": 0.98,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 2,
+     "round": 10,
+     "from": 20,
+     "to": 21,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 43,
+      "age": 23,
+      "windowPoints": 1.2974
+     }
+    },
+    {
+     "season": 2,
+     "round": 25,
+     "from": 21,
+     "to": 22,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 43,
+      "age": 23,
+      "windowPoints": 1.2979
+     }
+    },
+    {
+     "season": 2,
+     "round": 38,
+     "from": 22,
+     "to": 23,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 43,
+      "age": 23,
+      "windowPoints": 1.155
+     }
+    },
+    {
+     "season": 3,
+     "round": 15,
+     "from": 23,
+     "to": 24,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 43,
+      "age": 24,
+      "windowPoints": 1.055
+     }
+    },
+    {
+     "season": 3,
+     "round": 35,
+     "from": 24,
+     "to": 25,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 43,
+      "age": 24,
+      "windowPoints": 1.255
+     }
+    },
+    {
+     "season": 4,
+     "round": 15,
+     "from": 25,
+     "to": 26,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 42,
+      "age": 25,
+      "windowPoints": 1.175
+     }
+    },
+    {
+     "season": 4,
+     "round": 35,
+     "from": 26,
+     "to": 27,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 42,
+      "age": 25,
+      "windowPoints": 1.175
+     }
+    },
+    {
+     "season": 5,
+     "round": 20,
+     "from": 27,
+     "to": 28,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 42,
+      "age": 26,
+      "windowPoints": 1.115
+     }
+    }
+   ]
+  },
+  {
+   "id": "T32",
+   "group": "Transferências",
+   "title": "D3 → D2: força 24, 23 anos (ambiente 22 → 30)",
+   "position": "MEI",
+   "startAge": 23,
+   "strengthBase": 24,
+   "strengthFinal": 29,
+   "maxGainPerSeason": 2,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 38,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 25,
+     "afterFirstRound": 25
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 23,
+     "env": 22,
+     "ceiling": 26,
+     "label": "D3, titular",
+     "start": 24,
+     "end": 25,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.72,
+      "performance": 0.36,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.08
+     },
+     "meanOpportunity": 0.33,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 24,
+     "env": 30,
+     "ceiling": 34,
+     "label": "D2, titular médio",
+     "start": 25,
+     "end": 26,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.43,
+      "performance": 0.3,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.74
+     },
+     "meanOpportunity": 0.76,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 25,
+     "env": 30,
+     "ceiling": 33,
+     "label": "D2, titular médio",
+     "start": 26,
+     "end": 28,
+     "ups": 2,
+     "downs": 0,
+     "points": {
+      "age": 1.07,
+      "performance": 0.28,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.36
+     },
+     "meanOpportunity": 0.71,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 26,
+     "env": 30,
+     "ceiling": 33,
+     "label": "D2, titular médio",
+     "start": 28,
+     "end": 29,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.76,
+      "performance": 0.26,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0.66,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 27,
+     "env": 30,
+     "ceiling": 32,
+     "label": "D2, titular médio",
+     "start": 29,
+     "end": 29,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.39,
+      "performance": 0.34,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.73
+     },
+     "meanOpportunity": 0.63,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 38,
+     "from": 24,
+     "to": 25,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 22,
+      "ceiling": 26,
+      "age": 23,
+      "windowPoints": 1.0752
+     }
+    },
+    {
+     "season": 2,
+     "round": 25,
+     "from": 25,
+     "to": 26,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 30,
+      "ceiling": 34,
+      "age": 24,
+      "windowPoints": 1.22
+     }
+    },
+    {
+     "season": 3,
+     "round": 10,
+     "from": 26,
+     "to": 27,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 30,
+      "ceiling": 33,
+      "age": 25,
+      "windowPoints": 1.1733
+     }
+    },
+    {
+     "season": 3,
+     "round": 35,
+     "from": 27,
+     "to": 28,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 30,
+      "ceiling": 33,
+      "age": 25,
+      "windowPoints": 1.0483
+     }
+    },
+    {
+     "season": 4,
+     "round": 35,
+     "from": 28,
+     "to": 29,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 30,
+      "ceiling": 33,
+      "age": 26,
+      "windowPoints": 1.0948
+     }
+    }
+   ]
+  },
+  {
+   "id": "T21",
+   "group": "Transferências",
+   "title": "D2 → D1: força 31, 24 anos (ambiente 30 → 39)",
+   "position": "DEF",
+   "startAge": 24,
+   "strengthBase": 31,
+   "strengthFinal": 35,
+   "maxGainPerSeason": 1,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 30,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 32,
+     "afterFirstRound": 32
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 24,
+     "env": 30,
+     "ceiling": 34,
+     "label": "D2, titular",
+     "start": 31,
+     "end": 32,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.88,
+      "performance": 0.39,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.27
+     },
+     "meanOpportunity": 0.46,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 25,
+     "env": 39,
+     "ceiling": 42,
+     "label": "D1, titular médio",
+     "start": 32,
+     "end": 33,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 1.24,
+      "performance": 0.17,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.41
+     },
+     "meanOpportunity": 0.82,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 26,
+     "env": 39,
+     "ceiling": 42,
+     "label": "D1, titular médio",
+     "start": 33,
+     "end": 34,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.89,
+      "performance": 0.16,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.05
+     },
+     "meanOpportunity": 0.78,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 27,
+     "env": 39,
+     "ceiling": 41,
+     "label": "D1, titular médio",
+     "start": 34,
+     "end": 35,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.34,
+      "performance": 0.38,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.72
+     },
+     "meanOpportunity": 0.75,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 28,
+     "env": 39,
+     "ceiling": 40,
+     "label": "D1, titular médio",
+     "start": 35,
+     "end": 35,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.17,
+      "performance": 0.22,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.39
+     },
+     "meanOpportunity": 0.73,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 1,
+     "round": 30,
+     "from": 31,
+     "to": 32,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 30,
+      "ceiling": 34,
+      "age": 24,
+      "windowPoints": 1.08
+     }
+    },
+    {
+     "season": 2,
+     "round": 20,
+     "from": 32,
+     "to": 33,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 42,
+      "age": 25,
+      "windowPoints": 1.0401
+     }
+    },
+    {
+     "season": 3,
+     "round": 15,
+     "from": 33,
+     "to": 34,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 42,
+      "age": 26,
+      "windowPoints": 1.1201
+     }
+    },
+    {
+     "season": 4,
+     "round": 15,
+     "from": 34,
+     "to": 35,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 39,
+      "ceiling": 41,
+      "age": 27,
+      "windowPoints": 1.0402
+     }
+    }
+   ]
+  },
+  {
+   "id": "T12",
+   "group": "Transferências",
+   "title": "D1 → D2: força 37, 27 anos (ambiente 39 → 30)",
+   "position": "ATA",
+   "startAge": 27,
+   "strengthBase": 37,
+   "strengthFinal": 37,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 37,
+     "afterFirstRound": 37
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 27,
+     "env": 39,
+     "ceiling": 41,
+     "label": "D1, titular médio",
+     "start": 37,
+     "end": 37,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.4,
+      "performance": 0.33,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.73
+     },
+     "meanOpportunity": 0.67,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 28,
+     "env": 30,
+     "ceiling": 31,
+     "label": "D2, titular",
+     "start": 37,
+     "end": 37,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 29,
+     "env": 30,
+     "ceiling": 31,
+     "label": "D2, titular",
+     "start": 37,
+     "end": 37,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 30,
+     "env": 30,
+     "ceiling": 30,
+     "label": "D2, titular",
+     "start": 37,
+     "end": 37,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 31,
+     "env": 30,
+     "ceiling": 29,
+     "label": "D2, titular",
+     "start": 37,
+     "end": 37,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.35,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "T14",
+   "group": "Transferências",
+   "title": "D1 → D4: força 36, 29 anos (ambiente 39 → 16)",
+   "position": "MEI",
+   "startAge": 29,
+   "strengthBase": 36,
+   "strengthFinal": 36,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 36,
+     "afterFirstRound": 36
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 29,
+     "env": 39,
+     "ceiling": 40,
+     "label": "D1, titular médio",
+     "start": 36,
+     "end": 36,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 0.24,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.24
+     },
+     "meanOpportunity": 0.7,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 30,
+     "env": 16,
+     "ceiling": 16,
+     "label": "D4, titular",
+     "start": 36,
+     "end": 36,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.2,
+      "idle": 0,
+      "total": 0.87
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 31,
+     "env": 16,
+     "ceiling": 15,
+     "label": "D4, titular",
+     "start": 36,
+     "end": 36,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.39,
+      "idle": 0,
+      "total": 0.68
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 32,
+     "env": 16,
+     "ceiling": 15,
+     "label": "D4, titular",
+     "start": 36,
+     "end": 36,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.59,
+      "idle": 0,
+      "total": 0.48
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 33,
+     "env": 16,
+     "ceiling": 14,
+     "label": "D4, titular",
+     "start": 36,
+     "end": 36,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.07,
+      "aging": -0.79,
+      "idle": 0,
+      "total": 0.28
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "S46c",
+   "group": "Estrela pronta",
+   "title": "Controle: a mesma estrela 46 fica no clube forte (ambiente 42)",
+   "position": "ATA",
+   "startAge": 27,
+   "strengthBase": 46,
+   "strengthFinal": 46,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 27,
+     "env": 42,
+     "ceiling": 44,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 28,
+     "env": 42,
+     "ceiling": 43,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 29,
+     "env": 42,
+     "ceiling": 43,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 30,
+     "env": 42,
+     "ceiling": 42,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 31,
+     "env": 42,
+     "ceiling": 41,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.35,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 32,
+     "env": 42,
+     "ceiling": 41,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.53,
+      "idle": 0,
+      "total": 0.84
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  },
+  {
+   "id": "C8c",
+   "group": "10 temporadas",
+   "title": "Controle do caso 8: o mesmo 45 em ambiente 45",
+   "position": "ATA",
+   "startAge": 27,
+   "strengthBase": 45,
+   "strengthFinal": 46,
+   "maxGainPerSeason": 1,
+   "maxDropPerSeason": 0,
+   "firstUpRound": 73,
+   "transfers": [],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 27,
+     "env": 45,
+     "ceiling": 47,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 45,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0.25,
+      "performance": 0.56,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.81
+     },
+     "meanOpportunity": 0.4,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 28,
+     "env": 45,
+     "ceiling": 46,
+     "label": "titular, bom",
+     "start": 45,
+     "end": 46,
+     "ups": 1,
+     "downs": 0,
+     "points": {
+      "age": 0.04,
+      "performance": 0.28,
+      "aging": 0,
+      "idle": 0,
+      "total": 0.32
+     },
+     "meanOpportunity": 0.18,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 29,
+     "env": 45,
+     "ceiling": 46,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 30,
+     "env": 45,
+     "ceiling": 45,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 31,
+     "env": 45,
+     "ceiling": 44,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.35,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 32,
+     "env": 45,
+     "ceiling": 44,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.53,
+      "idle": 0,
+      "total": 0.84
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 7,
+     "age": 33,
+     "env": 45,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.7,
+      "idle": 0,
+      "total": 0.67
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 8,
+     "age": 34,
+     "env": 45,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.88,
+      "idle": 0,
+      "total": 0.49
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 9,
+     "age": 35,
+     "env": 45,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -1.06,
+      "idle": 0,
+      "total": 0.31
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 10,
+     "age": 36,
+     "env": 45,
+     "ceiling": 43,
+     "label": "titular, bom",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -1.23,
+      "idle": 0,
+      "total": 0.14
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": [
+    {
+     "season": 2,
+     "round": 35,
+     "from": 45,
+     "to": 46,
+     "reason": "evolução: jogou, rendeu e havia espaço no ambiente",
+     "context": {
+      "environmentLevel": 45,
+      "ceiling": 46,
+      "age": 28,
+      "windowPoints": 1.02
+     }
+    }
+   ]
+  },
+  {
+   "id": "S46",
+   "group": "Estrela pronta",
+   "title": "Estrela 46 (27 anos) vai para clube de ambiente 30",
+   "position": "ATA",
+   "startAge": 27,
+   "strengthBase": 46,
+   "strengthFinal": 46,
+   "maxGainPerSeason": 0,
+   "maxDropPerSeason": 0,
+   "firstUpRound": null,
+   "transfers": [
+    {
+     "season": 2,
+     "before": 46,
+     "afterFirstRound": 46
+    }
+   ],
+   "seasons": [
+    {
+     "season": 1,
+     "age": 27,
+     "env": 42,
+     "ceiling": 44,
+     "label": "clube forte",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 2,
+     "age": 28,
+     "env": 30,
+     "ceiling": 31,
+     "label": "clube de ambiente 30",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 3,
+     "age": 29,
+     "env": 30,
+     "ceiling": 31,
+     "label": "clube de ambiente 30",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": 0,
+      "idle": 0,
+      "total": 1.37
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 4,
+     "age": 30,
+     "env": 30,
+     "ceiling": 30,
+     "label": "clube de ambiente 30",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.18,
+      "idle": 0,
+      "total": 1.19
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 5,
+     "age": 31,
+     "env": 30,
+     "ceiling": 29,
+     "label": "clube de ambiente 30",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.35,
+      "idle": 0,
+      "total": 1.02
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    },
+    {
+     "season": 6,
+     "age": 32,
+     "env": 30,
+     "ceiling": 29,
+     "label": "clube de ambiente 30",
+     "start": 46,
+     "end": 46,
+     "ups": 0,
+     "downs": 0,
+     "points": {
+      "age": 0,
+      "performance": 1.37,
+      "aging": -0.53,
+      "idle": 0,
+      "total": 0.84
+     },
+     "meanOpportunity": 0,
+     "roundsPlayed": 38
+    }
+   ],
+   "history": []
+  }
+ ],
+ "cappedVariant": [
+  {
+   "id": "C1",
+   "seasonGainCap": 4,
+   "strengthFinal": 34,
+   "maxGainPerSeason": 3
+  },
+  {
+   "id": "C10",
+   "seasonGainCap": 4,
+   "strengthFinal": 31,
+   "maxGainPerSeason": 3
+  },
+  {
+   "id": "E23",
+   "seasonGainCap": 4,
+   "strengthFinal": 31,
+   "maxGainPerSeason": 2
+  },
+  {
+   "id": "T41",
+   "seasonGainCap": 4,
+   "strengthFinal": 28,
+   "maxGainPerSeason": 3
+  }
+ ]
+}
