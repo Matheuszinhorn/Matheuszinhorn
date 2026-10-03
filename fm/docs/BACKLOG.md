@@ -93,3 +93,6 @@ priorizar depois do teste externo.
 * DEV-PROTO-0.3 (não integrada): divisão como contexto de oportunidade aprovada nos testes; inatividade ainda sem
   solução — A/B deixam o envelhecimento sem minutos sem limite, C zera a consequência. Próximo teste: limitar a perda
   total sem participação (inatividade + idade sem jogar) por temporada. Relatório: reports/development-world-10-seasons-v03.md.
+* DEV-PROTO-0.4 (não integrada): limite conjunto da perda sem participação resolve a deflação do veterano sem
+  minutos (A/B); restam jogadores que já começam com força ≤ 10 chegando a 1 e a curva de idade dos 34–36 (titulares
+  −1,1/−1,2 por temporada). Preservação do rendimento com efeito pequeno. Relatório: reports/development-world-10-seasons-v04.md.

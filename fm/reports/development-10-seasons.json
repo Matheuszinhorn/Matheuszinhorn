@@ -80,7 +80,10 @@
   "seasonGainCap": null,
   "divisionWeight": 0,
   "idleSeasonCap": null,
-  "agingWhenNotPlayed": true
+  "agingWhenNotPlayed": true,
+  "nonPlayingSeasonCap": null,
+  "performancePreservation": "none",
+  "preservationBuffer": 0.5
  },
  "note": "partidas sintéticas com padrões fixos; pontos de desenvolvimento por componente somados por temporada",
  "checks": [

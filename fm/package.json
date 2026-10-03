@@ -15,7 +15,9 @@
     "development:sim": "node scripts/simulate-development.ts",
     "development:sim10": "node scripts/simulate-development-10.ts",
     "development:world": "node scripts/simulate-development-world.ts",
-    "development:world03": "node scripts/simulate-development-world-v03.ts"
+    "development:world03": "node scripts/simulate-development-world-v03.ts",
+    "development:world04": "node scripts/simulate-development-world-v04.ts",
+    "development:synthetic04": "node scripts/simulate-development-v04-synthetic.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",

@@ -66,6 +66,20 @@ export interface DevelopmentConfig {
   idleSeasonCap: number | null;
   /** envelhecimento também nas rodadas sem jogar (true na 0.2; false = idade só pesa quando o jogador participa) */
   agingWhenNotPlayed: boolean;
+  // ---- campos da DEV-PROTO-0.4 (inertes na 0.2 e na 0.3) ----
+  /**
+   * limite CONJUNTO da perda nas rodadas sem participação (envelhecimento + inatividade somados), por temporada, em
+   * pontos (null = sem limite conjunto). Numa temporada inteira sem minutos, é o teto da perda total do ano.
+   * Rodadas em que o jogador participa não entram: o envelhecimento normal de quem joga continua.
+   */
+  nonPlayingSeasonCap: number | null;
+  /**
+   * rendimento positivo no limite contextual (ou acima): 'none' = descartado (regra da 0.2/0.3); 'partial' = guarda
+   * até `preservationBuffer` pontos no acumulador; 'full' = guarda até `accumulatorCap`. A reserva só amortece perdas
+   * futuras (idade, rendimento ruim): o +1 continua proibido no limite, então não há ganho acima do contexto.
+   */
+  performancePreservation: 'none' | 'partial' | 'full';
+  preservationBuffer: number;
 }
 
 /** DEV-PROTO-0.2 (calibração de 03/10/2026). Valores em teste; nada aqui é definitivo. */
@@ -89,7 +103,32 @@ export const DEVELOPMENT_PROTO: DevelopmentConfig = Object.freeze({
   divisionWeight: 0,
   idleSeasonCap: null,
   agingWhenNotPlayed: true,
+  nonPlayingSeasonCap: null,
+  performancePreservation: 'none',
+  preservationBuffer: 0.5,
 }) as DevelopmentConfig;
+
+export type Proto04Cap = 'A' | 'B' | 'C';
+export type Proto04Preservation = 'A' | 'B' | 'C';
+/**
+ * DEV-PROTO-0.4 (calibração; não integrada). Base 0.3 (contexto 50% elenco + 50% divisão; envelhecimento também sem
+ * jogar; inatividade −0,04/rodada) com:
+ * 1) limite CONJUNTO da perda sem participação por temporada — A: −0,50; B: −0,75; C: −1,00 (substitui o limite
+ *    separado de inatividade da 0.3);
+ * 2) preservação do rendimento positivo no limite contextual — A: atual (descarta); B: parcial (reserva até 0,5);
+ *    C: integral (reserva até o acúmulo máximo). Curva de idade inalterada; strengthBase não é piso.
+ */
+export function devProto04(cap: Proto04Cap, preservation: Proto04Preservation = 'A'): DevelopmentConfig {
+  return Object.freeze({
+    ...DEVELOPMENT_PROTO,
+    version: `DEV-PROTO-0.4-${cap}${preservation}`,
+    divisionWeight: 0.5,
+    idleSeasonCap: null,
+    agingWhenNotPlayed: true,
+    nonPlayingSeasonCap: cap === 'A' ? 0.5 : cap === 'B' ? 0.75 : 1,
+    performancePreservation: preservation === 'A' ? 'none' : preservation === 'B' ? 'partial' : 'full',
+  }) as DevelopmentConfig;
+}
 
 export type Proto03Variant = 'A' | 'B' | 'C';
 /**
@@ -122,6 +161,8 @@ export interface PlayerDevelopment {
   idleRounds: number;
   /** 0.3: perda por inatividade já aplicada na temporada (para o limite por temporada) */
   idleLoss?: { season: number; points: number };
+  /** 0.4: perda já aplicada nas rodadas sem participação na temporada (para o limite conjunto) */
+  nonPlayLoss?: { season: number; points: number };
   history: DevelopmentEvent[];
 }
 
@@ -165,6 +206,8 @@ export interface RoundBreakdown {
   idle: number;
   /** fator de oportunidade aplicado ao ganho (0 = sem espaço) */
   opportunity: number;
+  /** 0.4: devolução do limite conjunto (≥ 0): quanto da perda bruta sem participação (envelhecimento + inatividade) não foi aplicado */
+  capRelief: number;
   ceiling: number;
   idleRounds: number;
 }
@@ -261,14 +304,23 @@ export function roundPoints(dev: PlayerDevelopment, ctx: RoundContext, cfg: Deve
       idle = Math.max(idle, -Math.max(0, cfg.idleSeasonCap - spent));
     }
   }
-  return { points: r4(age + performance + aging + idle), age: r4(age), performance: r4(performance), aging: r4(aging), idle: r4(idle), opportunity: r4(opportunity), ceiling, idleRounds };
+  let capRelief = 0;
+  if (cfg.nonPlayingSeasonCap !== null && !e.played) {
+    const raw = aging + idle; // ≤ 0: perda bruta da rodada sem participação
+    const spent = dev.nonPlayLoss?.season === ctx.season ? dev.nonPlayLoss.points : 0;
+    const applied = Math.max(raw, -Math.max(0, cfg.nonPlayingSeasonCap - spent));
+    capRelief = applied - raw;
+  }
+  return { points: r4(age + performance + aging + idle + capRelief), age: r4(age), performance: r4(performance), aging: r4(aging), idle: r4(idle), opportunity: r4(opportunity), ceiling, idleRounds, capRelief: r4(capRelief) };
 }
 
 /** Uma rodada: acumula pontos; no fim da janela aplica no máximo ±1 (nunca mais). */
 export function developRound(dev: PlayerDevelopment, ctx: RoundContext, cfg: DevelopmentConfig = DEVELOPMENT_PROTO): PlayerDevelopment {
   const b = roundPoints(dev, ctx, cfg);
-  // no limite contextual (ou acima), o acumulador não guarda crédito de ganho: só pode ficar em 0 ou negativo
-  const upper = dev.strengthCurrent >= b.ceiling ? 0 : cfg.accumulatorCap;
+  // no limite contextual (ou acima), o acumulador não guarda crédito de ganho (0.2/0.3: só 0 ou negativo); na 0.4, a
+  // preservação do rendimento pode guardar uma reserva, que só amortece perdas (o +1 segue proibido no limite)
+  const atLimit = dev.strengthCurrent >= b.ceiling;
+  const upper = atLimit ? (cfg.performancePreservation === 'full' ? cfg.accumulatorCap : cfg.performancePreservation === 'partial' ? cfg.preservationBuffer : 0) : cfg.accumulatorCap;
   let progress = clamp(r4(dev.progress + b.points), -cfg.accumulatorCap, upper);
   let strengthCurrent = dev.strengthCurrent;
   let event: DevelopmentEvent | null = null;
@@ -283,10 +335,14 @@ export function developRound(dev: PlayerDevelopment, ctx: RoundContext, cfg: Dev
       progress = r4(progress - step);
       strengthCurrent = to;
     }
-    // a sobra passa adiante, mas nunca vira um segundo passo
-    progress = clamp(progress, -0.99, 0.99);
+    // a sobra passa adiante, mas nunca vira um segundo passo (no limite, nunca acima da reserva permitida)
+    progress = clamp(progress, -0.99, cfg.performancePreservation !== 'none' && strengthCurrent >= b.ceiling ? Math.min(0.99, upper) : 0.99);
   }
   const next: PlayerDevelopment = { ...dev, strengthCurrent, progress, idleRounds: b.idleRounds, history: event ? [...dev.history, event] : dev.history };
+  if (cfg.nonPlayingSeasonCap !== null && !ctx.evidence.played) {
+    const spent = dev.nonPlayLoss?.season === ctx.season ? dev.nonPlayLoss.points : 0;
+    next.nonPlayLoss = { season: ctx.season, points: r4(spent - (b.aging + b.idle + b.capRelief)) };
+  }
   if (cfg.idleSeasonCap !== null && b.idle < 0) next.idleLoss = { season: ctx.season, points: r4((dev.idleLoss?.season === ctx.season ? dev.idleLoss.points : 0) - b.idle) };
   return next;
 }

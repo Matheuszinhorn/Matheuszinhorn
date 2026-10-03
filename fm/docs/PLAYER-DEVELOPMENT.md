@@ -1,6 +1,6 @@
 # Evolução contextual de força — PlayerDevelopment (PROJETO EM CALIBRAÇÃO)
 
-> **Última etapa: [Validação DEV-PROTO-0.3 — Mundo Real](#validação-dev-proto-03--mundo-real).**
+> **Última etapa: [Validação DEV-PROTO-0.4 — Mundo Real](#validação-dev-proto-04--mundo-real)** (antes: 0.3).
 > **DEV-PROTO-0.3 continua NÃO integrada ao jogo.** Nenhuma das três variantes de inatividade resolveu sozinha os
 > dois lados do problema. A divisão como oportunidade funcionou como pedido.
 
@@ -18,7 +18,8 @@
 | `scripts/simulate-development-world.ts` (`npm run development:world`) | Validação em 10 temporadas reais do universo fictício → `reports/development-world-10-seasons.md` e `.json` |
 | `game/development/evidence.ts` | Leitura (só leitura) da evidência de cada partida a partir do `MatchState` do engine |
 | `scripts/simulate-development-world-v03.ts` (`npm run development:world03`) | Validação da 0.3 (variantes A/B/C + 0.2) no mundo real → `reports/development-world-10-seasons-v03.md` e `.json` |
-| `game/tests/development.test.ts` | 19 testes de invariantes |
+| `scripts/simulate-development-world-v04.ts` e `scripts/simulate-development-v04-synthetic.ts` | Validação da 0.4 (mundo real e casos sintéticos) |
+| `game/tests/development.test.ts` | 23 testes de invariantes |
 
 ## Princípios aprovados
 
@@ -553,3 +554,77 @@ Trajetórias completas por temporada no relatório. Destaques:
    envelhecimento normal para quem joga. Objetivo: quem não joga perde algo todo ano, e ninguém chega a 1 só por
    ficar no banco.
 4. **Antes de integrar:** medir o efeito de volta (com aprovação, porque muda placares) e testar mais seeds.
+
+## Validação DEV-PROTO-0.4 — Mundo Real
+
+> **DEV-PROTO-0.4 continua NÃO integrada ao jogo e isolada.** Nenhuma variante foi declarada definitiva. Curva de
+> idade inalterada; strengthBase não é piso. Relatórios: `reports/development-world-10-seasons-v04.md`
+> (`npm run development:world04`) e `reports/development-v04-synthetic.md` (`npm run development:synthetic04`).
+
+**O que a 0.4 testa** (sobre a 0.3: contexto 50% elenco + 50% divisão):
+
+1. **Limite CONJUNTO da perda sem participação:** envelhecimento + inatividade das rodadas sem jogar, somados por
+   temporada e limitados a A −0,50, B −0,75 ou C −1,00. Para quem não joga o ano todo, é o teto da perda total do ano.
+   Rodadas jogadas seguem o envelhecimento normal. Lesão conta como rodada sem participação.
+2. **Preservação do rendimento no limite contextual** (`performancePreservation`):
+   - A = atual (descarta);
+   - B = parcial (reserva de até 0,5 no acumulador);
+   - C = integral (até 1,5).
+
+   O +1 continua proibido no limite.
+
+**Mundo real.** Mesma seed e metodologia, 15.200 partidas; controle sem observador × 10 observadores (0.3-B e a
+grade 3 × 3). Hash dos placares idêntico (`af11672f38c7…0318328`). A decomposição bate com a fórmula (diferença
+máxima de 0,0001).
+
+| 10 temporadas | 0.3-B | A (−0,50) | B (−0,75) | C (−1,00) |
+|---|---:|---:|---:|---:|
+| Mesmo conjunto (1.111 jogadores) | −0,8 | −0,1 a +0,2 | −0,7 a −0,4 | −1,2 a −1,0 |
+| Chegaram a 1 | 57 | 16 | 25 | 49 |
+| Dos que chegaram a 1, força inicial ≤ 10 | 52 | 16 (todos) | 25 (todos) | 47 |
+| −10 ou mais | 157 | 0 | 1 | 77 |
+| Maior queda | −12 | −9 | −10 | −11 |
+| Veteranos 31–36 sem minutos (por temporada) | −1,6 | −0,5 | −0,7 | −1,0 |
+| Todas as temporadas sem minutos | −0,9 | −0,4 | −0,6 | −0,8 |
+| Jovens (≤ 23) sem minutos | 0,0 | 0,0 | 0,0 | −0,1 |
+| Jovens (≤ 23) titulares | +0,9 | +0,9 | +0,9 | +0,8 a +0,9 |
+| Veteranos titulares, rendimento > 0 × ≤ 0 | −0,61 × −1,12 | −0,61…−0,55 × −1,12…−1,00 | −0,60…−0,54 × −1,12…−1,01 | −0,60…−0,54 × −1,12…−1,00 |
+| Chegaram a 50 / subidas sem minutos / força por transferência | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
+
+Faixas com "a" ou "…" vão da preservação A à C.
+
+- **O limite conjunto age onde o diagnóstico apontou.** Nos veteranos 31–36 sem minutos, a perda bruta média é
+  −2,67 por temporada (envelhecimento −1,19 + inatividade −1,48). A aplicada passa a −0,50, −0,75 ou −1,00.
+- **Casos obrigatórios** (força final; 0.3-B → A / B / C, com preservação atual):
+
+| Jogador | 0.3-B | A | B | C |
+|---|---:|---:|---:|---:|
+| Breno Bragança Almeida | 29 | 30 | 28 | 25 |
+| Henrique Jardim | 18 | 24 | 23 | 21 |
+| Luan Gomes | 20 | 27 | 25 | 22 |
+| Gabriel Macedo | 15 | 22 | 20 | 19 |
+
+  Igor Duarte (24) e Caio Toledo Freitas (48) não mudam: eles jogam.
+- **A preservação mexe pouco:**
+  - nos veteranos titulares com rendimento ruim, a queda vai de −1,12 para −1,00;
+  - nos com rendimento bom, de −0,61 para −0,54;
+  - a reserva descartada é quase toda de titulares de até 27 anos (0,20 por temporada) e de veteranos só 0,02;
+  - na preservação integral, a média sobe +0,1 a +0,3 e os "+5 ou mais" vão de 199 para 229 (na A).
+- **Casos sintéticos** (5 temporadas):
+  - veterano de 35 anos, 40, sem minutos: 0.3-B 40 → 28; 0.4 A → 38, B → 37, C → 35;
+  - jovem de 20 anos sem minutos: −1 a −2;
+  - jovem titular: +12;
+  - a preservação não diferencia os padrões sintéticos.
+
+**Anomalias que permanecem** (registradas, não corrigidas):
+
+- **Jogadores ainda chegam a 1:** 16 (A), 25 (B) e 49 (C). Na A e na B, todos começaram com força 10 ou menos e
+  passaram em média 4 temporadas sem minutos. Sem piso pela força inicial (proibido nesta etapa), isso continua
+  possível.
+- **Titulares de 34–36 anos caem −1,1 a −1,2 por temporada.** É a curva de idade, não alterada.
+- **Extremos sintéticos da curva de idade:**
+  - titular de 36 anos, força 48, rendimento bom: fica em 48 até os 40 (o rendimento compensa a idade);
+  - com rendimento ruim: cai −3 por ano (48 → 34).
+
+  Só existem até os 36 no jogo, por causa da aposentadoria aos 37.
+- **Sem efeito de volta da força nas partidas;** uma seed só.

@@ -230,3 +230,54 @@ test('0.3: divisão é só oportunidade — sem minutos nada sobe; com minutos, 
   for (let round = 1; round <= 38; round++) s = developRound(s, { ...ctx(40, titular(round % 2)), round }, cfg);
   assert.ok(s.strengthCurrent > 23 && s.strengthCurrent <= 27, `gradual: ${s.strengthCurrent}`);
 });
+
+// ---------- DEV-PROTO-0.4 (calibração; não integrada) ----------
+
+test('0.4: campos novos inertes na 0.2 e na 0.3', async () => {
+  const { devProto03 } = await import('../development/development.ts');
+  for (const cfg of [DEVELOPMENT_PROTO, devProto03('B')]) {
+    assert.equal(cfg.nonPlayingSeasonCap, null);
+    assert.equal(cfg.performancePreservation, 'none');
+  }
+});
+
+test('0.4: limite CONJUNTO — temporada inteira sem minutos perde no máximo o teto (idade + inatividade somadas)', async () => {
+  const { devProto04, roundPoints } = await import('../development/development.ts');
+  for (const [cap, max] of [['A', 0.5], ['B', 0.75], ['C', 1]] as const) {
+    const cfg = devProto04(cap);
+    let d = newDevelopment('v', 40);
+    let applied = 0;
+    let raw = 0;
+    for (let round = 1; round <= 38; round++) {
+      const ctx = { season: 1, round, age: 35, position: 'DEF' as const, environmentLevel: 38, divisionLevel: 38, evidence: bench };
+      const b = roundPoints(d, ctx, cfg);
+      raw += b.aging + b.idle;
+      applied += b.aging + b.idle + b.capRelief;
+      d = developRound(d, ctx, cfg);
+    }
+    assert.ok(raw < -max, `perda bruta ${raw} maior que o teto`);
+    assert.ok(Math.abs(applied + max) < 1e-3, `${cap}: aplicada ${applied}, teto ${max}`);
+  }
+});
+
+test('0.4: quem joga continua com o envelhecimento normal (o limite só vale para rodadas sem participação)', async () => {
+  const { devProto03, devProto04, roundPoints } = await import('../development/development.ts');
+  const d = newDevelopment('t', 40);
+  const ctx = { season: 1, round: 1, age: 35, position: 'DEF' as const, environmentLevel: 38, divisionLevel: 38, evidence: titular(0, 0, 1) };
+  const a = roundPoints(d, ctx, devProto03('B'));
+  const b = roundPoints(d, ctx, devProto04('A'));
+  assert.equal(b.aging, a.aging);
+  assert.equal(b.capRelief, 0);
+});
+
+test('0.4: preservação nunca dá +1 no limite contextual; só guarda reserva (parcial ≤ 0,5)', async () => {
+  const { devProto04, developmentCeiling } = await import('../development/development.ts');
+  for (const p of ['A', 'B', 'C'] as const) {
+    const cfg = devProto04('B', p);
+    let d = newDevelopment('s', 48);
+    for (let round = 1; round <= 38; round++) d = developRound(d, { season: 1, round, age: 27, position: 'ATA', environmentLevel: 46, divisionLevel: 46, evidence: titular(2, 3, 0) }, cfg);
+    assert.equal(d.strengthCurrent, 48, `${p}: não sobe acima do limite ${developmentCeiling(46, 27)}`);
+    if (p === 'A') assert.ok(d.progress <= 0);
+    if (p === 'B') assert.ok(d.progress <= 0.5 + 1e-9);
+  }
+});
