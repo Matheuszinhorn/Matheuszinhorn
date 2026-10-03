@@ -97,7 +97,8 @@ export function universeToWorld(
         name: up.displayName,
         age,
         nationality: up.nationality ?? '',
-        position: ENGINE_POSITION[up.position],
+        // o elenco (squad) só tem jogadores ATIVOS com posição informada (validate.ts)
+        position: ENGINE_POSITION[up.position as UniversePosition],
         strength,
         temperament: p.temperament,
         salary: p.salary,

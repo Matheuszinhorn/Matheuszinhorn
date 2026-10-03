@@ -55,5 +55,13 @@ priorizar depois do teste externo.
 
 * Empréstimos entre clubes da CPU; patrocínio da CPU; problemas financeiros da CPU com efeito (hoje só notícia).
 * Jogos da seleção, datas FIFA e Copa (a cada 4 temporadas) — roadmap.
-* Força dos jogadores do universo real: só com metodologia aprovada (continua null).
+* Força dos jogadores do universo real: metodologia EM-RATING-1.0 pronta, mas **não aplicada** (cobertura de 8% do EA FC 26). Decisão do proprietário: (a) esperar referência com o Brasileirão, (b) EM-RATING-1.1 com segunda referência, (c) curadoria documentada, (d) só os 72 (não recomendado). PLAYER-RATINGS.md.
 * Corpo das notícias mais longo, com contexto gravado no momento do fato.
+
+## Depois da etapa Universo real + EM-RATING
+
+* 291 atletas da CBF sem posição em fonte nenhuma (167 ATIVOS): precisam de uma fonte de posição (o BID não foi acessível).
+* Séries B, C e D: importar elencos e confirmar regras na CBF (`confirmed: false` em `data/competition-rules.ts`).
+* Data de início da 2ª janela de 2026 a conferir na CBF.
+* Ligação do universo real à carreira (UNIVERSES.md: opções a, b, c) e medição do efeito "Overall − 42" nas razões do modelo de chance, antes de qualquer partida real.
+* Refazer a medição de quebra de nomes no campo do MEU TIME com os apelidos da CBF.

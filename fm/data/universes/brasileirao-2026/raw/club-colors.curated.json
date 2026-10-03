@@ -1,0 +1,28 @@
+{
+ "format": "club-colors-curated",
+ "source": "curadoria-elite-manager",
+ "curatedAt": "2026-10-03",
+ "notes": "Cores TRADICIONAIS de identidade de cada clube (conhecimento público), escolhidas pelo ELITE MANAGER em tons aproximados. Não são dados oficiais, não vêm de escudo nem de imagem, e não substituem a identidade visual do jogo (marinho, lima e off-white). A CBF não publica cores; o infobox da Wikipédia traz a cor de fundo do uniforme (sem as listras), que não serve como identidade. confirmedByPrimary = false.",
+ "clubs": {
+  "br-athletico-pr": { "primary": "#C8102E", "secondary": "#000000", "accent": "#FFFFFF", "label": "vermelho e preto" },
+  "br-atletico-mg": { "primary": "#000000", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "preto e branco" },
+  "br-bahia": { "primary": "#0033A0", "secondary": "#E30613", "accent": "#FFFFFF", "label": "azul, vermelho e branco" },
+  "br-botafogo": { "primary": "#000000", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "preto e branco" },
+  "br-bragantino": { "primary": "#FFFFFF", "secondary": "#D50032", "accent": "#FFFFFF", "label": "branco e vermelho" },
+  "br-chapecoense": { "primary": "#00843D", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "verde e branco" },
+  "br-corinthians": { "primary": "#FFFFFF", "secondary": "#000000", "accent": "#FFFFFF", "label": "branco e preto" },
+  "br-coritiba": { "primary": "#00544D", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "verde e branco" },
+  "br-cruzeiro": { "primary": "#0033A0", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "azul e branco" },
+  "br-flamengo": { "primary": "#E2001A", "secondary": "#000000", "accent": "#E2001A", "label": "vermelho e preto" },
+  "br-fluminense": { "primary": "#7A0026", "secondary": "#00613C", "accent": "#FFFFFF", "label": "grená, verde e branco" },
+  "br-gremio": { "primary": "#0D80BF", "secondary": "#000000", "accent": "#FFFFFF", "label": "azul, preto e branco" },
+  "br-internacional": { "primary": "#E30613", "secondary": "#FFFFFF", "accent": "#E30613", "label": "vermelho e branco" },
+  "br-mirassol": { "primary": "#FFD200", "secondary": "#00843D", "accent": "#FFD200", "label": "amarelo e verde" },
+  "br-palmeiras": { "primary": "#006437", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "verde e branco" },
+  "br-remo": { "primary": "#0B1F4B", "secondary": "#FFFFFF", "accent": "#FFFFFF", "label": "azul-marinho e branco" },
+  "br-santos": { "primary": "#FFFFFF", "secondary": "#000000", "accent": "#FFFFFF", "label": "branco e preto" },
+  "br-sao-paulo": { "primary": "#E30613", "secondary": "#000000", "accent": "#FFFFFF", "label": "vermelho, preto e branco" },
+  "br-vasco": { "primary": "#000000", "secondary": "#FFFFFF", "accent": "#E30613", "label": "preto e branco (cruz vermelha)" },
+  "br-vitoria": { "primary": "#E30613", "secondary": "#000000", "accent": "#E30613", "label": "vermelho e preto" }
+ }
+}

@@ -39,7 +39,7 @@ test('caminho completo: World do universo real → interface mostra exatamente o
   // A marca sobrevive às cópias que o jogo faz do mundo ({ ...world }) e ao save (JSON).
   const copied = JSON.parse(JSON.stringify({ ...world, players: { ...world.players } }));
   useNamesOf(copied);
-  for (const p of Object.values(u.players)) assert.equal(shortName(copied.players[p.id].name), p.displayName);
-  assert.equal(shortName(copied.players['p-027ce63b'].name), 'Gustavo Gómez');
+  for (const p of Object.values(u.players)) if (copied.players[p.id]) assert.equal(shortName(copied.players[p.id].name), p.displayName);
+  assert.equal(shortName(copied.players['p-cbf-633571'].name), 'Gustavo Gomez'); // apelido como a CBF escreve
   useNamesOf(null);
 });

@@ -28,6 +28,10 @@ Não há divisão servidor/cliente: o jogo inteiro é uma página estática.
 universos de dados (ex.: Brasileirão 2026), pelo fluxo fonte → raw → normalização → validação → `Universe` →
 `World`. Ela depende só dos tipos e de `generateWorld` do engine; o engine não a conhece. Ainda não é usada por
 `game/` nem pelo build do app (o jogo continua no universo fictício). Detalhes em [UNIVERSES.md](UNIVERSES.md).
+Dentro dela: `data/import/cbf-squads.ts` (CBF, fonte principal), `data/rating/em-rating.ts` (metodologia de força
+EM-RATING, [PLAYER-RATINGS.md](PLAYER-RATINGS.md)) e `data/competition-rules.ts` (regras por competição). São só
+dados e funções puras; o engine não os lê. O teste `data/tests/ratings.test.ts` grava a impressão digital das
+fontes do engine para provar que esta camada não o altera.
 
 **Camada de gestão (`game/manager/`):** tudo o que acontece fora da partida e que a especificação ELITE MANAGER pede
 (estatísticas, mercado, contratos, estádio, finanças, notícias, moral, árbitros, técnicos da CPU, mundo vivo).
@@ -43,7 +47,7 @@ O estado vive em `CareerState.manager` (campo opcional; save antigo recebe os pa
 | `engine/` | Simula minutos, sorteia eventos, valida times e comandos, abre decisões, aplica a política da CPU, calcula tabela, acesso/rebaixamento e finanças. | Não sabe de telas, velocidade, armazenamento ou do clube "do jogador" além do `controlledClubId`. |
 | `game/` | Carreira entre rodadas (aplicar resultados uma vez, lesões, suspensões, finanças, virada de temporada), sessão da rodada (ritmo, pausas, fila de decisões), consultas, edição de escalação. | Não desenha nada e não muda regras de partida. |
 | `app/` | Mostra o estado, coleta escolhas, chama o controlador, salva e carrega. | Não decide resultado nem valida regras: quem valida é o engine. |
-| `data/` | Universos de dados: modelos, normalização, validação, importação JSON, conversão para `World`, registro de universos. | Não simula nada, não acessa a internet em runtime e não muda o engine. |
+| `data/` | Universos de dados: modelos, normalização, validação, importação (JSON, CBF, Wikipédia), metodologia de força (EM-RATING), regras por competição, conversão para `World`, registro de universos. | Não simula nada, não acessa a internet em runtime e não muda o engine. |
 
 ## Fluxo de dados
 

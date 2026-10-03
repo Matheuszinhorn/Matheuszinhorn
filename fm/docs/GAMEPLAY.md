@@ -208,6 +208,7 @@ temporada joga exatamente as mesmas partidas da versão anterior.
   técnico no fim da temporada. Propostas de fim de temporada valem até a 3ª rodada da seguinte.
 * **Velocidades**: LENTA, NORMAL e RÁPIDA. Quem tinha MUITO RÁPIDA ou INSTANTÂNEA salva volta como RÁPIDA.
 * **Força relativa, ⭐ e evolução gradual**: PLAYER-PROGRESSION.md.
+* **Força dos jogadores reais (metodologia EM-RATING, ainda não aplicada; a carreira continua no universo fictício)**: PLAYER-RATINGS.md.
 * **Salário por temporada**, folha por temporada e custo da rodada: FINANCE.md.
 * **Lesão em partidas**: leve (1–2), moderada (3–5), grave (6+); calendário lista desfalques e a rodada de volta.
 * **Próximo adversário**: cidade, divisão, posição, estádio, público estimado, estilo, técnico, forma, artilheiro,

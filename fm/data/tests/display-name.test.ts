@@ -111,11 +111,12 @@ test('5. fullName só existe no universo, como referência: nunca chega ao World
   assert.equal(u.players['a-p1'].fullName, 'Gustavo Martins de Souza Santos'); // continua disponível no universo
 });
 
-test('universo real: a Wikipédia não tem apelido nem nome civil; displayName = nome da fonte, força continua null', () => {
+test('universo real: apelido da CBF em todos; displayName = apelido como a CBF escreve; força continua null', () => {
   const u = loadUniverse('brasileirao-2026').universe as Universe;
   const ps = Object.values(u.players);
-  assert.equal(ps.length, 644);
-  assert.ok(ps.every((p) => p.fullName === null && p.nickname === null && p.displayName.trim() !== ''));
-  assert.ok(ps.every((p) => p.strength === null && p.source.confirmedByPrimary === false));
-  assert.equal(u.players['p-027ce63b'].displayName, 'Gustavo Gómez');
+  assert.equal(ps.length, 897);
+  assert.ok(ps.every((p) => p.nickname !== null && p.displayName === p.nickname && p.fullName !== null));
+  assert.ok(ps.every((p) => p.strength === null && p.source.confirmedByPrimary === true));
+  assert.equal(u.players['p-cbf-633571'].displayName, 'Gustavo Gomez'); // grafia da CBF, sem "corrigir"
+  assert.equal(u.players['p-cbf-633571'].fullName, 'Gustavo Raul Gomez Portillo');
 });

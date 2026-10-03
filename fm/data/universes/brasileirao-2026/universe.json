@@ -3,9 +3,13 @@
   "name": "Brasileirão 2026",
   "season": 2026,
   "country": "Brasil",
-  "competitions": ["brasileirao-a-2026"],
-  "competitionFiles": ["competition.json"],
+  "competitions": [
+    "brasileirao-a-2026"
+  ],
+  "competitionFiles": [
+    "competition.json"
+  ],
   "defaultCompetitionId": "brasileirao-a-2026",
   "primarySource": "cbf",
-  "dataStatus": "Clubes e elencos da Série A 2026 a partir da fonte de conferência (Wikipédia em inglês, snapshot de 01/10/2026). A fonte principal (CBF) não pôde ser consultada nesta etapa: nenhum registro está confirmado pela CBF. Idade, cores e força ELITE MANAGER ausentes."
+  "dataStatus": "Série A 2026 com a CBF como fonte principal (coleta de 02–03/10/2026): 897 atletas, apelido e clube atual pela CBF (768 no clube, 129 transferidos). Posição, número e nacionalidade vindos da Wikipédia em inglês (conferência) só quando o jogador é identificado sem ambiguidade; 309 sem posição em nenhuma fonte ficam fora do elenco jogável. Cores por curadoria. Força ELITE MANAGER NÃO aplicada (null): a metodologia EM-RATING-1.0 só cobre 72 atletas com Overall do EA SPORTS FC 26 (simulação em ratings/)."
 }

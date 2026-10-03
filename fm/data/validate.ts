@@ -6,6 +6,10 @@ import { normalizeName, POSITION_SUGGESTIONS, resolveDisplayName } from './norma
 // existe, uma sugestão. Com qualquer ERROR o universo não é montado (WARNING não impede).
 
 export type IssueCode =
+  | 'POSITION_MISSING'
+  | 'STRENGTH_WITHOUT_METHOD'
+  | 'INVALID_BIRTH_DATE'
+  | 'INVALID_RATING_REF'
   | 'INVALID_FILE'
   | 'MISSING_FIELD'
   | 'COMPETITION_NOT_FOUND'
@@ -121,7 +125,8 @@ export function validateUniverse(files: UniverseFiles): ValidationResult {
     }
     const id = p.id;
     if (players[id]) err('PLAYER_DUPLICATE_ID', id, `playerId duplicado: "${id}"`);
-    need(p, id, ['displayName', 'position', 'status', 'source']);
+    need(p, id, ['displayName', 'status', 'source']);
+    if (p.position === undefined) err('MISSING_FIELD', id, 'campo obrigatório ausente: "position" (use null quando nenhuma fonte informa)');
     // Regra do nome exibido: com apelido na fonte, displayName TEM de ser o apelido.
     const expected = resolveDisplayName(p.nickname as string | null, p.displayName as string | null);
     if (isStr(p.displayName) && expected !== p.displayName) err('DISPLAY_NAME_MISMATCH', id, `displayName "${p.displayName}" diferente do apelido "${String(p.nickname)}"`, expected);
@@ -129,12 +134,17 @@ export function validateUniverse(files: UniverseFiles): ValidationResult {
     else if (!clubs[p.clubId]) err('CLUB_NOT_FOUND', id, `clube inexistente: "${p.clubId}"`);
 
     const pos = String(p.position ?? '');
-    if (!(UNIVERSE_POSITIONS as readonly string[]).includes(pos)) {
+    if (p.position === null) warn('POSITION_MISSING', id, 'posição ausente nas fontes: fica fora do elenco jogável', 'informar a posição a partir de uma fonte (nunca estimar)');
+    else if (!(UNIVERSE_POSITIONS as readonly string[]).includes(pos)) {
       err('INVALID_POSITION', id, `posição inválida: "${pos}"`, POSITION_SUGGESTIONS[pos.toUpperCase()] ?? `uma de ${UNIVERSE_POSITIONS.join(', ')}`);
     }
     if (p.strength !== null && p.strength !== undefined && !(isInt(p.strength) && p.strength >= 1 && p.strength <= 50)) {
       err('STRENGTH_OUT_OF_RANGE', id, `força fora de 1–50: ${JSON.stringify(p.strength)}`, isInt(p.strength) ? String(Math.max(1, Math.min(50, p.strength))) : 'null (ainda não avaliada)');
     }
+    // força vinda de uma referência externa precisa dizer com qual metodologia foi calculada (rastreabilidade)
+    if (isInt(p.strength) && isObj(p.rating) && !isStr(p.strengthMethodVersion)) err('STRENGTH_WITHOUT_METHOD', id, 'força com referência externa e sem strengthMethodVersion', 'gravar a versão da metodologia (ex.: EM-RATING-1.0)');
+    if (p.birthDate !== null && p.birthDate !== undefined && !(isStr(p.birthDate) && /^\d{4}-\d{2}-\d{2}$/.test(p.birthDate))) err('INVALID_BIRTH_DATE', id, `data de nascimento inválida: ${JSON.stringify(p.birthDate)}`, 'AAAA-MM-DD ou null');
+    if (isObj(p.rating) && !(isStr(p.rating.source) && isStr(p.rating.sourceVersion) && isStr(p.rating.sourcePlayerId) && isInt(p.rating.overall))) err('INVALID_RATING_REF', id, 'referência de força incompleta', 'source, sourceVersion, sourcePlayerId e overall');
     if (p.number !== null && p.number !== undefined && !(isInt(p.number) && p.number >= 1 && p.number <= 99)) {
       err('INVALID_NUMBER', id, `número inválido: ${JSON.stringify(p.number)}`, 'inteiro de 1 a 99, ou null se ausente');
     }
@@ -166,7 +176,8 @@ export function validateUniverse(files: UniverseFiles): ValidationResult {
       if (isStr(p.source.source) && !sourceIds.has(p.source.source)) warn('UNKNOWN_SOURCE', id, `fonte não cadastrada em sources.json: "${p.source.source}"`);
     }
     players[id] = p as unknown as UniversePlayer;
-    if (isStr(p.clubId) && clubs[p.clubId]) clubs[p.clubId].squad.push(id);
+    // elenco jogável = quem está no clube hoje (ATIVO) e tem posição informada
+    if (isStr(p.clubId) && clubs[p.clubId] && p.status === 'ATIVO' && p.position !== null) clubs[p.clubId].squad.push(id);
   }
 
   // ---------- elencos jogáveis ----------

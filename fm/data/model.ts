@@ -6,9 +6,12 @@
 export type UniversePosition = 'GOL' | 'DEF' | 'MEI' | 'ATA';
 export const UNIVERSE_POSITIONS: readonly UniversePosition[] = ['GOL', 'DEF', 'MEI', 'ATA'];
 
-/** Situação do jogador no cadastro. Por enquanto só existe ATIVO (listado no elenco principal da fonte). */
-export type PlayerStatus = 'ATIVO';
-export const PLAYER_STATUSES: readonly PlayerStatus[] = ['ATIVO'];
+/**
+ * Situação do jogador no cadastro. ATIVO = o clube atual na fonte é este clube. TRANSFERIDO = inscrito pelo clube na
+ * temporada, mas a fonte principal (CBF: atleta_time_atual) aponta outro clube hoje. Só ATIVO entra no elenco jogável.
+ */
+export type PlayerStatus = 'ATIVO' | 'TRANSFERIDO';
+export const PLAYER_STATUSES: readonly PlayerStatus[] = ['ATIVO', 'TRANSFERIDO'];
 
 /** De onde veio um registro: identifica a fonte e o item nela (ex.: "enwiki:Gustavo Gómez"). */
 export interface SourceRef {
@@ -51,7 +54,14 @@ export interface UniverseClub {
   city: string | null;
   state: string | null;
   stadium: { name: string; capacity: number | null } | null;
-  colors: { primary: string; secondary: string } | null; // null = ausente na fonte
+  colors: { primary: string; secondary: string; accent?: string } | null; // null = ausente na fonte
+  /** de onde vieram as cores (ex.: "curadoria-elite-manager"); ausente = mesma fonte do clube */
+  colorsSource?: string | null;
+  country?: string | null;
+  /** ids do clube em fontes externas (ex.: { cbf: "20002" }) */
+  externalIds?: Record<string, string>;
+  /** origem dos campos que não vieram da fonte principal (ex.: { city: "wikipedia-en" }) */
+  fieldSources?: Record<string, string>;
   source: SourceRef;
 }
 
@@ -66,7 +76,8 @@ export interface UniversePlayer {
   nickname: string | null; // campo "Apelido" da fonte, quando existir
   displayName: string; // o nome que o jogo mostra
   clubId: string;
-  position: UniversePosition;
+  /** null = nenhuma fonte informou a posição (a CBF não publica posição); jogador fica fora do elenco jogável */
+  position: UniversePosition | null;
   number: number | null; // 1–99; null = ausente
   age: number | null; // null = ausente
   nationality: string | null;
@@ -74,13 +85,36 @@ export interface UniversePlayer {
   status: PlayerStatus;
   notes: string | null; // ex.: "capitão", "emprestado por Cruzeiro"
   source: SourceRef;
+  // ---- campos acrescentados na etapa "Universo real + EM-RATING" (todos opcionais: arquivos antigos continuam válidos) ----
+  /** data de nascimento ISO (AAAA-MM-DD), da fonte principal */
+  birthDate?: string | null;
+  /** ids do jogador em fontes externas (ex.: { cbf: "710301", eaFc: "209331" }) */
+  externalIds?: Record<string, string>;
+  /** fonte de cada campo que NÃO veio da fonte principal (ex.: { position: "wikipedia-en", nationality: "wikipedia-en" }) */
+  fieldSources?: Record<string, string>;
+  /** referência externa de força (EA FC...), exatamente como veio da fonte; não é a força do jogo */
+  rating?: PlayerRatingRef | null;
+  /** versão da metodologia que produziu `strength` (null = força não aplicada) */
+  strengthMethodVersion?: string | null;
+  strengthNotes?: string | null;
+}
+
+/** Referência externa de força guardada no jogador (rastreável; ver data/rating/em-rating.ts). */
+export interface PlayerRatingRef {
+  source: string; // "EA_FC_26"
+  sourceVersion: string;
+  sourcePlayerId: string;
+  overall: number;
+  sourcePosition: string | null;
+  retrievedAt: string;
+  matchedBy: string;
 }
 
 /** sources.json (um item). */
 export interface DataSource {
   id: string;
   name: string;
-  role: 'principal' | 'conferencia';
+  role: 'principal' | 'conferencia' | 'referencia-forca' | 'curadoria';
   url: string | null;
   retrievedAt: string | null;
   notes: string;

@@ -6,13 +6,14 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 
 ## Testes automatizados
 
-`npm test` (Node `--test`): **217/217** (etapa Força + Economia; antes 213/213 (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
+`npm test` (Node `--test`): **235/235** (etapa Universo real + EM-RATING, 03/10/2026: +18 em `data/tests/ratings.test.ts` com os 20 testes pedidos, incluindo a impressão digital do engine; testes do universo atualizados para os dados da CBF). Antes **217/217** (etapa Força + Economia; antes 213/213 (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
 
 | Conjunto | Arquivo(s) | Cobre |
 |---|---|---|
 | Engine | `engine/tests/*.test.ts` | Partida, chances e calibração, decisões, prioridade de eventos no mesmo minuto, fim de partida, rodada, finanças, promoção. |
 | Game | `game/tests/*.test.ts` | Carreira (ofertas na D4, rodadas, lesões/suspensões, finanças uma vez por rodada, virada, persistência), sessão (velocidades, pausas, decisões, determinismo entre velocidades), consultas, edição de escalação, decisões de goleiro. |
-| Data (V1.1) | `data/tests/*.test.ts` | Universo Brasileirão 2026: carga, 20 clubes, 644 jogadores, ids, posições, força, vínculos, conversão para o engine, partida, temporada de 380 jogos, determinismo; validador (posição "VOL" com sugestão, força fora de 1–50, duplicidades, clube/competição inexistente, número, idade, elenco mínimo, goleiro, JSON inválido) e normalização; regra do nome exibido (apelido → `displayName`, `fullName` só como referência, nunca no World nem na partida). O universo padrão continua idêntico a `generateWorld`. |
+| Data (V1.1) | `data/tests/*.test.ts` | Universo Brasileirão 2026 (CBF): carga, 20 clubes, 897 atletas (601 no elenco jogável), ids `p-cbf-<id>`, posições, força, vínculos, conversão para o engine, partida, temporada de 380 jogos, determinismo; validador (posição "VOL" com sugestão, força fora de 1–50, duplicidades, clube/competição inexistente, número, idade, elenco mínimo, goleiro, JSON inválido) e normalização; regra do nome exibido (apelido → `displayName`, `fullName` só como referência, nunca no World nem na partida). O universo padrão continua idêntico a `generateWorld`. |
+| Ratings e regras (etapa Universo real) | `data/tests/ratings.test.ts` | Os 20 testes pedidos: displayName, apelido priorizado, sem apelido usa o nome disponível, sem escudo, cores válidas, força 1–50, determinismo, mesma entrada = mesma força, rastreabilidade da referência, jogadores sem referência identificados, dado incompleto não inventado, universo fictício intacto, universo real separado, impressão digital do Engine 0.2.0, save antigo, força alta em divisão inferior, sem barreira de contratação por divisão, regras por competição (Brasil × fictício); mais a ligação CBF × EA (datas, nomes, ambiguidade). |
 | App | `app/tests/controller.test.ts` | Controlador sem tela: carreira, rodada, velocidades, CLUBES, MEU TIME, recarregar no fim da temporada, estados de save na tela inicial, NOVA CARREIRA na mesma página (regressão do P1 da auditoria). |
 
 `npm run typecheck` (TypeScript 6.0.3, `strict`): OK.
@@ -97,3 +98,15 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 - Mesma seed + mesmos dados + mesmas decisões = mesmo resultado: coberto na suíte (partida, rodada, sessão em
   velocidades diferentes) e na interface (`qa-speeds`: 7 casos × 5 velocidades; `qa-myteam`: mesmo roteiro 2×;
   `qa-persist`: mesmo save jogado em outro navegador; `qa-season`: 1.520 placares idênticos nas 6 larguras).
+
+## Auditoria anti-reroll (03/10/2026)
+
+Busca de fontes não determinísticas em `game/` e `app/src`. Toda decisão de jogo usa RNG com seed (`game/career.ts`,
+`game/manager/{people,world,finance,market,flow}.ts`). Fora disso:
+
+| Item | Situação |
+|---|---|
+| Seed da carreira (`app/src/controller.ts` `randomSeed`) | Única fonte aleatória real: sorteada uma vez por NOVA CARREIRA e gravada no save. |
+| Propostas iniciais | Persistidas em `elite-manager:propostas-iniciais` (`OFFERS_KEY`): recarregar a página mostra as mesmas. Recusar todas leva a AGUARDAR PROPOSTAS; novas propostas só por eventos do mundo. |
+| Mercado, patrocínio, empréstimos, leilões, eventos, notícias, ofertas, geração de jogadores | Funções da seed + estado + decisões: repetir a ação dá a mesma resposta; não existe "sortear de novo". |
+| `app/src/audio.ts` `Math.random` | Só o timbre do ruído sintetizado; não toca no jogo. |

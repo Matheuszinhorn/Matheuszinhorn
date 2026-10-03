@@ -11,17 +11,31 @@
    "name": "Arena da Baixada",
    "capacity": 42372
   },
-  "colors": null,
+  "colors": {
+   "primary": "#C8102E",
+   "secondary": "#000000",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Club Athletico Paranaense",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20052",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20052"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-atletico-mg",
   "name": "Atlético Mineiro",
-  "fullName": "Clube Atlético Mineiro",
+  "fullName": "Atlético Mineiro SAF",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Belo Horizonte",
@@ -30,17 +44,31 @@
    "name": "Arena MRV",
    "capacity": 44892
   },
-  "colors": null,
+  "colors": {
+   "primary": "#000000",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Clube Atlético Mineiro",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:62194",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "62194"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-bahia",
   "name": "Bahia",
-  "fullName": "Esporte Clube Bahia",
+  "fullName": "Esporte Clube Bahia SAF",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Salvador",
@@ -49,17 +77,31 @@
    "name": "Casa de Apostas Arena Fonte Nova",
    "capacity": 50052
   },
-  "colors": null,
+  "colors": {
+   "primary": "#0033A0",
+   "secondary": "#E30613",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Esporte Clube Bahia",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:61377",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "61377"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-botafogo",
   "name": "Botafogo",
-  "fullName": "Botafogo de Futebol e Regatas",
+  "fullName": "SAF Botafogo",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Rio de Janeiro",
@@ -68,17 +110,31 @@
    "name": "Olímpico Nilton Santos",
    "capacity": 44661
   },
-  "colors": null,
+  "colors": {
+   "primary": "#000000",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Botafogo FR",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:60175",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "60175"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-bragantino",
   "name": "Red Bull Bragantino",
-  "fullName": "Red Bull Bragantino",
+  "fullName": "Red Bull Bragantino Futebol Ltda.",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Bragança Paulista",
@@ -87,17 +143,31 @@
    "name": "Cícero de Souza Marques",
    "capacity": 12000
   },
-  "colors": null,
+  "colors": {
+   "primary": "#FFFFFF",
+   "secondary": "#D50032",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Red Bull Bragantino",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20007",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20007"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-chapecoense",
   "name": "Chapecoense",
-  "fullName": "Associação Chapecoense de Futebol",
+  "fullName": "Associacao Chapecoense de Futebol",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Chapecó",
@@ -106,11 +176,25 @@
    "name": "Arena Condá",
    "capacity": 20089
   },
-  "colors": null,
+  "colors": {
+   "primary": "#00843D",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Associação Chapecoense de Futebol",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20086",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20086"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -125,17 +209,31 @@
    "name": "Neo Química Arena",
    "capacity": 47252
   },
-  "colors": null,
+  "colors": {
+   "primary": "#FFFFFF",
+   "secondary": "#000000",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:SC Corinthians Paulista",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20001",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20001"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-coritiba",
   "name": "Coritiba",
-  "fullName": "Coritiba Foot Ball Club",
+  "fullName": "Coritiba Sociedade Anônima do Futebol",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Curitiba",
@@ -144,17 +242,31 @@
    "name": "Couto Pereira",
    "capacity": 40502
   },
-  "colors": null,
+  "colors": {
+   "primary": "#00544D",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Coritiba Foot Ball Club",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:61590",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "61590"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-cruzeiro",
   "name": "Cruzeiro",
-  "fullName": "Cruzeiro Esporte Clube",
+  "fullName": "Cruzeiro Esporte Clube - Sociedade Anônima do Futebol",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Belo Horizonte",
@@ -163,11 +275,25 @@
    "name": "Mineirão",
    "capacity": 66658
   },
-  "colors": null,
+  "colors": {
+   "primary": "#0033A0",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Cruzeiro EC",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:59849",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "59849"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -182,11 +308,25 @@
    "name": "Maracanã",
    "capacity": 78838
   },
-  "colors": null,
+  "colors": {
+   "primary": "#E2001A",
+   "secondary": "#000000",
+   "accent": "#E2001A"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:CR Flamengo",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20016",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20016"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -201,17 +341,31 @@
    "name": "Maracanã",
    "capacity": 78838
   },
-  "colors": null,
+  "colors": {
+   "primary": "#7A0026",
+   "secondary": "#00613C",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Fluminense FC",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20014",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20014"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-gremio",
   "name": "Grêmio",
-  "fullName": "Grêmio Foot-Ball Porto Alegrense",
+  "fullName": "Gremio Foot-ball Porto Alegrense",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Porto Alegre",
@@ -220,11 +374,25 @@
    "name": "Arena do Grêmio",
    "capacity": 60540
   },
-  "colors": null,
+  "colors": {
+   "primary": "#0D80BF",
+   "secondary": "#000000",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Grêmio FBPA",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20013",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20013"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -239,11 +407,25 @@
    "name": "Beira-Rio",
    "capacity": 49055
   },
-  "colors": null,
+  "colors": {
+   "primary": "#E30613",
+   "secondary": "#FFFFFF",
+   "accent": "#E30613"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:SC Internacional",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20011",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20011"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -258,11 +440,25 @@
    "name": "Campos Maia",
    "capacity": 14534
   },
-  "colors": null,
+  "colors": {
+   "primary": "#FFD200",
+   "secondary": "#00843D",
+   "accent": "#FFD200"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Mirassol Futebol Clube",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20385",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20385"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -277,11 +473,25 @@
    "name": "Nubank Parque",
    "capacity": 43713
   },
-  "colors": null,
+  "colors": {
+   "primary": "#006437",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:SE Palmeiras",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20002",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20002"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -296,11 +506,25 @@
    "name": "Mangueirão",
    "capacity": 53645
   },
-  "colors": null,
+  "colors": {
+   "primary": "#0B1F4B",
+   "secondary": "#FFFFFF",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Clube do Remo",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20022",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20022"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -315,11 +539,25 @@
    "name": "Vila Belmiro",
    "capacity": 16068
   },
-  "colors": null,
+  "colors": {
+   "primary": "#FFFFFF",
+   "secondary": "#000000",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Santos FC",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20008",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20008"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
@@ -334,17 +572,31 @@
    "name": "MorumBIS",
    "capacity": 66671
   },
-  "colors": null,
+  "colors": {
+   "primary": "#E30613",
+   "secondary": "#000000",
+   "accent": "#FFFFFF"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:São Paulo FC",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20005",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20005"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-vasco",
   "name": "Vasco da Gama",
-  "fullName": "Club de Regatas Vasco da Gama",
+  "fullName": "Vasco da Gama Sociedade Anônima do Futebol",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Rio de Janeiro",
@@ -353,17 +605,31 @@
    "name": "São Januário",
    "capacity": 24584
   },
-  "colors": null,
+  "colors": {
+   "primary": "#000000",
+   "secondary": "#FFFFFF",
+   "accent": "#E30613"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:CR Vasco da Gama",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:60646",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "60646"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  },
  {
   "id": "br-vitoria",
   "name": "Vitória",
-  "fullName": "Esporte Clube Vitória",
+  "fullName": "Esporte Clube Vitoria",
   "competitionId": "brasileirao-a-2026",
   "division": 1,
   "city": "Salvador",
@@ -372,11 +638,25 @@
    "name": "Barradão",
    "capacity": 30793
   },
-  "colors": null,
+  "colors": {
+   "primary": "#E30613",
+   "secondary": "#000000",
+   "accent": "#E30613"
+  },
   "source": {
-   "source": "wikipedia-en",
-   "ref": "enwiki:Esporte Clube Vitória",
-   "confirmedByPrimary": false
+   "source": "cbf",
+   "ref": "cbf:time:20018",
+   "confirmedByPrimary": true
+  },
+  "country": "Brasil",
+  "colorsSource": "curadoria-elite-manager",
+  "externalIds": {
+   "cbf": "20018"
+  },
+  "fieldSources": {
+   "city": "wikipedia-en",
+   "state": "wikipedia-en",
+   "stadium": "wikipedia-en"
   }
  }
 ]

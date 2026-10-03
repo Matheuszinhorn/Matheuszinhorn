@@ -39,9 +39,11 @@ function playSeason(world: World, seed: string): MatchResult[] {
   return results;
 }
 
-test('1. carrega o universo sem erros nem avisos', () => {
+test('1. carrega o universo sem erros; avisos só de posição ausente em todas as fontes', () => {
   assert.equal(loaded.ok, true, loaded.issues.map((i) => `${i.code} ${i.entity} ${i.message}`).join('\n'));
-  assert.deepEqual(loaded.issues, []);
+  const codes: Record<string, number> = {};
+  for (const i of loaded.issues) codes[i.code] = (codes[i.code] ?? 0) + 1;
+  assert.deepEqual(codes, { POSITION_MISSING: 291 });
   assert.equal(U.manifest.id, 'brasileirao-2026');
   assert.equal(U.manifest.season, 2026);
   const comp = U.competitions['brasileirao-a-2026'];
@@ -60,23 +62,24 @@ test('2. a Série A 2026 tem 20 clubes, todos da competição e com elenco', () 
   assert.ok(Object.values(U.clubs).some((c) => c.name === 'Palmeiras') && Object.values(U.clubs).some((c) => c.name === 'Remo'));
 });
 
-test('3. jogadores carregados e ligados aos clubes (elenco = jogadores com aquele clubId)', () => {
+test('3. jogadores carregados e ligados aos clubes (elenco jogável = ATIVOS com posição daquele clubId)', () => {
   const players = Object.values(U.players);
-  assert.equal(players.length, 644);
-  for (const c of Object.values(U.clubs)) assert.deepEqual(c.squad, players.filter((p) => p.clubId === c.id).map((p) => p.id));
+  assert.equal(players.length, 897);
+  for (const c of Object.values(U.clubs)) assert.deepEqual(c.squad, players.filter((p) => p.clubId === c.id && p.status === 'ATIVO' && p.position !== null).map((p) => p.id));
 });
 
-test('4. ids estáveis e únicos: clube "br-<slug>", jogador "p-<hash>", nunca o nome', () => {
+test('4. ids estáveis e únicos: clube "br-<slug>", jogador "p-cbf-<id do atleta na CBF>", nunca o nome', () => {
   const ids = Object.values(U.players).map((p) => p.id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.every((id) => /^p-[0-9a-f]{8}$/.test(id)));
+  assert.ok(ids.every((id) => /^p-cbf-[0-9]+$/.test(id)));
   assert.ok(Object.keys(U.clubs).every((id) => /^br-[a-z0-9-]+$/.test(id)));
   // Recarregar dá exatamente os mesmos ids.
   assert.deepEqual(Object.keys((loadUniverse('brasileirao-2026').universe as Universe).players), Object.keys(U.players));
 });
 
-test('5. posições só GOL/DEF/MEI/ATA e todo clube tem goleiro', () => {
-  for (const p of Object.values(U.players)) assert.ok(UNIVERSE_POSITIONS.includes(p.position), `${p.id}: ${p.position}`);
+test('5. posições só GOL/DEF/MEI/ATA (ou ausente, fora do elenco) e todo clube tem goleiro', () => {
+  for (const p of Object.values(U.players)) assert.ok(p.position === null || UNIVERSE_POSITIONS.includes(p.position), `${p.id}: ${p.position}`);
+  for (const c of Object.values(U.clubs)) for (const id of c.squad) assert.ok(U.players[id].position !== null && U.players[id].status === 'ATIVO', `${id} no elenco sem posição ou fora do clube`);
   for (const c of Object.values(U.clubs)) assert.ok(c.squad.some((id) => U.players[id].position === 'GOL'), c.name);
 });
 
@@ -85,15 +88,16 @@ test('6. força: ainda não avaliada (null) em todos; nunca fora de 1–50', () 
   assert.ok(Object.values(U.players).every((p) => p.strength === null));
 });
 
-test('7. vínculo jogador/clube e origem: nenhum registro confirmado pela CBF; ausentes ficam null', () => {
+test('7. vínculo jogador/clube e origem: todo jogador confirmado pela CBF; idade da data de nascimento; ausentes ficam null', () => {
   for (const p of Object.values(U.players)) {
     assert.ok(U.clubs[p.clubId]);
-    assert.equal(p.source.source, 'wikipedia-en');
-    assert.equal(p.source.confirmedByPrimary, false);
-    assert.equal(p.age, null);
+    assert.equal(p.source.source, 'cbf');
+    assert.equal(p.source.confirmedByPrimary, true);
+    assert.ok(p.birthDate && Number.isInteger(p.age) && p.age! >= 14 && p.age! <= 50, p.id);
     assert.ok(p.number === null || (p.number >= 1 && p.number <= 99));
+    assert.ok(p.status === 'ATIVO' || /clube atual na CBF/.test(p.notes ?? ''), `${p.id}: transferido sem o clube atual`);
   }
-  for (const c of Object.values(U.clubs)) assert.equal(c.colors, null);
+  for (const c of Object.values(U.clubs)) assert.equal(c.colorsSource, 'curadoria-elite-manager');
 });
 
 test('8. converter sem perfil provisório falha e diz o que falta (nada é inventado em silêncio)', () => {
@@ -104,8 +108,8 @@ test('9. o World convertido é aceito pelo engine: escalação válida e partida
   const { world, report } = toWorld();
   assert.equal(world.divisions.length, 1);
   assert.equal(world.divisions[0].clubIds.length, 20);
-  assert.equal(Object.keys(world.players).length, 644);
-  assert.deepEqual(report.provisional, { strength: 644, age: 644, colors: 20, stadiumCapacity: 0 });
+  assert.equal(Object.keys(world.players).length, 601); // só ATIVO com posição
+  assert.deepEqual(report.provisional, { strength: 601, age: 0, colors: 0, stadiumCapacity: 0 });
   for (const club of Object.values(world.clubs)) assert.deepEqual(validateLineup(autoLineup(club, world.players), club, world.players), []);
   const fx = prepareFixture('M1', world.clubs['br-palmeiras'], world.clubs['br-flamengo'], world.players);
   const match = simulateMatch({ matchId: 'M1', seed: 'seed-partida', home: fx.home, away: fx.away, attendance: fx.attendance });

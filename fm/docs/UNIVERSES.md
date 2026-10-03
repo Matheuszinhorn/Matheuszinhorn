@@ -1,8 +1,8 @@
-# Universos de dados (V1.1)
+# Universos de dados (V1.1 + universo real CBF)
 
 Infraestrutura para o ELITE MANAGER jogar com elencos reais sem mudar o engine. Primeiro universo:
-**Brasileirão 2026 — Série A**. Branch `feature/real-rosters-2026`; **ainda não ligado à carreira**: o jogo da V1
-continua usando o universo fictício.
+**Brasileirão 2026 — Série A**, com a CBF como fonte principal desde 03/10/2026. **Ainda não ligado à carreira**:
+o jogo continua usando o universo fictício (padrão), e trocar o padrão exige autorização.
 
 ## Conceitos
 
@@ -11,11 +11,18 @@ continua usando o universo fictício.
 | **Universe** | Um mundo de jogo de uma temporada: competições, clubes, jogadores e fontes. | `universe.json` (manifesto) |
 | **Competition** | Uma competição do universo (id, nome, temporada, país, divisão, clubes). | `competition.json` |
 | **Club** | Clube com id estável entre temporadas (`br-palmeiras`), nome, nome oficial, competição, divisão, cidade, estado, estádio e cores. Identidade no jogo: nome + cor; sem escudo obrigatório. | `clubs.json` |
-| **Player** | Jogador com id estável (`p-<hash>`), `fullName` (referência), `nickname` (apelido da fonte), `displayName` (o nome que o jogo mostra), `clubId`, posição GOL/DEF/MEI/ATA, número, idade, nacionalidade, força 1–50, status e observações. Sem outros atributos. | `players.json` |
+| **Player** | Jogador com id estável (`p-cbf-<id do atleta na CBF>`), `fullName` (nome civil, referência), `nickname` (apelido da CBF), `displayName` (o nome que o jogo mostra), `clubId`, posição GOL/DEF/MEI/ATA, número, idade, nacionalidade, força 1–50, status e observações. Sem outros atributos. | `players.json` |
 | **Source** | De onde veio cada dado (fonte principal ou de conferência). Todo clube e jogador aponta para uma. | `sources.json` |
 
-O **elenco** de um clube não é repetido em `clubs.json`: é o conjunto de jogadores com aquele `clubId` (montado
-na carga).
+O **elenco** de um clube não é repetido em `clubs.json`: é o conjunto de jogadores com aquele `clubId`, `status`
+ATIVO e posição informada (montado na carga). Jogador TRANSFERIDO (a CBF diz que o clube atual é outro) ou sem
+posição em nenhuma fonte fica no arquivo, com o motivo, mas fora do elenco jogável.
+
+Campos acrescentados nesta etapa (todos opcionais; saves e universo fictício não mudam): clube `country`,
+`colorsSource`, `externalIds`; jogador `birthDate`, `externalIds`, `fieldSources` (origem de cada campo que não veio
+da fonte principal), `rating`, `strengthMethodVersion`, `strengthNotes` (docs/PLAYER-RATINGS.md). Clubes **não**
+têm escudo, logo nem imagem: a identidade é nome, cidade, estado, país, divisão e cores (primária, secundária,
+destaque), usadas só como contexto; a marca do jogo continua marinho #071522, lima #B3FA46 e off-white #F2F4ED.
 
 ## Onde fica
 
@@ -25,13 +32,20 @@ data/
   normalize.ts             normalização (nomes, posições, números, nacionalidade, observações, ids)
   validate.ts              validação com erros claros e sugestões
   import-json.ts           importação JSON (texto → validação → Universe); igual no Node e no navegador
-  import/wikipedia-squads.ts  importador do formato bruto "wikipedia-fs-player"
+  import/wikipedia-squads.ts  importador do formato bruto "wikipedia-fs-player" (conferência)
+  import/cbf-squads.ts     importador do snapshot do site da CBF (fonte principal)
+  rating/em-rating.ts      metodologia de força EM-RATING (docs/PLAYER-RATINGS.md)
+  competition-rules.ts     regras por competição (CompetitionRules): Brasil 2026 e universo fictício
   load-node.ts             leitura do disco (só testes e scripts)
   to-world.ts              Universe → World do engine (com perfil provisório explícito)
   registry.ts              lista de universos e o universo padrão
   universes/brasileirao-2026/
     universe.json  competition.json  clubs.json  players.json  sources.json
-    raw/wikipedia-en-2026.raw.json   snapshot bruto da fonte, sem alteração
+    raw/cbf-2026.raw.json            snapshot da CBF (times + páginas de atleta), sem alteração
+    raw/wikipedia-en-2026.raw.json   snapshot bruto da conferência, sem alteração
+    raw/ea-fc-26.candidates.raw.json candidatos EA FC 26 (mesma data de nascimento de algum atleta)
+    raw/club-colors.curated.json     cores curadas dos 20 clubes
+    ratings/EM-RATING-1.0.simulacao.json   simulação da força, NÃO aplicada (applied: false)
   tests/                   testes da camada (npm test)
 scripts/build-universe.ts  RAW → normalize → validate → competition/clubs/players.json (npm run universe)
 ```
@@ -59,16 +73,25 @@ válidos, como os do mundo fictício. Nada aqui roda no jogo publicado (o build 
 ```json
 { "id": "br-palmeiras", "name": "Palmeiras", "fullName": "Sociedade Esportiva Palmeiras",
   "competitionId": "brasileirao-a-2026", "division": 1, "city": "São Paulo", "state": "São Paulo",
-  "stadium": { "name": "Nubank Parque", "capacity": 43713 }, "colors": null,
-  "source": { "source": "wikipedia-en", "ref": "enwiki:SE Palmeiras", "confirmedByPrimary": false } }
+  "stadium": { "name": "Nubank Parque", "capacity": 43713 },
+  "colors": { "primary": "#006437", "secondary": "#FFFFFF", "accent": "#FFFFFF" },
+  "source": { "source": "cbf", "ref": "cbf:time:20002", "confirmedByPrimary": true },
+  "country": "Brasil", "colorsSource": "curadoria-elite-manager", "externalIds": { "cbf": "20002" },
+  "fieldSources": { "city": "wikipedia-en", "state": "wikipedia-en", "stadium": "wikipedia-en" } }
 ```
 
 `players.json` (lista)
 ```json
-{ "id": "p-7888c289", "fullName": null, "nickname": null, "displayName": "Alexander Barboza",
-  "clubId": "br-palmeiras", "position": "DEF", "number": 2,
-  "age": null, "nationality": "Argentina", "strength": null, "status": "ATIVO", "notes": null,
-  "source": { "source": "wikipedia-en", "ref": "enwiki:Alexander Barboza", "confirmedByPrimary": false } }
+{ "id": "p-cbf-353568", "fullName": "Rodinei Marcelo de Almeida", "nickname": "Rodinei", "displayName": "Rodinei",
+  "clubId": "br-santos", "position": "DEF", "number": 23, "age": 34, "nationality": "Brasil",
+  "strength": null, "status": "ATIVO", "notes": null,
+  "source": { "source": "cbf", "ref": "cbf:atleta:353568", "confirmedByPrimary": true },
+  "birthDate": "1992-01-29", "externalIds": { "cbf": "353568", "eaFc": "212091" },
+  "fieldSources": { "position": "wikipedia-en", "nationality": "wikipedia-en", "number": "wikipedia-en" },
+  "rating": { "source": "EA_FC_26", "sourceVersion": "FC26-api-2026-10-02", "sourcePlayerId": "212091",
+              "overall": 79, "sourcePosition": "RB", "retrievedAt": "2026-10-02T23:49:33Z",
+              "matchedBy": "CBF 353568 × EA 212091: nascimento + nome" },
+  "strengthMethodVersion": null, "strengthNotes": null }
 ```
 
 `null` sempre significa **ausente na fonte**, nunca "zero" ou "padrão".
@@ -90,9 +113,9 @@ O jogo exibe **somente `displayName`**, calculado por `resolveDisplayName`:
   `Player.name`). Como o engine e todas as telas leem `Player.name` (escalação, MEU TIME, partida, gols, cartões,
   lesões, substituições), o nome completo não aparece no jogo. Qualquer narrativa futura deve partir do mesmo campo.
 - O validador recusa (`DISPLAY_NAME_MISMATCH`) um `displayName` diferente do apelido quando o apelido existe.
-- Brasileirão 2026: a Wikipédia não tem campo "Apelido" nem nome civil no elenco; mostra o nome esportivo.
-  Por isso, nos 644 jogadores, `fullName` e `nickname` são `null` e `displayName` é o nome da fonte. Quando a
-  fonte primária (CBF/BID, que tem "Nome" e "Apelido") for importada, os dois campos passam a ser preenchidos.
+- Brasileirão 2026: a CBF publica "Nome" (civil) e "Apelido". Os 897 atletas têm apelido, então `displayName`
+  é o apelido como a CBF o escreve (inclusive caixa alta e sem acento: "ELIASSON", "Gustavo Gomez"). Nada é
+  trocado pelo nome civil nem inventado. Antes desta etapa, com a Wikipédia, `fullName` e `nickname` eram `null`.
 - **Na interface, o `displayName` aparece inteiro** ("Felipe Anderson", "João Pedro", "G. Martins", "Jefinho"),
   sem segunda abreviação. O mundo gerado por `universeToWorld` leva a marca `nameStyle: 'display'`; a cada
   desenho, `app/src/views/shell.ts` informa o mundo atual a `useNamesOf` e `shortName` (`app/src/format.ts`)
@@ -101,7 +124,8 @@ O jogo exibe **somente `displayName`**, calculado por `resolveDisplayName`:
   antes ("Thiago Pacheco Lopes" → "T. Lopes").
 - No campo do MEU TIME, a etiqueta do jogador tem largura fixa. Com nomes de universo (classe `names-full` no
   `.shell`), ela quebra em linhas em vez de cortar com "…", e o campo não recorta a etiqueta do goleiro na borda.
-  Medido nos 644 nomes reais (390 px): 311 cabem em 1 linha, 332 em 2 e 1 em 3 ("Gabriel Knesowitsch").
+  Medição de 01/10/2026 com os 644 nomes da Wikipédia (390 px): 311 cabem em 1 linha, 332 em 2 e 1 em 3. Os
+  apelidos da CBF são em geral mais curtos; a medição não foi refeita nesta etapa.
 
 ## Normalização (`data/normalize.ts`)
 
@@ -122,7 +146,10 @@ Erros (impedem montar o universo): arquivo inválido, campo obrigatório ausente
 repetida, clube inexistente, `clubId` duplicado, clube fora da competição, jogador sem `clubId`, `playerId`
 duplicado, jogador duplicado (mesmo nome no clube ou mesmo jogador da fonte em dois registros), posição inválida,
 força fora de 1–50, número fora de 1–99, idade fora de 14–50, status inválido, elenco com menos de 11 jogadores,
-elenco sem goleiro. Avisos (não impedem): número repetido no clube, fonte não cadastrada.
+elenco sem goleiro (o elenco conta só ATIVOS com posição), força com referência externa mas sem
+`strengthMethodVersion`, data de nascimento fora do formato AAAA-MM-DD, referência externa (`rating`) incompleta.
+Avisos (não impedem): número repetido no clube, fonte não cadastrada, posição ausente em todas as fontes
+(`POSITION_MISSING`: o jogador fica fora do elenco jogável, nunca recebe posição estimada).
 
 Formato da mensagem:
 
@@ -137,34 +164,76 @@ MEI
 
 ## Origem dos dados — Brasileirão 2026
 
-| Papel | Fonte | Situação |
-|---|---|---|
-| **Principal** | CBF (tabelas da Série A 2026 e BID) | **Não consultada.** `www.cbf.com.br` e `bid.cbf.com.br` falharam na conexão a partir do ambiente de desenvolvimento (01/10/2026). Nenhum registro tem `confirmedByPrimary = true`. |
-| **Conferência** | Wikipédia em inglês: artigo "2026 Campeonato Brasileiro Série A" (clubes, cidade, estado, estádio, capacidade) e os 20 artigos de clube (elenco principal) | Snapshot de 01/10/2026 em `raw/wikipedia-en-2026.raw.json`, com URL e revisão de cada artigo. Lista dos 20 clubes conferida também em busca na web (Flashscore). |
+Coleta: **02/10/2026 23:51 a 03/10/2026 00:28 (UTC)**. A 2ª janela terminou em 11/09/2026; a CBF ainda aceita
+inscrições depois dela, dentro do regulamento. Por isso o elenco vale para a data da coleta.
 
-Elenco = primeira seção do artigo do clube com `{{Fs player}}` ("First-team squad", "Current squad"...). Ficam de
-fora base, reservas e jogadores emprestados **a outros** clubes. Jogadores emprestados **ao** clube entram, com a
-observação "emprestado por X".
+| Papel | Fonte | O que dá |
+|---|---|---|
+| **Principal** | CBF: páginas dos 20 times da Série A 2026 e as 898 páginas de atleta (`raw/cbf-2026.raw.json`) | id do atleta, nome civil, **apelido**, data de nascimento e **clube atual** (`atleta_time_atual`). Todo jogador tem `confirmedByPrimary: true`. |
+| **Conferência** | Wikipédia em inglês (snapshot de 01/10/2026) | cidade, estado e estádio do clube; posição, número e nacionalidade do jogador, só quando ele é identificado **mútua e unicamente** no mesmo clube (`fieldSources`). |
+| **Referência de força** | EA SPORTS FC 26 (API pública, 02/10/2026) | Overall, só para a simulação EM-RATING. Também dá a posição quando a Wikipédia não tem (12 jogadores). |
+| **Curadoria** | ELITE MANAGER | cores dos clubes (`raw/club-colors.curated.json`). |
+
+Acesso à CBF: o servidor `www.cbf.com.br` envia a cadeia TLS com o intermediário errado. A coleta validou o
+certificado com o intermediário correto (Sectigo Public Server Authentication CA OV R36, obtido do endereço AIA e
+conferido contra as raízes do sistema), **sem desligar a verificação**. O BID (`bid.cbf.com.br`) não foi acessível.
+
+Regras do importador CBF (`data/import/cbf-squads.ts`):
+- **Nome exibido = apelido da CBF**, escrito como a CBF escreve (ex.: "Gustavo Gomez", "ELIASSON"). Não é trocado
+  pelo nome civil nem "corrigido". Os 897 têm apelido.
+- **Clube atual**: se a CBF diz que o atleta está em outro clube, ele fica `TRANSFERIDO`, com
+  `notes: "clube atual na CBF: X"`. Um atleta inscrito por dois clubes da Série A vira um registro só, no clube atual.
+- **Idade**: anos completos na data da coleta. Um registro da lista de atletas com 65 anos (Juan Carlos Osorio, Remo,
+  provavelmente comissão técnica) ficou fora do universo e aparece no relatório (`foraDoUniverso`).
+- **Ligação com a Wikipédia**: primeiro por nome idêntico, depois pelas regras de nome compatível, sempre mútua e
+  única. Um jogador da Wikipédia nunca vale para dois atletas: "Gabriel" e "Gabriel Girotto" no mesmo clube
+  davam o número e a posição de um ao outro antes dessa regra.
+
+## Números do universo (03/10/2026)
+
+| | |
+|---|---|
+| Clubes | 20 (cores curadas; sem escudo) |
+| Atletas | 897: 768 ATIVOS e 129 TRANSFERIDOS |
+| Posição | Wikipédia 594 · EA FC 26 12 · **nenhuma fonte 291** (167 deles ATIVOS) |
+| Elenco jogável (ATIVO com posição) | 601 (GOL 71 · DEF 195 · MEI 176 · ATA 159) |
+| Sem apelido / sem fonte principal | 0 / 0 |
+| Com Overall do EA FC 26 | 72 (8%) |
+| Força aplicada | **0**: todos com `strength: null` (docs/PLAYER-RATINGS.md) |
+| Idade | 16 a 46 anos, média 25,8 |
+| Atletas da Wikipédia que a CBF não lista no clube | 79 (não entram: a fonte principal manda) |
 
 ## Limitações (dados ausentes ou provisórios)
 
 | Dado | Situação |
 |---|---|
-| Confirmação pela CBF | Pendente para os 20 clubes e 644 jogadores. |
-| Força ELITE MANAGER | **Ausente (`null`) para todos.** Não há metodologia definida; nada foi copiado de outro jogo ou site. |
-| Idade | Ausente para todos (a fonte de elenco não informa). |
-| Cores dos clubes | Ausentes: o campo de uniforme da fonte é só a cor de base sob o desenho da camisa (ex.: o Athletico aparece "branco"); usá-lo seria inventar. |
-| Número da camisa | Ausente para 3: Patrick (Red Bull Bragantino), João Lucas (Remo), Ignacio Laquintana (Vitória). |
-| Identificador na fonte | Ausente para 7 (id por clube + nome): Alejandro Ararat e Benassi (Coritiba), Athos (Grêmio), João Pedro e Felipe Preis (São Paulo), Pablo e Walace Falcão (Vasco da Gama). |
-| Atualidade | Elencos mudam durante a temporada (janelas, empréstimos): o snapshot vale para 01/10/2026. |
+| Força ELITE MANAGER | **Ausente (`null`) para todos.** A EM-RATING-1.0 está documentada e testada, mas a referência (EA FC 26) cobre só 8% e com viés; o proprietário precisa decidir o caminho (docs/PLAYER-RATINGS.md). |
+| Posição | A CBF não publica. 291 atletas sem posição em nenhuma fonte (base, reservas, recém-chegados) ficam fora do elenco jogável, nunca estimados. |
+| Número e nacionalidade | Só da Wikipédia, quando a ligação é segura. |
+| Cores | Curadoria, não dado oficial (`colorsSource: "curadoria-elite-manager"`). |
+| Séries B, C e D | Não importadas; regras em `data/competition-rules.ts` marcadas `confirmed: false`. |
+| Atualidade | Vale para a data da coleta; inscrições depois da janela mudam elencos. |
 
-**Força: continua `null` nos 644 jogadores** até a metodologia oficial do ELITE MANAGER. Não existe perfil
-provisório no código de produção. O engine exige campos que a fonte não tem, então converter o universo em
-`World` só funciona com um `ProvisionalProfile` passado **explicitamente**; sem ele, a conversão falha dizendo o
-que falta. O único perfil existente é **de teste técnico** (`data/tests/provisional-test-profile.ts`: força 25,
-idade 25, temperamento Normal, salário R$ 10.000/rodada, caixa R$ 10 milhões, reputação 50, cores
-marinho/off-white, 4-4-2). Ele só preenche o `World` daquela conversão, nunca altera `players.json`, e serve
-apenas para provar que o engine aceita os dados: **não é força oficial nem balanceamento**.
+O universo ainda não tem força oficial. Por isso converter em `World` só funciona com um `ProvisionalProfile`
+passado **explicitamente** (`data/tests/provisional-test-profile.ts`, força 25, só para teste técnico). Sem ele, a
+conversão falha e diz o que falta. Esse perfil não é força oficial nem balanceamento e nunca altera `players.json`.
+
+## Regras por competição (`data/competition-rules.ts`)
+
+Cada competição tem as próprias `CompetitionRules`: clubes, formato, acesso, rebaixamento, janelas, inscrição,
+`confirmed`, fonte e notas. `LeagueSystem` é a pirâmide de um país ou universo, e `checkLeagueSystem` confere a
+coerência (rodadas = 2 × (clubes − 1) em pontos corridos; quem cai de uma divisão = quem sobe da de baixo; o topo não
+sobe; a base não cai).
+
+- **Brasil 2026:**
+  - Série A: 20 clubes, 38 rodadas, 4 rebaixados, 2ª janela até 11/09/2026. Confirmada; só a data de início da
+    janela não foi conferida.
+  - Série B: 20 clubes, 4 sobem e 4 caem. `confirmed: false`.
+  - Séries C e D: formato com fases. `confirmed: false`; o número de clubes da D é desconhecido (`clubs: 0`).
+- **Universo fictício:** 4 divisões × 20 clubes, 38 rodadas, 4 sobem e 4 caem. São as regras que o jogo já usa e que
+  não mudam.
+- Outra liga traz as próprias regras. Nada é global. Esta camada é dado: o engine não a lê, e a carreira atual não
+  muda.
 
 ## Seleção de universo (`data/registry.ts`)
 
@@ -173,8 +242,9 @@ apenas para provar que o engine aceita os dados: **não é força oficial nem ba
 
 **Pendente de decisão antes de ligar à carreira:** a carreira da V1 tem 4 divisões × 20 clubes, acesso e
 rebaixamento, e começa na 4ª divisão. O universo real tem hoje só a Série A. Opções: (a) esperar Séries B, C e D;
-(b) Série A real + divisões fictícias; (c) modo de uma divisão (exige mudanças em `game/`). Também é preciso
-decidir a força (metodologia) antes de qualquer partida "de verdade".
+(b) Série A real + divisões fictícias (atenção: na amostra convertida, a Série A fica no nível da 2ª divisão
+fictícia, docs/PLAYER-RATINGS.md); (c) modo de uma divisão (exige mudanças em `game/`). Também é preciso decidir o
+caminho da força antes de qualquer partida "de verdade".
 
 ## Como adicionar uma nova temporada
 

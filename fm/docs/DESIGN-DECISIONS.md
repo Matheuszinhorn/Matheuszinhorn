@@ -52,3 +52,24 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 * **Salário guardado por rodada, mostrado por temporada**: preserva `engine/finance.ts` e os saves.
 * **Propostas só por eventos reais**: removido o "preenchimento" que gerava proposta a cada rodada sem clube.
 * **Três velocidades na tela**; VERY_FAST/INSTANT ficam só na sessão para testes.
+
+## Etapa Universo real + EM-RATING
+
+* **CBF como fonte principal, Wikipédia só como conferência.** Apelido, nome civil, nascimento e clube atual vêm da
+  CBF. Posição, número e nacionalidade vêm da Wikipédia só com ligação mútua e única no mesmo clube. Sem posição em
+  fonte nenhuma, o jogador fica fora do elenco jogável em vez de receber uma posição estimada.
+* **Nome exibido = apelido da CBF como a CBF escreve.** Sem "corrigir" acento ou caixa, sem trocar pelo nome civil.
+* **Clube atual da CBF manda.** Um atleta inscrito pelo clube mas com outro clube atual fica TRANSFERIDO, com o
+  motivo nas notas.
+* **Cores por curadoria declarada**, sem escudos: a cor do uniforme na Wikipédia é a base sob o desenho e enganaria.
+  A marca do jogo não muda.
+* **EM-RATING-1.0 = Overall − 42 (1–50)**: a tabela por faixas do proprietário escrita como uma linha. Sem ajuste
+  por posição (o Overall já é por posição) nem por divisão (a divisão não reduz ninguém; o limite é econômico).
+* **Força NÃO aplicada.** O EA FC 26 não tem clubes brasileiros: cobertura de 8% e enviesada (repatriados e
+  estrangeiros). Pelo critério do proprietário, anomalia grave significa não aplicar. Os caminhos ficam para
+  decisão (PLAYER-RATINGS.md).
+* **Ligação CBF × EA conservadora:** mesma data de nascimento e nome compatível, com candidato único. A regra "só o
+  sobrenome" foi retirada por gerar ligações falsas.
+* **Regras por competição como dado** (`data/competition-rules.ts`), com `confirmed` por divisão. O engine continua
+  com as regras do universo fictício.
+* **Engine travado por teste:** o sha256 das 22 fontes do engine faz parte da suíte.
