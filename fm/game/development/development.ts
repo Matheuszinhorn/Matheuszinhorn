@@ -59,6 +59,13 @@ export interface DevelopmentConfig {
   environmentCore: number;
   /** teto opcional de subidas por temporada (null = sem teto; só para teste de calibração) */
   seasonGainCap: number | null;
+  // ---- campos da DEV-PROTO-0.3 (inertes na 0.2) ----
+  /** peso do nível da DIVISÃO no contexto (0 = só o elenco). Afeta só oportunidade e limite, nunca a força direto. */
+  divisionWeight: number;
+  /** perda máxima por inatividade numa temporada, em pontos (null = sem limite, como na 0.2) */
+  idleSeasonCap: number | null;
+  /** envelhecimento também nas rodadas sem jogar (true na 0.2; false = idade só pesa quando o jogador participa) */
+  agingWhenNotPlayed: boolean;
 }
 
 /** DEV-PROTO-0.2 (calibração de 03/10/2026). Valores em teste; nada aqui é definitivo. */
@@ -79,7 +86,28 @@ export const DEVELOPMENT_PROTO: DevelopmentConfig = Object.freeze({
   goalkeeperGainFactor: 0.75,
   environmentCore: 16,
   seasonGainCap: null,
+  divisionWeight: 0,
+  idleSeasonCap: null,
+  agingWhenNotPlayed: true,
 }) as DevelopmentConfig;
+
+export type Proto03Variant = 'A' | 'B' | 'C';
+/**
+ * DEV-PROTO-0.3 (calibração; não integrada). Mesma fórmula da 0.2 com duas mudanças:
+ * 1) inatividade com limite — A: perda por inatividade de no máximo 1 ponto por temporada; B: no máximo 0,5;
+ *    C: nenhuma perda direta por inatividade e envelhecimento só nas rodadas em que o jogador participa;
+ * 2) contexto = 50% ambiente do elenco + 50% nível da divisão (média dos ambientes dos clubes dela), usado SÓ para
+ *    oportunidade e limite do ganho. A divisão nunca soma força.
+ */
+export function devProto03(variant: Proto03Variant): DevelopmentConfig {
+  return Object.freeze({
+    ...DEVELOPMENT_PROTO,
+    version: `DEV-PROTO-0.3-${variant}`,
+    divisionWeight: 0.5,
+    idleSeasonCap: variant === 'A' ? 1 : variant === 'B' ? 0.5 : 0,
+    agingWhenNotPlayed: variant !== 'C',
+  }) as DevelopmentConfig;
+}
 
 /** Estado de desenvolvimento de um jogador: três números além do histórico (nada de atributos ocultos extras). */
 export interface PlayerDevelopment {
@@ -92,6 +120,8 @@ export interface PlayerDevelopment {
   progress: number;
   /** rodadas seguidas sem jogar (sem contar lesão) */
   idleRounds: number;
+  /** 0.3: perda por inatividade já aplicada na temporada (para o limite por temporada) */
+  idleLoss?: { season: number; points: number };
   history: DevelopmentEvent[];
 }
 
@@ -111,7 +141,15 @@ export interface RoundContext {
   position: DevPosition;
   /** nível do ambiente: média de força dos N mais fortes do elenco atual do clube */
   environmentLevel: number;
+  /** 0.3: nível da divisão do clube (média dos ambientes dos clubes da divisão); ignorado se divisionWeight = 0 */
+  divisionLevel?: number | null;
   evidence: MatchEvidence;
+}
+
+/** Contexto de desenvolvimento: ambiente do elenco, misturado ao nível da divisão quando a configuração pede (0.3). */
+export function contextLevel(ctx: Pick<RoundContext, 'environmentLevel' | 'divisionLevel'>, cfg: DevelopmentConfig = DEVELOPMENT_PROTO): number {
+  if (!cfg.divisionWeight || ctx.divisionLevel === null || ctx.divisionLevel === undefined) return ctx.environmentLevel;
+  return (1 - cfg.divisionWeight) * ctx.environmentLevel + cfg.divisionWeight * ctx.divisionLevel;
 }
 
 /** Decomposição dos pontos de uma rodada (para auditoria e para medir o efeito de cada fator). */
@@ -188,7 +226,8 @@ export function matchPerformance(e: MatchEvidence, position: DevPosition): numbe
 
 /** Pontos de uma rodada (pós-jogo), com a decomposição. */
 export function roundPoints(dev: PlayerDevelopment, ctx: RoundContext, cfg: DevelopmentConfig = DEVELOPMENT_PROTO): RoundBreakdown {
-  const ceiling = developmentCeiling(ctx.environmentLevel, ctx.age, cfg);
+  const env = contextLevel(ctx, cfg);
+  const ceiling = developmentCeiling(env, ctx.age, cfg);
   const e = ctx.evidence;
   const idleRounds = e.played ? 0 : e.injured ? dev.idleRounds : dev.idleRounds + 1;
   const trend = curveAt(cfg.ageTrend, ctx.age);
@@ -202,7 +241,7 @@ export function roundPoints(dev: PlayerDevelopment, ctx: RoundContext, cfg: Deve
     const share = clamp(e.minutes / 90, 0, 1);
     const devPart = share * Math.max(0, trend);
     const perfPart = share * cfg.performanceWeight * perf;
-    opportunity = opportunityFactor(dev.strengthCurrent, ctx.environmentLevel, ceiling, cfg) * (ctx.position === 'GOL' ? cfg.goalkeeperGainFactor : 1);
+    opportunity = opportunityFactor(dev.strengthCurrent, env, ceiling, cfg) * (ctx.position === 'GOL' ? cfg.goalkeeperGainFactor : 1);
     if (opportunity === 0) {
       // sem espaço para crescer (no limite contextual ou acima): o rendimento conta COM SINAL — jogos bons compensam
       // os ruins — e o acumulador não guarda crédito de ganho (developRound). Assim o ambiente fraco não derruba
@@ -214,8 +253,14 @@ export function roundPoints(dev: PlayerDevelopment, ctx: RoundContext, cfg: Deve
       performance = perfPart * opportunity;
     } else performance = devPart + perfPart; // rodada ruim: pesa inteira
   }
-  if (trend < 0) aging = trend * (e.played ? 1 - cfg.agingCompensation * Math.max(0, perf) * clamp(e.minutes / 90, 0, 1) : 1);
-  if (!e.played && !e.injured && idleRounds > cfg.idleRoundsBeforeDecline && ctx.age >= cfg.idleMinAge) idle = -cfg.idleDeclinePerRound;
+  if (trend < 0 && (e.played || cfg.agingWhenNotPlayed)) aging = trend * (e.played ? 1 - cfg.agingCompensation * Math.max(0, perf) * clamp(e.minutes / 90, 0, 1) : 1);
+  if (!e.played && !e.injured && idleRounds > cfg.idleRoundsBeforeDecline && ctx.age >= cfg.idleMinAge) {
+    idle = -cfg.idleDeclinePerRound;
+    if (cfg.idleSeasonCap !== null) {
+      const spent = dev.idleLoss?.season === ctx.season ? dev.idleLoss.points : 0;
+      idle = Math.max(idle, -Math.max(0, cfg.idleSeasonCap - spent));
+    }
+  }
   return { points: r4(age + performance + aging + idle), age: r4(age), performance: r4(performance), aging: r4(aging), idle: r4(idle), opportunity: r4(opportunity), ceiling, idleRounds };
 }
 
@@ -234,12 +279,14 @@ export function developRound(dev: PlayerDevelopment, ctx: RoundContext, cfg: Dev
     const to = clamp(strengthCurrent + step, 1, 50);
     if (to !== strengthCurrent) {
       const reason = step > 0 ? 'evolução: jogou, rendeu e havia espaço no ambiente' : b.idleRounds > cfg.idleRoundsBeforeDecline ? 'queda: muito tempo sem jogar' : b.aging < 0 && b.performance >= 0 ? 'queda: idade' : 'queda: rendimento';
-      event = { season: ctx.season, round: ctx.round, from: strengthCurrent, to, reason, context: { environmentLevel: r4(ctx.environmentLevel), ceiling: b.ceiling, age: ctx.age, windowPoints: progress } };
+      event = { season: ctx.season, round: ctx.round, from: strengthCurrent, to, reason, context: { environmentLevel: r4(contextLevel(ctx, cfg)), ceiling: b.ceiling, age: ctx.age, windowPoints: progress } };
       progress = r4(progress - step);
       strengthCurrent = to;
     }
     // a sobra passa adiante, mas nunca vira um segundo passo
     progress = clamp(progress, -0.99, 0.99);
   }
-  return { ...dev, strengthCurrent, progress, idleRounds: b.idleRounds, history: event ? [...dev.history, event] : dev.history };
+  const next: PlayerDevelopment = { ...dev, strengthCurrent, progress, idleRounds: b.idleRounds, history: event ? [...dev.history, event] : dev.history };
+  if (cfg.idleSeasonCap !== null && b.idle < 0) next.idleLoss = { season: ctx.season, points: r4((dev.idleLoss?.season === ctx.season ? dev.idleLoss.points : 0) - b.idle) };
+  return next;
 }

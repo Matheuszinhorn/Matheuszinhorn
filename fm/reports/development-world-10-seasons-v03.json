@@ -1,0 +1,2272 @@
+{
+ "versions": [
+  {
+   "key": "0.2",
+   "label": "DEV-PROTO-0.2 (referência)",
+   "config": {
+    "version": "DEV-PROTO-0.2",
+    "windowRounds": 5,
+    "seasonRounds": 38,
+    "accumulatorCap": 1.5,
+    "ageTrend": [
+     [
+      18,
+      0.08
+     ],
+     [
+      21,
+      0.07
+     ],
+     [
+      24,
+      0.05
+     ],
+     [
+      27,
+      0.02
+     ],
+     [
+      29,
+      0
+     ],
+     [
+      32,
+      -0.02
+     ],
+     [
+      35,
+      -0.04
+     ],
+     [
+      38,
+      -0.06
+     ]
+    ],
+    "agingCompensation": 0.7,
+    "ceilingMargin": [
+     [
+      20,
+      5
+     ],
+     [
+      24,
+      4
+     ],
+     [
+      27,
+      2
+     ],
+     [
+      30,
+      0
+     ],
+     [
+      33,
+      -2
+     ]
+    ],
+    "ceilingTaper": 3,
+    "opportunity": {
+     "atEnvironment": 0.6,
+     "farBelow": 1,
+     "farBelowGap": 12,
+     "aboveEnvironment": 0.5
+    },
+    "performanceWeight": 0.1,
+    "idleRoundsBeforeDecline": 6,
+    "idleDeclinePerRound": 0.04,
+    "idleMinAge": 23,
+    "goalkeeperGainFactor": 0.75,
+    "environmentCore": 16,
+    "seasonGainCap": null,
+    "divisionWeight": 0,
+    "idleSeasonCap": null,
+    "agingWhenNotPlayed": true
+   }
+  },
+  {
+   "key": "A",
+   "label": "0.3-A: inatividade ≤ −1/temporada",
+   "config": {
+    "version": "DEV-PROTO-0.3-A",
+    "windowRounds": 5,
+    "seasonRounds": 38,
+    "accumulatorCap": 1.5,
+    "ageTrend": [
+     [
+      18,
+      0.08
+     ],
+     [
+      21,
+      0.07
+     ],
+     [
+      24,
+      0.05
+     ],
+     [
+      27,
+      0.02
+     ],
+     [
+      29,
+      0
+     ],
+     [
+      32,
+      -0.02
+     ],
+     [
+      35,
+      -0.04
+     ],
+     [
+      38,
+      -0.06
+     ]
+    ],
+    "agingCompensation": 0.7,
+    "ceilingMargin": [
+     [
+      20,
+      5
+     ],
+     [
+      24,
+      4
+     ],
+     [
+      27,
+      2
+     ],
+     [
+      30,
+      0
+     ],
+     [
+      33,
+      -2
+     ]
+    ],
+    "ceilingTaper": 3,
+    "opportunity": {
+     "atEnvironment": 0.6,
+     "farBelow": 1,
+     "farBelowGap": 12,
+     "aboveEnvironment": 0.5
+    },
+    "performanceWeight": 0.1,
+    "idleRoundsBeforeDecline": 6,
+    "idleDeclinePerRound": 0.04,
+    "idleMinAge": 23,
+    "goalkeeperGainFactor": 0.75,
+    "environmentCore": 16,
+    "seasonGainCap": null,
+    "divisionWeight": 0.5,
+    "idleSeasonCap": 1,
+    "agingWhenNotPlayed": true
+   }
+  },
+  {
+   "key": "B",
+   "label": "0.3-B: inatividade ≤ −0,5/temporada",
+   "config": {
+    "version": "DEV-PROTO-0.3-B",
+    "windowRounds": 5,
+    "seasonRounds": 38,
+    "accumulatorCap": 1.5,
+    "ageTrend": [
+     [
+      18,
+      0.08
+     ],
+     [
+      21,
+      0.07
+     ],
+     [
+      24,
+      0.05
+     ],
+     [
+      27,
+      0.02
+     ],
+     [
+      29,
+      0
+     ],
+     [
+      32,
+      -0.02
+     ],
+     [
+      35,
+      -0.04
+     ],
+     [
+      38,
+      -0.06
+     ]
+    ],
+    "agingCompensation": 0.7,
+    "ceilingMargin": [
+     [
+      20,
+      5
+     ],
+     [
+      24,
+      4
+     ],
+     [
+      27,
+      2
+     ],
+     [
+      30,
+      0
+     ],
+     [
+      33,
+      -2
+     ]
+    ],
+    "ceilingTaper": 3,
+    "opportunity": {
+     "atEnvironment": 0.6,
+     "farBelow": 1,
+     "farBelowGap": 12,
+     "aboveEnvironment": 0.5
+    },
+    "performanceWeight": 0.1,
+    "idleRoundsBeforeDecline": 6,
+    "idleDeclinePerRound": 0.04,
+    "idleMinAge": 23,
+    "goalkeeperGainFactor": 0.75,
+    "environmentCore": 16,
+    "seasonGainCap": null,
+    "divisionWeight": 0.5,
+    "idleSeasonCap": 0.5,
+    "agingWhenNotPlayed": true
+   }
+  },
+  {
+   "key": "C",
+   "label": "0.3-C: sem perda por inatividade; idade só com participação",
+   "config": {
+    "version": "DEV-PROTO-0.3-C",
+    "windowRounds": 5,
+    "seasonRounds": 38,
+    "accumulatorCap": 1.5,
+    "ageTrend": [
+     [
+      18,
+      0.08
+     ],
+     [
+      21,
+      0.07
+     ],
+     [
+      24,
+      0.05
+     ],
+     [
+      27,
+      0.02
+     ],
+     [
+      29,
+      0
+     ],
+     [
+      32,
+      -0.02
+     ],
+     [
+      35,
+      -0.04
+     ],
+     [
+      38,
+      -0.06
+     ]
+    ],
+    "agingCompensation": 0.7,
+    "ceilingMargin": [
+     [
+      20,
+      5
+     ],
+     [
+      24,
+      4
+     ],
+     [
+      27,
+      2
+     ],
+     [
+      30,
+      0
+     ],
+     [
+      33,
+      -2
+     ]
+    ],
+    "ceilingTaper": 3,
+    "opportunity": {
+     "atEnvironment": 0.6,
+     "farBelow": 1,
+     "farBelowGap": 12,
+     "aboveEnvironment": 0.5
+    },
+    "performanceWeight": 0.1,
+    "idleRoundsBeforeDecline": 6,
+    "idleDeclinePerRound": 0.04,
+    "idleMinAge": 23,
+    "goalkeeperGainFactor": 0.75,
+    "environmentCore": 16,
+    "seasonGainCap": null,
+    "divisionWeight": 0.5,
+    "idleSeasonCap": 0,
+    "agingWhenNotPlayed": false
+   }
+  }
+ ],
+ "seed": "elite-dev-world-10",
+ "seasons": 10,
+ "integrated": false,
+ "applied": false,
+ "determinism": {
+  "controlHash": "af11672f38c73766549ff74d1156b85259761b25aded33d85f0c28dbe0318328",
+  "observedHash": "af11672f38c73766549ff74d1156b85259761b25aded33d85f0c28dbe0318328",
+  "identical": true
+ },
+ "totals": {
+  "0.2": {
+   "maxGain": 11,
+   "maxDrop": -22,
+   "up5": 165,
+   "down5": 962,
+   "up10": 1,
+   "down10": 436,
+   "sameSet": -2.3483348334833485,
+   "sameSetN": 1111,
+   "reached50": 2,
+   "reached1": 146
+  },
+  "A": {
+   "maxGain": 11,
+   "maxDrop": -17,
+   "up5": 167,
+   "down5": 935,
+   "up10": 2,
+   "down10": 338,
+   "sameSet": -1.774977497749775,
+   "sameSetN": 1111,
+   "reached50": 0,
+   "reached1": 110
+  },
+  "B": {
+   "maxGain": 11,
+   "maxDrop": -12,
+   "up5": 185,
+   "down5": 819,
+   "up10": 2,
+   "down10": 157,
+   "sameSet": -0.8136813681368137,
+   "sameSetN": 1111,
+   "reached50": 0,
+   "reached1": 57
+  },
+  "C": {
+   "maxGain": 11,
+   "maxDrop": -8,
+   "up5": 259,
+   "down5": 104,
+   "up10": 2,
+   "down10": 0,
+   "sameSet": 1.36993699369937,
+   "sameSetN": 1111,
+   "reached50": 0,
+   "reached1": 2
+  }
+ },
+ "distributions": {
+  "0.2": {
+   "0": {
+    "n": 1920,
+    "media": 25.485416666666666,
+    "mediana": 26,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 117,
+    "b2": 490,
+    "b3": 674,
+    "b4": 545,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "1": {
+    "n": 1920,
+    "media": 25.260416666666668,
+    "mediana": 25,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 132,
+    "b2": 490,
+    "b3": 668,
+    "b4": 535,
+    "b5": 95,
+    "eq50": 2,
+    "eq1": 2
+   },
+   "3": {
+    "n": 1809,
+    "media": 24.4212271973466,
+    "mediana": 25,
+    "p10": 11,
+    "p25": 17,
+    "p75": 32,
+    "p90": 38,
+    "b1": 171,
+    "b2": 471,
+    "b3": 624,
+    "b4": 449,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 20
+   },
+   "5": {
+    "n": 1633,
+    "media": 23.56399265156154,
+    "mediana": 24,
+    "p10": 9,
+    "p25": 16,
+    "p75": 31,
+    "p90": 38,
+    "b1": 197,
+    "b2": 438,
+    "b3": 547,
+    "b4": 356,
+    "b5": 95,
+    "eq50": 2,
+    "eq1": 44
+   },
+   "10": {
+    "n": 1452,
+    "media": 22.18801652892562,
+    "mediana": 22,
+    "p10": 7,
+    "p25": 14,
+    "p75": 30,
+    "p90": 37,
+    "b1": 228,
+    "b2": 403,
+    "b3": 477,
+    "b4": 270,
+    "b5": 74,
+    "eq50": 2,
+    "eq1": 67
+   }
+  },
+  "A": {
+   "0": {
+    "n": 1920,
+    "media": 25.485416666666666,
+    "mediana": 26,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 117,
+    "b2": 490,
+    "b3": 674,
+    "b4": 545,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "1": {
+    "n": 1920,
+    "media": 25.263020833333332,
+    "mediana": 25,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 134,
+    "b2": 488,
+    "b3": 670,
+    "b4": 538,
+    "b5": 90,
+    "eq50": 2,
+    "eq1": 2
+   },
+   "3": {
+    "n": 1809,
+    "media": 24.678275290215588,
+    "mediana": 25,
+    "p10": 11,
+    "p25": 18,
+    "p75": 32,
+    "p90": 38,
+    "b1": 163,
+    "b2": 458,
+    "b3": 633,
+    "b4": 471,
+    "b5": 84,
+    "eq50": 2,
+    "eq1": 19
+   },
+   "5": {
+    "n": 1633,
+    "media": 23.99448867115738,
+    "mediana": 24,
+    "p10": 10,
+    "p25": 17,
+    "p75": 32,
+    "p90": 38,
+    "b1": 170,
+    "b2": 441,
+    "b3": 560,
+    "b4": 380,
+    "b5": 82,
+    "eq50": 1,
+    "eq1": 32
+   },
+   "10": {
+    "n": 1452,
+    "media": 22.643250688705233,
+    "mediana": 22,
+    "p10": 9,
+    "p25": 15,
+    "p75": 30,
+    "p90": 37,
+    "b1": 195,
+    "b2": 416,
+    "b3": 494,
+    "b4": 288,
+    "b5": 59,
+    "eq50": 0,
+    "eq1": 49
+   }
+  },
+  "B": {
+   "0": {
+    "n": 1920,
+    "media": 25.485416666666666,
+    "mediana": 26,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 117,
+    "b2": 490,
+    "b3": 674,
+    "b4": 545,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "1": {
+    "n": 1920,
+    "media": 25.432291666666668,
+    "mediana": 26,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 130,
+    "b2": 483,
+    "b3": 667,
+    "b4": 549,
+    "b5": 91,
+    "eq50": 2,
+    "eq1": 2
+   },
+   "3": {
+    "n": 1809,
+    "media": 25.119402985074625,
+    "mediana": 25,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 141,
+    "b2": 454,
+    "b3": 635,
+    "b4": 493,
+    "b5": 86,
+    "eq50": 2,
+    "eq1": 8
+   },
+   "5": {
+    "n": 1633,
+    "media": 24.66809552969994,
+    "mediana": 25,
+    "p10": 11,
+    "p25": 18,
+    "p75": 32,
+    "p90": 38,
+    "b1": 144,
+    "b2": 426,
+    "b3": 574,
+    "b4": 405,
+    "b5": 84,
+    "eq50": 1,
+    "eq1": 19
+   },
+   "10": {
+    "n": 1452,
+    "media": 23.394628099173552,
+    "mediana": 23,
+    "p10": 10,
+    "p25": 16,
+    "p75": 31,
+    "p90": 37,
+    "b1": 150,
+    "b2": 424,
+    "b3": 511,
+    "b4": 306,
+    "b5": 61,
+    "eq50": 0,
+    "eq1": 22
+   }
+  },
+  "C": {
+   "0": {
+    "n": 1920,
+    "media": 25.485416666666666,
+    "mediana": 26,
+    "p10": 12,
+    "p25": 18,
+    "p75": 33,
+    "p90": 38,
+    "b1": 117,
+    "b2": 490,
+    "b3": 674,
+    "b4": 545,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "1": {
+    "n": 1920,
+    "media": 25.6015625,
+    "mediana": 26,
+    "p10": 13,
+    "p25": 19,
+    "p75": 33,
+    "p90": 38,
+    "b1": 118,
+    "b2": 477,
+    "b3": 673,
+    "b4": 558,
+    "b5": 94,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "3": {
+    "n": 1809,
+    "media": 26.01492537313433,
+    "mediana": 26,
+    "p10": 13,
+    "p25": 19,
+    "p75": 33,
+    "p90": 38,
+    "b1": 108,
+    "b2": 429,
+    "b3": 637,
+    "b4": 536,
+    "b5": 99,
+    "eq50": 2,
+    "eq1": 1
+   },
+   "5": {
+    "n": 1633,
+    "media": 26.045315370483774,
+    "mediana": 26,
+    "p10": 13,
+    "p25": 19,
+    "p75": 33,
+    "p90": 39,
+    "b1": 99,
+    "b2": 388,
+    "b3": 587,
+    "b4": 458,
+    "b5": 101,
+    "eq50": 1,
+    "eq1": 1
+   },
+   "10": {
+    "n": 1452,
+    "media": 25.107438016528924,
+    "mediana": 25,
+    "p10": 13,
+    "p25": 18,
+    "p75": 32,
+    "p90": 38,
+    "b1": 96,
+    "b2": 388,
+    "b3": 522,
+    "b4": 367,
+    "b5": 79,
+    "eq50": 0,
+    "eq1": 2
+   }
+  }
+ },
+ "alerts": [
+  "**0.2** — muitos jogadores chegando a 1: 146.",
+  "**0.2** — deflação generalizada: -2,3 no mesmo conjunto.",
+  "**0.2** — veteranos (34+) caindo rápido: -1,8 por temporada.",
+  "**0.2** — reserva sem minutos perdendo força rápido: -1,6 por temporada.",
+  "**A** — muitos jogadores chegando a 1: 110.",
+  "**A** — deflação generalizada: -1,8 no mesmo conjunto.",
+  "**A** — veteranos (34+) caindo rápido: -1,7 por temporada.",
+  "**A** — reserva sem minutos perdendo força rápido: -1,3 por temporada.",
+  "**B** — muitos jogadores chegando a 1: 57.",
+  "**B** — veteranos (34+) caindo rápido: -1,6 por temporada.",
+  "**C** — inatividade sem nenhuma consequência: 3360 temporadas sem minutos e nenhuma queda (o \"deve perder força\" não é atendido)."
+ ],
+ "cases": [
+  {
+   "label": "1. jovem fraco que vira titular em clube forte (D1)",
+   "id": "ply-0091",
+   "name": "Heitor Xavier",
+   "position": "MEI",
+   "startAge": 18,
+   "base": 30,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 18,
+     "minutes": 843,
+     "apps": 10,
+     "starts": 8,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 30,
+      "A": 30,
+      "B": 30,
+      "C": 30
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 19,
+     "minutes": 942,
+     "apps": 11,
+     "starts": 10,
+     "injuredRounds": 2,
+     "longestInjury": 2,
+     "strength": {
+      "0.2": 30,
+      "A": 31,
+      "B": 31,
+      "C": 31
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 20,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 32,
+      "A": 33,
+      "B": 33,
+      "C": 33
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 21,
+     "minutes": 3101,
+     "apps": 35,
+     "starts": 35,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 34,
+      "A": 34,
+      "B": 34,
+      "C": 35
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 22,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 34,
+      "A": 36,
+      "B": 36,
+      "C": 36
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 23,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 34,
+      "A": 36,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 24,
+     "minutes": 3071,
+     "apps": 35,
+     "starts": 35,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 34,
+      "A": 37,
+      "B": 37,
+      "C": 38
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 25,
+     "minutes": 3227,
+     "apps": 36,
+     "starts": 36,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 34,
+      "A": 37,
+      "B": 37,
+      "C": 38
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-004",
+     "division": 2,
+     "age": 26,
+     "minutes": 3010,
+     "apps": 34,
+     "starts": 34,
+     "injuredRounds": 4,
+     "longestInjury": 3,
+     "strength": {
+      "0.2": 34,
+      "A": 37,
+      "B": 37,
+      "C": 38
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-004",
+     "division": 1,
+     "age": 27,
+     "minutes": 3110,
+     "apps": 35,
+     "starts": 35,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 34,
+      "A": 37,
+      "B": 37,
+      "C": 38
+     }
+    }
+   ]
+  },
+  {
+   "label": "2. jovem fraco que permanece reserva",
+   "id": "ply-0210",
+   "name": "Everton Siqueira",
+   "position": "MEI",
+   "startAge": 17,
+   "base": 23,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-009",
+     "division": 1,
+     "age": 17,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 18,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-009",
+     "division": 1,
+     "age": 19,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 20,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 21,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 22,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 23,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 23,
+     "minutes": 46,
+     "apps": 1,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 22,
+      "A": 22,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 24,
+     "minutes": 122,
+     "apps": 2,
+     "starts": 1,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 21,
+      "A": 22,
+      "B": 23,
+      "C": 23
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 25,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 20,
+      "A": 21,
+      "B": 22,
+      "C": 23
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-009",
+     "division": 2,
+     "age": 26,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 18,
+      "A": 20,
+      "B": 22,
+      "C": 23
+     }
+    }
+   ]
+  },
+  {
+   "label": "3. jogador forte em clube fraco (maior força inicial entre quem começa na D3/D4)",
+   "id": "ply-1273",
+   "name": "Mateus Uchoa Teixeira",
+   "position": "GOL",
+   "startAge": 18,
+   "base": 37,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-054",
+     "division": 3,
+     "age": 18,
+     "minutes": 3253,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 19,
+     "minutes": 2654,
+     "apps": 30,
+     "starts": 30,
+     "injuredRounds": 7,
+     "longestInjury": 4,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 20,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 21,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 22,
+     "minutes": 3309,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 23,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 24,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-037",
+     "division": 1,
+     "age": 25,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-037",
+     "division": 1,
+     "age": 26,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-037",
+     "division": 2,
+     "age": 27,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    }
+   ]
+  },
+  {
+   "label": "4. jogador forte que vai para clube forte (chega à D1 com 38+, até 30 anos)",
+   "id": "ply-0435",
+   "name": "Marcos Freitas Farias",
+   "position": "GOL",
+   "startAge": 18,
+   "base": 44,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 18,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 19,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 20,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 21,
+     "minutes": 3288,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-019",
+     "division": 2,
+     "age": 22,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-019",
+     "division": 2,
+     "age": 23,
+     "minutes": 3233,
+     "apps": 36,
+     "starts": 36,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 24,
+     "minutes": 3136,
+     "apps": 36,
+     "starts": 36,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 25,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 26,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 27,
+     "minutes": 3304,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 44,
+      "A": 44,
+      "B": 44,
+      "C": 44
+     }
+    }
+   ]
+  },
+  {
+   "label": "5. veterano titular",
+   "id": "ply-0289",
+   "name": "Everton Valadares",
+   "position": "GOL",
+   "startAge": 32,
+   "base": 32,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-013",
+     "division": 1,
+     "age": 32,
+     "minutes": 3245,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 32,
+      "A": 32,
+      "B": 32,
+      "C": 32
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-013",
+     "division": 1,
+     "age": 33,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 32,
+      "A": 32,
+      "B": 32,
+      "C": 32
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-013",
+     "division": 1,
+     "age": 34,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 31,
+      "A": 31,
+      "B": 31,
+      "C": 31
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-013",
+     "division": 1,
+     "age": 35,
+     "minutes": 3420,
+     "apps": 38,
+     "starts": 38,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 31,
+      "A": 31,
+      "B": 31,
+      "C": 31
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-013",
+     "division": 1,
+     "age": 36,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 30,
+      "A": 30,
+      "B": 30,
+      "C": 30
+     }
+    }
+   ]
+  },
+  {
+   "label": "6. veterano reserva",
+   "id": "ply-0019",
+   "name": "Henrique Jardim",
+   "position": "MEI",
+   "startAge": 32,
+   "base": 26,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-001",
+     "division": 1,
+     "age": 32,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 24,
+      "A": 25,
+      "B": 25,
+      "C": 26
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-001",
+     "division": 2,
+     "age": 33,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 22,
+      "A": 23,
+      "B": 24,
+      "C": 26
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-001",
+     "division": 3,
+     "age": 34,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 19,
+      "A": 20,
+      "B": 22,
+      "C": 26
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-001",
+     "division": 3,
+     "age": 35,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 16,
+      "A": 18,
+      "B": 20,
+      "C": 26
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-001",
+     "division": 2,
+     "age": 36,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 13,
+      "A": 15,
+      "B": 18,
+      "C": 26
+     }
+    }
+   ]
+  },
+  {
+   "label": "7. transferido de divisão inferior para superior",
+   "id": "ply-0811",
+   "name": "Paulo Valadares",
+   "position": "MEI",
+   "startAge": 18,
+   "base": 42,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-034",
+     "division": 2,
+     "age": 18,
+     "minutes": 3223,
+     "apps": 36,
+     "starts": 36,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 42,
+      "A": 42,
+      "B": 42,
+      "C": 42
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 19,
+     "minutes": 954,
+     "apps": 12,
+     "starts": 9,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 43,
+      "A": 42,
+      "B": 42,
+      "C": 42
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 20,
+     "minutes": 738,
+     "apps": 9,
+     "starts": 8,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 43,
+      "A": 42,
+      "B": 42,
+      "C": 42
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 21,
+     "minutes": 900,
+     "apps": 10,
+     "starts": 10,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 43,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 22,
+     "minutes": 720,
+     "apps": 8,
+     "starts": 8,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 23,
+     "minutes": 1230,
+     "apps": 14,
+     "starts": 12,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 24,
+     "minutes": 794,
+     "apps": 9,
+     "starts": 8,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 25,
+     "minutes": 2070,
+     "apps": 23,
+     "starts": 23,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 26,
+     "minutes": 630,
+     "apps": 7,
+     "starts": 7,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-018",
+     "division": 1,
+     "age": 27,
+     "minutes": 692,
+     "apps": 8,
+     "starts": 7,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 44,
+      "A": 43,
+      "B": 43,
+      "C": 43
+     }
+    }
+   ]
+  },
+  {
+   "label": "8. transferido de divisão superior para inferior",
+   "id": "ply-0173",
+   "name": "Davi Gomes Nogueira",
+   "position": "DEF",
+   "startAge": 23,
+   "base": 38,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-008",
+     "division": 1,
+     "age": 23,
+     "minutes": 3112,
+     "apps": 35,
+     "starts": 35,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-008",
+     "division": 2,
+     "age": 24,
+     "minutes": 2816,
+     "apps": 32,
+     "starts": 32,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-008",
+     "division": 2,
+     "age": 25,
+     "minutes": 2596,
+     "apps": 31,
+     "starts": 31,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 26,
+     "minutes": 2065,
+     "apps": 24,
+     "starts": 24,
+     "injuredRounds": 10,
+     "longestInjury": 7,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 27,
+     "minutes": 2781,
+     "apps": 32,
+     "starts": 32,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 28,
+     "minutes": 2964,
+     "apps": 34,
+     "starts": 34,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 38,
+      "A": 38,
+      "B": 38,
+      "C": 38
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 29,
+     "minutes": 2600,
+     "apps": 31,
+     "starts": 31,
+     "injuredRounds": 1,
+     "longestInjury": 1,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 30,
+     "minutes": 2380,
+     "apps": 29,
+     "starts": 29,
+     "injuredRounds": 2,
+     "longestInjury": 2,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 31,
+     "minutes": 2787,
+     "apps": 32,
+     "starts": 32,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 37,
+      "A": 37,
+      "B": 37,
+      "C": 37
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-036",
+     "division": 2,
+     "age": 32,
+     "minutes": 2851,
+     "apps": 32,
+     "starts": 32,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 36,
+      "A": 36,
+      "B": 36,
+      "C": 37
+     }
+    }
+   ]
+  },
+  {
+   "label": "9. várias temporadas sem jogar",
+   "id": "ply-0434",
+   "name": "Breno Bragança Almeida",
+   "position": "GOL",
+   "startAge": 23,
+   "base": 35,
+   "seasons": [
+    {
+     "season": 1,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 23,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 34,
+      "A": 34,
+      "B": 35,
+      "C": 35
+     }
+    },
+    {
+     "season": 2,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 24,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 33,
+      "A": 33,
+      "B": 34,
+      "C": 35
+     }
+    },
+    {
+     "season": 3,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 25,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 31,
+      "A": 32,
+      "B": 34,
+      "C": 35
+     }
+    },
+    {
+     "season": 4,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 26,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 30,
+      "A": 31,
+      "B": 33,
+      "C": 35
+     }
+    },
+    {
+     "season": 5,
+     "clubId": "clb-019",
+     "division": 2,
+     "age": 27,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 28,
+      "A": 30,
+      "B": 33,
+      "C": 35
+     }
+    },
+    {
+     "season": 6,
+     "clubId": "clb-019",
+     "division": 2,
+     "age": 28,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 27,
+      "A": 29,
+      "B": 32,
+      "C": 35
+     }
+    },
+    {
+     "season": 7,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 29,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 25,
+      "A": 28,
+      "B": 32,
+      "C": 35
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 30,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 23,
+      "A": 27,
+      "B": 31,
+      "C": 35
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 31,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 21,
+      "A": 26,
+      "B": 30,
+      "C": 35
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-019",
+     "division": 1,
+     "age": 32,
+     "minutes": 0,
+     "apps": 0,
+     "starts": 0,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 19,
+      "A": 24,
+      "B": 29,
+      "C": 35
+     }
+    }
+   ]
+  },
+  {
+   "label": "10. retorna após lesão longa",
+   "id": "clb-028-b2032-1",
+   "name": "Davi Duarte",
+   "position": "DEF",
+   "startAge": 18,
+   "base": 26,
+   "seasons": [
+    {
+     "season": 7,
+     "clubId": "clb-028",
+     "division": 1,
+     "age": 18,
+     "minutes": 221,
+     "apps": 3,
+     "starts": 2,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 26,
+      "A": 26,
+      "B": 26,
+      "C": 26
+     }
+    },
+    {
+     "season": 8,
+     "clubId": "clb-028",
+     "division": 1,
+     "age": 19,
+     "minutes": 361,
+     "apps": 5,
+     "starts": 4,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 26,
+      "A": 26,
+      "B": 26,
+      "C": 26
+     }
+    },
+    {
+     "season": 9,
+     "clubId": "clb-028",
+     "division": 2,
+     "age": 20,
+     "minutes": 3330,
+     "apps": 37,
+     "starts": 37,
+     "injuredRounds": 0,
+     "longestInjury": 0,
+     "strength": {
+      "0.2": 28,
+      "A": 28,
+      "B": 28,
+      "C": 28
+     }
+    },
+    {
+     "season": 10,
+     "clubId": "clb-028",
+     "division": 2,
+     "age": 21,
+     "minutes": 2534,
+     "apps": 29,
+     "starts": 29,
+     "injuredRounds": 8,
+     "longestInjury": 8,
+     "strength": {
+      "0.2": 30,
+      "A": 29,
+      "B": 29,
+      "C": 30
+     }
+    }
+   ]
+  }
+ ]
+}

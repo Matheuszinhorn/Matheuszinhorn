@@ -90,3 +90,6 @@ priorizar depois do teste externo.
 * Validação no mundo real (docs/PLAYER-DEVELOPMENT.md, `npm run development:world`): recalibrar antes de integrar —
   perda por inatividade sem limite (146 jogadores chegam a 1; deflação −2,3) e ambiente que não muda com acesso ou
   rebaixamento (é o próprio elenco). Medir também o efeito de volta da força nas partidas (só com aprovação).
+* DEV-PROTO-0.3 (não integrada): divisão como contexto de oportunidade aprovada nos testes; inatividade ainda sem
+  solução — A/B deixam o envelhecimento sem minutos sem limite, C zera a consequência. Próximo teste: limitar a perda
+  total sem participação (inatividade + idade sem jogar) por temporada. Relatório: reports/development-world-10-seasons-v03.md.

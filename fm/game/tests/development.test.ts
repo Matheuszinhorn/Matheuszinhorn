@@ -180,3 +180,53 @@ test('evidência lida de uma rodada real do engine: titulares, minutos, gols e p
   const again = roundResults(simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null)));
   assert.deepStrictEqual(again.map((r) => `${r.homeGoals}-${r.awayGoals}`), roundResults(sim).map((r) => `${r.homeGoals}-${r.awayGoals}`));
 });
+
+// ---------- DEV-PROTO-0.3 (calibração; não integrada) ----------
+
+test('0.3: campos novos são inertes na 0.2 (a 0.2 continua exatamente igual)', async () => {
+  const { contextLevel } = await import('../development/development.ts');
+  assert.equal(DEVELOPMENT_PROTO.divisionWeight, 0);
+  assert.equal(DEVELOPMENT_PROTO.idleSeasonCap, null);
+  assert.equal(DEVELOPMENT_PROTO.agingWhenNotPlayed, true);
+  assert.equal(contextLevel({ environmentLevel: 30, divisionLevel: 40 }, DEVELOPMENT_PROTO), 30);
+});
+
+test('0.3: inatividade com limite por temporada (A ≤ 1, B ≤ 0,5) e C sem perda nem idade sem jogar', async () => {
+  const { devProto03, roundPoints } = await import('../development/development.ts');
+  const idleTotal = (cfg: typeof DEVELOPMENT_PROTO, age: number) => {
+    let d = newDevelopment('i', 30);
+    let idle = 0;
+    let aging = 0;
+    for (let round = 1; round <= 38; round++) {
+      const ctx = { season: 1, round, age, position: 'MEI' as const, environmentLevel: 30, divisionLevel: 30, evidence: bench };
+      const b = roundPoints(d, ctx, cfg);
+      idle += b.idle;
+      aging += b.aging;
+      d = developRound(d, ctx, cfg);
+    }
+    return { idle, aging, d };
+  };
+  assert.ok(idleTotal(devProto03('A'), 27).idle >= -1 - 1e-9);
+  assert.ok(idleTotal(devProto03('B'), 27).idle >= -0.5 - 1e-9);
+  assert.ok(idleTotal(DEVELOPMENT_PROTO, 27).idle < -1, '0.2 sem limite');
+  const c = idleTotal(devProto03('C'), 35);
+  assert.equal(c.idle, 0);
+  assert.equal(c.aging, 0);
+  assert.equal(c.d.strengthCurrent, 30);
+  assert.ok(idleTotal(devProto03('B'), 35).aging < 0, 'A e B mantêm a idade para quem não joga');
+});
+
+test('0.3: divisão é só oportunidade — sem minutos nada sobe; com minutos, divisão mais forte dá mais espaço; nunca muda a força na hora', async () => {
+  const { devProto03, roundPoints } = await import('../development/development.ts');
+  const cfg = devProto03('B');
+  const d = newDevelopment('x', 23);
+  const ctx = (divisionLevel: number, evidence: MatchEvidence) => ({ season: 1, round: 1, age: 22, position: 'ATA' as const, environmentLevel: 20, divisionLevel, evidence });
+  assert.equal(roundPoints(d, ctx(40, bench), cfg).points, 0, 'divisão forte sem minutos: zero');
+  assert.ok(roundPoints(d, ctx(40, titular(1)), cfg).points > roundPoints(d, ctx(16, titular(1)), cfg).points);
+  // força igual logo após trocar de contexto (D4 → D1)
+  const after = developRound(d, ctx(40, titular(1)), cfg);
+  assert.equal(after.strengthCurrent, 23);
+  let s = d;
+  for (let round = 1; round <= 38; round++) s = developRound(s, { ...ctx(40, titular(round % 2)), round }, cfg);
+  assert.ok(s.strengthCurrent > 23 && s.strengthCurrent <= 27, `gradual: ${s.strengthCurrent}`);
+});

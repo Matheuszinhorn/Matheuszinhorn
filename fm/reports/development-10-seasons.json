@@ -77,7 +77,10 @@
   "idleMinAge": 23,
   "goalkeeperGainFactor": 0.75,
   "environmentCore": 16,
-  "seasonGainCap": null
+  "seasonGainCap": null,
+  "divisionWeight": 0,
+  "idleSeasonCap": null,
+  "agingWhenNotPlayed": true
  },
  "note": "partidas sintéticas com padrões fixos; pontos de desenvolvimento por componente somados por temporada",
  "checks": [

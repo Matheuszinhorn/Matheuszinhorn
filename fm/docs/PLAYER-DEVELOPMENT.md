@@ -1,8 +1,8 @@
 # Evolução contextual de força — PlayerDevelopment (PROJETO EM CALIBRAÇÃO)
 
-> **Última etapa: validação no mundo real do engine (0.3), com a fórmula DEV-PROTO-0.2 sem mudanças.**
-> Resultado: os princípios se mantêm, mas há dois problemas de calibração (deflação pelo banco e ambiente que não
-> enxerga a divisão). Ver [Validação no mundo real](#validação-no-mundo-real-do-engine-03).
+> **Última etapa: [Validação DEV-PROTO-0.3 — Mundo Real](#validação-dev-proto-03--mundo-real).**
+> **DEV-PROTO-0.3 continua NÃO integrada ao jogo.** Nenhuma das três variantes de inatividade resolveu sozinha os
+> dois lados do problema. A divisão como oportunidade funcionou como pedido.
 
 > **Status: projeto e simulação. Nada implementado no jogo.**
 > - O protótipo `game/development/development.ts` (versão **DEV-PROTO-0.2**) não é importado por nenhum módulo do
@@ -17,7 +17,8 @@
 | `scripts/simulate-development.ts` (`npm run development:sim`) | Casos A–E, perfis e exploits → `reports/development-simulation.md` |
 | `scripts/simulate-development-world.ts` (`npm run development:world`) | Validação em 10 temporadas reais do universo fictício → `reports/development-world-10-seasons.md` e `.json` |
 | `game/development/evidence.ts` | Leitura (só leitura) da evidência de cada partida a partir do `MatchState` do engine |
-| `game/tests/development.test.ts` | 16 testes de invariantes |
+| `scripts/simulate-development-world-v03.ts` (`npm run development:world03`) | Validação da 0.3 (variantes A/B/C + 0.2) no mundo real → `reports/development-world-10-seasons-v03.md` e `.json` |
+| `game/tests/development.test.ts` | 19 testes de invariantes |
 
 ## Princípios aprovados
 
@@ -335,3 +336,220 @@ A DEV-PROTO-0.2 **sobreviveu em parte**:
   jogadores em 1 vêm quase toda da regra de inatividade, e o ambiente não reage à divisão.
 - **Antes de qualquer integração:** recalibrar esses dois pontos (nova versão, por exemplo DEV-PROTO-0.3) e repetir
   esta mesma validação.
+
+## Validação DEV-PROTO-0.3 — Mundo Real
+
+> **DEV-PROTO-0.3 continua NÃO integrada ao jogo.** Nada mudou no Engine 0.2.0, nos saves, na gameplay, no
+> calendário, no universo fictício ou na força base. Relatório completo: `reports/development-world-10-seasons-v03.md`
+> (`npm run development:world03`).
+
+### 1. Metodologia
+
+- **Mesmo método da validação anterior:**
+  - universo fictício, seed `elite-dev-world-10`, carreira gerenciada sem decisões manuais;
+  - 10 temporadas e 15.200 partidas reais do Engine 0.2.0;
+  - gestão da CPU, envelhecimento, aposentadoria aos 37, acesso e rebaixamento, transferências da CPU e lesões do
+    jogo.
+- **Mundos:**
+  - **controle** (nenhuma camada observando);
+  - observadores sobre as mesmas partidas: **0.2** (referência), **0.3-A**, **0.3-B** e **0.3-C**.
+- **Placares:** o hash dos 15.200 é idêntico entre o controle e os observados (`af11672f…`). A força dos
+  observadores **não volta ao engine**.
+- **Limitação registrada:** não há efeito de volta (strengthCurrent → engine → novo rendimento → novo
+  desenvolvimento). As variantes são comparadas com os mesmos resultados de partida.
+
+### 2. Variantes testadas
+
+Todas com a fórmula da 0.2. Elas mudam só a inatividade e o contexto.
+
+| Variante | Perda por inatividade | Idade para quem não joga | Contexto |
+|---|---|---|---|
+| 0.2 (referência) | −0,04/rodada após 6 sem jogar, sem limite | sim | só o elenco |
+| 0.3-A | idem, no máximo −1 por temporada | sim | 50% elenco + 50% divisão |
+| 0.3-B | idem, no máximo −0,5 por temporada | sim | 50% elenco + 50% divisão |
+| 0.3-C | nenhuma perda direta | não: a idade só pesa quando o jogador participa | 50% elenco + 50% divisão |
+
+**Nível da divisão** = média dos ambientes (os 16 mais fortes de cada elenco) dos clubes da divisão, recalculado a
+cada rodada. Ele entra só na oportunidade e no limite do ganho; nunca soma força.
+
+### 3–5. Resultados, comparação com a 0.2 e distribuição
+
+| 10 temporadas | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| Variação média do mesmo conjunto (1.111 jogadores) | −2,3 | −1,8 | −0,8 | +1,4 |
+| Chegaram a 1 | 146 | 110 | 57 | 2 |
+| Perderam 10 ou mais | 436 | 338 | 157 | 0 |
+| Perderam 5 ou mais | 962 | 935 | 819 | 104 |
+| Ganharam 5 ou mais / 10 ou mais | 165 / 1 | 167 / 2 | 185 / 2 | 259 / 2 |
+| Maior queda / maior ganho | −22 / +11 | −17 / +11 | −12 / +11 | −8 / +11 |
+| Chegaram a 50 | 2 | 0 | 0 | 0 |
+
+Distribuição da força atual (jogadores em clube). Início: média 25,5, mediana 26, P10 12, P90 38.
+
+| | Média (1 / 3 / 5 / 10 temporadas) | Após 10: mediana · P10 · P25 · P75 · P90 | Após 10: 1–10 · 11–20 · 21–30 · 31–40 · 41–50 · =50 |
+|---|---|---|---|
+| 0.2 | 25,3 / 24,4 / 23,6 / 22,2 | 22 · 7 · 14 · 30 · 37 | 228 · 403 · 477 · 270 · 74 · 2 |
+| A | 25,3 / 24,7 / 24,0 / 22,6 | 22 · 9 · 15 · 30 · 37 | 195 · 416 · 494 · 288 · 59 · 0 |
+| B | 25,4 / 25,1 / 24,7 / 23,4 | 23 · 10 · 16 · 31 · 37 | 150 · 424 · 511 · 306 · 61 · 0 |
+| C | 25,6 / 26,0 / 26,0 / 25,1 | 25 · 13 · 18 · 32 · 38 | 96 · 388 · 522 · 367 · 79 · 0 |
+
+A base do mundo (strengthBase de quem está em clube) também cai, de 25,5 para 23,6 em 10 temporadas, porque a base
+que entra é mais jovem e fraca. Por isso a comparação justa é a do mesmo conjunto.
+
+### 6. Por idade (variação média por temporada)
+
+| Idade | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| 18–20 | +0,6 | +0,6 | +0,6 | +0,6 |
+| 21–23 | +0,4 | +0,4 | +0,5 | +0,5 |
+| 24–27 | −0,2 | −0,1 | 0,0 | +0,2 |
+| 28–30 | −0,4 | −0,3 | −0,2 | 0,0 |
+| 31–33 | −1,0 | −0,9 | −0,8 | −0,2 |
+| 34–36 | −1,8 (91% caem) | −1,7 | −1,6 | −0,5 (39% caem) |
+
+Jovens não evoluem rápido demais em nenhuma variante: no máximo +3 numa temporada e +11 em 10 temporadas.
+
+### 7. Por utilização (variação média por temporada)
+
+| Uso | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| Titular frequente (≥ 70% dos minutos) | 0,0 | 0,0 | 0,0 | +0,1 |
+| Titular parcial (40–70%) | −0,2 | −0,2 | −0,2 | +0,1 |
+| Reserva (> 0 e < 40%) | −0,8 | −0,8 | −0,6 | 0,0 |
+| Zero minutos | −1,6 | −1,3 | −0,9 | 0,0 (nenhuma queda) |
+
+527 jogadores passaram 3 ou mais temporadas sem nenhum minuto. Variação total média (entre parênteses, o pior caso):
+
+| Temporadas sem jogar | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| 3–4 | −8,3 (−19) | −7,1 (−16) | −5,2 (−12) | +0,3 (−5) |
+| 5–7 | −12,3 (−21) | −10,3 (−17) | −7,3 (−12) | +0,1 (−2) |
+| 8–10 | −14,4 (−22) | −11,3 (−17) | −7,5 (−12) | 0,0 (0) |
+
+**"Um jogador que não joga perde força, mas essa perda destrói a carreira?"**
+
+| Variante | Resposta |
+|---|---|
+| A | **Sim, ainda destrói** (110 chegam a 1). O limite de −1 vale só para a inatividade; a idade continua pesando no banco sem limite. |
+| B | **Ainda pesa muito para veteranos** (−1,6 por temporada aos 34+) e para longas inatividades (−7,5 em média com 8–10 temporadas paradas). |
+| C | **Não destrói**, mas a inatividade **fica sem consequência nenhuma** (0 queda em 3.360 temporadas sem minutos). Não atende "deve perder força". |
+
+### 8. Por divisão (efeito isolado no titular)
+
+Para o titular, a inatividade não pesa. A diferença entre a 0.2 e as variantes da 0.3 vem do contexto da divisão.
+
+| Titulares frequentes | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| 1ª temporada após promoção (% que subiu) | −0,1 (17%) | 0,0 (22%) | 0,0 (23,5%) | +0,1 (25%) |
+| 1ª temporada após rebaixamento (% que subiu) | 0,0 (18%) | −0,1 (12%) | −0,1 (13%) | 0,0 (16%) |
+| Titulares até 27 anos, D1 → D4 | +0,5 em todas | +0,5 | +0,5 | +0,6 |
+
+- **Promoção:** com a divisão no contexto, a chance de subir vai de 17% para 22–25%.
+- **Rebaixamento:** a chance de subir cai de 18% para 12–16%. Ninguém perde força por isso; a perda vem só da
+  inatividade.
+- **D1 sem minutos:** 853 temporadas, **0 subidas** em todas as variantes. Divisão superior não dá força a quem
+  não joga.
+
+### 9. Transferências
+
+Todas as 4.311 mudanças de clube ou de divisão chegaram com a mesma força em todas as variantes: 0 mudanças na
+1ª rodada. Força antes → logo depois · evolução após 1 / 3 / 5 temporadas:
+
+| Movimento | n | 0.2 | B | C |
+|---|---:|---|---|---|
+| Transferência D4 → D3 | 6 | 24,0 → 24,0 · +0,5 / +2,0 / +2,5 | 24,0 → 24,0 · +0,3 / +1,2 / +2,3 | 24,2 → 24,2 · +0,2 / +1,6 / +2,0 |
+| Transferência D3 → D2 | 15 | 33,1 → 33,1 · −0,1 / −0,8 / −2,1 | 33,0 → 33,0 · 0,0 / −0,2 / −0,8 | 33,2 → 33,2 · 0,0 / +0,1 / 0,0 |
+| Transferência D2 → D1 | 16 | 40,8 → 40,8 · 0,0 / −0,6 / −1,1 | 40,5 → 40,5 · 0,0 / −0,4 / −1,0 | 40,7 → 40,7 · 0,0 / +0,1 / −0,3 |
+| Transferência D1 → D2 e D1 → D4 | 0 | **nenhum caso no mundo** (a CPU não vende para baixo) | | |
+
+O detalhamento por variante, incluindo a A, está no relatório. Promoções e rebaixamentos (cerca de 700 jogadores por
+par de divisões) seguem o mesmo padrão: a força é igual na chegada, e a evolução depois depende do uso.
+
+### 10. Lesões (variação média por temporada)
+
+| | 0.2 | A | B | C |
+|---|---:|---:|---:|---:|
+| Sem lesão | −0,6 | −0,5 | −0,4 | 0,0 |
+| Lesão curta | 0,0 | 0,0 | 0,0 | +0,1 |
+| Lesão longa (8+ rodadas) | −0,1 | −0,2 | −0,1 | 0,0 |
+
+A lesão só interrompe a evolução. Exemplo: Davi Duarte (caso 10) teve 8 rodadas lesionado aos 21 anos e terminou com
+29–30.
+
+### 11. Casos individuais (reais)
+
+Trajetórias completas por temporada no relatório. Destaques:
+
+- **1. Jovem fraco titular na D1:** Heitor Xavier, MEI, 18 anos, 30.
+  - 0.2: 30 → 34.
+  - A e B: 30 → 37.
+  - C: 30 → 38.
+  - Com a divisão no contexto, cresce mais e de forma gradual: no máximo +2 por temporada.
+- **2. Jovem fraco que fica reserva:** Everton Siqueira, 23. Fica em 23 até os 22 anos em todas as variantes. Depois
+  vai a 18 (0.2), 20 (A), 22 (B) ou 23 (C).
+- **3. Forte em clube fraco:** Mateus Uchoa Teixeira, goleiro, 37 na D3. Estável em 37 por 10 temporadas em todas as
+  variantes; o ambiente fraco não o derruba.
+- **4. Forte em clube forte:** Marcos Freitas Farias, goleiro, 44. Estável em 44 em todas.
+- **5. Veterano titular:** Everton Valadares, 32 → 30 dos 32 aos 36 anos, igual em todas.
+- **6. Veterano reserva sem minutos:** Henrique Jardim, 26 (dos 32 aos 36 anos).
+  - 0.2: → 13.
+  - A: → 15.
+  - B: → 18.
+  - C: → 26.
+- **7. Transferido para cima:** Paulo Valadares, 42, D2 → D1. Vira reserva e termina com 43–44.
+- **8. Para baixo (pelo rebaixamento do clube):** Davi Gomes Nogueira, 38. Fica em 38 e depois cai a 36–37 com a
+  idade (30+).
+- **9. Dez temporadas sem jogar:** Breno Bragança Almeida, goleiro, 35.
+  - 0.2: → 19.
+  - A: → 24.
+  - B: → 29.
+  - C: → 35.
+- **10. Volta de lesão longa:** Davi Duarte, 26 → 29/30.
+
+### 12. Alertas (sinalizados, não corrigidos)
+
+- **0.2:**
+  - 146 jogadores chegam a 1;
+  - deflação de −2,3;
+  - veteranos (34+) caem −1,8 por temporada;
+  - quem não joga cai −1,6 por temporada.
+- **A:**
+  - 110 chegam a 1;
+  - deflação de −1,8;
+  - veteranos caem −1,7 por temporada;
+  - quem não joga cai −1,3 por temporada.
+- **B:**
+  - 57 chegam a 1;
+  - veteranos caem −1,6 por temporada.
+- **C:** inatividade sem nenhuma consequência (3.360 temporadas sem minutos, nenhuma queda).
+- **Nenhuma variante teve:**
+  - jogador evoluindo sem minutos;
+  - ganho de força por transferência ou por estar na D1 sem jogar;
+  - excesso de jogadores em 50;
+  - inflação acima de +2;
+  - jovens rápidos demais;
+  - jogador forte destruído pelo ambiente.
+
+### 13. Limitações
+
+- **Sem efeito de volta da força nas partidas:** todos os mundos usam os mesmos placares.
+- **Poucas transferências reais:** 86 entre clubes em 10 temporadas, nenhuma para divisão inferior. O efeito da
+  divisão foi medido principalmente via acesso e rebaixamento.
+- **Uma seed só.** A aposentadoria aos 37 (do jogo) limita a análise de veteranos.
+
+### 14. Recomendação técnica
+
+1. **Manter a divisão como contexto de oportunidade (peso 0,5).** Ela fez o que se pediu:
+   - mais chance de evolução para titulares de clubes promovidos;
+   - nenhum ganho para quem não joga;
+   - nenhuma mudança de força na transferência ou na promoção;
+   - nenhuma inflação.
+2. **Nenhuma das três variantes de inatividade deve virar definitiva.**
+   - A e B ainda deixam o **envelhecimento sem minutos** sem limite, e é ele que derruba veteranos e reservas
+     antigos.
+   - C elimina qualquer consequência.
+3. **Próximo teste sugerido** (variante nova, só com evidência e sem integrar): limitar a **perda total sem
+   participação** (inatividade + idade nas rodadas sem jogar) a cerca de −0,5 a −1 por temporada, mantendo o
+   envelhecimento normal para quem joga. Objetivo: quem não joga perde algo todo ano, e ninguém chega a 1 só por
+   ficar no banco.
+4. **Antes de integrar:** medir o efeito de volta (com aprovação, porque muda placares) e testar mais seeds.
