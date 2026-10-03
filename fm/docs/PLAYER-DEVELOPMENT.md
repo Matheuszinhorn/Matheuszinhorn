@@ -628,3 +628,80 @@ Faixas com "a" ou "…" vão da preservação A à C.
 
   Só existem até os 36 no jogo, por causa da aposentadoria aos 37.
 - **Sem efeito de volta da força nas partidas;** uma seed só.
+
+## Teste de feedback — Temporada 1
+
+> **DEV-INTEGRATION-0.1 — teste de integração EXPERIMENTAL.** Não é integração oficial. Nada entra no produto, nos
+> saves, no gameplay, no calendário ou no deploy. Engine 0.2.0 intocado. Relatório completo:
+> `reports/development-feedback-season-01.md`; dados para reproduzir: `reports/development-feedback-season-01.json`;
+> comando: `npm run development:feedback1` (~1,5 min, roda o experimento duas vezes).
+
+**Montagem**
+
+- Candidata: DEV-PROTO-0.4-B (`devProto04('B', 'B')`):
+  - limite conjunto −0,75 por temporada sem participação;
+  - preservação parcial;
+  - divisão como oportunidade;
+  - sem piso de strengthBase;
+  - curva de idade inalterada.
+- Dois mundos com a mesma seed (`elite-dev-world-10`), universo, calendário, carreira sem decisões manuais e 1.520
+  partidas cada:
+  - **Controle:** strengthBase → Engine 0.2.0. Usa `evolution: false`, então a força fica fixa.
+  - **Desenvolvimento:** strengthBase → DEV-PROTO-0.4-B → strengthCurrent → Engine 0.2.0.
+- Camada de composição: `game/development/feedback.ts`. Nenhum código do produto a importa (há teste para isso).
+  - `stepDevelopment` lê as partidas já jogadas.
+  - `withDevelopedStrength` devolve o mundo trocando só `Player.strength`.
+  - Escalação, chances, conversão, RNG, gols, cartões, lesões, placares e calendário continuam no engine e no jogo.
+
+**Divergências**
+
+Nenhuma além de strengthCurrent. Ficaram idênticos:
+
+- o universo inicial;
+- calendário, seeds e mandos das 38 rodadas;
+- o mundo inteiro e os placares até a 1ª mudança real de força (rodada 20);
+- identidade, idade, posição e temperamento dos jogadores;
+- as divisões.
+
+A composição só alterou a força em todas as rodadas. Efeitos derivados (esperados, porque a escalação automática
+ordena por força):
+
+- 31 placares diferentes em 1.520, o primeiro na rodada 21;
+- 257 jogadores com condição diferente no fim;
+- 28 clubes com caixa diferente;
+- nenhuma transferência diferente.
+
+**Resultado (1 temporada)**
+
+- **Desenvolvimento:**
+  - 350 de 1.920 jogadores mudaram a força (255 subiram, 95 caíram), magnitude média 1,05;
+  - média 25,49 → 25,58; mediana igual; P10 12 → 13; P90 igual;
+  - maior ganho +2, maior queda −2;
+  - ninguém chegou a 50 ou a 1.
+- **Engine (Controle → Experimental):**
+  - gols por partida 2,746 → 2,747;
+  - conversão 35,5% → 35,5%;
+  - vitória do favorito 47,1% → 46,6%, do azarão 28,6% → 28,7%;
+  - placares típicos e 4+/5+/7+ dentro de ±0,3 p.p., também por divisão.
+- **Divisões:**
+  - todas sobem cerca de +0,1;
+  - as distâncias ficam estáveis (D1−D4: 19,26 → 19,29);
+  - não divergem nem convergem.
+- **Feedback:**
+  - a variação por janela cresce até a rodada 25 e depois cai (0,02 · 0,03 · 0,03 · 0,01 · 0,00);
+  - os 4 primeiros da tabela não ganham mais que os 4 últimos (diferença entre −0,05 e +0,06);
+  - não há sinal de retroalimentação positiva.
+- **Casos:**
+  - o jovem fraco titular da D1 sobe +1;
+  - os demais não mudam em uma temporada: jovem reserva sem minutos, jovem forte da D4 já no limite contextual,
+    veteranos (limite conjunto < 1) e estrela 50;
+  - não houve transferido entre divisões, porque a CPU só transfere e o acesso/rebaixamento só acontece na virada.
+- **Critérios de segurança:** nenhum disparou.
+- **Determinismo:** duas execuções completas com hashes iguais (placares dos dois mundos, evolução e relatório).
+
+**Limites do teste**
+
+- Uma temporada e uma seed.
+- A força só muda a partir da rodada 20, com ±1 por janela, então o efeito de volta é pequeno por construção.
+- Sem virada de temporada (envelhecimento, aposentadoria, acesso, mercado).
+- **Não avançar para 10 temporadas sem decisão do responsável.**

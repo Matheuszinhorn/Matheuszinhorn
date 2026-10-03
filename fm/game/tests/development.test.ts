@@ -100,7 +100,7 @@ test('protótipo isolado: nada em engine/, game/ (fora de development/) ou app/ 
     }
   };
   for (const d of ['engine', 'game', 'app']) walk(d);
-  for (const f of files) assert.ok(!readFileSync(join(ROOT, f), 'utf8').includes('development/development'), f);
+  for (const f of files) for (const m of ['development/development', 'development/feedback', 'development/evidence']) assert.ok(!readFileSync(join(ROOT, f), 'utf8').includes(m), `${f} importa ${m}`);
 });
 
 // ---------- calibração DEV-PROTO-0.2 ----------
@@ -280,4 +280,38 @@ test('0.4: preservação nunca dá +1 no limite contextual; só guarda reserva (
     if (p === 'A') assert.ok(d.progress <= 0);
     if (p === 'B') assert.ok(d.progress <= 0.5 + 1e-9);
   }
+});
+
+// ---------- DEV-INTEGRATION-0.1 (teste de feedback experimental; não integrado) ----------
+
+test('feedback: a composição só troca Player.strength por strengthCurrent; o resto do mundo e o calendário ficam idênticos', async () => {
+  const { createRound, roundResults, simulateRound } = await import('../../engine/index.ts');
+  const { careerOffers } = await import('../career.ts');
+  const { newManagedCareer } = await import('../manager/actions.ts');
+  const { finishManagedRound, planManagedRound } = await import('../manager/flow.ts');
+  const { devProto04 } = await import('../development/development.ts');
+  const { stepDevelopment, withDevelopedStrength } = await import('../development/feedback.ts');
+  const cfg = devProto04('B', 'B');
+  const c0 = newManagedCareer('dev-feedback', 'T', careerOffers('dev-feedback')[0]);
+  const plan = planManagedRound(c0);
+  const sim = simulateRound(createRound(plan.roundId, plan.seed, plan.fixtures, null));
+  const frozenWorld = JSON.stringify(c0.world);
+  const devs = stepDevelopment(new Map(), c0.world, sim.matches, 1, 1, cfg);
+  assert.equal(JSON.stringify(c0.world), frozenWorld, 'stepDevelopment não altera o mundo');
+  assert.deepStrictEqual([...stepDevelopment(new Map(), c0.world, sim.matches, 1, 1, cfg)], [...devs], 'determinístico');
+  for (const p of Object.values(c0.world.players)) if (p.clubId) assert.equal(devs.get(p.id)!.strengthBase, p.strength, 'strengthBase = força no 1º encontro');
+  const c1 = finishManagedRound(c0, roundResults(sim), sim.matches, { evolution: false }).career;
+  // rodada 1: nada muda ainda → a composição devolve o mesmo mundo
+  assert.equal(withDevelopedStrength(c1.world, devs), c1.world);
+  // força alterada à mão: só strength muda, e só nesses jogadores
+  const ids = Object.keys(c1.world.players).filter((id) => devs.has(id)).slice(0, 3);
+  const forced = new Map(devs);
+  for (const id of ids) forced.set(id, { ...forced.get(id)!, strengthCurrent: Math.min(50, forced.get(id)!.strengthCurrent + 1) });
+  const w = withDevelopedStrength(c1.world, forced);
+  const mask = (x: typeof w) => JSON.stringify({ ...x, players: Object.fromEntries(Object.entries(x.players).map(([id, p]) => [id, { ...p, strength: 0 }])) });
+  assert.equal(mask(w), mask(c1.world), 'nada além de strength muda');
+  for (const id of Object.keys(w.players)) assert.equal(w.players[id].strength, ids.includes(id) ? forced.get(id)!.strengthCurrent : c1.world.players[id].strength);
+  // o calendário da rodada seguinte é o mesmo com e sem a composição (seed, partidas, mandos)
+  const key = (p: ReturnType<typeof planManagedRound>) => `${p.roundId}|${p.seed}|${p.fixtures.map((f) => `${f.matchId}:${f.home.club.id}-${f.away.club.id}`).join(',')}`;
+  assert.equal(key(planManagedRound({ ...c1, world: w })), key(planManagedRound(c1)));
 });
