@@ -545,23 +545,14 @@
   },
   "birthDate": "2002-01-02",
   "externalIds": {
-   "cbf": "976495",
-   "eaFc": "269913"
+   "cbf": "976495"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "269913",
-   "overall": 68,
-   "sourcePosition": "LM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 976495 × EA 269913: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -914,23 +905,14 @@
   },
   "birthDate": "1998-09-12",
   "externalIds": {
-   "cbf": "943842",
-   "eaFc": "248191"
+   "cbf": "943842"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "248191",
-   "overall": 73,
-   "sourcePosition": "CDM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943842 × EA 248191: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -1190,23 +1172,14 @@
   },
   "birthDate": "2003-05-14",
   "externalIds": {
-   "cbf": "943523",
-   "eaFc": "263397"
+   "cbf": "943523"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "263397",
-   "overall": 70,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943523 × EA 263397: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -1261,23 +1234,14 @@
   },
   "birthDate": "1998-02-18",
   "externalIds": {
-   "cbf": "943826",
-   "eaFc": "246055"
+   "cbf": "943826"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "246055",
-   "overall": 75,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943826 × EA 246055: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -1363,23 +1327,14 @@
   },
   "birthDate": "2000-09-29",
   "externalIds": {
-   "cbf": "978179",
-   "eaFc": "272951"
+   "cbf": "978179"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "272951",
-   "overall": 77,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 978179 × EA 272951: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -1558,23 +1513,14 @@
   },
   "birthDate": "1993-03-05",
   "externalIds": {
-   "cbf": "324122",
-   "eaFc": "209297"
+   "cbf": "324122"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "209297",
-   "overall": 80,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 324122 × EA 209297: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -1843,7 +1789,7 @@
   "nickname": "Leonardo",
   "displayName": "Leonardo",
   "clubId": "br-atletico-mg",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 30,
   "nationality": null,
@@ -1857,21 +1803,10 @@
   },
   "birthDate": "1996-07-17",
   "externalIds": {
-   "cbf": "355960",
-   "eaFc": "233926"
+   "cbf": "355960"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "233926",
-   "overall": 75,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 355960 × EA 233926: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -2158,23 +2093,14 @@
   },
   "birthDate": "1998-04-08",
   "externalIds": {
-   "cbf": "396433",
-   "eaFc": "251573"
+   "cbf": "396433"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "251573",
-   "overall": 78,
-   "sourcePosition": "LB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 396433 × EA 251573: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -2345,23 +2271,14 @@
   },
   "birthDate": "2005-08-26",
   "externalIds": {
-   "cbf": "945377",
-   "eaFc": "278725"
+   "cbf": "945377"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "278725",
-   "overall": 65,
-   "sourcePosition": "CDM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 945377 × EA 278725: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -2563,23 +2480,14 @@
   },
   "birthDate": "2003-09-19",
   "externalIds": {
-   "cbf": "973565",
-   "eaFc": "269176"
+   "cbf": "973565"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "269176",
-   "overall": 71,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 973565 × EA 269176: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -2955,23 +2863,14 @@
   },
   "birthDate": "2004-07-14",
   "externalIds": {
-   "cbf": "943518",
-   "eaFc": "71400"
+   "cbf": "943518"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "71400",
-   "overall": 64,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943518 × EA 71400: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -2995,23 +2894,14 @@
   },
   "birthDate": "1992-02-29",
   "externalIds": {
-   "cbf": "974398",
-   "eaFc": "215251"
+   "cbf": "974398"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "215251",
-   "overall": 76,
-   "sourcePosition": "GK",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 974398 × EA 215251: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -3310,23 +3200,14 @@
   },
   "birthDate": "2001-02-20",
   "externalIds": {
-   "cbf": "973366",
-   "eaFc": "271438"
+   "cbf": "973366"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "271438",
-   "overall": 68,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 973366 × EA 271438: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -3839,7 +3720,7 @@
   "nickname": "Arthur",
   "displayName": "Arthur",
   "clubId": "br-botafogo",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 25,
   "nationality": null,
@@ -3853,21 +3734,10 @@
   },
   "birthDate": "2001-01-29",
   "externalIds": {
-   "cbf": "526215",
-   "eaFc": "74871"
+   "cbf": "526215"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "74871",
-   "overall": 74,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 526215 × EA 74871: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -3958,7 +3828,7 @@
   "nickname": "Batista",
   "displayName": "Batista",
   "clubId": "br-botafogo",
-  "position": "GOL",
+  "position": null,
   "number": null,
   "age": 28,
   "nationality": null,
@@ -3972,21 +3842,10 @@
   },
   "birthDate": "1998-06-03",
   "externalIds": {
-   "cbf": "439475",
-   "eaFc": "271571"
+   "cbf": "439475"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "271571",
-   "overall": 73,
-   "sourcePosition": "GK",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 439475 × EA 271571: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -4172,23 +4031,14 @@
   },
   "birthDate": "2002-06-01",
   "externalIds": {
-   "cbf": "947048",
-   "eaFc": "261082"
+   "cbf": "947048"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "261082",
-   "overall": 73,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 947048 × EA 261082: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -4212,23 +4062,14 @@
   },
   "birthDate": "1999-04-07",
   "externalIds": {
-   "cbf": "388359",
-   "eaFc": "239881"
+   "cbf": "388359"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "239881",
-   "overall": 73,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 388359 × EA 239881: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -4991,23 +4832,14 @@
   },
   "birthDate": "1995-01-03",
   "externalIds": {
-   "cbf": "351920",
-   "eaFc": "251847"
+   "cbf": "351920"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "251847",
-   "overall": 69,
-   "sourcePosition": "LB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 351920 × EA 251847: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -5201,23 +5033,14 @@
   },
   "birthDate": "1996-08-31",
   "externalIds": {
-   "cbf": "409079",
-   "eaFc": "255754"
+   "cbf": "409079"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "255754",
-   "overall": 70,
-   "sourcePosition": "GK",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 409079 × EA 255754: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -6255,23 +6078,14 @@
   },
   "birthDate": "2003-08-31",
   "externalIds": {
-   "cbf": "943312",
-   "eaFc": "263437"
+   "cbf": "943312"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "263437",
-   "overall": 70,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943312 × EA 263437: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -6944,23 +6758,14 @@
   },
   "birthDate": "2002-01-05",
   "externalIds": {
-   "cbf": "691581",
-   "eaFc": "248281"
+   "cbf": "691581"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "248281",
-   "overall": 64,
-   "sourcePosition": "LM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 691581 × EA 248281: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -7127,23 +6932,14 @@
   },
   "birthDate": "2002-06-26",
   "externalIds": {
-   "cbf": "975633",
-   "eaFc": "76456"
+   "cbf": "975633"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "76456",
-   "overall": 62,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 975633 × EA 76456: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -8637,23 +8433,14 @@
   },
   "birthDate": "1990-11-26",
   "externalIds": {
-   "cbf": "312462",
-   "eaFc": "201305"
+   "cbf": "312462"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "201305",
-   "overall": 77,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 312462 × EA 201305: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -8851,23 +8638,14 @@
   },
   "birthDate": "1992-12-15",
   "externalIds": {
-   "cbf": "951265",
-   "eaFc": "207494"
+   "cbf": "951265"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "207494",
-   "overall": 74,
-   "sourcePosition": "CAM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 951265 × EA 207494: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -8949,23 +8727,14 @@
   },
   "birthDate": "2004-02-15",
   "externalIds": {
-   "cbf": "628499",
-   "eaFc": "70651"
+   "cbf": "628499"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "70651",
-   "overall": 73,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 628499 × EA 70651: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -9256,23 +9025,14 @@
   },
   "birthDate": "2002-03-24",
   "externalIds": {
-   "cbf": "944060",
-   "eaFc": "270854"
+   "cbf": "944060"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "270854",
-   "overall": 70,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 944060 × EA 270854: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -9478,23 +9238,14 @@
   },
   "birthDate": "1993-03-09",
   "externalIds": {
-   "cbf": "946183",
-   "eaFc": "198640"
+   "cbf": "946183"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "198640",
-   "overall": 71,
-   "sourcePosition": "CAM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 946183 × EA 198640: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -9638,23 +9389,14 @@
   },
   "birthDate": "1999-06-25",
   "externalIds": {
-   "cbf": "973426",
-   "eaFc": "253293"
+   "cbf": "973426"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "253293",
-   "overall": 70,
-   "sourcePosition": "LM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 973426 × EA 253293: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -9709,23 +9451,14 @@
   },
   "birthDate": "1996-04-28",
   "externalIds": {
-   "cbf": "750897",
-   "eaFc": "236441"
+   "cbf": "750897"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "236441",
-   "overall": 76,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 750897 × EA 236441: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -11200,23 +10933,14 @@
   },
   "birthDate": "1997-06-22",
   "externalIds": {
-   "cbf": "973365",
-   "eaFc": "236668"
+   "cbf": "973365"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "236668",
-   "overall": 74,
-   "sourcePosition": "LM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 973365 × EA 236668: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -11240,23 +10964,14 @@
   },
   "birthDate": "2001-02-11",
   "externalIds": {
-   "cbf": "523349",
-   "eaFc": "70822"
+   "cbf": "523349"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "70822",
-   "overall": 76,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 523349 × EA 70822: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -11311,23 +11026,14 @@
   },
   "birthDate": "2005-03-28",
   "externalIds": {
-   "cbf": "666804",
-   "eaFc": "278567"
+   "cbf": "666804"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "278567",
-   "overall": 71,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 666804 × EA 278567: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -12141,23 +11847,14 @@
   },
   "birthDate": "2005-03-05",
   "externalIds": {
-   "cbf": "686457",
-   "eaFc": "74913"
+   "cbf": "686457"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "74913",
-   "overall": 71,
-   "sourcePosition": "LW",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 686457 × EA 74913: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -12324,23 +12021,14 @@
   },
   "birthDate": "2001-07-01",
   "externalIds": {
-   "cbf": "554750",
-   "eaFc": "263673"
+   "cbf": "554750"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "263673",
-   "overall": 75,
-   "sourcePosition": "GK",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 554750 × EA 263673: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -13037,23 +12725,14 @@
   },
   "birthDate": "1997-08-27",
   "externalIds": {
-   "cbf": "319635",
-   "eaFc": "233927"
+   "cbf": "319635"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "233927",
-   "overall": 80,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 319635 × EA 233927: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -13317,23 +12996,14 @@
   },
   "birthDate": "2003-07-21",
   "externalIds": {
-   "cbf": "982499",
-   "eaFc": "256199"
+   "cbf": "982499"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "256199",
-   "overall": 67,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 982499 × EA 256199: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -13481,23 +13151,14 @@
   },
   "birthDate": "1999-02-26",
   "externalIds": {
-   "cbf": "948678",
-   "eaFc": "273080"
+   "cbf": "948678"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "273080",
-   "overall": 72,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 948678 × EA 273080: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -14152,23 +13813,14 @@
   },
   "birthDate": "1998-03-27",
   "externalIds": {
-   "cbf": "948685",
-   "eaFc": "233822"
+   "cbf": "948685"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "233822",
-   "overall": 73,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 948685 × EA 233822: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15206,23 +14858,14 @@
   },
   "birthDate": "1998-06-14",
   "externalIds": {
-   "cbf": "975064",
-   "eaFc": "244193"
+   "cbf": "975064"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "244193",
-   "overall": 70,
-   "sourcePosition": "LW",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 975064 × EA 244193: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15277,23 +14920,14 @@
   },
   "birthDate": "1995-08-29",
   "externalIds": {
-   "cbf": "978419",
-   "eaFc": "230988"
+   "cbf": "978419"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "230988",
-   "overall": 70,
-   "sourcePosition": "CAM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 978419 × EA 230988: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15303,7 +14937,7 @@
   "nickname": "Leo Perez",
   "displayName": "Leo Perez",
   "clubId": "br-gremio",
-  "position": "MEI",
+  "position": null,
   "number": null,
   "age": 22,
   "nationality": null,
@@ -15317,21 +14951,10 @@
   },
   "birthDate": "2004-08-09",
   "externalIds": {
-   "cbf": "945572",
-   "eaFc": "278464"
+   "cbf": "945572"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "278464",
-   "overall": 62,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 945572 × EA 278464: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15448,23 +15071,14 @@
   },
   "birthDate": "2004-03-03",
   "externalIds": {
-   "cbf": "612641",
-   "eaFc": "77521"
+   "cbf": "612641"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "77521",
-   "overall": 63,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 612641 × EA 77521: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15515,23 +15129,14 @@
   },
   "birthDate": "2002-07-14",
   "externalIds": {
-   "cbf": "945783",
-   "eaFc": "253952"
+   "cbf": "945783"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "253952",
-   "overall": 75,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 945783 × EA 253952: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -15706,23 +15311,14 @@
   },
   "birthDate": "2000-02-15",
   "externalIds": {
-   "cbf": "464163",
-   "eaFc": "247641"
+   "cbf": "464163"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "247641",
-   "overall": 77,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 464163 × EA 247641: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -16477,23 +16073,14 @@
   },
   "birthDate": "2000-04-30",
   "externalIds": {
-   "cbf": "440499",
-   "eaFc": "264842"
+   "cbf": "440499"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "264842",
-   "overall": 69,
-   "sourcePosition": "CAM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 440499 × EA 264842: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -16633,23 +16220,14 @@
   },
   "birthDate": "1995-12-07",
   "externalIds": {
-   "cbf": "978709",
-   "eaFc": "220969"
+   "cbf": "978709"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "220969",
-   "overall": 76,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 978709 × EA 220969: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -17044,23 +16622,14 @@
   },
   "birthDate": "1994-05-06",
   "externalIds": {
-   "cbf": "973064",
-   "eaFc": "219145"
+   "cbf": "973064"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "219145",
-   "overall": 76,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 973064 × EA 219145: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -17341,7 +16910,7 @@
   "nickname": "Tony Sanabria",
   "displayName": "Tony Sanabria",
   "clubId": "br-internacional",
-  "position": "ATA",
+  "position": null,
   "number": null,
   "age": 30,
   "nationality": null,
@@ -17355,21 +16924,10 @@
   },
   "birthDate": "1996-03-04",
   "externalIds": {
-   "cbf": "979953",
-   "eaFc": "219932"
+   "cbf": "979953"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "219932",
-   "overall": 76,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 979953 × EA 219932: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -17517,23 +17075,14 @@
   },
   "birthDate": "1994-03-09",
   "externalIds": {
-   "cbf": "391068",
-   "eaFc": "246093"
+   "cbf": "391068"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "246093",
-   "overall": 73,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 391068 × EA 246093: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -18398,7 +17947,7 @@
   "nickname": "Rodrigues",
   "displayName": "Rodrigues",
   "clubId": "br-mirassol",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 28,
   "nationality": null,
@@ -18412,21 +17961,10 @@
   },
   "birthDate": "1997-10-10",
   "externalIds": {
-   "cbf": "434738",
-   "eaFc": "263784"
+   "cbf": "434738"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "263784",
-   "overall": 68,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 434738 × EA 263784: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -19274,23 +18812,14 @@
   },
   "birthDate": "1997-09-21",
   "externalIds": {
-   "cbf": "728790",
-   "eaFc": "241602"
+   "cbf": "728790"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "241602",
-   "overall": 78,
-   "sourcePosition": "RW",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 728790 × EA 241602: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -19942,7 +19471,7 @@
   "nickname": "BRAIAN CUFRE",
   "displayName": "BRAIAN CUFRE",
   "clubId": "br-remo",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 29,
   "nationality": null,
@@ -19956,21 +19485,10 @@
   },
   "birthDate": "1996-12-15",
   "externalIds": {
-   "cbf": "944227",
-   "eaFc": "231247"
+   "cbf": "944227"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "231247",
-   "overall": 68,
-   "sourcePosition": "LB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 944227 × EA 231247: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -20048,23 +19566,14 @@
   },
   "birthDate": "2000-04-02",
   "externalIds": {
-   "cbf": "944427",
-   "eaFc": "261637"
+   "cbf": "944427"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "261637",
-   "overall": 65,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 944427 × EA 261637: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -20870,7 +20379,7 @@
   "nickname": "Patrick de Paula",
   "displayName": "Patrick de Paula",
   "clubId": "br-remo",
-  "position": "MEI",
+  "position": null,
   "number": null,
   "age": 27,
   "nationality": null,
@@ -20884,21 +20393,10 @@
   },
   "birthDate": "1999-09-08",
   "externalIds": {
-   "cbf": "453232",
-   "eaFc": "259427"
+   "cbf": "453232"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "259427",
-   "overall": 71,
-   "sourcePosition": "CDM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 453232 × EA 259427: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -20949,23 +20447,14 @@
   },
   "birthDate": "1998-10-22",
   "externalIds": {
-   "cbf": "944177",
-   "eaFc": "252044"
+   "cbf": "944177"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "252044",
-   "overall": 69,
-   "sourcePosition": "CDM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 944177 × EA 252044: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -21136,23 +20625,14 @@
   },
   "birthDate": "1998-07-10",
   "externalIds": {
-   "cbf": "947946",
-   "eaFc": "240728"
+   "cbf": "947946"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "240728",
-   "overall": 71,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 947946 × EA 240728: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -22380,23 +21860,14 @@
   },
   "birthDate": "1996-06-01",
   "externalIds": {
-   "cbf": "948040",
-   "eaFc": "247076"
+   "cbf": "948040"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "247076",
-   "overall": 72,
-   "sourcePosition": "CDM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 948040 × EA 247076: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -22594,23 +22065,14 @@
   },
   "birthDate": "1992-01-29",
   "externalIds": {
-   "cbf": "353568",
-   "eaFc": "212091"
+   "cbf": "353568"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "212091",
-   "overall": 79,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 353568 × EA 212091: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -23021,23 +22483,14 @@
   },
   "birthDate": "1997-02-10",
   "externalIds": {
-   "cbf": "974347",
-   "eaFc": "234573"
+   "cbf": "974347"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "234573",
-   "overall": 73,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 974347 × EA 234573: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -23092,23 +22545,14 @@
   },
   "birthDate": "1996-12-29",
   "externalIds": {
-   "cbf": "341697",
-   "eaFc": "242084"
+   "cbf": "341697"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "242084",
-   "overall": 72,
-   "sourcePosition": "GK",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 341697 × EA 242084: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -23283,23 +22727,14 @@
   },
   "birthDate": "1995-03-10",
   "externalIds": {
-   "cbf": "974468",
-   "eaFc": "234835"
+   "cbf": "974468"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "234835",
-   "overall": 74,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 974468 × EA 234835: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -24066,23 +23501,14 @@
   },
   "birthDate": "2006-07-01",
   "externalIds": {
-   "cbf": "741363",
-   "eaFc": "73049"
+   "cbf": "741363"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "73049",
-   "overall": 68,
-   "sourcePosition": "RB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 741363 × EA 73049: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -24309,7 +23735,7 @@
   "nickname": "Alan",
   "displayName": "Alan",
   "clubId": "br-vasco",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 24,
   "nationality": null,
@@ -24323,21 +23749,10 @@
   },
   "birthDate": "2002-04-06",
   "externalIds": {
-   "cbf": "943636",
-   "eaFc": "275371"
+   "cbf": "943636"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "275371",
-   "overall": 72,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 943636 × EA 275371: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -24713,23 +24128,14 @@
   },
   "birthDate": "2000-01-04",
   "externalIds": {
-   "cbf": "977626",
-   "eaFc": "245461"
+   "cbf": "977626"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "245461",
-   "overall": 76,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 977626 × EA 245461: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -24753,23 +24159,14 @@
   },
   "birthDate": "2000-05-07",
   "externalIds": {
-   "cbf": "641271",
-   "eaFc": "274187"
+   "cbf": "641271"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "274187",
-   "overall": 74,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 641271 × EA 274187: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -25007,7 +24404,7 @@
   "nickname": "LESCANO",
   "displayName": "LESCANO",
   "clubId": "br-vasco",
-  "position": "MEI",
+  "position": null,
   "number": null,
   "age": 24,
   "nationality": null,
@@ -25021,21 +24418,10 @@
   },
   "birthDate": "2001-11-11",
   "externalIds": {
-   "cbf": "983150",
-   "eaFc": "272350"
+   "cbf": "983150"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "272350",
-   "overall": 73,
-   "sourcePosition": "CM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 983150 × EA 272350: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -25161,7 +24547,7 @@
   "nickname": "Marino",
   "displayName": "Marino",
   "clubId": "br-vasco",
-  "position": "MEI",
+  "position": null,
   "number": null,
   "age": 24,
   "nationality": null,
@@ -25175,21 +24561,10 @@
   },
   "birthDate": "2002-07-08",
   "externalIds": {
-   "cbf": "702345",
-   "eaFc": "279786"
+   "cbf": "702345"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "279786",
-   "overall": 72,
-   "sourcePosition": "RM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 702345 × EA 279786: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -25569,23 +24944,14 @@
   },
   "birthDate": "1999-05-03",
   "externalIds": {
-   "cbf": "977805",
-   "eaFc": "246033"
+   "cbf": "977805"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "246033",
-   "overall": 76,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 977805 × EA 246033: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -25609,23 +24975,14 @@
   },
   "birthDate": "1997-01-21",
   "externalIds": {
-   "cbf": "945025",
-   "eaFc": "238180"
+   "cbf": "945025"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "238180",
-   "overall": 70,
-   "sourcePosition": "ST",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 945025 × EA 238180: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -26036,23 +25393,14 @@
   },
   "birthDate": "2003-04-26",
   "externalIds": {
-   "cbf": "944886",
-   "eaFc": "70440"
+   "cbf": "944886"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "70440",
-   "overall": 64,
-   "sourcePosition": "LW",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 944886 × EA 70440: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -26521,23 +25869,14 @@
   },
   "birthDate": "1999-08-27",
   "externalIds": {
-   "cbf": "432211",
-   "eaFc": "245717"
+   "cbf": "432211"
   },
   "fieldSources": {
    "position": "wikipedia-en",
    "nationality": "wikipedia-en",
    "number": "wikipedia-en"
   },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "245717",
-   "overall": 66,
-   "sourcePosition": "LM",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 432211 × EA 245717: nascimento + nome"
-  },
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },
@@ -26995,7 +26334,7 @@
   "nickname": "Riccieli",
   "displayName": "Riccieli",
   "clubId": "br-vitoria",
-  "position": "DEF",
+  "position": null,
   "number": null,
   "age": 28,
   "nationality": null,
@@ -27009,21 +26348,10 @@
   },
   "birthDate": "1998-09-17",
   "externalIds": {
-   "cbf": "433577",
-   "eaFc": "252095"
+   "cbf": "433577"
   },
-  "fieldSources": {
-   "position": "EA_FC_26"
-  },
-  "rating": {
-   "source": "EA_FC_26",
-   "sourceVersion": "FC26-api-2026-10-02",
-   "sourcePlayerId": "252095",
-   "overall": 70,
-   "sourcePosition": "CB",
-   "retrievedAt": "2026-10-02T23:49:33Z",
-   "matchedBy": "CBF 433577 × EA 252095: nascimento + nome"
-  },
+  "fieldSources": {},
+  "rating": null,
   "strengthMethodVersion": null,
   "strengthNotes": null
  },

@@ -43,7 +43,7 @@ test('1. carrega o universo sem erros; avisos só de posição ausente em todas 
   assert.equal(loaded.ok, true, loaded.issues.map((i) => `${i.code} ${i.entity} ${i.message}`).join('\n'));
   const codes: Record<string, number> = {};
   for (const i of loaded.issues) codes[i.code] = (codes[i.code] ?? 0) + 1;
-  assert.deepEqual(codes, { POSITION_MISSING: 291 });
+  assert.deepEqual(codes, { POSITION_MISSING: 303 });
   assert.equal(U.manifest.id, 'brasileirao-2026');
   assert.equal(U.manifest.season, 2026);
   const comp = U.competitions['brasileirao-a-2026'];
@@ -108,8 +108,8 @@ test('9. o World convertido é aceito pelo engine: escalação válida e partida
   const { world, report } = toWorld();
   assert.equal(world.divisions.length, 1);
   assert.equal(world.divisions[0].clubIds.length, 20);
-  assert.equal(Object.keys(world.players).length, 601); // só ATIVO com posição
-  assert.deepEqual(report.provisional, { strength: 601, age: 0, colors: 0, stadiumCapacity: 0 });
+  assert.equal(Object.keys(world.players).length, 593); // só ATIVO com posição
+  assert.deepEqual(report.provisional, { strength: 593, age: 0, colors: 0, stadiumCapacity: 0 });
   for (const club of Object.values(world.clubs)) assert.deepEqual(validateLineup(autoLineup(club, world.players), club, world.players), []);
   const fx = prepareFixture('M1', world.clubs['br-palmeiras'], world.clubs['br-flamengo'], world.players);
   const match = simulateMatch({ matchId: 'M1', seed: 'seed-partida', home: fx.home, away: fx.away, attendance: fx.attendance });

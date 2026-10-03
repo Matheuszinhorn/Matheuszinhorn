@@ -6,11 +6,12 @@ import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { generateWorld } from '../../engine/index.ts';
 import { BRASILEIRAO_A_2026, BRAZIL_2026, FICTIONAL_SYSTEM, checkLeagueSystem } from '../competition-rules.ts';
-import { ageAt, EA_POSITION } from '../import/cbf-squads.ts';
+import { ageAt } from '../import/cbf-squads.ts';
+import { isoDate, linkByBirthAndName, namesCompatible } from '../import/matching.ts';
 import { loadUniverse } from '../load-node.ts';
 import type { Universe } from '../model.ts';
 import { resolveDisplayName } from '../normalize.ts';
-import { EM_RATING_VERSION, baseFromOverall, isoDate, linkByBirthAndName, namesCompatible, strengthFrom, type ExternalRating } from '../rating/em-rating.ts';
+import { EM_RATING_2_VERSION } from '../rating/em-rating-2.ts';
 import { FICTIONAL_UNIVERSE_ID, worldForUniverse } from '../registry.ts';
 import { validateUniverse } from '../validate.ts';
 import { createCareer, deserializeCareer, serializeCareer, careerOffers } from '../../game/career.ts';
@@ -18,14 +19,14 @@ import { ensureManager } from '../../game/manager/core.ts';
 import { playerAccepts } from '../../game/manager/market.ts';
 import { personalityOf } from '../../game/manager/people.ts';
 
-// Etapa "Universo real + EM-RATING-1.0": dados da CBF, metodologia de força (sem aplicar), regras por competição.
+// Universo real (CBF) + metodologia de força (EM-RATING-2.0, só simulada) + regras por competição.
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const loaded = loadUniverse('brasileirao-2026');
 const U = loaded.universe as Universe;
 const players = Object.values(U.players);
-const sim = JSON.parse(readFileSync(join(ROOT, 'data/universes/brasileirao-2026/ratings', `${EM_RATING_VERSION}.simulacao.json`), 'utf8'));
-const ref = (overall: number): ExternalRating => ({ source: 'EA_FC_26', sourceVersion: 't', sourcePlayerId: 'x', overall, sourcePosition: 'CM', retrievedAt: 't', matchedBy: 'teste' });
+const sim = JSON.parse(readFileSync(join(ROOT, 'reports/em-rating-2.0-simulation.json'), 'utf8'));
+const simStrengths = sim.players.map((x: { oficial: { strength: number | null } }) => x.oficial.strength).filter((v: number | null) => v !== null) as number[];
 
 test('1. todo jogador tem displayName válido (texto não vazio, sem espaços nas pontas)', () => {
   assert.ok(loaded.ok, 'universo válido');
@@ -58,44 +59,27 @@ test('5. todos os clubes têm cores válidas (#RRGGBB) e a origem das cores regi
   }
 });
 
-test('6. a força da metodologia fica sempre entre 1 e 50 (todo Overall possível)', () => {
-  for (let ovr = 1; ovr <= 99; ovr++) {
-    const s = strengthFrom(ref(ovr)).strength;
-    assert.ok(s >= 1 && s <= 50 && Number.isInteger(s), `${ovr} → ${s}`);
-  }
-  for (const p of players) assert.ok(p.strength === null || (p.strength >= 1 && p.strength <= 50), p.id);
+test('6. a força simulada fica sempre entre 1 e 50; nenhuma força oficial aplicada', () => {
+  assert.ok(simStrengths.length > 0);
+  for (const v of simStrengths) assert.ok(Number.isInteger(v) && v >= 1 && v <= 50, String(v));
+  for (const p of players) assert.equal(p.strength, null, p.id);
 });
 
-test('7–8. metodologia determinística: mesma entrada = mesma força e mesma trilha; tabela por faixas respeitada', () => {
-  assert.deepStrictEqual(strengthFrom(ref(83)), strengthFrom(ref(83)));
-  const bands: [number, number, number, number][] = [[90, 99, 48, 50], [86, 89, 44, 47], [82, 85, 40, 43], [78, 81, 36, 39], [74, 77, 32, 35], [70, 73, 28, 31], [66, 69, 24, 27], [62, 65, 20, 23], [58, 61, 16, 19], [54, 57, 12, 15], [50, 53, 8, 11], [1, 49, 1, 7]];
-  for (const [lo, hi, smin, smax] of bands) for (let o = lo; o <= hi; o++) {
-    const s = baseFromOverall(o);
-    assert.ok(s >= smin && s <= smax, `Overall ${o} → ${s} fora de ${smin}–${smax}`);
-  }
-  const r = strengthFrom(ref(83));
-  assert.equal(r.methodVersion, EM_RATING_VERSION);
-  assert.equal(r.base, 41);
-  assert.match(r.notes, /Overall 83 → base 41/);
+test('7–8. simulação determinística: mesmo dado + mesma versão = mesma força (gravada com a versão)', () => {
+  assert.equal(sim.methodVersion, EM_RATING_2_VERSION);
+  assert.equal(sim.config.version, EM_RATING_2_VERSION);
+  // a simulação é refeita nos testes de em-rating-2.test.ts; aqui, o arquivo cobre todos os atletas
+  assert.equal(sim.players.length, players.length);
 });
 
-test('9. a referência externa é rastreável (fonte, versão, id na fonte, regra de ligação)', () => {
-  const rated = players.filter((p) => p.rating);
-  assert.ok(rated.length > 0);
-  for (const p of rated) {
-    const r = p.rating!;
-    assert.equal(r.source, 'EA_FC_26');
-    assert.ok(r.sourceVersion && r.sourcePlayerId && r.retrievedAt && /nascimento \+ nome/.test(r.matchedBy), p.id);
-    assert.equal(p.externalIds?.eaFc, r.sourcePlayerId);
-  }
-  assert.equal(sim.players.length, rated.length, 'uma linha de simulação por jogador com referência');
+test('9. nenhum rating de terceiros: jogadores sem referência externa e simulação declarada sem terceiros', () => {
+  assert.equal(sim.thirdPartyRatings, 'nenhum');
+  for (const p of players) assert.ok(!p.rating && !p.externalIds?.eaFc, p.id);
 });
 
-test('10. jogadores sem referência externa ficam identificados (sem força e fora da simulação)', () => {
-  const without = players.filter((p) => !p.rating);
-  assert.ok(without.length > 0);
-  const simIds = new Set(sim.players.map((x: { playerId: string }) => x.playerId));
-  for (const p of without) assert.ok(!simIds.has(p.id) && p.strength === null && p.strengthMethodVersion === null, p.id);
+test('10. jogadores com dados insuficientes ficam identificados (força null + motivo), não estimados', () => {
+  const missing = sim.players.filter((x: { oficial: { strength: number | null } }) => x.oficial.strength === null);
+  for (const x of missing) assert.ok(x.oficial.flags.includes('DADOS_INSUFICIENTES'), x.playerId);
 });
 
 test('11. dado incompleto não é inventado: posição/nacionalidade só com fonte; força não aplicada', () => {
@@ -198,6 +182,5 @@ test('ligação CBF × EA só com evidência forte; datas e idade lidas sem chut
   assert.equal(linkByBirthAndName({ id: 'x', names: ['Lingard'], birthDate: null }, pool).id, null);
   assert.equal(namesCompatible(['Gabriel'], ['Gabriel Paulista']), true);
   assert.equal(namesCompatible(['Ana Silva'], ['Bruno Souza']), false);
-  assert.equal(EA_POSITION.GK, 'GOL');
   assert.ok(existsSync(join(ROOT, 'data/universes/brasileirao-2026/raw/cbf-2026.raw.json')));
 });

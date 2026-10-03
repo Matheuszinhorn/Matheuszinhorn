@@ -28,8 +28,8 @@ Não há divisão servidor/cliente: o jogo inteiro é uma página estática.
 universos de dados (ex.: Brasileirão 2026), pelo fluxo fonte → raw → normalização → validação → `Universe` →
 `World`. Ela depende só dos tipos e de `generateWorld` do engine; o engine não a conhece. Ainda não é usada por
 `game/` nem pelo build do app (o jogo continua no universo fictício). Detalhes em [UNIVERSES.md](UNIVERSES.md).
-Dentro dela: `data/import/cbf-squads.ts` (CBF, fonte principal), `data/rating/em-rating.ts` (metodologia de força
-EM-RATING, [PLAYER-RATINGS.md](PLAYER-RATINGS.md)) e `data/competition-rules.ts` (regras por competição). São só
+Dentro dela: `data/import/cbf-squads.ts` (CBF, fonte principal), `data/rating/em-rating-2.ts` (metodologia de força
+EM-RATING-2.0, própria, [PLAYER-RATINGS.md](PLAYER-RATINGS.md)), `data/curation.ts` (curadoria rastreável) e `data/competition-rules.ts` (regras por competição). São só
 dados e funções puras; o engine não os lê. O teste `data/tests/ratings.test.ts` grava a impressão digital das
 fontes do engine para provar que esta camada não o altera.
 

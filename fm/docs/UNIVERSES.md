@@ -34,7 +34,11 @@ data/
   import-json.ts           importação JSON (texto → validação → Universe); igual no Node e no navegador
   import/wikipedia-squads.ts  importador do formato bruto "wikipedia-fs-player" (conferência)
   import/cbf-squads.ts     importador do snapshot do site da CBF (fonte principal)
-  rating/em-rating.ts      metodologia de força EM-RATING (docs/PLAYER-RATINGS.md)
+  rating/em-rating-2.ts    metodologia de força EM-RATING-2.0, própria, só fatos da CBF (docs/PLAYER-RATINGS.md)
+  rating/em-rating-2-inputs.ts  entradas da 2.0 a partir do snapshot da CBF
+  rating/em-rating.ts      EM-RATING-1.0 (descontinuada; registro histórico, sem uso)
+  curation.ts              curadoria rastreável (posição), separada do dado factual
+  import/matching.ts       ligação entre fontes por nome e data de nascimento
   competition-rules.ts     regras por competição (CompetitionRules): Brasil 2026 e universo fictício
   load-node.ts             leitura do disco (só testes e scripts)
   to-world.ts              Universe → World do engine (com perfil provisório explícito)
@@ -43,9 +47,10 @@ data/
     universe.json  competition.json  clubs.json  players.json  sources.json
     raw/cbf-2026.raw.json            snapshot da CBF (times + páginas de atleta), sem alteração
     raw/wikipedia-en-2026.raw.json   snapshot bruto da conferência, sem alteração
-    raw/ea-fc-26.candidates.raw.json candidatos EA FC 26 (mesma data de nascimento de algum atleta)
+    raw/ea-fc-26.candidates.raw.json SEM USO desde 03/10/2026 (aguarda decisão de remoção)
     raw/club-colors.curated.json     cores curadas dos 20 clubes
-    ratings/EM-RATING-1.0.simulacao.json   simulação da força, NÃO aplicada (applied: false)
+    ratings/EM-RATING-1.0.simulacao.json   simulação antiga (EA), SEM USO (aguarda decisão de remoção)
+    curation/positions.csv           planilha de curadoria de posição (303 pendentes)
   tests/                   testes da camada (npm test)
 scripts/build-universe.ts  RAW → normalize → validate → competition/clubs/players.json (npm run universe)
 ```
@@ -86,11 +91,9 @@ válidos, como os do mundo fictício. Nada aqui roda no jogo publicado (o build 
   "clubId": "br-santos", "position": "DEF", "number": 23, "age": 34, "nationality": "Brasil",
   "strength": null, "status": "ATIVO", "notes": null,
   "source": { "source": "cbf", "ref": "cbf:atleta:353568", "confirmedByPrimary": true },
-  "birthDate": "1992-01-29", "externalIds": { "cbf": "353568", "eaFc": "212091" },
+  "birthDate": "1992-01-29", "externalIds": { "cbf": "353568" },
   "fieldSources": { "position": "wikipedia-en", "nationality": "wikipedia-en", "number": "wikipedia-en" },
-  "rating": { "source": "EA_FC_26", "sourceVersion": "FC26-api-2026-10-02", "sourcePlayerId": "212091",
-              "overall": 79, "sourcePosition": "RB", "retrievedAt": "2026-10-02T23:49:33Z",
-              "matchedBy": "CBF 353568 × EA 212091: nascimento + nome" },
+  "rating": null,
   "strengthMethodVersion": null, "strengthNotes": null }
 ```
 
@@ -171,7 +174,7 @@ inscrições depois dela, dentro do regulamento. Por isso o elenco vale para a d
 |---|---|---|
 | **Principal** | CBF: páginas dos 20 times da Série A 2026 e as 898 páginas de atleta (`raw/cbf-2026.raw.json`) | id do atleta, nome civil, **apelido**, data de nascimento e **clube atual** (`atleta_time_atual`). Todo jogador tem `confirmedByPrimary: true`. |
 | **Conferência** | Wikipédia em inglês (snapshot de 01/10/2026) | cidade, estado e estádio do clube; posição, número e nacionalidade do jogador, só quando ele é identificado **mútua e unicamente** no mesmo clube (`fieldSources`). |
-| **Referência de força** | EA SPORTS FC 26 (API pública, 02/10/2026) | Overall, só para a simulação EM-RATING. Também dá a posição quando a Wikipédia não tem (12 jogadores). |
+| **Curadoria** | ELITE MANAGER | posição dos atletas sem posição em nenhuma fonte (`curation/positions.csv`, rastreável). |
 | **Curadoria** | ELITE MANAGER | cores dos clubes (`raw/club-colors.curated.json`). |
 
 Acesso à CBF: o servidor `www.cbf.com.br` envia a cadeia TLS com o intermediário errado. A coleta validou o
@@ -195,10 +198,10 @@ Regras do importador CBF (`data/import/cbf-squads.ts`):
 |---|---|
 | Clubes | 20 (cores curadas; sem escudo) |
 | Atletas | 897: 768 ATIVOS e 129 TRANSFERIDOS |
-| Posição | Wikipédia 594 · EA FC 26 12 · **nenhuma fonte 291** (167 deles ATIVOS) |
-| Elenco jogável (ATIVO com posição) | 601 (GOL 71 · DEF 195 · MEI 176 · ATA 159) |
+| Posição | Wikipédia 594 · **nenhuma fonte 303** (175 deles ATIVOS); curadoria: 0 preenchidas |
+| Elenco jogável (ATIVO com posição) | 593 (GOL 70 · DEF 191 · MEI 174 · ATA 158) |
 | Sem apelido / sem fonte principal | 0 / 0 |
-| Com Overall do EA FC 26 | 72 (8%) |
+| Ratings de terceiros | nenhum (EA FC removido do build em 03/10/2026) |
 | Força aplicada | **0**: todos com `strength: null` (docs/PLAYER-RATINGS.md) |
 | Idade | 16 a 46 anos, média 25,8 |
 | Atletas da Wikipédia que a CBF não lista no clube | 79 (não entram: a fonte principal manda) |
@@ -207,7 +210,7 @@ Regras do importador CBF (`data/import/cbf-squads.ts`):
 
 | Dado | Situação |
 |---|---|
-| Força ELITE MANAGER | **Ausente (`null`) para todos.** A EM-RATING-1.0 está documentada e testada, mas a referência (EA FC 26) cobre só 8% e com viés; o proprietário precisa decidir o caminho (docs/PLAYER-RATINGS.md). |
+| Força ELITE MANAGER | **Ausente (`null`) para todos.** A EM-RATING-2.0 (própria, só fatos da CBF) foi simulada sobre 895 atletas, sem aplicar (docs/PLAYER-RATINGS.md, reports/em-rating-2.0-report.md). |
 | Posição | A CBF não publica. 291 atletas sem posição em nenhuma fonte (base, reservas, recém-chegados) ficam fora do elenco jogável, nunca estimados. |
 | Número e nacionalidade | Só da Wikipédia, quando a ligação é segura. |
 | Cores | Curadoria, não dado oficial (`colorsSource: "curadoria-elite-manager"`). |

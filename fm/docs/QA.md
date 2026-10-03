@@ -6,7 +6,7 @@ de Playwright + Chromium (ver [RELEASE.md](RELEASE.md#qa)).
 
 ## Testes automatizados
 
-`npm test` (Node `--test`): **235/235** (etapa Universo real + EM-RATING, 03/10/2026: +18 em `data/tests/ratings.test.ts` com os 20 testes pedidos, incluindo a impressão digital do engine; testes do universo atualizados para os dados da CBF). Antes **217/217** (etapa Força + Economia; antes 213/213 (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
+`npm test` (Node `--test`): **248/248** (etapa EM-RATING-2.0, 03/10/2026: +13 em `data/tests/em-rating-2.test.ts`: determinismo, 1–50, sem posição, sem gols, goleiro, atacante, jovem/veterano, partidas, produção, dados ausentes, curadoria, versionamento e simulação sem terceiros; testes da 1.0 trocados pelos da 2.0). Antes **235/235** (etapa Universo real + EM-RATING, +18 em `data/tests/ratings.test.ts` com os 20 testes pedidos, incluindo a impressão digital do engine; testes do universo atualizados para os dados da CBF). Antes **217/217** (etapa Força + Economia; antes 213/213 (ELITE MANAGER: 190 anteriores + 16 da camada de gestão em `game/tests/manager.test.ts` + 3 de paradas obrigatórias em `game/tests/session.test.ts` + 4 do controlador: entrada/perfil local, propostas e sem clube, gestão bloqueada durante a rodada, velocidade INSTANTÂNEA antiga).
 
 | Conjunto | Arquivo(s) | Cobre |
 |---|---|---|

@@ -1,187 +1,249 @@
 # Força dos jogadores — metodologia EM-RATING
 
-Como o ELITE MANAGER define a **força (1–50)** de um jogador real. Código: `data/rating/em-rating.ts`.
-Testes: `data/tests/ratings.test.ts`. Esta etapa **não aplicou** a força a ninguém: todos os jogadores do universo
-real continuam com `strength: null`. A conversão só foi **simulada**
-(`data/universes/brasileirao-2026/ratings/EM-RATING-1.0.simulacao.json`, `applied: false`). O motivo está em
-[Situação atual](#situação-atual-não-aplicar).
+Como o ELITE MANAGER define a **força (1–50)** dos jogadores do universo real.
 
-## Princípios
+- **Metodologia vigente:** EM-RATING-2.0 (experimental), em `data/rating/em-rating-2.ts` (fórmula) e
+  `data/rating/em-rating-2-inputs.ts` (entradas da CBF).
+- **Simulação:** `scripts/simulate-em-rating-2.ts` gera `reports/em-rating-2.0-simulation.json` (`applied: false`) e
+  `reports/em-rating-2.0-report.md`.
+- **Testes:** `data/tests/em-rating-2.test.ts`.
 
-- **A força é do ELITE MANAGER.** Uma referência externa só calibra. O jogo nunca mostra nem usa o número da fonte.
-- **Regra fixa, sem IA nem sorteio.** A mesma entrada com a mesma versão dá a mesma força, e a trilha do cálculo
-  (base e ajustes) fica gravada junto.
-- **Versionada.** Cada força aplicada guarda a versão do método (`strengthMethodVersion`) e a referência usada
-  (`rating`: fonte, edição, id na fonte, Overall, data da coleta, regra de ligação). Uma nova edição (FC 27, FC 28)
-  ou uma nova versão do método recalcula tudo sem perder o histórico.
-- **Nada estimado.** Jogador sem referência fica **sem força** (`null`). A força não é deduzida da divisão, do
-  salário, da idade nem do clube.
-- **O engine não muda.** Ele continua lendo só `strength` (1–50). Esta camada é dado e não conhece o motor.
+**Nada foi aplicado.** Todos os jogadores reais continuam com `strength: null`. O jogo continua no universo
+fictício.
 
-## Por que o EA SPORTS FC 26
+## Por que abandonamos ratings de terceiros
 
-É a única base pública e ampla com a mesma régua para milhares de jogadores: 17.873 na API pública de ratings da EA,
-coletada em 02/10/2026. O **Overall** já é calculado por posição (o de goleiro sai dos atributos de goleiro) e é
-conhecido do público, o que torna a calibração fácil de conferir.
+Decisão do proprietário de 03/10/2026: **a força não depende de ratings de terceiros**. EA SPORTS FC, Flashscore,
+Opta, Transfermarkt e SofaScore ficam fora. Os motivos:
 
-**Edição:** a API (`drop-api.ea.com/rating/ea-sports-fc`) serve a base do FC 26. Os valores do topo coincidem com os
-de lançamento do FC 26. O prefixo "FC25" nas imagens é legado da CDN. Lote registrado como
-`FC26-api-2026-10-02` (`ratingSourceVersion`).
+- **Propriedade.** Um rating de outra empresa é uma criação dela. Uma força derivada dele e distribuída no jogo
+  carrega essa dependência.
+- **Cobertura.** O EA FC 26 não tem clubes brasileiros: só 8% dos atletas da Série A tinham Overall, e a amostra era
+  enviesada (EM-RATING-1.0, abaixo).
+- **Coerência com o jogo.** A força é uma abstração do ELITE MANAGER e precisa ter regras do próprio jogo.
 
-### Limitações da referência
+## Princípio
 
-| Limitação | Consequência |
+A força **não** é "o quanto alguém considera o jogador bom" e **não** mede talento real. É o quanto o jogador deve
+representar na escala simplificada 1–50 do ELITE MANAGER, a partir dos fatos objetivos disponíveis e de regras do
+próprio jogo.
+
+## A CBF como fonte factual
+
+Fonte única da fórmula: `data/universes/brasileirao-2026/raw/cbf-2026.raw.json`, coletado em 02–03/10/2026. Nenhuma
+coleta nova foi feita nesta etapa. Campos por atleta:
+
+| Fato | Campo bruto | Observação |
+|---|---|---|
+| Nascimento → idade | `birth` | Idade em anos completos na **data do snapshot** (fixa; nunca a data do relógio). |
+| Temporadas com registro | `years` | Anos com registro do atleta no sistema da CBF. **A base começa em 2013** (máximo de 14). Não diz em que competição nem quantos jogos por ano. |
+| Partidas e gols | `matches`, `goals` | Estatística da página "Série A 2026" do atleta: **da temporada 2026, não da carreira**. A CBF não documenta o recorte exato de competições (o máximo é 42 partidas). |
+| Clube | `current`, inscrição | Clube atual e clube que o inscreveu na Série A 2026. |
+| Competição | página | Todos os atletas são da Série A 2026: não há dados das Séries B, C e D. |
+
+**Não existe na base:**
+- **Posição** (a CBF não publica).
+- **Minutos**, titularidade e assistências.
+- **Partidas por temporada anterior.**
+- **Carreira fora do Brasil ou antes de 2013.**
+- **Cartões:** aparecem na página da CBF, mas não foram guardados no snapshot.
+
+## Fórmula EM-RATING-2.0
+
+Cada componente vale de 0 a 1. O índice é a média ponderada dos componentes **avaliados**:
+
+```
+índice = Σ (peso × valor) / Σ (peso)        (componente sem dado sai da conta e é sinalizado)
+força  = arredondar(1 + 49 × índice), limitada a 1–50
+```
+
+| Componente | Peso | Valor (0–1) | O que representa |
+|---|---|---|---|
+| **Participação** | 40% | √(partidas na temporada ÷ maior número de partidas do clube) | Participação e recência na temporada atual. A raiz dá retorno decrescente. |
+| **Experiência** | 20% | (1 − e^(−temporadas/4)) normalizado para 1 em 14 temporadas | Longevidade com retorno decrescente: 1 temporada vale 0,23, 4 valem 0,65, 8 valem 0,89 e 14 valem 1. Cem jogos nunca viram +100. |
+| **Recência** | 10% | Temporadas com registro entre as 3 mais recentes (2024–2026) ÷ 3 | Evita que quem jogou muito há anos fique alto hoje. |
+| **Idade** | 10% | Curva moderada: 0,6 até 17 anos → 1 de 24 a 31 → 0,6 aos 40 ou mais | Contexto de desenvolvimento. Do pior ao melhor ponto, move no máximo uns 5 pontos. |
+| **Produção** | 15% | Gols ÷ (partidas + 5), comparado às âncoras da posição | Produção ofensiva relativa à posição (abaixo). |
+| **Contexto** | 5% | Inscrito numa competição nacional da CBF → 1 | Na 2.0 é **igual para todas as séries**. |
+
+### Produção por posição
+
+O prior de 5 partidas no denominador impede que 1 gol em 1 jogo pareça artilharia. A taxa é comparada às âncoras da
+posição por interpolação linear: 0 gols → 0, típico → 0,5, alto → 1.
+
+| Posição | Típico (0,5) | Alto (1,0) |
+|---|---|---|
+| ATA | 0,075 | 0,26 |
+| MEI | 0,03 | 0,12 |
+| DEF | 0,025 | 0,09 |
+| GOL | neutro fixo 0,5 | neutro fixo 0,5 |
+
+- As âncoras são a **mediana** e o **p90** da posição entre quem tem 10 ou mais partidas, medidas **uma vez** na base
+  CBF 2026 e gravadas na versão. Não são recalculadas a cada execução.
+- **Goleiro:** os gols não contam nem a favor nem contra.
+- **Defensor:** é comparado com defensores, não com atacantes.
+- **Sem posição:** a produção não é avaliada (sai da conta) e o jogador fica marcado `POSICAO_AUSENTE` para curadoria.
+  Nenhuma posição é deduzida.
+
+Na primeira simulação, a produção funcionava só como bônus por alvo. Atacantes ficavam em média 5,6 pontos abaixo dos
+goleiros (35,6 contra 41,2), porque o goleiro saía da conta e o atacante típico era puxado para baixo. Com as âncoras,
+as médias por posição ficaram entre 37,2 e 38,9.
+
+### Divisão e contexto
+
+**A divisão não determina a força.** Não existe tabela do tipo "Série A +10, Série D +0". Um jogador forte numa
+divisão inferior continua forte: o risco de contratá-lo aparece em salário, preço, negociação, interesse,
+personalidade e caixa, nunca numa redução da força. Na 2.0, o contexto é igual em todas as séries. Quando houver dados
+de outras divisões, uma versão futura poderá usar um contexto **moderado**, documentado e testado.
+
+### Dados ausentes
+
+Nada é estimado.
+- **Sem partidas ou sem temporadas:** força `null`, com `DADOS_INSUFICIENTES` (2 atletas).
+- **Sem idade:** o componente sai da conta (`IDADE_AUSENTE`).
+- **Sem posição:** a produção sai da conta (`POSICAO_AUSENTE`).
+
+### Determinismo
+
+A fórmula é uma função pura: sem random, sem seed, sem relógio, sem rede, sem IA. A referência de temporada e de idade
+é a data do snapshot. Rodar a simulação duas vezes gera arquivos idênticos byte a byte (conferido). O teste proíbe
+`Math.random`, `Date.now`, `new Date(` e `fetch(` no código da fórmula.
+
+## Curadoria
+
+Usada só quando o dado factual não cobre uma necessidade. Hoje o único caso é a **posição**. A curadoria fica em
+`data/universes/brasileirao-2026/curation/positions.csv`, separada do dado factual: ela nunca reescreve
+`players.json`, é aplicada na hora do cálculo e a origem fica gravada (`positionSource: "curadoria"`).
+
+| Coluna | Conteúdo |
 |---|---|
-| **Não há clubes brasileiros** no FC 26 (sem licença do Brasileirão). | Só tem Overall quem jogava, na base de 2025/26, numa liga licenciada: europeias, MLS, Argentina, Uruguai, Colômbia, Ásia... |
-| A base é de uma data fixa (lançamento + atualizações). | Jogadores que mudaram de nível desde então ficam desatualizados. |
-| O Overall é de um videogame, com critérios próprios. | Serve de calibração, não de verdade. Por isso a força tem escala e nome próprios. |
-| A ligação CBF × EA exige nome e data de nascimento. | Ver [Ligação](#ligação-entre-a-cbf-e-a-referência). |
+| `playerId` | Id estável do jogador (`p-cbf-<id>`). |
+| `displayName`, `clubId`, `birthDate` | Só para ajudar quem preenche (ignoradas na leitura). |
+| `field` | `position` |
+| `oldValue` | Valor atual (vazio = null). Se não bater com o universo, a linha é recusada: a curadoria não sobrescreve em silêncio um dado que mudou. |
+| `newValue` | `GOL`, `DEF`, `MEI` ou `ATA`. Vazio = pendente (ignorada). |
+| `fieldSource` | `curadoria` |
+| `curator`, `date` (AAAA-MM-DD), `reason` | Obrigatórios numa linha preenchida. |
 
-## Conversão EM-RATING-1.0
+Exemplo:
+`p-cbf-750895,Arthur Monteiro,br-athletico-pr,2009-09-10,position,,MEI,curadoria,equipe ELITE MANAGER,2026-10-03,"posição definida para permitir cálculo posicional"`
 
-**Força = Overall − 42, limitada a 1–50.** Ponto de partida: a tabela por faixas proposta pelo proprietário. Escrita
-como uma linha, ela fica igual faixa a faixa:
+A planilha modelo tem **303 linhas pendentes**, uma para cada atleta sem posição em nenhuma fonte. Eram 291 antes
+desta etapa; os 12 a mais tinham posição vinda do EA FC 26, que foi retirada.
 
-| Overall EA FC 26 | Força ELITE MANAGER |
-|---|---|
-| 90+ | 48–50 (92 ou mais satura em 50) |
-| 86–89 | 44–47 |
-| 82–85 | 40–43 |
-| 78–81 | 36–39 |
-| 74–77 | 32–35 |
-| 70–73 | 28–31 |
-| 66–69 | 24–27 |
-| 62–65 | 20–23 |
-| 58–61 | 16–19 |
-| 54–57 | 12–15 |
-| 50–53 | 8–11 |
-| abaixo de 50 | 1–7 (43 ou menos vira 1) |
+**Decisão pendente.** Os outros 594 atletas têm posição da **Wikipédia** (fonte de conferência do universo), que
+**não entra na fórmula oficial**. Para o cálculo posicional valer para todos, há dois caminhos: aceitar a Wikipédia
+como fonte declarada da posição, ou curar também esses 594. A simulação mostra os dois cenários.
 
-O teste 7–8 confere cada Overall de 1 a 99 contra as faixas.
+## Simulação (03/10/2026)
 
-### Análise da tabela
+Os números completos estão em `reports/em-rating-2.0-report.md`. Cenários:
+- **Oficial:** só CBF e curadoria. Nenhuma posição curada ainda, então a produção não é avaliada para ninguém.
+- **Comparação:** CBF mais a posição da Wikipédia, declarada. Serve só para medir as regras por posição.
 
-- **Linear, 1 ponto por 1 ponto.** Não comprime o topo nem estica a base, e é a regra mais simples de auditar.
-- **O deslocamento amplia as razões.** O modelo de chance do engine compara as forças por **razão** (ataque/defesa,
-  própria/rival). Subtrair 42 aumenta a diferença relativa: Overall 80 contra 70 é uma razão de 1,14; como força,
-  38 contra 28, a razão vira 1,36. Isso deixa as partidas entre níveis diferentes mais desiguais do que o Overall
-  sugere. É uma consequência a medir no balanceamento antes de ligar o universo à carreira, não um defeito a
-  esconder.
-- **Calibração contra o mundo fictício.** A 1ª divisão fictícia tem média 37–38 (24 a 50), a 2ª 30, a 3ª 22 e a 4ª
-  16–17 (seeds de conferência). Na amostra real convertida, a média é 29,8 (20 a 38). Comparada à força fictícia, a
-  Série A ficaria no nível de uma 2ª divisão. Isso pesa se o universo real for misturado com divisões fictícias
-  (opção (b) em UNIVERSES.md).
-- **O limite de 50 só é atingido acima de 91.** No FC 26 isso é um punhado de jogadores no mundo. Nenhum está no
-  Brasileirão.
+| | Oficial | Comparação |
+|---|---|---|
+| Calculados | 895 de 897 | 895 de 897 |
+| Mín. / máx. | 14 / 50 | 14 / 50 |
+| Média / mediana | 39,5 / 41 | 37,4 / 38 |
+| p10 / p25 / p75 / p90 | 29 / 35 / 46 / 48 | 28 / 33 / 43 / 46 |
+| 11–15 · 16–20 · 21–25 · 26–30 | 4 · 12 · 30 · 63 | 6 · 18 · 36 · 78 |
+| 31–35 · 36–40 · 41–45 · 46–50 | 141 · 183 · 232 · 230 | 177 · 235 · 252 · 93 |
+| Por posição (média) | sem posição: 39,5 | GOL 38,9 · DEF 38,0 · MEI 38,0 · ATA 37,2 · sem posição 36,5 |
+| Por divisão | só Série A | só Série A |
 
-### Posição
+As faixas 1–5 e 6–10 ficaram vazias nos dois cenários.
 
-A versão 1.0 **não ajusta por posição**: o Overall da fonte já é por posição. Os passos de ajuste (`steps`) são
-gravados mesmo vazios, para que uma versão futura acrescente uma regra sem esconder nada. A posição do ELITE MANAGER
-(GOL/DEF/MEI/ATA) vem da fonte de conferência. Sem ela, vem da posição curta do EA (GK→GOL; CB/LB/RB/LWB/RWB→DEF;
-CDM/CM/CAM/LM/RM→MEI; LW/RW/ST/CF→ATA), com a origem gravada em `fieldSources.position`.
+Exemplos (cenário de comparação):
 
-### Extremos
+| Faixa | Jogador | Posição | Idade | Temporadas | Partidas | Gols | Força |
+|---|---|---|---|---|---|---|---|
+| Muito baixa | Robson (Palmeiras) | ausente | 20 | 2 | 0 | 0 | 17 |
+| Baixa | DARLAN (Vitória) | DEF | 23 | 1 | 28 | 1 | 32 |
+| Média | RAMON SOSA (Palmeiras) | ATA | 27 | 2 | 25 | 6 | 38 |
+| Alta | Renan Lodi (Atlético-MG) | DEF | 28 | 11 | 31 | 2 | 44 |
+| Muito alta | J. Capixaba (Bragantino) | DEF | 29 | 13 | 25 | 3 | 49 |
 
-- Overall fora de 1–99 ou não inteiro: **erro**, nunca "corrigido".
-- 92+ → 50; 43 ou menos → 1. O teste 6 cobre todo Overall possível.
+Renan Lodi mostra a recência em ação: tem 11 temporadas registradas, mas só 1 das 3 mais recentes, porque esteve
+fora do Brasil.
 
-### Jogadores sem referência
+### Anomalias (listadas, não corrigidas)
 
-Ficam com `strength: null`, `rating: null` e `strengthMethodVersion: null`, e não aparecem na simulação. Não recebem
-média do clube, da divisão nem da posição: **não existe força inventada**.
+1. **Topo saturado.** No cenário oficial, 52% dos atletas ficam com 41–50 e 12 chegam a 50. No de comparação, 39% e 6.
+   Titular regular e experiente chega a 1,0 em quase todos os componentes, e **os dados não distinguem titular de
+   destaque**. É o limite principal da base factual.
+2. **Experiência subestimada (60 atletas).** Com 27 anos ou mais e no máximo 2 temporadas na base, a carreira anterior
+   fica invisível (exterior ou antes de 2013). Exemplos: Aguirre, Portilla, Angelo Preciado, Guido Herrera, Ziyech.
+3. **Sem posição.** 897 no cenário oficial e 303 no de comparação: a produção não é avaliada.
+4. **Sem partidas em 2026 (15).** A força vem só de experiência e idade (ex.: Lezcano 14, Athos 14–17).
+5. **Dados insuficientes (2).** Lautaro (Bahia) e Gabriel (Bragantino) não têm temporadas registradas: força `null`.
+6. **Concentração.** 26–28% numa única faixa de 5 pontos.
+7. **Divisões.** Diferença entre divisões não avaliável: só há a Série A.
 
-## Divisões
+Não apareceram:
+- jogador com poucos dados e força 30 ou mais;
+- 10 ou mais temporadas com força 20 ou menos;
+- atacante com 8 ou mais gols e força abaixo de 30;
+- goleiro afetado por gols.
 
-**A divisão não reduz a força.** Um jogador forte numa divisão menor continua forte (teste 16). O que segura a ida dele
-para um clube pequeno é **econômico**: salário, caixa e personalidade nas regras do mercado. Não existe barreira
-"divisão X não contrata jogador Y" (teste 17). Também não há um piso ou teto de força por divisão.
+### Sensibilidade
 
-## Evolução
+Cada peso multiplicado por 0,5 e por 1,5, um de cada vez, no cenário de comparação:
 
-A camada de evolução existente (docs/PLAYER-PROGRESSION.md: checkpoints na rodada 19 e na virada, ±1) **não muda**.
-A força inicial vem da metodologia. Depois disso, quem a move é a evolução do jogo, não uma nova leitura da fonte no
-meio da carreira. Recalibrar (FC 27) vale para **novos** universos e temporadas, nunca para uma carreira em andamento.
+| Componente | Correlação com a força | Variação absoluta média (×0,5 / ×1,5) | Jogadores que mudam 3+ pontos |
+|---|---|---|---|
+| Participação | 0,83 | 1,4 / 0,9 | 138 / 40 |
+| Produção | 0,56 | 1,0 / 0,9 | 141 / 83 |
+| Experiência | 0,61 | 0,8 / 0,7 | 19 / 1 |
+| Recência | 0,58 | 0,5 / 0,4 | 0 / 0 |
+| Idade | 0,16 | 0,5 / 0,4 | 0 / 0 |
+| Contexto | 0,00 (constante) | 0,3 / 0,3 | 0 / 0 |
 
-## O que não muda no Engine
+- **A participação domina:** 15,5 pontos médios de contribuição, com desvio de 4,7.
+- **A produção é o segundo fator de diferenciação,** só entre quem tem posição.
+- Idade e contexto quase só deslocam a média.
 
-Nada. O engine 0.2.0 recebe `Player.strength` (1–50) como sempre. O teste 14 grava a impressão digital (sha256) das
-22 fontes do engine (`da6749ed…5b35a`): qualquer mudança nelas quebra o teste. RNG, seed, modelo de chance, mando,
-conversão, minutos e decisões continuam os mesmos.
+Calibração com o mundo fictício: a média dos ATIVOS é 37,4–39,8, perto da 1ª divisão fictícia (37–38). A distribuição
+é mais concentrada no topo.
 
-## Ligação entre a CBF e a referência
+## Versionamento
 
-A ligação é determinística e conservadora (`linkByBirthAndName`, `namesCompatible`). Ela exige:
+- `EM_RATING_2_VERSION = "EM-RATING-2.0"` vai em todo resultado (`methodVersion`).
+- A configuração inteira fica congelada (`Object.freeze`) em `EM_RATING_2_0` e é gravada na simulação (`config`):
+  pesos, curvas, âncoras, janelas e contexto.
+- Mudar qualquer valor = **nova versão** (2.1, 3.0...), com nova simulação e novo relatório. A versão anterior não é
+  apagada.
+- Ao aplicar (etapa futura, com aprovação), cada jogador recebe `strength`, `strengthMethodVersion` e
+  `strengthNotes` (a trilha dos componentes). Carreiras em andamento não mudam.
 
-1. **Mesma data de nascimento** (CBF DD/MM/AAAA, EA M/D/AAAA, ambas convertidas para ISO).
-2. **Nome compatível** entre o apelido ou nome civil da CBF e o nome comum ou nome completo do EA. Vale uma destas
-   regras:
-   - igual, sem acento e sem caixa;
-   - uma palavra de 4 letras ou mais contida no outro nome;
-   - nome de 2 ou mais palavras contido na mesma ordem no outro ("Ignacio Sosa" em "Ignacio Sosa Ospital");
-   - mesmo último sobrenome e mesma inicial.
-3. **Um único candidato.** Com dois ou mais, fica "ambíguo" e sem ligação.
+## Limitações conhecidas
 
-Na auditoria, a regra "sobrenome do EA sozinho" foi **removida**. Ela gerava ligações falsas: Kaiki Bruno da Silva
-com Tomás Silva (Platense) e Gabriel Baralhas dos Santos com Thomas Santos (IFK Göteborg). Cada ligação gravada
-mostra a regra usada (`matchedBy`).
+- Partidas e gols medem participação e produção, **não talento**. A força 2.0 não distingue titular comum de
+  destaque.
+- Sem minutos, uma entrada de 5 minutos conta como partida (se é assim que a CBF conta: não está documentado).
+- A experiência só enxerga a CBF a partir de 2013.
+- Os gols favorecem quem tem posição registrada, e a posição ainda depende de curadoria.
+- Só há a Série A: a calibração entre divisões é impossível com esta base.
 
-## Situação atual (não aplicar)
+## O que não muda
 
-Lote: CBF coletada em 02–03/10/2026, com 897 atletas (768 no clube e 129 transferidos segundo o clube atual da CBF),
-mais o EA FC 26 de 02/10/2026.
+- **Engine 0.2.0:** sem alteração. `git diff` de `engine/` vazio, e o teste compara o sha256 das 22 fontes.
+- **Evolução:** a camada existente (PLAYER-PROGRESSION.md) não muda. A força inicial viria da metodologia, e a
+  evolução segue as regras do jogo.
+- **Padrão do jogo:** o universo fictício continua o padrão, e o universo real continua opcional (`careerReady: false`).
+- **Escudos:** continuam fora.
 
-| Medida | Valor |
-|---|---|
-| Atletas com Overall ligado | **72 de 897 (8%)**; 68 dos 768 no clube |
-| Ligação por nascimento + nome | 72; "nascimento sem nome compatível": 681; "não encontrado": 188 |
-| Força proposta (72) | média 29,8 · mediana 30 · mín. 20 · máx. 38 |
-| Histograma | 20–24: 9 · 25–29: 24 · 30–34: 31 · 35–39: 8 |
-| Por posição | GOL 31,2 (5) · DEF 30,4 (23) · MEI 29,9 (20) · ATA 28,7 (24) |
-| Cobertura por clube | de 1 (Palmeiras, Bragantino) a 7 (Atlético-MG, Vasco) jogadores por elenco |
-| Topo | Fred 80→38 · Lucas Paquetá 80→38 · Rodinei 79→37 · Renan Lodi 78→36 · Jhon Arias 78→36 |
-| Base | Matheus Nascimento 63→21 · Franco Rossi 62→20 · Leo Perez 62→20 |
+## Pendência jurídica
 
-**Anomalias graves (critério do proprietário: "não aplique automaticamente se a distribuição apresentar anomalias
-graves"):**
+Uso comercial/distribuição de nomes reais de atletas e marcas de clubes requer avaliação jurídica antes da
+distribuição do universo real. Nada neste documento afirma que a CBF autoriza o uso comercial dos dados.
 
-1. **Cobertura de 8%.** 825 atletas ficariam sem força, e nenhum clube teria nem metade de um time titular avaliado.
-2. **Amostra enviesada.** Só tem Overall quem estava fora do Brasil ou numa liga sul-americana licenciada na base
-   do FC 26: repatriados e estrangeiros. Quem joga no Brasil há anos, entre eles os destaques de cada elenco, fica
-   sem referência. Aplicar a força assim faria "desconhecidos mais fortes que estrelas sem justificativa", situação
-   que o critério de qualidade proíbe.
-3. **Nível comparado ao fictício.** Com média 29,8, a Série A ficaria no nível da 2ª divisão fictícia. Isso só pode
-   ser decidido junto com a forma de ligar o universo à carreira.
+## Histórico: EM-RATING-1.0 (descontinuada)
 
-Por isso a **Fase 8 (aplicação) não foi executada**. Caminhos para o proprietário decidir:
+A 1.0 calculava força = Overall do EA SPORTS FC 26 − 42 (1–50). Ela nunca foi aplicada: a cobertura era de 8% e a
+amostra era enviesada (repatriados e estrangeiros). Descontinuada em 03/10/2026, junto com o uso de ratings de
+terceiros. O módulo `data/rating/em-rating.ts` ficou como registro histórico; nenhum código de dados, build ou teste o
+usa.
 
-- **(a) Esperar uma referência que cubra o Brasileirão**: uma edição com licença ou outra base pública de mesma
-  régua. É a mesma metodologia, com outro `ratingSource`.
-- **(b) EM-RATING-1.1 com uma segunda referência pública** para quem não tem Overall do EA. Precisa definir antes a
-  fonte, a régua e a conversão entre réguas, e documentar e testar como a 1.0.
-- **(c) Força por curadoria humana documentada** (lista revisável, com autor e data). Não é "IA decidiu": é uma
-  fonte própria, `ratingSource: 'curadoria'`.
-- **(d) Aplicar só aos 72**, com o restante `null`. **Não recomendado**: o universo não é jogável assim, e o viés do
-  item 2 continua.
-
-Qualquer caminho fica em `null` até a aprovação.
-
-## Recalibração (FC 27, FC 28, nova versão do método)
-
-1. Salvar o novo lote em `raw/` com `sourceVersion` próprio (ex.: `FC27-api-AAAA-MM-DD`), sem apagar o anterior.
-2. Novo `RatingSource` (`'EA_FC_27'`) e, se a régua mudar, nova `EM_RATING_VERSION` (ex.: `EM-RATING-2.0`) com a
-   nova tabela documentada aqui.
-3. `npm run universe -- <universo>` regrava a simulação `ratings/<versão>.simulacao.json`.
-4. Repetir o relatório desta página (cobertura, distribuição, anomalias) antes de aplicar.
-5. Aplicar grava `strength`, `strengthMethodVersion` e `strengthNotes`. Carreiras em andamento não mudam.
-
-## Campos
-
-| Campo (jogador) | Significado |
-|---|---|
-| `rating` | Referência externa ligada (`source`, `sourceVersion`, `sourcePlayerId`, `overall`, `sourcePosition`, `retrievedAt`, `matchedBy`) ou `null`. |
-| `strength` | Força 1–50 aplicada, ou `null`. Hoje é `null` em todos os jogadores reais. |
-| `strengthMethodVersion` | Versão do método que gerou `strength` (ex.: `EM-RATING-1.0`). É obrigatória quando há força e referência (o validador cobra). |
-| `strengthNotes` | Trilha do cálculo ("Overall 83 → base 41 (Overall − 42); sem ajustes"). |
-| `externalIds` | `{ cbf, eaFc }`: ids nas fontes. |
-| `fieldSources` | Origem de cada campo que não veio da fonte principal (`position`, `number`, `nationality`). |
+O snapshot `raw/ea-fc-26.candidates.raw.json` e a simulação antiga `ratings/EM-RATING-1.0.simulacao.json` continuam
+no repositório **sem uso**, aguardando a decisão de remoção. A auditoria está no relatório da etapa.

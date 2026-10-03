@@ -1,6 +1,6 @@
-import type { PlayerRatingRef, UniverseClub, UniversePlayer, UniversePosition } from '../model.ts';
+import type { UniverseClub, UniversePlayer, UniversePosition } from '../model.ts';
 import { normalizeName, normalizeNationality, resolveDisplayName } from '../normalize.ts';
-import { foldName, isoDate, namesCompatible } from '../rating/em-rating.ts';
+import { foldName, isoDate, namesCompatible } from './matching.ts';
 
 // Importador "CBF" (fonte PRINCIPAL): elencos da Série A a partir do snapshot bruto do site oficial da CBF.
 // Da CBF vêm: id do atleta, nome civil, APELIDO, data de nascimento e clube ATUAL (atleta_time_atual).
@@ -43,13 +43,6 @@ export interface CbfRawSnapshot {
 export const MAX_PLAYER_AGE = 50;
 
 const WIKI_POSITION: Record<string, UniversePosition> = { GOL: 'GOL', DEF: 'DEF', MEI: 'MEI', ATA: 'ATA' };
-/** Posição curta do EA FC → posição do ELITE MANAGER (só usada quando a Wikipédia não informa). */
-export const EA_POSITION: Record<string, UniversePosition> = {
-  GK: 'GOL', CB: 'DEF', LB: 'DEF', RB: 'DEF', LWB: 'DEF', RWB: 'DEF',
-  CDM: 'MEI', CM: 'MEI', CAM: 'MEI', LM: 'MEI', RM: 'MEI',
-  LW: 'ATA', RW: 'ATA', ST: 'ATA', CF: 'ATA',
-};
-
 /** Idade (anos completos) numa data de referência ISO. */
 export function ageAt(birthIso: string | null, refIso: string): number | null {
   if (!birthIso) return null;
@@ -65,8 +58,6 @@ export interface CbfImportInput {
   /** jogadores da fonte de conferência (Wikipédia), para posição/número/nacionalidade */
   reference: UniversePlayer[];
   referenceSource: string; // id em sources.json (ex.: "wikipedia-en")
-  /** referências externas de força já ligadas, por id CBF do atleta */
-  ratings: Record<string, PlayerRatingRef>;
 }
 
 export interface CbfImportReport {
@@ -75,7 +66,6 @@ export interface CbfImportReport {
   transferidos: number;
   semPagina: number;
   posicaoReferencia: number;
-  posicaoEa: number;
   semPosicao: number;
   ambiguosReferencia: number;
   referenciaSemCbf: string[]; // jogadores da Wikipédia que a CBF não lista no clube
@@ -137,7 +127,7 @@ export function matchReference(teams: readonly CbfRawTeam[], clubMap: Record<str
 export function importCbfSquads(i: CbfImportInput): { players: UniversePlayer[]; report: CbfImportReport } {
   const clubMap = clubMapFor(i.raw.teams, i.clubs);
   const refDate = i.raw.retrievedAt.slice(0, 10);
-  const report: CbfImportReport = { athletes: 0, ativos: 0, transferidos: 0, semPagina: 0, posicaoReferencia: 0, posicaoEa: 0, semPosicao: 0, ambiguosReferencia: 0, referenciaSemCbf: [], foraDoUniverso: [], clubMap };
+  const report: CbfImportReport = { athletes: 0, ativos: 0, transferidos: 0, semPagina: 0, posicaoReferencia: 0, semPosicao: 0, ambiguosReferencia: 0, referenciaSemCbf: [], foraDoUniverso: [], clubMap };
   const { refOf, ambiguous } = matchReference(i.raw.teams, clubMap, i.reference);
   const seen = new Map<string, UniversePlayer>();
   const usedRef = new Set<string>();
@@ -155,15 +145,11 @@ export function importCbfSquads(i: CbfImportInput): { players: UniversePlayer[];
       const ref = refOf.get(`${clubId}|${a.cbfId}`) ?? null;
       if (ambiguous.has(`${clubId}|${a.cbfId}`)) report.ambiguosReferencia++;
       if (ref) usedRef.add(ref.id);
-      const rating = i.ratings[a.cbfId] ?? null;
       const fieldSources: Record<string, string> = {};
       let position: UniversePosition | null = null;
       if (ref && ref.position && WIKI_POSITION[ref.position]) {
         position = WIKI_POSITION[ref.position];
         fieldSources.position = i.referenceSource;
-      } else if (rating?.sourcePosition && EA_POSITION[rating.sourcePosition]) {
-        position = EA_POSITION[rating.sourcePosition];
-        fieldSources.position = rating.source;
       }
       const nationality = ref?.nationality ?? null;
       if (nationality) fieldSources.nationality = i.referenceSource;
@@ -191,9 +177,9 @@ export function importCbfSquads(i: CbfImportInput): { players: UniversePlayer[];
         notes,
         source: { source: 'cbf', ref: `cbf:atleta:${a.cbfId}`, confirmedByPrimary: true },
         birthDate,
-        externalIds: { cbf: a.cbfId, ...(rating ? { eaFc: rating.sourcePlayerId } : {}) },
+        externalIds: { cbf: a.cbfId },
         fieldSources,
-        rating,
+        rating: null,
         strengthMethodVersion: null,
         strengthNotes: null,
       };
@@ -207,7 +193,6 @@ export function importCbfSquads(i: CbfImportInput): { players: UniversePlayer[];
     else report.transferidos++;
     if (!i.raw.athletes[p.externalIds!.cbf]) report.semPagina++;
     if (p.fieldSources?.position === i.referenceSource) report.posicaoReferencia++;
-    else if (p.position) report.posicaoEa++;
     else report.semPosicao++;
   }
   report.referenciaSemCbf = i.reference.filter((r) => !usedRef.has(r.id)).map((r) => `${r.displayName} (${r.clubId})`);

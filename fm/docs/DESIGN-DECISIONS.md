@@ -73,3 +73,19 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 * **Regras por competição como dado** (`data/competition-rules.ts`), com `confirmed` por divisão. O engine continua
   com as regras do universo fictício.
 * **Engine travado por teste:** o sha256 das 22 fontes do engine faz parte da suíte.
+
+## Etapa EM-RATING-2.0 (simulação)
+
+* **Força sem ratings de terceiros.** EA FC, Flashscore, Opta, Transfermarkt e SofaScore ficam fora. O build deixou
+  de ler o arquivo do EA: os 72 vínculos `rating`/`eaFc` e as 12 posições que vinham do EA saíram de `players.json`.
+* **CBF como única fonte factual da fórmula**, com componentes normalizados e retorno decrescente: participação na
+  temporada (40%), experiência (20%), recência (10%), idade (10%), produção por posição (15%) e contexto (5%).
+* **Produção relativa à posição, com âncoras fixas** (mediana → 0,5; p90 → 1). O goleiro fica neutro. A primeira
+  versão, com bônus por alvo, deixava o atacante 5,6 pontos abaixo do goleiro em média.
+* **Contexto igual em todas as séries:** a divisão não determina a força; o risco de um jogador forte num clube
+  pequeno é econômico.
+* **Curadoria separada do dado factual**, com curador, data, motivo e valor anterior conferido. Nunca escreve em
+  `players.json`.
+* **Posição da Wikipédia fora da fórmula oficial**, mostrada só num cenário de comparação declarado. Aceitá-la ou
+  curar os 594 é decisão do proprietário.
+* **Nada aplicado:** o topo satura (titular experiente ≈ 50) e a base não distingue titular de destaque.
