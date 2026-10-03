@@ -16,14 +16,6 @@
     "notes": "Snapshot bruto em raw/wikipedia-en-2026.raw.json (URL e revisão de cada artigo de clube). Elenco = primeira seção do artigo com {{Fs player}}; base, reservas e emprestados a outros clubes ficam de fora. Elencos mudam ao longo da temporada."
   },
   {
-    "id": "EA_FC_26",
-    "name": "EA SPORTS FC 26 — Overall (API pública de ratings da EA)",
-    "role": "referencia-forca",
-    "url": "https://drop-api.ea.com/rating/ea-sports-fc?locale=en",
-    "retrievedAt": "2026-10-02T23:49:33Z",
-    "notes": "SEM USO desde 03/10/2026: a força do ELITE MANAGER não depende de ratings de terceiros (docs/PLAYER-RATINGS.md). Nenhum jogador, build ou fórmula referencia esta fonte. O snapshot raw/ea-fc-26.candidates.raw.json e a simulação antiga ratings/EM-RATING-1.0.simulacao.json aguardam a decisão de remoção."
-  },
-  {
     "id": "curadoria-elite-manager",
     "name": "Curadoria ELITE MANAGER — cores dos clubes",
     "role": "curadoria",
@@ -37,6 +29,6 @@
     "role": "curadoria",
     "url": null,
     "retrievedAt": null,
-    "notes": "Posição dos atletas sem posição em nenhuma fonte, em curation/positions.csv: cada linha com curador, data, motivo e valor anterior. Aplicada só no cálculo, nunca sobre players.json. Nenhuma linha preenchida ainda."
+    "notes": "Fonte OFICIAL da posição de todos os atletas (a CBF não publica posição), em curation/positions.csv: uma linha por atleta, com curador, data, motivo e valor anterior. A Wikipédia aparece só como referência auxiliar do curador. Aplicada só no cálculo da força, nunca sobre players.json. Nenhuma linha preenchida ainda."
   }
 ]

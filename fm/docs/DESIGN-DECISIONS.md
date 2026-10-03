@@ -89,3 +89,13 @@ Decisões já tomadas e em vigor no MVP. Não estão em aberto.
 * **Posição da Wikipédia fora da fórmula oficial**, mostrada só num cenário de comparação declarado. Aceitá-la ou
   curar os 594 é decisão do proprietário.
 * **Nada aplicado:** o topo satura (titular experiente ≈ 50) e a base não distingue titular de destaque.
+
+## Etapa EM-RATING-2.0 (calibração, 2ª rodada)
+
+* **EA FC fora da arquitetura:** snapshot, simulação 1.0, módulo 1.0, campo `rating` e a fonte `EA_FC_26` removidos
+  depois da auditoria (nenhuma referência de código, teste, build ou simulação).
+* **Posição oficial só por curadoria.** A Wikipédia vira referência auxiliar na planilha (uma linha por atleta). A
+  posição dela continua em `players.json` só até a curadoria, porque sustenta o elenco jogável do universo.
+* **Sem teto artificial:** a calibração mexe em pesos, curva e tratamento da experiência; 50 continua possível.
+* **Modelos A/B/C comparados sem ranking;** a escolha é do proprietário. A curva de participação, o fator da
+  experiência limitada e o tratamento do goleiro são configuráveis por variante, gravados com a força.

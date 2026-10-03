@@ -20,8 +20,12 @@ export interface CurationEntry {
   reason: string;
 }
 
-/** Colunas do CSV. As de contexto (displayName, clubId, birthDate) só ajudam quem preenche e são ignoradas na leitura. */
-export const CURATION_COLUMNS = ['playerId', 'displayName', 'clubId', 'birthDate', 'field', 'oldValue', 'newValue', 'fieldSource', 'curator', 'date', 'reason'] as const;
+/**
+ * Colunas do CSV. As de contexto (displayName, clubId, birthDate, referenciaAuxiliar) só ajudam quem preenche e são
+ * ignoradas na leitura. referenciaAuxiliar = posição que a Wikipédia mostra, SÓ como apoio ao curador humano: nunca é
+ * fonte oficial e nunca entra no cálculo; a decisão registrada é sempre a do curador (fieldSource "curadoria").
+ */
+export const CURATION_COLUMNS = ['playerId', 'displayName', 'clubId', 'birthDate', 'referenciaAuxiliar', 'field', 'oldValue', 'newValue', 'fieldSource', 'curator', 'date', 'reason'] as const;
 
 function splitCsvLine(line: string): string[] {
   const out: string[] = [];

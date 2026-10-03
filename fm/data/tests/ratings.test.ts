@@ -25,8 +25,8 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const loaded = loadUniverse('brasileirao-2026');
 const U = loaded.universe as Universe;
 const players = Object.values(U.players);
-const sim = JSON.parse(readFileSync(join(ROOT, 'reports/em-rating-2.0-simulation.json'), 'utf8'));
-const simStrengths = sim.players.map((x: { oficial: { strength: number | null } }) => x.oficial.strength).filter((v: number | null) => v !== null) as number[];
+const sim = JSON.parse(readFileSync(join(ROOT, 'reports/em-rating-2.0-calibracao.json'), 'utf8'));
+const simStrengths = sim.players.flatMap((x: { strength: Record<string, number | null> }) => Object.values(x.strength)).filter((v: number | null) => v !== null) as number[];
 
 test('1. todo jogador tem displayName válido (texto não vazio, sem espaços nas pontas)', () => {
   assert.ok(loaded.ok, 'universo válido');
@@ -67,19 +67,23 @@ test('6. a força simulada fica sempre entre 1 e 50; nenhuma força oficial apli
 
 test('7–8. simulação determinística: mesmo dado + mesma versão = mesma força (gravada com a versão)', () => {
   assert.equal(sim.methodVersion, EM_RATING_2_VERSION);
-  assert.equal(sim.config.version, EM_RATING_2_VERSION);
+  for (const v of Object.values(sim.variants) as { version: string }[]) assert.equal(v.version, EM_RATING_2_VERSION);
   // a simulação é refeita nos testes de em-rating-2.test.ts; aqui, o arquivo cobre todos os atletas
   assert.equal(sim.players.length, players.length);
 });
 
 test('9. nenhum rating de terceiros: jogadores sem referência externa e simulação declarada sem terceiros', () => {
   assert.equal(sim.thirdPartyRatings, 'nenhum');
-  for (const p of players) assert.ok(!p.rating && !p.externalIds?.eaFc, p.id);
+  for (const p of players) assert.ok(!('rating' in p) && !('eaFc' in (p.externalIds ?? {})), p.id);
 });
 
 test('10. jogadores com dados insuficientes ficam identificados (força null + motivo), não estimados', () => {
-  const missing = sim.players.filter((x: { oficial: { strength: number | null } }) => x.oficial.strength === null);
-  for (const x of missing) assert.ok(x.oficial.flags.includes('DADOS_INSUFICIENTES'), x.playerId);
+  const missing = sim.players.filter((x: { strength: Record<string, number | null> }) => Object.values(x.strength).some((v) => v === null));
+  assert.equal(missing.length, 2);
+  for (const x of missing) {
+    assert.ok(x.flags.includes('DADOS_INSUFICIENTES'), x.playerId);
+    assert.ok(Object.values(x.strength).every((v) => v === null), `${x.playerId}: null em todas as variantes`);
+  }
 });
 
 test('11. dado incompleto não é inventado: posição/nacionalidade só com fonte; força não aplicada', () => {
@@ -171,7 +175,7 @@ test('18–20. cada competição tem regras próprias; Brasileirão usa regras b
   assert.notDeepStrictEqual(BRAZIL_2026.divisions.map((d) => d.relegation), FICTIONAL_SYSTEM.divisions.map((d) => d.relegation));
 });
 
-test('ligação CBF × EA só com evidência forte; datas e idade lidas sem chute', () => {
+test('ligação entre fontes só com evidência forte; datas e idade lidas sem chute', () => {
   assert.equal(isoDate('16/09/2007', 'DMY'), '2007-09-16');
   assert.equal(isoDate('6/15/1992 12:00:00 AM', 'MDY'), '1992-06-15');
   assert.equal(isoDate('31/13/2000', 'DMY'), null);

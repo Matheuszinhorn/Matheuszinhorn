@@ -7,9 +7,7 @@ import { normalizeName, POSITION_SUGGESTIONS, resolveDisplayName } from './norma
 
 export type IssueCode =
   | 'POSITION_MISSING'
-  | 'STRENGTH_WITHOUT_METHOD'
   | 'INVALID_BIRTH_DATE'
-  | 'INVALID_RATING_REF'
   | 'INVALID_FILE'
   | 'MISSING_FIELD'
   | 'COMPETITION_NOT_FOUND'
@@ -141,10 +139,7 @@ export function validateUniverse(files: UniverseFiles): ValidationResult {
     if (p.strength !== null && p.strength !== undefined && !(isInt(p.strength) && p.strength >= 1 && p.strength <= 50)) {
       err('STRENGTH_OUT_OF_RANGE', id, `força fora de 1–50: ${JSON.stringify(p.strength)}`, isInt(p.strength) ? String(Math.max(1, Math.min(50, p.strength))) : 'null (ainda não avaliada)');
     }
-    // força vinda de uma referência externa precisa dizer com qual metodologia foi calculada (rastreabilidade)
-    if (isInt(p.strength) && isObj(p.rating) && !isStr(p.strengthMethodVersion)) err('STRENGTH_WITHOUT_METHOD', id, 'força com referência externa e sem strengthMethodVersion', 'gravar a versão da metodologia (ex.: EM-RATING-1.0)');
     if (p.birthDate !== null && p.birthDate !== undefined && !(isStr(p.birthDate) && /^\d{4}-\d{2}-\d{2}$/.test(p.birthDate))) err('INVALID_BIRTH_DATE', id, `data de nascimento inválida: ${JSON.stringify(p.birthDate)}`, 'AAAA-MM-DD ou null');
-    if (isObj(p.rating) && !(isStr(p.rating.source) && isStr(p.rating.sourceVersion) && isStr(p.rating.sourcePlayerId) && isInt(p.rating.overall))) err('INVALID_RATING_REF', id, 'referência de força incompleta', 'source, sourceVersion, sourcePlayerId e overall');
     if (p.number !== null && p.number !== undefined && !(isInt(p.number) && p.number >= 1 && p.number <= 99)) {
       err('INVALID_NUMBER', id, `número inválido: ${JSON.stringify(p.number)}`, 'inteiro de 1 a 99, ou null se ausente');
     }

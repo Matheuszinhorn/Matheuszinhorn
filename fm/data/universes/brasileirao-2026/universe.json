@@ -11,5 +11,5 @@
   ],
   "defaultCompetitionId": "brasileirao-a-2026",
   "primarySource": "cbf",
-  "dataStatus": "Série A 2026 com a CBF como fonte principal (coleta de 02–03/10/2026): 897 atletas, apelido e clube atual pela CBF (768 no clube, 129 transferidos). Posição, número e nacionalidade da Wikipédia em inglês (conferência) só quando o jogador é identificado sem ambiguidade; 303 sem posição em nenhuma fonte ficam fora do elenco jogável (planilha de curadoria em curation/). Cores por curadoria. Nenhum rating de terceiros. Força ELITE MANAGER NÃO aplicada (null): a EM-RATING-2.0 foi só simulada (reports/em-rating-2.0-report.md)."
+  "dataStatus": "Série A 2026 com a CBF como fonte principal (coleta de 02–03/10/2026): 897 atletas, apelido e clube atual pela CBF (768 no clube, 129 transferidos). Posição oficial: curadoria (curation/positions.csv, nenhuma preenchida). Enquanto isso, a posição da Wikipédia (conferência, não oficial) ainda define o elenco jogável deste universo; 303 atletas sem nenhuma posição ficam fora dele. Cores por curadoria. Nenhum rating de terceiros. Força ELITE MANAGER NÃO aplicada (null): a EM-RATING-2.0 está em calibração (reports/em-rating-2.0-calibracao.md)."
 }

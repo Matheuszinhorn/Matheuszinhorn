@@ -69,7 +69,13 @@ priorizar depois do teste externo.
 ## Depois da etapa EM-RATING-2.0 (simulação)
 
 * **Uso comercial/distribuição de nomes reais de atletas e marcas de clubes requer avaliação jurídica antes da distribuição do universo real.**
-* Curadoria das 303 posições ausentes (`data/universes/brasileirao-2026/curation/positions.csv`) e decisão sobre as 594 posições da Wikipédia (aceitar como fonte declarada ou curar).
+* Curadoria das posições de todos os 897 atletas (`data/universes/brasileirao-2026/curation/positions.csv`; 303 sem nenhuma referência primeiro). Depois dela, retirar a posição da Wikipédia de `players.json` (hoje sustenta o elenco jogável do universo).
 * Topo saturado na 2.0 (titular experiente ≈ 50): decidir se o teto factual fica abaixo de 50 ou se surge outro fato que diferencie destaque de titular.
 * Experiência subestimada de estrangeiros e repatriados (só a CBF desde 2013 é vista).
-* Remoção do snapshot `raw/ea-fc-26.candidates.raw.json`, da simulação `ratings/EM-RATING-1.0.simulacao.json` e do módulo `data/rating/em-rating.ts` (sem uso; auditoria no relatório da etapa).
+
+## Depois da calibração EM-RATING-2.0 (2ª rodada)
+
+* Escolha do modelo (A, B, C ou outro) pelo proprietário; relatório em `reports/em-rating-2.0-calibracao.md`.
+* Regra do goleiro quando a produção pesa mais (o neutro fixo 0,5 limita o teto do goleiro: 46/44/41 em A/B/C).
+* Fator da experiência limitada (×1, ×0,5 ou ×0) para os 60 atletas com carreira anterior fora da base.
+* Repetir a calibração depois da curadoria das posições (hoje "sem posição" produz quase todos os 50).

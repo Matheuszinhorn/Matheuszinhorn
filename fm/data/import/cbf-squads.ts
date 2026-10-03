@@ -179,7 +179,6 @@ export function importCbfSquads(i: CbfImportInput): { players: UniversePlayer[];
         birthDate,
         externalIds: { cbf: a.cbfId },
         fieldSources,
-        rating: null,
         strengthMethodVersion: null,
         strengthNotes: null,
       };

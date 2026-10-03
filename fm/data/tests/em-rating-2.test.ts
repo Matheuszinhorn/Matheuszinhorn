@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { CURATION_COLUMNS, curatedPositions, parseCurationCsv } from '../curation.ts';
 import type { CbfRawSnapshot } from '../import/cbf-squads.ts';
 import type { UniversePlayer } from '../model.ts';
-import { COMPONENTS, EM_RATING_2_0, EM_RATING_2_VERSION, ageValue, experienceValue, productionValue, strengthV2, withWeights, type Rating2Input } from '../rating/em-rating-2.ts';
+import { COMPONENTS, EM_RATING_2_0, EM_RATING_2_VERSION, MODEL_IDS, ageValue, calibrationVariant, experienceValue, participationValue, productionValue, strengthV2, withWeights, type Rating2Input } from '../rating/em-rating-2.ts';
 import { inputsFromCbf } from '../rating/em-rating-2-inputs.ts';
 
 // EM-RATING-2.0 (experimental, só simulação): fórmula própria sobre fatos da CBF; nenhum rating de terceiros.
@@ -99,18 +99,20 @@ test('curadoria: planilha modelo válida, linhas pendentes ignoradas, linha pree
   assert.deepStrictEqual(csv.split('\n')[0].split(','), [...CURATION_COLUMNS]);
   const parsed = parseCurationCsv(csv);
   assert.deepStrictEqual(parsed.errors, []);
-  assert.equal(parsed.pending + parsed.entries.length, players.filter((p) => p.position === null).length);
+  // uma linha por atleta: a posição oficial é sempre de curadoria (a da Wikipédia é só referência auxiliar)
+  assert.equal(parsed.pending + parsed.entries.length, players.length);
+  assert.ok(csv.split('\n').slice(1).filter(Boolean).every((l) => !/wikipedia/.test(l) || /\(wikipedia-en, auxiliar\)/.test(l)), 'Wikipédia só como referência auxiliar');
   const current = Object.fromEntries(players.map((p) => [p.id, p]));
   const id = players.find((p) => p.position === null)!.id;
-  const ok = parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,position,,MEI,curadoria,equipe ELITE MANAGER,2026-10-03,"posição definida para permitir cálculo posicional"\n`);
+  const ok = parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,,position,,MEI,curadoria,equipe ELITE MANAGER,2026-10-03,"posição definida para permitir cálculo posicional"\n`);
   assert.deepStrictEqual(ok.errors, []);
   assert.deepStrictEqual(ok.entries[0], { playerId: id, field: 'position', oldValue: null, newValue: 'MEI', fieldSource: 'curadoria', curator: 'equipe ELITE MANAGER', date: '2026-10-03', reason: 'posição definida para permitir cálculo posicional' });
   assert.equal(curatedPositions(ok.entries, current).positions.get(id), 'MEI');
   // incompleta, inválida ou desatualizada: recusada
-  assert.ok(parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,position,,MEI,curadoria,,2026-10-03,motivo\n`).errors[0].includes('curador'));
-  assert.ok(parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,position,,VOL,curadoria,eu,2026-10-03,motivo\n`).errors[0].includes('posição inválida'));
+  assert.ok(parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,,position,,MEI,curadoria,,2026-10-03,motivo\n`).errors[0].includes('curador'));
+  assert.ok(parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${id},x,c,,,position,,VOL,curadoria,eu,2026-10-03,motivo\n`).errors[0].includes('posição inválida'));
   const withWiki = players.find((p) => p.position !== null)!;
-  const stale = parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${withWiki.id},x,c,,position,,MEI,curadoria,eu,2026-10-03,motivo\n`);
+  const stale = parseCurationCsv(`${CURATION_COLUMNS.join(',')}\n${withWiki.id},x,c,,,position,,MEI,curadoria,eu,2026-10-03,motivo\n`);
   assert.match(curatedPositions(stale.entries, current).errors[0], /oldValue/);
   // a curadoria entra no cálculo com a origem gravada; o dado factual (players.json) não muda
   const inp = inputsFromCbf(players.filter((p) => p.id === id), raw, { positions: new Map([[id, 'MEI']]), positionSource: 'curadoria', competition: 'brasileirao-a' })[0];
@@ -130,15 +132,78 @@ test('versionamento: versão gravada no resultado; pesos, curvas e âncoras cong
   assert.notEqual(strengthV2({ ...base, position: 'ATA', goals: 12 }, alt).strength, null);
 });
 
-test('simulação gravada em reports/: não aplicada, sem ratings de terceiros, nenhuma força oficial alterada', () => {
-  const sim = JSON.parse(readFileSync(join(ROOT, 'reports/em-rating-2.0-simulation.json'), 'utf8'));
+test('calibração gravada em reports/: não aplicada, sem ratings de terceiros, nenhuma força oficial alterada; EA fora do repositório', () => {
+  for (const gone of ['data/universes/brasileirao-2026/raw/ea-fc-26.candidates.raw.json', 'data/universes/brasileirao-2026/ratings/EM-RATING-1.0.simulacao.json', 'data/rating/em-rating.ts']) assert.ok(!existsSync(join(ROOT, gone)), gone);
+  const sim = JSON.parse(readFileSync(join(ROOT, 'reports/em-rating-2.0-calibracao.json'), 'utf8'));
   assert.equal(sim.applied, false);
+  assert.match(sim.status, /calibração/);
   assert.equal(sim.methodVersion, 'EM-RATING-2.0');
   assert.equal(sim.thirdPartyRatings, 'nenhum');
   assert.equal(sim.players.length, players.length);
-  assert.ok(players.every((p) => p.strength === null && p.strengthMethodVersion === null && !p.rating && !p.externalIds?.eaFc));
+  assert.ok(players.every((p) => p.strength === null && p.strengthMethodVersion === null && !('rating' in p) && !('eaFc' in (p.externalIds ?? {}))));
   // nenhum código da força 2.0, do build ou da simulação lê o arquivo do EA
   for (const f of ['data/rating/em-rating-2.ts', 'data/rating/em-rating-2-inputs.ts', 'data/curation.ts', 'data/import/cbf-squads.ts', 'scripts/build-universe.ts', 'scripts/simulate-em-rating-2.ts']) {
     assert.ok(!/ea-fc|EA_FC|eaFc|overall/i.test(readFileSync(join(ROOT, f), 'utf8')), f);
+  }
+});
+
+// ---------- calibração (2ª rodada) ----------
+
+test('modelos A/B/C: pesos registrados; A é a configuração da 1ª simulação; nenhum é tratado como definitivo', () => {
+  assert.deepStrictEqual(MODEL_IDS, ['A', 'B', 'C']);
+  assert.deepStrictEqual(calibrationVariant('A').weights, EM_RATING_2_0.weights);
+  assert.deepStrictEqual(calibrationVariant('B').weights, { participation: 0.25, experience: 0.2, recency: 0.15, age: 0.1, production: 0.25, context: 0.05 });
+  assert.deepStrictEqual(calibrationVariant('C').weights, { participation: 0.2, experience: 0.15, recency: 0.15, age: 0.1, production: 0.35, context: 0.05 });
+  for (const m of MODEL_IDS) {
+    const r = strengthV2(base, calibrationVariant(m, 'log', 0.5));
+    assert.equal(r.methodVersion, 'EM-RATING-2.0');
+    assert.equal(r.variant, `${m}/log/exp×0.5`);
+  }
+});
+
+test('curvas de participação: 0 → 0, 1 → 1, crescentes, com retorno decrescente; saturante satura mais cedo', () => {
+  for (const c of ['sqrt', 'log', 'saturating'] as const) {
+    const v = [0, 5, 10, 15, 20, 25, 30, 34].map((m) => participationValue(m, 34, c));
+    assert.equal(v[0], 0);
+    assert.ok(Math.abs(v[v.length - 1] - 1) < 1e-12);
+    for (let k = 1; k < v.length; k++) assert.ok(v[k] > v[k - 1], c);
+    for (let k = 2; k < v.length; k++) assert.ok(v[k] - v[k - 1] <= v[k - 1] - v[k - 2] + 1e-12, `${c}: retorno decrescente`);
+  }
+  assert.ok(participationValue(17, 34, 'saturating') > participationValue(17, 34, 'sqrt'));
+});
+
+test('experienceDataLimited: marca sem inventar experiência; o fator só reduz o peso de experiência e recência', () => {
+  const lim = { age: 30, seasons: [2026] };
+  for (const k of [1, 0.5, 0]) {
+    const r = strengthV2({ ...base, ...lim }, calibrationVariant('B', 'sqrt', k));
+    assert.equal(r.experienceDataLimited, true);
+    assert.ok(r.flags.includes('EXPERIENCIA_LIMITADA'));
+    assert.equal(r.components.experience.value, Math.round(experienceValue(1, EM_RATING_2_0) * 1e6) / 1e6, 'valor da experiência é o observado (1 temporada)');
+    assert.equal(r.components.experience.weight, Math.round(0.2 * k * 1e6) / 1e6);
+  }
+  // jovem com poucas temporadas não é "limitado" (a carreira dele cabe na base)
+  assert.equal(strengthV2({ ...base, age: 21, seasons: [2025, 2026] }).experienceDataLimited, false);
+  assert.equal(strengthV2({ ...base, age: 30, seasons: [2020, 2022, 2024, 2026] }).experienceDataLimited, false);
+});
+
+test('extremos coerentes em todos os modelos e curvas', () => {
+  const ALL = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+  for (const m of MODEL_IDS) for (const c of ['sqrt', 'log', 'saturating'] as const) {
+    const cfg = calibrationVariant(m, c);
+    const s = (o: Partial<Rating2Input>) => strengthV2({ ...base, ...o }, cfg).strength!;
+    const tag = `${m}/${c}`;
+    assert.ok(s({ matches: 0, goals: 0 }) < s({ matches: 34 }), `${tag}: 0 partidas < muitas`);
+    assert.ok(s({ position: 'ATA', matches: 30, goals: 0 }) < s({ position: 'ATA', matches: 30, goals: 15 }), `${tag}: 0 gols < produção excepcional`);
+    assert.ok(s({ seasons: [2026] }) < s({ seasons: ALL }), `${tag}: experiência baixa < alta`);
+    // idade moderada: 16 e 40 anos ficam a poucos pontos do auge
+    for (const age of [16, 40]) assert.ok(s({ age: 27 }) - s({ age, seasons: age === 16 ? [2026] : ALL }) <= 12 && s({ age: 27 }) - s({ age }) <= 5, `${tag}: idade ${age}`);
+    // goleiro: gols não mudam nada; sem posição: produção fora, sinalizado
+    assert.equal(s({ position: 'GOL', goals: 0 }), s({ position: 'GOL', goals: 4 }));
+    assert.ok(strengthV2({ ...base, position: null, positionSource: null }, cfg).flags.includes('POSICAO_AUSENTE'));
+    // 50 continua possível (sem teto artificial), e só no extremo de todos os componentes
+    assert.equal(s({ position: 'ATA', matches: 34, goals: 17, seasons: ALL, age: 29 }), 50);
+    assert.ok(s({ position: 'MEI', matches: 34, goals: 1, seasons: ALL, age: 29 }) < 50);
+    // dados insuficientes continuam null
+    assert.equal(strengthV2({ ...base, seasons: null }, cfg).strength, null);
   }
 });

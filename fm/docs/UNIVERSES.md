@@ -20,7 +20,7 @@ posição em nenhuma fonte fica no arquivo, com o motivo, mas fora do elenco jog
 
 Campos acrescentados nesta etapa (todos opcionais; saves e universo fictício não mudam): clube `country`,
 `colorsSource`, `externalIds`; jogador `birthDate`, `externalIds`, `fieldSources` (origem de cada campo que não veio
-da fonte principal), `rating`, `strengthMethodVersion`, `strengthNotes` (docs/PLAYER-RATINGS.md). Clubes **não**
+da fonte principal), `strengthMethodVersion`, `strengthNotes` (docs/PLAYER-RATINGS.md). Clubes **não**
 têm escudo, logo nem imagem: a identidade é nome, cidade, estado, país, divisão e cores (primária, secundária,
 destaque), usadas só como contexto; a marca do jogo continua marinho #071522, lima #B3FA46 e off-white #F2F4ED.
 
@@ -36,7 +36,6 @@ data/
   import/cbf-squads.ts     importador do snapshot do site da CBF (fonte principal)
   rating/em-rating-2.ts    metodologia de força EM-RATING-2.0, própria, só fatos da CBF (docs/PLAYER-RATINGS.md)
   rating/em-rating-2-inputs.ts  entradas da 2.0 a partir do snapshot da CBF
-  rating/em-rating.ts      EM-RATING-1.0 (descontinuada; registro histórico, sem uso)
   curation.ts              curadoria rastreável (posição), separada do dado factual
   import/matching.ts       ligação entre fontes por nome e data de nascimento
   competition-rules.ts     regras por competição (CompetitionRules): Brasil 2026 e universo fictício
@@ -47,10 +46,8 @@ data/
     universe.json  competition.json  clubs.json  players.json  sources.json
     raw/cbf-2026.raw.json            snapshot da CBF (times + páginas de atleta), sem alteração
     raw/wikipedia-en-2026.raw.json   snapshot bruto da conferência, sem alteração
-    raw/ea-fc-26.candidates.raw.json SEM USO desde 03/10/2026 (aguarda decisão de remoção)
     raw/club-colors.curated.json     cores curadas dos 20 clubes
-    ratings/EM-RATING-1.0.simulacao.json   simulação antiga (EA), SEM USO (aguarda decisão de remoção)
-    curation/positions.csv           planilha de curadoria de posição (303 pendentes)
+    curation/positions.csv           curadoria de posição: uma linha por atleta (897 pendentes)
   tests/                   testes da camada (npm test)
 scripts/build-universe.ts  RAW → normalize → validate → competition/clubs/players.json (npm run universe)
 ```
@@ -149,8 +146,7 @@ Erros (impedem montar o universo): arquivo inválido, campo obrigatório ausente
 repetida, clube inexistente, `clubId` duplicado, clube fora da competição, jogador sem `clubId`, `playerId`
 duplicado, jogador duplicado (mesmo nome no clube ou mesmo jogador da fonte em dois registros), posição inválida,
 força fora de 1–50, número fora de 1–99, idade fora de 14–50, status inválido, elenco com menos de 11 jogadores,
-elenco sem goleiro (o elenco conta só ATIVOS com posição), força com referência externa mas sem
-`strengthMethodVersion`, data de nascimento fora do formato AAAA-MM-DD, referência externa (`rating`) incompleta.
+elenco sem goleiro (o elenco conta só ATIVOS com posição), data de nascimento fora do formato AAAA-MM-DD.
 Avisos (não impedem): número repetido no clube, fonte não cadastrada, posição ausente em todas as fontes
 (`POSITION_MISSING`: o jogador fica fora do elenco jogável, nunca recebe posição estimada).
 
@@ -174,7 +170,7 @@ inscrições depois dela, dentro do regulamento. Por isso o elenco vale para a d
 |---|---|---|
 | **Principal** | CBF: páginas dos 20 times da Série A 2026 e as 898 páginas de atleta (`raw/cbf-2026.raw.json`) | id do atleta, nome civil, **apelido**, data de nascimento e **clube atual** (`atleta_time_atual`). Todo jogador tem `confirmedByPrimary: true`. |
 | **Conferência** | Wikipédia em inglês (snapshot de 01/10/2026) | cidade, estado e estádio do clube; posição, número e nacionalidade do jogador, só quando ele é identificado **mútua e unicamente** no mesmo clube (`fieldSources`). |
-| **Curadoria** | ELITE MANAGER | posição dos atletas sem posição em nenhuma fonte (`curation/positions.csv`, rastreável). |
+| **Curadoria** | ELITE MANAGER | posição OFICIAL de todos os atletas (`curation/positions.csv`, rastreável; a Wikipédia aparece só como referência auxiliar do curador). |
 | **Curadoria** | ELITE MANAGER | cores dos clubes (`raw/club-colors.curated.json`). |
 
 Acesso à CBF: o servidor `www.cbf.com.br` envia a cadeia TLS com o intermediário errado. A coleta validou o
@@ -198,10 +194,10 @@ Regras do importador CBF (`data/import/cbf-squads.ts`):
 |---|---|
 | Clubes | 20 (cores curadas; sem escudo) |
 | Atletas | 897: 768 ATIVOS e 129 TRANSFERIDOS |
-| Posição | Wikipédia 594 · **nenhuma fonte 303** (175 deles ATIVOS); curadoria: 0 preenchidas |
+| Posição | curadoria (oficial): 0 de 897 preenchidas · Wikipédia (não oficial; ainda usada no elenco jogável do universo) 594 · **nenhuma referência 303** (175 deles ATIVOS) |
 | Elenco jogável (ATIVO com posição) | 593 (GOL 70 · DEF 191 · MEI 174 · ATA 158) |
 | Sem apelido / sem fonte principal | 0 / 0 |
-| Ratings de terceiros | nenhum (EA FC removido do build em 03/10/2026) |
+| Ratings de terceiros | nenhum (EA FC removido do repositório em 03/10/2026) |
 | Força aplicada | **0**: todos com `strength: null` (docs/PLAYER-RATINGS.md) |
 | Idade | 16 a 46 anos, média 25,8 |
 | Atletas da Wikipédia que a CBF não lista no clube | 79 (não entram: a fonte principal manda) |
@@ -210,7 +206,7 @@ Regras do importador CBF (`data/import/cbf-squads.ts`):
 
 | Dado | Situação |
 |---|---|
-| Força ELITE MANAGER | **Ausente (`null`) para todos.** A EM-RATING-2.0 (própria, só fatos da CBF) foi simulada sobre 895 atletas, sem aplicar (docs/PLAYER-RATINGS.md, reports/em-rating-2.0-report.md). |
+| Força ELITE MANAGER | **Ausente (`null`) para todos.** A EM-RATING-2.0 (própria, só fatos da CBF) está em calibração (modelos A/B/C), sem aplicar (docs/PLAYER-RATINGS.md, reports/em-rating-2.0-calibracao.md). |
 | Posição | A CBF não publica. 291 atletas sem posição em nenhuma fonte (base, reservas, recém-chegados) ficam fora do elenco jogável, nunca estimados. |
 | Número e nacionalidade | Só da Wikipédia, quando a ligação é segura. |
 | Cores | Curadoria, não dado oficial (`colorsSource: "curadoria-elite-manager"`). |

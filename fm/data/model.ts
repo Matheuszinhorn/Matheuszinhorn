@@ -88,33 +88,20 @@ export interface UniversePlayer {
   // ---- campos acrescentados na etapa "Universo real + EM-RATING" (todos opcionais: arquivos antigos continuam válidos) ----
   /** data de nascimento ISO (AAAA-MM-DD), da fonte principal */
   birthDate?: string | null;
-  /** ids do jogador em fontes externas (ex.: { cbf: "710301", eaFc: "209331" }) */
+  /** ids do jogador em fontes externas (ex.: { cbf: "710301" }) */
   externalIds?: Record<string, string>;
   /** fonte de cada campo que NÃO veio da fonte principal (ex.: { position: "wikipedia-en", nationality: "wikipedia-en" }) */
   fieldSources?: Record<string, string>;
-  /** referência externa de força (EA FC...), exatamente como veio da fonte; não é a força do jogo */
-  rating?: PlayerRatingRef | null;
   /** versão da metodologia que produziu `strength` (null = força não aplicada) */
   strengthMethodVersion?: string | null;
   strengthNotes?: string | null;
-}
-
-/** Referência externa de força guardada no jogador (rastreável; ver data/rating/em-rating.ts). */
-export interface PlayerRatingRef {
-  source: string; // "EA_FC_26"
-  sourceVersion: string;
-  sourcePlayerId: string;
-  overall: number;
-  sourcePosition: string | null;
-  retrievedAt: string;
-  matchedBy: string;
 }
 
 /** sources.json (um item). */
 export interface DataSource {
   id: string;
   name: string;
-  role: 'principal' | 'conferencia' | 'referencia-forca' | 'curadoria';
+  role: 'principal' | 'conferencia' | 'curadoria';
   url: string | null;
   retrievedAt: string | null;
   notes: string;
