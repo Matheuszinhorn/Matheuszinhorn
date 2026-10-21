@@ -1,0 +1,2 @@
+id,data_hora_brt,descricao,categoria,natureza,valor,efeito_caixa,tipo,situacao,referencia_comprovante,saldo_caixa_confirmado_apos,observacao
+FIN-001,21/10/2026 18:10,Capital inicial do desafio,capital,entrada,50.00,+50.00 (somente após confirmação),PREVISTO,AGUARDANDO CONFIRMACAO,declaracao do proprietario no documento do desafio,0.00,Passa a REALIZADO quando o proprietário confirmar que o valor está separado (ATV-005); saldo então = 50.00
