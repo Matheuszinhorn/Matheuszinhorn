@@ -94,7 +94,7 @@ _Ainda sem dados de mercado._
 4. Antes de commitar, verificar a visibilidade do repositório: um repositório público distribui o produto de graça (origem: DEC-009).
 5. Construir ativos reutilizáveis multiplica canais sem multiplicar trabalho (origem: DEC-008).
 
-## DEC-010 — Ordem de prioridade para a primeira receita (21/10/2026 19:46)
+## DEC-010 — Ordem de prioridade para a primeira receita (21/10/2026 19:44)
 - **Fato:** todo marketplace (Hotmart, Fiverr, Lemon Squeezy) exige identidade, biometria ou repasse que o Brasil não tem (ATV-022). Claude não tem nenhum canal de envio próprio.
 - **Análise honesta:**
   - Um produto digital sem audiência e sem marketplace tem tráfego **perto de zero**. A chance de vender o kit nesta semana é baixa.

@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 19:50 BRT (fase validar e vender, DEC-010).
+Atualizado em 21/10/2026 19:44 BRT (fase validar e vender, DEC-010).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 

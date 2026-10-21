@@ -150,7 +150,7 @@
 
 ---
 
-## REL-005 — Fase "validar e vender" (21/10/2026 19:50 BRT)
+## REL-005 — Fase "validar e vender" (21/10/2026 19:44 BRT)
 
 **STATUS:** sobrevivendo. Capital confirmado, ainda sem receita.
 

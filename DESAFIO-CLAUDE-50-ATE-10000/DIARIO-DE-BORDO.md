@@ -285,3 +285,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 
 ## ATV-027 — Reavaliação: qual caminho dá a primeira receita mais rápido
 - **Situação:** CONCLUÍDO. Ver DEC-010.
+
+## COR-003 — Horários e formato do CSV (21/10/2026 19:45 BRT)
+- **Erro 1:** o commit `53b84fa` usou 19:50 e 19:46, horários posteriores ao commit real (19:44). Repetiu o erro da COR-002.
+- **Erro 2:** a descrição do FIN-001-C tinha uma vírgula dentro de aspas mal formadas, o que quebrava a leitura do CSV (13 colunas em vez de 12).
+- **Correção:** horários ajustados para 19:44 e a vírgula removida. O CSV agora tem 12 colunas em todas as linhas.
+- **Medida preventiva:** a partir daqui, todo registro usa o horário lido do relógio (`date`) imediatamente antes de escrever, e o CSV é validado com um parser antes de cada commit.
