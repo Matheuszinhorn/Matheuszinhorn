@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit Sites Locais</title>
+<meta name="description" content="Crie o site de um pequeno negócio em 2 minutos: formulário, prévia e download. Sem código e sem mensalidade.">
+<meta property="og:title" content="Kit Sites Locais">
+<meta property="og:description" content="Site pronto para barbearia, estética, pet shop, padaria, oficina e personal trainer. R$ 47, pagamento único.">
+<meta property="og:image" content="capa.png">
+<style>
+/* Vitrine de produto: promessa + prova (exemplos reais) + oferta com pagamento Pix */
+:root{--bg:#f5f4ef;--surface:#fff;--fg:#17201b;--muted:#59625c;--line:#dedcd3;--accent:#1d6b48;--accent-ink:#fff;--soft:#e4efe8}
+@media (prefers-color-scheme:dark){:root{--bg:#101512;--surface:#18201b;--fg:#e9eee9;--muted:#a1aca4;--line:#2a332d;--accent:#5fd19b;--accent-ink:#0b1710;--soft:#1d2b23;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{padding-block:56px 32px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;color:var(--accent)}
+h1{font-size:clamp(2.2rem,6.5vw,3.5rem);line-height:1.04;letter-spacing:-.02em;margin:.25em 0;max-width:16ch;text-wrap:balance}
+.lead{font-size:1.15rem;color:var(--muted);max-width:58ch;margin:0 0 24px}
+.cta{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;padding:14px 22px;border-radius:10px}
+.cta:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.shot{margin-top:32px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.shot img{display:block;width:100%;height:auto;max-width:100%}
+section{padding-block:44px;border-top:1px solid var(--line)}
+h2{font-size:1.6rem;margin:0 0 18px;text-wrap:balance}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.card h3{margin:0 0 4px;font-size:1.05rem}.card p{margin:0;color:var(--muted);font-size:.95rem}
+.ex{display:flex;flex-wrap:wrap;gap:8px}
+.ex a{border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;border-radius:999px;padding:8px 14px}
+.ex a:hover{border-color:var(--accent)}
+.offer{background:var(--soft);border-radius:16px;padding:28px;display:grid;gap:16px}
+.price{font-size:2.6rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price small{font-size:1rem;font-weight:500;color:var(--muted)}
+ol.steps{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.pix{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+@media (max-width:620px){.pix{grid-template-columns:1fr}}
+.pix img{width:200px;height:200px;background:#fff;padding:8px;border-radius:10px;max-width:100%}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;overflow-wrap:anywhere;user-select:all}
+button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:10px 16px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.note{color:var(--muted);font-size:.9rem;margin:0}
+details{border-top:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:600}
+footer{padding-block:32px 48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header class="w">
+  <div class="eyebrow">Kit Sites Locais · v1.0</div>
+  <h1>O site de um pequeno negócio pronto em 2 minutos</h1>
+  <p class="lead">Preencha um formulário, veja a prévia e baixe um site leve, pronto para celular, com botão de agendamento no WhatsApp. Você publica de graça e não paga mensalidade.</p>
+  <a class="cta" href="#comprar">Comprar por R$ 47</a>
+  <div class="shot"><img src="gerador.png" alt="Tela do gerador: formulário à esquerda e prévia do site à direita" width="1280" height="900"></div>
+</header>
+
+<section class="w">
+  <h2>Veja sites gerados pelo kit</h2>
+  <div class="ex">
+    <a href="../exemplos/pt-barber.html">Barbearia</a>
+    <a href="../exemplos/pt-beauty.html">Estética e unhas</a>
+    <a href="../exemplos/pt-pet.html">Pet shop</a>
+    <a href="../exemplos/pt-bakery.html">Padaria</a>
+    <a href="../exemplos/pt-auto.html">Oficina mecânica</a>
+    <a href="../exemplos/pt-fitness.html">Personal trainer</a>
+    <a href="../exemplos/es-beauty.html">Em espanhol</a>
+    <a href="../exemplos/en-barber.html">Em inglês</a>
+  </div>
+  <p class="note" style="margin-top:12px">Negócios fictícios. No kit, você troca nome, serviços, preços, horários e fotos pelo formulário.</p>
+</section>
+
+<section class="w">
+  <h2>O que vem no kit</h2>
+  <div class="grid">
+    <div class="card"><h3>Gerador sem código</h3><p>Abre no navegador, funciona sem internet e mostra a prévia enquanto você digita.</p></div>
+    <div class="card"><h3>6 nichos, 3 idiomas</h3><p>Barbearia, estética, pet shop, padaria, oficina e personal, em português, espanhol e inglês.</p></div>
+    <div class="card"><h3>Pronto para vender</h3><p>WhatsApp com mensagem pronta, preços, avaliações, horários, mapa e telefone.</p></div>
+    <div class="card"><h3>Leve e encontrável</h3><p>Um arquivo com menos de 10 KB e dados de SEO local (schema.org) para o Google.</p></div>
+    <div class="card"><h3>Hospedagem grátis</h3><p>Guia passo a passo para Netlify Drop, GitHub Pages ou Cloudflare Pages.</p></div>
+    <div class="card"><h3>Uso comercial</h3><p>Crie quantos sites quiser, inclusive para clientes pagantes.</p></div>
+  </div>
+</section>
+
+<section class="w" id="comprar">
+  <div class="offer">
+    <div class="price">R$ 47 <small>pagamento único</small></div>
+    <p><b>Vendas abrem em breve.</b> O pagamento por Pix está sendo configurado. Os sites de exemplo acima já podem ser vistos.</p>
+  </div>
+</section>
+
+<section class="w">
+  <h2>Perguntas frequentes</h2>
+  <details><summary>Preciso saber programar?</summary><p>Não. Você preenche um formulário e baixa o arquivo. Para publicar, basta arrastar a pasta para o Netlify Drop.</p></details>
+  <details><summary>Tem mensalidade?</summary><p>Não. O pagamento é único e a hospedagem é gratuita. O domínio próprio é opcional, e você paga direto ao registro.</p></details>
+  <details><summary>Posso usar para clientes?</summary><p>Sim, em quantos sites quiser. Só não é permitido revender ou distribuir o próprio kit.</p></details>
+  <details><summary>E se eu não gostar?</summary><p>Se o kit não funcionar como descrito, devolvemos o valor em até 7 dias depois da compra.</p></details>
+  <details><summary>Prefere que façamos o site para você?</summary><p>O site completo, feito sob medida, sai por R$ 197. Fale pelo mesmo WhatsApp.</p></details>
+</section>
+
+<footer class="w">Kit Sites Locais · feito por Matheus Reis, desenvolvedor em Porto Alegre/RS</footer>
+
+</body>
+</html>
