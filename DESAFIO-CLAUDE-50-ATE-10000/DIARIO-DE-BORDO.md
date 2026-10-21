@@ -63,3 +63,50 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 
 ## ATV-006 — Prospecção inicial do EXP-001 (30 leads, 20–30 mensagens)
 - **Situação:** PLANEJADO (depende da ATV-004 e do proprietário)
+
+## ATV-007 — Recebimento do regulamento v2
+- **Data/hora:** 21/10/2026, 18:29 BRT
+- **Situação:** CONCLUÍDO
+- **Objetivo:** incorporar o novo regulamento sem perder as regras anteriores.
+- **Ação executada:** resumo das mudanças da v2 registrado no `README.md` (seção "Versões do regulamento"). O estado CANCELADO passou a ser usado.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+- **Evidência:** o commit desta sessão.
+- **Próximo passo:** inventário de recursos (ATV-008).
+
+## ATV-008 — Inventário de ferramentas e limitações
+- **Data/hora:** 21/10/2026, 18:30 BRT
+- **Situação:** CONCLUÍDO
+- **Objetivo:** cumprir os itens 14.1 a 14.3: saber o que Claude executa sozinho e o que depende do proprietário.
+- **Ação executada:** `RECURSOS-E-ACESSOS.md` criado.
+- **Resultado:** Claude executa a produção (sites, textos, documentação, pesquisa). Venda, recebimento e investimento dependem do proprietário.
+- **Aprendizado:** o gargalo da operação é o tempo humano de envio de mensagens. Tudo que reduz esse tempo tem prioridade.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-009 — Pesquisa de mercado e de investimentos
+- **Data/hora:** 21/10/2026, 18:31 BRT
+- **Situação:** CONCLUÍDO
+- **Objetivo:** validar o preço do EXP-001 e avaliar investimentos financeiros para os R$ 50.
+- **Ferramentas:** busca na web.
+- **Resultados (fontes externas, sem verificação independente):**
+  - **Preço de landing pages para MEI e pequenas empresas, com freelancer:** a faixa mais citada vai de R$ 500 a R$ 2.000 (InfinitePay, mai/2026; FreelaSemCrise). Nossa oferta de R$ 97–297 fica bem abaixo do mercado, o que é uma vantagem para conseguir os primeiros clientes. HIPÓTESE: há espaço para subir o preço depois de ter um portfólio real.
+  - **Selic:** 14,25% a.a. segundo notícia de ago/2026. A Focus projeta 14,00% no fim de 2026. Não houve Copom em outubro, e a próxima reunião é em 3–4/11/2026. O valor atual não foi confirmado no site do BC.
+  - **Tesouro Selic 2029:** investimento mínimo estimado entre R$ 153 e R$ 195 (Investidor10, Serasa), acima do capital de R$ 50. Inviável.
+  - **Conta com liquidez diária a cerca de 100% do CDI:** R$ 50 × cerca de 14% a.a. dá aproximadamente R$ 0,55/mês bruto (ESTIMATIVA). Contribuição para a meta: desprezível.
+- **Decisão:** DEC-004 (nenhum investimento financeiro agora).
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-010 — Modelos por nicho e página de oferta
+- **Data/hora:** 21/10/2026, 18:27 BRT
+- **Situação:** CONCLUÍDO (os arquivos existem e foram testados). A publicação continua BLOQUEADA (ATV-004).
+- **Objetivo:** aumentar a taxa de resposta com um modelo do próprio nicho do cliente e ter uma página que reúna oferta e preços.
+- **Hipótese:** um modelo do mesmo nicho do negócio abordado converte mais que um genérico.
+- **Ação executada:**
+  - `demo/` reorganizado com CSS compartilhado e uma página de oferta e portfólio (`demo/index.html`).
+  - Três modelos fictícios, todos identificados como demonstração: `barbearia/`, `estetica/`, `petshop/`.
+- **Teste:** renderizei no Chromium a 390 px de largura. Não há rolagem horizontal (scrollWidth = 390 nas três páginas) e conferi visualmente a captura do modelo de estética.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+- **Próximo passo:** publicar (T-03) e começar a prospecção.
+
+## Atualização de ATV-004 (21/10/2026 18:35)
+- Como `demo/` foi reorganizado, o endereço previsto mudou para `https://matheuszinhorn.github.io/DESAFIO-CLAUDE-50-ATE-10000/demo/` (página de oferta) e para as subpastas `barbearia/`, `estetica/` e `petshop/`. Continua sendo PROJEÇÃO.
+- **Motivo do bloqueio:** falta permissão de administrador. **Providência:** o proprietário faz o merge e ativa o Pages.

@@ -28,3 +28,26 @@ _Ainda sem dados de mercado._
 
 ## Lições para decisões futuras
 1. Registrar como caixa apenas o que tiver confirmação (origem: COR-001).
+
+## DEC-004 — Nenhum investimento financeiro por enquanto (21/10/2026, ATV-009)
+- **Decisão:** não aplicar os R$ 50 em ativos financeiros.
+- **Alternativas consideradas:**
+  - Tesouro Selic: mínimo de cerca de R$ 153–195, acima do capital.
+  - Conta com cerca de 100% do CDI: aproximadamente R$ 0,55/mês.
+  - Ações e criptomoedas: alta volatilidade, com risco de perder a única reserva.
+- **Motivo:** retorno irrelevante para a meta, ou risco incompatível com a sobrevivência. Na prática, o capital é a reserva de emergência da operação.
+- **Opcional, sem impacto na estratégia:** se o proprietário quiser, pode deixar os R$ 50 em conta própria com liquidez diária e rendimento de cerca de 100% do CDI. Os rendimentos só serão lançados quando creditados.
+- **Revisão:** reavaliar quando o caixa passar de R$ 1.000, para guardar o capital de giro ocioso em renda fixa com liquidez diária.
+
+## DEC-005 — Dois canais em paralelo para a mesma oferta (21/10/2026)
+- **Decisão:** EXP-001 (WhatsApp para negócios locais) como canal principal e EXP-002 (plataformas de freelance) como complementar.
+- **Motivo:** diversificar o canal sem dispersar o produto. É o mesmo serviço, o mesmo portfólio e o mesmo custo zero.
+- **Alternativa descartada:** F (revenda), porque arriscaria todo o capital em estoque.
+
+## DEC-006 — Manter o preço de lançamento abaixo do mercado (21/10/2026)
+- **Fato:** o mercado cobra R$ 500–2.000 por landing page de freelancer (ATV-009).
+- **Decisão:** manter R$ 197 para os 3 primeiros clientes, em troca de depoimento, e R$ 297 depois disso. O preço do EXP-001 **não muda durante o experimento**.
+- **Motivo:** o objetivo agora é ganhar prova social e chegar à primeira receita. O reajuste vai ser avaliado como experimento próprio.
+
+## Lições (acréscimo)
+2. A alavanca do desafio é a habilidade com custo zero, não o rendimento do capital (origem: ATV-009).

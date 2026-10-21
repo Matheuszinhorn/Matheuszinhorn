@@ -4,7 +4,7 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 18:25 BRT)
+## Estado atual (atualizado em 21/10/2026 18:35 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
@@ -16,7 +16,8 @@ Início oficial: 21/10/2026 (horário de Brasília).
 | Patrimônio líquido atual | R$ 50,00 (capital disponibilizado, a confirmar) | — |
 | Total retirado | R$ 0,00 | — |
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
-| Estratégia ativa | EXP-001: sites de uma página para negócios locais | PLANEJADO |
+| Estratégias | EXP-001: sites para negócios locais (canal WhatsApp) · EXP-002: plataformas de freelance | ambas PLANEJADO |
+| Investimentos financeiros | nenhum | DEC-004 |
 
 Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORIOS-DE-PROGRESSO.md`.
 
@@ -33,8 +34,22 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
 | `RELATORIOS-DE-PROGRESSO.md` | Relatórios periódicos e marcos |
 | `PLANO-DE-ACAO.md` | Tarefas, responsáveis, prazos e situação |
 | `ENCERRAMENTO-E-LICOES.md` | Resultado final e lições, atualizado ao longo do desafio |
+| `RECURSOS-E-ACESSOS.md` | O que Claude executa sozinho, o que depende do proprietário (arquivo adicional) |
 | `comercial/mensagens.md` | Roteiros de prospecção e fechamento (arquivo adicional) |
-| `demo/index.html` | Página de demonstração, negócio fictício (arquivo adicional) |
+| `demo/` | Página de oferta + 3 modelos fictícios: barbearia, estética, pet shop (arquivo adicional) |
+
+## Versões do regulamento
+- **v1 (21/10/2026, cerca de 18:00):** documento inicial, mais a seção 12 (documentação).
+- **v2 (21/10/2026, 18:29):** "Regulamento oficial do experimento". Mantém as regras da v1 e acrescenta:
+  - Investimentos financeiros permitidos, sem alavancagem, crédito ou concentração especulativa. Valorização não realizada fica separada do lucro realizado. Juros e dividendos só contam quando creditados. Ativos são avaliados a valor de mercado verificável, líquido de custos.
+  - Proibido contrair dívidas ou obrigações sem autorização expressa.
+  - Autonomia máxima dentro das permissões reais, sem contornar controles.
+  - Novo estado de atividade: CANCELADO, com motivo. O estado BLOQUEADO exige motivo e providência.
+  - Derrota também ocorre se não houver como prosseguir sem obrigações não autorizadas.
+  - Revisão financeira específica antes de cada retirada. Se o dia não tiver movimentação, isso é registrado.
+  - Formalização, licenças e análises especializadas devem ser identificadas antes de prosseguir.
+
+Em caso de conflito, prevalece a v2.
 
 ## Regras oficiais (resumo fiel do documento do desafio)
 
@@ -77,3 +92,4 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
 - Os critérios de sucesso dos experimentos não são alterados depois do início.
 - Se houver divergência entre os registros e o dinheiro real, as decisões financeiras param até que ela seja esclarecida.
 - Sempre diferenciar **FATO** (confirmado), **ESTIMATIVA**, **HIPÓTESE** e **PROJEÇÃO**.
+- Estados: PLANEJADO, EM EXECUÇÃO, CONCLUÍDO, BLOQUEADO (com motivo e providência), CANCELADO (com motivo).

@@ -48,3 +48,32 @@
 7. **Deu errado:** o caixa foi lançado como disponível sem confirmação. Corrigido em COR-001.
 8. **Aprendido:** o ritmo do desafio depende das ações humanas (publicar e prospectar).
 9. **Próximo passo:** confirmar o capital, publicar a demo e enviar as primeiras mensagens.
+
+---
+
+## REL-002 — Abertura sob o regulamento v2 (21/10/2026 18:35 BRT)
+
+**STATUS:** sobrevivendo, em pré-operação. Não houve movimentação financeira desde o REL-001.
+
+| Indicador | Valor | Origem |
+|---|---:|---|
+| Receitas recebidas | R$ 0,00 | — |
+| Despesas pagas | R$ 0,00 | — |
+| Caixa disponível confirmado | R$ 0,00 (R$ 50,00 aguardando confirmação) | FIN-001 |
+| Lucro/prejuízo | R$ 0,00 | — |
+| Patrimônio líquido | R$ 50,00 (a confirmar) | FIN-001 |
+| Investimentos financeiros | R$ 0,00 | DEC-004 |
+| Total retirado | R$ 0,00 | — |
+| Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
+| Marcos atingidos | nenhum | — |
+
+- **Executado e concluído:** ATV-007 (regulamento v2), ATV-008 (inventário de recursos), ATV-009 (pesquisa de mercado e de investimentos), ATV-010 (3 modelos por nicho e página de oferta).
+- **Bloqueado:** ATV-004/T-03 (publicação), ATV-005/T-01 (confirmação do capital), T-05 (chave Pix), T-12 (perfil de freelance).
+- **Estratégias em andamento:** EXP-001 e EXP-002, ambas PLANEJADO.
+- **Riscos:**
+  1. Execução depende do tempo do proprietário.
+  2. Bloqueio do WhatsApp se houver envio em volume.
+  3. Cliente que some depois de pagar a entrada.
+  4. Preço abaixo do mercado pode sinalizar baixa qualidade.
+  5. Formalização (MEI) e tributação se o volume crescer. Na faixa atual, a renda é de pessoa física, informada na declaração anual. Revisar ao passar de cerca de R$ 2.000/mês.
+- **Próximas ações:** merge, ativação do Pages, confirmação do capital, lista de clientes e primeiras mensagens.

@@ -17,11 +17,14 @@ _Nenhuma validada ainda._
 ## Estratégias perdedoras
 _Nenhuma encerrada ainda._
 
+Descartadas antes de testar: investimento financeiro como motor principal (DEC-004) e revenda de produtos (DEC-005).
+
 ## Principais erros
 - 21/10/2026 — Capital lançado como caixa sem confirmação. Corrigido em COR-001 (ATV-003).
 
 ## Aprendizados
 - O capital escasso desloca o valor para a habilidade e o tempo do proprietário. A estratégia precisa explorar isso.
+- Com R$ 50, renda fixa a cerca de 14% a.a. levaria cerca de 40 anos até R$ 10.000. Investir só faz sentido para guardar o caixa ocioso, não como motor de crescimento.
 
 ## O que poderia ter sido feito melhor
 _Será preenchido conforme houver resultados._

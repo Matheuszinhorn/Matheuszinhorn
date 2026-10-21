@@ -62,3 +62,58 @@ _Nenhum resultado ainda: o experimento não foi iniciado._
 
 ### Decisão final
 _Pendente._
+
+---
+
+## Reavaliação com o regulamento v2 (ATV-009, 21/10/2026 18:33 BRT)
+
+Novas alternativas avaliadas. Os valores são ESTIMATIVAS, exceto onde há fonte indicada.
+
+| Critério | D. Plataformas de freelance (Workana, 99Freelas) | E. Investimento financeiro (renda fixa) | F. Compra e revenda de produtos |
+|---|---|---|---|
+| Capital necessário | R$ 0 | R$ 50 (Tesouro Selic exige cerca de R$ 153–195, por isso fica inviável) | R$ 50, com estoque de risco |
+| Tempo até a 1ª receita | 1–3 semanas (perfil novo sem avaliações) | Imediato, mas cerca de R$ 0,55/mês | 1–2 semanas |
+| Demanda | Alta, com muita concorrência | — | Depende do produto |
+| Margem | Alta, menos a taxa da plataforma (ainda não verificada) | cerca de 14% a.a. bruto | 20–40%, com ciclos lentos |
+| Risco | Baixo (só o tempo) | Muito baixo | Médio: perder o capital inteiro em estoque parado |
+| Tempo humano | Médio (propostas) | Nenhum | Alto (logística) |
+| **Decisão** | **Canal complementar: EXP-002** | **Não agora (DEC-004)** | **Descartado agora:** compromete o único capital |
+
+**Conclusão:** a alavanca do desafio é a **habilidade técnica com custo zero**, não o capital. Para ir de R$ 50 a R$ 10.000 com 14% a.a., seriam necessários cerca de 40 anos. Com serviços, bastam cerca de 35–50 vendas de R$ 197–297, mais a recorrência.
+
+---
+
+## EXP-002 — Perfil em plataforma de freelance (Workana/99Freelas)
+- **Situação:** PLANEJADO. Está bloqueado pela criação do perfil (T-12, proprietário).
+- **Critérios congelados em:** 21/10/2026 18:33 BRT.
+
+### Hipótese
+Um perfil com portfólio (os modelos do `demo/`) e propostas rápidas, a preço competitivo, consegue o primeiro projeto de landing page ou site simples em até 14 dias.
+
+### Por que parece promissora
+A demanda já existe e vem pronta, sem prospecção ativa, e a plataforma intermedeia o pagamento.
+
+### Público
+Pequenas empresas, MEIs e profissionais autônomos que publicam projetos de landing page ou site institucional.
+
+### Oferta
+Landing page de R$ 250 a R$ 450, conforme o escopo, com entrega em 3–5 dias.
+
+### Custo
+R$ 0. A taxa da plataforma sobre o valor recebido será verificada antes da primeira proposta.
+
+### Limite de perda
+R$ 0 em dinheiro. O tempo do proprietário fica limitado a 30 min/dia.
+
+### Critérios de avaliação
+| Métrica | Continuar se | Abandonar se |
+|---|---|---|
+| Propostas enviadas | ≥ 15 em 7 dias | — |
+| Respostas de clientes | ≥ 2 em 15 propostas | 0 em 30 propostas |
+| 1º projeto pago | até 04/11/2026 | 0 projetos em 21 dias |
+
+### Material
+`comercial/freelance.md` (perfil e modelo de proposta).
+
+### Resultados
+_Ainda não iniciado._
