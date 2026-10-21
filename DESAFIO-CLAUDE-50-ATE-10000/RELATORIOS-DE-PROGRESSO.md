@@ -147,3 +147,36 @@
   - Página de vendas (T-22).
   - Atender pedidos assim que chegarem.
   - Kit v1.1 conforme os dados.
+
+---
+
+## REL-005 — Fase "validar e vender" (21/10/2026 19:50 BRT)
+
+**STATUS:** sobrevivendo. Capital confirmado, ainda sem receita.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa disponível confirmado | **R$ 50,00** (FIN-001-C) |
+| Receitas recebidas / despesas pagas | R$ 0,00 / R$ 0,00 |
+| Lucro/prejuízo acumulado | R$ 0,00 |
+| Patrimônio líquido / acumulado | R$ 50,00 / R$ 50,00 (0,5%) |
+| Total retirado | R$ 0,00 |
+| Vendas / propostas / mensagens enviadas | 0 / 0 / 0 |
+
+- **Executado:** ATV-021 a ATV-027.
+  - Capital confirmado.
+  - Requisitos verificados nas fontes oficiais.
+  - Vitrine pública no ar sem ação do proprietário.
+  - Gerador de Pix testado.
+  - Mensagens atualizadas.
+  - Materiais de Instagram prontos.
+  - DEC-010.
+- **Disponível para compra?** **Não.** Falta a chave Pix (T-05).
+- **Bloqueios reais (só o proprietário):**
+  - T-05: chave Pix e WhatsApp.
+  - T-07: enviar as mensagens.
+  - T-26: postar no Instagram.
+- **Riscos:**
+  - Tráfego do kit perto de zero sem divulgação.
+  - Os links dependem do branch e do htmlpreview.
+  - A chave Pix fica pública na página (usar chave aleatória).

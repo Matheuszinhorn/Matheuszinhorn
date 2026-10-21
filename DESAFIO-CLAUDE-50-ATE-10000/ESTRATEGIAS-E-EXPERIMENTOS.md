@@ -61,6 +61,8 @@ Mensagem personalizada no WhatsApp comercial, com o link da demo, no máximo 30 
 - 21/10 18:48: portfólio publicado (ATV-012). Falta torná-lo público (T-16).
 - 21/10 18:55: 29 contatos com mensagens personalizadas e envio em um toque (ATV-013/014). A lista de clientes passou a ser feita por Claude.
 
+- 21/10 19:42: link público do portfólio nas mensagens e escada de preços de R$ 197, 97 e 47 (ATV-025).
+
 ### Resultados
 _Nenhuma mensagem enviada ainda. O experimento continua PLANEJADO até o primeiro envio._
 
@@ -186,8 +188,11 @@ R$ 0. Nenhum anúncio pago sem lucro anterior.
 - ATV-017 (21/10 19:30): produto construído e testado. Gerador `builder.html` mais 18 exemplos, guia em 3 idiomas e licença.
 - ATV-019 (21/10 19:30): capas e anúncios prontos (`comercial/anuncios-globais.md`).
 
+### Execução (critérios não alterados)
+- 21/10 19:44: página pública do kit no ar, **sem meio de compra** (falta a chave Pix). Canal escolhido: Pix direto, sem marketplace (DEC-010). O relógio de "21 dias depois da publicação" começa **quando a compra estiver habilitada**.
+
 ### Resultados
-_Ainda não publicado._
+_0 vendas. A compra ainda não está habilitada._
 
 ---
 

@@ -225,3 +225,63 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Erro:** os registros do commit `70497ee` usavam 19:40, 19:35 e 19:33, horários **posteriores** ao commit real (19:32 BRT).
 - **Correção:** os horários foram ajustados para 19:32 e 19:30. A versão anterior continua no commit `70497ee`.
 - **Lição:** registrar o horário obtido do relógio no momento da escrita, e não uma estimativa.
+
+---
+# Ciclo 5 — Validar e vender (21/10/2026, a partir de 19:36 BRT)
+
+## ATV-021 — Capital inicial confirmado
+- **Data/hora:** 21/10/2026 19:36 BRT
+- **Situação:** CONCLUÍDO
+- **Evidência:** mensagem do proprietário na sessão: "Capital confirmado, R$ 50 separados".
+- **Efeito:** lançamento FIN-001-C. O caixa confirmado passa a R$ 50,00. ATV-005 e T-01 concluídas.
+
+## ATV-022 — Verificação de requisitos em fontes oficiais
+- **Data/hora:** 21/10/2026 19:37 BRT
+- **Situação:** CONCLUÍDO
+- **Resultados:**
+  - **Lemon Squeezy (docs oficiais):** o Brasil **não consta** na lista de repasse bancário. Por PayPal não deu para confirmar. **Inviável como canal principal.**
+  - **Hotmart (Central de Ajuda oficial, artigo 216440217):** para vender, é preciso validar a identidade com documento original (RG/CNH/CRNM) e **biometria facial**. Os dados têm de coincidir com o titular da conta bancária, e a conta bancária só pode ser cadastrada **depois da primeira venda**. **Exige a identidade do proprietário; Claude não pode fazer isso.**
+  - **Pix:** o padrão BR Code foi conferido contra o exemplo de referência do manual do BCB, que circula em fontes de terceiros. O CRC calculado (1D3D) é igual ao esperado. O PDF oficial do BCB não abriu pela ferramenta.
+- **Conclusão:** o único caminho de recebimento **sem conta nova** é o Pix na chave que o proprietário já tem, com contato pelo WhatsApp que ele já usa.
+
+## ATV-023 — Vitrine pública sem ação do proprietário
+- **Data/hora:** 21/10/2026 19:38–19:44 BRT
+- **Situação:** CONCLUÍDO
+- **Tentativas de hospedagem:**
+  1. **raw.githack:** serve as páginas, mas mostra uma tela de "External Content Notice" ao navegador. **Rejeitado.**
+  2. **jsDelivr e statically:** entregam como texto puro. **Rejeitados.**
+  3. **htmlpreview.github.io:** renderiza a página, as imagens e a navegação entre páginas. **Adotado.**
+- **Publicado no ar:**
+  - Portfólio de serviços: https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/demo/index.html
+  - Página de venda do kit: https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/vitrine/kit/index.html
+  - 8 sites de exemplo (6 em PT, 1 ES, 1 EN).
+- **Teste:** Chromium a 390 px, sem rolagem horizontal, imagem carregada, link de exemplo navegável, nenhum erro de script.
+- **Efeito:** **T-16 (tornar público o artefato) deixa de ser necessária.** O portfólio já é público.
+- **Decisão consciente:** os exemplos ficaram públicos; o gerador (`builder.html`), que é o produto pago, não.
+- **Riscos:** os links dependem do branch `ccr-fb47334b-mm7jqd` continuar existindo e do serviço gratuito htmlpreview.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-024 — Gerador de Pix e página de compra
+- **Data/hora:** 21/10/2026 19:39 BRT
+- **Situação:** CONCLUÍDO (ferramenta). A **venda continua BLOQUEADA** até a chave Pix (T-05).
+- **Ação executada:**
+  - `ferramentas/pix.py` gera o Pix copia e cola e o QR code.
+  - `vitrine/montar.py` monta a página com Pix de R$ 47, QR code, botão "copiar" e botão de comprovante pelo WhatsApp.
+- **Teste:** com uma chave fictícia, o payload ficou válido (CRC confere, valor 47.00) e a página renderizou o QR code. A versão publicada **diz claramente que as vendas ainda não abriram**.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-025 — EXP-001 atualizado com link público e escada de preços
+- **Data/hora:** 21/10/2026 19:42 BRT
+- **Situação:** CONCLUÍDO
+- **Ação executada:**
+  - As 29 mensagens passaram a usar o link público do portfólio.
+  - O arquivo de prospecção ganhou a escada de preços: R$ 197 (feito por nós), R$ 97 (cartão digital) e R$ 47 (kit para fazer você mesmo).
+  - O arquivo atualizado foi entregue ao proprietário. Nenhum envio foi feito ainda.
+
+## ATV-026 — Materiais para o Instagram do proprietário (conta existente)
+- **Data/hora:** 21/10/2026 19:44 BRT
+- **Situação:** CONCLUÍDO (materiais). A publicação depende do proprietário (conta pessoal dele).
+- **Ação executada:** 2 imagens 1080×1350 e legendas, em `comercial/instagram.md`.
+
+## ATV-027 — Reavaliação: qual caminho dá a primeira receita mais rápido
+- **Situação:** CONCLUÍDO. Ver DEC-010.

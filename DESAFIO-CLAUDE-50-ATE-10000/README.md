@@ -4,21 +4,22 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 19:32 BRT)
+## Estado atual (atualizado em 21/10/2026 19:50 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
 | Status | Sobrevivendo, em pré-operação | — |
-| Capital disponibilizado | R$ 50,00 | **Aguardando confirmação do proprietário** |
-| Caixa disponível confirmado | R$ 0,00 | Passa a R$ 50,00 quando o proprietário confirmar que o valor está separado |
+| Capital disponibilizado | R$ 50,00 | **Confirmado em 21/10/2026 19:36 (FIN-001-C)** |
+| Caixa disponível confirmado | R$ 50,00 | FIN-001-C |
 | Receita recebida | R$ 0,00 | — |
 | Despesas pagas | R$ 0,00 | — |
-| Patrimônio líquido atual | R$ 50,00 (capital disponibilizado, a confirmar) | — |
+| Patrimônio líquido atual | R$ 50,00 | — |
 | Total retirado | R$ 0,00 | — |
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
 | Estratégias | EXP-001: sites locais via WhatsApp (pronto, aguardando envio) · EXP-003: produto digital global "Local Site Kit" (produto pronto) · EXP-004: serviço global no Fiverr (anúncio pronto) · EXP-002: CANCELADO | ver ESTRATEGIAS-E-EXPERIMENTOS.md |
 | Investimentos financeiros | nenhum | DEC-004 |
-| Portfólio publicado | https://claude.ai/artifact/XL38oFznHwV6wcSDS9S52Q | privado até o proprietário compartilhar |
+| Portfólio público (serviço) | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/demo/index.html | no ar desde 21/10 19:40 (ATV-023) |
+| Página de venda do kit | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/vitrine/kit/index.html | no ar, **sem meio de compra** até a chave Pix (T-05) |
 | Contatos prontos | 29 (L001–L029), 0 contatados | ATV-013 |
 
 Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORIOS-DE-PROGRESSO.md`.

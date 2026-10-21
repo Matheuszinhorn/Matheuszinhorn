@@ -93,3 +93,20 @@ _Ainda sem dados de mercado._
 ## Lições (acréscimo)
 4. Antes de commitar, verificar a visibilidade do repositório: um repositório público distribui o produto de graça (origem: DEC-009).
 5. Construir ativos reutilizáveis multiplica canais sem multiplicar trabalho (origem: DEC-008).
+
+## DEC-010 — Ordem de prioridade para a primeira receita (21/10/2026 19:46)
+- **Fato:** todo marketplace (Hotmart, Fiverr, Lemon Squeezy) exige identidade, biometria ou repasse que o Brasil não tem (ATV-022). Claude não tem nenhum canal de envio próprio.
+- **Análise honesta:**
+  - Um produto digital sem audiência e sem marketplace tem tráfego **perto de zero**. A chance de vender o kit nesta semana é baixa.
+  - A abordagem direta (EXP-001) tem a maior chance de gerar a primeira receita: 29 contatos qualificados, mensagem personalizada e ticket de R$ 197.
+- **Decisão:**
+  1. **Primeira receita:** EXP-001. Usa o WhatsApp que o proprietário já tem e não precisa de conta nova.
+  2. **Escada de preços na mesma conversa:** R$ 197, R$ 97 e R$ 47 (kit). O kit encontra compradores reais dentro das conversas do EXP-001.
+  3. **Kit para o público geral:** Pix direto (taxa zero) na página pública, divulgado no Instagram que o proprietário já tem.
+  4. **Hotmart e Fiverr:** ficam como opcionais. Só valem a biometria e o cadastro se o proprietário quiser escala além do Brasil.
+- **Recebimento:** Pix na chave existente. Taxa: 0%. A entrega do kit é manual (envio do .zip pelo WhatsApp, cerca de 1 min por venda).
+- **Funcionalidades novas:** **congeladas** até haver feedback de comprador, conforme a regra da fase.
+
+## Lições (acréscimo)
+6. Testar a hospedagem no navegador real, e não só com curl: o raw.githack respondia 200, mas mostrava uma tela de aviso (origem: ATV-023).
+7. Produto sem canal de distribuição não vende. O canal vem antes do produto (origem: DEC-010).
