@@ -77,3 +77,35 @@
   4. Preço abaixo do mercado pode sinalizar baixa qualidade.
   5. Formalização (MEI) e tributação se o volume crescer. Na faixa atual, a renda é de pessoa física, informada na declaração anual. Revisar ao passar de cerca de R$ 2.000/mês.
 - **Próximas ações:** merge, ativação do Pages, confirmação do capital, lista de clientes e primeiras mensagens.
+
+---
+
+## REL-003 — Ciclo de correção de autonomia (21/10/2026 18:59 BRT)
+
+**STATUS:** sobrevivendo, em pré-operação. **Não houve movimentação financeira.**
+
+| Indicador | Valor |
+|---|---:|
+| Receitas recebidas / despesas pagas | R$ 0,00 / R$ 0,00 |
+| Caixa confirmado | R$ 0,00 (R$ 50,00 a confirmar, FIN-001) |
+| Patrimônio líquido / acumulado | R$ 50,00 / R$ 50,00 (0,5%) |
+| Total retirado | R$ 0,00 |
+| Contatos prontos para envio | 29 (4 celulares, 25 fixos) |
+| Mensagens enviadas | 0 |
+
+- **Executado por Claude:**
+  - ATV-011: revisão de autonomia.
+  - ATV-012: portfólio publicado.
+  - ATV-013: 29 contatos em dados abertos.
+  - ATV-014: mensagens personalizadas e arquivo de envio.
+  - ATV-015: taxas das plataformas.
+- **Bloqueado:**
+  - T-16: tornar a página pública (só o proprietário).
+  - T-01/T-05: capital e chave Pix.
+  - Publicação da página com banco de dados, negada pelas permissões.
+- **Cancelado:** T-02, T-03 e ATV-004 (desnecessários).
+- **Riscos:**
+  - 25 dos 29 contatos são fixos, e pode ser que não tenham WhatsApp.
+  - Os dados do OSM podem estar desatualizados.
+  - Sem T-16, o link enviado na mensagem não abre para o cliente.
+- **Próximo:** assim que as respostas chegarem, Claude escreve as respostas, gera as prévias personalizadas e o Pix de cobrança.

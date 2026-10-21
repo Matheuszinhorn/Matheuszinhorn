@@ -51,3 +51,15 @@ _Ainda sem dados de mercado._
 
 ## Lições (acréscimo)
 2. A alavanca do desafio é a habilidade com custo zero, não o rendimento do capital (origem: ATV-009).
+
+## DEC-007 — Claude assume a operação; o humano só entra por identidade, finanças ou permissão (21/10/2026 18:59)
+- **Decisão:** toda pesquisa, redação, construção, publicação, lista de clientes e acompanhamento fica com Claude. Ao proprietário cabem apenas: tornar a página pública, confirmar o capital e a chave Pix, tocar em enviar e criar contas que exigem documento.
+- **Alternativas avaliadas para tirar o humano do envio:**
+  - **Criar contas em nome do proprietário pelo navegador headless:** rejeitada (falsidade de identidade, termos de uso).
+  - **API do WhatsApp Business:** exige conta verificada e cobra por conversa. Fica para quando houver caixa.
+  - **E-mail:** Claude não tem ferramenta de envio.
+- **Escolha:** links `wa.me` com texto pronto. O esforço humano cai para cerca de 5 segundos por contato.
+- **Erro reconhecido:** nos ciclos 1 e 2, tarefas como montar a lista de clientes e publicar a demo foram atribuídas ao proprietário sem antes testar se Claude conseguia fazê-las.
+
+## Lições (acréscimo)
+3. Antes de delegar uma tarefa ao humano, testar se as ferramentas disponíveis resolvem (origem: DEC-007).

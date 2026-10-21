@@ -1,0 +1,92 @@
+<title>Sites em 3 Dias</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Páginas para pequenos negócios de Porto Alegre: WhatsApp, serviços, horários e mapa.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600&display=swap">
+<style>
+  /* Layout: vitrine de balcão — oferta curta no topo, modelos como "fichas" de nicho, tabela de preços no estilo cardápio */
+  :root {
+    --bg: #f6f5f1; --surface: #ffffff; --fg: #1d1f24; --muted: #5d6270; --line: #e2e0d8;
+    --accent: #0f7a5c; --accent-ink: #ffffff;
+    --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+    --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #121418; --surface: #1b1e24; --fg: #eceef2; --muted: #a2a8b5; --line: #2b2f37;
+    --accent: #3cc49a; --accent-ink: #0b1a14; color-scheme: dark; } }
+  :root[data-theme="dark"] {
+    --bg: #121418; --surface: #1b1e24; --fg: #eceef2; --muted: #a2a8b5; --line: #2b2f37;
+    --accent: #3cc49a; --accent-ink: #0b1a14; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 400 1rem/1.6 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .wrap { max-width: 960px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 56px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; }
+  h1 em { font-style: normal; color: var(--accent); }
+  h2 { font-size: 1.5rem; font-weight: 600; }
+  .lead { color: var(--muted); max-width: 60ch; margin: 16px 0 0; font-size: 1.08rem; }
+  .eyebrow { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .checks { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .checks li { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .92rem; background: var(--surface); }
+  .models { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 20px; }
+  .model { display: grid; gap: 6px; text-decoration: none; color: inherit; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+  .model:hover, .model:focus-visible { border-color: var(--accent); outline: none; }
+  .model .tag { font-size: .78rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  .model .go { color: var(--accent); font-weight: 600; margin-top: 6px; }
+  .note { color: var(--muted); font-size: .88rem; margin: 12px 0 0; }
+  .menu { margin-top: 20px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .row h3 { font-size: 1.1rem; font-weight: 600; }
+  .row p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: .95rem; max-width: 60ch; }
+  .price { font-family: var(--display); font-weight: 800; font-size: 1.25rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .price s { color: var(--muted); font-weight: 400; font-size: .9rem; margin-right: 6px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { counter-increment: s; display: grid; gap: 4px; }
+  .steps li::before { content: "Passo " counter(s); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  footer { color: var(--muted); font-size: .88rem; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Porto Alegre · pequenos negócios</div>
+    <h1>Seu negócio com <em>site próprio</em> em 3 dias</h1>
+    <p class="lead">Uma página feita para o celular, com botão de WhatsApp, serviços e preços, fotos, horários e mapa. Quem procura no Google encontra, e quem chega pelo Instagram agenda sem precisar rolar o feed.</p>
+    <ul class="checks">
+      <li>Hospedagem gratuita</li>
+      <li>Sem mensalidade obrigatória</li>
+      <li>50% só depois de aprovar</li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="modelos">
+    <h2 id="modelos">Veja como fica</h2>
+    <div class="models">
+      <a class="model" href="barbearia/index.html"><span class="tag">Barbearia</span><h3>Corte, barba e combo</h3><span>Preços, avaliações e agenda pelo WhatsApp.</span><span class="go">Abrir modelo →</span></a>
+      <a class="model" href="estetica/index.html"><span class="tag">Estética e manicure</span><h3>Tabela de procedimentos</h3><span>Manutenções, horários e localização.</span><span class="go">Abrir modelo →</span></a>
+      <a class="model" href="petshop/index.html"><span class="tag">Pet shop</span><h3>Banho, tosa e leva e traz</h3><span>Serviços por porte e área de entrega.</span><span class="go">Abrir modelo →</span></a>
+    </div>
+    <p class="note">Os modelos usam negócios fictícios. A sua página leva o seu nome, as suas fotos e os seus preços.</p>
+  </section>
+
+  <section aria-labelledby="precos">
+    <h2 id="precos">Preços</h2>
+    <div class="menu">
+      <div class="row"><h3>Cartão digital</h3><span class="price">R$ 97</span><p>Uma tela com WhatsApp, lista de serviços, horários e mapa.</p></div>
+      <div class="row"><h3>Página completa</h3><span class="price"><s>R$ 297</s>R$ 197</span><p>Valor de lançamento para os 3 primeiros clientes. Inclui fotos, avaliações, todas as seções e uma rodada de ajustes.</p></div>
+      <div class="row"><h3>Manutenção</h3><span class="price">R$ 39/mês</span><p>Opcional. Troca de preços, fotos e promoções sempre que precisar. Cancela quando quiser.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="como">
+    <h2 id="como">Como funciona</h2>
+    <ol class="steps">
+      <li><strong>Você manda o material</strong><span>Logo, 5 a 10 fotos, serviços e horários. Sem textos prontos? Eu escrevo.</span></li>
+      <li><strong>Entrada de 50% no Pix</strong><span>Começo no mesmo dia.</span></li>
+      <li><strong>Prévia em até 3 dias</strong><span>Você vê no celular e pede ajustes.</span></li>
+      <li><strong>Aprovou, publicou</strong><span>Paga os 50% restantes e o site vai ao ar.</span></li>
+    </ol>
+  </section>
+
+  <footer>Matheus Reis · Desenvolvedor, Engenharia de Software · Porto Alegre/RS</footer>
+</div>

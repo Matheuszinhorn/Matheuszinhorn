@@ -57,8 +57,12 @@ Mensagem personalizada no WhatsApp comercial, com o link da demo, no máximo 30 
 | Proposta → venda | ≥ 20% | — | 0 vendas em 10 propostas |
 | 1ª venda | até 28/10/2026 | — | 0 vendas em 14 dias com mais de 100 contatos: trocar canal ou oferta (avaliar B ou presencial) |
 
+### Execução (os critérios acima não foram alterados)
+- 21/10 18:48: portfólio publicado (ATV-012). Falta torná-lo público (T-16).
+- 21/10 18:55: 29 contatos com mensagens personalizadas e envio em um toque (ATV-013/014). A lista de clientes passou a ser feita por Claude.
+
 ### Resultados
-_Nenhum resultado ainda: o experimento não foi iniciado._
+_Nenhuma mensagem enviada ainda. O experimento continua PLANEJADO até o primeiro envio._
 
 ### Decisão final
 _Pendente._
@@ -100,7 +104,7 @@ Pequenas empresas, MEIs e profissionais autônomos que publicam projetos de land
 Landing page de R$ 250 a R$ 450, conforme o escopo, com entrega em 3–5 dias.
 
 ### Custo
-R$ 0. A taxa da plataforma sobre o valor recebido será verificada antes da primeira proposta.
+R$ 0. Taxa estimada: Workana cerca de 20%, 99Freelas 0–20% (ATV-015, fontes secundárias). Confirmar na página oficial ao criar o perfil.
 
 ### Limite de perda
 R$ 0 em dinheiro. O tempo do proprietário fica limitado a 30 min/dia.

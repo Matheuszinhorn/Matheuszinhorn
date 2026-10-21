@@ -4,7 +4,7 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 18:35 BRT)
+## Estado atual (atualizado em 21/10/2026 18:59 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
@@ -18,6 +18,8 @@ Início oficial: 21/10/2026 (horário de Brasília).
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
 | Estratégias | EXP-001: sites para negócios locais (canal WhatsApp) · EXP-002: plataformas de freelance | ambas PLANEJADO |
 | Investimentos financeiros | nenhum | DEC-004 |
+| Portfólio publicado | https://claude.ai/artifact/XL38oFznHwV6wcSDS9S52Q | privado até o proprietário compartilhar |
+| Contatos prontos | 29 (L001–L029), 0 contatados | ATV-013 |
 
 Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORIOS-DE-PROGRESSO.md`.
 

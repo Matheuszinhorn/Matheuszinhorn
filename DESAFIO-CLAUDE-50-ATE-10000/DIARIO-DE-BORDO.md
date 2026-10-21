@@ -110,3 +110,61 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## Atualização de ATV-004 (21/10/2026 18:35)
 - Como `demo/` foi reorganizado, o endereço previsto mudou para `https://matheuszinhorn.github.io/DESAFIO-CLAUDE-50-ATE-10000/demo/` (página de oferta) e para as subpastas `barbearia/`, `estetica/` e `petshop/`. Continua sendo PROJEÇÃO.
 - **Motivo do bloqueio:** falta permissão de administrador. **Providência:** o proprietário faz o merge e ativa o Pages.
+
+---
+# Ciclo 3 — Correção de autonomia (21/10/2026, a partir de 18:40 BRT)
+
+## ATV-011 — Revisão de autonomia (o que Claude executa de ponta a ponta)
+- **Data/hora:** 21/10/2026 18:40 BRT
+- **Situação:** CONCLUÍDO
+- **Contexto:** o proprietário apontou que o plano transferia tarefas operacionais demais para ele.
+- **Ação executada:** cada tarefa humana do plano foi reavaliada e testada contra as ferramentas reais. O resultado está em `RECURSOS-E-ACESSOS.md` (seção "Revisão de 21/10 18:59") e na decisão DEC-007.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-012 — Publicação do portfólio em página hospedada (substitui o GitHub Pages)
+- **Data/hora:** 21/10/2026 18:48 BRT
+- **Situação:** CONCLUÍDO
+- **Hipótese:** o Claude consegue publicar páginas por conta própria, sem depender do merge nem do Pages.
+- **Ação executada:**
+  - Criei e publiquei a página de oferta "Sites em 3 Dias" com os 3 modelos, em https://claude.ai/artifact/XL38oFznHwV6wcSDS9S52Q (versão 1).
+  - O arquivo-fonte é `demo/portfolio-artifact.html`.
+- **Limite real:** a página nasce privada, e só o proprietário pode torná-la pública (menu Compartilhar). Claude não tem permissão para mudar o compartilhamento.
+- **Evidência:** o retorno da publicação com a URL e a versão.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-004 — atualização: CANCELADO (21/10/2026 18:59)
+- **Motivo:** a ATV-012 publicou o portfólio sem depender de merge nem de ativar o GitHub Pages. Os dois passos deixam de ser necessários. O Pages continua possível depois, como domínio alternativo.
+
+## ATV-013 — Geração de lista de clientes por Claude (substitui T-06 do proprietário)
+- **Data/hora:** 21/10/2026 18:50 BRT
+- **Situação:** CONCLUÍDO
+- **Tentativas:**
+  1. **Busca na web por diretórios:** FALHOU como fonte. Os diretórios (guiafacil) trazem dados confusos e misturam cidades.
+  2. **API Overpass do OpenStreetMap:** BLOQUEADA. A conexão é reiniciada pelo proxy de rede, nos três servidores testados.
+  3. **API Nominatim do OpenStreetMap:** FUNCIONOU.
+     - Fiz 8 buscas por nicho, com intervalo de 1,5 s, respeitando a política de uso.
+     - Retornaram 66 negócios. 38 têm telefone público e 31 não têm site cadastrado.
+     - Depois de excluir os fora do nicho, ficaram **29 contatos (L001–L029)**: 4 celulares e 25 fixos.
+- **Verificação:** pesquisei 6 desses negócios na web e não encontrei site para nenhum deles. Também não consegui confirmar que todos ainda funcionam, então os dados ficam como NÃO VERIFICADOS.
+- **Privacidade:** os telefones ficam fora do repositório público. Em `VENDAS-E-CLIENTES.csv` só entram ID, nicho e bairro.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-014 — Mensagens personalizadas com envio em um toque
+- **Data/hora:** 21/10/2026 18:55 BRT
+- **Situação:** CONCLUÍDO, com um BLOQUEIO parcial.
+- **Ação executada:**
+  - Escrevi uma mensagem personalizada para cada contato (nome, bairro, nicho e link do portfólio), com um link `wa.me` que abre o WhatsApp com o texto já preenchido.
+  - Tentei publicar uma página de controle em que Claude leria os status direto. **BLOQUEADO:** a publicação foi negada pelo controle de permissões da sessão (categoria "transações no mundo real"). Não tentei contornar.
+  - **Alternativa executada:** gerei o arquivo local `prospeccao-porto-alegre.html` e entreguei ao proprietário pela sessão. Ele tem os 29 contatos, envio em um toque, status salvo no navegador e o botão "Copiar relatório" para devolver os resultados a Claude.
+- **Teste:** Chromium a 390 px mostrou 29 cartões, nenhum erro de script, nenhuma rolagem horizontal, e a mudança de status funcionou.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-015 — Pesquisa de taxas das plataformas de freelance
+- **Data/hora:** 21/10/2026 18:45 BRT
+- **Situação:** CONCLUÍDO (fontes secundárias).
+- **Resultado:**
+  - Workana: cerca de 20% do projeto.
+  - 99Freelas: de 0% a 20%, conforme o plano.
+
+  Os números vêm de blogs (FreelaSemCrise, ecarts, TabNews), não das páginas oficiais. Ficam como ESTIMATIVA até o perfil existir.
+- **Impacto:** um projeto de R$ 300 renderia de R$ 240 a R$ 300 líquidos.
