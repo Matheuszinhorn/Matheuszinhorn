@@ -291,3 +291,39 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Erro 2:** a descrição do FIN-001-C tinha uma vírgula dentro de aspas mal formadas, o que quebrava a leitura do CSV (13 colunas em vez de 12).
 - **Correção:** horários ajustados para 19:44 e a vírgula removida. O CSV agora tem 12 colunas em todas as linhas.
 - **Medida preventiva:** a partir daqui, todo registro usa o horário lido do relógio (`date`) imediatamente antes de escrever, e o CSV é validado com um parser antes de cada commit.
+
+---
+# Ciclo 6 — Execução comercial (início 21/10/2026 19:50 BRT)
+
+## ATV-028 — Inventário de canais de envio disponíveis para Claude
+- **Data/hora:** 21/10/2026 19:50 BRT
+- **Situação:** CONCLUÍDO
+- **Ação executada:** consultei os conectores da conta e o catálogo de conectores.
+- **Resultado (FATO):**
+  - Ligados: só **Canva** e **Figma**, nenhum com envio de mensagens.
+  - Microsoft 365: com conexão incompleta.
+  - Não existe conector de WhatsApp, e-mail, Instagram ou LinkedIn ligado.
+  - No catálogo há **Gmail** (não instalado), AgentMail e Bird (exigem conta e API nova) e Stripe (exige conta).
+- **Conclusão:** hoje Claude **não tem nenhum meio técnico de enviar uma mensagem a um comprador.**
+
+## ATV-029 — Viabilidade do e-mail como canal autônomo
+- **Data/hora:** 21/10/2026 19:50 BRT
+- **Situação:** CONCLUÍDO (resultado negativo)
+- **Ação executada:** ampliei a busca em dados abertos (22 nichos novos no Nominatim, respeitando o intervalo de uso).
+- **Resultado:** 206 negócios. Só **17** têm e-mail público, e só **3** desses não têm site.
+- **Conclusão:** mesmo com o conector Gmail, o e-mail alcançaria 3 negócios. **Não justifica pedir a conexão.** O público do serviço local se comunica por WhatsApp.
+
+## ATV-030 — Lote 2 de contatos (reserva)
+- **Data/hora:** 21/10/2026 19:50 BRT
+- **Situação:** CONCLUÍDO
+- **Ação executada:**
+  - Entraram **40 novos contatos** com telefone e sem site (7 celulares), sem duplicar o lote 1 e excluindo escolas, templos e órgãos públicos.
+  - Todos têm mensagem personalizada e link público.
+- **Total no arquivo de envio:** 69 contatos (L001–L069).
+- **Privacidade:** os telefones ficam fora do repositório. O CSV recebeu só ID, nicho e bairro.
+- **Envios:** 0. Nenhum contato foi feito.
+
+## ATV-031 — Matriz de canais de aquisição (o que Claude opera de verdade)
+- **Situação:** CONCLUÍDO
+- **Resultado:** ver `RECURSOS-E-ACESSOS.md`, seção "Canais de aquisição".
+- **Conclusão:** nenhum canal de aquisição funciona sem uma identidade humana. O menor esforço humano disponível é tocar em enviar no WhatsApp, cerca de 5 s por contato.

@@ -42,3 +42,19 @@ Apenas FATOS verificados nesta sessão. O inventário será revisto quando algum
 3. Tocar em "enviar" nas mensagens. O WhatsApp é a identidade do proprietário, e não há ferramenta de envio.
 4. (Opcional) Criar a conta na plataforma de freelance (cadastro com documento).
 5. (Opcional) Liberar a publicação de páginas com banco de dados, para Claude ler os status sem o "Copiar relatório".
+
+---
+
+## Canais de aquisição — verificação de 21/10/2026 19:50 BRT (ATV-028 a ATV-031)
+
+| Canal | Claude opera sozinho? | O que impede | Alternativa mais autônoma |
+|---|---|---|---|
+| WhatsApp dos negócios (EXP-001) | Não | Sem conector nem API. O WhatsApp Business API exige conta verificada na Meta e é pago | **Link `wa.me` com o texto pronto: o proprietário só toca em enviar** |
+| E-mail para negócios | Tecnicamente seria possível com o conector Gmail | Só 3 de 206 negócios sem site têm e-mail público (ATV-029) | Não compensa |
+| Instagram, Facebook, LinkedIn | Não | Sem conector de publicação ou mensagem | Posts e legendas prontos para a conta existente do proprietário |
+| Comunidades (Reddit, TabNews, grupos) | Não | Exigem conta pessoal. Claude não cria contas em nome de terceiros | Nenhuma sem conta |
+| Marketplaces (Hotmart, Fiverr, Lemon Squeezy, Gumroad) | Não | Identidade e biometria (Hotmart), conta (Fiverr), sem repasse para o Brasil (Lemon Squeezy, Gumroad) | Pix direto na página pública |
+| Busca orgânica (Google) | Parcial | As páginas no htmlpreview são montadas por JavaScript, e a indexação é incerta | Sem efeito no curto prazo |
+| Repositório GitHub (público) | Sim | Tráfego desprezível para esse público | — |
+
+**Conclusão verificável:** não existe hoje um canal em que Claude alcance um comprador sem a identidade do proprietário. A ação de menor esforço humano com maior chance de receita é o envio pelo WhatsApp.

@@ -110,3 +110,11 @@ _Ainda sem dados de mercado._
 ## Lições (acréscimo)
 6. Testar a hospedagem no navegador real, e não só com curl: o raw.githack respondia 200, mas mostrava uma tela de aviso (origem: ATV-023).
 7. Produto sem canal de distribuição não vende. O canal vem antes do produto (origem: DEC-010).
+
+## DEC-011 — Canal único de aquisição nesta fase: WhatsApp do proprietário, com o mínimo de esforço (21/10/2026 19:50)
+- **Evidência:** ATV-028 a ATV-031.
+- **Decisão:**
+  - Não pedir conector novo nem conta nova. O Gmail alcançaria só 3 contatos.
+  - Concentrar tudo no envio por WhatsApp, começando pelos **11 celulares** (L001–L004 e os 7 do lote 2), que têm a maior chance de ser WhatsApp ativo.
+- **Divisão do trabalho depois do envio:** Claude faz tudo o que vem a seguir — redigir respostas, preparar a prévia personalizada em menos de 1 h, gerar o Pix da entrada e entregar o site. O proprietário só repassa as mensagens.
+- **Descartado:** contas criadas por Claude em plataformas (falsidade de identidade e termos de uso), envio automatizado em massa (spam) e compra de listas de contatos (LGPD e spam).

@@ -180,3 +180,25 @@
   - Tráfego do kit perto de zero sem divulgação.
   - Os links dependem do branch e do htmlpreview.
   - A chave Pix fica pública na página (usar chave aleatória).
+
+---
+
+## REL-006 — Execução comercial (21/10/2026 19:50 BRT)
+
+**STATUS:** sobrevivendo. Sem movimentação financeira.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Contatos prontos | 69 (11 celulares) |
+| Mensagens enviadas / respostas / interessados | **0 / 0 / 0** |
+
+- **Executado:** ATV-028 a ATV-031.
+  - Inventário de conectores.
+  - Teste do e-mail como canal (negativo).
+  - 40 contatos novos.
+  - Matriz de canais.
+- **Sinais de interesse recebidos:** nenhum. Nenhum contato foi feito.
+- **Bloqueio real:** envio pelo WhatsApp, que exige a identidade do proprietário (sem alternativa, ATV-031). Chave Pix para habilitar a venda do kit.
