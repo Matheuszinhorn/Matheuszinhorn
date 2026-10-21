@@ -168,3 +168,55 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 
   Os números vêm de blogs (FreelaSemCrise, ecarts, TabNews), não das páginas oficiais. Ficam como ESTIMATIVA até o perfil existir.
 - **Impacto:** um projeto de R$ 300 renderia de R$ 240 a R$ 300 líquidos.
+
+---
+# Ciclo 4 — Adendo "Mercado global" (21/10/2026, a partir de 19:15 BRT)
+
+## ATV-016 — Pesquisa global de modelos de negócio
+- **Data/hora:** 21/10/2026 19:15–19:25 BRT
+- **Situação:** CONCLUÍDO
+- **Objetivo:** reavaliar a estratégia sem a restrição de país e de modelo (adendo v3).
+- **Ação executada:** pesquisa na web sobre:
+  - plataformas de produto digital e repasse para o Brasil (Gumroad, Lemon Squeezy, Hotmart);
+  - demanda e preço de templates;
+  - taxas do Fiverr.
+- **Resultados (fontes secundárias):**
+  - **Gumroad:** o Brasil aparentemente não tem PayPal Commerce nem Stripe para repasse, e o saque mínimo é de US$ 100. Por isso, **não serve** como canal principal.
+  - **Lemon Squeezy:** taxa de 5% + 50¢. O suporte a repasse para o Brasil não foi confirmado.
+  - **Hotmart:** taxa de 9,9% + R$ 2,49 (out/2026). Repassa para conta brasileira e tem rede de afiliados.
+  - **Templates:** são a categoria de maior volume de produto digital. Preço típico: US$ 9–49 o item, US$ 29–149 o pacote. Não achei dado de venda específico do nicho.
+  - **Fiverr:** fica com 20% do pedido e retém o saldo por cerca de 14 dias.
+- **Decisão:** DEC-008, com a matriz em `ESTRATEGIAS-E-EXPERIMENTOS.md`.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-017 — Construção do produto "Local Site Kit"
+- **Data/hora:** 21/10/2026 19:27–19:31 BRT
+- **Situação:** CONCLUÍDO
+- **Ação executada:**
+  - Fiz um gerador de sites que funciona no navegador e sem internet (`builder.html`): formulário, prévia ao vivo e download do `index.html`.
+  - Cobre 6 nichos e 3 idiomas (EN/ES/PT), com 18 sites de exemplo, guia em 3 idiomas e licença.
+  - Cada site tem botão de WhatsApp, serviços e preços, avaliações, horários, Google Maps, schema.org LocalBusiness e modo escuro, num arquivo de menos de 10 KB.
+- **Teste no Chromium:**
+  - Os 18 exemplos não têm rolagem horizontal a 390 px, e o JSON-LD de todos é válido.
+  - No gerador, a prévia atualiza, o download gera um `index.html` com os dados digitados, o idioma do navegador é detectado e não aparece nenhum erro de script.
+  - **Correção feita durante o teste:** a nota "4,9" com vírgula invalidava o schema. Passou a ser convertida em número (4.9).
+- **Integridade:**
+  - `local-site-kit.zip` (60 KB): sha256 `aed693ec95b0364dd4b068affd4bb7de4ab40edf0713f3e5fd4a5471531f6356`.
+  - Código-fonte `kit-sites-locais-fonte.tar.gz`: sha256 `c2827ba540838bb668e67194cd25d03b30b48b68352b8127038abc69f35a9461`.
+- **Decisão de segurança:** o repositório é **público** (verificado pela API do GitHub). Por isso o produto pago **não** foi commitado aqui, e os arquivos foram entregues ao proprietário pela sessão.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-018 — Pesquisa de taxas e repasses (complemento da ATV-016)
+- **Situação:** CONCLUÍDO. O resumo está na ATV-016. Os números ficam como ESTIMATIVA até serem conferidos na tela de cadastro de cada plataforma.
+
+## ATV-019 — Capas e anúncios prontos para publicar
+- **Data/hora:** 21/10/2026 19:35 BRT
+- **Situação:** CONCLUÍDO
+- **Ação executada:**
+  - 3 capas de 1280×720 (PT/ES/EN), feitas com capturas reais dos sites do kit.
+  - Anúncios completos em `comercial/anuncios-globais.md`: Hotmart PT/ES, Lemon Squeezy EN e anúncio do Fiverr com pacotes e FAQ.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+## ATV-020 — Cancelamento do EXP-002
+- **Situação:** CONCLUÍDO
+- **Motivo:** substituído pelo EXP-004 (DEC-008). O EXP-002 não chegou a começar e não teve custo.

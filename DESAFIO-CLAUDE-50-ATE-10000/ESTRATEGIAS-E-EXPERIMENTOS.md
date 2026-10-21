@@ -88,7 +88,7 @@ Novas alternativas avaliadas. Os valores são ESTIMATIVAS, exceto onde há fonte
 ---
 
 ## EXP-002 — Perfil em plataforma de freelance (Workana/99Freelas)
-- **Situação:** PLANEJADO. Está bloqueado pela criação do perfil (T-12, proprietário).
+- **Situação:** CANCELADO em 21/10/2026 19:40, antes de começar. **Motivo:** foi substituído pelo EXP-004 (Fiverr, em USD), que tem preços e mercado maiores e o mesmo esforço humano (DEC-008).
 - **Critérios congelados em:** 21/10/2026 18:33 BRT.
 
 ### Hipótese
@@ -121,3 +121,94 @@ R$ 0 em dinheiro. O tempo do proprietário fica limitado a 30 min/dia.
 
 ### Resultados
 _Ainda não iniciado._
+
+
+---
+
+## Reavaliação global (adendo v3, ATV-016, 21/10/2026 19:20 BRT)
+
+Notas de 1 (pior) a 5 (melhor). Fontes nas ATV-016 a 018. Os valores são ESTIMATIVAS.
+
+| Modelo | Capital | Tempo até a 1ª receita | Demanda comprovável | Execução autônoma | Esforço humano por venda | Margem | Escala e recorrência | Nota |
+|---|---|---|---|---|---|---|---|---|
+| G1. Sites locais BR (EXP-001) | 5 | 4 | 4 (mercado de R$ 500–2.000) | 4 | 2 (enviar, conversar, cobrar) | 5 | 2 | **3,7** |
+| G2. Serviço global no Fiverr, USD (EXP-004) | 5 | 3 | 4 (categoria grande na plataforma) | 4 (Claude produz em minutos com o kit) | 2 (mensagens pela plataforma) | 4 (20% de taxa) | 3 | **3,6** |
+| G3. Produto digital global (EXP-003) | 5 | 2 | 3 (templates são a maior categoria de produto digital; nicho sem dado) | **5** | **5 (zero)** | 4 (cerca de 10–15% de taxa) | **5** | **4,1** |
+| G4. Afiliados ou conteúdo monetizado | 5 | 1 (precisa de audiência) | 3 | 2 (sem contas de rede social) | 4 | 2 | 4 | 3,0 |
+| G5. Revenda e arbitragem física | 2 | 3 | 3 | 1 | 1 | 2 | 2 | 2,0 |
+| G6. Micro-SaaS por assinatura | 3 (hospedagem e cobrança) | 1 | 2 | 3 | 5 | 4 | 5 | 3,3 (adiado: financiar com lucro) |
+| G7. Investimento financeiro | 1 (mínimos) | 5 | — | 5 | 5 | 1 (cerca de 14% a.a.) | 1 | 2,0 |
+
+**Decisão (DEC-008):** concentrar tudo em **um único ativo, o Local Site Kit**, vendido por três canais:
+1. Produto digital global (G3), que traz receita sem esforço humano por venda.
+2. Serviço no Fiverr em USD (G2).
+3. Serviço local no Brasil (G1).
+
+O mesmo ativo serve aos três, então não há dispersão. O EXP-002 (Workana) foi cancelado.
+
+---
+
+## EXP-003 — Produto digital global "Local Site Kit"
+- **Situação:** EM EXECUÇÃO. O produto está construído e testado. A publicação depende da conta na plataforma (T-20, proprietário: identidade e recebimento).
+- **Critérios congelados em:** 21/10/2026 19:40 BRT.
+
+### Hipótese
+Freelancers, agências e donos de pequenos negócios, no Brasil, na América Latina e no mercado global, compram um gerador de sites locais sem código, multilíngue, por R$ 47 ou US$ 15.
+
+### Por que parece promissora
+- Templates são a categoria de produto digital de maior volume.
+- Em espanhol e português há pouca oferta de kits HTML sem código. HIPÓTESE, ainda não medida.
+- Depois de publicado, o esforço humano por venda é zero.
+- A rede de afiliados da Hotmart pode trazer divulgação sem audiência própria.
+
+### Público
+Freelancers e agências que fazem sites para comércio local, e donos de pequenos negócios.
+
+### Oferta
+- Hotmart: R$ 47 (BR) e o equivalente a cerca de US$ 9 (América Latina), com 40% para afiliados.
+- Lemon Squeezy: US$ 15, se aceitar repasse para o Brasil.
+
+### Custos
+- R$ 0 em dinheiro.
+- Taxas por venda: Hotmart 9,9% + R$ 2,49 (fonte: comparativo de out/2026). Líquido estimado de R$ 39,86 por venda direta a R$ 47.
+
+### Limite de perda
+R$ 0. Nenhum anúncio pago sem lucro anterior.
+
+### Critérios de avaliação
+| Métrica | Continuar se | Ajustar se | Abandonar se |
+|---|---|---|---|
+| 1ª venda | até 21 dias depois da publicação | — | 0 vendas em 45 dias |
+| Afiliados inscritos | ≥ 3 em 30 dias | 1–2: melhorar a página e a comissão | 0 |
+| Reembolsos | < 10% | — | > 25% |
+
+### Execução
+- ATV-017 (21/10 19:30): produto construído e testado. Gerador `builder.html` mais 18 exemplos, guia em 3 idiomas e licença.
+- ATV-019 (21/10 19:35): capas e anúncios prontos (`comercial/anuncios-globais.md`).
+
+### Resultados
+_Ainda não publicado._
+
+---
+
+## EXP-004 — Serviço global no Fiverr (USD)
+- **Situação:** PLANEJADO. O anúncio está pronto. Depende da conta no Fiverr (T-21, proprietário: identidade).
+- **Critérios congelados em:** 21/10/2026 19:40 BRT.
+
+### Hipótese
+Um anúncio com pacotes de US$ 35, 65 e 120 recebe pedidos de pequenos negócios no exterior, e Claude entrega cada site em menos de 1 hora usando o kit.
+
+### Custos
+- R$ 0 em dinheiro.
+- Taxas: 20% do Fiverr, mais o saque.
+- O valor em USD entra convertido pela PTAX do dia do crédito.
+
+### Limite de perda
+R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
+
+### Critérios de avaliação
+| Métrica | Continuar se | Abandonar se |
+|---|---|---|
+| Impressões ou cliques no anúncio | crescendo semana a semana | 0 cliques em 21 dias |
+| 1º pedido | até 30 dias | 0 pedidos em 45 dias |
+| Avaliação média | ≥ 4,8 | < 4,5 |

@@ -26,5 +26,7 @@ Descartadas antes de testar: investimento financeiro como motor principal (DEC-0
 - O capital escasso desloca o valor para a habilidade e o tempo do proprietário. A estratégia precisa explorar isso.
 - Com R$ 50, renda fixa a cerca de 14% a.a. levaria cerca de 40 anos até R$ 10.000. Investir só faz sentido para guardar o caixa ocioso, não como motor de crescimento.
 
+- Sem restrição de mercado, o melhor ativo foi um produto que reaproveita o trabalho de serviço: um esforço, três canais (DEC-008).
+
 ## O que poderia ter sido feito melhor
 _Será preenchido conforme houver resultados._

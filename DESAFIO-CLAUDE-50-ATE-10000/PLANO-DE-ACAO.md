@@ -1,8 +1,8 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 18:59 BRT (correção de autonomia, DEC-007).
+Atualizado em 21/10/2026 19:40 BRT (adendo global, DEC-008).
 
-**Objetivo imediato:** primeira venda real do EXP-001 até 28/10/2026.
+**Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
 | # | Tarefa | Prioridade | Responsável | Depende de | Prazo | Situação |
 |---|---|---|---|---|---|---|
@@ -17,11 +17,16 @@ Atualizado em 21/10/2026 18:59 BRT (correção de autonomia, DEC-007).
 | T-09 | Criar demos por nicho | Média | Claude | — | 24/10 | CONCLUÍDO antecipadamente (ATV-010: barbearia, estética, pet shop). Outros nichos sob demanda |
 | T-10 | Primeira avaliação do EXP-001 (48 h) | Média | Claude | T-07 | 24/10 | PLANEJADO |
 | T-11 | Registrar todo Pix recebido (valor, data e comprovante guardado) | Alta | Humano + Claude | venda | a cada venda | PLANEJADO |
-| T-12 | Criar perfil no Workana ou no 99Freelas com o texto de `comercial/freelance.md` | Média | Humano | T-03 (link do portfólio) | 24/10 | BLOQUEADO (aguarda o proprietário) |
-| T-13 | Verificar a taxa da plataforma escolhida e registrar no EXP-002 | Média | Claude + Humano | T-12 | antes da 1ª proposta | PLANEJADO |
-| T-14 | Enviar ≥ 15 propostas em 7 dias, com textos redigidos por Claude a partir dos projetos colados no chat | Média | Humano + Claude | T-12 | 31/10 | PLANEJADO |
+| T-12 | Criar perfil no Workana ou no 99Freelas | — | — | — | — | CANCELADO (EXP-002 substituído pelo EXP-004) |
+| T-13 | Verificar a taxa da plataforma | — | — | — | — | CANCELADO (coberto pela ATV-016) |
+| T-14 | Propostas no Workana | — | — | — | — | CANCELADO |
 | T-15 | Confirmar a Selic vigente no site do BC (relevante só para DEC-004) | Baixa | Claude | — | 05/11 (após o Copom) | PLANEJADO |
 | T-16 | Tornar pública a página do portfólio (Compartilhar → link público) | **Crítica** | Humano (permissão) | — | 22/10 | BLOQUEADO: Claude não pode alterar o compartilhamento |
 | T-17 | Gerar o Pix "copia e cola" e o QR code de cada cobrança, a partir da chave | Alta | Claude | T-05 | na 1ª venda | PLANEJADO |
 | T-18 | Montar mais 30 contatos (novos nichos e bairros) | Média | Claude | resultado das primeiras 48 h | 24/10 | PLANEJADO |
 | T-19 | Gerar a prévia personalizada para cada contato interessado (em até 2 h depois do "sim") | Alta | Claude | resposta positiva | contínuo | PLANEJADO |
+| T-20 | Criar conta na **Hotmart** (cadastro com CPF e conta bancária) e cadastrar o produto com o texto e as capas prontos | **Crítica** | Humano (identidade e finanças, não delegável) | — | 23/10 | BLOQUEADO (aguarda o proprietário). Claude não pode criar conta em nome de terceiros |
+| T-21 | Criar conta no **Fiverr** e publicar o anúncio com o texto pronto | Alta | Humano (identidade) | — | 24/10 | BLOQUEADO (aguarda o proprietário) |
+| T-22 | Página de vendas do kit, para o campo "página de vendas" da Hotmart | Alta | Claude | — | 22/10 | PLANEJADO (publicar quando houver link de checkout) |
+| T-23 | Entregar os pedidos do Fiverr e do EXP-001 (site personalizado em menos de 1 hora) | Alta | Claude | pedido | contínuo | PLANEJADO |
+| T-24 | Kit v1.1: mais nichos (dentista, restaurante, diarista, fotógrafo) conforme a demanda observada | Média | Claude | dados de venda | após a 1ª semana | PLANEJADO |

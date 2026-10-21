@@ -4,7 +4,7 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 18:59 BRT)
+## Estado atual (atualizado em 21/10/2026 19:40 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
@@ -16,7 +16,7 @@ Início oficial: 21/10/2026 (horário de Brasília).
 | Patrimônio líquido atual | R$ 50,00 (capital disponibilizado, a confirmar) | — |
 | Total retirado | R$ 0,00 | — |
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
-| Estratégias | EXP-001: sites para negócios locais (canal WhatsApp) · EXP-002: plataformas de freelance | ambas PLANEJADO |
+| Estratégias | EXP-001: sites locais via WhatsApp (pronto, aguardando envio) · EXP-003: produto digital global "Local Site Kit" (produto pronto) · EXP-004: serviço global no Fiverr (anúncio pronto) · EXP-002: CANCELADO | ver ESTRATEGIAS-E-EXPERIMENTOS.md |
 | Investimentos financeiros | nenhum | DEC-004 |
 | Portfólio publicado | https://claude.ai/artifact/XL38oFznHwV6wcSDS9S52Q | privado até o proprietário compartilhar |
 | Contatos prontos | 29 (L001–L029), 0 contatados | ATV-013 |
@@ -38,6 +38,7 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
 | `ENCERRAMENTO-E-LICOES.md` | Resultado final e lições, atualizado ao longo do desafio |
 | `RECURSOS-E-ACESSOS.md` | O que Claude executa sozinho, o que depende do proprietário (arquivo adicional) |
 | `comercial/mensagens.md` | Roteiros de prospecção e fechamento (arquivo adicional) |
+| `comercial/anuncios-globais.md` | Anúncios prontos: Hotmart (PT/ES), Lemon Squeezy (EN), Fiverr (EN) |
 | `demo/` | Página de oferta + 3 modelos fictícios: barbearia, estética, pet shop (arquivo adicional) |
 
 ## Versões do regulamento
@@ -51,7 +52,12 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
   - Revisão financeira específica antes de cada retirada. Se o dia não tiver movimentação, isso é registrado.
   - Formalização, licenças e análises especializadas devem ser identificadas antes de prosseguir.
 
-Em caso de conflito, prevalece a v2.
+- **v3 (21/10/2026, 19:15) — Adendo "Mercado global e liberdade empreendedora":**
+  - Qualquer país, idioma ou modelo de negócio. Prestar serviço deixa de ser obrigatório.
+  - Receitas e despesas em moeda estrangeira são registradas na moeda original e convertidas para reais por taxa verificável, com data e fonte. Este projeto usa a **PTAX de venda do Banco Central** do dia do crédito.
+  - Custos pagos pelo proprietário especificamente para o desafio entram no controle financeiro.
+
+Em caso de conflito, prevalece a versão mais recente.
 
 ## Regras oficiais (resumo fiel do documento do desafio)
 

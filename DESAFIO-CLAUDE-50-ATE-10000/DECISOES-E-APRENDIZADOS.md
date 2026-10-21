@@ -63,3 +63,33 @@ _Ainda sem dados de mercado._
 
 ## Lições (acréscimo)
 3. Antes de delegar uma tarefa ao humano, testar se as ferramentas disponíveis resolvem (origem: DEC-007).
+
+## DEC-008 — Um ativo, três canais: o "Local Site Kit" (21/10/2026 19:40, adendo v3)
+- **Decisão:** construir um ativo próprio (o gerador de sites) e vendê-lo de três formas:
+  - (a) como produto digital global (EXP-003), canal principal de longo prazo;
+  - (b) como serviço global no Fiverr em USD (EXP-004);
+  - (c) como serviço local no Brasil (EXP-001), que já estava pronto.
+- **Alternativas consideradas:**
+  - Afiliados e conteúdo: exigem audiência e contas de rede social.
+  - Revenda física: consome capital e logística.
+  - Micro-SaaS: tem custo fixo; fica adiado até haver lucro.
+  - Investimento: retorno irrelevante.
+  - Gumroad: o repasse para o Brasil é inviável.
+- **Motivos:**
+  - É o único modelo em que o esforço humano por venda cai a zero (G3).
+  - O mesmo trabalho alimenta os três canais.
+  - O custo continua R$ 0.
+  - O produto aumenta a velocidade de entrega dos serviços: um site personalizado sai em menos de 1 hora.
+- **Riscos:**
+  - A demanda pelo produto não está comprovada.
+  - Plataformas novas não têm avaliações.
+  - Dependência de plataformas (Hotmart, Fiverr).
+- **Mitigação:** critérios de abandono fixados antes do início, e nenhum gasto até haver receita.
+
+## DEC-009 — Não publicar produto pago em repositório público (21/10/2026 19:33)
+- **Decisão:** o código do kit fica fora do repositório `Matheuszinhorn/Matheuszinhorn`, que é público.
+- **Registro de auditoria:** hashes sha256 na ATV-017. Os arquivos foram entregues ao proprietário.
+
+## Lições (acréscimo)
+4. Antes de commitar, verificar a visibilidade do repositório: um repositório público distribui o produto de graça (origem: DEC-009).
+5. Construir ativos reutilizáveis multiplica canais sem multiplicar trabalho (origem: DEC-008).

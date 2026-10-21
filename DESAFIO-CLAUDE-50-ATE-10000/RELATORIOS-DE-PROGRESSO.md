@@ -109,3 +109,41 @@
   - Os dados do OSM podem estar desatualizados.
   - Sem T-16, o link enviado na mensagem não abre para o cliente.
 - **Próximo:** assim que as respostas chegarem, Claude escreve as respostas, gera as prévias personalizadas e o Pix de cobrança.
+
+---
+
+## REL-004 — Ciclo do adendo global (21/10/2026 19:40 BRT)
+
+**STATUS:** sobrevivendo, em pré-operação. **Não houve movimentação financeira.**
+
+| Indicador | Valor |
+|---|---:|
+| Receitas recebidas / despesas pagas | R$ 0,00 / R$ 0,00 |
+| Caixa confirmado | R$ 0,00 (R$ 50,00 a confirmar, FIN-001) |
+| Patrimônio líquido / acumulado | R$ 50,00 / R$ 50,00 (0,5%) |
+| Total retirado | R$ 0,00 |
+| Ativos criados | Local Site Kit v1.0. Contabilizado a **R$ 0**: ativo sem valor de realização comprovado, por regra de prudência |
+
+- **Executado:** ATV-016 a ATV-020.
+  - Pesquisa global.
+  - Produto construído e testado.
+  - Capas e anúncios em 3 idiomas.
+  - EXP-002 cancelado.
+- **Em andamento:**
+  - EXP-001: 29 contatos prontos.
+  - EXP-003: produto pronto para publicar.
+  - EXP-004: anúncio pronto.
+- **Bloqueado (só humano):**
+  - T-16: tornar o portfólio público.
+  - T-20: conta na Hotmart.
+  - T-21: conta no Fiverr.
+  - T-01/T-05: capital e chave Pix.
+- **Riscos:**
+  - Demanda do produto não comprovada.
+  - Contas novas sem avaliações.
+  - Repasse internacional ainda não confirmado (Lemon Squeezy).
+  - Variação cambial: entradas em USD convertidas pela PTAX.
+- **Próximo (Claude):**
+  - Página de vendas (T-22).
+  - Atender pedidos assim que chegarem.
+  - Kit v1.1 conforme os dados.
