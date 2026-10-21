@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 19:40 BRT (adendo global, DEC-008).
+Atualizado em 21/10/2026 19:32 BRT (adendo global, DEC-008).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 

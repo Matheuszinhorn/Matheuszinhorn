@@ -64,7 +64,7 @@ _Ainda sem dados de mercado._
 ## Lições (acréscimo)
 3. Antes de delegar uma tarefa ao humano, testar se as ferramentas disponíveis resolvem (origem: DEC-007).
 
-## DEC-008 — Um ativo, três canais: o "Local Site Kit" (21/10/2026 19:40, adendo v3)
+## DEC-008 — Um ativo, três canais: o "Local Site Kit" (21/10/2026 19:32, adendo v3)
 - **Decisão:** construir um ativo próprio (o gerador de sites) e vendê-lo de três formas:
   - (a) como produto digital global (EXP-003), canal principal de longo prazo;
   - (b) como serviço global no Fiverr em USD (EXP-004);
@@ -86,7 +86,7 @@ _Ainda sem dados de mercado._
   - Dependência de plataformas (Hotmart, Fiverr).
 - **Mitigação:** critérios de abandono fixados antes do início, e nenhum gasto até haver receita.
 
-## DEC-009 — Não publicar produto pago em repositório público (21/10/2026 19:33)
+## DEC-009 — Não publicar produto pago em repositório público (21/10/2026 19:30)
 - **Decisão:** o código do kit fica fora do repositório `Matheuszinhorn/Matheuszinhorn`, que é público.
 - **Registro de auditoria:** hashes sha256 na ATV-017. Os arquivos foram entregues ao proprietário.
 

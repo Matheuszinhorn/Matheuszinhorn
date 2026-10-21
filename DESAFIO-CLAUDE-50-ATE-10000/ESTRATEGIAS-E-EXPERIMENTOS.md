@@ -88,7 +88,7 @@ Novas alternativas avaliadas. Os valores são ESTIMATIVAS, exceto onde há fonte
 ---
 
 ## EXP-002 — Perfil em plataforma de freelance (Workana/99Freelas)
-- **Situação:** CANCELADO em 21/10/2026 19:40, antes de começar. **Motivo:** foi substituído pelo EXP-004 (Fiverr, em USD), que tem preços e mercado maiores e o mesmo esforço humano (DEC-008).
+- **Situação:** CANCELADO em 21/10/2026 19:32, antes de começar. **Motivo:** foi substituído pelo EXP-004 (Fiverr, em USD), que tem preços e mercado maiores e o mesmo esforço humano (DEC-008).
 - **Critérios congelados em:** 21/10/2026 18:33 BRT.
 
 ### Hipótese
@@ -150,7 +150,7 @@ O mesmo ativo serve aos três, então não há dispersão. O EXP-002 (Workana) f
 
 ## EXP-003 — Produto digital global "Local Site Kit"
 - **Situação:** EM EXECUÇÃO. O produto está construído e testado. A publicação depende da conta na plataforma (T-20, proprietário: identidade e recebimento).
-- **Critérios congelados em:** 21/10/2026 19:40 BRT.
+- **Critérios congelados em:** 21/10/2026 19:32 BRT.
 
 ### Hipótese
 Freelancers, agências e donos de pequenos negócios, no Brasil, na América Latina e no mercado global, compram um gerador de sites locais sem código, multilíngue, por R$ 47 ou US$ 15.
@@ -184,7 +184,7 @@ R$ 0. Nenhum anúncio pago sem lucro anterior.
 
 ### Execução
 - ATV-017 (21/10 19:30): produto construído e testado. Gerador `builder.html` mais 18 exemplos, guia em 3 idiomas e licença.
-- ATV-019 (21/10 19:35): capas e anúncios prontos (`comercial/anuncios-globais.md`).
+- ATV-019 (21/10 19:30): capas e anúncios prontos (`comercial/anuncios-globais.md`).
 
 ### Resultados
 _Ainda não publicado._
@@ -193,7 +193,7 @@ _Ainda não publicado._
 
 ## EXP-004 — Serviço global no Fiverr (USD)
 - **Situação:** PLANEJADO. O anúncio está pronto. Depende da conta no Fiverr (T-21, proprietário: identidade).
-- **Critérios congelados em:** 21/10/2026 19:40 BRT.
+- **Critérios congelados em:** 21/10/2026 19:32 BRT.
 
 ### Hipótese
 Um anúncio com pacotes de US$ 35, 65 e 120 recebe pedidos de pequenos negócios no exterior, e Claude entrega cada site em menos de 1 hora usando o kit.

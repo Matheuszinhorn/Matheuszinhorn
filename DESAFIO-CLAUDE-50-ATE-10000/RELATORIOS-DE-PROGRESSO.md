@@ -112,7 +112,7 @@
 
 ---
 
-## REL-004 — Ciclo do adendo global (21/10/2026 19:40 BRT)
+## REL-004 — Ciclo do adendo global (21/10/2026 19:32 BRT)
 
 **STATUS:** sobrevivendo, em pré-operação. **Não houve movimentação financeira.**
 

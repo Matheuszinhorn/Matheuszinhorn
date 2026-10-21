@@ -210,7 +210,7 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Situação:** CONCLUÍDO. O resumo está na ATV-016. Os números ficam como ESTIMATIVA até serem conferidos na tela de cadastro de cada plataforma.
 
 ## ATV-019 — Capas e anúncios prontos para publicar
-- **Data/hora:** 21/10/2026 19:35 BRT
+- **Data/hora:** 21/10/2026 19:30 BRT
 - **Situação:** CONCLUÍDO
 - **Ação executada:**
   - 3 capas de 1280×720 (PT/ES/EN), feitas com capturas reais dos sites do kit.
@@ -220,3 +220,8 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## ATV-020 — Cancelamento do EXP-002
 - **Situação:** CONCLUÍDO
 - **Motivo:** substituído pelo EXP-004 (DEC-008). O EXP-002 não chegou a começar e não teve custo.
+
+## COR-002 — Horários do ciclo 4 (21/10/2026 19:34 BRT)
+- **Erro:** os registros do commit `70497ee` usavam 19:40, 19:35 e 19:33, horários **posteriores** ao commit real (19:32 BRT).
+- **Correção:** os horários foram ajustados para 19:32 e 19:30. A versão anterior continua no commit `70497ee`.
+- **Lição:** registrar o horário obtido do relógio no momento da escrita, e não uma estimativa.
