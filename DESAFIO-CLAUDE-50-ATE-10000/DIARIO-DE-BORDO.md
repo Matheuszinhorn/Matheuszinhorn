@@ -437,3 +437,37 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - (a) o proprietário cria um repositório vazio `local-site-kit-lite`, e Claude o adiciona à sessão e publica tudo; **ou**
   - (b) o proprietário autoriza push na `main` do repositório de perfil.
 - **Custos:** R$ 0 previstos, R$ 0 pagos.
+
+---
+# Ciclo 10 — DEC-015: publicação do Local Site Kit Lite (até 22/10/2026 00:15 BRT)
+
+## ATV-044 — Tentativa de publicação no repositório criado pelo proprietário
+- **Situação:** **BLOQUEADO**
+- **Contexto:** o proprietário informou que criou `local-site-kit-lite`.
+- **Tentativas:**
+  - `add_repo Matheuszinhorn/local-site-kit-lite (push)`, duas vezes → "you don't have access to matheuszinhorn/local-site-kit-lite".
+  - `list_repos` → 9 repositórios visíveis para o app Claude do GitHub, **sem** `local-site-kit-lite`.
+  - `git ls-remote` anônimo → pede credencial, o que é consistente com repositório privado ou fora do alcance do app.
+- **Diagnóstico provável:** o app Claude do GitHub foi instalado com acesso a "repositórios selecionados", e o novo repositório não está na seleção. Outra possibilidade é ter sido criado como privado ou com outro nome.
+- **Procedimento mínimo (sem credenciais):** no GitHub, Settings → Applications → Installed GitHub Apps → Claude → Configure → Repository access → adicionar `local-site-kit-lite` → Save. Se isso não resolver, reconectar em https://claude.ai/connect-github. Também confirmar que o repositório é **Public**.
+
+## ATV-045 — Revisão pré-publicação (o que não depende do acesso)
+- **Situação:** CONCLUÍDO
+- **Segurança:** nenhuma chave, token, senha, e-mail ou CPF. Os telefones são fictícios (+1 555 010 0000, +52 55 0000 0000, +55 11 90000-0000).
+- **Licença:** MIT, adequada aos templates (gerados por Claude neste desafio, sem material de terceiros). O kit pago continua fora, com licença própria.
+- **Correção de risco:** a nota "4,9 · 120 avaliações" e os depoimentos são fictícios. Acrescentei um aviso no topo de cada template e no README para apagá-los ou trocá-los por dados reais, evitando avaliação falsa.
+- **README:** demonstração, recursos, início rápido, publicação gratuita, limitações, ajuda e pedidos, em EN/PT/ES.
+- **Issues:** modelos de pedido e de erro ou dúvida, com aviso para não publicar dados pessoais.
+- **Teste:** 3 templates a 360 px nos temas claro e escuro. Sem rolagem lateral, sem erros, 2 links de WhatsApp em cada, JSON-LD válido e modo padrão (CSS1Compat).
+
+## ATV-046 — Ciclo de feedback preparado
+- **Situação:** CONCLUÍDO (não testado contra a API, porque falta o acesso da ATV-044).
+- **Ação executada:** `ferramentas/metricas_repo.py` coleta só métricas observadas (visitas e clones de 14 dias, origens, estrelas, issues) em `METRICAS-REPO-LITE.csv`. O processo de triagem e o gatilho de monetização estão em `canais/CICLO-DE-FEEDBACK.md`.
+
+## ATV-047 — Pesquisa de distribuição
+- **Situação:** CONCLUÍDO. Ver `canais/DISTRIBUICAO.md`.
+- **Fatos:**
+  - O Show HN exclui "quickly generated one-off projects" (regras oficiais), então não se aplica.
+  - O reddit.com bloqueia a leitura automática, e as regras não foram verificadas.
+  - PRs em listas de terceiros estão proibidos pela DEC-015.
+- **Executável sem conta:** só a otimização do próprio repositório (tópicos e descrição), que depende da ATV-044.

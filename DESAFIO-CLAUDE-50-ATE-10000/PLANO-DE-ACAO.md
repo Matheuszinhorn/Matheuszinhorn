@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 23:59 BRT (DEC-014).
+Atualizado em 22/10/2026 00:15 BRT (DEC-015).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
@@ -34,5 +34,7 @@ Atualizado em 21/10/2026 23:59 BRT (DEC-014).
 | T-26 | Publicar os 2 posts no Instagram existente (imagens e legendas prontas) | Média | Humano (conta pessoal) | — | 23/10 | PRONTO PARA EXECUTAR |
 | T-27 | Entregar o kit ao comprador (enviar o .zip pelo WhatsApp depois de conferir o Pix no banco) | Alta | Humano (banco e WhatsApp) | venda | a cada venda | PLANEJADO |
 | T-28 | EXP-005 (recompensas): reabrir só com autorização explícita para PRs em nome do proprietário | Baixa | Proprietário decide | — | — | EM ESPERA (DEC-012) |
-| T-29 | A1: autorização para um canal próprio no GitHub (repositório vazio `local-site-kit-lite` **ou** push na `main` do perfil) | Alta | Proprietário (autorização; o 403 impede Claude) | — | — | AGUARDANDO DECISÃO |
+| T-29 | Repositório `local-site-kit-lite` | Alta | Proprietário | — | — | CRIADO pelo proprietário. **Falta liberar o acesso do app Claude** (T-31) |
 | T-30 | Publicar o repositório lite, monitorar as Issues de pedido e responder nelas | Alta | Claude | T-29 | logo após T-29 | PRONTO (conteúdo em `canais/repo-lite/`) |
+| T-31 | Adicionar `local-site-kit-lite` ao app Claude do GitHub (Settings → Applications → Claude → Configure → Repository access) e confirmar que é **Public** | **Crítica** | Proprietário (permissão de conta, ATV-044) | — | — | BLOQUEADO |
+| T-32 | Depois da T-31: publicar, adicionar tópicos e descrição, criar rótulos, verificar a demonstração e rodar a 1ª coleta de métricas | Crítica | Claude | T-31 | mesma sessão | PRONTO |

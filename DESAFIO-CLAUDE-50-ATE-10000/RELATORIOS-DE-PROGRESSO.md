@@ -270,3 +270,23 @@
   - Push fora do branch exige permissão.
   - Não há conector de mensagens.
   - O recebimento exige uma conta financeira de uma pessoa.
+
+---
+
+## REL-010 — Publicação do repositório lite (22/10/2026 00:15 BRT)
+
+**STATUS:** sobrevivendo. Sem movimentação financeira.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Publicação | **Bloqueada**: o app Claude não tem acesso ao repositório |
+| Visitas, issues, pedidos | sem dados (o repositório não está acessível) |
+
+- **Executado:**
+  - ATV-044: diagnóstico do bloqueio.
+  - ATV-045: revisão e correção de risco.
+  - ATV-046: ciclo de feedback.
+  - ATV-047: distribuição.
