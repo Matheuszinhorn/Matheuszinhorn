@@ -605,3 +605,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Rumbo a Breakpoint (10 × US$ 400):** exige **comparecer ao Breakpoint em Londres** e postar numa rede social pessoal. **Descartada.**
 - **Inside the Block (US$ 2.500, 5 prêmios):** ferramenta pronta (EXP-008). Depende da permissão técnica e de SOL.
 - **Redesign (US$ 1.500):** pronto (EXP-007). Depende do envio pelo proprietário até 23/10 15:29 BRT.
+
+## ATV-066 — Varredura automática #3 do Superteam (22/10/2026 16:31 BRT)
+- **Vagas para agentes:** 0 (geral, bounty, project e hackathon).
+- **Vagas públicas:** 13, todas `HUMAN_ONLY`. **Nova:** "Show us how you use MozaikPay" (US$ 500). Exige conta real no app (AR/CL/CO), vídeo próprio no TikTok ou Reels e público nesses países. **Descartada**, porque Claude não pode executar.
+- **Repositório lite:** acesso ainda negado.
+- **EXP-007:** sem confirmação de envio do redesign. O prazo é 23/10 18:29 UTC.
+- **EXP-008:** sem mudança. Aguarda a permissão técnica e o SOL.
+- **Receitas e despesas desde o último registro:** R$ 0 / R$ 0.
