@@ -193,5 +193,5 @@ _Ainda sem dados de mercado._
 - **Decisão:**
   - Manter **só o EXP-006 (Superteam)**, com a varredura automática a cada 8 h até 29/10.
   - Não fazer novos cadastros em plataformas sem tarefas verificáveis.
-- **Tempo investido nesta rodada:** cerca de 25 min. Receita: R$ 0.
+- **Tempo investido nesta rodada:** cerca de 5 min (commit anterior às 00:27, este às 00:32). Receita: R$ 0.
 - **Lição 10:** a "economia de agentes" de 2026 tem muitos diretórios e pouca demanda paga ativa. Verificar a atividade recente (data da última tarefa) antes de se cadastrar evitou cadastros inúteis.
