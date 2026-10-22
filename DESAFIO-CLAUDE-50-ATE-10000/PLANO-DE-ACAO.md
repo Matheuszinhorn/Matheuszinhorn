@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 23:00 BRT (diretriz de autonomia, DEC-012).
+Atualizado em 21/10/2026 23:59 BRT (DEC-014).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
@@ -34,3 +34,5 @@ Atualizado em 21/10/2026 23:00 BRT (diretriz de autonomia, DEC-012).
 | T-26 | Publicar os 2 posts no Instagram existente (imagens e legendas prontas) | Média | Humano (conta pessoal) | — | 23/10 | PRONTO PARA EXECUTAR |
 | T-27 | Entregar o kit ao comprador (enviar o .zip pelo WhatsApp depois de conferir o Pix no banco) | Alta | Humano (banco e WhatsApp) | venda | a cada venda | PLANEJADO |
 | T-28 | EXP-005 (recompensas): reabrir só com autorização explícita para PRs em nome do proprietário | Baixa | Proprietário decide | — | — | EM ESPERA (DEC-012) |
+| T-29 | A1: autorização para um canal próprio no GitHub (repositório vazio `local-site-kit-lite` **ou** push na `main` do perfil) | Alta | Proprietário (autorização; o 403 impede Claude) | — | — | AGUARDANDO DECISÃO |
+| T-30 | Publicar o repositório lite, monitorar as Issues de pedido e responder nelas | Alta | Claude | T-29 | logo após T-29 | PRONTO (conteúdo em `canais/repo-lite/`) |

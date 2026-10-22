@@ -247,3 +247,26 @@
   - Pesquisa de plataformas.
   - DEC-013.
 - **Estratégia:** serviço para negócios com site quebrado ou sem site (EXP-001, lote 3 primeiro). O capital fica como reserva.
+
+---
+
+## REL-009 — "Até onde Claude vai sozinho" (21/10/2026 23:59 BRT)
+
+**STATUS:** sobrevivendo. Sem movimentação financeira.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Respostas ou vendas | 0 / 0 |
+
+- **Executado:**
+  - ATV-042: recompensas. Nenhuma oportunidade financiada e viável.
+  - ATV-043: repositório lite pronto; a publicação deu 403.
+  - DEC-014.
+- **Bloqueios técnicos específicos:**
+  - 403 na criação de repositório.
+  - Push fora do branch exige permissão.
+  - Não há conector de mensagens.
+  - O recebimento exige uma conta financeira de uma pessoa.

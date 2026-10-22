@@ -153,3 +153,22 @@ _Ainda sem dados de mercado._
   - A meta só é plausível com **receita de trabalho** (serviço ou produto), e não com rendimento de capital.
 - **Capital:** os R$ 50 ficam intactos como reserva. Nenhuma operação financeira foi feita.
 - **Limite de exposição** (se um dia houver investimento): no máximo 10% do patrimônio em cripto, só depois do patrimônio acumulado passar de R$ 1.000, e sem alavancagem.
+
+## DEC-014 — Mapa final do que Claude faz sozinho e do que depende de autorização (21/10/2026 23:59)
+- **Claude executa sozinho (provado):**
+  - produtos (kit testado);
+  - páginas públicas (htmlpreview);
+  - listas de clientes por dados abertos;
+  - auditoria técnica de sites, que revela uma dor verificável;
+  - mensagens personalizadas;
+  - Pix válido a partir de uma chave;
+  - análises quantitativas;
+  - documentação.
+- **Claude não consegue fazer (provado, com o erro técnico registrado):**
+  1. alcançar um comprador: nenhum conector de mensagens, nenhuma conta em comunidade, criação de repositório bloqueada (403);
+  2. receber dinheiro: toda forma de recebimento exige uma conta financeira de uma pessoa real.
+- **Menor conjunto de autorizações que transforma a operação em autônoma:**
+  - **A1:** um repositório público vazio (ou permissão de push na `main` do perfil). Abre um canal de entrada **e** de conversa (Issues) operado 100% por Claude.
+  - **A2:** a chave Pix, que só é necessária quando houver um comprador.
+  - A WhatsApp continua disponível como alternativa, e não como única saída.
+- **Rejeitado de novo:** carteira cripto criada por Claude como meio de recebimento. É tecnicamente possível, mas o comprador local paga por Pix e a guarda da chave privada é um risco. Só faz sentido se um comprador estrangeiro pedir.
