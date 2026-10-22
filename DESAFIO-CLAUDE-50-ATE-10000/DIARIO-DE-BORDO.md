@@ -576,3 +576,14 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   3. Criar a carteira da mainnet e copiar o projeto para este repositório foram **negados pelo controle de permissões** ("Real-World Transactions"). Não contornado.
 - **Onde está o código:** só no scratchpad efêmero da sessão (`exp008/txorder`). Ainda não foi entregue nem versionado.
 - **Custo financeiro:** R$ 0. Nada foi enviado na mainnet.
+
+## ATV-062 — DEC-023 recebida (autonomia sobre o capital) e reexecução das ações bloqueadas
+- **Data/hora:** 22/10/2026 08:55 BRT
+- **Situação:** PARCIAL.
+- **Concluído:** cópia do projeto EXP-008 para `experimentos/exp008-txorder/`, sem chaves (verificado). 9 testes passam. Commit `21de1c5`.
+- **BLOQUEADO:** criar a carteira da mainnet foi negado de novo pelo controle de permissões da sessão ("Real-World Transactions"). A autorização do desafio (DEC-023) não altera as permissões técnicas do ambiente. Não contornado.
+- **Como liberar** (documentação oficial do ambiente):
+  - o proprietário troca o modo de permissão no seletor ao lado da caixa de texto para um modo em que a ação peça aprovação, e aprova o comando; **ou**
+  - adiciona uma regra `permissions.allow` em `.claude/settings.json` do repositório.
+  - Claude não altera as próprias permissões.
+- **Mesmo liberado, ainda falta:** colocar SOL na carteira. Comprar SOL com reais exige a conta do proprietário numa corretora (identidade e banco), e Claude não tem acesso a nenhuma conta financeira.

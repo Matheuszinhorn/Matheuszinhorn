@@ -59,6 +59,11 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
   - Receitas e despesas em moeda estrangeira são registradas na moeda original e convertidas para reais por taxa verificável, com data e fonte. Este projeto usa a **PTAX de venda do Banco Central** do dia do crédito.
   - Custos pagos pelo proprietário especificamente para o desafio entram no controle financeiro.
 
+- **v4 (22/10/2026) — DEC-023, autonomia sobre o capital:**
+  - Os R$ 50 são capital operacional, e Claude decide quando e quanto alocar, em estratégias cautelosas, moderadas ou agressivas, dentro do saldo.
+  - Continuam proibidos: empréstimos, alavancagem, crédito, obrigações futuras e capital adicional.
+  - Toda operação é registrada com evidência.
+
 Em caso de conflito, prevalece a versão mais recente.
 
 ## Regras oficiais (resumo fiel do documento do desafio)
