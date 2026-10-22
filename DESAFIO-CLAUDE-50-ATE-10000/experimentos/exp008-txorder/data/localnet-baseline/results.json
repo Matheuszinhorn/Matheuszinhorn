@@ -1,0 +1,16 @@
+[
+ {
+  "client": "unknown",
+  "version": "3.0.10",
+  "validator": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+  "windows": 4,
+  "sent": 32,
+  "landed": 32,
+  "slots_with_probes": 4,
+  "comparable_pairs": 112,
+  "tau_position_vs_price": -0.1350154312168304,
+  "p_price": 0.4007996001999001,
+  "tau_position_vs_send_order": 1.0,
+  "p_order": 0.0004997501249375312
+ }
+]

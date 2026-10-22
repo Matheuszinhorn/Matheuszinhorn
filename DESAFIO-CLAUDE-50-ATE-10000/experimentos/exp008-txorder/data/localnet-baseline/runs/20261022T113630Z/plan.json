@@ -1,0 +1,83 @@
+{
+ "created": "2026-10-22T11:36:30.339+00:00",
+ "start_slot": 235,
+ "horizon": 200,
+ "targets": [
+  {
+   "identity": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+   "vote": "7qCPJwRprQWSndUZfJz7pJhUSPpjcZs7gYzxik32PcfJ",
+   "stake": 999999997717120,
+   "client": "unknown",
+   "version": "3.0.10",
+   "tpu_quic": "127.0.0.1:8009"
+  }
+ ],
+ "jobs": [
+  {
+   "identity": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+   "vote": "7qCPJwRprQWSndUZfJz7pJhUSPpjcZs7gYzxik32PcfJ",
+   "stake": 999999997717120,
+   "client": "unknown",
+   "version": "3.0.10",
+   "tpu_quic": "127.0.0.1:8009",
+   "window": [
+    235
+   ]
+  },
+  {
+   "identity": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+   "vote": "7qCPJwRprQWSndUZfJz7pJhUSPpjcZs7gYzxik32PcfJ",
+   "stake": 999999997717120,
+   "client": "unknown",
+   "version": "3.0.10",
+   "tpu_quic": "127.0.0.1:8009",
+   "window": [
+    236,
+    237,
+    238,
+    239
+   ]
+  },
+  {
+   "identity": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+   "vote": "7qCPJwRprQWSndUZfJz7pJhUSPpjcZs7gYzxik32PcfJ",
+   "stake": 999999997717120,
+   "client": "unknown",
+   "version": "3.0.10",
+   "tpu_quic": "127.0.0.1:8009",
+   "window": [
+    240,
+    241,
+    242,
+    243
+   ]
+  },
+  {
+   "identity": "3kUyXrot3r7XKHYkgz5WwfQ86Q1CvKi7EcQoyYVXvB27",
+   "vote": "7qCPJwRprQWSndUZfJz7pJhUSPpjcZs7gYzxik32PcfJ",
+   "stake": 999999997717120,
+   "client": "unknown",
+   "version": "3.0.10",
+   "tpu_quic": "127.0.0.1:8009",
+   "window": [
+    244,
+    245,
+    246,
+    247
+   ]
+  }
+ ],
+ "probes_per_window": 8,
+ "prices": [
+  0,
+  0,
+  10000,
+  10000,
+  100000,
+  100000,
+  1000000,
+  1000000
+ ],
+ "cu_limit": 2000,
+ "max_probe_fees_lamports": 224000
+}

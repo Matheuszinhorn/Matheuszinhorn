@@ -1,0 +1,16 @@
+# One command: `docker compose up` → mainnet DRY-RUN (plans leader windows, builds and signs probes, sends nothing).
+# Live (spends real SOL, capped):  docker compose run --rm txorder run --live --cap-sol 0.05
+# Then:                            docker compose run --rm txorder collect --run <RUN_ID>
+#                                  docker compose run --rm txorder analyze
+services:
+  txorder:
+    build:
+      context: .
+      args:
+        BASE_IMAGE: ${BASE_IMAGE:-python:3.12-slim}
+    environment:
+      - RPC_URL=${RPC_URL:-https://api.mainnet-beta.solana.com}
+    volumes:
+      - ./keys:/keys:ro      # master.json lives here; never committed (see .gitignore)
+      - ./data:/data         # plan, raw probes, block summaries, spend ledger, results
+    command: ["plan"]
