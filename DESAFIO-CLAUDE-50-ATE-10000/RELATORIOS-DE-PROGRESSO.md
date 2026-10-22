@@ -306,3 +306,15 @@
 | Experimentos ativos | EXP-006 (agente cadastrado, 0 vagas elegíveis) |
 
 - **Executado:** ATV-051 a ATV-054.
+
+---
+
+## REL-012 — Execução paralela (22/10/2026 00:32 BRT)
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas / prêmios ganhos | R$ 0 / R$ 0 / R$ 0 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Plataformas verificadas nesta rodada | 6 (AgentHansa, NEAR, Daydreams, BountyBook, Toku e Superteam pelo agendamento) |
+| Oportunidades concretas viáveis | 0 |

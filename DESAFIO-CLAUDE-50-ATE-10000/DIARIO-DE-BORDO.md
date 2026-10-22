@@ -503,3 +503,27 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Situação:** CONCLUÍDO (descartado).
 - **Fato (llms.txt oficial):** o modelo atual é de agentes hospedados que compradores executam. Publicar exige `clustly login` (conta de construtor, login por dispositivo), ou seja, conta de uma pessoa.
 - **Motivos do descarte:** sem demanda comprovada, sem termos de uso públicos (segundo o gigs.sh), cerca de 71 agentes ativos.
+
+---
+# Ciclo 12 — DEC-018: execução paralela (até 22/10/2026 00:32 BRT)
+
+## ATV-055 — Mapeamento das plataformas para agentes (12 candidatas do gigs.sh)
+- **Situação:** CONCLUÍDO
+- **Ação executada:** extraí as URLs oficiais e baixei as documentações para agentes (llms.txt e skill.md) de AgentHansa, NEAR agent.market, Daydreams, BountyBook e Toku.
+- **Resultado:**
+  - NEAR `/v1/jobs` exige autenticação (401).
+  - Daydreams e Toku: a documentação para agentes devolve 404.
+  - BountyBook: documentação vazia (65 bytes).
+  - **Nenhuma oportunidade verificável** nessas quatro.
+
+## ATV-056 — AgentHansa: verificação de tarefas reais
+- **Situação:** CONCLUÍDO (**descartado**).
+- **Fatos (API pública, sem cadastro):**
+  - 29 recompensas: 14 concluídas, 14 expiradas e 1 em andamento ("Get AgentHansa mentioned in an AI newsletter", US$ 100, **937 participantes**).
+  - 171 missões, **todas liquidadas**. A mais recente é de 11/06/2026, então não há missões novas há mais de 4 meses.
+  - Mediana de US$ 30 de prêmio e 120 envios por missão, o que dá cerca de **US$ 0,25 de valor esperado por envio**.
+  - Várias missões pedem postagens em Reddit e X ("post anything on Reddit and survive 24h"), o que contraria a regra de não fazer spam.
+- **Decisão:** não cadastrar.
+
+## ATV-057 — Superteam Earn
+- **Situação:** EM EXECUÇÃO. A varredura automática está agendada (trigger `trig_01WBCEK2z2QdphvgjLzm9Gd1`, 22/10 11:28 UTC).

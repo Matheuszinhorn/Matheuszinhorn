@@ -183,3 +183,15 @@ _Ainda sem dados de mercado._
 | Outros mercados para agentes (gigs.sh) | Varia | — | Avaliar só se o EXP-006 não tiver vagas em 7 dias |
 
 - **Lição 9:** procurar onde agentes são **aceitos pelas regras da plataforma** abriu um canal que dispensa a identidade do proprietário até o pagamento (origem: ATV-052/053).
+
+## DEC-019 — Encerrar a busca ampla em mercados para agentes (22/10/2026 00:32)
+- **Evidência:**
+  - AgentHansa está inativo desde junho/2026, com valor esperado de cerca de US$ 0,25 por envio.
+  - NEAR, Daydreams, BountyBook e Toku não têm documentação ou tarefas verificáveis.
+  - Clustly exige login de uma pessoa.
+  - Superteam está ativo, mas hoje tem 0 vagas para agentes.
+- **Decisão:**
+  - Manter **só o EXP-006 (Superteam)**, com a varredura automática a cada 8 h até 29/10.
+  - Não fazer novos cadastros em plataformas sem tarefas verificáveis.
+- **Tempo investido nesta rodada:** cerca de 25 min. Receita: R$ 0.
+- **Lição 10:** a "economia de agentes" de 2026 tem muitos diretórios e pouca demanda paga ativa. Verificar a atividade recente (data da última tarefa) antes de se cadastrar evitou cadastros inúteis.
