@@ -260,3 +260,38 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 - **Critério de sucesso:** prêmio anunciado a favor do proprietário. **Critério de encerramento:** anúncio dos vencedores sem prêmio, e aí o aprendizado é registrado.
 - **Valor esperado:** ESTIMATIVA. A concorrência é desconhecida (a API não expõe o número de envios). Não conta como receita até o USDC ser creditado.
 - **Prêmio e recebimento:** USDC → registrado na moeda original + PTAX do dia do crédito (adendo v3).
+
+---
+
+## Atualização de 22/10/2026 19:35 BRT (DEC-027)
+
+### EXP-007 — CANCELADO
+- **Motivo:** a vaga é regional (`region` = India). O servidor recusa o envio de residentes de outros países (`Region not eligible`). Ver ATV-068.
+- **Resultado:** US$ 0, sem envio. O critério de sucesso não foi alterado. O experimento acabou por inelegibilidade, não por avaliação.
+
+### EXP-008 — ARQUIVADO (sem gasto)
+- **Motivo:** a vaga é regional (`region` = Ukraine). Sem pagador elegível.
+- **Plano reproduzível e condições para reabrir:** `experimentos/exp008-txorder/PLANO-MAINNET.md`.
+- **Prazo final:** se nenhuma condição para reabrir aparecer até 05/11/2026, fica encerrado como código aberto.
+
+### EXP-006 — EM EXECUÇÃO (filtro de região adicionado)
+- Os critérios continuam os mesmos. O encerramento é em 29/10/2026 se continuar com 0 vagas elegíveis.
+
+### EXP-009 — Canal de entrada autônomo no GitHub (repositório lite)
+- **Situação:** PLANEJADO. Depende de **uma única ação de permissão** do proprietário (T-31). O conteúdo está pronto desde o ciclo 11.
+- **Hipótese:** um repositório público com modelos gratuitos de sites para negócios locais, com pedido de versão personalizada por Issue, atrai visitas pela busca do GitHub e do Google e gera pedidos. Claude responde e entrega sem o proprietário. O proprietário só confere o Pix de cada venda.
+- **Por que este e não outro:** é o único canal avaliado em que, depois de **uma** configuração, a operação inteira (publicar, responder, entregar e medir) fica com Claude. Ver DEC-027, gargalo de distribuição.
+- **Custo:** R$ 0.
+- **Prazo:** 14 dias depois da liberação.
+- **Medição:** `ferramentas/metricas_repo.py`, que usa a API de tráfego oficial e nunca recebe valores preenchidos à mão.
+
+| Marco (14 dias) | Continuar se | Abandonar se |
+|---|---|---|
+| Tráfego | ≥ 50 visitantes únicos | < 20 visitantes únicos |
+| Interesse | ≥ 1 Issue de pedido ou pergunta | 0 Issues com ≥ 50 visitantes |
+| Receita | ≥ 1 venda paga (Pix confirmado pelo proprietário) | — (avaliado no dia 30) |
+
+### EXP-010 — Medição de demanda e velocidade em marketplaces (CONCLUÍDO)
+- **Hipótese:** existe demanda pouco disputada que Claude atende, com o proprietário enviando as propostas.
+- **Resultado:** **rejeitada**. Mediana de 34,5 a 178 lances no Freelancer.com, e 31 propostas em cerca de 25 min no 99Freelas. Ver ATV-071.
+- **Custo:** R$ 0.

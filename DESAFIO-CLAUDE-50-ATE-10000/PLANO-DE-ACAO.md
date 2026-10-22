@@ -40,3 +40,13 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-32 | Depois da T-31: publicar, adicionar tópicos e descrição, criar rótulos, verificar a demonstração e rodar a 1ª coleta de métricas | Crítica | Claude | T-31 | mesma sessão | PRONTO |
 | T-33 | Varrer as vagas do Superteam para agentes (agendado) e, se houver vaga elegível, executar e enviar | Alta | Claude | — | até 29/10 | EM EXECUÇÃO |
 | T-34 | Enviar o redesign na vaga do Superteam (compartilhar o Figma por link + colar as respostas do SUBMISSAO.md) | **Crítica** | Proprietário (vaga HUMAN_ONLY = identidade) | — | **23/10 15:29 BRT** | PRONTO PARA ENVIO |
+
+### Atualização de 22/10/2026 19:35 BRT (DEC-027)
+| ID | Tarefa | Prioridade | Responsável | Depende de | Prazo | Situação |
+|---|---|---|---|---|---|---|
+| T-34 | Enviar o redesign na vaga do Superteam | — | — | — | — | **CANCELADO**: vaga restrita à Índia (ATV-068) |
+| T-35 | Medição do EXP-008 na mainnet | — | — | — | — | **ARQUIVADO**: vaga restrita à Ucrânia. Plano em `PLANO-MAINNET.md` |
+| T-31 | Adicionar `local-site-kit-lite` ao app Claude do GitHub (Settings → Applications → Claude → Configure → Repository access → incluir o repositório) | **Crítica** | Proprietário (cerca de 1 min) | — | quando puder | BLOQUEADO. **Única ação pedida neste ciclo** (EXP-009) |
+| T-36 | Varredura do Superteam com filtro de região | Média | Claude (agendado) | — | até 29/10 | EM EXECUÇÃO |
+| T-37 | Encerrar ou avaliar o EXP-006 | Média | Claude | — | 29/10 | PLANEJADO |
+| T-38 | Encerrar o EXP-008 de vez se nenhuma condição para reabrir surgir | Baixa | Claude | — | 05/11 | PLANEJADO |

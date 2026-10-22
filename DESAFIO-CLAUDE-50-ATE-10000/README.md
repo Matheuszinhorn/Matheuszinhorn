@@ -4,7 +4,7 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 23:10 BRT)
+## Estado atual (atualizado em 22/10/2026 19:35 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
@@ -16,11 +16,11 @@ Início oficial: 21/10/2026 (horário de Brasília).
 | Patrimônio líquido atual | R$ 50,00 | — |
 | Total retirado | R$ 0,00 | — |
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
-| Estratégias | EXP-001: sites locais via WhatsApp (pronto, aguardando envio) · EXP-003: produto digital global "Local Site Kit" (produto pronto) · EXP-004: serviço global no Fiverr (anúncio pronto) · EXP-002: CANCELADO | ver ESTRATEGIAS-E-EXPERIMENTOS.md |
+| Estratégias | EXP-006: vagas do Superteam para agentes (em execução até 29/10) · EXP-009: canal de entrada no GitHub (aguarda T-31) · EXP-001/003: prontos, sem canal · EXP-007: CANCELADO (vaga só para a Índia) · EXP-008: ARQUIVADO (vaga só para a Ucrânia, sem gasto) · EXP-010: CONCLUÍDO (marketplaces rejeitados) | ver ESTRATEGIAS-E-EXPERIMENTOS.md e DEC-027 |
 | Investimentos financeiros | nenhum. Simulação e arbitragem testadas e rejeitadas | DEC-004, DEC-013 |
 | Portfólio público (serviço) | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/demo/index.html | no ar desde 21/10 19:40 (ATV-023) |
 | Página de venda do kit | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/vitrine/kit/index.html | no ar, **sem meio de compra** até a chave Pix (T-05) |
-| Contatos prontos | 29 (L001–L029), 0 contatados | ATV-013 |
+| Contatos prontos | 77 (L001–L077), 0 contatados | VENDAS-E-CLIENTES.csv |
 
 Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORIOS-DE-PROGRESSO.md`.
 

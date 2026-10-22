@@ -214,3 +214,29 @@ _Ainda sem dados de mercado._
 
 - **Leitura honesta:** o trabalho que Claude faz de ponta a ponta já soma **US$ 4.000 em prêmios disputáveis** (EXP-007 e EXP-008). O que separa isso de dinheiro são dois atos que só o proprietário pode fazer: um envio de cerca de 5 min e a liberação de uma permissão. Procurar mais plataformas agora custaria tempo sem mudar esse gargalo.
 - **Lição 12:** com recursos humanos mínimos, o melhor portfólio é o de entregáveis completos que esperam um único ato de identidade, e não o de canais que exigem operação humana contínua.
+
+## COR-005 — A leitura "US$ 4.000 em prêmios disputáveis" da DEC-025 está corrigida (22/10/2026 19:35)
+- O EXP-007 e o EXP-008 tinham região restrita (Índia e Ucrânia), então o valor disputável pelo proprietário era US$ 0. Detalhes no DIARIO (COR-005).
+- A tabela da DEC-025 fica como estava, por histórico, e esta correção prevalece.
+
+## DEC-026 — Diretriz do proprietário: priorização, preservação e novas oportunidades (22/10/2026 19:35; recebida com o título "DEC-025")
+- **Conteúdo:**
+  1. Tratar o EXP-007 com urgência e encerrá-lo se houver inelegibilidade.
+  2. Preservar o EXP-008 sem gastar.
+  3. Manter o EXP-006 em segundo plano.
+  4. Ampliar a exploração comercial.
+  5. Exigir execução, prazo, custo, hipótese e critério de abandono.
+- **Capital:** pode ser usado com justificativa econômica.
+
+## DEC-027 — Encerrar o EXP-007, arquivar o EXP-008 e filtrar por região (22/10/2026 19:35)
+| Item | Decisão | Motivo (evidência) |
+|---|---|---|
+| EXP-007 | **CANCELADO** | `region` = India, e o servidor recusa com `Region not eligible` (ATV-068) |
+| EXP-008 | **ARQUIVADO**, sem gasto, com plano reproduzível | `region` = Ukraine. Sem pagador elegível, comprar SOL não tem retorno (ATV-069) |
+| EXP-006 | Continua até 29/10, agora com filtro de região | Critério fixado; a varredura funciona (3 execuções registradas) |
+| Freelance com proposta pelo proprietário | **Não abrir** | Os projetos lotam em menos de 1 h (31 propostas em ≈ 25 min). Um relé humano chega tarde (ATV-071) |
+| Algora | Continua EM ESPERA | Mercado esvaziado rapidamente; sobram resquícios (ATV-071) |
+
+- **Leitura honesta do gargalo:** Claude produz entregáveis completos rápido. Faltam duas coisas, e as duas pertencem ao proprietário: **um meio de receber dinheiro** e **um canal de distribuição** que não dependa dele para cada ação. Nenhuma plataforma nova testada hoje muda isso.
+- **Lição 13:** antes de produzir para qualquer vaga, ler as regras de **elegibilidade do pagador** (região, KYC, país de pagamento) direto na fonte oficial. Dois entregáveis bons (EXP-007 e EXP-008) foram feitos para vagas que o proprietário não podia disputar.
+- **Lição 14:** em marketplaces abertos, a vantagem do trabalho rápido de Claude se perde se cada proposta passa por um humano. A velocidade de chegada também é um requisito do canal.

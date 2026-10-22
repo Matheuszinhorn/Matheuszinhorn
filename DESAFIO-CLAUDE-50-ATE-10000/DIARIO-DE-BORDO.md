@@ -613,3 +613,55 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **EXP-007:** sem confirmação de envio do redesign. O prazo é 23/10 18:29 UTC.
 - **EXP-008:** sem mudança. Aguarda a permissão técnica e o SOL.
 - **Receitas e despesas desde o último registro:** R$ 0 / R$ 0.
+
+---
+# Ciclo 16 — Diretriz do proprietário: priorização, preservação e novas oportunidades (até 22/10/2026 19:35 BRT)
+
+## ATV-067 — Diretriz do proprietário recebida
+- O texto chegou com o título "DEC-025". Esse número já estava em uso (portfólio por estágio, 22/10 09:31), então a diretriz foi registrada como **DEC-026**. O conteúdo não foi alterado.
+
+## ATV-068 — EXP-007: verificação de elegibilidade e prazo
+- **Situação:** CONCLUÍDO. Resultado: **inelegível**.
+- **Fonte oficial:** `https://superteam.fun/api/listings/details/redesign-your-favourite-app-on-solana`, consultada em 22/10/2026 ≈ 22:20 UTC.
+  - `deadline` = 2026-10-23T18:29:59.999Z (23/10 15:29 BRT)
+  - `status` = OPEN
+  - `agentAccess` = HUMAN_ONLY
+  - **`region` = India**
+  - patrocinador: Superteam India
+- **Regra efetiva:** o código público do Superteam Earn (SuperteamDAO/earn, commit `082cb9a`) faz `src/features/listings/utils/validateSubmissionRequest.ts` lançar `Region not eligible` quando a localização do perfil humano não pertence à região da vaga. A função `userRegionEligibilty` só libera automaticamente as vagas `Global`.
+- **Conclusão:** um residente no Brasil não pode enviar. **Candidatura encerrada** (EXP-007 → CANCELADO). Não será feita nenhuma tentativa de alterar a localização do perfil, porque isso seria contornar a regra.
+- O prêmio nunca foi contabilizado como receita (CONTROLE-FINANCEIRO.csv sem lançamento).
+- **O que fica de útil:** o arquivo do Figma continua como portfólio de design.
+
+## ATV-069 — EXP-008: preservação e plano da medição na mainnet
+- **Situação:** CONCLUÍDO (preservação e plano). A medição foi **ARQUIVADA** sem gasto.
+- A vaga "Inside the Block" tem **`region` = Ukraine**, então o proprietário também é inelegível. Sem prêmio elegível, não há justificativa econômica para comprar SOL.
+- **Preservado:** `experimentos/exp008-txorder/` neste branch (código, 9 testes, Docker, README, REPORT e dados da rede local). Os 9 testes foram rodados de novo agora: OK.
+  - Novo arquivo: `PLANO-MAINNET.md`, com custos medidos, saldo necessário, riscos, critérios e condições para reabrir.
+  - Chaves e registro de gastos ficam fora do repositório (`.gitignore`).
+- **Custos medidos:**
+  - taxa de prioridade mediana na mainnet = 0 µlamports/CU (150 slots);
+  - saldo mínimo de uma conta = 650.240 lamports;
+  - 1 SOL = R$ 522,57 (CoinGecko).
+  - Teto de taxas de uma rodada: **0,00224 SOL ≈ R$ 1,17**. Saldo necessário: **≈ 0,010 SOL ≈ R$ 5,23**, quase todo recuperável.
+  - A taxa de compra e saque na corretora não foi verificada e pode superar o custo da medição.
+- **Limpeza:** um `.pyc` versionado por engano (`ferramentas/__pycache__`) foi retirado, e foi criado um `.gitignore`.
+
+## ATV-070 — EXP-006: filtro de região nas varreduras
+- A varredura agendada (#4, 23/10 00:32 BRT) foi atualizada: toda vaga candidata agora passa por `/api/listings/details` e só conta se a região for `Global` ou `Brazil`.
+
+## ATV-071 — Varredura de oportunidades globais (fora de plataformas para agentes)
+- **Situação:** CONCLUÍDO. Detalhes e números em `analises/mercado/2026-10-22-varredura-global.md`.
+- **Superteam:** 13 vagas; 5 regionais e inelegíveis, 8 globais e nenhuma executável por Claude. Todas exigem conta pessoal, audiência, capital de trading ou um produto com volume real.
+- **Algora:** as páginas por organização são legíveis. Exemplo: tscircuit com 727 recompensas concluídas contra 10 abertas, todas resquícios de 5 a 23 meses. A concorrência por issue não pode ser medida nesta sessão (GitHub fora do escopo).
+- **Freelancer.com (API pública):** mediana de 34,5 a 178 lances por projeto. Projetos com até 5 lances: de 0 a 4 em cada 50.
+- **99Freelas:** um projeto de site para marcenaria foi publicado às 19:05 e já tinha **31 propostas por volta das 19:30**.
+- **Workana e Upwork:** bloqueados por Cloudflare. Não contornado.
+- **Tentativa de medir leads internacionais pelo OSM (Overpass):** os dois servidores falharam (conexão fechada e timeout). Sem resultado, e nada foi presumido.
+- **Custo:** R$ 0. Cerca de 1 h de trabalho de Claude.
+
+## COR-005 — "US$ 4.000 em prêmios disputáveis" (DEC-025) estava errado
+- **Erro:** a DEC-025 (22/10 09:31) e os relatórios trataram o EXP-007 (US$ 1.500) e o EXP-008 (US$ 2.500) como disputáveis pelo proprietário.
+- **Causa:** o campo `region` das vagas nunca foi checado. As duas eram restritas (Índia e Ucrânia).
+- **Correção:** o valor disputável real era **US$ 0**. Não houve impacto financeiro (nada foi gasto nem contabilizado). O custo foi tempo de Claude (≈ 4 h nos dois entregáveis) e o tempo de atenção do proprietário.
+- **Prevenção:** filtro de região obrigatório (ATV-070) e lição 13.

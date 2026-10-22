@@ -330,3 +330,18 @@
 | Prêmios ganhos / recebidos | 0 / R$ 0,00 |
 | Patrimônio acumulado | R$ 50,00 (0,5%) |
 | Trabalho entregue | Redesign no Figma (10 quadros), pronto para envio |
+
+---
+
+## REL-014 — Priorização e novas oportunidades (22/10/2026 19:35 BRT)
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas / prêmios ganhos | R$ 0 / R$ 0 / R$ 0 (dia sem movimentação financeira) |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Prêmios disputáveis pelo proprietário | **US$ 0** (COR-005: EXP-007 e EXP-008 eram regionais) |
+| Experimentos | EXP-006 em execução; EXP-007 cancelado; EXP-008 arquivado; EXP-009 aguardando T-31; EXP-010 concluído (rejeitado) |
+| Fontes de mercado medidas hoje | Superteam (13 vagas), Algora (2 organizações), Freelancer.com (250 projetos), 99Freelas (10 projetos) |
+
+- **Executado:** ATV-067 a ATV-071 e COR-005.
