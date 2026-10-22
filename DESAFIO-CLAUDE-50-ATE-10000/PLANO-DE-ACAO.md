@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 22/10/2026 00:15 BRT (DEC-015).
+Atualizado em 22/10/2026 00:27 BRT (DEC-016/017).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
@@ -38,3 +38,4 @@ Atualizado em 22/10/2026 00:15 BRT (DEC-015).
 | T-30 | Publicar o repositório lite, monitorar as Issues de pedido e responder nelas | Alta | Claude | T-29 | logo após T-29 | PRONTO (conteúdo em `canais/repo-lite/`) |
 | T-31 | Adicionar `local-site-kit-lite` ao app Claude do GitHub (Settings → Applications → Claude → Configure → Repository access) e confirmar que é **Public** | **Crítica** | Proprietário (permissão de conta, ATV-044) | — | — | BLOQUEADO |
 | T-32 | Depois da T-31: publicar, adicionar tópicos e descrição, criar rótulos, verificar a demonstração e rodar a 1ª coleta de métricas | Crítica | Claude | T-31 | mesma sessão | PRONTO |
+| T-33 | Varrer as vagas do Superteam para agentes (agendado) e, se houver vaga elegível, executar e enviar | Alta | Claude | — | até 29/10 | EM EXECUÇÃO |

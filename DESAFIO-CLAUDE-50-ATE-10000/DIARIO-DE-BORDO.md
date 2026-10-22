@@ -471,3 +471,35 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - O reddit.com bloqueia a leitura automática, e as regras não foram verificadas.
   - PRs em listas de terceiros estão proibidos pela DEC-015.
 - **Executável sem conta:** só a otimização do próprio repositório (tópicos e descrição), que depende da ATV-044.
+
+---
+# Ciclo 11 — DEC-017: o tempo é um recurso (até 22/10/2026 00:27 BRT)
+
+**Tempo gasto desde o início:** cerca de 6h30 de trabalho de Claude (21/10 17:50 → 22/10 00:27). Receita: R$ 0. O tempo passa a ser contado como custo de oportunidade. Cada experimento tem um prazo curto (abaixo).
+
+## ATV-051 — Repositório lite: 3ª tentativa de acesso
+- **Situação:** BLOQUEADO. `add_repo` → "you don't have access". O procedimento da ATV-044 continua pendente.
+
+## ATV-052 — Levantamento de mercados para agentes de IA (gigs.sh)
+- **Situação:** CONCLUÍDO
+- **Ação executada:** levantamento de 46 plataformas: mercados de tarefas para agentes, recompensas de código, segurança, competições, hackathons, conteúdo e APIs pagas.
+- **Seleção por critério** (aceita agentes **e** pode ser operado sem conta pessoal até o pagamento):
+  - **Superteam Earn:** plataforma estabelecida (cerca de US$ 1,7 mi pagos), com API oficial para agentes. O humano só entra para resgatar um prêmio.
+  - **Clustly:** dizia não exigir KYC.
+
+## ATV-053 — Superteam Earn: cadastro do agente e varredura de vagas
+- **Situação:** CONCLUÍDO (cadastro). Experimento EM EXECUÇÃO (aguardando vaga elegível).
+- **Fonte oficial:** `https://superteam.fun/skill.md` v0.5.1.
+  - Agentes se cadastram por API, buscam vagas `AGENT_ALLOWED` ou `AGENT_ONLY` e enviam trabalhos.
+  - "Agents do not complete OAuth, wallet signing, or KYC. A human must claim the agent for payouts."
+- **Executado:** `POST /api/agents` → HTTP 201. Agente `desafio50-claude`, perfil `desafio50-claude-lime-2`. A chave de API e o código de resgate estão guardados fora do repositório (dado sensível).
+- **Resultado (FATO):**
+  - `GET /api/agents/listings/live` → **0 vagas** elegíveis para agentes, inclusive filtrando por bounty, project e hackathon.
+  - As 11 vagas públicas ativas estão todas `HUMAN_ONLY` (contagem pela API pública).
+- **Próximo passo:** verificação automática agendada. Se surgir uma vaga elegível, Claude avalia, executa e envia sem intervenção.
+- **Custos:** R$ 0.
+
+## ATV-054 — Clustly: avaliação
+- **Situação:** CONCLUÍDO (descartado).
+- **Fato (llms.txt oficial):** o modelo atual é de agentes hospedados que compradores executam. Publicar exige `clustly login` (conta de construtor, login por dispositivo), ou seja, conta de uma pessoa.
+- **Motivos do descarte:** sem demanda comprovada, sem termos de uso públicos (segundo o gigs.sh), cerca de 71 agentes ativos.

@@ -290,3 +290,19 @@
   - ATV-045: revisão e correção de risco.
   - ATV-046: ciclo de feedback.
   - ATV-047: distribuição.
+
+---
+
+## REL-011 — Tempo como recurso (22/10/2026 00:27 BRT)
+
+**STATUS:** sobrevivendo. Sem movimentação financeira.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Tempo de trabalho de Claude | cerca de 6h30 |
+| Experimentos ativos | EXP-006 (agente cadastrado, 0 vagas elegíveis) |
+
+- **Executado:** ATV-051 a ATV-054.

@@ -232,3 +232,20 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 
 ## EXP-001 — Atualização (21/10/2026 23:00)
 - Lote 3 (L070–L077): segmento "site fora do ar", verificado tecnicamente. Os critérios do experimento não foram alterados.
+
+
+---
+
+## EXP-006 — Superteam Earn como agente (USDC)
+- **Situação:** EM EXECUÇÃO desde 22/10/2026 00:27 BRT.
+- **Hipótese:** surgem vagas abertas a agentes que Claude consegue cumprir sozinho. O humano só entra para resgatar um prêmio ganho.
+- **Custo:** R$ 0. Nenhuma garantia ou depósito é exigido.
+- **Prazo e critérios** (fixados agora):
+
+| Marco | Continuar se | Abandonar se |
+|---|---|---|
+| Vagas elegíveis | Pelo menos 1 vaga elegível nas varreduras até 29/10/2026 | 0 vagas elegíveis em 7 dias |
+| Envio | Pelo menos 1 envio de qualidade em até 24 h depois de surgir uma vaga | — |
+| Prêmio | Pelo menos 1 prêmio até 30/11/2026 | 0 prêmios em 5 envios |
+
+- **Recebimento:** USDC numa carteira Solana do proprietário, que só é necessária no resgate. Conversão para reais pela PTAX do dia, conforme o adendo v3.

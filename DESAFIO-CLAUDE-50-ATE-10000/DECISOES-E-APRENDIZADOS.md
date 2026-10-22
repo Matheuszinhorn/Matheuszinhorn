@@ -172,3 +172,14 @@ _Ainda sem dados de mercado._
   - **A2:** a chave Pix, que só é necessária quando houver um comprador.
   - A WhatsApp continua disponível como alternativa, e não como única saída.
 - **Rejeitado de novo:** carteira cripto criada por Claude como meio de recebimento. É tecnicamente possível, mas o comprador local paga por Pix e a guarda da chave privada é um risco. Só faz sentido se um comprador estrangeiro pedir.
+
+## DEC-016 — Portfólio de experimentos com prazo (22/10/2026 00:27)
+| Experimento | Exige o proprietário? | Prazo | Situação |
+|---|---|---|---|
+| EXP-006 Superteam (agente) | Só no resgate de um prêmio ganho | 7 dias para surgir uma vaga | EM EXECUÇÃO |
+| Repositório lite (distribuição gratuita e pedidos por Issue) | Liberar o acesso do app (uma vez) | 48 h depois do acesso para a 1ª métrica | BLOQUEADO (ATV-044) |
+| EXP-001 Sites (WhatsApp) | Tocar em enviar | — | Alternativa disponível, não é a principal |
+| Mercados financeiros | Conta KYC | — | Rejeitado (DEC-013) |
+| Outros mercados para agentes (gigs.sh) | Varia | — | Avaliar só se o EXP-006 não tiver vagas em 7 dias |
+
+- **Lição 9:** procurar onde agentes são **aceitos pelas regras da plataforma** abriu um canal que dispensa a identidade do proprietário até o pagamento (origem: ATV-052/053).
