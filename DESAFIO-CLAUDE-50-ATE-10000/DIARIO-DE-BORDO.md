@@ -369,3 +369,7 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **WhatsApp Business API:** exige empresa verificada na Meta e é paga por conversa.
 - **Conector Gmail:** tecnicamente autônomo, mas só alcança cerca de 4 contatos locais (ATV-029/033). No exterior, o CAN-SPAM (EUA) exige endereço postal físico do remetente, e GDPR, CASL e o Spam Act restringem e-mail frio na UE, no Canadá e na Austrália.
 - **Contas próprias de Claude em plataformas:** proibido (falsidade de identidade e termos de uso).
+
+## COR-004 — Data do lote 3 (21/10/2026 23:01 BRT)
+- **Erro:** as mensagens e os registros do lote 3 diziam "22/10", mas a verificação foi feita em 21/10 no horário de Brasília (o ambiente já estava em 22/10 UTC).
+- **Correção:** as mensagens passaram a dizer "hoje, 21/10", e as linhas L070–L077 do CSV foram datadas em 21/10/2026. O arquivo de envio foi corrigido antes de qualquer envio. A versão anterior continua no commit `7a4c60d`.
