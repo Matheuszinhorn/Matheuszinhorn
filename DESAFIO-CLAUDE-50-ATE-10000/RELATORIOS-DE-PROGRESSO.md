@@ -202,3 +202,25 @@
   - Matriz de canais.
 - **Sinais de interesse recebidos:** nenhum. Nenhum contato foi feito.
 - **Bloqueio real:** envio pelo WhatsApp, que exige a identidade do proprietário (sem alternativa, ATV-031). Chave Pix para habilitar a venda do kit.
+
+---
+
+## REL-007 — Diretriz de autonomia (21/10/2026 23:00 BRT)
+
+**STATUS:** sobrevivendo. Sem movimentação financeira.
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Contatos prontos | 77 (8 com site fora do ar verificado) |
+| Mensagens enviadas / respostas | 0 / 0 |
+
+- **Executado:** ATV-032 a ATV-035.
+  - Investigação das recompensas open source.
+  - Auditoria de 35 sites.
+  - Verificação RDAP e navegador.
+  - Lote 3.
+  - Alternativas de envio avaliadas.
+- **Estratégia:** EXP-001, começando pelo segmento "site fora do ar" (DEC-012).

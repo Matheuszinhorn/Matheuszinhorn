@@ -327,3 +327,45 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Situação:** CONCLUÍDO
 - **Resultado:** ver `RECURSOS-E-ACESSOS.md`, seção "Canais de aquisição".
 - **Conclusão:** nenhum canal de aquisição funciona sem uma identidade humana. O menor esforço humano disponível é tocar em enviar no WhatsApp, cerca de 5 s por contato.
+
+---
+# Ciclo 7 — Diretriz de autonomia operacional (até 21/10/2026 23:00 BRT)
+
+## ATV-032 — Recompensas em projetos open source (Algora): investigação
+- **Situação:** CONCLUÍDO (investigação). **Não executado**, por decisão (DEC-012).
+- **Hipótese:** é o único mercado global em que Claude faz o trabalho inteiro (código e pull request) e o pagamento sai em USD quando a contribuição é aceita.
+- **Fatos e fontes:**
+  - **Docs do Algora:** o pagamento passa pelo Stripe Connect e o colaborador recebe 100% da recompensa.
+  - **Guia gigs.sh:** exige KYC no pagamento, com "pessoa ou entidade real". Não há política que convide agentes de IA. A maioria das organizações tem de 0 a 2 recompensas abertas.
+  - **Artigo no dev.to (relato individual, não verificado):** "8–158 PRs concorrentes em poucas horas", cerca de 15% de aceitação, "mercado público de recompensas totalmente saturado de agentes em 2026" e "automação pura destrói a reputação".
+- **Limites técnicos verificados:**
+  - A API de busca do GitHub nesta sessão só alcança o repositório do desafio (HTTP 403 fora dele).
+  - O endpoint público de recompensas do Algora não devolve dados úteis (404 ou HTML).
+- **Conclusão:** cada PR seria publicado com a **identidade do proprietário no GitHub**. Com cerca de 15% de aceitação e concorrência saturada de agentes, o risco à reputação dele é maior que o valor esperado. Fica como EXP-005, em espera.
+
+## ATV-033 — E-mail para negócios com site fraco: auditoria
+- **Situação:** CONCLUÍDO (resultado negativo para o e-mail e positivo para um novo segmento).
+- **Ação executada:** auditoria automática dos 35 sites de negócios locais com site cadastrado no OSM: HTTPS, adaptação a celular (viewport), botão de WhatsApp e e-mail público.
+- **Resultado:**
+  - 19 sites acessíveis. Só 4 são fracos (sem HTTPS ou sem versão para celular), e só **1** desses tem e-mail público.
+  - **Conclusão:** o e-mail continua inviável como canal (somado à ATV-029: 4 contatos alcançáveis no total).
+- **Achado:** **16 de 35 sites (46%) não abriram.**
+
+## ATV-034 — Verificação dos sites fora do ar
+- **Situação:** CONCLUÍDO
+- **Ação executada:** reteste com Chromium real e consulta ao RDAP do registro.br (fonte oficial de domínios .br).
+- **Fatos:**
+  - **artfashionfloricultura.com.br:** status `inactive`, vencido em 08/08/2026 (RDAP).
+  - **indiada.com.br:** não registrado (RDAP 404).
+  - O navegador acusa `ERR_NAME_NOT_RESOLVED` em 7 domínios, e 1 estoura o tempo.
+  - Os demais deram erro 403 no RDAP (limite de consultas), então o status do registro não foi confirmado.
+- **Excluídos por ambiguidade:** sites com redirecionamento interrompido (possível bloqueio de robô), a universidade e um falso positivo.
+- **Resultado:** **lote 3 com 8 contatos (L070–L077)**. Cada um tem uma mensagem que cita o problema verificado ("tentei abrir o site de vocês hoje e ele não está entrando"). Todos são telefones fixos.
+- **Envios:** 0.
+
+## ATV-035 — Alternativas para tirar o humano do envio, avaliadas e rejeitadas
+- **Situação:** CONCLUÍDO
+- **WhatsApp Web automatizado no navegador (QR code do proprietário):** rejeitado. Os termos do WhatsApp proíbem automação não oficial, e há risco de banir a conta do proprietário.
+- **WhatsApp Business API:** exige empresa verificada na Meta e é paga por conversa.
+- **Conector Gmail:** tecnicamente autônomo, mas só alcança cerca de 4 contatos locais (ATV-029/033). No exterior, o CAN-SPAM (EUA) exige endereço postal físico do remetente, e GDPR, CASL e o Spam Act restringem e-mail frio na UE, no Canadá e na Austrália.
+- **Contas próprias de Claude em plataformas:** proibido (falsidade de identidade e termos de uso).

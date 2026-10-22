@@ -118,3 +118,19 @@ _Ainda sem dados de mercado._
   - Concentrar tudo no envio por WhatsApp, começando pelos **11 celulares** (L001–L004 e os 7 do lote 2), que têm a maior chance de ser WhatsApp ativo.
 - **Divisão do trabalho depois do envio:** Claude faz tudo o que vem a seguir — redigir respostas, preparar a prévia personalizada em menos de 1 h, gerar o Pix da entrada e entregar o site. O proprietário só repassa as mensagens.
 - **Descartado:** contas criadas por Claude em plataformas (falsidade de identidade e termos de uso), envio automatizado em massa (spam) e compra de listas de contatos (LGPD e spam).
+
+## DEC-012 — Manter o EXP-001 como estratégia, com prioridade para o segmento "site fora do ar" (21/10/2026 23:00)
+- **Alternativas investigadas nesta rodada:**
+  - Recompensas open source (ATV-032).
+  - E-mail para sites fracos (ATV-033).
+  - Automação do WhatsApp (ATV-035).
+  - Conector Gmail (ATV-035).
+  - Contas próprias (ATV-035).
+- **Resultado:** nenhum canal gera receita sem uma ação de identidade do proprietário. Os que exigem menos dele são:
+  - WhatsApp: cerca de 5 s por mensagem, sem risco.
+  - Algora: um PR por tentativa com a identidade dele, KYC e cerca de 15% de aceitação.
+- **Decisão:** o EXP-001 continua sendo a estratégia, agora começando pelo lote 3 (dor verificada) e pelos 11 celulares. O EXP-005 fica em espera.
+- **O que muda no modelo:** nada no produto. Muda só a **segmentação**: os negócios com site quebrado têm o problema que o serviço resolve, comprovado.
+
+## Lições (acréscimo)
+8. A auditoria técnica automática é um gerador de leads qualificados: transforma dados públicos em uma dor verificável e específica (origem: ATV-033/034).

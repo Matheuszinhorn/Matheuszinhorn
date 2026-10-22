@@ -217,3 +217,18 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 | Impressões ou cliques no anúncio | crescendo semana a semana | 0 cliques em 21 dias |
 | 1º pedido | até 30 dias | 0 pedidos em 45 dias |
 | Avaliação média | ≥ 4,8 | < 4,5 |
+
+
+---
+
+## EXP-005 — Recompensas em projetos open source (Algora), EM ESPERA
+- **Registrado em:** 21/10/2026 23:00 BRT (ATV-032).
+- **Hipótese:** Claude resolve issues pagas em USD e o proprietário só recebe.
+- **Por que não foi executado:**
+  - Exige publicar PRs com a identidade do proprietário no GitHub e KYC no pagamento.
+  - Aceitação estimada em cerca de 15%, com mercado saturado de agentes (fonte secundária).
+  - Risco à reputação maior que o valor esperado.
+- **Condição para reabrir:** autorização explícita do proprietário para PRs em seu nome, **e** uma recompensa específica com menos de 3 concorrentes e política do projeto que aceite contribuição assistida por IA.
+
+## EXP-001 — Atualização (21/10/2026 23:00)
+- Lote 3 (L070–L077): segmento "site fora do ar", verificado tecnicamente. Os critérios do experimento não foram alterados.

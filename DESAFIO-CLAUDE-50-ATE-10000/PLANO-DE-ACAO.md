@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 21/10/2026 19:50 BRT (execução comercial, DEC-011).
+Atualizado em 21/10/2026 23:00 BRT (diretriz de autonomia, DEC-012).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
@@ -12,7 +12,7 @@ Atualizado em 21/10/2026 19:50 BRT (execução comercial, DEC-011).
 | T-04 | Publicar o portfólio | Alta | Claude | — | 21/10 | CONCLUÍDO (ATV-012) |
 | T-05 | Informar a chave Pix (de preferência a chave aleatória ou o e-mail, **não o CPF**, porque a página é pública), o nome que aparece no Pix, a cidade e o número de WhatsApp para comprovantes | **Crítica** | Humano (dado bancário) | — | 22/10 | BLOQUEADO. É a única peça que falta para o kit ficar à venda |
 | T-06 | Montar a lista de clientes | Alta | **Claude** | — | 21/10 | CONCLUÍDO (ATV-013: 29 contatos) |
-| T-07 | Tocar em enviar: **primeiro os 11 celulares** (filtro "Novos", L001–L004 e o lote 2 com tipo celular), depois os fixos | **Crítica** | Humano (WhatsApp pessoal, não há canal alternativo, ATV-031) | — | 22/10 | PRONTO PARA EXECUTAR |
+| T-07 | Tocar em enviar: **lote 3 (L070–L077, site fora do ar)**, depois os 11 celulares e depois os fixos | **Crítica** | Humano (WhatsApp pessoal; 6 alternativas testadas e rejeitadas, ATV-031/035) | — | 22/10 | PRONTO PARA EXECUTAR |
 | T-08 | Redigir respostas e propostas a partir das conversas coladas no chat | Alta | Claude | T-07 | contínuo | PLANEJADO |
 | T-09 | Criar demos por nicho | Média | Claude | — | 24/10 | CONCLUÍDO antecipadamente (ATV-010: barbearia, estética, pet shop). Outros nichos sob demanda |
 | T-10 | Primeira avaliação do EXP-001 (48 h) | Média | Claude | T-07 | 24/10 | PLANEJADO |
@@ -33,3 +33,4 @@ Atualizado em 21/10/2026 19:50 BRT (execução comercial, DEC-011).
 | T-25 | Gerar a página com Pix e publicar (cerca de 2 min depois de receber T-05) | Crítica | Claude | T-05 | 22/10 | PLANEJADO |
 | T-26 | Publicar os 2 posts no Instagram existente (imagens e legendas prontas) | Média | Humano (conta pessoal) | — | 23/10 | PRONTO PARA EXECUTAR |
 | T-27 | Entregar o kit ao comprador (enviar o .zip pelo WhatsApp depois de conferir o Pix no banco) | Alta | Humano (banco e WhatsApp) | venda | a cada venda | PLANEJADO |
+| T-28 | EXP-005 (recompensas): reabrir só com autorização explícita para PRs em nome do proprietário | Baixa | Proprietário decide | — | — | EM ESPERA (DEC-012) |
