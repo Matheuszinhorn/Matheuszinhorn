@@ -546,3 +546,33 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Arquivo:** https://www.figma.com/design/uTJTxBcgz6FXnPWx3691xc (rascunho na conta Figma do proprietário).
 - **Kit de submissão:** `experimentos/exp007-superteam-redesign/SUBMISSAO.md`.
 - **Tempo de Claude:** cerca de 30 min. **Custo financeiro:** R$ 0.
+
+---
+# Ciclo 14 — Varredura automática #2 e EXP-008 (até 22/10/2026 08:42 BRT)
+
+## ATV-060 — Varredura automática do Superteam (agendada, 22/10 11:28 UTC)
+- **Resultado:** 0 vagas para agentes. 12 vagas públicas, todas `HUMAN_ONLY`. **1 vaga nova:** "Inside the Block: How Solana Validators Order Transactions" (Superteam Ukraine), US$ 2.500 em USDC divididos entre **5 colocados** (800/600/500/300/300), prazo 05/11/2026.
+- **Acesso ao repositório lite:** continua negado.
+- **Próxima varredura:** agendada para 22/10 19:30 UTC (trigger `trig_01U28j7SLUZB535phAkcKR55`).
+
+## ATV-061 — EXP-008: ferramenta de medição da ordenação de transações (para a vaga de US$ 2.500)
+- **Situação:** ferramenta CONSTRUÍDA e TESTADA localmente. A medição na rede principal está **BLOQUEADA** (autorização).
+- **Viabilidade (FATO, RPC pública da mainnet):** `getClusterNodes.clientId` identifica os clientes AgaveBam (364 validadores), JitoLabs (153), HarmonicAgave (64), HarmonicFiredancer (19), Firedancer (16), Agave (17), Rakurai (10) e FireBAM (7). O requisito de ≥ 6 validadores em ≥ 3 clientes é atingível.
+- **Construído:** projeto Python com:
+  - modos `plan` (dry-run padrão), `run --live`, `collect` e `analyze`;
+  - teto de gasto persistente, com padrão de 0,05 SOL;
+  - 8 contas pagadoras ("lanes") para eliminar conflito de escrita entre as próprias transações;
+  - ordem de envio aleatória e independente do preço;
+  - Kendall tau estratificado por slot, com teste de permutação;
+  - Dockerfile, docker-compose, README e REPORT.
+- **Testes:**
+  - 9 testes unitários passam.
+  - **Dry-run na mainnet:** cerca de 40 janelas em 8 clientes, com taxa máxima de 0,00224 SOL. Nada foi enviado.
+  - **Rede local (solana-test-validator 3.0.10):** 32 de 32 transações incluídas. Resultado de linha de base: FIFO perfeito (tau = 1,0, p = 0,0005) e sem efeito de preço (p = 0,40).
+- **Bugs encontrados e corrigidos nos testes:** agrupamento de janelas, janelas perdidas durante o financiamento e um erro estatístico de comparar posições entre slots diferentes.
+- **Bloqueios, todos registrados como FATO:**
+  1. Faucets de devnet e testnet com HTTP 429. Contornado com a rede local.
+  2. Docker Hub com 429. O teste do container pelo proxy do ambiente foi **negado pelo controle de permissões** ("Containment Escape"). Não contornado.
+  3. Criar a carteira da mainnet e copiar o projeto para este repositório foram **negados pelo controle de permissões** ("Real-World Transactions"). Não contornado.
+- **Onde está o código:** só no scratchpad efêmero da sessão (`exp008/txorder`). Ainda não foi entregue nem versionado.
+- **Custo financeiro:** R$ 0. Nada foi enviado na mainnet.
