@@ -224,3 +224,26 @@
   - Lote 3.
   - Alternativas de envio avaliadas.
 - **Estratégia:** EXP-001, começando pelo segmento "site fora do ar" (DEC-012).
+
+---
+
+## REL-008 — Autonomia financeira (21/10/2026 23:10 BRT)
+
+**STATUS:** sobrevivendo. **Nenhuma operação financeira foi realizada.**
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Investimentos | R$ 0,00 |
+| Lucro realizado / não realizado | R$ 0,00 / R$ 0,00 |
+| Receitas / despesas | R$ 0,00 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+
+- **Executado:** ATV-036 a ATV-041.
+  - Dados de mercado.
+  - Simulação de Monte Carlo.
+  - Backtest.
+  - Arbitragem.
+  - Pesquisa de plataformas.
+  - DEC-013.
+- **Estratégia:** serviço para negócios com site quebrado ou sem site (EXP-001, lote 3 primeiro). O capital fica como reserva.

@@ -134,3 +134,22 @@ _Ainda sem dados de mercado._
 
 ## Lições (acréscimo)
 8. A auditoria técnica automática é um gerador de leads qualificados: transforma dados públicos em uma dor verificável e específica (origem: ATV-033/034).
+
+## DEC-013 — Mercados financeiros não são o motor do desafio; o capital continua como reserva (21/10/2026 23:10)
+
+| Estratégia | Chance de chegar a R$ 10 mil (evidência) | Risco de perda | Execução autônoma | Decisão |
+|---|---|---|---|---|
+| BTC, comprar e segurar | ≈0,01% em 3 anos (ATV-037) | 7–29% de chance de perder ≥ 50% em 3 anos | Não (KYC do proprietário) | Rejeitada |
+| Tendência ou quant em BTC | Abaixo de comprar e segurar no backtest (ATV-038) | Igual ou maior | Não | Rejeitada |
+| Arbitragem entre corretoras | Negativa: ≈−R$ 8,90 por ciclo (ATV-039) | Certa | Não (duas contas KYC) | Rejeitada |
+| Renda fixa | 0% (R$ 74 em 3 anos) | Muito baixo | Não (conta do proprietário) | Só como reserva |
+| Recompensas open source | Positiva, mas cerca de 15% de aceitação e mercado saturado (ATV-032) | Reputação do proprietário | Parcial (PR com a identidade dele) | Em espera |
+| Produto digital (kit) | Depende de canal; sem tráfego hoje (DEC-010) | Nenhum (R$ 0) | Parcial | Mantido, aguardando a chave Pix |
+| Serviço para negócios com site quebrado ou sem site | **A maior entre as opções**: ticket de R$ 197 contra o capital de R$ 50, com dor verificada (ATV-034) | Nenhum financeiro | Parcial (o envio exige o WhatsApp do proprietário) | **Escolhida** |
+
+- **Conclusão:**
+  - Para ir de R$ 50 a R$ 10.000 é preciso multiplicar o capital por 200. Nenhum ativo sem alavancagem chega a isso com probabilidade relevante.
+  - Alavancagem é proibida e tornaria a ruína o resultado mais provável.
+  - A meta só é plausível com **receita de trabalho** (serviço ou produto), e não com rendimento de capital.
+- **Capital:** os R$ 50 ficam intactos como reserva. Nenhuma operação financeira foi feita.
+- **Limite de exposição** (se um dia houver investimento): no máximo 10% do patrimônio em cripto, só depois do patrimônio acumulado passar de R$ 1.000, e sem alavancagem.

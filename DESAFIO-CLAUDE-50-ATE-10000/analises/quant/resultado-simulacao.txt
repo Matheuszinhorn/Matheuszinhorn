@@ -1,0 +1,19 @@
+histórico: 2200 dias | retorno log médio/dia 0.00086 (≈37%/ano) | vol anual 54%
+
+Horizonte 1 ano(s), R$ 50 tudo em BTC, sem alavancagem:
+  cenário histórico (2020-26): P(≥R$10k)=0.00% | P(tocar R$1k)=0.01% | P(perder ≥50%)=5.5% | mediana R$65 | 5%–95%: R$24–R$185
+  cenário sem tendência:      P(≥R$10k)=0.00% | P(tocar R$1k)=0.00% | P(perder ≥50%)=14.5% | mediana R$47 | 5%–95%: R$18–R$135
+
+Horizonte 2 ano(s), R$ 50 tudo em BTC, sem alavancagem:
+  cenário histórico (2020-26): P(≥R$10k)=0.00% | P(tocar R$1k)=0.57% | P(perder ≥50%)=7.1% | mediana R$86 | 5%–95%: R$22–R$374
+  cenário sem tendência:      P(≥R$10k)=0.00% | P(tocar R$1k)=0.10% | P(perder ≥50%)=23.4% | mediana R$46 | 5%–95%: R$12–R$200
+
+Horizonte 3 ano(s), R$ 50 tudo em BTC, sem alavancagem:
+  cenário histórico (2020-26): P(≥R$10k)=0.01% | P(tocar R$1k)=3.46% | P(perder ≥50%)=7.3% | mediana R$115 | 5%–95%: R$21–R$692
+  cenário sem tendência:      P(≥R$10k)=0.00% | P(tocar R$1k)=0.47% | P(perder ≥50%)=28.8% | mediana R$45 | 5%–95%: R$8–R$271
+
+Renda fixa ~14% a.a. bruto, 1 ano(s): R$ 57.00 (IR regressivo reduz)
+
+Renda fixa ~14% a.a. bruto, 3 ano(s): R$ 74.08 (IR regressivo reduz)
+
+Backtest cruzamento de médias 50/200 (out/2021–out/2026): R$50 → R$61.21 (13 trocas) | comprar e segurar no mesmo período: R$65.23

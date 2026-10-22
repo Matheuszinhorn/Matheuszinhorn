@@ -4,7 +4,7 @@ Desafio de empreendedorismo e sobrevivência financeira: transformar **R$ 50,00*
 
 Início oficial: 21/10/2026 (horário de Brasília).
 
-## Estado atual (atualizado em 21/10/2026 19:44 BRT)
+## Estado atual (atualizado em 21/10/2026 23:10 BRT)
 
 | Indicador | Valor | Situação |
 |---|---:|---|
@@ -17,7 +17,7 @@ Início oficial: 21/10/2026 (horário de Brasília).
 | Total retirado | R$ 0,00 | — |
 | Patrimônio acumulado | R$ 50,00 / R$ 10.000 (0,5%) | — |
 | Estratégias | EXP-001: sites locais via WhatsApp (pronto, aguardando envio) · EXP-003: produto digital global "Local Site Kit" (produto pronto) · EXP-004: serviço global no Fiverr (anúncio pronto) · EXP-002: CANCELADO | ver ESTRATEGIAS-E-EXPERIMENTOS.md |
-| Investimentos financeiros | nenhum | DEC-004 |
+| Investimentos financeiros | nenhum. Simulação e arbitragem testadas e rejeitadas | DEC-004, DEC-013 |
 | Portfólio público (serviço) | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/demo/index.html | no ar desde 21/10 19:40 (ATV-023) |
 | Página de venda do kit | https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/vitrine/kit/index.html | no ar, **sem meio de compra** até a chave Pix (T-05) |
 | Contatos prontos | 29 (L001–L029), 0 contatados | ATV-013 |
@@ -39,6 +39,7 @@ Fonte dos números: `CONTROLE-FINANCEIRO.csv`. O detalhamento está em `RELATORI
 | `ENCERRAMENTO-E-LICOES.md` | Resultado final e lições, atualizado ao longo do desafio |
 | `RECURSOS-E-ACESSOS.md` | O que Claude executa sozinho, o que depende do proprietário (arquivo adicional) |
 | `comercial/mensagens.md` | Roteiros de prospecção e fechamento (arquivo adicional) |
+| `analises/quant/` | Monte Carlo do BTC, backtest e arbitragem, com scripts reproduzíveis |
 | `comercial/anuncios-globais.md` | Anúncios prontos: Hotmart (PT/ES), Lemon Squeezy (EN), Fiverr (EN) |
 | `demo/` | Página de oferta + 3 modelos fictícios: barbearia, estética, pet shop (arquivo adicional) |
 

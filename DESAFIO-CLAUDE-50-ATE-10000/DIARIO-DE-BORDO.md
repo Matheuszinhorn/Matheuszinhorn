@@ -373,3 +373,44 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## COR-004 — Data do lote 3 (21/10/2026 23:01 BRT)
 - **Erro:** as mensagens e os registros do lote 3 diziam "22/10", mas a verificação foi feita em 21/10 no horário de Brasília (o ambiente já estava em 22/10 UTC).
 - **Correção:** as mensagens passaram a dizer "hoje, 21/10", e as linhas L070–L077 do CSV foram datadas em 21/10/2026. O arquivo de envio foi corrigido antes de qualquer envio. A versão anterior continua no commit `7a4c60d`.
+
+---
+# Ciclo 8 — Autonomia financeira: comparação de estratégias (até 21/10/2026 23:10 BRT)
+
+## ATV-036 — Acesso a dados de mercado (sem conta)
+- **Situação:** CONCLUÍDO
+- **Teste das APIs públicas:**
+  - Funcionaram: Mercado Bitcoin v4, Foxbit v3, BitPreço, CoinGecko, `data-api.binance.vision` (histórico) e câmbio do BCB.
+  - `api.binance.com` respondeu HTTP 451 ("restricted location") para o servidor deste ambiente. Isso não indica restrição ao Brasil.
+- **Dados baixados:** 2.200 candles diários BTCBRL, de 13/10/2020 a 22/10/2026.
+
+## ATV-037 — Simulação de Monte Carlo: R$ 50 em BTC
+- **Situação:** CONCLUÍDO. Script e resultado em `analises/quant/`.
+- **Premissas:** blocos de 30 dias do histórico, sem alavancagem, 0,7% de taxa por lado e 20.000 trajetórias.
+- **Estatísticas do período:** retorno de cerca de 37% ao ano e volatilidade de 54% ao ano.
+- **Resultados (ESTIMATIVA do modelo):**
+
+| Horizonte | Cenário | P(≥ R$ 10 mil) | P(tocar R$ 1 mil) | P(perder ≥ 50%) | Mediana |
+|---|---|---|---|---|---|
+| 1 ano | Histórico | 0,00% | 0,01% | 5,5% | R$ 65 |
+| 1 ano | Sem tendência | 0,00% | 0,00% | 14,5% | R$ 47 |
+| 3 anos | Histórico | 0,01% | 3,46% | 7,3% | R$ 115 |
+| 3 anos | Sem tendência | 0,00% | 0,47% | 28,8% | R$ 45 |
+
+## ATV-038 — Backtest de estratégia quantitativa (cruzamento de médias 50/200 em BTC)
+- **Situação:** CONCLUÍDO
+- **Resultado:** de out/2021 a out/2026, R$ 50 viraram R$ 61,21 em 13 trocas. Comprar e segurar no mesmo período deu R$ 65,23. A estratégia de tendência **ficou abaixo** de comprar e segurar.
+
+## ATV-039 — Arbitragem BTC/BRL entre corretoras
+- **Situação:** CONCLUÍDO (duas fotos, às 02:09 e às 02:10 UTC de 22/10/2026).
+- **Resultado:** a melhor diferença bruta foi de 0,064% e depois de 0,015%. Com R$ 50, o ganho bruto é de cerca de R$ 0,03. Descontadas as taxas de ordem e a transferência de BTC entre corretoras, o resultado é de **cerca de −R$ 8,90 por ciclo**.
+- **Requisitos:** exigiria conta verificada (KYC) em duas corretoras.
+
+## ATV-040 — Renda fixa, plataformas e tributação
+- **Renda fixa:** cerca de 14% ao ano bruto. R$ 50 viram cerca de R$ 57 em 1 ano e R$ 74 em 3 anos. O Tesouro Selic tem mínimo de cerca de R$ 150–195 (ATV-009).
+- **Taxas do Mercado Bitcoin:** maker 0,30% e taker 0,70% (fonte secundária, brapi). Não foi conferido na tabela oficial.
+- **Tributação de cripto:** os textos divergem sobre a isenção de R$ 35 mil por mês em vendas, por causa da MP 1.303/2025. Ponto **não verificado** em fonte oficial; irrelevante na escala de R$ 50.
+- **Cadastro:** toda corretora brasileira exige KYC do titular. Claude **não** opera sem a conta e a autorização do proprietário.
+
+## ATV-041 — Decisão de estratégia
+- Ver DEC-013.

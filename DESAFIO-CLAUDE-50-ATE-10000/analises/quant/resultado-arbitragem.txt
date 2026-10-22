@@ -1,0 +1,8 @@
+instante (UTC): 2026-10-22 02:10:26
+  Mercado Bitcoin  compra(bid) R$420,514  venda(ask) R$420,515  spread 0.000%
+  Foxbit           compra(bid) R$420,445  venda(ask) R$420,480  spread 0.008%
+  BitPreço         compra(bid) R$420,504  venda(ask) R$420,943  spread 0.104%
+  Binance          compra(bid) R$420,452  venda(ask) R$420,453  spread 0.000%
+
+Melhor oportunidade bruta: comprar em Binance e vender em Mercado Bitcoin: 0.015%
+Com R$50: ganho bruto R$0.01 − taxas de ordem R$0.50 − saque de BTC entre corretoras ≈R$8.41 = R$-8.90 por ciclo
