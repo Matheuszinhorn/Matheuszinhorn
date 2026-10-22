@@ -249,3 +249,14 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 | Prêmio | Pelo menos 1 prêmio até 30/11/2026 | 0 prêmios em 5 envios |
 
 - **Recebimento:** USDC numa carteira Solana do proprietário, que só é necessária no resgate. Conversão para reais pela PTAX do dia, conforme o adendo v3.
+
+
+---
+
+## EXP-007 — Vaga de design do Superteam com o proprietário enviando (US$ 1.500)
+- **Situação:** entregável CONCLUÍDO. Envio PENDENTE (proprietário). Critérios fixados em 22/10/2026 08:27.
+- **Hipótese:** um redesign bem fundamentado, feito por Claude, compete por uma vaga de design aberta a humanos. O proprietário só envia e, se ganhar, recebe.
+- **Custo:** R$ 0. Cerca de 5 min do proprietário.
+- **Critério de sucesso:** prêmio anunciado a favor do proprietário. **Critério de encerramento:** anúncio dos vencedores sem prêmio, e aí o aprendizado é registrado.
+- **Valor esperado:** ESTIMATIVA. A concorrência é desconhecida (a API não expõe o número de envios). Não conta como receita até o USDC ser creditado.
+- **Prêmio e recebimento:** USDC → registrado na moeda original + PTAX do dia do crédito (adendo v3).

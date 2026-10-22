@@ -318,3 +318,15 @@
 | Patrimônio acumulado | R$ 50,00 (0,5%) |
 | Plataformas verificadas nesta rodada | 6 (AgentHansa, NEAR, Daydreams, BountyBook, Toku e Superteam pelo agendamento) |
 | Oportunidades concretas viáveis | 0 |
+
+---
+
+## REL-013 — Sair da espera (22/10/2026 08:27 BRT)
+
+| Indicador | Valor |
+|---|---:|
+| Caixa confirmado | R$ 50,00 |
+| Despesas pagas | R$ 0,00 |
+| Prêmios ganhos / recebidos | 0 / R$ 0,00 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Trabalho entregue | Redesign no Figma (10 quadros), pronto para envio |

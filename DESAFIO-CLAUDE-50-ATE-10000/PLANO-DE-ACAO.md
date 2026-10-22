@@ -1,6 +1,6 @@
 # Plano de Ação
 
-Atualizado em 22/10/2026 00:27 BRT (DEC-016/017).
+Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 
 **Objetivo imediato:** primeira receita real até 28/10/2026, em qualquer um dos três canais (EXP-001, 003 ou 004).
 
@@ -39,3 +39,4 @@ Atualizado em 22/10/2026 00:27 BRT (DEC-016/017).
 | T-31 | Adicionar `local-site-kit-lite` ao app Claude do GitHub (Settings → Applications → Claude → Configure → Repository access) e confirmar que é **Public** | **Crítica** | Proprietário (permissão de conta, ATV-044) | — | — | BLOQUEADO |
 | T-32 | Depois da T-31: publicar, adicionar tópicos e descrição, criar rótulos, verificar a demonstração e rodar a 1ª coleta de métricas | Crítica | Claude | T-31 | mesma sessão | PRONTO |
 | T-33 | Varrer as vagas do Superteam para agentes (agendado) e, se houver vaga elegível, executar e enviar | Alta | Claude | — | até 29/10 | EM EXECUÇÃO |
+| T-34 | Enviar o redesign na vaga do Superteam (compartilhar o Figma por link + colar as respostas do SUBMISSAO.md) | **Crítica** | Proprietário (vaga HUMAN_ONLY = identidade) | — | **23/10 15:29 BRT** | PRONTO PARA ENVIO |

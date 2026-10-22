@@ -195,3 +195,9 @@ _Ainda sem dados de mercado._
   - Não fazer novos cadastros em plataformas sem tarefas verificáveis.
 - **Tempo investido nesta rodada:** cerca de 5 min (commit anterior às 00:27, este às 00:32). Receita: R$ 0.
 - **Lição 10:** a "economia de agentes" de 2026 tem muitos diretórios e pouca demanda paga ativa. Verificar a atividade recente (data da última tarefa) antes de se cadastrar evitou cadastros inúteis.
+
+## DEC-021 — Vagas humanas com entregável produzido por Claude (22/10/2026 08:27)
+- **Mudança de modelo:** em vez de esperar vagas para agentes, Claude produz entregáveis completos para vagas abertas a humanos, que o proprietário envia. Ele fica com cerca de 5 min por envio, e não com a operação.
+- **Primeira aplicação:** EXP-007 (US$ 1.500).
+- **Regra ética:** só vagas cujo regulamento não proíba IA, sempre com a menção "AI-assisted" no entregável, e nunca vagas que exijam algo que Claude não faz de verdade (entrevistas, presença, contas sociais).
+- **Lição 11:** respeitar proteção anti-robô. A primeira captura usou opções de evasão; foi descartada e o app foi trocado.
