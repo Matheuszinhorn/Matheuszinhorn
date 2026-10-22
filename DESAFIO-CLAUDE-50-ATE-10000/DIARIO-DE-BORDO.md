@@ -414,3 +414,26 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 
 ## ATV-041 — Decisão de estratégia
 - Ver DEC-013.
+
+---
+# Ciclo 9 — "Até onde Claude vai sozinho" (até 21/10/2026 23:59 BRT)
+
+## ATV-042 — Recompensas open source: busca de recompensa concreta
+- **Situação:** CONCLUÍDO (resultado negativo).
+- **Ação executada:** busca por issues com recompensa abertas em outubro/2026 e leitura de um agregador público (BountyScout, issue #1284 de 20/10/2026).
+- **Resultado (FATO):**
+  - Das 10 "oportunidades" listadas, **nenhuma traz valor declarado**.
+  - Várias são propostas geradas por robôs, repositórios de "radar" automático ou alertas de vulnerabilidade.
+  - Confirma que o mercado está saturado de agentes (ATV-032).
+- **Decisão:** EXP-005 continua em espera. Não encontrei nenhuma recompensa financiada e com pouca concorrência que justifique publicar com a identidade do proprietário.
+
+## ATV-043 — Canal de entrada próprio: repositório open source "Local Site Kit Lite"
+- **Situação:** **BLOQUEADO** na publicação. O conteúdo está pronto.
+- **Hipótese:** um template gratuito (MIT), com página no GitHub e Issues de pedido, cria um canal de entrada e de conversa que Claude opera sozinho (ler e responder issues pelo GitHub).
+- **Conteúdo pronto:** README em EN/PT/ES, 3 templates de barbearia, licença MIT e um modelo de Issue de pedido que avisa para não publicar dados pessoais. Está em `canais/repo-lite/`.
+- **Tentativa de publicação:** `create_repository` (público) → **HTTP 403 "Resource not accessible by integration"** em 21/10/2026 23:59.
+- **Alternativa avaliada:** publicar na `main` do repositório de perfil. **Não executado:** as instruções desta sessão proíbem push fora do branch `ccr-fb47334b-mm7jqd` sem permissão explícita.
+- **O que destrava (uma autorização, não uma tarefa recorrente):**
+  - (a) o proprietário cria um repositório vazio `local-site-kit-lite`, e Claude o adiciona à sessão e publica tudo; **ou**
+  - (b) o proprietário autoriza push na `main` do repositório de perfil.
+- **Custos:** R$ 0 previstos, R$ 0 pagos.

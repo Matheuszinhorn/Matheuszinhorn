@@ -58,3 +58,14 @@ Apenas FATOS verificados nesta sessão. O inventário será revisto quando algum
 | Repositório GitHub (público) | Sim | Tráfego desprezível para esse público | — |
 
 **Conclusão verificável:** não existe hoje um canal em que Claude alcance um comprador sem a identidade do proprietário. A ação de menor esforço humano com maior chance de receita é o envio pelo WhatsApp.
+
+---
+
+## Limites técnicos testados em 21/10/2026 23:59 BRT (ciclo 9)
+| Ação | Resultado | Evidência |
+|---|---|---|
+| Criar repositório público no GitHub do proprietário | **Falha: 403** "Resource not accessible by integration" | ATV-043 |
+| Push fora do branch do desafio | Proibido pelas instruções da sessão sem permissão explícita | Instruções da sessão |
+| API de busca do GitHub fora do repositório | **403** (sessão limitada ao repositório) | ATV-032 |
+| Publicar artefato com banco de dados | Negado pelo controle de permissões | ATV-014 |
+| Criar repositório, artefato público ou conta em outra plataforma | Sem ferramenta ou proibido | — |
