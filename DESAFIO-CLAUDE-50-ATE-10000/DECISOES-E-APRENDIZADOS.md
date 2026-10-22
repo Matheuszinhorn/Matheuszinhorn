@@ -201,3 +201,16 @@ _Ainda sem dados de mercado._
 - **Primeira aplicação:** EXP-007 (US$ 1.500).
 - **Regra ética:** só vagas cujo regulamento não proíba IA, sempre com a menção "AI-assisted" no entregável, e nunca vagas que exijam algo que Claude não faz de verdade (entrevistas, presença, contas sociais).
 - **Lição 11:** respeitar proteção anti-robô. A primeira captura usou opções de evasão; foi descartada e o app foi trocado.
+
+## DEC-025 — Portfólio de oportunidades por estágio (22/10/2026 09:31)
+| Estágio | Oportunidade | Próximo passo | Bloqueio |
+|---|---|---|---|
+| **Monetização (aguardando envio)** | EXP-007: redesign do Jupiter, US$ 1.500 | Envio pelo proprietário | Identidade (vaga humana), prazo 23/10 15:29 BRT |
+| **Execução (pronto para rodar)** | EXP-008: medição de ordenação de transações, US$ 2.500 com 5 prêmios | Rodar na mainnet, analisar, publicar o repositório | Permissão técnica da sessão para transações reais + cerca de 0,02 SOL na carteira |
+| **Teste contínuo** | EXP-006: vagas para agentes no Superteam | Varredura automática a cada 8 h | Nenhum (0 vagas até agora) |
+| **Pronto, sem canal** | Local Site Kit e repositório lite | — | Acesso do app ao repositório lite |
+| **Pronto, sem canal** | EXP-001: sites locais (77 contatos) | — | Envio pelo WhatsApp (identidade) |
+| **Encerrado** | Mercados para agentes (AgentHansa, Clustly…), MultiHopper, Breakpoint, investimentos, arbitragem | — | Evidência registrada em cada atividade |
+
+- **Leitura honesta:** o trabalho que Claude faz de ponta a ponta já soma **US$ 4.000 em prêmios disputáveis** (EXP-007 e EXP-008). O que separa isso de dinheiro são dois atos que só o proprietário pode fazer: um envio de cerca de 5 min e a liberação de uma permissão. Procurar mais plataformas agora custaria tempo sem mudar esse gargalo.
+- **Lição 12:** com recursos humanos mínimos, o melhor portfólio é o de entregáveis completos que esperam um único ato de identidade, e não o de canais que exigem operação humana contínua.

@@ -587,3 +587,21 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - adiciona uma regra `permissions.allow` em `.claude/settings.json` do repositório.
   - Claude não altera as próprias permissões.
 - **Mesmo liberado, ainda falta:** colocar SOL na carteira. Comprar SOL com reais exige a conta do proprietário numa corretora (identidade e banco), e Claude não tem acesso a nenhuma conta financeira.
+
+---
+# Ciclo 15 — DEC-024: liberdade empreendedora total (até 22/10/2026 09:31 BRT)
+
+## ATV-063 — Workana (recurso novo: conta do proprietário)
+- **Situação:** BLOQUEADO para leitura automatizada.
+- **Fato:** a listagem de projetos, as URLs de RSS e a busca respondem HTTP 403 com o desafio do Cloudflare ("Just a moment..."). Isso vale para curl e para Chromium padrão sem evasão. Só o `robots.txt` responde (200).
+- **Decisão:** não contornar a proteção. A descoberta de projetos no Workana exige um navegador logado do proprietário.
+
+## ATV-064 — Projetos do proprietário (recurso novo)
+- **Situação:** CONCLUÍDO.
+- **Fato:** `Quiosques_Gremio` (privado, o mais recente) foi adicionado à sessão só para leitura e clonado. **O repositório está vazio**, sem nada a aproveitar. Os outros repositórios são exercícios de estudo (Super Trunfo, HTML5_CSS_JS, programacaoC).
+
+## ATV-065 — Vagas do Superteam ainda não avaliadas
+- **MultiHopper Build & Route (US$ 5.000):** exige **pelo menos US$ 100 mil de volume de transações** para qualificar. Inviável com R$ 50 e sem usuários. **Descartada.**
+- **Rumbo a Breakpoint (10 × US$ 400):** exige **comparecer ao Breakpoint em Londres** e postar numa rede social pessoal. **Descartada.**
+- **Inside the Block (US$ 2.500, 5 prêmios):** ferramenta pronta (EXP-008). Depende da permissão técnica e de SOL.
+- **Redesign (US$ 1.500):** pronto (EXP-007). Depende do envio pelo proprietário até 23/10 15:29 BRT.
