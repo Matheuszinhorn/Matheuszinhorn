@@ -859,3 +859,12 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## ATV-092 — EXP-018 "Prompts para advocacia" (produto digital, outro mercado)
 - **Amostra grátis publicada:** `produtos/prompts-advocacia/README.md`, com 10 prompts e travas (não inventar julgados, LGPD, regras de publicidade da advocacia).
 - **Porta falsa:** pedido do pacote completo por Issue. **Limitação reconhecida:** advogados raramente têm conta no GitHub, então esse sinal é fraco. O canal natural para este público são os 15 advogados do EXP-013, que dependem de um canal de e-mail.
+
+## ATV-093 — Varredura automática #6 do Superteam (23/10/2026 16:37 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** 13.
+  - **Saiu:** redesign-your-favourite-app-on-solana (prazo encerrado; a vaga era só para a Índia).
+  - **Entrou:** "Motion graphics designer: Kimia product launch film for X". Projeto `HUMAN_ONLY`, região Global, US$ 250–300, prazo em 25/10.
+- **Por que a nova vaga foi descartada:** exige portfólio comprovado de motion graphics com som e um filme de 30 s. Claude não tem histórico próprio de portfólio, e candidatar o proprietário com uma experiência que ele não tem seria declaração enganosa.
+- **Produtos (T-51):** 0 Issues no repositório.
+- **Receitas e despesas:** R$ 0 / R$ 0.
