@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seu site no celular</title>
+<meta name="description" content="Adaptação do site de escritórios e consultórios para o celular, mantendo conteúdo, domínio e identidade. Você só paga depois de aprovar.">
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d2433;--muted:#5b6475;--line:#e3e1d9;--accent:#1f5f8b;--accent-ink:#fff;--ok:#2f7d4f;--bad:#b4442f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171d;--card:#1c2029;--ink:#e9ecf2;--muted:#a3abba;--line:#2c3240;--accent:#6fb1e0;--accent-ink:#0b1622;--ok:#6cc292;--bad:#e58b78}}
+:root[data-theme="dark"]{--bg:#14171d;--card:#1c2029;--ink:#e9ecf2;--muted:#a3abba;--line:#2c3240;--accent:#6fb1e0;--accent-ink:#0b1622;--ok:#6cc292;--bad:#e58b78}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:40px 16px 64px}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:0 0 12px}h2{font-size:24px;margin:48px 0 12px}
+.lead{color:var(--muted);font-size:19px;max-width:680px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.phone{width:200px;height:380px;margin:8px auto 14px;border:8px solid var(--ink);border-radius:28px;overflow:hidden;background:#fff;position:relative}
+.old{transform:scale(.4);transform-origin:0 0;width:500px;padding:10px;font:14px/1.3 Georgia,serif;color:#222}
+.old .bar{background:#2b3a55;color:#fff;padding:8px;font-size:13px}.old p{margin:6px 0}
+.new{padding:14px;font:13px/1.45 system-ui,sans-serif;color:#1d2433}.new b{display:block;font-size:17px;margin-bottom:4px}
+.new .btn{display:block;text-align:center;background:#2f7d4f;color:#fff;border-radius:8px;padding:9px;margin:10px 0 6px;font-weight:600}
+.tag{display:inline-block;font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px}
+.bad{background:color-mix(in srgb,var(--bad) 15%,transparent);color:var(--bad)}.good{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+ol{padding-left:20px}li{margin:6px 0}
+.price{font-size:40px;font-weight:700}.small{color:var(--muted);font-size:15px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}summary{cursor:pointer;font-weight:600}
+footer{margin-top:56px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Seu site abre como uma miniatura no celular?</h1>
+<p class="lead">Muita gente procura advogado, contador, médico ou arquiteto pelo celular. Um site feito só para computador abre reduzido no telefone: o cliente precisa dar zoom para ler o telefone ou o endereço, e muitos desistem antes de ligar.</p>
+
+<div class="cmp">
+  <div class="card"><span class="tag bad">Antes</span>
+    <div class="phone" aria-label="Exemplo ilustrativo de site de computador aberto no celular"><div class="old"><div class="bar">Início · Institucional · Áreas de atuação · Contato</div><p><b>Escritório</b></p><p>Situado em região nobre, o escritório dispõe de uma moderna infraestrutura, visando à excelência na prestação dos serviços…</p><p><b>Áreas de atuação</b></p><p>Cível · Empresarial · Imobiliário · Família</p><p><b>Contato</b> Tel. (11) 0000-0000 · Rua Exemplo, 100 · cj. 41</p></div></div>
+    <p class="small">Texto com 40% do tamanho, menu minúsculo e telefone que não abre para ligar.</p></div>
+  <div class="card"><span class="tag good">Depois</span>
+    <div class="phone" aria-label="Exemplo ilustrativo do mesmo conteúdo adaptado ao celular"><div class="new"><b>Escritório Exemplo</b>Advocacia cível, empresarial e de família.<span class="btn">Chamar no WhatsApp</span><span class="btn" style="background:#1f5f8b">Ligar agora</span><p><b style="font-size:14px">Áreas de atuação</b>Cível · Empresarial · Imobiliário · Família</p></div></div>
+    <p class="small">O mesmo conteúdo, legível sem zoom, com botões de ligar, WhatsApp e mapa.</p></div>
+</div>
+<p class="small">Ilustração com conteúdo fictício.</p>
+
+<h2>O que eu faço</h2>
+<ol>
+<li><b>Mantenho</b> o seu conteúdo, o seu domínio e a identidade visual (logotipo e cores).</li>
+<li><b>Adapto</b> o site ao celular, com botões de ligar, WhatsApp e mapa, e carregamento rápido.</li>
+<li><b>Mostro uma prévia</b> do seu próprio site adaptado, em até 48 horas depois do seu "pode fazer".</li>
+<li><b>Publico</b> no seu domínio, com a sua hospedagem atual ou com uma gratuita.</li>
+</ol>
+
+<h2>Preço</h2>
+<div class="card">
+<div class="price">R$ 297</div>
+<p>Pagamento único, por Pix, <b>só depois de você ver e aprovar a prévia</b>. Se não gostar, não paga nada.</p>
+<p class="small">Inclui até 6 páginas do site atual e 30 dias de ajustes depois da publicação. Sites maiores recebem orçamento antes de começar.</p>
+</div>
+
+<h2>Perguntas</h2>
+<details><summary>Como você encontrou o meu site?</summary><p>Verifico sites de profissionais liberais (domínios .adv.br, .cnt.br, .med.br, .odo.br e .arq.br) abrindo cada um num navegador com tela de celular. Só escrevo quando o problema é verificável, e o e-mail usado é o publicado no próprio site.</p></details>
+<details><summary>Preciso passar senhas?</summary><p>Não para a prévia. Para publicar, há duas opções: você (ou quem cuida da sua hospedagem) envia os arquivos prontos, ou cria um acesso temporário só para isso. Nunca peço senha de e-mail ou de banco.</p></details>
+<details><summary>Quem faz o trabalho?</summary><p>Matheus, com o uso de ferramentas de inteligência artificial para acelerar a produção. Cada página é revisada antes da entrega.</p></details>
+<details><summary>Como peço?</summary><p>Responda o e-mail que você recebeu com "pode fazer a prévia". Em até 48 horas você recebe o link.</p></details>
+
+<footer>Oferta válida para escritórios e consultórios no Brasil. Se não quiser receber mensagens, responda "remover".</footer>
+</main>
+</body>
+</html>

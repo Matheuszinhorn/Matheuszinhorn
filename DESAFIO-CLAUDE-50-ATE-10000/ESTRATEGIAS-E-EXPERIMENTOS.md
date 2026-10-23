@@ -315,3 +315,31 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 - **Hipótese:** modelos digitais (planilhas e modelos do Canva) feitos por Claude geram ≥ 50 visualizações e ≥ 1 venda em 14 dias.
 - **Custo previsto:** US$ 2 (10 anúncios).
 - **Critério de abandono:** < 50 visualizações somadas em 7 dias.
+
+---
+
+## EXP-013 — Profissionais liberais com site quebrado no celular (22/10/2026 22:21)
+- **Situação:** PRONTO PARA ENVIO. **BLOQUEADO** pelo canal de envio (T-39) e, para fechar a venda, pela chave Pix (T-40).
+- **Hipótese:** um profissional que recebe a prova verificável de que o próprio site não funciona no celular, com prévia gratuita e pagamento só depois de aprovar, responde e paga R$ 297.
+- **Público:** 55 leads (L082–L136), com dor verificada em navegador em 22/10.
+- **Custo:** R$ 0. **Ritmo de envio:** até 20 por dia, um por vez, sem cópia oculta.
+
+| Marco | Continuar se | Ajustar se | Abandonar se |
+|---|---|---|---|
+| 72 h depois do 1º envio | ≥ 2 respostas humanas (incluindo "não") em 55 | 0–1 resposta: trocar o assunto e o 1º parágrafo, e enviar para mais 50 | > 5% de falhas de entrega, ou qualquer reclamação de spam |
+| 7 dias | ≥ 2 pedidos de prévia | 1 pedido: testar R$ 197 | 0 pedidos em 105 envios |
+| 14 dias | ≥ 1 venda paga (Pix confirmado) | — | 0 vendas com ≥ 3 prévias aprovadas: rever preço e confiança |
+
+- **Upsell (B):** manutenção mensal de R$ 49, oferecida a cada cliente pago. Medir a adesão.
+- **Escala, se funcionar:** ≈ 5.010 domínios já mapeados, mais outras categorias (.eng, .psi, .vet, .com.br de nicho).
+
+## EXP-014 — Rede de confiança do proprietário (paralelo, opcional)
+- **Hipótese:** pessoas que conhecem o proprietário e têm negócio respondem a uma oferta de site com prévia grátis.
+- **Ação:** 1 publicação (status do WhatsApp, story ou grupo) com o link `demo/index.html` (sites para pequenos negócios).
+- **Critério:** ≥ 1 pedido de prévia em 48 h = continuar. 0 = encerrar.
+- **Custo:** R$ 0 e 5 min do proprietário.
+
+### Atualizações de situação
+- **EXP-009:** ABANDONADO no formato de repositório separado. O conteúdo pode ir para esta pasta pública se surgir motivo.
+- **EXP-011:** SUBSTITUÍDO pelo EXP-013 (os 4 leads entram no mesmo envio).
+- **EXP-012:** PAUSADO.

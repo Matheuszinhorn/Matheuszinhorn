@@ -59,3 +59,13 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-41 | Enviar os 4 e-mails do EXP-011 (data atualizada no dia do envio) e acompanhar as respostas | Crítica | Claude | T-39 | mesma sessão da T-39 | PRONTO |
 | T-42 | Gerar a prévia personalizada em até 2 h depois de cada "sim" | Alta | Claude | resposta | contínuo | PRONTO |
 | T-43 | Confirmar a taxa de abertura da loja Etsy (só olhar na tela de cadastro, sem pagar) | Média | Proprietário (opcional) | — | — | PLANEJADO |
+
+### Atualização de 22/10/2026 22:21 BRT (DEC-030)
+| ID | Tarefa | Prioridade | Responsável | Depende de | Prazo | Situação |
+|---|---|---|---|---|---|---|
+| T-31 | Acesso ao repositório lite | — | — | — | — | CANCELADO (EXP-009 abandonado no formato separado) |
+| T-39 | Conectar o **Gmail** em claude.ai (Configurações → Conectores → Gmail) e autorizar envio em seu nome para os leads do EXP-013, até 20 por dia | **Crítica** | Proprietário (≈ 3 min) | — | já | BLOQUEADO |
+| T-40 | Chave Pix **aleatória** para cobranças particulares depois da aprovação | Alta | Proprietário | — | antes da 1ª aprovação | BLOQUEADO |
+| T-44 | Enviar o lote do EXP-013 (20 por dia), ler respostas, responder em até 2 h, gerar prévias em até 48 h | Crítica | Claude | T-39 | contínuo | PRONTO |
+| T-45 | EXP-014: uma publicação com o link da oferta para pequenos negócios | Média | Proprietário (opcional) | — | 48 h | PLANEJADO |
+| T-46 | Corrigir o espaço em branco da prévia de teste e transformar o ajuste responsivo em script reutilizável | Média | Claude | — | 24 h | PLANEJADO |

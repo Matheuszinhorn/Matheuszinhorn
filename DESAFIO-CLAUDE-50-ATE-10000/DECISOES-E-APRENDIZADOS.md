@@ -273,3 +273,20 @@ _Ainda sem dados de mercado._
 6. **Ampliação da frente A:** a fonte aberta (OSM) rende cerca de 1 lead por capital. Se o EXP-011 mostrar resposta (≥ 1 em 4), a próxima fonte avaliada será a lista pública de domínios `.adv.br` e `.com.br` cujo DNS não resolve: o problema é verificável em massa sem coletar dados pessoais.
 
 - **Lição 15:** a cadeia de venda quebra no elo mais fraco, e hoje esse elo é sempre o canal de contato, nunca o produto. A primeira pergunta de qualquer oportunidade deve ser "por onde a mensagem sai e por onde a resposta volta".
+
+## DEC-030 — Reset estratégico: EXP-013 como frente principal (22/10/2026 22:21; responde à diretriz do proprietário intitulada "DEC-029")
+- O proprietário mandou a diretriz com o número DEC-029, que já estava em uso pela decisão de 22/10 21:45. O conteúdo foi registrado sem alteração; esta decisão usa o próximo número livre.
+- **Auditoria e comparação:** `analises/AUDITORIA-2026-10-22.md`.
+- **Escolha:**
+  1. **EXP-013** (prova + oferta para profissionais liberais), principal.
+  2. **EXP-014** (uma publicação do proprietário na rede de confiança dele), paralelo e opcional.
+  3. **EXP-006** encerra em 29/10.
+  4. Upsell de manutenção mensal dentro do EXP-013.
+- **Abandonados ou pausados:**
+  - EXP-009 com repositório separado (erro: esta pasta pública já servia);
+  - EXP-011, substituído pelo EXP-013;
+  - EXP-012, Etsy;
+  - frente C;
+  - micro-SaaS de diagnóstico, que precisa de servidor.
+- **Lição 16:** quando um canal parece não funcionar, testar **outra fonte** antes de abandonar. O e-mail parecia inviável pelo OSM (0,7%) e rendeu 55 leads verificados com certificados públicos.
+- **Lição 17:** a hipótese mais arriscada nunca foi "consigo construir". Foi "alguém responde e paga". O MVP é a mensagem com prova, não o produto.

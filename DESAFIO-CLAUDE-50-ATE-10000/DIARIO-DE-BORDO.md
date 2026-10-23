@@ -726,3 +726,49 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 | Música com IA em streaming | Plataformas, por reprodução | Distribuidora paga (fora do caixa) | Royalties | Meses, centavos por mil reproduções | **Rejeitado** |
 | Personagens, figurinhas e estampas sob demanda | Compradores de marketplace | Etsy ou Redbubble (conta do proprietário) | Payoneer/PayPal | Semanas | Fica com o pré-teste do Etsy (ATV-076) |
 | Automações para empresas | Pequenas empresas | Mesmo gargalo de canal da Frente A | Pix | Semanas | Fica como 2ª oferta da Frente A |
+
+---
+# Ciclo 18 — DEC-029: reset estratégico (até 22/10/2026 22:21 BRT)
+
+## ATV-078 — Auditoria completa
+- **Situação:** CONCLUÍDO. Arquivo: `analises/AUDITORIA-2026-10-22.md`.
+- 13 iniciativas avaliadas pelas 7 perguntas. Seis padrões de erro reconhecidos.
+- Fato central: **em 28 h, nenhuma conversa com um comprador real.**
+
+## ATV-079 — Nova fonte de leads: certificados públicos + auditoria em navegador
+- **Situação:** CONCLUÍDO.
+- **Fonte:** logs públicos de certificados (crt.sh, certificados não expirados).
+  - Domínios por categoria profissional: .adv.br 1.371, .cnt.br 1.045, .med.br 980, .odo.br 403, .arq.br 1.215. **Total ≈ 5.010.**
+  - O índice do Common Crawl falhou pelo proxy (conexão encerrada).
+- **Auditoria HTTP de todos:** 3.580 responderam com 200; 301 sem viewport.
+  - Os sinais por palavra-chave ("em construção", "à venda", WordPress padrão) deram **falsos positivos** em sites normais e foram descartados como critério.
+- **Prova em navegador real** (Chromium, tela 390×844, celular): **224 sites** abrem com o layout de computador (980–1.101 px de largura). Capturas guardadas fora do repositório.
+  - Por categoria: contabilidade 64, arquitetura 54, advocacia 49, medicina 42, odontologia 15.
+- **E-mails publicados no próprio site** (página inicial e de contato): 56. **Com MX válido: 55.** Comparação: 4 na fonte OSM (ATV-074), ou seja, **14 vezes mais**.
+- **Ferramenta gratuita de diagnóstico com a API PageSpeed sem chave:** testada antes de construir. HTTP 429, cota diária compartilhada esgotada. **Não construída.**
+- **Custo:** R$ 0. **Tempo:** ≈ 1 h 30.
+
+## ATV-080 — Entrega testada num site real (sem publicar)
+- **Site:** serodiocosta.adv.br, um dos 224.
+- **Técnica:** em vez de refazer o site, **ajuste responsivo**:
+  - viewport + CSS válido só em telas de até 760 px;
+  - botões "Ligar agora" e "Ver no mapa" com o telefone e o endereço que já estão no site.
+- **1ª versão:** apagou o logotipo, deixou o menu laranja e escondeu o contato na versão de computador. Corrigida na 2ª versão.
+- **Resultado (FATO):** na versão final, a largura no celular é 390 = 390 (sem rolagem lateral), e a versão de computador fica **idêntica** à original (capturas antes e depois).
+- **Tempo de relógio:** ≈ 1 min entre baixar o site e a renderização final, pelos horários dos arquivos.
+- **Pendência visual:** um espaço em branco abaixo do menu no celular.
+- **Privacidade:** a prévia ficou só no scratchpad, nada publicado nem enviado ao escritório.
+
+## ATV-081 — Oferta pública no ar
+- **Página:** `oferta/site-no-celular.html`, com ilustração fictícia, sem nome de cliente. Testada com largura de 390 px (sem rolagem lateral) e de 1.280 px.
+- **Termos:** R$ 297 por Pix, só depois de aprovar a prévia; até 6 páginas; 30 dias de ajustes.
+- **Revisão:** removi a frase "mais da metade das visitas vem do celular", porque não tinha fonte verificada.
+
+## ATV-082 — Lote de 55 e-mails personalizados (EXP-013)
+- Cada e-mail traz:
+  - o domínio e a largura medida;
+  - o tamanho relativo do texto (≈ 36–40%), ou "quase nenhum texto aparece" quando a página renderiza vazia;
+  - o link da oferta, a origem do e-mail (publicado no próprio site) e a opção "remover".
+- **Arquivo privado:** `/tmp/claude-0/-home-user/53dec64f-596b-5e59-a540-da409aa575a4/scratchpad/cc/lote-exp013.md`.
+- **No CSV de vendas:** L082–L136, sem domínio nem e-mail.
+- **Enviados:** **0**. Bloqueio: não há conector de e-mail nesta sessão (ATV-073). Claude não cria contas nem usa a identidade do proprietário sem autorização.

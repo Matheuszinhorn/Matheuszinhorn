@@ -358,3 +358,17 @@
 | Ofertas redigidas / enviadas | 4 / **0** (sem canal de envio) |
 | Respostas / vendas | 0 / 0 |
 | Bloqueio principal | Canal de envio (T-39) e chave Pix (T-40) |
+
+---
+
+## REL-016 — Reset estratégico (22/10/2026 22:21 BRT)
+| Indicador | Valor |
+|---|---:|
+| Caixa / receitas / despesas | R$ 50,00 / R$ 0 / R$ 0 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Domínios de profissionais mapeados | ≈ 5.010 |
+| Sites com problema provado em navegador | 224 |
+| Leads com e-mail ativo | 55 |
+| Ofertas no ar / e-mails enviados / respostas / vendas | 1 / 0 / 0 / 0 |
+| Tempo de uma entrega de teste | ≈ 1 min de relógio (FATO) |
+| Bloqueio | Canal de envio (T-39) e chave Pix (T-40) |
