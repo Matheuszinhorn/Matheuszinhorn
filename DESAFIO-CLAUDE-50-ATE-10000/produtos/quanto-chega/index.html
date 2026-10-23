@@ -63,22 +63,34 @@ footer{margin-top:28px;color:var(--muted);font-size:13px}
 <h2>Isto ajudou?</h2>
 <p class="muted">Estamos avaliando um <b>alerta por e-mail</b> quando a cotação de um serviço passar de um valor escolhido. Ele ainda não existe. Se você usaria, diga abaixo: é isso que decide se ele será feito.</p>
 <div class="actions">
-<a id="want" target="_blank" rel="noopener"><button>Eu usaria o alerta de cotação</button></a>
+<a id="want" target="_blank" rel="noopener" onclick="track('quero-alerta')"><button>Eu usaria o alerta de cotação</button></a>
 <a href="https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html"><button class="ghost">Recebe em dólar? Converta para o Carnê-Leão</button></a>
 </div>
 <p class="muted" style="margin-top:8px">O botão do alerta abre uma Issue pública no GitHub (é preciso ter conta). Não inclua dados pessoais.</p>
 </section>
 
 <footer>
-<p>Sem cadastro e sem anúncios. Os links para os serviços são links comuns (sem comissão) até que exista um programa de indicação aprovado; quando houver, isso será indicado aqui. Não é recomendação financeira. Feito com auxílio de IA. Código aberto no <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/quanto-chega">GitHub</a>.</p>
+<p>Sem cadastro e sem anúncios. Os links para os serviços são links comuns (sem comissão) até que exista um programa de indicação aprovado; quando houver, isso será indicado aqui. Não é recomendação financeira. Feito com auxílio de IA. Código aberto no <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/quanto-chega">GitHub</a>.</p><p class="muted" style="font-size:12px">Medimos de forma anônima quantas pessoas visitam e usam esta página (apenas contadores numéricos, sem cookies e sem os dados que você digita).</p>
 </footer>
 </main>
+<script>
+/* Medição anônima: só contadores numéricos (abacus.jasoncameron.dev). Nada do que é digitado é enviado.
+   Não conta navegadores automatizados (navigator.webdriver) nem acessos com ?notrack=1. */
+(function(){
+  const NS="matheuszinhorn-desafio50", P="qc";
+  let off=false; try{ off = navigator.webdriver || /[?&]notrack=1/.test(location.search+location.hash) || localStorage.getItem("notrack")==="1"; }catch(e){}
+  window.track = function(k){ if(off) return; try{ fetch("https://abacus.jasoncameron.dev/hit/"+NS+"/"+P+"-"+k,{keepalive:true}).catch(()=>{}); }catch(e){} };
+  let src="direto"; try{ const m=(location.search+location.hash).match(/[?&]src=([a-z0-9-]{3,20})/i); if(m) src=m[1].toLowerCase(); else if(document.referrer && !/htmlpreview\.github\.io/.test(document.referrer)) src="ref-"+(new URL(document.referrer).hostname.replace(/^www\./,"").replace(/[^a-z0-9-]/g,"-").slice(0,20)); }catch(e){}
+  track("visita"); track("visita-"+src);
+})();
+</script>
 <script>
 document.getElementById("want").href = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new?title=" + encodeURIComponent("[Quanto Chega] Eu usaria o alerta de cotação") + "&body=" + encodeURIComponent("Moeda e valor típico (ex.: USD, 2.000/mês):\nCom que frequência envia:\nPagaria por um alerta? (sim / não / depende do preço):\n\n(Não inclua dados pessoais.)");
 const $ = s => document.querySelector(s);
 const SITES = {wise:"https://wise.com/br/", remitly:"https://www.remitly.com/", paypal:"https://www.paypal.com/br/", "western-union":"https://www.westernunion.com/", xoom:"https://www.xoom.com/", ofx:"https://www.ofx.com/", instarem:"https://www.instarem.com/"};
 const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 function num(t){ t=String(t).trim().replace(/\s/g,""); if(/,\d{1,2}$/.test(t)) t=t.replace(/\./g,"").replace(",","."); else t=t.replace(/,/g,""); return parseFloat(t); }
+function idade(t){ if(!t) return ""; const m=Math.round((Date.now()-new Date(t))/60000); const txt = m<2?"cotação ao vivo": m<60?`cotação de ${m} min atrás`:`cotação de ${Math.round(m/60)} h atrás`; return m>180?`<span style="color:var(--warn);font-weight:600">${txt}</span>`:txt; }
 function dur(iso){ if(!iso) return ""; const m = iso.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/); if(!m) return ""; const d=+(m[1]||0), h=+(m[2]||0), mi=+(m[3]||0); if(d) return `≈ ${d} dia${d>1?"s":""}`; if(h) return `≈ ${h} h`; return `≈ ${mi} min`; }
 async function run(){
   const amt = num($("#amt").value), cur = $("#cur").value;
@@ -89,6 +101,7 @@ async function run(){
     const r = await fetch(`https://api.wise.com/v3/comparisons/?sourceCurrency=${cur}&targetCurrency=BRL&sendAmount=${amt}`);
     if(!r.ok) throw new Error("a fonte respondeu " + r.status);
     const d = await r.json();
+    track("comparacao"); track("moeda-"+cur.toLowerCase());
     const rows = (d.providers||[]).filter(p=>p.quotes&&p.quotes.length).map(p=>({p, q:p.quotes[0]})).sort((a,b)=>b.q.receivedAmount-a.q.receivedAmount);
     if(!rows.length) throw new Error("nenhum serviço retornou cotação para essa moeda");
     const best = rows[0].q.receivedAmount;
@@ -100,11 +113,11 @@ async function run(){
       return `<div class="prov ${i===0?"best":""}">
         ${logo?`<img src="${logo}" alt="" onerror="this.style.visibility='hidden'">`:`<span></span>`}
         <div><div class="name">${x.p.name}${i===0?'<span class="tag">MAIS REAIS</span>':""}</div>
-        <div class="meta">Câmbio ${x.q.rate.toFixed(4).replace(".",",")} · taxa ${x.q.fee.toLocaleString("pt-BR")} ${cur} ${dur(x.q.deliveryEstimation&&x.q.deliveryEstimation.duration&&x.q.deliveryEstimation.duration.max)?"· "+dur(x.q.deliveryEstimation.duration.max):""} · <a href="${url}" target="_blank" rel="noopener nofollow">site</a></div></div>
+        <div class="meta">Câmbio ${x.q.rate.toFixed(4).replace(".",",")} · margem ${(x.q.markup||0).toFixed(2).replace(".",",")}% · taxa ${x.q.fee.toLocaleString("pt-BR")} ${cur} · ${idade(x.q.dateCollected)} ${dur(x.q.deliveryEstimation&&x.q.deliveryEstimation.duration&&x.q.deliveryEstimation.duration.max)?"· "+dur(x.q.deliveryEstimation.duration.max):""} · <a href="${url}" target="_blank" rel="noopener nofollow" onclick="track('clique-${x.p.alias}')">site</a></div></div>
         <div class="amt"><b>${brl(x.q.receivedAmount)}</b><span class="loss">${i===0?"melhor valor":"−"+brl(diff)}</span></div></div>`;
     }).join("");
     const t = rows.map(x=>x.q.dateCollected).filter(Boolean).sort().pop();
-    $("#when").textContent = t ? `Cotações coletadas em ${new Date(t).toLocaleString("pt-BR")}.` : "";
+    $("#when").innerHTML = "As cotações não são coletadas no mesmo instante: veja a idade de cada uma. <b>Margem</b> é quanto o câmbio do serviço fica abaixo do câmbio comercial (de referência), além da taxa.";
     try{ localStorage.setItem("qc", JSON.stringify({amt:$("#amt").value, cur})); }catch(e){}
   }catch(e){ list.innerHTML = `<p class="err">Não foi possível comparar agora: ${e.message}.</p>`; }
 }

@@ -73,23 +73,34 @@ button.primary{background:var(--accent);color:var(--accent-ink);border-color:var
 <label>Instruções (banco, Wise, Payoneer, PayPal…)</label><textarea data-k="pay" placeholder="Bank: ...&#10;Account holder: ...&#10;SWIFT/BIC: ...&#10;Account / IBAN: ..."></textarea>
 <label>Observações</label><textarea data-k="notes" placeholder="Thank you for your business."></textarea>
 </fieldset>
-<div class="actions"><button class="primary" onclick="window.print()">Salvar em PDF / imprimir</button><button id="newNum">Nova invoice (próximo número)</button></div>
+<div class="actions"><button class="primary" onclick="track('pdf');window.print()">Salvar em PDF / imprimir</button><button id="newNum">Nova invoice (próximo número)</button></div>
 <p class="muted" style="margin-top:10px">Não substitui nota fiscal quando ela for exigida. Exportação de serviços por pessoa física é tributada no Carnê-Leão. Para converter o valor recebido em reais, use o <a href="https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html">Recebi do Exterior</a>. Para escolher por onde receber, compare no <a href="https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/quanto-chega/index.html">Quanto Chega</a>.</p>
 </section>
 
 <section>
 <div class="doc" id="doc"></div>
 <div class="card noprint" style="margin-top:16px">
-<p style="margin:0 0 8px"><b>Kit completo para quem trabalha para fora</b>: contrato de prestação de serviços bilíngue, invoice com numeração e histórico, e planilha anual para o Imposto de Renda. Ele ainda não existe. Se você compraria, diga abaixo: é isso que decide se ele será feito.</p>
-<a id="want" target="_blank" rel="noopener"><button class="primary">Eu compraria o kit</button></a>
+<p style="margin:0 0 8px"><b>Fechamento do mês para o Carnê-Leão (em avaliação)</b>: marque as invoices pagas e receba o total em reais convertido pela cotação do Banco Central, pronto para lançar, mais o histórico do ano para a declaração. Ainda não existe. Se você pagaria por isso, diga abaixo: é isso que decide se será feito.</p>
+<a id="want" target="_blank" rel="noopener" onclick="track('quero-kit')"><button class="primary">Eu pagaria pelo fechamento mensal</button></a>
 <p class="muted" style="margin-top:8px">Abre uma Issue pública no GitHub (é preciso ter conta). Não inclua dados pessoais.</p>
 </div>
 </section>
 </div>
-<footer class="noprint muted" style="margin-top:24px">Feito com auxílio de IA. Código aberto no <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/invoice">GitHub</a>.</footer>
+<footer class="noprint muted" style="margin-top:24px">Feito com auxílio de IA. Código aberto no <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/invoice">GitHub</a>.<p class="muted" style="font-size:12px">Medimos de forma anônima quantas pessoas visitam e usam esta página (apenas contadores numéricos, sem cookies e sem os dados que você digita).</p></footer>
 </main>
 <script>
-document.getElementById("want").href = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new?title=" + encodeURIComponent("[Invoice] Eu compraria o kit para quem trabalha para fora") + "&body=" + encodeURIComponent("O que mais importa no kit (contrato, invoice, planilha de IR):\nQuanto pagaria (ex.: R$ 29, R$ 49, R$ 79):\n\n(Não inclua dados pessoais.)");
+/* Medição anônima: só contadores numéricos (abacus.jasoncameron.dev). Nada do que é digitado é enviado.
+   Não conta navegadores automatizados (navigator.webdriver) nem acessos com ?notrack=1. */
+(function(){
+  const NS="matheuszinhorn-desafio50", P="inv";
+  let off=false; try{ off = navigator.webdriver || /[?&]notrack=1/.test(location.search+location.hash) || localStorage.getItem("notrack")==="1"; }catch(e){}
+  window.track = function(k){ if(off) return; try{ fetch("https://abacus.jasoncameron.dev/hit/"+NS+"/"+P+"-"+k,{keepalive:true}).catch(()=>{}); }catch(e){} };
+  let src="direto"; try{ const m=(location.search+location.hash).match(/[?&]src=([a-z0-9-]{3,20})/i); if(m) src=m[1].toLowerCase(); else if(document.referrer && !/htmlpreview\.github\.io/.test(document.referrer)) src="ref-"+(new URL(document.referrer).hostname.replace(/^www\./,"").replace(/[^a-z0-9-]/g,"-").slice(0,20)); }catch(e){}
+  track("visita"); track("visita-"+src);
+})();
+</script>
+<script>
+document.getElementById("want").href = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new?title=" + encodeURIComponent("[Invoice] Eu pagaria pelo fechamento mensal") + "&body=" + encodeURIComponent("Quantas invoices emite por mês:\nQuanto pagaria por ano (ex.: R$ 29, R$ 49, R$ 79):\n\n(Não inclua dados pessoais.)");
 const $=s=>document.querySelector(s), esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const today=new Date().toISOString().slice(0,10), in15=new Date(Date.now()+15*864e5).toISOString().slice(0,10);
 let st={num:"001",cur:"USD",date:today,due:in15,items:[{d:"Software development services",q:1,p:0}]};
@@ -111,7 +122,7 @@ function drawItems(){
   });
 }
 $("#addItem").onclick=()=>{st.items.push({d:"",q:1,p:0});save();drawItems();render();};
-$("#newNum").onclick=()=>{ const n=String((parseInt(st.num,10)||0)+1).padStart(String(st.num).length,"0"); st.num=n; st.date=today; st.due=in15; ["num","date","due"].forEach(k=>document.querySelector(`[data-k=${k}]`).value=st[k]); save(); render(); };
+$("#newNum").onclick=()=>{ track("nova-invoice"); const n=String((parseInt(st.num,10)||0)+1).padStart(String(st.num).length,"0"); st.num=n; st.date=today; st.due=in15; ["num","date","due"].forEach(k=>document.querySelector(`[data-k=${k}]`).value=st[k]); save(); render(); };
 function render(){
   const rows=st.items.filter(i=>i.d||num(i.p)).map(i=>({d:i.d,q:num(i.q)||0,p:num(i.p)}));
   const total=rows.reduce((s,i)=>s+i.q*i.p,0);

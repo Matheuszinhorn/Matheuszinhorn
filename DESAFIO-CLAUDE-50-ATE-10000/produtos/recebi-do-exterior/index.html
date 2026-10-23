@@ -79,7 +79,7 @@ footer{margin-top:32px;color:var(--muted);font-size:13px}
 <div class="actions">
 <button id="csv">Baixar CSV</button>
 <button id="copy">Copiar totais por mês</button>
-<button onclick="window.print()">Imprimir ou salvar em PDF</button>
+<button onclick="track('imprimir');window.print()">Imprimir ou salvar em PDF</button>
 </div>
 </section>
 
@@ -87,17 +87,28 @@ footer{margin-top:32px;color:var(--muted);font-size:13px}
 <h2>Isto foi útil?</h2>
 <p class="muted">Estamos avaliando uma versão com <b>relatório anual para a declaração</b> (rendimentos do exterior, ganhos de capital e a Lei 14.754/2023 para investimentos no exterior), com lembrete do DARF todo mês. Ela ainda não existe. Se você usaria, diga abaixo: é isso que decide se ela será feita.</p>
 <div class="actions">
-<a id="wantPro" target="_blank" rel="noopener"><button class="primary">Eu usaria a versão com relatório anual</button></a>
-<a id="fb" target="_blank" rel="noopener"><button>Relatar um erro ou sugerir algo</button></a>
+<a id="wantPro" target="_blank" rel="noopener" onclick="track('quero-pro')"><button class="primary">Eu usaria a versão com relatório anual</button></a>
+<a id="fb" target="_blank" rel="noopener" onclick="track('feedback')"><button>Relatar um erro ou sugerir algo</button></a>
 </div>
 <p class="muted" style="margin-top:8px">Os dois botões abrem uma Issue pública no GitHub (é preciso ter conta). Não inclua dados pessoais nem valores.</p>
 </section>
 
 <footer>
-<p>Fonte das cotações: Banco Central do Brasil, serviço PTAX (olinda.bcb.gov.br), consultado no momento do cálculo. Não é aconselhamento fiscal. Feito com auxílio de IA. Código aberto em <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior">GitHub</a>.</p>
+<p>Fonte das cotações: Banco Central do Brasil, serviço PTAX (olinda.bcb.gov.br), consultado no momento do cálculo. Não é aconselhamento fiscal. Feito com auxílio de IA. Código aberto em <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior">GitHub</a>.</p><p class="muted" style="font-size:12px">Medimos de forma anônima quantas pessoas visitam e usam esta página (apenas contadores numéricos, sem cookies e sem os dados que você digita).</p>
 </footer>
 </main>
 
+<script>
+/* Medição anônima: só contadores numéricos (abacus.jasoncameron.dev). Nada do que é digitado é enviado.
+   Não conta navegadores automatizados (navigator.webdriver) nem acessos com ?notrack=1. */
+(function(){
+  const NS="matheuszinhorn-desafio50", P="rde";
+  let off=false; try{ off = navigator.webdriver || /[?&]notrack=1/.test(location.search+location.hash) || localStorage.getItem("notrack")==="1"; }catch(e){}
+  window.track = function(k){ if(off) return; try{ fetch("https://abacus.jasoncameron.dev/hit/"+NS+"/"+P+"-"+k,{keepalive:true}).catch(()=>{}); }catch(e){} };
+  let src="direto"; try{ const m=(location.search+location.hash).match(/[?&]src=([a-z0-9-]{3,20})/i); if(m) src=m[1].toLowerCase(); else if(document.referrer && !/htmlpreview\.github\.io/.test(document.referrer)) src="ref-"+(new URL(document.referrer).hostname.replace(/^www\./,"").replace(/[^a-z0-9-]/g,"-").slice(0,20)); }catch(e){}
+  track("visita"); track("visita-"+src);
+})();
+</script>
 <script>
 const REPO = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new";
 document.getElementById("wantPro").href = REPO + "?title=" + encodeURIComponent("[Recebi do Exterior] Eu usaria a versão com relatório anual") + "&body=" + encodeURIComponent("Uso para: (ex.: salário de empresa estrangeira, freelas, dividendos)\nQuantos recebimentos por mês, mais ou menos:\nPagaria por ano? (sim / não / depende do preço):\n\n(Não inclua dados pessoais.)");
@@ -185,7 +196,7 @@ $("#calc").onclick = async () => {
       const used = rule==="quinzena" ? a : b;
       res.push({...r, taxa:used.taxa, ref:used.ref, reais:Math.round(r.v*used.taxa*100)/100, alt:b, altReais:Math.round(r.v*b.taxa*100)/100, q:a});
     }
-    lastResult = res; render(res, rule);
+    lastResult = res; render(res, rule); track("calculo"); track("linhas-"+Math.min(res.length,10));
   }catch(e){ out.innerHTML = `<p class="err">Não foi possível calcular: ${e.message}. Tente de novo em alguns instantes.</p>`; }
 };
 
@@ -210,7 +221,7 @@ function render(res, rule){
   $("#result").dataset.rule = rule;
 }
 
-$("#csv").onclick = () => {
+$("#csv").onclick = () => { track("csv");
   if(!lastResult.length) return;
   const lines = [["data_recebimento","descricao","valor_usd","cotacao_ptax_compra","data_cotacao","valor_brl"].join(";")]
     .concat(lastResult.map(r => [br(r.d), (r.s||"").replace(/;/g,","), r.v.toFixed(2).replace(".",","), r.taxa.toFixed(4).replace(".",","), br(r.ref), r.reais.toFixed(2).replace(".",",")].join(";")));

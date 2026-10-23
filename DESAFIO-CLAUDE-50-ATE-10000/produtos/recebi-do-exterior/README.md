@@ -1,6 +1,6 @@
 # Recebi do Exterior: conversão PTAX para o Carnê-Leão
 
-**Usar agora (grátis, sem cadastro):** https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html
+**Usar agora (grátis, sem cadastro):** https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html?src=github
 
 É para quem recebe em dólar de uma empresa ou de um cliente no exterior (salário, freelas, "dev na gringa") e precisa lançar o valor em reais no **Carnê-Leão Web** todo mês.
 
