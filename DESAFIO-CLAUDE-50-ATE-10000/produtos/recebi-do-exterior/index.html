@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recebi do Exterior</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Converte em reais, com a cotação PTAX do Banco Central, os valores recebidos do exterior, para lançar no Carnê-Leão. Gratuito, sem cadastro, roda no seu navegador.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#17202e;--muted:#5d6878;--line:#dfe3ea;--accent:#0f6b5c;--accent-ink:#fff;--warn:#8a5a00;--warn-bg:#fff6e0;--err:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151b;--card:#1a2029;--ink:#e8edf3;--muted:#a1acbb;--line:#2b3340;--accent:#4fc3ab;--accent-ink:#06201b;--warn:#f0c46c;--warn-bg:#2d2412;--err:#ff8a80}}
+:root[data-theme="dark"]{--bg:#11151b;--card:#1a2029;--ink:#e8edf3;--muted:#a1acbb;--line:#2b3340;--accent:#4fc3ab;--accent-ink:#06201b;--warn:#f0c46c;--warn-bg:#2d2412;--err:#ff8a80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:clamp(26px,4.5vw,36px);margin:0 0 6px;line-height:1.2}
+h2{font-size:20px;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 20px;max-width:720px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+textarea{min-height:96px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+.row{display:grid;grid-template-columns:1fr 1fr 1.4fr auto;gap:8px;align-items:end;margin-bottom:8px}
+@media (max-width:640px){.row{grid-template-columns:1fr 1fr}.row .desc{grid-column:1/-1}.row .rm{grid-column:1/-1}}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+th{color:var(--muted);font-weight:600}
+tfoot td{font-weight:700}
+.month{margin:18px 0 6px;font-weight:700}
+.note{background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:10px 12px;font-size:14px}
+.err{color:var(--err)}
+.muted{color:var(--muted);font-size:14px}
+.big{font-size:22px;font-weight:700}
+a{color:var(--accent)}
+footer{margin-top:32px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Recebi do Exterior</h1>
+<p class="sub">Converte em reais os valores que você recebeu em dólar, usando a cotação PTAX oficial do Banco Central, e soma por mês para o lançamento no <b>Carnê-Leão Web</b>. É gratuito, não pede cadastro e roda no seu navegador. Só as <i>datas</i> são enviadas ao Banco Central, para buscar as cotações.</p>
+
+<section class="card">
+<h2>1. Seus recebimentos (em US$)</h2>
+<div id="rows"></div>
+<div class="actions">
+<button id="add">+ Adicionar recebimento</button>
+<button id="ex">Preencher exemplo</button>
+<button id="clear">Limpar</button>
+</div>
+<details style="margin-top:12px"><summary class="muted">Colar de uma planilha (uma linha por recebimento: data;valor;descrição)</summary>
+<textarea id="paste" placeholder="05/09/2026;3200;Cliente A&#10;20/09/2026;1250,50;Cliente B"></textarea>
+<div class="actions"><button id="importBtn">Importar linhas</button></div>
+</details>
+</section>
+
+<section class="card">
+<h2>2. Regra de conversão</h2>
+<div class="opts">
+<div><label for="rule">Cotação usada</label>
+<select id="rule">
+<option value="quinzena">PTAX de compra do último dia útil da 1ª quinzena do mês anterior (regra mais citada para rendimentos do exterior)</option>
+<option value="dia">PTAX de compra do dia útil do recebimento ou anterior (para comparar)</option>
+</select></div>
+<div><label>&nbsp;</label><button class="primary" id="calc" style="width:100%">Converter em reais</button></div>
+</div>
+<p class="note" style="margin-top:12px">As fontes que consultamos divergem sobre a regra. A maioria (orientação de auditor-fiscal da Receita citada pela imprensa e textos de contabilidade) indica a PTAX de compra do último dia útil da 1ª quinzena do mês anterior ao recebimento. Outras indicam a cotação do dia. Use a comparação abaixo e, na dúvida, confirme com um contador. Esta ferramenta não calcula o imposto: o Carnê-Leão Web calcula a partir do valor em reais.</p>
+</section>
+
+<section class="card" id="out" hidden>
+<h2>3. Resultado</h2>
+<div id="result"></div>
+<div class="actions">
+<button id="csv">Baixar CSV</button>
+<button id="copy">Copiar totais por mês</button>
+<button onclick="window.print()">Imprimir ou salvar em PDF</button>
+</div>
+</section>
+
+<section class="card">
+<h2>Isto foi útil?</h2>
+<p class="muted">Estamos avaliando uma versão com <b>relatório anual para a declaração</b> (rendimentos do exterior, ganhos de capital e a Lei 14.754/2023 para investimentos no exterior), com lembrete do DARF todo mês. Ela ainda não existe. Se você usaria, diga abaixo: é isso que decide se ela será feita.</p>
+<div class="actions">
+<a id="wantPro" target="_blank" rel="noopener"><button class="primary">Eu usaria a versão com relatório anual</button></a>
+<a id="fb" target="_blank" rel="noopener"><button>Relatar um erro ou sugerir algo</button></a>
+</div>
+<p class="muted" style="margin-top:8px">Os dois botões abrem uma Issue pública no GitHub (é preciso ter conta). Não inclua dados pessoais nem valores.</p>
+</section>
+
+<footer>
+<p>Fonte das cotações: Banco Central do Brasil, serviço PTAX (olinda.bcb.gov.br), consultado no momento do cálculo. Não é aconselhamento fiscal. Feito com auxílio de IA. Código aberto em <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior">GitHub</a>.</p>
+</footer>
+</main>
+
+<script>
+const REPO = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new";
+document.getElementById("wantPro").href = REPO + "?title=" + encodeURIComponent("[Recebi do Exterior] Eu usaria a versão com relatório anual") + "&body=" + encodeURIComponent("Uso para: (ex.: salário de empresa estrangeira, freelas, dividendos)\nQuantos recebimentos por mês, mais ou menos:\nPagaria por ano? (sim / não / depende do preço):\n\n(Não inclua dados pessoais.)");
+document.getElementById("fb").href = REPO + "?title=" + encodeURIComponent("[Recebi do Exterior] Feedback") + "&body=" + encodeURIComponent("O que aconteceu ou o que você sugere:\n\n(Não inclua dados pessoais.)");
+
+const $ = s => document.querySelector(s);
+const rowsEl = $("#rows");
+const brl = v => v.toLocaleString("pt-BR", {style:"currency", currency:"BRL"});
+const usd = v => v.toLocaleString("pt-BR", {style:"currency", currency:"USD"});
+const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+function store(v){ try{ if(v===undefined) return JSON.parse(localStorage.getItem("rde-rows")||"null"); localStorage.setItem("rde-rows", JSON.stringify(v)); }catch(e){ return null; } }
+
+function addRow(d="", v="", desc=""){
+  const r = document.createElement("div"); r.className = "row";
+  r.innerHTML = `<div><label>Data do recebimento</label><input type="date" class="d" value="${d}"></div>
+  <div><label>Valor (US$)</label><input inputmode="decimal" class="v" placeholder="0,00" value="${v}"></div>
+  <div class="desc"><label>Descrição (opcional)</label><input class="s" placeholder="ex.: cliente, salário" value="${desc}"></div>
+  <div class="rm"><button title="Remover" aria-label="Remover">×</button></div>`;
+  r.querySelector("button").onclick = () => { r.remove(); save(); };
+  r.querySelectorAll("input").forEach(i => i.oninput = save);
+  rowsEl.appendChild(r);
+}
+function readRows(){
+  return [...rowsEl.querySelectorAll(".row")].map(r => ({
+    d: r.querySelector(".d").value,
+    v: parseNum(r.querySelector(".v").value),
+    s: r.querySelector(".s").value.trim()
+  }));
+}
+function save(){ store(readRows().map(x => ({d:x.d, v:isNaN(x.v)?"":String(x.v).replace(".",","), s:x.s}))); }
+function parseNum(t){ t = String(t).trim().replace(/\s|US\$|\$/g,""); if(/,\d{1,2}$/.test(t)) t = t.replace(/\./g,"").replace(",","."); else t = t.replace(/,/g,""); return parseFloat(t); }
+function parseDate(t){ t=t.trim(); let m=t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); if(m) return `${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`; m=t.match(/^(\d{4})-(\d{2})-(\d{2})$/); return m?t:""; }
+
+const saved = store(); if(saved && saved.length) saved.forEach(x => addRow(x.d, x.v, x.s)); else addRow();
+$("#add").onclick = () => addRow();
+$("#clear").onclick = () => { rowsEl.innerHTML=""; addRow(); save(); $("#out").hidden = true; };
+$("#ex").onclick = () => { rowsEl.innerHTML=""; [["2026-09-05","3200,00","Cliente A"],["2026-09-22","1250,50","Cliente B"],["2026-10-06","3200,00","Cliente A"]].forEach(x=>addRow(...x)); save(); };
+$("#importBtn").onclick = () => {
+  const lines = $("#paste").value.split(/\n/).map(l=>l.trim()).filter(Boolean);
+  let ok=0; lines.forEach(l => { const p=l.split(/[;\t]/); const d=parseDate(p[0]||""); const v=parseNum(p[1]||""); if(d && !isNaN(v)){ addRow(d, String(v).replace(".",","), (p[2]||"").trim()); ok++; } });
+  [...rowsEl.querySelectorAll(".row")].forEach(r => { if(!r.querySelector(".d").value && !r.querySelector(".v").value && rowsEl.children.length>ok) r.remove(); });
+  save(); alert(ok + " linha(s) importada(s).");
+};
+
+// --- PTAX ---
+const cache = {};
+const fmtBC = d => `${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}-${d.getUTCFullYear()}`;
+async function ptaxRange(ini, fim){
+  const key = fmtBC(ini)+"|"+fmtBC(fim);
+  if(cache[key]) return cache[key];
+  const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarPeriodo(dataInicial=@i,dataFinalCotacao=@f)?@i='${fmtBC(ini)}'&@f='${fmtBC(fim)}'&$format=json&$select=cotacaoCompra,dataHoraCotacao`;
+  const r = await fetch(url); if(!r.ok) throw new Error("Banco Central respondeu " + r.status);
+  const j = await r.json(); return cache[key] = j.value;
+}
+const U = (y,m,d) => new Date(Date.UTC(y,m,d));
+async function cotacaoQuinzena(dataRec){
+  const [y,m] = dataRec.split("-").map(Number);
+  const ini = U(y, m-2, 1), fim = U(y, m-2, 15);   // mês anterior: dias 1 a 15
+  const v = await ptaxRange(ini, fim);
+  if(!v.length) throw new Error("sem cotação na 1ª quinzena de " + MESES[ini.getUTCMonth()]);
+  const last = v[v.length-1]; return {taxa:last.cotacaoCompra, ref:last.dataHoraCotacao.slice(0,10)};
+}
+async function cotacaoDia(dataRec){
+  const [y,m,d] = dataRec.split("-").map(Number);
+  const v = await ptaxRange(U(y,m-1,d-10), U(y,m-1,d));
+  if(!v.length) throw new Error("sem cotação até " + dataRec);
+  const last = v[v.length-1]; return {taxa:last.cotacaoCompra, ref:last.dataHoraCotacao.slice(0,10)};
+}
+const br = iso => iso.split("-").reverse().join("/");
+
+let lastResult = [];
+$("#calc").onclick = async () => {
+  const rows = readRows().filter(r => r.d && !isNaN(r.v) && r.v>0).sort((a,b)=>a.d.localeCompare(b.d));
+  const out = $("#result"); $("#out").hidden = false;
+  if(!rows.length){ out.innerHTML = `<p class="err">Preencha pelo menos uma data e um valor.</p>`; return; }
+  const today = new Date().toISOString().slice(0,10);
+  out.innerHTML = `<p class="muted">Buscando cotações no Banco Central…</p>`;
+  const rule = $("#rule").value;
+  try{
+    const res = [];
+    for(const r of rows){
+      if(r.d > today) throw new Error(`a data ${br(r.d)} está no futuro`);
+      const a = await cotacaoQuinzena(r.d), b = await cotacaoDia(r.d);
+      const used = rule==="quinzena" ? a : b;
+      res.push({...r, taxa:used.taxa, ref:used.ref, reais:Math.round(r.v*used.taxa*100)/100, alt:b, altReais:Math.round(r.v*b.taxa*100)/100, q:a});
+    }
+    lastResult = res; render(res, rule);
+  }catch(e){ out.innerHTML = `<p class="err">Não foi possível calcular: ${e.message}. Tente de novo em alguns instantes.</p>`; }
+};
+
+function render(res, rule){
+  const byMonth = {};
+  res.forEach(r => (byMonth[r.d.slice(0,7)] ||= []).push(r));
+  let html = "";
+  for(const [ym, list] of Object.entries(byMonth)){
+    const [y,m] = ym.split("-").map(Number);
+    const tot = list.reduce((s,r)=>s+r.reais,0), totUsd = list.reduce((s,r)=>s+r.v,0);
+    const venc = `${MESES[m % 12]} de ${m===12?y+1:y}`;
+    html += `<div class="month">${MESES[m-1][0].toUpperCase()+MESES[m-1].slice(1)} de ${y}</div>
+    <div class="tbl"><table><thead><tr><th>Recebido em</th><th class="l">Descrição</th><th>US$</th><th>Cotação usada</th><th>Data da cotação</th><th>R$</th></tr></thead><tbody>`
+    + list.map(r=>`<tr><td>${br(r.d)}</td><td class="l">${r.s||"—"}</td><td>${usd(r.v)}</td><td>${r.taxa.toFixed(4).replace(".",",")}</td><td>${br(r.ref)}</td><td>${brl(r.reais)}</td></tr>`).join("")
+    + `</tbody><tfoot><tr><td>Total do mês</td><td></td><td>${usd(totUsd)}</td><td></td><td></td><td>${brl(tot)}</td></tr></tfoot></table></div>
+    <p class="muted">Valor a lançar no Carnê-Leão Web referente a ${MESES[m-1]}/${y}: <span class="big">${brl(tot)}</span>. O DARF (código 0190), se houver imposto, vence no último dia útil de ${venc}.</p>`;
+  }
+  const a = res.reduce((s,r)=>s+r.q.taxa*r.v,0), b = res.reduce((s,r)=>s+r.altReais,0);
+  const dif = Math.round((a-b)*100)/100;
+  html += `<p class="note">Comparação: pela regra da 1ª quinzena do mês anterior, o total seria ${brl(Math.round(a*100)/100)}; pela cotação do dia do recebimento, ${brl(b)}. Diferença: ${brl(dif)}.</p>`;
+  $("#result").innerHTML = html;
+  $("#result").dataset.rule = rule;
+}
+
+$("#csv").onclick = () => {
+  if(!lastResult.length) return;
+  const lines = [["data_recebimento","descricao","valor_usd","cotacao_ptax_compra","data_cotacao","valor_brl"].join(";")]
+    .concat(lastResult.map(r => [br(r.d), (r.s||"").replace(/;/g,","), r.v.toFixed(2).replace(".",","), r.taxa.toFixed(4).replace(".",","), br(r.ref), r.reais.toFixed(2).replace(".",",")].join(";")));
+  const blob = new Blob(["﻿"+lines.join("\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "recebimentos-exterior.csv"; a.click();
+};
+$("#copy").onclick = async () => {
+  const byMonth = {}; lastResult.forEach(r => byMonth[r.d.slice(0,7)] = (byMonth[r.d.slice(0,7)]||0) + r.reais);
+  const txt = Object.entries(byMonth).map(([ym,v]) => `${ym.split("-").reverse().join("/")}: ${brl(v)}`).join("\n");
+  try{ await navigator.clipboard.writeText(txt); alert("Totais copiados."); }catch(e){ prompt("Copie os totais:", txt); }
+};
+</script>
+</body>
+</html>
