@@ -827,3 +827,35 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas públicas:** as mesmas 13 (nenhuma entrou, nenhuma saiu), todas `HUMAN_ONLY`. Nada elegível e executável.
 - **Verificação paralela do EXP-015:** 0 Issues no repositório (linha de base: 0).
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+---
+# Ciclo 20 — Diretriz do proprietário "DEC-031": mapa de 50 modelos e 5 experimentos (até 23/10/2026 14:16 BRT)
+
+## ATV-088 — Diretriz recebida e reenvio da anterior
+- A diretriz "DEC-030" foi reenviada idêntica às 14:00. Respondi com o que já tinha sido entregue (ATV-083 a 085), sem refazer o trabalho.
+- A nova diretriz cita "as 50 possibilidades apresentadas", mas **a lista não veio anexada**. Montei a minha lista de 50.
+
+## ATV-089 — Mapa de 50 modelos
+- **Arquivo:** `analises/MAPA-50-MODELOS-2026-10-23.md`. 7 critérios com notas de 1 a 5 (ESTIMATIVAS) e coluna de evidência.
+- **Novos sinais de demanda** (autocompletar; arquivo bruto `/tmp/claude-0/-home-user/53dec64f-596b-5e59-a540-da409aa575a4/scratchpad/m50/suggest2.json`): "receber salário em dólar no brasil", "taxa wise", "gerador de invoice gratuito", "modelo de invoice de serviço", "prompts para advogados gratuitos", "cardápio digital grátis para whatsapp".
+- **Descoberta técnica (FATO):** a API pública de comparação da Wise (`api.wise.com/v3/comparisons`) responde com CORS `*`. Lista 7 serviços para USD→BRL e 11 para EUR→BRL.
+- **Rejeitado antes de construir:** cardápio digital. O catálogo grátis do WhatsApp Business já tem carrinho, e Goomer e OlaClick têm plano grátis: diferenciação fraca.
+
+## ATV-090 — EXP-016 "Quanto Chega" (afiliados), construído e testado
+- **Link:** https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/quanto-chega/index.html
+- **O que faz:** comparação ao vivo de quantos reais chegam por serviço (taxa + margem de câmbio), em 5 moedas. Inclui aviso de que a fonte é a própria Wise e de que o IOF pode não estar incluído.
+- **Teste (FATO, 23/10 ≈ 14:12 BRT, US$ 1.000):** Remitly R$ 5.025,21, Instarem 4.993,04, Wise 4.953,96, Western Union 4.900,98, Xoom 4.890,67, PayPal 4.791,17, OFX 4.749,31.
+  - **Diferença entre o melhor e o pior serviço: R$ 275,90.**
+  - Celular e computador sem rolagem lateral; 0 erros de JavaScript.
+- **Monetização:** links de indicação ou afiliado. Hoje os links são comuns e a página diz isso. Os programas exigem cadastro do proprietário: verificar as regras antes.
+- **Porta falsa:** "Eu usaria o alerta de cotação" (Issue no GitHub).
+
+## ATV-091 — EXP-017 "Invoice Simples" (software gratuito + kit pago em avaliação), construído e testado
+- **Link:** https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/invoice/index.html
+- **O que faz:** invoice em inglês, itens, moeda, numeração e PDF, com dados só no aparelho. Leva ao Recebi do Exterior e ao Quanto Chega.
+- **Teste (FATO):** US$ 1.500 + 3 × US$ 120,50 = US$ 1.861,50, correto. PDF A4 gerado; margens corrigidas depois da 1ª versão.
+- **Porta falsa:** "Eu compraria o kit" (contrato bilíngue + invoice com histórico + planilha de IR).
+
+## ATV-092 — EXP-018 "Prompts para advocacia" (produto digital, outro mercado)
+- **Amostra grátis publicada:** `produtos/prompts-advocacia/README.md`, com 10 prompts e travas (não inventar julgados, LGPD, regras de publicidade da advocacia).
+- **Porta falsa:** pedido do pacote completo por Issue. **Limitação reconhecida:** advogados raramente têm conta no GitHub, então esse sinal é fraco. O canal natural para este público são os 15 advogados do EXP-013, que dependem de um canal de e-mail.

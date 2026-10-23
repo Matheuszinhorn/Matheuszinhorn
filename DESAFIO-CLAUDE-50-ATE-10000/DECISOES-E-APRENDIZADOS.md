@@ -300,3 +300,18 @@ _Ainda sem dados de mercado._
   - **P3:** exige uma conversa por venda; fica só como entrega do EXP-013.
 - **Princípio aplicado:** a menor versão útil resolve a parte confusa (conversão e regra), não a parte arriscada (cálculo do imposto, que o Carnê-Leão Web já faz).
 - **Lição 18:** o bloqueio de canal muda o *tipo* de produto que convém testar. Sem canal de saída, priorizar produtos que **se distribuem por busca** e medem intenção por um registro público (Issue), em vez de serviços que dependem de abordagem.
+
+## DEC-032 — Cinco experimentos (23/10/2026 14:16; responde à diretriz do proprietário intitulada "DEC-031")
+- A diretriz chegou com o número DEC-031, que já estava em uso. O conteúdo foi registrado sem alteração.
+
+| # | Exigência | Experimento | Público | Canal | Custo máx. | Prazo | Sucesso | Abandono |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Software | EXP-015 Recebi do Exterior | Quem recebe do exterior como PF | Busca (README) + comunidades | R$ 0 | 14 dias | ≥ 5 pedidos da versão anual | 0 pedidos depois de 2 divulgações |
+| 2 | Afiliados | EXP-016 Quanto Chega | Quem envia ou recebe dinheiro do exterior | Busca ("taxa wise", "wise ou remessa") + links cruzados | R$ 0 | 14 dias | ≥ 3 pedidos de alerta, ou 1 programa de indicação aprovado | API indisponível ou programas incompatíveis com o regulamento |
+| 3 | Comercial rápida | EXP-013 Sites no celular | 55 profissionais com problema provado | E-mail (canal pendente) | R$ 0 | 72 h depois do envio | ≥ 2 respostas | > 5% de falhas de entrega ou qualquer reclamação de spam |
+| 4 | Livre | EXP-017 Invoice Simples + kit | Freelancers que faturam para fora | Busca ("gerador de invoice gratuito") | R$ 0 | 14 dias | ≥ 3 pedidos do kit | 0 pedidos depois de 2 divulgações |
+| 5 | Livre (outro mercado) | EXP-018 Prompts para advocacia | Advogados | Busca + e-mail (EXP-013) | R$ 0 | 14 dias | ≥ 3 pedidos do pacote | 0 pedidos com ≥ 50 contatos alcançados |
+
+- **Por que estes:** 3 modelos de receita distintos (assinatura ou relatório, indicação, venda de produto) mais 1 serviço e 1 produto para outro mercado. Os experimentos 1, 2 e 4 formam um **funil** para o mesmo público, com links cruzados: cada visitante pode virar usuário de três ferramentas.
+- **Capital:** nenhum gasto. Nenhum dos testes exige dinheiro, e nenhuma aposta especulativa tem valor esperado positivo (DEC-013).
+- **Lição 19:** a mesma ação (consultar uma API pública) pode virar produto em minutos quando a API aceita chamadas do navegador. Checar o CORS primeiro é o teste mais barato de viabilidade.

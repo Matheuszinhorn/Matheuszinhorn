@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quanto Chega</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Compare, ao vivo, quantos reais chegam ao Brasil quando você envia dólares, euros ou libras por Wise, Remitly, PayPal, Western Union e outros.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#17202e;--muted:#5d6878;--line:#dfe3ea;--accent:#1d5fbf;--accent-ink:#fff;--best:#0f7a4a;--best-bg:#e6f5ed;--warn:#8a5a00;--warn-bg:#fff6e0;--err:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151b;--card:#1a2029;--ink:#e8edf3;--muted:#a1acbb;--line:#2b3340;--accent:#7fb0ff;--accent-ink:#0a1830;--best:#6fd3a1;--best-bg:#13291f;--warn:#f0c46c;--warn-bg:#2d2412;--err:#ff8a80}}
+:root[data-theme="dark"]{--bg:#11151b;--card:#1a2029;--ink:#e8edf3;--muted:#a1acbb;--line:#2b3340;--accent:#7fb0ff;--accent-ink:#0a1830;--best:#6fd3a1;--best-bg:#13291f;--warn:#f0c46c;--warn-bg:#2d2412;--err:#ff8a80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:clamp(26px,4.5vw,36px);margin:0 0 6px;line-height:1.2}
+h2{font-size:20px;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.form{display:grid;grid-template-columns:1.2fr 1fr auto;gap:10px;align-items:end}
+@media (max-width:560px){.form{grid-template-columns:1fr 1fr}.form button{grid-column:1/-1}}
+label{font-size:14px;color:var(--muted);display:block;margin-bottom:4px}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%}
+button{font:inherit;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:9px 16px;cursor:pointer;font-weight:600}
+button.ghost{background:var(--card);color:var(--ink);border-color:var(--line);font-weight:500}
+.list{display:grid;gap:10px}
+.prov{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px}
+.prov.best{border-color:var(--best);background:var(--best-bg)}
+.prov img{width:44px;height:44px;object-fit:contain;border-radius:8px}
+.name{font-weight:700}.meta{color:var(--muted);font-size:13px}
+.amt{text-align:right;font-variant-numeric:tabular-nums}.amt b{font-size:20px;display:block}
+.loss{font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:var(--best);margin-left:6px}
+.note{background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:10px 12px;font-size:14px}
+.err{color:var(--err)}
+.muted{color:var(--muted);font-size:14px}
+a{color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Quanto Chega</h1>
+<p class="sub">Você vai mandar dinheiro do exterior para o Brasil? Veja, ao vivo, quantos reais chegam por serviço, já descontadas a taxa e a margem no câmbio de cada um.</p>
+
+<section class="card">
+<div class="form">
+<div><label for="amt">Valor enviado</label><input id="amt" inputmode="decimal" value="1000"></div>
+<div><label for="cur">Moeda</label><select id="cur"><option>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option></select></div>
+<button id="go">Comparar</button>
+</div>
+</section>
+
+<section class="card" id="out" hidden>
+<h2 id="title">Resultado</h2>
+<div class="list" id="list"></div>
+<p class="muted" id="when"></p>
+<p class="note">Os valores vêm da API pública de comparação mantida pela <b>Wise</b>, que também aparece na lista. É uma fonte com interesse próprio: confira a cotação final no app de cada serviço antes de enviar. Na entrada no Brasil pode incidir IOF (em geral 0,38% em transferências de pessoa física), que nem sempre está incluído nas cotações.</p>
+</section>
+
+<section class="card">
+<h2>Isto ajudou?</h2>
+<p class="muted">Estamos avaliando um <b>alerta por e-mail</b> quando a cotação de um serviço passar de um valor escolhido. Ele ainda não existe. Se você usaria, diga abaixo: é isso que decide se ele será feito.</p>
+<div class="actions">
+<a id="want" target="_blank" rel="noopener"><button>Eu usaria o alerta de cotação</button></a>
+<a href="https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html"><button class="ghost">Recebe em dólar? Converta para o Carnê-Leão</button></a>
+</div>
+<p class="muted" style="margin-top:8px">O botão do alerta abre uma Issue pública no GitHub (é preciso ter conta). Não inclua dados pessoais.</p>
+</section>
+
+<footer>
+<p>Sem cadastro e sem anúncios. Os links para os serviços são links comuns (sem comissão) até que exista um programa de indicação aprovado; quando houver, isso será indicado aqui. Não é recomendação financeira. Feito com auxílio de IA. Código aberto no <a href="https://github.com/Matheuszinhorn/Matheuszinhorn/tree/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/quanto-chega">GitHub</a>.</p>
+</footer>
+</main>
+<script>
+document.getElementById("want").href = "https://github.com/Matheuszinhorn/Matheuszinhorn/issues/new?title=" + encodeURIComponent("[Quanto Chega] Eu usaria o alerta de cotação") + "&body=" + encodeURIComponent("Moeda e valor típico (ex.: USD, 2.000/mês):\nCom que frequência envia:\nPagaria por um alerta? (sim / não / depende do preço):\n\n(Não inclua dados pessoais.)");
+const $ = s => document.querySelector(s);
+const SITES = {wise:"https://wise.com/br/", remitly:"https://www.remitly.com/", paypal:"https://www.paypal.com/br/", "western-union":"https://www.westernunion.com/", xoom:"https://www.xoom.com/", ofx:"https://www.ofx.com/", instarem:"https://www.instarem.com/"};
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+function num(t){ t=String(t).trim().replace(/\s/g,""); if(/,\d{1,2}$/.test(t)) t=t.replace(/\./g,"").replace(",","."); else t=t.replace(/,/g,""); return parseFloat(t); }
+function dur(iso){ if(!iso) return ""; const m = iso.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/); if(!m) return ""; const d=+(m[1]||0), h=+(m[2]||0), mi=+(m[3]||0); if(d) return `≈ ${d} dia${d>1?"s":""}`; if(h) return `≈ ${h} h`; return `≈ ${mi} min`; }
+async function run(){
+  const amt = num($("#amt").value), cur = $("#cur").value;
+  $("#out").hidden = false; const list = $("#list");
+  if(!(amt>0)){ list.innerHTML = `<p class="err">Informe um valor maior que zero.</p>`; return; }
+  list.innerHTML = `<p class="muted">Consultando cotações…</p>`;
+  try{
+    const r = await fetch(`https://api.wise.com/v3/comparisons/?sourceCurrency=${cur}&targetCurrency=BRL&sendAmount=${amt}`);
+    if(!r.ok) throw new Error("a fonte respondeu " + r.status);
+    const d = await r.json();
+    const rows = (d.providers||[]).filter(p=>p.quotes&&p.quotes.length).map(p=>({p, q:p.quotes[0]})).sort((a,b)=>b.q.receivedAmount-a.q.receivedAmount);
+    if(!rows.length) throw new Error("nenhum serviço retornou cotação para essa moeda");
+    const best = rows[0].q.receivedAmount;
+    $("#title").textContent = `Enviando ${amt.toLocaleString("pt-BR")} ${cur} para o Brasil`;
+    list.innerHTML = rows.map((x,i)=>{
+      const diff = best - x.q.receivedAmount;
+      const url = SITES[x.p.alias] || "#";
+      const logo = (x.p.logos&&x.p.logos.normal&&x.p.logos.normal.pngUrl) || "";
+      return `<div class="prov ${i===0?"best":""}">
+        ${logo?`<img src="${logo}" alt="" onerror="this.style.visibility='hidden'">`:`<span></span>`}
+        <div><div class="name">${x.p.name}${i===0?'<span class="tag">MAIS REAIS</span>':""}</div>
+        <div class="meta">Câmbio ${x.q.rate.toFixed(4).replace(".",",")} · taxa ${x.q.fee.toLocaleString("pt-BR")} ${cur} ${dur(x.q.deliveryEstimation&&x.q.deliveryEstimation.duration&&x.q.deliveryEstimation.duration.max)?"· "+dur(x.q.deliveryEstimation.duration.max):""} · <a href="${url}" target="_blank" rel="noopener nofollow">site</a></div></div>
+        <div class="amt"><b>${brl(x.q.receivedAmount)}</b><span class="loss">${i===0?"melhor valor":"−"+brl(diff)}</span></div></div>`;
+    }).join("");
+    const t = rows.map(x=>x.q.dateCollected).filter(Boolean).sort().pop();
+    $("#when").textContent = t ? `Cotações coletadas em ${new Date(t).toLocaleString("pt-BR")}.` : "";
+    try{ localStorage.setItem("qc", JSON.stringify({amt:$("#amt").value, cur})); }catch(e){}
+  }catch(e){ list.innerHTML = `<p class="err">Não foi possível comparar agora: ${e.message}.</p>`; }
+}
+try{ const s = JSON.parse(localStorage.getItem("qc")||"null"); if(s){ $("#amt").value=s.amt; $("#cur").value=s.cur; } }catch(e){}
+$("#go").onclick = run;
+</script>
+</body>
+</html>

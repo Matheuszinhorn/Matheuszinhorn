@@ -383,3 +383,14 @@
 | Oportunidades de produto avaliadas | 3 (P1 escolhida) |
 | Produto publicado | 1 (Recebi do Exterior), testado e conferido |
 | Usuários medidos / pedidos da versão paga | 0 / 0 (linha de base; sem divulgação ainda) |
+
+---
+
+## REL-018 — Mapa de 50 modelos e 5 experimentos (23/10/2026 14:16 BRT)
+| Indicador | Valor |
+|---|---:|
+| Caixa / receitas / despesas | R$ 50,00 / R$ 0 / R$ 0 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Modelos avaliados | 50 |
+| Experimentos ativos | 5 (3 produtos publicados, 1 amostra publicada, 1 serviço pronto) |
+| Pedidos ou uso medidos | 0 Issues (sem divulgação) |

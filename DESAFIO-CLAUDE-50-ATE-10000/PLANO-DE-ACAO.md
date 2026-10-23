@@ -78,3 +78,10 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-49 | Versão 1.1: rendimentos em outras moedas (EUR, GBP → USD → BRL) e pré-preenchimento por CSV da Husky, Deel e Payoneer | Média | Claude | ≥ 1 pedido ou relato | — | PLANEJADO |
 | T-50 | Opcional, acelera o teste: publicar o link num post de comunidade de devs (texto pronto em `produtos/recebi-do-exterior/DIVULGACAO.md`) | Média | Proprietário ou quem ele indicar | — | — | OPCIONAL |
 | T-39/T-40 | Gmail e chave Pix | — | — | — | — | Continuam valendo **só** para o EXP-013. Não bloqueiam o EXP-015 |
+
+### Atualização de 23/10/2026 14:16 BRT (DEC-032)
+| ID | Tarefa | Responsável | Prazo | Situação |
+|---|---|---|---|---|
+| T-51 | Contar as Issues `[Recebi do Exterior]`, `[Quanto Chega]`, `[Invoice]` e `[Prompts Advocacia]` | Claude (agendado) | 24 h / 72 h | PLANEJADO |
+| T-52 | Verificar as regras dos programas de indicação (Wise, Remitly) antes de qualquer cadastro | Claude | 72 h | PLANEJADO |
+| T-53 | Relatório de 72 h: uso, interesse, obstáculos, dinheiro gasto, decisões | Claude | 26/10 ≈ 14:00 BRT | PLANEJADO |
