@@ -821,3 +821,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Nenhuma executável por Claude (mesma análise da ATV-071).
 - **Passo "add_repo do lite":** não executado. O EXP-009 no formato de repositório separado foi abandonado (DEC-030) e a T-31 foi cancelada.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-087 — Varredura automática #5 do Superteam (23/10/2026 08:35 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** as mesmas 13 (nenhuma entrou, nenhuma saiu), todas `HUMAN_ONLY`. Nada elegível e executável.
+- **Verificação paralela do EXP-015:** 0 Issues no repositório (linha de base: 0).
+- **Receitas e despesas:** R$ 0 / R$ 0.
