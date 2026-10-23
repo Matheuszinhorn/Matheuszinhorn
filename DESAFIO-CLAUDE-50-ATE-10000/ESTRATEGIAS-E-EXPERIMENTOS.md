@@ -295,3 +295,23 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 - **Hipótese:** existe demanda pouco disputada que Claude atende, com o proprietário enviando as propostas.
 - **Resultado:** **rejeitada**. Mediana de 34,5 a 178 lances no Freelancer.com, e 31 propostas em cerca de 25 min no 99Freelas. Ver ATV-071.
 - **Custo:** R$ 0.
+
+---
+
+## EXP-011 — E-mail individual para negócios com problema de site verificado (22/10/2026 21:45)
+- **Situação:** PRONTO. **BLOQUEADO**: falta o canal de envio (DEC-029).
+- **Hipótese:** um dono de negócio que recebe um aviso concreto e verificável do problema do próprio site, com prévia gratuita e pagamento só depois de aprovar, responde e compra.
+- **Leads:** L078–L081 (4), com dor verificada em 22/10.
+- **Custo:** R$ 0.
+
+| Marco | Continuar se | Abandonar se |
+|---|---|---|
+| 72 h depois do envio | ≥ 1 resposta (qualquer, inclusive "remover", que mede entrega) | 0 respostas e ≥ 1 rejeição por falha de entrega |
+| 7 dias | ≥ 1 pedido de prévia | 0 pedidos de prévia em 4 envios + o próximo lote de 10 |
+| 14 dias | ≥ 1 venda paga (Pix confirmado) | — |
+
+## EXP-012 — Produtos digitais no Etsy (pré-teste)
+- **Situação:** PLANEJADO. **Condição para começar:** o proprietário confirmar, ao abrir a loja, se há taxa de abertura e de quanto. Se for maior que o caixa, o experimento é cancelado.
+- **Hipótese:** modelos digitais (planilhas e modelos do Canva) feitos por Claude geram ≥ 50 visualizações e ≥ 1 venda em 14 dias.
+- **Custo previsto:** US$ 2 (10 anúncios).
+- **Critério de abandono:** < 50 visualizações somadas em 7 dias.

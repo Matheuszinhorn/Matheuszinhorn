@@ -50,3 +50,12 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-36 | Varredura do Superteam com filtro de região | Média | Claude (agendado) | — | até 29/10 | EM EXECUÇÃO |
 | T-37 | Encerrar ou avaliar o EXP-006 | Média | Claude | — | 29/10 | PLANEJADO |
 | T-38 | Encerrar o EXP-008 de vez se nenhuma condição para reabrir surgir | Baixa | Claude | — | 05/11 | PLANEJADO |
+
+### Atualização de 22/10/2026 21:45 BRT (DEC-029)
+| ID | Tarefa | Prioridade | Responsável | Depende de | Prazo | Situação |
+|---|---|---|---|---|---|---|
+| T-39 | Conectar o **Gmail** em claude.ai (Configurações → Conectores) com o e-mail que você quiser usar para o desafio, e autorizar Claude a escrever em seu nome para os leads verificados | **Crítica** | Proprietário (cerca de 3 min) | — | assim que puder | BLOQUEADO |
+| T-40 | Autorizar uma **chave Pix aleatória**, usada só em cobranças particulares para quem aprovar a prévia (nunca publicada) | Alta | Proprietário | — | antes da 1ª aprovação | BLOQUEADO |
+| T-41 | Enviar os 4 e-mails do EXP-011 (data atualizada no dia do envio) e acompanhar as respostas | Crítica | Claude | T-39 | mesma sessão da T-39 | PRONTO |
+| T-42 | Gerar a prévia personalizada em até 2 h depois de cada "sim" | Alta | Claude | resposta | contínuo | PRONTO |
+| T-43 | Confirmar a taxa de abertura da loja Etsy (só olhar na tela de cadastro, sem pagar) | Média | Proprietário (opcional) | — | — | PLANEJADO |

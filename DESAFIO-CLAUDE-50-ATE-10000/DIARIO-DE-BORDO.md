@@ -665,3 +665,64 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Causa:** o campo `region` das vagas nunca foi checado. As duas eram restritas (Índia e Ucrânia).
 - **Correção:** o valor disputável real era **US$ 0**. Não houve impacto financeiro (nada foi gasto nem contabilizado). O custo foi tempo de Claude (≈ 4 h nos dois entregáveis) e o tempo de atenção do proprietário.
 - **Prevenção:** filtro de região obrigatório (ATV-070) e lição 13.
+
+---
+# Ciclo 17 — DEC-028: de pesquisador para empreendedor (início em 22/10/2026 21:00 BRT)
+
+## ATV-072 — DEC-028 recebida
+- **Postura:** antes de construir, aplicar o pré-teste de 6 perguntas: elegibilidade, quem paga, como chegar ao comprador, como receber, custo e tempo, e o teste mais barato.
+- **Frentes:** A (receita de curto prazo), B (produto escalável) e C (novos canais).
+- **Prazo:** 24 h com ações e evidências.
+
+## ATV-073 — Canais que Claude pode operar nesta sessão (verificação)
+- **Conectores do proprietário** (ListConnectors):
+  - Canva e Figma: conectados.
+  - Microsoft 365: conexão incompleta, indisponível.
+  - **Nenhum conector de e-mail ou de mensagens.**
+- **No catálogo:** existe conector **Gmail**, não instalado.
+- **Consequência:** hoje Claude não tem como enviar nenhuma mensagem a um comprador. Todo canal de saída exige uma identidade, e Claude não cria contas nem usa a identidade do proprietário sem autorização.
+
+## ATV-074 — Frente A: pool de compradores com dor verificada e e-mail público
+- **Situação:** CONCLUÍDO.
+- **Coleta:** Nominatim/OSM, 12 capitais × 8 nichos (dentista, veterinária, salão, barbearia, advogado, contabilidade, ótica, marcenaria). Resultado: **603 negócios**, 64 com site e 23 com e-mail no cadastro.
+- **Auditoria automática dos 64 sites** (HTTP, HTTPS, ajuste para celular, e-mails na página): 43 responderam e 21 deram erro. Parte dos erros veio do túnel do proxy, então não conta como prova de site fora do ar.
+- **Verificação manual dos candidatos:** DNS via dns.google, MX do e-mail e nova requisição HTTP.
+  - **4 leads qualificados (L078–L081):**
+    - 1 site com erro de domínio do Wix;
+    - 1 domínio inexistente (NXDOMAIN), com o dono usando e-mail externo;
+    - 2 sites sem ajuste para celular.
+  - **Descartados:**
+    - 2 com domínio e e-mail mortos (sem MX);
+    - 1 falso positivo (Barbosa Contabilidade: o HTTPS funciona, o cadastro é que tinha link antigo);
+    - 1 conselho profissional e 1 escola (não são clientes).
+- **Taxa de rendimento:** 4 em 603 ≈ **0,7%**. O e-mail frio para negócios locais a partir de dados abertos **não escala**: cerca de 1 lead por capital.
+- **Overpass (OSM):** 3 servidores fora do ar ou com erro 504 nesta noite.
+
+## ATV-075 — Frente A: oferta real redigida para os 4 leads
+- **Situação:** PRONTO PARA ENVIO. **BLOQUEADO** por falta de canal (ver ATV-073).
+- **Oferta:**
+  - página profissional, adaptada ao celular, com WhatsApp, no ar em até 48 h;
+  - **R$ 197, pagamento só depois de aprovar a prévia** (Pix);
+  - para L078, também a opção gratuita de passo a passo para reconectar o domínio, que gera confiança.
+- **Cada e-mail:**
+  - cita o problema verificado, com data;
+  - diz a origem do contato (cadastro público no OSM);
+  - oferece opção de "remover".
+- **Arquivo privado (fora do repositório):** `/tmp/claude-0/-home-user/53dec64f-596b-5e59-a540-da409aa575a4/scratchpad/leads2/emails-prontos.md`.
+- **Correção antes do envio:** os textos diziam "23/10" (data UTC), mas em Brasília é 22/10. Corrigido; nada tinha sido enviado. É a mesma causa da COR-004. Regra para o envio: atualizar "hoje" para a data real.
+
+## ATV-076 — Frente B: EXP-009 e Etsy (pré-teste)
+- **add_repo `local-site-kit-lite` (push):** negado de novo ("you don't have access"). Continua dependendo da T-31.
+- **Pré-teste do Etsy (produto digital, com demanda própria da plataforma):**
+  - Ajuda oficial do Etsy: o Brasil é elegível ao Etsy Payments **via conta Payoneer**.
+  - Item feito com IA: permitido com aviso na descrição (House Rules).
+  - Custo: US$ 0,20 por anúncio e 6,5% por venda.
+  - **Risco não resolvido:** taxa de abertura de cerca de US$ 15 (≈ R$ 78) citada por fontes secundárias, que superaria o caixa de R$ 50. Uma fonte de jul/2026 diz que ela não existe. **Nada será construído para o Etsy antes de confirmar essa taxa** (regra da DEC-028).
+
+## ATV-077 — Frente C: conteúdo com IA, personagens, animação e música (pré-teste)
+| Modelo | Quem paga | Como chega ao público | Como recebe | Tempo até a 1ª receita | Decisão |
+|---|---|---|---|---|---|
+| Canal de vídeos ou animações com personagem original | Programa de criadores da plataforma | Conta pessoal no YouTube ou TikTok + algoritmo | YouTube exige 1.000 inscritos + 4.000 h ou 10 mi de visualizações em Shorts | Meses | **Não abrir agora**: o pagamento só vem depois de atingir o requisito |
+| Música com IA em streaming | Plataformas, por reprodução | Distribuidora paga (fora do caixa) | Royalties | Meses, centavos por mil reproduções | **Rejeitado** |
+| Personagens, figurinhas e estampas sob demanda | Compradores de marketplace | Etsy ou Redbubble (conta do proprietário) | Payoneer/PayPal | Semanas | Fica com o pré-teste do Etsy (ATV-076) |
+| Automações para empresas | Pequenas empresas | Mesmo gargalo de canal da Frente A | Pix | Semanas | Fica como 2ª oferta da Frente A |

@@ -240,3 +240,36 @@ _Ainda sem dados de mercado._
 - **Leitura honesta do gargalo:** Claude produz entregáveis completos rápido. Faltam duas coisas, e as duas pertencem ao proprietário: **um meio de receber dinheiro** e **um canal de distribuição** que não dependa dele para cada ação. Nenhuma plataforma nova testada hoje muda isso.
 - **Lição 13:** antes de produzir para qualquer vaga, ler as regras de **elegibilidade do pagador** (região, KYC, país de pagamento) direto na fonte oficial. Dois entregáveis bons (EXP-007 e EXP-008) foram feitos para vagas que o proprietário não podia disputar.
 - **Lição 14:** em marketplaces abertos, a vantagem do trabalho rápido de Claude se perde se cada proposta passa por um humano. A velocidade de chegada também é um requisito do canal.
+
+## DEC-028 — Diretriz do proprietário: mudança de postura (recebida em 22/10/2026 ≈ 21:00 BRT)
+- **Regra nova, permanente:** antes de desenvolver, responder 6 perguntas:
+  1. Elegibilidade e regras.
+  2. Quem paga e pelo quê.
+  3. Como chegar ao comprador.
+  4. Como receber legalmente.
+  5. Tempo e dinheiro necessários.
+  6. Qual é o teste mais barato.
+- **Formato de trabalho:** três frentes em paralelo (A, B e C), sinais desde o 1º dia e evidências em 24 h.
+
+## DEC-029 — Cadeia de venda escolhida e o único bloqueio dela (22/10/2026 21:45)
+
+### Pré-teste das opções
+| Pergunta | EXP-011: e-mail para negócios com site quebrado | EXP-009: repositório lite | EXP-012: loja de produtos digitais no Etsy |
+|---|---|---|---|
+| Elegibilidade | Serviço legal no Brasil, prestado por pessoa física | Sem restrição | Brasil elegível via Payoneer (ajuda oficial do Etsy) |
+| Quem paga e pelo quê | O dono do negócio, R$ 197 por uma página no ar | Negócio local que quer versão personalizada | Comprador estrangeiro de modelo digital, US$ 3–15 |
+| Como chegar | E-mail individual sobre o problema verificado do site | Busca do GitHub/Google (lento, sem controle) | Busca interna do Etsy |
+| Como receber | Pix depois da aprovação da prévia | Pix | Etsy → Payoneer → banco |
+| Custo e tempo | R$ 0; cerca de 1 h por cliente | R$ 0 | US$ 0,20 por anúncio + taxa de abertura **não confirmada** (≈ US$ 15) |
+| Teste mais barato | 4 e-mails já redigidos, medir respostas em 72 h | Publicar e medir visitas | 10 anúncios (US$ 2), medir visualizações e favoritos em 7 dias |
+| **Bloqueio** | **Nenhum canal de envio** (sem conector de e-mail) | Acesso do app ao repositório (T-31) | Abertura da loja e da Payoneer (identidade do proprietário) + confirmar a taxa |
+
+### Decisão
+1. **EXP-011 é a frente A.** É a cadeia completa mais curta: problema verificado → oferta → e-mail → resposta → prévia → Pix. Precisa de **uma** configuração do proprietário: o conector Gmail em claude.ai (o Microsoft 365 também serve, se ele concluir a conexão já iniciada), com autorização para Claude escrever em nome dele. Depois disso, Claude envia, lê as respostas, produz a prévia e cobra **sem o proprietário abordar ninguém**.
+2. **Pix:** pedir agora uma **chave aleatória**, autorizada só para cobranças enviadas em particular a quem aprovar a prévia, nunca publicada. Sem ela, uma venda aprovada fica parada.
+3. **EXP-012 (Etsy):** só depois de confirmada a taxa de abertura. Se ela existir e superar o caixa (R$ 50), é **abandonado**, porque aporte novo é proibido.
+4. **EXP-009:** continua dependendo da T-31. Não é prioridade.
+5. **Frente C:** nenhum modelo passou no pré-teste para gerar receita em menos de 30 dias. Fica registrado na ATV-077, sem construção.
+6. **Ampliação da frente A:** a fonte aberta (OSM) rende cerca de 1 lead por capital. Se o EXP-011 mostrar resposta (≥ 1 em 4), a próxima fonte avaliada será a lista pública de domínios `.adv.br` e `.com.br` cujo DNS não resolve: o problema é verificável em massa sem coletar dados pessoais.
+
+- **Lição 15:** a cadeia de venda quebra no elo mais fraco, e hoje esse elo é sempre o canal de contato, nunca o produto. A primeira pergunta de qualquer oportunidade deve ser "por onde a mensagem sai e por onde a resposta volta".

@@ -76,3 +76,7 @@ L074,21/10/2026,EXP-001,loja,Tristeza,WhatsApp (fixo),Página completa,0.00,0.00
 L075,21/10/2026,EXP-001,loja,Farroupilha,WhatsApp (fixo),Página completa,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Lote 3: site fora do ar verificado; contato fora do repositório
 L076,21/10/2026,EXP-001,loja,Vila Assunção,WhatsApp (fixo),Página completa,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Lote 3: site fora do ar verificado; contato fora do repositório
 L077,21/10/2026,EXP-001,confeitaria,Moinhos de Vento,WhatsApp (fixo),Página completa,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Lote 3: site fora do ar verificado; contato fora do repositório
+L078,22/10/2026,EXP-011,advocacia,Florianópolis,E-mail,Página completa ou reconexão do domínio,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Site fora do ar verificado (erro de domínio do Wix); e-mail com MX válido; contato fora do repositório
+L079,22/10/2026,EXP-011,advocacia,São Paulo,E-mail,Página completa,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Site sem ajuste para celular (sem viewport); contato fora do repositório
+L080,22/10/2026,EXP-011,contabilidade,Rio de Janeiro,E-mail,Página completa,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Site sem ajuste para celular e sem WhatsApp; contato fora do repositório
+L081,22/10/2026,EXP-011,advocacia,Brasília,E-mail,Página completa + recuperação do domínio,0.00,0.00,0.00,LEAD NÃO CONTATADO,0.00,Domínio inexistente (DNS NXDOMAIN via dns.google); contato fora do repositório

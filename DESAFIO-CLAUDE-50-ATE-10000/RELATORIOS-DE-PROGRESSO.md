@@ -345,3 +345,16 @@
 | Fontes de mercado medidas hoje | Superteam (13 vagas), Algora (2 organizações), Freelancer.com (250 projetos), 99Freelas (10 projetos) |
 
 - **Executado:** ATV-067 a ATV-071 e COR-005.
+
+---
+
+## REL-015 — DEC-028, primeiras horas (22/10/2026 21:45 BRT)
+| Indicador | Valor |
+|---|---:|
+| Caixa / receitas / despesas | R$ 50,00 / R$ 0 / R$ 0 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Negócios analisados | 603 (12 capitais), 64 sites auditados |
+| Leads com dor verificada e e-mail válido | 4 (L078–L081) |
+| Ofertas redigidas / enviadas | 4 / **0** (sem canal de envio) |
+| Respostas / vendas | 0 / 0 |
+| Bloqueio principal | Canal de envio (T-39) e chave Pix (T-40) |
