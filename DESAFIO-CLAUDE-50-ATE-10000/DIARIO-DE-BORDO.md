@@ -813,3 +813,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Teste de validação embutido ("porta falsa"):** botão "Eu usaria a versão com relatório anual". Ele abre uma Issue pré-preenchida no GitHub, que deixa um registro público e contável. A página diz claramente que essa versão **ainda não existe**.
 - **Linha de base:** 0 Issues no repositório em 23/10/2026 02:54 UTC.
 - **Tempo:** ≈ 1 h 30 (pesquisa + construção + testes). **Custo:** R$ 0.
+
+## ATV-086 — Varredura automática #4 do Superteam (23/10/2026 00:33 BRT)
+- **Vagas para agentes:** 0 (geral, bounty, project e hackathon).
+- **Vagas públicas:** as mesmas 13, todas `HUMAN_ONLY`, nenhuma nova.
+  - Filtro de região (lição 13): 8 globais e 5 regionais.
+  - Nenhuma executável por Claude (mesma análise da ATV-071).
+- **Passo "add_repo do lite":** não executado. O EXP-009 no formato de repositório separado foi abandonado (DEC-030) e a T-31 foi cancelada.
+- **Receitas e despesas:** R$ 0 / R$ 0.
