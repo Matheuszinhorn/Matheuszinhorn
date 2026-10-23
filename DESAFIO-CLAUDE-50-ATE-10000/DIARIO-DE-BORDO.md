@@ -868,3 +868,43 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Por que a nova vaga foi descartada:** exige portfólio comprovado de motion graphics com som e um filme de 30 s. Claude não tem histórico próprio de portfólio, e candidatar o proprietário com uma experiência que ele não tem seria declaração enganosa.
 - **Produtos (T-51):** 0 Issues no repositório.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+---
+# Ciclo 21 — Diretriz do proprietário "DEC-032": distribuição e validação (até 23/10/2026 19:21 BRT)
+
+## ATV-094 — Medição do funil instalada
+- **Contador anônimo** (abacus.jasoncameron.dev): gratuito, sem conta, limite de 30 chamadas a cada 10 s por IP.
+- **Eventos medidos:**
+  - visita e origem (`?src=` ou domínio de referência);
+  - uso real: cálculo, comparação, PDF, CSV, nova invoice;
+  - cliques nos serviços e nas portas falsas.
+- **Exclusões:** não conta navegadores automatizados (`navigator.webdriver`) nem `?notrack=1`. Aviso de privacidade em cada página.
+- **Teste (FATO):** local e na URL pública. Navegador automatizado = 0 eventos; humano simulado = eventos corretos, com `src=tabnews` preservado pelo htmlpreview. As chamadas foram interceptadas, sem inflar os contadores.
+- **Linha de base** (`ferramentas/funil.py`): **0 eventos** em todos os produtos.
+- **Limite:** os contadores são públicos e podem ser inflados por terceiros. São indicativo, não prova.
+
+## ATV-095 — Rigor por produto
+- **Recebi do Exterior:**
+  - O cálculo da conversão continua conferido de forma independente (ATV-085).
+  - O texto oficial da regra **não foi confirmado** depois de 4 tentativas: o Planalto deu 503; o portal de normas da Receita, renderizado, abriu outro ato (IN 225/2002); a base jurídica de terceiros deu 403 e timeout.
+  - A página mantém o aviso, as duas regras lado a lado e a declaração "não é aconselhamento fiscal".
+- **Quanto Chega:**
+  - **Achado:** as cotações não são simultâneas. Às 19:18 BRT, a Wise era ao vivo e as outras tinham de 33 min a 525 min (Xoom).
+  - Corrigido: a página mostra a idade de cada cotação, destaca as com mais de 3 h e exibe a margem sobre o câmbio comercial (0% Wise; 0,37% Remitly; 5,32% OFX).
+  - **Afiliados:**
+    - Wise: CPA de ≈ £ 10 por cliente pessoal (guia do Reino Unido); sem anúncios pagos sem autorização; país do afiliado avaliado caso a caso.
+    - Remitly: programa via Impact, aceita sites; valor por transferência não confirmado.
+  - **Termos da API de comparação da Wise:** não encontrados. É um **risco** para qualquer monetização, e deve ser confirmado antes de se inscrever num programa.
+- **Invoice Simples:**
+  - A Wise oferece gerador de invoice grátis e ilimitado, então a invoice sozinha não diferencia.
+  - A porta falsa passou a medir o **fechamento mensal para o Carnê-Leão** (invoices pagas → reais pela PTAX → total do mês), que liga os produtos e que nenhum concorrente encontrado oferece.
+- **Prompts para advocacia:** há prompts grátis (EasyJur, Canaltech, Aurum) e um livro com 500 prompts. **Pacote pago abandonado** (proposta substituível). A amostra fica publicada, sem mais investimento.
+
+## ATV-096 — 1ª rodada de distribuição
+- **Publicado por Claude:** READMEs com links rastreáveis (`src=github`) para os 3 apps.
+  - Limite reconhecido: o branch não é o padrão do repositório, então a busca do GitHub não o indexa. Alcance esperado próximo de zero.
+- **Preparado, depende da conta do proprietário** (`produtos/DIVULGACAO.md`):
+  - post "Pitch" técnico no TabNews (regras da FAQ verificadas);
+  - post no LinkedIn.
+- **Bloqueado:** r/brdev. O Reddit recusou a leitura das regras pela sessão (HTTP 403); não foi contornado.
+- **Canais verificados e indisponíveis para Claude:** todos os fóruns e diretórios encontrados exigem conta pessoal. Claude não cria contas (falsidade de identidade).

@@ -315,3 +315,16 @@ _Ainda sem dados de mercado._
 - **Por que estes:** 3 modelos de receita distintos (assinatura ou relatório, indicação, venda de produto) mais 1 serviço e 1 produto para outro mercado. Os experimentos 1, 2 e 4 formam um **funil** para o mesmo público, com links cruzados: cada visitante pode virar usuário de três ferramentas.
 - **Capital:** nenhum gasto. Nenhum dos testes exige dinheiro, e nenhuma aposta especulativa tem valor esperado positivo (DEC-013).
 - **Lição 19:** a mesma ação (consultar uma API pública) pode virar produto em minutos quando a API aceita chamadas do navegador. Checar o CORS primeiro é o teste mais barato de viabilidade.
+
+## DEC-033 — Fase de distribuição (23/10/2026 19:21; responde à diretriz do proprietário intitulada "DEC-032")
+- A diretriz chegou com o número DEC-032, que já estava em uso. O conteúdo foi registrado sem alteração.
+- **Nenhum produto novo** até rodar a 1ª distribuição dos atuais.
+- **EXP-018 (prompts):** pacote pago **ABANDONADO**, por ser substituível por material gratuito. A amostra grátis permanece publicada.
+- **EXP-017 (invoice):** hipótese paga **MODIFICADA** de "kit" para "fechamento mensal para o Carnê-Leão".
+- **EXP-016 (comparador):** antes de qualquer inscrição em programa de afiliados, confirmar os termos de uso da API da Wise e a elegibilidade de residente no Brasil.
+- **Critério de leitura do funil:**
+  - sem visitas → problema de **canal**;
+  - visitas sem uso → problema de **produto**;
+  - uso sem pedido → problema de **proposta ou monetização**.
+  - Só se abandona por falta de interesse depois de exposição real, de pelo menos 1 canal com público executado.
+- **Lição 20:** medir antes de divulgar. Sem contador, uma rodada de divulgação não ensinaria nada.

@@ -85,3 +85,11 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-51 | Contar as Issues `[Recebi do Exterior]`, `[Quanto Chega]`, `[Invoice]` e `[Prompts Advocacia]` | Claude (agendado) | 24 h / 72 h | PLANEJADO |
 | T-52 | Verificar as regras dos programas de indicação (Wise, Remitly) antes de qualquer cadastro | Claude | 72 h | PLANEJADO |
 | T-53 | Relatório de 72 h: uso, interesse, obstáculos, dinheiro gasto, decisões | Claude | 26/10 ≈ 14:00 BRT | PLANEJADO |
+
+### Atualização de 23/10/2026 19:21 BRT (DEC-033)
+| ID | Tarefa | Responsável | Prazo | Situação |
+|---|---|---|---|---|
+| T-54 | Publicar o post "Pitch" no TabNews (texto em `produtos/DIVULGACAO.md`) | Proprietário (conta dele) | quando puder | PRONTO. É a ação de maior alcance disponível |
+| T-55 | Publicar o post no LinkedIn | Proprietário | quando puder | PRONTO |
+| T-56 | Ler as regras do r/brdev e decidir se é permitido postar | Proprietário | opcional | BLOQUEADO para Claude (403) |
+| T-57 | Ler o funil (`ferramentas/funil.py`) às 24 h e às 72 h e responder ao feedback | Claude (agendado) | 24/10 e 26/10 | PLANEJADO |
