@@ -290,3 +290,13 @@ _Ainda sem dados de mercado._
   - micro-SaaS de diagnóstico, que precisa de servidor.
 - **Lição 16:** quando um canal parece não funcionar, testar **outra fonte** antes de abandonar. O e-mail parecia inviável pelo OSM (0,7%) e rendeu 55 leads verificados com certificados públicos.
 - **Lição 17:** a hipótese mais arriscada nunca foi "consigo construir". Foi "alguém responde e paga". O MVP é a mensagem com prova, não o produto.
+
+## DEC-031 — Tese de produto: P1 "Recebi do Exterior" (22/10/2026 23:56; responde à diretriz do proprietário intitulada "DEC-030")
+- A diretriz chegou com o número DEC-030, que já estava em uso. O conteúdo foi registrado sem alteração.
+- **Três oportunidades avaliadas:** `analises/TESE-DE-PRODUTO-2026-10-22.md`.
+- **Escolhida: P1.** Motivos: confusão pública comprovada sobre a regra, necessidade mensal e recorrente, público online, custo zero e funcionamento sem servidor.
+- **Rejeitadas:**
+  - **P2:** geradores grátis saturam o mercado.
+  - **P3:** exige uma conversa por venda; fica só como entrega do EXP-013.
+- **Princípio aplicado:** a menor versão útil resolve a parte confusa (conversão e regra), não a parte arriscada (cálculo do imposto, que o Carnê-Leão Web já faz).
+- **Lição 18:** o bloqueio de canal muda o *tipo* de produto que convém testar. Sem canal de saída, priorizar produtos que **se distribuem por busca** e medem intenção por um registro público (Issue), em vez de serviços que dependem de abordagem.

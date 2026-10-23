@@ -372,3 +372,14 @@
 | Ofertas no ar / e-mails enviados / respostas / vendas | 1 / 0 / 0 / 0 |
 | Tempo de uma entrega de teste | ≈ 1 min de relógio (FATO) |
 | Bloqueio | Canal de envio (T-39) e chave Pix (T-40) |
+
+---
+
+## REL-017 — Tese de produto e MVP (22/10/2026 23:56 BRT)
+| Indicador | Valor |
+|---|---:|
+| Caixa / receitas / despesas | R$ 50,00 / R$ 0 / R$ 0 |
+| Patrimônio acumulado | R$ 50,00 (0,5%) |
+| Oportunidades de produto avaliadas | 3 (P1 escolhida) |
+| Produto publicado | 1 (Recebi do Exterior), testado e conferido |
+| Usuários medidos / pedidos da versão paga | 0 / 0 (linha de base; sem divulgação ainda) |

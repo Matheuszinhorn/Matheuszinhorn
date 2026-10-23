@@ -772,3 +772,44 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Arquivo privado:** `/tmp/claude-0/-home-user/53dec64f-596b-5e59-a540-da409aa575a4/scratchpad/cc/lote-exp013.md`.
 - **No CSV de vendas:** L082–L136, sem domínio nem e-mail.
 - **Enviados:** **0**. Bloqueio: não há conector de e-mail nesta sessão (ATV-073). Claude não cria contas nem usa a identidade do proprietário sem autorização.
+
+---
+# Ciclo 19 — Diretriz do proprietário "DEC-030": quebra do ciclo e tese de produto (até 22/10/2026 23:56 BRT)
+
+## ATV-083 — Limites do EXP-013
+- Mantido pronto, **sem envio e sem coleta de novos leads**.
+- Material suficiente para um teste legítimo quando houver canal autorizado: 55 leads, oferta pública e entrega testada.
+
+## ATV-084 — Sinais de demanda e concorrência para produtos (FATO)
+- **Autocompletar do Google:** 21 buscas-semente. Arquivo bruto: `/tmp/claude-0/-home-user/53dec64f-596b-5e59-a540-da409aa575a4/scratchpad/prod/suggest.json`.
+- **Busca de concorrentes:**
+  - recebimento do exterior: calculadora da Contabilidade Zen;
+  - orçamento: VISU, geradores de Pix (TecMestre) e SwiftInvoice.
+- **Divergência entre fontes** sobre a cotação do carnê-leão: confirmada em 5 fontes.
+- **Texto normativo exato:** não confirmado. O Planalto respondeu HTTP 503 e o portal de normas da Receita não renderizou. A ferramenta diz isso abertamente.
+- **Viabilidade:**
+  - API PTAX do BC com CORS liberado: FATO, testado com origem htmlpreview.
+  - API PageSpeed sem chave: HTTP 429.
+  - API de Pages do GitHub: bloqueada pelo proxy. As Issues do repositório estão ativas.
+- **Análise completa:** `analises/TESE-DE-PRODUTO-2026-10-22.md`.
+
+## ATV-085 — MVP "Recebi do Exterior" construído e publicado
+- **Situação:** CONCLUÍDO (MVP).
+- **Arquivos:** `produtos/recebi-do-exterior/index.html` e README. Commit `3097903`.
+- **Link público:** https://htmlpreview.github.io/?https://github.com/Matheuszinhorn/Matheuszinhorn/blob/ccr-fb47334b-mm7jqd/DESAFIO-CLAUDE-50-ATE-10000/produtos/recebi-do-exterior/index.html
+- **Funções:**
+  - cotação PTAX de compra do BC por recebimento;
+  - regra do último dia útil da 1ª quinzena do mês anterior, ou cotação do dia, com comparação entre as duas;
+  - total por mês e vencimento do DARF 0190;
+  - colar da planilha, CSV, impressão;
+  - dados salvos só no aparelho.
+- **Testes (FATO):**
+  - navegador Chromium, larguras de 390 e 1.280 px, local e pela URL pública (CORS real);
+  - sem rolagem lateral no celular; sem erros de JavaScript (o único 404 era o favicon, já corrigido localmente, ou um recurso do htmlpreview).
+- **Conferência independente em Python, direto na API do BC:** 3 recebimentos.
+  - 15/08/2026 caiu num sábado, e a ferramenta usou corretamente a cotação de 14/08 (5,2230).
+  - Valores idênticos: R$ 16.713,60, R$ 6.531,36 e R$ 16.474,88.
+  - Diferença entre as regras no exemplo: R$ 1.022,43.
+- **Teste de validação embutido ("porta falsa"):** botão "Eu usaria a versão com relatório anual". Ele abre uma Issue pré-preenchida no GitHub, que deixa um registro público e contável. A página diz claramente que essa versão **ainda não existe**.
+- **Linha de base:** 0 Issues no repositório em 23/10/2026 02:54 UTC.
+- **Tempo:** ≈ 1 h 30 (pesquisa + construção + testes). **Custo:** R$ 0.

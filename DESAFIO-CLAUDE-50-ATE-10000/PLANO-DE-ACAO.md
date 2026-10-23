@@ -69,3 +69,12 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-44 | Enviar o lote do EXP-013 (20 por dia), ler respostas, responder em até 2 h, gerar prévias em até 48 h | Crítica | Claude | T-39 | contínuo | PRONTO |
 | T-45 | EXP-014: uma publicação com o link da oferta para pequenos negócios | Média | Proprietário (opcional) | — | 48 h | PLANEJADO |
 | T-46 | Corrigir o espaço em branco da prévia de teste e transformar o ajuste responsivo em script reutilizável | Média | Claude | — | 24 h | PLANEJADO |
+
+### Atualização de 22/10/2026 23:56 BRT (DEC-031)
+| ID | Tarefa | Prioridade | Responsável | Depende de | Prazo | Situação |
+|---|---|---|---|---|---|---|
+| T-47 | MVP "Recebi do Exterior" | Crítica | Claude | — | 23/10 | CONCLUÍDO (ATV-085) |
+| T-48 | Contar Issues `[Recebi do Exterior]` a cada 24 h e registrar | Alta | Claude (agendado) | — | 24 h, 72 h, 14 dias | PLANEJADO |
+| T-49 | Versão 1.1: rendimentos em outras moedas (EUR, GBP → USD → BRL) e pré-preenchimento por CSV da Husky, Deel e Payoneer | Média | Claude | ≥ 1 pedido ou relato | — | PLANEJADO |
+| T-50 | Opcional, acelera o teste: publicar o link num post de comunidade de devs (texto pronto em `produtos/recebi-do-exterior/DIVULGACAO.md`) | Média | Proprietário ou quem ele indicar | — | — | OPCIONAL |
+| T-39/T-40 | Gmail e chave Pix | — | — | — | — | Continuam valendo **só** para o EXP-013. Não bloqueiam o EXP-015 |

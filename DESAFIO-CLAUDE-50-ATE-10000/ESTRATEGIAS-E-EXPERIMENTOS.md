@@ -343,3 +343,20 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 - **EXP-009:** ABANDONADO no formato de repositório separado. O conteúdo pode ir para esta pasta pública se surgir motivo.
 - **EXP-011:** SUBSTITUÍDO pelo EXP-013 (os 4 leads entram no mesmo envio).
 - **EXP-012:** PAUSADO.
+
+---
+
+## EXP-015 — Produto "Recebi do Exterior" (22/10/2026 23:56)
+- **Situação:** EM EXECUÇÃO (MVP no ar).
+- **Hipótese:** pessoas que recebem do exterior usam um conversor que aplica a regra do carnê-leão automaticamente, e parte delas quer pagar por uma versão anual (relatório para a declaração).
+- **Monetização prevista:** versão anual a R$ 29–49 (HIPÓTESE). Indicação de plataformas de câmbio só se o programa aceitar o proprietário (a verificar antes).
+- **Custo:** R$ 0.
+
+| Marco | Continuar se | Ajustar se | Abandonar se |
+|---|---|---|---|
+| 72 h depois da 1ª divulgação | ≥ 1 Issue (pedido de versão paga ou relato) | 0 Issues com divulgação feita: mudar a mensagem e o canal | — |
+| 14 dias | ≥ 5 pedidos da versão anual | 1–4 pedidos: entrevistar pelos comentários da Issue | 0 pedidos depois de ≥ 2 divulgações em comunidades |
+| 30 dias | ≥ 1 pré-venda paga da versão anual | — | 0 pré-vendas com ≥ 10 pedidos: rever preço e proposta |
+
+- **Distribuição sem depender do proprietário:** README indexável no GitHub (lento, sem controle).
+- **Distribuição mais rápida:** uma postagem numa comunidade de devs (TabNews ou r/brdev). Exige uma conta humana. Não é condição para o produto existir, só acelera o teste.
