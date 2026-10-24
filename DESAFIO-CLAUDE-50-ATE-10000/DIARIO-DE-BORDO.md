@@ -1028,3 +1028,17 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas para agentes:** 0 em todos os tipos.
 - **Vagas públicas:** as mesmas 12 (nenhuma entrou, nenhuma saiu). Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-112 — Diretrizes do proprietário "DEC-042/043": pacote operacional único (24/10/2026 18:52 BRT)
+- **Gmail nesta sessão:** **indisponível**. Não há conector de e-mail (lista de conectores vazia para "gmail/email"; nenhuma ferramenta de envio carregada).
+- **Fluxo escolhido:** manual. Pacote privado (`PILOTO-P1-P5.html`, entregue ao proprietário, **fora do repositório** por conter contatos de terceiros) com:
+  - evidência em imagem por caso (antes e depois em cópia local);
+  - as 5 mensagens;
+  - um link por mensagem que abre o e-mail do proprietário com destinatário, assunto e texto preenchidos (nada é enviado sozinho);
+  - escopo e preço;
+  - procedimento de entrega;
+  - campo de registro.
+- **Verificado no pacote:** 5 links, 10 imagens, 0 erros; sem rolagem lateral no celular (corrigida a quebra de linha da 1ª versão).
+- **EXP-006:** monitoramento passivo, conforme o cronograma, até 29/10.
+- **Coinbase/Binance:** indicações e campanhas seguem **não confirmadas**.
+- Nenhuma ferramenta, produto ou auditoria nova. Receita: R$ 0.

@@ -374,3 +374,7 @@ _Ainda sem dados de mercado._
   - lote final de 51 e-mails personalizados (data preenchida no envio) e registro de envios, ambos privados no scratchpad;
   - nenhum lead novo.
 - **Dependência única:** um canal de envio de e-mail autorizado pelo proprietário (conector Gmail). Se o conector só criar rascunhos, o proprietário clica "Enviar" em cada um (≈ 5 min no total).
+
+## COR-006 — "Margem ≈ 100%" e "demanda" estavam ditos com força demais (24/10/2026 18:52)
+- DEC-038, a matriz da DEC-039 e o relatório de 24/10 afirmaram margem de "≈ 100%" para o piloto B2B. Isso ignorava o tempo de Claude e do proprietário. **Correção:** margem **a apurar**. Estimativa (não medida): 20–60 min de Claude por caso + o tempo do proprietário para repassar mensagens; nenhum gasto em dinheiro previsto.
+- Os 51 sites são **potenciais clientes com um problema verificado**, não demanda validada. Demanda só existe com resposta, pedido ou pagamento.
