@@ -939,3 +939,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Invoice: total correto.
 - **Leitura (DEC-033):** sem visitas = problema de **canal**. Não houve exposição: o artigo e os posts dependem da conta do proprietário (T-54/T-55), e o README fica num branch não indexado. Não há base para julgar o produto.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-101 — Varredura automática #7 do Superteam (24/10/2026 00:39 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** 12.
+  - Saiu: launch-and-trade-on-daejin (prazo encerrado).
+  - Nenhuma entrou.
+  - Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
