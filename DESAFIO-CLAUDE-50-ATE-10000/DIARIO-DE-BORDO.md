@@ -1055,3 +1055,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Decisão:** sem vantagem demonstrável → **0 ordens reais**.
 - Detalhes: `analises/quant/trading-2026/RESULTADO.md`.
 - **Operações simuladas registradas:** 267. **Reais:** 0. **Taxas pagas:** R$ 0. Posições: nenhuma.
+
+## ATV-115 — Opção A aprovada: paper trading de 8 semanas (24/10/2026 19:06 BRT)
+- **Regras e critérios pré-registrados** (não serão alterados): `analises/quant/trading-2026/paper/REGRAS.md`.
+  - R1: momentum 6 h (30 dias) em BTC e ETH.
+  - R2: RSI(2) diário com filtro de média de 200 dias em BTC e ETH.
+  - 4 carteiras virtuais de R$ 12,50; custo de 0,12% (estresse 0,30%).
+  - Período: 25/10 a 20/12/2026.
+- **Script determinístico** (`paper.py`), validado num início fictício em 01/08 em diretório temporário. Isso testa o código, não a estratégia.
+- **Registro oficial:** zerado (o teste começa em 25/10 00:00 UTC). Execução diária agendada.
+- **Saldo da Coinbase autorizado pelo proprietário:** nenhum uso agora. O teste é sem dinheiro, e o conector não negocia BRL.

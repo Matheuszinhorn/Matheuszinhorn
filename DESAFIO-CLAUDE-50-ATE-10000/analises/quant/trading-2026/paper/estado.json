@@ -1,0 +1,55 @@
+{
+ "atualizado_utc": "2026-10-24T22:06+00:00",
+ "total_virtual_brl": 50.0,
+ "retorno_total_pct": 0.0,
+ "carteiras": [
+  {
+   "carteira": "R1-momentum-6h",
+   "ativo": "BTC-USD",
+   "barras": 0,
+   "valor": 12.5,
+   "ret": 0,
+   "ret_estresse": 0,
+   "mdd": 0,
+   "trades": 0,
+   "bh": 0,
+   "posicao": "sem dados"
+  },
+  {
+   "carteira": "R1-momentum-6h",
+   "ativo": "ETH-USD",
+   "barras": 0,
+   "valor": 12.5,
+   "ret": 0,
+   "ret_estresse": 0,
+   "mdd": 0,
+   "trades": 0,
+   "bh": 0,
+   "posicao": "sem dados"
+  },
+  {
+   "carteira": "R2-rsi2-1d",
+   "ativo": "BTC-USD",
+   "barras": 0,
+   "valor": 12.5,
+   "ret": 0,
+   "ret_estresse": 0,
+   "mdd": 0,
+   "trades": 0,
+   "bh": 0,
+   "posicao": "sem dados"
+  },
+  {
+   "carteira": "R2-rsi2-1d",
+   "ativo": "ETH-USD",
+   "barras": 0,
+   "valor": 12.5,
+   "ret": 0,
+   "ret_estresse": 0,
+   "mdd": 0,
+   "trades": 0,
+   "bh": 0,
+   "posicao": "sem dados"
+  }
+ ]
+}
