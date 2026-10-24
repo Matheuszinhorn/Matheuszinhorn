@@ -1077,3 +1077,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Referência:** US$ 1 = R$ 4,9833 (Coinbase) → ≈ R$ 10,22; PTAX de venda de 23/10 = 5,0377.
 - **Divergência:** o saldo anterior era de R$ 7,04, que daria ≈ 1,41 USDC. Ou houve um depósito adicional, ou outro valor convertido. **Lançamento no CONTROLE-FINANCEIRO pendente** até o proprietário informar quanto foi gasto em reais e se o valor faz parte dos R$ 50 do desafio. Aporte novo é proibido pelo regulamento.
 - **Nenhuma operação.** O paper trading segue como única atividade de trading até 20/12.
+
+## ATV-118 — Bônus do proprietário registrado (24/10/2026 19:28 BRT)
+- O proprietário definiu o valor da Coinbase como **bônus de checkpoint**.
+- **Registrado como FIN-002** (aporte/bônus, ≈ R$ 10,22 em USDC). **Não é receita.**
+- Regulamento v5 no README: o bônus fica separado do **resultado gerado pelo desafio**, que continua em **R$ 0**.
+- **Patrimônio total:** R$ 50,00 (fora da Coinbase) + 2,051824 USDC (≈ R$ 10,22) ≈ R$ 60,22.

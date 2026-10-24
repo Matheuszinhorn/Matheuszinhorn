@@ -108,3 +108,8 @@ Em caso de conflito, prevalece a versão mais recente.
 - Se houver divergência entre os registros e o dinheiro real, as decisões financeiras param até que ela seja esclarecida.
 - Sempre diferenciar **FATO** (confirmado), **ESTIMATIVA**, **HIPÓTESE** e **PROJEÇÃO**.
 - Estados: PLANEJADO, EM EXECUÇÃO, CONCLUÍDO, BLOQUEADO (com motivo e providência), CANCELADO (com motivo).
+
+- **v5 (24/10/2026 19:28) — Bônus do proprietário (checkpoint):** o proprietário pode conceder bônus por avanço. O bônus entra como **aporte do proprietário**, nunca como receita, e é mostrado à parte:
+  - **patrimônio total** = caixa + ativos (inclui bônus);
+  - **resultado gerado pelo desafio** = patrimônio total − R$ 50 − bônus recebidos.
+  - Primeiro bônus: 2,051824 USDC (≈ R$ 10,22 em 24/10), FIN-002.
