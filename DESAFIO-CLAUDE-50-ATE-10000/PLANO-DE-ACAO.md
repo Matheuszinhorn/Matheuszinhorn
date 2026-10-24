@@ -93,3 +93,10 @@ Atualizado em 22/10/2026 08:27 BRT (DEC-021).
 | T-55 | Publicar o post no LinkedIn | Proprietário | quando puder | PRONTO |
 | T-56 | Ler as regras do r/brdev e decidir se é permitido postar | Proprietário | opcional | BLOQUEADO para Claude (403) |
 | T-57 | Ler o funil (`ferramentas/funil.py`) às 24 h e às 72 h e responder ao feedback | Claude (agendado) | 24/10 e 26/10 | PLANEJADO |
+
+### Atualização de 24/10/2026 14:05 BRT (DEC-036)
+| ID | Tarefa | Responsável | Tempo | Situação |
+|---|---|---|---|---|
+| T-58 | Criar o perfil de vendedor no Fiverr e publicar o serviço com o texto de `oferta/fiverr/PACOTE-FIVERR.md` e a capa `demo/capa-1280x769.png` | Proprietário (identidade) | ≈ 30 min, uma vez | PRONTO PARA EXECUTAR |
+| T-39 | Conectar o Gmail em claude.ai e autorizar os 51 envios individuais (oportunidade B) | Proprietário | ≈ 3 min, uma vez | PRONTO PARA EXECUTAR |
+| T-48/T-51/T-57 | Leitura do funil dos produtos | — | — | **CONGELADO** (DEC-036) |

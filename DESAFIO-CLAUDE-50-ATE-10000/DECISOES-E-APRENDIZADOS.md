@@ -346,3 +346,11 @@ _Ainda sem dados de mercado._
 - **Invoice:** fica em espera; não se constrói o fechamento mensal sem sinal.
 - **Canal:** artigo educativo, não pitch. O TabNews tem a regra verificada (FAQ), mas exige conta, e os dados mostram alcance baixo para pitches. Nenhum canal com público aceita publicação sem conta pessoal, e Claude não cria contas (regra do desafio e termos das plataformas).
 - **Lição 21:** medir o canal **antes** de publicar evita gastar a única ação disponível do proprietário no formato errado (pitch saturado).
+
+## DEC-036 — Reset: duas oportunidades com caminho até o comprador (24/10/2026 14:05; responde à diretriz do proprietário intitulada "DEC-035")
+- A diretriz chegou com o número DEC-035, que já estava em uso. O conteúdo foi registrado sem alteração.
+- **A:** serviço "mobile friendly em 24 h" no Fiverr. Comprador entra pela busca da plataforma, pagamento pela plataforma, entrega em minutos com técnica testada.
+- **B:** oferta direta a 51 profissionais com o problema provado em navegador, por e-mail individual.
+- **Critérios** em `analises/RESET-2026-10-24.md`, fixados antes de qualquer resultado.
+- **Lição 22:** toda oportunidade avaliada exigiu um ato de identidade do proprietário. O critério de escolha passa a ser o *menor ato, uma única vez*, e não a ausência de ato, que não existe neste desafio.
+- **Lição 23 (técnica):** ao corrigir um site, o CSS novo entra **depois** do original; regras de mesma especificidade valem pela ordem.

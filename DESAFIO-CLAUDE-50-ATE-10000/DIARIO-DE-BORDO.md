@@ -952,3 +952,40 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas para agentes:** 0 em todos os tipos.
 - **Vagas públicas:** as mesmas 12 (nenhuma entrou, nenhuma saiu). Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+---
+# Ciclo 23 — Diretriz do proprietário "DEC-035": reset estratégico total (até 24/10/2026 14:05 BRT)
+
+## ATV-103 — Congelamento e auditoria
+- **Congelados**, sem apagar nada:
+  - produtos (Recebi do Exterior, Quanto Chega, Invoice, amostra de prompts);
+  - expansão do EXP-013.
+- **Manutenção mantida:**
+  - varreduras do EXP-006 até 29/10 (compromisso já fixado);
+  - páginas no ar, como estão.
+- **Auditoria:** `analises/RESET-2026-10-24.md`. Causa-raiz decisiva: sem identidade para transacionar, nenhum produto chega a um comprador.
+
+## ATV-104 — Seleção do zero, com acesso real verificado (FATO)
+- **Biblioteca de Anúncios da Meta:** a API exige token com identidade; a página web deu 403. Indisponível, não contornada.
+- **Etsy:** captcha. Indisponível.
+- **Fiverr, busca pública** (1 coleta, sem repetição): "responsive website fix" = 57.150 serviços, US$ 10–250. Os mais vendidos têm 138, 551, 801 e 1.521 avaliações.
+- **Hotmart:** os mais avaliados são cursos de especialistas humanos (cílios 1.936; Los Academy 1.588; AutoCAD 514). Claude não pode ser o produtor com honestidade.
+- **Regras do Fiverr:** a central de ajuda aceita trabalho com IA, exceto entregas em massa idênticas ou que infrinjam direitos; o comprador pode pedir "sem IA". Saque para o Brasil via Payoneer ou PayPal.
+- **Rejeitados com motivo:**
+  - dropshipping e anúncios (R$ 50 não pagam um teste conclusivo);
+  - print-on-demand (meses de volume);
+  - afiliado com tráfego pago (inconclusivo);
+  - produtor Hotmart (exige especialista).
+- **Escolhidos:**
+  - **A**, serviço produtizado no Fiverr (compradores chegam pela busca; a plataforma cobra);
+  - **B**, oferta direta com prova do problema (nunca testada, sem expansão).
+
+## ATV-105 — Oportunidade A: pacote pronto e portfólio próprio
+- **Arquivos:** `oferta/fiverr/PACOTE-FIVERR.md` (título, pacotes de US$ 25/60/120, descrição, requisitos, FAQ, fluxo, declaração de IA) e `oferta/fiverr/demo/` (site fictício antes e depois + capa de 1280×769).
+- **Erro encontrado e corrigido:** a 1ª versão da correção colocou o CSS antes do CSS original, e a página continuou com 961 px. Depois de mover a correção para o fim do `<head>`: 390 = 390. Regra fixada no fluxo de entrega.
+
+## ATV-106 — Oportunidade B: lote reverificado
+- 55 sites reabertos em navegador de celular: **51 continuam com layout de computador**, 4 deram erro de acesso (saem do lote) e 0 foram corrigidos. A prova citada nos e-mails continua válida.
+- Nenhum lead novo.
+
+**Custo do ciclo:** R$ 0. Tempo ≈ 2 h.
