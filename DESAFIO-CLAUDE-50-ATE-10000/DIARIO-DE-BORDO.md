@@ -1042,3 +1042,16 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **EXP-006:** monitoramento passivo, conforme o cronograma, até 29/10.
 - **Coinbase/Binance:** indicações e campanhas seguem **não confirmadas**.
 - Nenhuma ferramenta, produto ou auditoria nova. Receita: R$ 0.
+
+---
+# Ciclo 25 — Diretriz do proprietário "DEC-045": prioridade passa a ser trading spot na Coinbase (24/10/2026 19:00 BRT)
+## ATV-113 — Mudança de prioridade
+- **Suspensos (arquivos preservados):** piloto B2B (pacote P1–P5 pronto, não enviado), Fiverr, indicações e novas ideias comerciais.
+- **Agendamentos mantidos:** varredura do EXP-006 (custo baixo, termina em 29/10) e relatório de 26/10.
+## ATV-114 — Auditoria de capacidade e 1º teste de estratégias
+- Ferramentas, pares, mínimo de 1 USDC, spreads e taxas de 0,09% / 0,10% verificados (somente leitura).
+- **Não há par em BRL.** Os R$ 50 do desafio não estão na Coinbase.
+- **Backtest:** 24 combinações, com seleção dentro da amostra e avaliação fora dela. **8 de 24** positivas fora da amostra; **nenhuma** estratégia consistente entre ativos e tempos gráficos; tendência no diário caiu de +124–731% para −3 a −24%.
+- **Decisão:** sem vantagem demonstrável → **0 ordens reais**.
+- Detalhes: `analises/quant/trading-2026/RESULTADO.md`.
+- **Operações simuladas registradas:** 267. **Reais:** 0. **Taxas pagas:** R$ 0. Posições: nenhuma.
