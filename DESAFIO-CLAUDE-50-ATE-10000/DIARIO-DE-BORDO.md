@@ -1009,3 +1009,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Campanhas:** "Word of the Day" (≤ 5 USDC por pessoa, até 25/10 UTC). Torneios rejeitados (volume mínimo de US$ 500).
 - **Matriz:** `analises/DEC-039-INTEGRACOES-E-MATRIZ.md`. Principal: piloto B2B; alternativa: Fiverr.
 - **Operações reais:** 0. **Operações simuladas:** 1 (arbitragem). **Custo:** R$ 0.
+
+## ATV-109 — Conector Coinbase verificado (24/10/2026 15:41 BRT)
+- Conectado e autenticado (leitura funcionou). 31 ferramentas classificadas: `analises/DEC-040-COINBASE-MCP.md`.
+- Leituras: 1 portfólio, 0 ordens, 0 cripto, taxas Intro de 0,09% / 0,10%, **0 pares em BRL**.
+- O saldo encontrado é do proprietário, fora do capital do desafio; não registrado.
+- **Operações executadas: 0.**
+- O servidor instrui a executar ordens pedidas sem reconfirmar. Claude manterá a regra do proprietário: nada sem plano com custos e limites.
