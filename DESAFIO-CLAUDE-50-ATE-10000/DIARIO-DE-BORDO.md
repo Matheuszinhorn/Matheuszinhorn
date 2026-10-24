@@ -1071,3 +1071,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Verificação técnica (FATO):** `BTC-BRL` e `USDC-BRL` → "not supported for trading on this domain"; `products_list symbol=BRL` = 0. A conversão do conector é só USD↔USDC.
   - Conclusão: **o saldo em BRL não pode ser negociado nem convertido pelo conector.**
 - **Decisão:** nenhuma operação. Mesmo com o saldo convertido no app, operar antes dos critérios do paper trading contrariaria a regra do proprietário ("se o trading não apresentar vantagem líquida demonstrável, não opere"). A autorização fica registrada para uso se os critérios de 20/12 forem cumpridos.
+
+## ATV-117 — Conversão para USDC feita pelo proprietário (24/10/2026 19:25 BRT)
+- **Leitura pelo conector (FATO):** saldo de **2,051824 USDC**; 0 BRL; 0 ordens. A conversão foi feita no app, pelo proprietário.
+- **Referência:** US$ 1 = R$ 4,9833 (Coinbase) → ≈ R$ 10,22; PTAX de venda de 23/10 = 5,0377.
+- **Divergência:** o saldo anterior era de R$ 7,04, que daria ≈ 1,41 USDC. Ou houve um depósito adicional, ou outro valor convertido. **Lançamento no CONTROLE-FINANCEIRO pendente** até o proprietário informar quanto foi gasto em reais e se o valor faz parte dos R$ 50 do desafio. Aporte novo é proibido pelo regulamento.
+- **Nenhuma operação.** O paper trading segue como única atividade de trading até 20/12.
