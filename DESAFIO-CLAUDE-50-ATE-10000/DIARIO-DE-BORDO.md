@@ -1065,3 +1065,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Script determinístico** (`paper.py`), validado num início fictício em 01/08 em diretório temporário. Isso testa o código, não a estratégia.
 - **Registro oficial:** zerado (o teste começa em 25/10 00:00 UTC). Execução diária agendada.
 - **Saldo da Coinbase autorizado pelo proprietário:** nenhum uso agora. O teste é sem dinheiro, e o conector não negocia BRL.
+
+## ATV-116 — Autorização ampla sobre o saldo da Coinbase (24/10/2026 19:18 BRT)
+- O proprietário autorizou comprar, vender, reinvestir e converter o saldo da Coinbase.
+- **Verificação técnica (FATO):** `BTC-BRL` e `USDC-BRL` → "not supported for trading on this domain"; `products_list symbol=BRL` = 0. A conversão do conector é só USD↔USDC.
+  - Conclusão: **o saldo em BRL não pode ser negociado nem convertido pelo conector.**
+- **Decisão:** nenhuma operação. Mesmo com o saldo convertido no app, operar antes dos critérios do paper trading contrariaria a regra do proprietário ("se o trading não apresentar vantagem líquida demonstrável, não opere"). A autorização fica registrada para uso se os critérios de 20/12 forem cumpridos.
