@@ -929,3 +929,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## ATV-099 — Funil às 24 h (FATO)
 - Leitura de `ferramentas/funil.py` às 21:51 BRT: **0 eventos** nos 3 apps (visitas, uso e cliques). 0 Issues.
 - **Leitura (DEC-033):** sem visitas = problema de **canal**. Coerente: o único canal publicado é o README de um branch não indexado.
+
+## ATV-100 — Check-in de 24 h dos produtos (23/10/2026 23:58 BRT)
+- **Funil** (`ferramentas/funil.py`): **0 eventos** em Recebi do Exterior, Quanto Chega e Invoice (visitas, uso e cliques). Nenhuma origem registrada.
+- **Issues:** 0 (nenhum pedido nem feedback).
+- **Páginas públicas:** as 3 funcionam (Playwright, celular e computador).
+  - Recebi do Exterior: valores iguais à conferência na API PTAX.
+  - Quanto Chega: 7 serviços.
+  - Invoice: total correto.
+- **Leitura (DEC-033):** sem visitas = problema de **canal**. Não houve exposição: o artigo e os posts dependem da conta do proprietário (T-54/T-55), e o README fica num branch não indexado. Não há base para julgar o produto.
+- **Receitas e despesas:** R$ 0 / R$ 0.
