@@ -1016,3 +1016,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - O saldo encontrado é do proprietário, fora do capital do desafio; não registrado.
 - **Operações executadas: 0.**
 - O servidor instrui a executar ordens pedidas sem reconfirmar. Claude manterá a regra do proprietário: nada sem plano com custos e limites.
+
+## ATV-110 — Diretriz do proprietário "DEC-041": receita sem risco (24/10/2026 15:44 BRT)
+- **Coinbase:** o conector não tem ferramenta de indicação (busca de ferramentas); a página oficial de termos deu 403. Oferta **não confirmada**: requer o app.
+- **Binance:** o Rewards Hub exige login. Os anúncios públicos mais recentes são de 22/10 (torneios de trading, "Word of the Day" até 25/10, "Community Voice" de 12/10). Nenhum foi presumido ativo.
+- **Plano de indicação transparente**, com consentimento e sem promessa: `oferta/INDICACAO-PLANO.md`.
+- **Piloto B2B:** sem mudança; pronto (P1–P5), aguardando canal e aprovação.
+- Nenhuma ferramenta nova construída. Nenhuma operação. Receita: R$ 0.
