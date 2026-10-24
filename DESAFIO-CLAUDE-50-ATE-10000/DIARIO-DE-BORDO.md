@@ -947,3 +947,8 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Nenhuma entrou.
   - Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-102 — Varredura automática #8 do Superteam (24/10/2026 08:41 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** as mesmas 12 (nenhuma entrou, nenhuma saiu). Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
