@@ -354,3 +354,23 @@ _Ainda sem dados de mercado._
 - **Critérios** em `analises/RESET-2026-10-24.md`, fixados antes de qualquer resultado.
 - **Lição 22:** toda oportunidade avaliada exigiu um ato de identidade do proprietário. O critério de escolha passa a ser o *menor ato, uma única vez*, e não a ausência de ato, que não existe neste desafio.
 - **Lição 23 (técnica):** ao corrigir um site, o CSS novo entra **depois** do original; regras de mesma especificidade valem pela ordem.
+
+## DEC-038 — Principal e alternativa (24/10/2026 15:12; responde à diretriz do proprietário "DEC-037")
+- **Testado de fato até hoje:** nada chegou a um comprador. Pesquisado ou preparado: tudo o mais (ver `analises/RESET-2026-10-24.md`).
+- **Principal: oferta direta a 51 profissionais com site quebrado no celular** (e-mail individual, prova verificada em 24/10, prévia grátis, R$ 297 via Pix só depois de aprovar).
+  1. **Quem paga:** escritórios e consultórios que já pagam domínio e certificado.
+  2. **Problema:** o site não é legível no celular (provado em navegador).
+  3. **Evidência de que pagam por isso:** a busca do Fiverr tem 57.150 serviços do tipo, e os mais vendidos acumulam até 1.521 avaliações.
+  4. **Acesso:** e-mail publicado pelo próprio profissional, com MX ativo.
+  5. **Oferta:** prévia grátis do próprio site.
+  6. **Tempo até tentar vender:** minutos depois de liberado o canal.
+  7. **Custo:** R$ 0.
+  8. **Margem:** ≈ 100%; sem risco de capital.
+  9. **Menor teste:** 51 envios, 72 h.
+  10. **Escala:** ≈ 5.010 domínios profissionais mapeados + manutenção mensal.
+- **Alternativa: serviço no Fiverr** (`oferta/fiverr/PACOTE-FIVERR.md`). Entra se a principal não tiver ≥ 2 respostas em 72 h ou se o canal de e-mail não for liberado.
+- **Por que essa ordem:** a principal tem o comprador já identificado, com a dor provada, e não depende de visibilidade num marketplace onde uma conta nova compete com 57 mil serviços.
+- **Executado agora:**
+  - lote final de 51 e-mails personalizados (data preenchida no envio) e registro de envios, ambos privados no scratchpad;
+  - nenhum lead novo.
+- **Dependência única:** um canal de envio de e-mail autorizado pelo proprietário (conector Gmail). Se o conector só criar rascunhos, o proprietário clica "Enviar" em cada um (≈ 5 min no total).
