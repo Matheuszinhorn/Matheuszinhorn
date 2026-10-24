@@ -25,3 +25,9 @@ Se todos passarem, a proposta real terá: até R$ 10 por operação, perda acumu
 
 ## Acompanhamento
 `python3 analises/quant/trading-2026/paper/paper.py`, uma vez por dia (agendado). O script recalcula tudo do zero de forma determinística: um dia sem execução não muda o resultado. Saídas: `estado.json` e `operacoes-paper.csv`.
+
+---
+## Alteração de prazo (diretriz do proprietário "DEC-046", 24/10/2026 19:34 BRT)
+- **Novo prazo:** o ciclo de validação passa a ser de **72 h** (até 27/10/2026 ≈ 19:30 BRT). Regras R1/R2 e custos não mudam; o texto original acima fica preservado.
+- **Decisão ao fim das 72 h:** A (evidência insuficiente, com pergunta específica), B (sem vantagem: rejeitar ou reformular) ou C (proposta de 1ª ordem pequena **para aprovação explícita**).
+- **Limitação conhecida já no início:** 72 h geram ≈ 12 barras de 6 h e 3 barras diárias. O paper trading desse período **não tem poder estatístico**; a decisão se apoia sobretudo no walk-forward histórico.

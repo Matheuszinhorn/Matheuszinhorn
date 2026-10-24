@@ -1083,3 +1083,24 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Registrado como FIN-002** (aporte/bônus, ≈ R$ 10,22 em USDC). **Não é receita.**
 - Regulamento v5 no README: o bônus fica separado do **resultado gerado pelo desafio**, que continua em **R$ 0**.
 - **Patrimônio total:** R$ 50,00 (fora da Coinbase) + 2,051824 USDC (≈ R$ 10,22) ≈ R$ 60,22.
+
+---
+# Ciclo 26 — Diretriz do proprietário "DEC-046": validação acelerada de 72 h (início 24/10/2026 19:34 BRT)
+## ATV-119 — Auditoria operacional (FATO, somente leitura e prévias)
+- **Saldo:** 2,051824 USDC; 0 ordens; taxas Intro de 0,09% / 0,10%.
+  - **Atenção:** os R$ 7,04 pessoais já foram convertidos junto e estão **dentro** desses USDC; não há como separá-los na conta. Tratamento: todo o saldo como bônus (FIN-002), conforme o proprietário declarou.
+- **Pares:** BTC/ETH/SOL-USDC online; mínimo de **1 USDC**.
+- **Prévias** (`orders_preview`, não executam):
+  - compra de 1 USDC em BTC → taxa de US$ 0,000999, slippage ≈ 0;
+  - compra de 0,50 USDC → **recusada** ("quote size too small");
+  - venda sem saldo em BTC → "insufficient fund". Não deu para verificar se o mínimo de 1 USDC também vale na **venda**.
+- **Risco operacional:** com ≈ US$ 2,05, cabem no máximo 2 posições de ≈ US$ 1. Uma posição de US$ 1 que caia pode ficar **abaixo do mínimo** e impossível de vender.
+## ATV-120 — Validação walk-forward (36 combinações)
+- `analises/quant/trading-2026/walkforward.py` → `walkforward.json`.
+- **Método:** parâmetros escolhidos em cada janela de treino e aplicados só na janela seguinte. Dados de 1 h (1 ano), 6 h (2 anos) e 1 d (4 anos).
+- **Resultado (custo de 0,12% por lado):**
+  - média por família: SMA −13,9%, momentum −18,7%, RSI(2) −9,4%, breakout −1,0%;
+  - **todas as 12 combinações de 1 h foram negativas**;
+  - 8 de 36 positivas mesmo a 0,30%, concentradas em ETH;
+  - SOL negativo em 10 de 12.
+- **Melhores candidatas, com poucos trades:** RSI(2) diário em BTC (+9,5%, 13 trades, queda máxima de 8,3%, acerto de 69%, payoff 0,98) e ETH (+21,5%, 8 trades), mas SOL −14%. Inconsistente entre ativos.

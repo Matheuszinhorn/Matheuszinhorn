@@ -113,3 +113,5 @@ Em caso de conflito, prevalece a versão mais recente.
   - **patrimônio total** = caixa + ativos (inclui bônus);
   - **resultado gerado pelo desafio** = patrimônio total − R$ 50 − bônus recebidos.
   - Primeiro bônus: 2,051824 USDC (≈ R$ 10,22 em 24/10), FIN-002.
+
+- **v6 (24/10/2026 19:34) — Trading: ciclo de validação de 72 h** (substitui o prazo de 20/12). Somente spot; sem transferências; ordem real só com proposta e aprovação explícita. O capital do desafio (R$ 50) e o bônus (2,051824 USDC) ficam identificados separadamente.
