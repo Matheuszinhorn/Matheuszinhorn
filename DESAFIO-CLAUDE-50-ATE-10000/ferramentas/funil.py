@@ -7,7 +7,7 @@ import json
 import urllib.request
 
 NS = "matheuszinhorn-desafio50"
-CANAIS = ["direto", "tabnews", "linkedin", "x", "github", "whatsapp", "telegram", "reddit", "email"]
+CANAIS = ["direto", "tabnews", "linkedin", "x", "github", "whatsapp", "telegram", "reddit", "email", "artigo"]
 EVENTOS = {
     "rde": ["visita", "calculo", "csv", "imprimir", "quero-pro", "feedback"],
     "qc": ["visita", "comparacao", "quero-alerta"] + [f"clique-{a}" for a in ["remitly", "wise", "instarem", "western-union", "xoom", "paypal", "ofx"]],

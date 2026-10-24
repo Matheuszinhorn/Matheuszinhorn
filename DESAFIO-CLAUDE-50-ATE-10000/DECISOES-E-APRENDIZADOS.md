@@ -328,3 +328,21 @@ _Ainda sem dados de mercado._
   - uso sem pedido → problema de **proposta ou monetização**.
   - Só se abandona por falta de interesse depois de exposição real, de pelo menos 1 canal com público executado.
 - **Lição 20:** medir antes de divulgar. Sem contador, uma rodada de divulgação não ensinaria nada.
+
+## DEC-035 — Produto principal e canal (23/10/2026 21:51; responde à diretriz do proprietário intitulada "DEC-034")
+- A diretriz chegou com o número DEC-034. As decisões de Claude seguem a numeração própria do diário.
+
+| Critério | Recebi do Exterior | Quanto Chega | Invoice Simples |
+|---|---|---|---|
+| Problema | Regra de conversão confusa (fontes divergem), todo mês | Escolher o serviço mais barato (até R$ 270 por US$ 1.000) | Emitir a invoice |
+| Diferenciação | Alta: aplica as duas regras em lote, com fonte | Média: Wise e Monito já comparam | Baixa: a Wise tem gerador grátis |
+| Qualidade dos dados | **Oficial** (BCB), conferida | De um concorrente (Wise), com cotações de idades diferentes | Não se aplica |
+| Concorrência | Blogs + 1 calculadora | Forte | Forte |
+| Monetização | Relatório anual pago (HIPÓTESE fraca) | Afiliados (não aprovados; termos da API não encontrados) | Fechamento mensal (HIPÓTESE) |
+| Risco de confiança | Baixo (só calcula com dado oficial) | Médio | Baixo |
+
+- **Principal: Recebi do Exterior.** Melhor diferenciação e dados mais confiáveis. Também gera o conteúdo educativo mais forte (ATV-098).
+- **Alternativa: Quanto Chega.** Problema de alto valor em reais, mas depende de dados de terceiros e de afiliação não aprovada.
+- **Invoice:** fica em espera; não se constrói o fechamento mensal sem sinal.
+- **Canal:** artigo educativo, não pitch. O TabNews tem a regra verificada (FAQ), mas exige conta, e os dados mostram alcance baixo para pitches. Nenhum canal com público aceita publicação sem conta pessoal, e Claude não cria contas (regra do desafio e termos das plataformas).
+- **Lição 21:** medir o canal **antes** de publicar evita gastar a única ação disponível do proprietário no formato errado (pitch saturado).

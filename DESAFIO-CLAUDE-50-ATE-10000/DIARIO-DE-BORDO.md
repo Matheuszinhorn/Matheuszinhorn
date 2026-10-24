@@ -908,3 +908,24 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - post no LinkedIn.
 - **Bloqueado:** r/brdev. O Reddit recusou a leitura das regras pela sessão (HTTP 403); não foi contornado.
 - **Canais verificados e indisponíveis para Claude:** todos os fóruns e diretórios encontrados exigem conta pessoal. Claude não cria contas (falsidade de identidade).
+
+---
+# Ciclo 22 — Diretriz do proprietário "DEC-034": validar a distribuição (até 23/10/2026 21:51 BRT)
+
+## ATV-097 — Canal TabNews medido antes de publicar (FATO, API pública de leitura)
+- **Amostra:** 4.000 posts mais recentes (01/04 a 24/10/2026).
+  - **Pitches:** 794 (20% dos posts). Mediana de **1 tabcoin** e **0 comentários**; p90 de 7 tabcoins e 5 comentários. Só 51 passaram de 10 tabcoins.
+  - Títulos sobre receber do exterior: 1 discussão real ("Vocês usariam uma 'Husky' (receber dólar) rodando no seu terminal?", 8 tabcoins, 4 comentários).
+- **Sinal de mercado (comentários dessa discussão):** os 4 comentários desconfiam de ferramenta financeira nova e anônima. Um deles cita "contribuidores Claude + agente" como sinal de alerta.
+  - Implicação: a comunicação precisa deixar explícito que os produtos **não mexem em dinheiro nem em credenciais**, citar as fontes e ter código aberto.
+  - Feito: frase de confiança adicionada ao Recebi do Exterior.
+- **Conclusão:** um post "Pitch" no TabNews teria alcance esperado muito baixo. Um artigo educativo (não pitch) tem mais chance de gerar discussão.
+- **Reddit:** a leitura das regras continua bloqueada (403). Nenhuma tentativa de contorno.
+
+## ATV-098 — Dados reais para conteúdo educativo (FATO, API PTAX)
+- **Simulação:** US$ 5.000 no dia 5 de cada mês de 2026. A diferença entre a regra da 1ª quinzena e a cotação do dia vai de −R$ 643,50 a +R$ 815,50 por mês. Acumulado jan–out: +R$ 1.283,50 na base.
+- **Artigo:** `produtos/recebi-do-exterior/ARTIGO.md`, com tabela, método, limites e link rastreável (`src=artigo`).
+
+## ATV-099 — Funil às 24 h (FATO)
+- Leitura de `ferramentas/funil.py` às 21:51 BRT: **0 eventos** nos 3 apps (visitas, uso e cliques). 0 Issues.
+- **Leitura (DEC-033):** sem visitas = problema de **canal**. Coerente: o único canal publicado é o README de um branch não indexado.
