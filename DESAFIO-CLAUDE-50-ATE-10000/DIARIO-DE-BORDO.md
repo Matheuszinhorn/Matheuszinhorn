@@ -989,3 +989,23 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - Nenhum lead novo.
 
 **Custo do ciclo:** R$ 0. Tempo ≈ 2 h.
+
+---
+# Ciclo 24 — Diretrizes do proprietário "DEC-038" (piloto) e "DEC-039" (finanças) (até 24/10/2026 15:26 BRT)
+## ATV-107 — Piloto de 5 casos pronto para aprovação (nada enviado)
+- **Seleção:** critérios objetivos sobre os 51 sites → 14 candidatos.
+  - Ajuste genérico testado nos 14 em ambiente próprio: todos chegam a 390 px, mas visualmente só 1 de 8 ficou limpo.
+  - CSS sob medida para 8. Escolhidos 5 (3 demonstrações prontas, 2 parciais).
+  - Descartados com motivo: construtor com posições absolutas; conteúdo cortado; texto sem sentido visível na página.
+- **Escopo de R$ 297 e verificações** (LGPD via guia da ANPD; regras do Gmail para remetentes): `oferta/PILOTO-5.md`.
+- **Mensagens:** privadas, apresentadas ao proprietário para aprovação.
+## ATV-108 — Auditoria de integrações financeiras e testes (DEC-039)
+- **Integrações:**
+  - não há conector Binance/Coinbase;
+  - a API da Binance responde **451** (local restrito) a este ambiente;
+  - os dados públicos de Binance, Coinbase e Mercado Bitcoin funcionam;
+  - nenhuma conta está conectada.
+- **Arbitragem BTC/BRL:** diferença de 0,042% → **−R$ 0,08 a −R$ 0,38** em R$ 50 depois das taxas. Rejeitada.
+- **Campanhas:** "Word of the Day" (≤ 5 USDC por pessoa, até 25/10 UTC). Torneios rejeitados (volume mínimo de US$ 500).
+- **Matriz:** `analises/DEC-039-INTEGRACOES-E-MATRIZ.md`. Principal: piloto B2B; alternativa: Fiverr.
+- **Operações reais:** 0. **Operações simuladas:** 1 (arbitragem). **Custo:** R$ 0.
