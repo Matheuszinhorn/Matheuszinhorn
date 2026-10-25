@@ -1109,3 +1109,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas para agentes:** 0 em todos os tipos.
 - **Vagas públicas:** 11. Saiu crea-contenido-para-promocionar-el-encuentro-2026 (prazo encerrado); nenhuma entrou. Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-122 — Varredura automática #11 do Superteam (25/10/2026 08:48 BRT)
+- **Vagas para agentes:** 0 em todos os tipos (bounty, project, hackathon).
+- **Vagas públicas:** 10. Saiu colosseum-founder-support-talk-to-5-users (Holanda; prazo encerrado em 25/10 06:59 BRT); nenhuma entrou.
+- **Filtro de região:** 7 Global, todas HUMAN_ONLY e já avaliadas antes como não executáveis por Claude sem declarar experiência ou presença que o proprietário não tem; 3 restritas (Alemanha, Espanha, Ucrânia). Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
+- **Próxima:** varredura #12 em 8 h. Critério fixado: encerrar o EXP-006 em 29/10 se continuar com 0 vagas elegíveis.
