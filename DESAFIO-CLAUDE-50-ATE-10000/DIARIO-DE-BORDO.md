@@ -1129,3 +1129,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - A Resolução 804/2020 tirou da notificação de radar a exigência de trazer a data da verificação, e esse argumento antigo foi descartado.
   - Página e diagnóstico testados em 2 cenários, no celular (390 px): sem erros e sem rolagem lateral.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-124 — Varredura automática #12 do Superteam (25/10/2026 16:48 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** 9. Saiu motion-graphics-designer-kimia-product-launch-film-for-x (prazo encerrado em 25/10 15:29 BRT); nenhuma entrou.
+- **Filtro de região:** 6 Global, todas só para humanos e não executáveis; 3 restritas a outros países. Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
+- **Próxima:** varredura #13 em 8 h.
