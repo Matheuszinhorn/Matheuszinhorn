@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confere Multa: sua multa tem falha?</title>
+<meta name="description" content="Diagnóstico grátis em 2 minutos: confira se a sua multa de trânsito tem falhas de prazo ou de preenchimento previstas no Código de Trânsito. Sem cadastro, nada é enviado.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#14171c;--mut:#5b6472;--line:#e3e6eb;--pri:#0b6bcb;--pri2:#0957a6;--ok:#137a3f;--okbg:#e8f6ee;--warn:#9a5b00;--warnbg:#fff4e0;--bad:#b42318;--badbg:#fdecea;--chip:#eef3fb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1216;--card:#171b21;--tx:#e8ebf0;--mut:#9aa4b2;--line:#2a313b;--pri:#4c9bec;--pri2:#6aaef2;--ok:#5fd08f;--okbg:#13291d;--warn:#f0b35a;--warnbg:#2c2212;--bad:#ff8a80;--badbg:#2d1715;--chip:#1c2633}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:16px}
+header{padding:28px 0 8px}
+.tag{display:inline-block;background:var(--chip);color:var(--pri);font-weight:600;font-size:13px;padding:4px 10px;border-radius:99px}
+h1{font-size:30px;line-height:1.15;margin:12px 0 8px;letter-spacing:-.01em}
+h2{font-size:21px;margin:0 0 12px}
+p{margin:0 0 12px}
+.mut{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--pri);color:#fff;font-weight:700;font-size:17px;padding:15px 16px;cursor:pointer;text-align:center;text-decoration:none}
+.btn:hover{background:var(--pri2)}
+.btn.sec{background:transparent;color:var(--pri);border:1px solid var(--line)}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;background:var(--card)}
+.opt input{margin-top:4px;flex:none;width:18px;height:18px}
+.opt b{display:block}
+.opt small{color:var(--mut)}
+label.f{display:block;font-weight:600;margin:12px 0 4px}
+input[type=date]{width:100%;font:inherit;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--tx)}
+.hint{font-size:14px;color:var(--mut);margin-top:4px}
+.steps{display:flex;gap:6px;margin-bottom:14px}
+.steps i{flex:1;height:5px;border-radius:9px;background:var(--line)}
+.steps i.on{background:var(--pri)}
+.nav{display:flex;gap:10px;margin-top:16px}
+.nav .btn{flex:1}
+.res{border-radius:12px;padding:12px 14px;margin:10px 0}
+.res b{display:block;margin-bottom:2px}
+.res.forte{background:var(--okbg);border:1px solid var(--ok)}
+.res.forte b{color:var(--ok)}
+.res.media{background:var(--warnbg);border:1px solid var(--warn)}
+.res.media b{color:var(--warn)}
+.res.alerta{background:var(--badbg);border:1px solid var(--bad)}
+.res.alerta b{color:var(--bad)}
+.res.info{background:var(--chip);border:1px solid var(--line)}
+.law{font-size:13px;color:var(--mut)}
+.big{font-size:22px;font-weight:800;margin:4px 0 10px}
+.price{font-size:34px;font-weight:800}
+ul.chk{padding-left:20px;margin:8px 0 14px}
+ul.chk li{margin:4px 0}
+details{border-top:1px solid var(--line);padding:12px 0}
+details summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px}
+footer{font-size:13px;color:var(--mut);padding:20px 0 40px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">Grátis · 2 minutos · sem cadastro</span>
+  <h1>Sua multa pode ter uma falha que a anula.</h1>
+  <p class="mut">Responda 4 perguntas e confira se a notificação respeitou os prazos e as regras do Código de Trânsito Brasileiro (CTB). Tudo roda no seu celular: nada do que você digita é enviado.</p>
+  <a class="btn" href="#diag" onclick="track('comecar')">Conferir minha multa agora</a>
+</header>
+
+<section id="diag" class="card">
+  <div class="steps"><i class="on"></i><i></i><i></i><i></i></div>
+
+  <div data-step="1">
+    <h2>1. Qual carta você recebeu?</h2>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="fase" value="NA"><span><b>Notificação de Autuação</b><small>A primeira carta. Avisa da infração e dá prazo para defesa prévia ou para indicar o condutor. Normalmente sem boleto.</small></span></label>
+      <label class="opt"><input type="radio" name="fase" value="NP"><span><b>Notificação de Penalidade</b><small>A segunda carta, com o valor e o boleto da multa.</small></span></label>
+      <label class="opt"><input type="radio" name="fase" value="JARI"><span><b>Resultado da JARI negando o meu recurso</b><small>Ainda cabe recurso ao CETRAN ou ao CONTRANDIFE.</small></span></label>
+    </div>
+    <p class="hint">Não sabe? Procure no topo da carta a palavra "Autuação" ou "Penalidade".</p>
+  </div>
+
+  <div data-step="2" class="hide">
+    <h2>2. Datas da carta</h2>
+    <label class="f" for="dInf">Data da infração</label>
+    <input type="date" id="dInf">
+    <label class="f" for="dNA">Data de expedição da Notificação de Autuação</label>
+    <input type="date" id="dNA">
+    <p class="hint">Na carta aparece como "data de expedição", "data de emissão" ou "data de postagem". Se não tiver mais a primeira carta, deixe em branco.</p>
+    <div id="boxNP" class="hide">
+      <label class="f" for="dNP">Data de expedição da Notificação de Penalidade</label>
+      <input type="date" id="dNP">
+      <label class="f">Você apresentou defesa prévia?</label>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="defesa" value="nao"><span><b>Não</b></span></label>
+        <label class="opt"><input type="radio" name="defesa" value="sim"><span><b>Sim</b></span></label>
+      </div>
+    </div>
+    <label class="f" for="dPrazo">Prazo final para defesa ou recurso (impresso na carta)</label>
+    <input type="date" id="dPrazo">
+    <p class="hint">Opcional, mas importante: recurso fora do prazo é arquivado.</p>
+  </div>
+
+  <div data-step="3" class="hide">
+    <h2>3. Qual foi a infração?</h2>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="tipo" value="radar"><span><b>Excesso de velocidade (radar)</b></span></label>
+      <label class="opt"><input type="radio" name="tipo" value="estac"><span><b>Estacionamento</b></span></label>
+      <label class="opt"><input type="radio" name="tipo" value="celular"><span><b>Uso de celular</b></span></label>
+      <label class="opt"><input type="radio" name="tipo" value="sinal"><span><b>Sinal vermelho</b></span></label>
+      <label class="opt"><input type="radio" name="tipo" value="seca"><span><b>Lei Seca (bafômetro ou recusa)</b></span></label>
+      <label class="opt"><input type="radio" name="tipo" value="outra"><span><b>Outra</b></span></label>
+    </div>
+  </div>
+
+  <div data-step="4" class="hide">
+    <h2>4. Algo está errado na carta?</h2>
+    <p class="mut">Marque tudo o que se aplica. Compare com o documento do seu veículo.</p>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" value="placa"><span><b>A placa está errada</b></span></label>
+      <label class="opt"><input type="checkbox" value="marca"><span><b>Marca, modelo ou espécie diferente do meu veículo</b></span></label>
+      <label class="opt"><input type="checkbox" value="local"><span><b>Falta local, data ou hora, ou eles estão incoerentes</b></span></label>
+      <label class="opt"><input type="checkbox" value="tipif"><span><b>Não diz qual infração foi cometida (código ou descrição)</b></span></label>
+      <label class="opt"><input type="checkbox" value="agente"><span><b>Não identifica o órgão, o agente ou o equipamento</b></span></label>
+      <label class="opt" data-only="radar"><input type="checkbox" value="foto"><span><b>A foto do radar não mostra a placa de forma legível</b></span></label>
+      <label class="opt" data-only="radar"><input type="checkbox" value="r19"><span><b>Não havia placa de velocidade (R-19) junto ao radar</b><small>Só marque se você consegue comprovar, por exemplo com foto ou Street View recente.</small></span></label>
+      <label class="opt"><input type="checkbox" value="condutor"><span><b>Era outra pessoa dirigindo</b></span></label>
+      <label class="opt"><input type="checkbox" value="nada"><span><b>Nada disso: os dados estão corretos</b></span></label>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="btn sec hide" id="back" type="button">Voltar</button>
+    <button class="btn" id="next" type="button">Continuar</button>
+  </div>
+</section>
+
+<section id="result" class="card hide" aria-live="polite"></section>
+
+<section class="card">
+  <h2>Como funciona</h2>
+  <ul class="chk">
+    <li><b>Diagnóstico grátis:</b> confere prazos e dados obrigatórios com base no CTB (arts. 280 a 290).</li>
+    <li><b>Recurso pronto (R$ 19,90):</b> documento preenchido com os argumentos do seu caso, os artigos de lei e o passo a passo para protocolar pelo app, pelo site do órgão ou pelos Correios.</li>
+    <li><b>Você assina e protocola.</b> Recorrer da própria multa é direito de qualquer motorista e não exige advogado.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Perguntas frequentes</h2>
+  <details><summary>Preciso pagar a multa para recorrer?</summary><p>Não. O recurso pode ser apresentado sem pagar (CTB, art. 286). E, se você já pagou, ainda pode recorrer: o pagamento não impede o questionamento (art. 284, § 2º). A exceção é quem escolheu o desconto de 60% no sistema de notificação eletrônica, que exige abrir mão da defesa (art. 284, § 1º).</p></details>
+  <details><summary>Enquanto o recurso não é julgado, consigo licenciar o carro?</summary><p>Enquanto o processo administrativo estiver aberto, não pode haver restrição ao licenciamento por causa dessa multa (CTB, art. 284, § 3º), desde que o recurso tenha sido apresentado dentro do prazo.</p></details>
+  <details><summary>Vocês garantem que a multa será anulada?</summary><p>Não, e desconfie de quem garante. Quem decide é o órgão de trânsito. O diagnóstico mostra com honestidade se existe uma falha concreta. Se não existir, dizemos isso e não recomendamos pagar pelo recurso.</p></details>
+  <details><summary>Meus dados ficam guardados?</summary><p>Não. O diagnóstico roda no seu navegador e nada do que você digita é enviado. Só contamos visitas e cliques, de forma anônima.</p></details>
+  <details><summary>Isto é assessoria jurídica?</summary><p>Não. É uma ferramenta que gera um documento a partir das suas respostas. Em casos graves (Lei Seca, suspensão ou cassação da CNH), o ideal é consultar um advogado.</p></details>
+</section>
+
+<footer>
+  Confere Multa · ferramenta de documento, não é assessoria jurídica. Base legal: Lei 9.503/1997 (CTB), conferida em 25/10/2026.
+</footer>
+</div>
+
+<script>
+/* Medição anônima: só contadores numéricos (abacus.jasoncameron.dev). Nada do que é digitado é enviado.
+   Não conta navegadores automatizados (navigator.webdriver) nem acessos com ?notrack=1. */
+(function(){
+  const NS="matheuszinhorn-desafio50", P="cm";
+  let off=false; try{ off = navigator.webdriver || /[?&]notrack=1/.test(location.search+location.hash) || localStorage.getItem("notrack")==="1"; }catch(e){}
+  window.track = function(k){ if(off) return; try{ fetch("https://abacus.jasoncameron.dev/hit/"+NS+"/"+P+"-"+k,{keepalive:true}).catch(()=>{}); }catch(e){} };
+  let src="direto"; try{ const m=(location.search+location.hash).match(/[?&]src=([a-z0-9-]{3,20})/i); if(m) src=m[1].toLowerCase(); else if(document.referrer && !/htmlpreview\.github\.io/.test(document.referrer)) src="ref-"+(new URL(document.referrer).hostname.replace(/^www\./,"").replace(/[^a-z0-9-]/g,"-").slice(0,20)); }catch(e){}
+  track("visita"); track("visita-"+src);
+})();
+
+/* Link do checkout (Kiwify). Enquanto estiver vazio, o botão registra o interesse e avisa que a venda abre em breve. */
+const CHECKOUT_URL = "";
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+let step = 1;
+const val = n => (document.querySelector(`input[name=${n}]:checked`)||{}).value;
+const d = id => { const v = $("#"+id).value; return v ? new Date(v+"T12:00:00") : null; };
+const dias = (a,b) => Math.round((b-a)/86400000);
+const fmt = x => x.toLocaleDateString("pt-BR");
+
+function show(){
+  $$("[data-step]").forEach(e => e.classList.toggle("hide", +e.dataset.step !== step));
+  $$(".steps i").forEach((e,i) => e.classList.toggle("on", i < step));
+  $("#back").classList.toggle("hide", step === 1);
+  $("#next").textContent = step === 4 ? "Ver meu diagnóstico" : "Continuar";
+  $("#boxNP").classList.toggle("hide", val("fase") === "NA");
+  $$("[data-only=radar]").forEach(e => e.classList.toggle("hide", val("tipo") !== "radar"));
+}
+function ok(){
+  if (step === 1 && !val("fase")) return "Escolha qual carta você recebeu.";
+  if (step === 2 && !d("dInf")) return "Informe pelo menos a data da infração.";
+  if (step === 3 && !val("tipo")) return "Escolha o tipo de infração.";
+  return "";
+}
+$("#next").onclick = () => {
+  const e = ok(); if (e) { alert(e); return; }
+  if (step < 4) { step++; show(); track("passo-"+step); $("#diag").scrollIntoView({behavior:"smooth"}); }
+  else diagnosticar();
+};
+$("#back").onclick = () => { step--; show(); };
+document.addEventListener("change", show);
+
+function diagnosticar(){
+  const fase = val("fase"), tipo = val("tipo");
+  const inf = d("dInf"), na = d("dNA"), np = d("dNP"), prazo = d("dPrazo");
+  const marc = new Set($$("[data-step='4'] input:checked").map(i => i.value));
+  const hoje = new Date(); hoje.setHours(12,0,0,0);
+  const forte = [], media = [], alerta = [], info = [];
+
+  // Prazo de 30 dias para expedir a notificação da autuação (art. 281, § 1º, II)
+  if (inf && na) {
+    const n = dias(inf, na);
+    if (n > 30) forte.push(["A notificação da autuação saiu " + n + " dias depois da infração", "O limite é de 30 dias. Passado esse prazo, o auto deve ser arquivado.", "CTB, art. 281, § 1º, II"]);
+    else if (n < 0) alerta.push(["As datas parecem invertidas", "Confira a data da infração e a da expedição da carta.", ""]);
+  }
+  // Prazo para a notificação da penalidade: 180 dias, ou 360 com defesa prévia (art. 282, §§ 6º e 7º)
+  if (fase !== "NA" && inf && np) {
+    const lim = val("defesa") === "sim" ? 360 : 180, n = dias(inf, np);
+    if (n > lim) forte.push(["A notificação da penalidade saiu " + n + " dias depois da infração", "O limite é de " + lim + " dias" + (lim === 360 ? " (houve defesa prévia)" : "") + ". Passado esse prazo, o direito de aplicar a multa decai.", "CTB, art. 282, §§ 6º e 7º"]);
+  }
+  // Dados obrigatórios do auto (art. 280)
+  if (marc.has("placa")) forte.push(["A placa está errada", "A identificação do veículo é dado obrigatório do auto. Um erro nela torna o auto inconsistente.", "CTB, art. 280, III, e art. 281, § 1º, I"]);
+  if (marc.has("local")) forte.push(["Falta local, data ou hora, ou eles estão incoerentes", "Esses dados são obrigatórios no auto de infração.", "CTB, art. 280, II"]);
+  if (marc.has("tipif")) forte.push(["A infração não está descrita", "A tipificação é dado obrigatório do auto.", "CTB, art. 280, I"]);
+  if (marc.has("marca")) media.push(["Marca, modelo ou espécie diferente", "A marca e a espécie fazem parte da identificação obrigatória. Junte a foto do documento do veículo.", "CTB, art. 280, III"]);
+  if (marc.has("agente")) media.push(["Sem identificação do órgão, do agente ou do equipamento", "A identificação é dado obrigatório do auto.", "CTB, art. 280, V"]);
+  if (tipo === "radar" && marc.has("foto")) forte.push(["A foto do radar não mostra a placa", "A imagem com a placa do veículo é exigida para a autuação por radar.", "Resolução CONTRAN 798/2020, art. 9º"]);
+  if (tipo === "radar" && marc.has("r19")) media.push(["Não havia placa de velocidade junto ao radar", "Radar fixo precisa da placa R-19. Esse argumento só se sustenta com prova (foto, vídeo ou imagem de mapa com data).", "Resolução CONTRAN 798/2020, arts. 10 e 11"]);
+  if (marc.has("condutor")) info.push(["Era outra pessoa dirigindo", fase === "NA" ? "Isso não se resolve com recurso: use o formulário de indicação de condutor, que vem junto com a Notificação de Autuação e é gratuito. Atenção ao prazo impresso na carta." : "O prazo para indicar o condutor costuma acabar na fase da autuação. Confira na carta se ainda é possível.", ""]);
+  if (tipo === "seca") alerta.push(["Lei Seca é caso grave", "Envolve suspensão da CNH e regras próprias. Recomendamos consultar um advogado em vez de usar um modelo.", ""]);
+
+  // Prazo para defender ou recorrer
+  let prazoTxt = "";
+  if (prazo) {
+    const r = dias(hoje, prazo);
+    if (r < 0) alerta.push(["O prazo impresso na carta já passou", "Recurso fora do prazo é arquivado e não suspende a multa.", "CTB, art. 285, §§ 1º e 5º"]);
+    else prazoTxt = r === 0 ? "Seu prazo termina hoje." : "Você ainda tem " + r + " dia" + (r > 1 ? "s" : "") + " para protocolar (até " + fmt(prazo) + ").";
+  } else if (fase === "NA" && na) {
+    prazoTxt = "O prazo da defesa prévia é de pelo menos 30 dias contados da expedição (CTB, art. 281-A). Confira a data exata impressa na carta.";
+  } else {
+    prazoTxt = "Confira o prazo final impresso na carta: ele não pode ser menor que 30 dias (CTB, arts. 281-A e 282, § 4º).";
+  }
+
+  const vencido = alerta.some(a => a[0].startsWith("O prazo"));
+  const temCaso = forte.length + media.length > 0 && !vencido && tipo !== "seca";
+  const etapa = fase === "NA" ? "defesa prévia" : fase === "NP" ? "recurso à JARI" : "recurso ao CETRAN";
+  const bloco = (c, a) => `<div class="res ${c}"><b>${a[0]}</b>${a[1]}${a[2] ? `<div class="law">${a[2]}</div>` : ""}</div>`;
+
+  let h = "<h2>Seu diagnóstico</h2>";
+  if (forte.length) h += `<p class="big">Encontramos ${forte.length} indício${forte.length > 1 ? "s" : ""} forte${forte.length > 1 ? "s" : ""} de falha.</p>`;
+  else if (media.length) h += `<p class="big">Encontramos ${media.length} ponto${media.length > 1 ? "s" : ""} que pode${media.length > 1 ? "m" : ""} sustentar um recurso.</p>`;
+  else h += `<p class="big">Não encontramos falha formal no que você informou.</p>`;
+  h += forte.map(a => bloco("forte", a)).join("") + media.map(a => bloco("media", a)).join("") + alerta.map(a => bloco("alerta", a)).join("") + info.map(a => bloco("info", a)).join("");
+  h += `<p class="mut">${prazoTxt}</p>`;
+
+  if (temCaso) {
+    h += `<div class="card" style="margin:14px 0 0">
+      <p><b>Seu documento pronto: ${etapa}</b></p>
+      <div class="price">R$ 19,90</div>
+      <ul class="chk">
+        <li>Documento preenchido com os argumentos acima e os artigos de lei</li>
+        <li>Lista do que anexar e passo a passo para protocolar (app, site do órgão ou Correios)</li>
+        <li>Pronto em PDF em 5 minutos, depois do pagamento</li>
+      </ul>
+      <a class="btn" id="buy" href="#">Quero meu recurso pronto</a>
+      <p class="hint">Pagamento por Pix ou cartão. Quem decide é o órgão de trânsito: não prometemos anulação.</p>
+      <div id="soon" class="res info hide"><b>Abrimos as vendas em poucos dias.</b>Seu interesse foi registrado de forma anônima. Salve esta página e volte, porque o seu prazo continua correndo.</div>
+    </div>`;
+  } else if (!vencido && tipo !== "seca") {
+    h += `<div class="res info"><b>Nossa recomendação honesta</b>Recurso sem falha concreta costuma ser negado, então não vale pagar por ele. Se for pagar a multa, pague até o vencimento com 20% de desconto (CTB, art. 284). Se aparecer algo novo, faça o diagnóstico de novo.</div>`;
+  }
+  h += `<button class="btn sec" style="margin-top:12px" onclick="location.reload()">Fazer outro diagnóstico</button>`;
+
+  const r = $("#result"); r.innerHTML = h; r.classList.remove("hide");
+  r.scrollIntoView({behavior:"smooth"});
+  track("diagnostico"); track(temCaso ? "diag-com-caso" : "diag-sem-caso");
+  const b = $("#buy");
+  if (b) b.onclick = e => {
+    track("quero-comprar");
+    if (CHECKOUT_URL) { b.href = CHECKOUT_URL; return; }
+    e.preventDefault(); $("#soon").classList.remove("hide");
+  };
+}
+show();
+</script>
+</body>
+</html>

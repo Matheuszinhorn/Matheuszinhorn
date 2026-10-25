@@ -378,3 +378,25 @@ _Ainda sem dados de mercado._
 ## COR-006 — "Margem ≈ 100%" e "demanda" estavam ditos com força demais (24/10/2026 18:52)
 - DEC-038, a matriz da DEC-039 e o relatório de 24/10 afirmaram margem de "≈ 100%" para o piloto B2B. Isso ignorava o tempo de Claude e do proprietário. **Correção:** margem **a apurar**. Estimativa (não medida): 20–60 min de Claude por caso + o tempo do proprietário para repassar mensagens; nenhum gasto em dinheiro previsto.
 - Os 51 sites são **potenciais clientes com um problema verificado**, não demanda validada. Demanda só existe com resposta, pedido ou pagamento.
+
+## DEC-047 — Nova frente: Confere Multa (25/10/2026 15:10; aprovada pelo proprietário)
+- **Contexto:** o proprietário pediu monetização em paralelo ao ciclo de trading. Também vetou as frentes antigas (B2B, Fiverr e indicação) e escolheu a ideia 2: recurso de multa de trânsito, vendido por meio de um canal sem rosto no TikTok.
+- **Decisão:**
+  - **Produto:** diagnóstico grátis, seguido de documento pago a R$ 19,90.
+  - **Order bumps:** kit das 3 fases (+R$ 12,90) e guia "CNH sem suspensão" (+R$ 7,90).
+  - **Oferta depois da compra:** pacote de 3 multas a R$ 39,90.
+- **Plataforma recomendada: Kiwify.**
+  - Order bump, oferta pós-compra, Pix, área de membros e afiliados já vêm prontos.
+  - Taxa: 8,99% + R$ 2,49 por venda, segundo fonte de terceiros (a confirmar no cadastro). Numa venda de R$ 19,90, sobram ≈ R$ 15,62.
+  - A Hotmart fica como alternativa. Ela tem o maior mercado de afiliados, o que dá mais alcance e também mais exposição a cópias.
+- **Proteção contra plágio:** nenhuma plataforma esconde a página de vendas, que é pública por natureza. A proteção vem da arquitetura:
+  1. os modelos pagos e o gerador nunca ficam no repositório público. São entregues só depois da compra, na área de membros;
+  2. a afiliação depende de aprovação manual, e o produto não aparece na vitrine pública;
+  3. vale a velocidade e o canal próprio: quem chega primeiro e tem audiência leva a vantagem;
+  4. o registro da marca no INPI fica para depois da primeira venda.
+- **Base legal:** conferida em `analises/multas/BASE-LEGAL.md`. Pendências antes da primeira cobrança:
+  - P-1: reconferir o CTB no Planalto;
+  - P-2: confirmar se a Resolução CONTRAN 798/2020 ainda está em vigor.
+- **Não muda:**
+  - o ciclo de trading na Coinbase (decisão em 27/10, sem ordem real sem aprovação);
+  - a Binance fica só com dados públicos (as chaves foram recusadas; recomendado revogá-las).

@@ -360,3 +360,23 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 
 - **Distribuição sem depender do proprietário:** README indexável no GitHub (lento, sem controle).
 - **Distribuição mais rápida:** uma postagem numa comunidade de devs (TabNews ou r/brdev). Exige uma conta humana. Não é condição para o produto existir, só acelera o teste.
+
+---
+
+## EXP-019 — Confere Multa: diagnóstico grátis e recurso pago, com vendas pelo TikTok (25/10/2026 15:10)
+- **Situação:** EM CONSTRUÇÃO. A página com o diagnóstico está pronta em `produtos/confere-multa/`.
+- **Hipótese:** motoristas multados fazem o diagnóstico grátis, e quem tem indício de falha paga R$ 19,90 pelo documento pronto.
+- **Canal:** vídeos curtos sem rosto no TikTok. Eu produzo; o proprietário cria a conta e publica. Os vídeos são marcados como feitos com IA.
+- **Pagamento:** Kiwify, conta do proprietário. Enquanto não houver link, o botão de compra mede o interesse (`cm-quero-comprar`).
+- **Medição:** contadores anônimos `cm-*`:
+  - visita;
+  - passos;
+  - diagnóstico (com ou sem caso);
+  - clique em comprar.
+- **Custo:** R$ 0. O domínio próprio (conferemulta.com.br, livre em 25/10) só entra com aprovação, depois da 1ª venda.
+
+| Marco (72 h depois do 1º vídeo) | Sucesso | Ajuste | Abandono |
+|---|---|---|---|
+| Vendas e uso | ≥ 1 venda ou ≥ 50 diagnósticos | > 1.000 visualizações e < 10 cliques: trocar o gancho | < 1.000 visualizações somadas nos 5 vídeos, depois de 1 rodada de ajuste |
+
+- **Sazonalidade (HIPÓTESE):** o pico deve vir entre o fim de dezembro e fevereiro, por causa das férias, do licenciamento e da notificação só eletrônica a partir de 1º/1/2027.

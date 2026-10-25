@@ -1116,3 +1116,16 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Filtro de região:** 7 Global, todas HUMAN_ONLY e já avaliadas antes como não executáveis por Claude sem declarar experiência ou presença que o proprietário não tem; 3 restritas (Alemanha, Espanha, Ucrânia). Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
 - **Próxima:** varredura #12 em 8 h. Critério fixado: encerrar o EXP-006 em 29/10 se continuar com 0 vagas elegíveis.
+
+## ATV-123 — Binance, mineração e nova frente (25/10/2026 15:10 BRT)
+- **Binance:**
+  - Duas chaves de API foram coladas no chat e **não foram usadas nem gravadas**. Este servidor recebe o erro 451 (local restrito) em todos os endereços da API, inclusive no ambiente de teste spot. Recomendado ao proprietário revogar as duas.
+  - `binance-mcp-server` não foi instalado: é pacote de terceiro e exigiria a chave secreta.
+  - Os skills oficiais (`binance-skills-hub`) foram instalados. Só os dados públicos funcionam.
+- **Mineração:** rejeitada. Viola os termos do ambiente e o ganho seria praticamente zero.
+- **Nova frente:** DEC-047 e EXP-019 (Confere Multa).
+  - Base legal conferida: CTB, arts. 280 a 290.
+  - A MP 1.327/2025 não altera esses artigos.
+  - A Resolução 804/2020 tirou da notificação de radar a exigência de trazer a data da verificação, e esse argumento antigo foi descartado.
+  - Página e diagnóstico testados em 2 cenários, no celular (390 px): sem erros e sem rolagem lateral.
+- **Receitas e despesas:** R$ 0 / R$ 0.
