@@ -1104,3 +1104,8 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - 8 de 36 positivas mesmo a 0,30%, concentradas em ETH;
   - SOL negativo em 10 de 12.
 - **Melhores candidatas, com poucos trades:** RSI(2) diário em BTC (+9,5%, 13 trades, queda máxima de 8,3%, acerto de 69%, payoff 0,98) e ETH (+21,5%, 8 trades), mas SOL −14%. Inconsistente entre ativos.
+
+## ATV-121 — Varredura automática #10 do Superteam (25/10/2026 00:45 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** 11. Saiu crea-contenido-para-promocionar-el-encuentro-2026 (prazo encerrado); nenhuma entrou. Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
