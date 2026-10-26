@@ -1187,3 +1187,14 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - **Elegível, mas depende do proprietário:** fazer login na RaptorX (≈ 15 min). Claude escreve as perguntas a partir do relatório e monta o envio.
 - **Demais vagas:** 6 Global, só para humanos; 2 restritas a outros países.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-130 — Relatório de 26/10 (26/10/2026 14:01 BRT)
+- **Coinbase (só leitura):**
+  - 0,8105854 USDC + 0,00054058 ETH. Bid do ETH-USDC: 2.320,89.
+  - Ordens: só a OP-001 (FILLED). Taxa *taker* de 0,1%; taxas totais de 0,00124 USDC.
+- **P&L da OP-001 (não realizado):** a posição vale 1,25463 USDC contra o custo de 1,24124, ou seja **+0,0134 USDC (+1,08%)**. Não há P&L realizado.
+- **Valor total:** 2,06522 USDC. Pela PTAX de 26/10 (venda R$ 5,5007), dá **R$ 11,36**.
+  - O bônus foi registrado valendo R$ 10,22.
+  - Dos +R$ 1,14: ≈ R$ 0,07 vêm da operação e o resto é câmbio.
+- **Confere Multa:** sem resposta do proprietário sobre paleta e checkout.
+- **RaptorX:** o proprietário fez login. Orientado a trocar ANSEM (memecoin) por um projeto legítimo (JUP, JTO, RAY ou PYTH) e enviar o relatório.
