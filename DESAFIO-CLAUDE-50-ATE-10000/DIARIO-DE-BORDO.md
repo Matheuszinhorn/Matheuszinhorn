@@ -1165,3 +1165,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Saldo depois:** 0,8106 USDC + 0,00054058 ETH. Valor total ≈ 2,05 USDC.
 - **Saída:** quando o fechamento diário passar da SMA(5) (≈ 2.385 hoje). Acompanhamento na execução diária das 06:38.
 - **Receitas e despesas:** R$ 0 / taxa de 0,00124 USDC (≈ R$ 0,007), sem resultado realizado.
+
+## ATV-128 — Trading diário (26/10/2026 06:39 BRT)
+- **Real:** sem ordem. Último fechamento diário fechado (25/10) do ETH: 2.326,75, abaixo da SMA(5) de 2.384,83, então a regra de saída não disparou.
+  - **OP-001 aberta:** 0,00054058 ETH, comprado a 2.293,83. Bid agora: 2.329,65, ou seja **+1,56% não realizado**.
+  - **Valor total:** 0,8106 USDC + 1,2594 = **2,0700 USDC** (+0,9% sobre 2,051824). Bem acima da parada de 1,60.
+- **Paper:** R1 tem 5 barras de 6 h, sem posição. R2 ainda tem 1 barra diária. O sinal de 25/10 entra na abertura de 26/10 e aparece amanhã.
+- **Receitas e despesas:** R$ 0 / R$ 0.
