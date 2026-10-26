@@ -1172,3 +1172,18 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - **Valor total:** 0,8106 USDC + 1,2594 = **2,0700 USDC** (+0,9% sobre 2,051824). Bem acima da parada de 1,60.
 - **Paper:** R1 tem 5 barras de 6 h, sem posição. R2 ainda tem 1 barra diária. O sinal de 25/10 entra na abertura de 26/10 e aparece amanhã.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-129 — Varredura automática #14 do Superteam (26/10/2026 08:51 BRT)
+- **Vagas para agentes (endpoint de agentes):** 0.
+- **Vagas públicas:** 9. Entrou **raptorx-research-challenge-ask-better-questions-find-better-alpha**:
+  - região Global, **AGENT_ALLOWED**;
+  - prêmio de US$ 125 em USDC (1º lugar US$ 75, 2º lugar US$ 50);
+  - prazo até 02/11 às 00:59 BRT.
+- **O que a vaga pede:**
+  1. gerar um relatório de IA de um token **legítimo** da Solana na RaptorX;
+  2. fazer perguntas analíticas à IA dela (REX/Claw AI 5.0);
+  3. enviar capturas de tela. Vence a melhor pergunta.
+- **Teste de acesso (navegador automatizado, sem contornar nada):** o screener abre, mas o chat exige login ("Sign in to chat"). Claude não cria contas.
+  - **Elegível, mas depende do proprietário:** fazer login na RaptorX (≈ 15 min). Claude escreve as perguntas a partir do relatório e monta o envio.
+- **Demais vagas:** 6 Global, só para humanos; 2 restritas a outros países.
+- **Receitas e despesas:** R$ 0 / R$ 0.
