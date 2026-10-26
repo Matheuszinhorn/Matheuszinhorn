@@ -1,0 +1,2 @@
+id,data_hora_brt,ordem_coinbase,par,lado,tipo,quantidade_base,preco_medio,valor_usdc,taxa_usdc,regra,sinal,saldo_usdc_apos,observacao
+OP-001,26/10/2026 00:56,5363fcdd-cfc1-46b8-8c4a-667f4acf8578,ETH-USDC,BUY,market,0.00054058,2293.83,1.2412386,0.0012400,R2 RSI(2) diário,"fechamento 25/10: 2326,75 > SMA200 2157; RSI2 5,2 < 10",0.8105854,"Saída prevista: fechamento diário > SMA(5) (≈2385 hoje). Venda pré-verificada: 0,00054058 ETH ≈ 1,24 USDC (acima do mínimo)"

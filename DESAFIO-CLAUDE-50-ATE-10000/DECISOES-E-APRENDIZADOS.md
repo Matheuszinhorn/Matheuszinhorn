@@ -400,3 +400,15 @@ _Ainda sem dados de mercado._
 - **Não muda:**
   - o ciclo de trading na Coinbase (decisão em 27/10, sem ordem real sem aprovação);
   - a Binance fica só com dados públicos (as chaves foram recusadas; recomendado revogá-las).
+
+## DEC-048 — Autorização permanente para operar e 1ª ordem real (26/10/2026 00:56)
+- **Autorização do proprietário:** "você tem liberdade, aprovação de operar a qualquer momento [...] usando valores disponíveis [...] Sempre com intuito do lucro."
+  - Isso substitui a exigência de aprovação prévia de cada ordem (DEC-046).
+  - Os demais limites continuam: spot, sem alavancagem, sem transferências, nunca o capital inteiro numa operação.
+- **Regras operacionais:** fixadas em `analises/quant/trading-2026/real/REGRAS-REAIS.md`. Só regra testada fora da amostra, 1 posição de até ≈ 60% do saldo e parada total abaixo de 1,60 USDC.
+- **1ª ordem (OP-001):** a R2 deu sinal de entrada no fechamento de 25/10.
+  - O sinal apareceu tanto no BTC (RSI2 7,8) quanto no ETH (RSI2 5,2), os dois acima da SMA200.
+  - Escolhido o ETH: o sinal estava mais extremo e o resultado fora da amostra foi melhor.
+  - Compra a mercado de 1,25 USDC: 0,00054058 ETH a 2.293,83, taxa de 0,1%.
+  - A venda foi pré-verificada por prévia.
+- **Por que 1,25 e não 1,00:** com 1,00, qualquer queda deixaria a posição abaixo do mínimo de venda (1 USDC). Com 1,25, ela continua vendável mesmo com queda de até ≈ 20%.

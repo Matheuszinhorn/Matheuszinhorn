@@ -1157,3 +1157,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Filtro de região:** 6 Global, todas só para humanos e não executáveis; 2 restritas (Espanha e Ucrânia). Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
 - **Próxima:** varredura #14 em 8 h.
+
+## ATV-127 — 1ª operação real: OP-001 ETH-USDC (26/10/2026 00:56 BRT)
+- **Autorização:** permanente, do proprietário (DEC-048).
+- **Sinal:** R2, no fechamento diário de 25/10 (ETH: RSI2 5,2; fechamento de 2.326,75, acima da SMA200 de 2.157).
+- **Ordem:** compra a mercado de 1,25 USDC. **Executada:** 0,00054058 ETH a 2.293,83. Taxa: 0,00124 USDC.
+- **Saldo depois:** 0,8106 USDC + 0,00054058 ETH. Valor total ≈ 2,05 USDC.
+- **Saída:** quando o fechamento diário passar da SMA(5) (≈ 2.385 hoje). Acompanhamento na execução diária das 06:38.
+- **Receitas e despesas:** R$ 0 / taxa de 0,00124 USDC (≈ R$ 0,007), sem resultado realizado.
