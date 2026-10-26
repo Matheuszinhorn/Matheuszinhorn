@@ -1136,3 +1136,17 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Filtro de região:** 6 Global, todas só para humanos e não executáveis; 3 restritas a outros países. Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
 - **Próxima:** varredura #13 em 8 h.
+
+## ATV-125 — Retrato do mercado depois do 2º turno (25/10/2026 23:55 BRT)
+- **Contexto:** reeleição de Lula, segundo o noticiário da noite. O dólar futuro subiu ≈ 11% em Chicago e o ETF do Ibovespa (EWZ) caiu até ≈ 20% nos EUA.
+- **Coinbase:** saldo de 2,051824 USDC (bônus FIN-002), conferido só por leitura. **0 ordens** desde 20/10.
+- **Cripto em dólar, últimas 24 h** (Coinbase, velas de 1 h, 02:00 UTC):
+  - BTC: US$ 79.545 (−1,6%);
+  - ETH: US$ 2.302 (−2,6%);
+  - SOL: US$ 100,57 (−1,7%).
+- **Cripto em real:** o USDT/BRL na Binance (dado público) foi a R$ 5,3976, alta de 7,8% em 24 h. O BTC/BRL subiu 5,9%.
+  - **Leitura:** a alta em real é só o dólar subindo. O preço das criptos em dólar caiu.
+- **Bônus em reais (estimativa, não realizada):** 2,051824 × 5,3976 ≈ R$ 11,07, contra R$ 10,22 no registro.
+  - O ganho é de variação cambial, não é receita do desafio.
+  - A cotação oficial (PTAX) sai na segunda-feira.
+- **Simulação (paper trading):** ainda sem barras suficientes. Próxima execução em 26/10 às 06:38, e a decisão das 72 h em 27/10 às 19:30.
