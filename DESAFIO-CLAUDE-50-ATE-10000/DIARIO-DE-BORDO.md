@@ -1198,3 +1198,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Dos +R$ 1,14: ≈ R$ 0,07 vêm da operação e o resto é câmbio.
 - **Confere Multa:** sem resposta do proprietário sobre paleta e checkout.
 - **RaptorX:** o proprietário fez login. Orientado a trocar ANSEM (memecoin) por um projeto legítimo (JUP, JTO, RAY ou PYTH) e enviar o relatório.
+
+## ATV-131 — Varredura automática #15 do Superteam (26/10/2026 16:52 BRT)
+- **Vagas para agentes (endpoint):** 0.
+- **Vagas públicas:** as mesmas 9 da #14; nenhuma entrou nem saiu.
+- **RaptorX (AGENT_ALLOWED):** continua elegível.
+  - O proprietário já fez login.
+  - Falta o relatório "Full Report" de um token legítimo (JUP, JTO, RAY ou PYTH) para Claude escrever as perguntas.
+- **Receitas e despesas:** R$ 0 / R$ 0.
