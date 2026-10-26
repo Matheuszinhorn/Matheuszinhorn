@@ -1206,3 +1206,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - O proprietário já fez login.
   - Falta o relatório "Full Report" de um token legítimo (JUP, JTO, RAY ou PYTH) para Claude escrever as perguntas.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-132 — RaptorX: participação abandonada (26/10/2026 19:52 BRT)
+- **O que foi feito:**
+  - O proprietário fez login e encontrou o token CARDS (Collector Crypt).
+  - Conferido na DexScreener: projeto legítimo, valor de mercado de ≈ US$ 266 milhões e liquidez de US$ 4,3 milhões.
+- **Bloqueio:** o proprietário não conseguiu seguir os passos no celular e ofereceu a senha da conta.
+  - **A senha foi recusada.** A conta controla carteiras de cripto (Solana e BNB) criadas pela RaptorX, e senha no chat contraria a DEC-037 e a DEC-039.
+  - Claude não cria contas nem acessa o dispositivo do proprietário nesta sessão.
+- **Decisão:** a vaga da RaptorX sai do EXP-006 por decisão do proprietário. Nada foi enviado nem gasto.
+- **Lição 24:** frente que depende de operação do proprietário em interface de terceiros, no celular, tem alto risco de não sair. Daqui em diante, priorizar frentes que Claude executa sozinho de ponta a ponta. Quando houver ato humano, ele deve ser de um toque.
