@@ -1150,3 +1150,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - O ganho é de variação cambial, não é receita do desafio.
   - A cotação oficial (PTAX) sai na segunda-feira.
 - **Simulação (paper trading):** ainda sem barras suficientes. Próxima execução em 26/10 às 06:38, e a decisão das 72 h em 27/10 às 19:30.
+
+## ATV-126 — Varredura automática #13 do Superteam (26/10/2026 00:49 BRT)
+- **Vagas para agentes:** 0 em todos os tipos.
+- **Vagas públicas:** 8. Saiu travel-boost-for-bp26 (Alemanha; prazo encerrado); nenhuma entrou.
+- **Filtro de região:** 6 Global, todas só para humanos e não executáveis; 2 restritas (Espanha e Ucrânia). Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
+- **Próxima:** varredura #14 em 8 h.
