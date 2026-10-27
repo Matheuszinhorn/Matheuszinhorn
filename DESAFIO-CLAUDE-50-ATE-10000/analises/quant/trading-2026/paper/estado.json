@@ -1,55 +1,55 @@
 {
- "atualizado_utc": "2026-10-26T09:39+00:00",
- "total_virtual_brl": 50.0,
- "retorno_total_pct": 0.0,
+ "atualizado_utc": "2026-10-27T09:39+00:00",
+ "total_virtual_brl": 49.9,
+ "retorno_total_pct": -0.201,
  "carteiras": [
   {
    "carteira": "R1-momentum-6h",
    "ativo": "BTC-USD",
-   "barras": 5,
+   "barras": 9,
    "valor": 12.5,
    "ret": 0.0,
    "ret_estresse": 0.0,
    "mdd": 0,
    "trades": 0,
-   "bh": -0.773,
+   "bh": -1.165,
    "posicao": "caixa"
   },
   {
    "carteira": "R1-momentum-6h",
    "ativo": "ETH-USD",
-   "barras": 5,
+   "barras": 9,
    "valor": 12.5,
    "ret": 0.0,
    "ret_estresse": 0.0,
    "mdd": 0,
    "trades": 0,
-   "bh": -1.333,
+   "bh": -1.832,
    "posicao": "caixa"
   },
   {
    "carteira": "R2-rsi2-1d",
    "ativo": "BTC-USD",
-   "barras": 0,
-   "valor": 12.5,
-   "ret": 0,
-   "ret_estresse": 0,
-   "mdd": 0,
-   "trades": 0,
-   "bh": 0,
-   "posicao": "sem dados"
+   "barras": 2,
+   "valor": 12.4631,
+   "ret": -0.295,
+   "ret_estresse": -0.654,
+   "mdd": -0.12,
+   "trades": 1,
+   "bh": -0.942,
+   "posicao": "comprado"
   },
   {
    "carteira": "R2-rsi2-1d",
    "ativo": "ETH-USD",
-   "barras": 0,
-   "valor": 12.5,
-   "ret": 0,
-   "ret_estresse": 0,
-   "mdd": 0,
-   "trades": 0,
-   "bh": 0,
-   "posicao": "sem dados"
+   "barras": 2,
+   "valor": 12.4366,
+   "ret": -0.507,
+   "ret_estresse": -0.866,
+   "mdd": -0.12,
+   "trades": 1,
+   "bh": -1.487,
+   "posicao": "comprado"
   }
  ]
 }

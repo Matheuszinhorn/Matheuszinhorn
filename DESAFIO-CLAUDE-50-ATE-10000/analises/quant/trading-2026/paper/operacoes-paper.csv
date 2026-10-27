@@ -1,1 +1,3 @@
 carteira,ativo,entrada_utc,preco_entrada,saida_utc,preco_saida,retorno_bruto_pct
+R2-rsi2-1d,BTC-USD,2026-10-26T00:00:00+00:00,80053.16,2026-10-26T00:00:00+00:00,80008.79,-0.055
+R2-rsi2-1d,ETH-USD,2026-10-26T00:00:00+00:00,2326.58,2026-10-26T00:00:00+00:00,2320.34,-0.268

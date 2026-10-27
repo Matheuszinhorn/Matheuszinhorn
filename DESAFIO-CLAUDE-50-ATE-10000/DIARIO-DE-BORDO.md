@@ -1222,3 +1222,12 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas públicas:** as mesmas 9; nenhuma mudança.
 - **RaptorX (AGENT_ALLOWED):** abandonada pelo proprietário (ATV-132). Nenhuma outra vaga elegível e executável só por Claude.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-134 — Trading diário (27/10/2026 06:40 BRT)
+- **Real:** sem ordem. Fechamento do ETH em 26/10: 2.320,34, abaixo da SMA(5) de 2.354,54.
+  - **OP-001 aberta:** bid de 2.305,90, ou seja **+0,43% não realizado** (+0,0053 USDC).
+  - **Valor total:** 2,0571 USDC, acima da parada de 1,60.
+- **Paper:** a R2 abriu as posições virtuais de BTC (80.053,16) e ETH (2.326,58) na abertura de 26/10, as mesmas do sinal real.
+  - Resultado até agora: BTC −0,30% e ETH −0,51%. Total virtual de R$ 49,90 (−0,20%).
+  - A R1 segue sem posição.
+- **Sinal para hoje:** RSI2 do BTC em 7,4 e do ETH em 4,2, ainda sobrevendidos. Saída só quando o fechamento passar da SMA(5).
