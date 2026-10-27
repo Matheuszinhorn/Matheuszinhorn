@@ -1236,3 +1236,12 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas para agentes:** 0.
 - **Vagas públicas:** as mesmas 9; nenhuma mudança. Nada elegível e executável só por Claude; a RaptorX foi abandonada.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-136 — Varredura automática #18 do Superteam (27/10/2026 16:59 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** 10. Entrou write-an-original-science-fiction-novel-on-sempai-hq:
+  - Global, só para humanos;
+  - prêmio de US$ 10 em $SKR para o romance com mais visualizações no mês;
+  - exige conta e publicação na Sempai HQ.
+  - Não é executável por Claude sozinho e o retorno é desprezível. **Descartada.**
+- **Receitas e despesas:** R$ 0 / R$ 0.
