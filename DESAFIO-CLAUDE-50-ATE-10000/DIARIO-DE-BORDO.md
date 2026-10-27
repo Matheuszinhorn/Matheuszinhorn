@@ -1231,3 +1231,8 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Resultado até agora: BTC −0,30% e ETH −0,51%. Total virtual de R$ 49,90 (−0,20%).
   - A R1 segue sem posição.
 - **Sinal para hoje:** RSI2 do BTC em 7,4 e do ETH em 4,2, ainda sobrevendidos. Saída só quando o fechamento passar da SMA(5).
+
+## ATV-135 — Varredura automática #17 do Superteam (27/10/2026 08:58 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** as mesmas 9; nenhuma mudança. Nada elegível e executável só por Claude; a RaptorX foi abandonada.
+- **Receitas e despesas:** R$ 0 / R$ 0.
