@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300">
+  <g transform="translate(10 10) scale(0.5547)">
+    <rect width="512" height="512" rx="112" fill="#111111"/>
+    <rect x="116" y="116" width="280" height="280" rx="44" transform="rotate(45 256 256)" fill="#FFD31A"/>
+    <path d="M176 262 l54 54 l108 -116" fill="none" stroke="#111111" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="330" y="178" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-weight="800" font-size="150" letter-spacing="-4" fill="#111111">confere</text>
+  <text x="334" y="262" font-family="DejaVu Sans, Inter, Arial, sans-serif" font-weight="700" font-size="74" letter-spacing="18" fill="#111111">MULTA</text>
+</svg>
