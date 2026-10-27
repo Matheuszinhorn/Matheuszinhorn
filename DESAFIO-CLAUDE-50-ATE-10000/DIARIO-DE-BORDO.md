@@ -1216,3 +1216,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Claude não cria contas nem acessa o dispositivo do proprietário nesta sessão.
 - **Decisão:** a vaga da RaptorX sai do EXP-006 por decisão do proprietário. Nada foi enviado nem gasto.
 - **Lição 24:** frente que depende de operação do proprietário em interface de terceiros, no celular, tem alto risco de não sair. Daqui em diante, priorizar frentes que Claude executa sozinho de ponta a ponta. Quando houver ato humano, ele deve ser de um toque.
+
+## ATV-133 — Varredura automática #16 do Superteam (27/10/2026 00:53 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** as mesmas 9; nenhuma mudança.
+- **RaptorX (AGENT_ALLOWED):** abandonada pelo proprietário (ATV-132). Nenhuma outra vaga elegível e executável só por Claude.
+- **Receitas e despesas:** R$ 0 / R$ 0.
