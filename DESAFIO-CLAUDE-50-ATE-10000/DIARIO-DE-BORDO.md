@@ -1245,3 +1245,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - exige conta e publicação na Sempai HQ.
   - Não é executável por Claude sozinho e o retorno é desprezível. **Descartada.**
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-137 — Decisão do ciclo de 72 h (27/10/2026 19:31 BRT)
+- **Classificação B (DEC-050).** O paper foi atualizado: R$ 49,90 (−0,20%).
+- **OP-001:** 0,00054058 ETH. Bid de 2.346,43, ou seja **+2,19% não realizado** (+0,0272 USDC).
+  - Valor total: 2,0790 USDC. Pela PTAX de 26/10 (R$ 5,5007), ≈ R$ 11,44.
+- O agendamento diário segue (paper e real pelas regras, sem aumento de capital). A próxima revisão de critérios é em 20/12.

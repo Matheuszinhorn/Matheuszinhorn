@@ -1,30 +1,30 @@
 {
- "atualizado_utc": "2026-10-27T09:39+00:00",
+ "atualizado_utc": "2026-10-27T22:30+00:00",
  "total_virtual_brl": 49.9,
  "retorno_total_pct": -0.201,
  "carteiras": [
   {
    "carteira": "R1-momentum-6h",
    "ativo": "BTC-USD",
-   "barras": 9,
+   "barras": 11,
    "valor": 12.5,
    "ret": 0.0,
    "ret_estresse": 0.0,
    "mdd": 0,
    "trades": 0,
-   "bh": -1.165,
+   "bh": -0.465,
    "posicao": "caixa"
   },
   {
    "carteira": "R1-momentum-6h",
    "ativo": "ETH-USD",
-   "barras": 9,
+   "barras": 11,
    "valor": 12.5,
    "ret": 0.0,
    "ret_estresse": 0.0,
    "mdd": 0,
    "trades": 0,
-   "bh": -1.832,
+   "bh": -0.514,
    "posicao": "caixa"
   },
   {

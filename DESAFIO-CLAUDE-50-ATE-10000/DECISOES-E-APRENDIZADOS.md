@@ -421,3 +421,20 @@ _Ainda sem dados de mercado._
   - O código é entregue só a quem compra, pela Kiwify.
   - Limite: um comprador pode repassar o código. Mitigação: trocar o código e cifrar de novo de tempos em tempos.
 - **Testes:** código errado é recusado; código certo libera o gerador. Recurso à JARI gerado com 3 argumentos (prazo de 30 dias, decadência de 180 dias, foto do radar), sem campos em branco, a 390 px.
+
+## DEC-050 — Fim do ciclo de 72 h: classificação **B** (27/10/2026 19:31)
+- **Evidência:**
+  - **Walk-forward (36 combinações):** só 11 positivas fora da amostra. Média negativa em todas as famílias (SMA −13,9%, momentum −18,7%, RSI2 −9,4%, rompimento −1,0%) e todas as de 1 h negativas.
+  - **Melhor candidata, R2 diária:** BTC +9,5% (13 operações) e ETH +21,5% (8 operações). Amostras pequenas demais para afirmar vantagem.
+  - **Paper de 72 h:** R1 sem operações; R2 com 1 posição virtual por ativo (BTC −0,30%, ETH −0,51%). Total de R$ 49,90 (−0,20%). Sem poder estatístico, como previsto no REGRAS.md.
+  - **Real (OP-001, ETH):** +2,19% não realizado (bid de 2.346,43 contra entrada de 2.293,83). Uma operação não prova nada.
+- **Classificação: B.** Não há vantagem demonstrada.
+  - Não proponho aumentar o capital nem tratar o trading como fonte de receita do desafio.
+- **O que muda e o que fica:**
+  1. **R2 real continua só como experimento de microvalor** (bônus de ≈ US$ 2), dentro da autorização permanente do proprietário (DEC-048) e do REGRAS-REAIS.md, sem alterar regras.
+     - Fechar a OP-001 agora contrariaria a própria regra e só somaria taxa.
+     - A saída segue a regra (fechamento > SMA5).
+  2. **Nenhum depósito adicional** (nem dos R$ 50) para trading enquanto a classificação for B.
+  3. **O paper continua até 20/12** com os 4 critérios originais do REGRAS.md. É lá que se decide se o trading vira fonte de receita.
+  4. **Reformulação possível (sem pressa):** testar a R2 em mais ativos e em um período maior, para aumentar a amostra antes de qualquer conclusão.
+- **Foco do desafio:** passa a ser o EXP-019 (Confere Multa), que tem caminho real para receita.
