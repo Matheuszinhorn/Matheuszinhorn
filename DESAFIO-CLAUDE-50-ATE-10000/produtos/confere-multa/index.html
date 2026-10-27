@@ -6,13 +6,16 @@
 <title>Confere Multa: sua multa tem falha?</title>
 <meta name="description" content="Diagnóstico grátis em 2 minutos: confira se a sua multa de trânsito tem falhas de prazo ou de preenchimento previstas no Código de Trânsito. Sem cadastro, nada é enviado.">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--tx:#14171c;--mut:#5b6472;--line:#e3e6eb;--pri:#0b6bcb;--pri2:#0957a6;--ok:#137a3f;--okbg:#e8f6ee;--warn:#9a5b00;--warnbg:#fff4e0;--bad:#b42318;--badbg:#fdecea;--chip:#eef3fb}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1216;--card:#171b21;--tx:#e8ebf0;--mut:#9aa4b2;--line:#2a313b;--pri:#4c9bec;--pri2:#6aaef2;--ok:#5fd08f;--okbg:#13291d;--warn:#f0b35a;--warnbg:#2c2212;--bad:#ff8a80;--badbg:#2d1715;--chip:#1c2633}}
+:root{--bg:#fffbea;--card:#fff;--tx:#111;--mut:#4a4a4a;--line:#ece3bf;--pri:#111;--pri2:#000;--ok:#0f7b4f;--okbg:#e7f6ee;--warn:#9a5b00;--warnbg:#fff4e0;--bad:#b42318;--badbg:#fdecea;--chip:#ffd31a;--acc:#ffd31a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14130c;--card:#1d1c14;--tx:#f3f0e2;--mut:#b9b39a;--line:#3a3726;--pri:#ffd31a;--pri2:#ffe25e;--ok:#5fd08f;--okbg:#13291d;--warn:#f0b35a;--warnbg:#2c2212;--bad:#ff8a80;--badbg:#2d1715;--chip:#ffd31a;--acc:#ffd31a}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .wrap{max-width:640px;margin:0 auto;padding:16px}
-header{padding:28px 0 8px}
-.tag{display:inline-block;background:var(--chip);color:var(--pri);font-weight:600;font-size:13px;padding:4px 10px;border-radius:99px}
+header{background:var(--acc);color:#111;margin:-16px -16px 0;padding:32px 16px 24px;border-bottom:6px solid #111}
+header .mut{color:#333}
+header .btn{background:#111;color:#ffd31a}
+.btn{color:var(--bg)}
+.tag{display:inline-block;background:#111;color:#ffd31a;font-weight:600;font-size:13px;padding:4px 10px;border-radius:99px}
 h1{font-size:30px;line-height:1.15;margin:12px 0 8px;letter-spacing:-.01em}
 h2{font-size:21px;margin:0 0 12px}
 p{margin:0 0 12px}
@@ -153,7 +156,7 @@ footer{font-size:13px;color:var(--mut);padding:20px 0 40px}
 </section>
 
 <footer>
-  Confere Multa · ferramenta de documento, não é assessoria jurídica. Base legal: Lei 9.503/1997 (CTB), conferida em 25/10/2026.
+  Confere Multa · serviço privado, sem vínculo com Detran ou qualquer órgão de trânsito. Ferramenta de documento, não é assessoria jurídica. Base legal: Lei 9.503/1997 (CTB), conferida em 25/10/2026.
 </footer>
 </div>
 

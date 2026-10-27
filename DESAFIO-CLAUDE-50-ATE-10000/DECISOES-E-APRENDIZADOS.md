@@ -412,3 +412,12 @@ _Ainda sem dados de mercado._
   - Compra a mercado de 1,25 USDC: 0,00054058 ETH a 2.293,83, taxa de 0,1%.
   - A venda foi pré-verificada por prévia.
 - **Por que 1,25 e não 1,00:** com 1,00, qualquer queda deixaria a posição abaixo do mínimo de venda (1 USDC). Com 1,25, ela continua vendável mesmo com queda de até ≈ 20%.
+
+## DEC-049 — Kiwify, paleta C e gerador cifrado (27/10/2026 09:05)
+- **Contexto:** o proprietário tem conta no Mercado Pago e na Kiwify. Pela lição 24 (o mínimo possível de passos do proprietário), fica escolhida a **Kiwify**: entrega automática, sem configurar servidor.
+- **Paleta C (amarelo e preto)** aplicada, com o aviso "serviço privado, sem vínculo com o Detran". O proprietário não escolheu entre as opções; segue a recomendação.
+- **Proteção contra cópia:** o `gerador.html` público carrega os modelos **cifrados** (AES-GCM; chave derivada do código de acesso por PBKDF2 com 250 mil iterações).
+  - Sem o código, o texto dos recursos não aparece nem no código-fonte.
+  - O código é entregue só a quem compra, pela Kiwify.
+  - Limite: um comprador pode repassar o código. Mitigação: trocar o código e cifrar de novo de tempos em tempos.
+- **Testes:** código errado é recusado; código certo libera o gerador. Recurso à JARI gerado com 3 argumentos (prazo de 30 dias, decadência de 180 dias, foto do radar), sem campos em branco, a 390 px.
