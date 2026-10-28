@@ -1251,3 +1251,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **OP-001:** 0,00054058 ETH. Bid de 2.346,43, ou seja **+2,19% não realizado** (+0,0272 USDC).
   - Valor total: 2,0790 USDC. Pela PTAX de 26/10 (R$ 5,5007), ≈ R$ 11,44.
 - O agendamento diário segue (paper e real pelas regras, sem aumento de capital). A próxima revisão de critérios é em 20/12.
+
+## ATV-138 — Checkout da Kiwify ligado à página (28/10/2026)
+- **Proprietário criou o produto:**
+  - página de vendas (link curto) https://kiwify.app/iSSg8EM, que redireciona para a página;
+  - checkout https://pay.kiwify.com.br/umHF0A3.
+- **Botão "Quero meu recurso pronto"** passa a abrir o checkout (`CHECKOUT_URL`). Testado.
+- **Bloqueio da Kiwify:** o checkout mostra "complete o cadastro antes de vender". Falta o proprietário enviar dados e conta bancária. **Ainda não é possível vender.**
+- **Pedido de acesso à conta da Kiwify:** recusado. A conta guarda dados bancários e saques (DEC-037 e DEC-039). O proprietário continua com a operação na conta, guiado por Claude.
