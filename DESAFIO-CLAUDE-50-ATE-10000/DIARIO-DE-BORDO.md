@@ -1265,3 +1265,12 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas públicas:** as mesmas 10; nenhuma mudança. Nada elegível e executável só por Claude.
 - **Receitas e despesas:** R$ 0 / R$ 0.
 - **Próxima:** varredura #20, a última antes do critério de encerramento de 29/10.
+
+## ATV-140 — OP-002: venda do ETH com lucro (28/10/2026 07:46 BRT)
+- **Sinal de saída (R2):** fechamento do ETH em 27/10 de 2.347,01, acima da SMA(5) de 2.346,77. Prévia: taxa de 0,1% e escorregamento de 0.
+- **Venda a mercado:** 0,00054058 ETH a **2.367,75**. Recebidos 1,2786783 USDC, com taxa de 0,00128.
+- **Resultado da operação (OP-001 + OP-002):** **+0,0374 USDC (+3,02% líquido de taxas)**. Pela PTAX de 27/10 (R$ 5,3346), **R$ 0,20**. É o **primeiro lucro realizado do desafio**.
+- **Saldo:** 2,0892637 USDC (estava em 2,051824). Sem posição aberta.
+- **Nova entrada:** não há. RSI2 do BTC em 70,6 e do ETH em 62,0, longe de 10.
+- **Paper:** R$ 50,17 (+0,33%). A saída virtual da R2 ocorre na abertura de 28/10.
+- **Lembrete (DEC-050):** uma operação não prova vantagem; a classificação continua B.
