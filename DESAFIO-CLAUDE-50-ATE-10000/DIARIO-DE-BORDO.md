@@ -1274,3 +1274,8 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Nova entrada:** não há. RSI2 do BTC em 70,6 e do ETH em 62,0, longe de 10.
 - **Paper:** R$ 50,17 (+0,33%). A saída virtual da R2 ocorre na abertura de 28/10.
 - **Lembrete (DEC-050):** uma operação não prova vantagem; a classificação continua B.
+
+## ATV-141 — Varredura automática #20 do Superteam (28/10/2026 09:04 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** 11. Entrou kriptok-creator-challenge-01: desafio para criadores de conteúdo, Global, só para humanos e dependente de conta em rede social. **Descartada:** não é executável por Claude sozinho.
+- **Receitas e despesas:** R$ 0 / R$ 0.
