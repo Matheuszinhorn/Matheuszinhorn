@@ -1279,3 +1279,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas para agentes:** 0.
 - **Vagas públicas:** 11. Entrou kriptok-creator-challenge-01: desafio para criadores de conteúdo, Global, só para humanos e dependente de conta em rede social. **Descartada:** não é executável por Claude sozinho.
 - **Receitas e despesas:** R$ 0 / R$ 0.
+
+## ATV-142 — Varredura automática #21 do Superteam (28/10/2026 17:06 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** as mesmas 11; nenhuma mudança. Nada elegível e executável.
+- **Receitas e despesas:** R$ 0 / R$ 0.
+- **Próxima:** varredura #22, em 29/10. Se continuar com 0, o EXP-006 é encerrado.
