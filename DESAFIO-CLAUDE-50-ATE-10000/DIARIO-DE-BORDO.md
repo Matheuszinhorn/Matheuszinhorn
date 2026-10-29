@@ -1293,3 +1293,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Focos que seguem:**
   - EXP-019 (Confere Multa), já à venda na Kiwify;
   - trading R2 com o bônus (DEC-050, saldo de 2,0893 USDC).
+
+## ATV-144 — Trading diário (29/10/2026 06:40 BRT)
+- **Real:** sem posição e sem sinal de entrada (RSI2 do BTC em 83,5 e do ETH em 73,7, longe de 10). Saldo de 2,0893 USDC.
+- **Paper:** a R2 fechou as 2 operações virtuais na abertura de 28/10: BTC +0,93% e ETH +0,87% brutos.
+  - Total virtual de R$ 50,17 (+0,33%), com 2 operações fechadas (o critério de 20/12 pede ≥ 8).
+  - A R1 segue sem sinal.
