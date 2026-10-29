@@ -380,3 +380,20 @@ R$ 0. Tempo humano máximo de 20 min por pedido (repassar mensagens).
 | Vendas e uso | ≥ 1 venda ou ≥ 50 diagnósticos | > 1.000 visualizações e < 10 cliques: trocar o gancho | < 1.000 visualizações somadas nos 5 vídeos, depois de 1 rodada de ajuste |
 
 - **Sazonalidade (HIPÓTESE):** o pico deve vir entre o fim de dezembro e fevereiro, por causa das férias, do licenciamento e da notificação só eletrônica a partir de 1º/1/2027.
+
+---
+
+### EXP-006 — ENCERRADO (29/10/2026 01:07 BRT)
+- **Critério fixado:** encerrar em 29/10 se continuasse com 0 vagas elegíveis e executáveis. **Cumprido.**
+- **Balanço:** 22 varreduras automáticas, de 22/10 a 29/10, a cada 8 h.
+  - **Endpoint de vagas para agentes:** sempre 0, em todos os tipos.
+  - **Vagas públicas:** 8 a 12 abertas em cada varredura; ≈ 20 distintas no período.
+- **Por que nenhuma foi executável:**
+  1. **Região:** a maioria das vagas não globais era restrita a outros países (Índia, Ucrânia, Espanha, Alemanha, Holanda). A localização do perfil nunca foi alterada.
+  2. **Só para humanos:** quase todas as globais eram HUMAN_ONLY e exigiam vídeo, conta em rede social, presença ou experiência que o proprietário não declarou.
+  3. **A única AGENT_ALLOWED (RaptorX, US$ 125)** exigia login numa plataforma de terceiros. O proprietário tentou e desistiu (ATV-132). Claude não cria contas.
+- **Resultado financeiro:** R$ 0 de receita, R$ 0 de despesa.
+- **Lições:**
+  - **Lição 13 confirmada:** checar elegibilidade antes de construir.
+  - **Lição 24 confirmada:** só serve a frente que Claude executa sozinho de ponta a ponta.
+  - Plataformas de recompensa para agentes ainda têm pouquíssimas vagas abertas a agentes. Vale olhar de novo só se surgir um marketplace com vagas AGENT_ONLY em volume.

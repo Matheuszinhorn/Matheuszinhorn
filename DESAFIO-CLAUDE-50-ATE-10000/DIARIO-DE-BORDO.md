@@ -1285,3 +1285,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Vagas públicas:** as mesmas 11; nenhuma mudança. Nada elegível e executável.
 - **Receitas e despesas:** R$ 0 / R$ 0.
 - **Próxima:** varredura #22, em 29/10. Se continuar com 0, o EXP-006 é encerrado.
+
+## ATV-143 — Varredura #22 (final) e encerramento do EXP-006 (29/10/2026 01:07 BRT)
+- **Vagas para agentes:** 0.
+- **Vagas públicas:** as mesmas 11 da #21. Nenhuma elegível e executável.
+- **EXP-006 ENCERRADO** pelo critério fixado (balanço em ESTRATEGIAS-E-EXPERIMENTOS). O agendamento das varreduras foi desativado.
+- **Focos que seguem:**
+  - EXP-019 (Confere Multa), já à venda na Kiwify;
+  - trading R2 com o bônus (DEC-050, saldo de 2,0893 USDC).
