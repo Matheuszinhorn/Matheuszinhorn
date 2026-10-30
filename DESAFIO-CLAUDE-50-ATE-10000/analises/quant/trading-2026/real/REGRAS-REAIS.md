@@ -25,3 +25,8 @@
 - No backtest, a R2 deu +9,5% no BTC e +21,5% no ETH fora da amostra, com amostra pequena (13 e 8 operações).
 - A classificação preliminar continua B: ainda não há vantagem estatisticamente demonstrada.
 - Lucro não é garantido.
+
+## Taxas sempre na conta (pedido do proprietário, 30/10/2026)
+- Todo relatório de operação mostra: **resultado bruto, taxas pagas (compra + venda) e resultado líquido**.
+- O resultado oficial é sempre o **líquido**, conferido pelo saldo real da Coinbase, que já desconta tudo.
+- Para posição aberta, o relatório informa o **preço de equilíbrio**: o preço em que a venda empata depois das duas taxas (≈ entrada × 1,001/0,999, com taxa *taker* de 0,1%).
