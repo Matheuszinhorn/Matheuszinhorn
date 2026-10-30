@@ -1299,3 +1299,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Paper:** a R2 fechou as 2 operações virtuais na abertura de 28/10: BTC +0,93% e ETH +0,87% brutos.
   - Total virtual de R$ 50,17 (+0,33%), com 2 operações fechadas (o critério de 20/12 pede ≥ 8).
   - A R1 segue sem sinal.
+
+## ATV-145 — OP-003: nova compra de ETH pela R2 (30/10/2026 08:43 BRT)
+- **Sinal:** fechamento do ETH em 29/10: 2.248,34. RSI2 de 9,5 e fechamento acima da SMA200 de 2.159. O BTC teve RSI2 de 10,8, sem sinal.
+- **Compra a mercado de 1,25 USDC:** **0,00055412 ETH a 2.237,78**, com taxa de 0,00124. A prévia teve escorregamento de ≈ 0.
+- **Saldo:** 0,8488 USDC + 0,00055412 ETH. A venda passa por cima do mínimo de 1 USDC mesmo com queda de até ≈ 19%.
+- **Observação:** antes da compra o saldo de USDC era de 2,0900257, ou seja, +0,00076 em relação ao fim da OP-002. Provável rendimento do USDC na Coinbase. Ainda não foi lançado como receita.
+- **Paper:** total virtual de R$ 50,17. A R2 abre posição virtual de ETH na abertura de 30/10 e aparece amanhã.
