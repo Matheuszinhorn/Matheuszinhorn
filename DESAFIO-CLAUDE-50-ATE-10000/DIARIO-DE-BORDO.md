@@ -1306,3 +1306,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Saldo:** 0,8488 USDC + 0,00055412 ETH. A venda passa por cima do mínimo de 1 USDC mesmo com queda de até ≈ 19%.
 - **Observação:** antes da compra o saldo de USDC era de 2,0900257, ou seja, +0,00076 em relação ao fim da OP-002. Provável rendimento do USDC na Coinbase. Ainda não foi lançado como receita.
 - **Paper:** total virtual de R$ 50,17. A R2 abre posição virtual de ETH na abertura de 30/10 e aparece amanhã.
+
+## ATV-146 — Trading diário (31/10/2026 06:40 BRT)
+- **Real (OP-003 aberta):** sem ordem.
+  - Fechamento do ETH em 30/10: 2.241,07, abaixo da SMA(5) de 2.302,73, então a saída não disparou.
+  - Bid de 2.241,83. Bruto +0,00224 USDC; taxa de compra −0,00124; taxa de venda estimada −0,00124. **Líquido se vendesse agora: −0,00024 USDC.** O equilíbrio é 2.242,26.
+  - Valor total: 2,0910 USDC.
+- **BTC também deu sinal** (RSI2 8,3, fechamento 77.180 > SMA200 73.114), mas a regra real permite **1 posição por vez**. Não comprou.
+- **Paper:** a R2 mantém ETH virtual e abre BTC virtual na abertura de 31/10. Total de R$ 50,09 (+0,19%).
