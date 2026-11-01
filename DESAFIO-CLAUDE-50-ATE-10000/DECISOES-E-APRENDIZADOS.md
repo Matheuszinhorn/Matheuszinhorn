@@ -450,3 +450,12 @@ _Ainda sem dados de mercado._
   - **F4 — Conteúdo de busca (Google):** artigos curtos de cada tema, apontando para os diagnósticos grátis. Lento, mas sem custo e cumulativo.
   - **F5 — Trading R2:** segue com o bônus (DEC-050). Não é motor de crescimento.
 - **Critério de cada produto novo:** construir em ≤ 2 dias. Se não houver nenhuma venda em 14 dias de divulgação, congelar.
+
+## DEC-052 — Moeda forte: Confere Multa Portugal (01/11/2026)
+- **Base:** `analises/mercado/2026-11-01-oportunidades-internacionais.md`.
+- **Proposta:** versão portuguesa do produto, em euro, vendida pelo mesmo checkout internacional da Kiwify.
+  - Preço sugerido de € 14,90 (≈ R$ 85).
+  - Mercado de ≈ 879 mil autos/ano, com concorrência só de advogados sob orçamento.
+- **Antes de construir:** conferir no Diário da República o Código da Estrada (arts. 170 a 175 e 181) e o regime de prazos. Nada vai de memória.
+- **Depois:** Espanha (DGT) e um gerador "faça você mesmo" de EU261, se Portugal vender.
+- **Aguarda autorização do proprietário.**
