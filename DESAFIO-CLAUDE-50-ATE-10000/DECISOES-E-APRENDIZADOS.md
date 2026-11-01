@@ -438,3 +438,15 @@ _Ainda sem dados de mercado._
   3. **O paper continua até 20/12** com os 4 critérios originais do REGRAS.md. É lá que se decide se o trading vira fonte de receita.
   4. **Reformulação possível (sem pressa):** testar a R2 em mais ativos e em um período maior, para aumentar a amostra antes de qualquer conclusão.
 - **Foco do desafio:** passa a ser o EXP-019 (Confere Multa), que tem caminho real para receita.
+
+## DEC-051 — Carteira de frentes em paralelo (01/11/2026)
+- **Diretriz do proprietário:** não depender de um único modelo e buscar o caminho mais rápido.
+- **Princípio:** a mesma infraestrutura já pronta (Kiwify + página + gerador cifrado + vídeos) serve para **vários produtos baratos**. Distribuição sem audiência própria vem de **afiliados**.
+- "Brecha" aqui significa oportunidade legítima, nunca burlar regra de plataforma ou lei.
+- **Frentes:**
+  - **F1 — Afiliados do Confere Multa (Kiwify).** O proprietário ativa a afiliação: 1 toque. Comissão sugerida de 40%: o afiliado fica com ≈ R$ 12 e nós com ≈ R$ 12,70 por venda. Claude escreve a página e o material para afiliados.
+  - **F2 — Produto 2: pedido de indenização por voo atrasado ou cancelado** (gerador de documento). Claude constrói de ponta a ponta, depois de conferir a regra da ANAC na fonte. O proprietário só cadastra na Kiwify.
+  - **F3 — Produto 3: contestação de cobrança indevida e negativação** (cartas e roteiro para Procon e consumidor.gov.br). Mesmo modelo.
+  - **F4 — Conteúdo de busca (Google):** artigos curtos de cada tema, apontando para os diagnósticos grátis. Lento, mas sem custo e cumulativo.
+  - **F5 — Trading R2:** segue com o bônus (DEC-050). Não é motor de crescimento.
+- **Critério de cada produto novo:** construir em ≤ 2 dias. Se não houver nenhuma venda em 14 dias de divulgação, congelar.
