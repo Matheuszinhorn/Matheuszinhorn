@@ -459,3 +459,30 @@ _Ainda sem dados de mercado._
 - **Antes de construir:** conferir no Diário da República o Código da Estrada (arts. 170 a 175 e 181) e o regime de prazos. Nada vai de memória.
 - **Depois:** Espanha (DGT) e um gerador "faça você mesmo" de EU261, se Portugal vender.
 - **Aguarda autorização do proprietário.**
+
+## DEC-053 — Novas frentes: recompensas por código e Kaggle (01/11/2026; escolha do proprietário)
+### EXP-020 — Recompensas por código (USD)
+- **Varredura de 01/11 (API de busca do GitHub, ≈ 1.300 issues com etiqueta de bounty):** o ecossistema está **dominado por repositórios-isca, spam e "bounty bots"**. Exemplos: ClankerNation, UnsafeLabs, alfrexo95/bounty-bot, "Bounty Seguro $750" repetido e trocas por tokens.
+- **Programas legítimos encontrados:**
+  - Activepieces: 173 recompensas pagas, de US$ 30 a 200, inclusive a um brasileiro. Nenhuma aberta agora.
+  - tscircuit: issues antigas com 40 a 79 comentários (concorrência altíssima).
+  - Tenstorrent: US$ 750, mas exige o hardware deles.
+- **Regras:**
+  - só programas com histórico de pagamento verificável (página de pagamentos na Algora ou equivalente);
+  - nunca repositório-isca;
+  - nunca pagar nada para "liberar" recompensa;
+  - ler a política de IA do repositório e declarar o uso de IA no PR.
+- **Execução:** varredura semanal. Claude só ataca issues com ≤ 5 comentários em programas legítimos. O proprietário liga a Algora ou o Stripe **só quando houver um PR aceito**.
+### EXP-021 — Kaggle: Gemma 4 Developer Agent (trilha principal)
+- **Formato:** `submission.zip` com `agent.yaml` mais prompts, *skills* e sub-agentes. O LoRA é **opcional**.
+  - ≈ 120 tarefas ocultas de correção de bugs em Python; métrica de % de tarefas resolvidas.
+  - 1 submissão por dia.
+  - Prêmios de US$ 37 mil / 18 mil / 10 mil.
+  - Entrada até 25/11; envio final em 02/12 (23:59 UTC).
+- **Estratégia:** sem treinar modelo. Engenharia de agente (prompts, *skills*, laço de verificação com testes e sub-agente revisor), testada com as submissões diárias. Avaliação e GPU ficam por conta do Kaggle.
+- **Expectativa honesta:** chance de pódio **baixa**, porque os líderes fazem *fine-tuning*. O custo para nós é só trabalho de Claude.
+- **Depende do proprietário (uma vez):**
+  1. "Join Competition" e aceitar as regras na página;
+  2. verificar o telefone no Kaggle;
+  3. criar o token da API e salvá-lo como **segredo do ambiente** (`KAGGLE_USERNAME` e `KAGGLE_KEY`), **nunca no chat**.
+- A API do Kaggle responde daqui (HTTP 401 sem token, o que é o esperado).
