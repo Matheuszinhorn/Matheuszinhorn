@@ -1314,3 +1314,14 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Valor total: 2,0910 USDC.
 - **BTC também deu sinal** (RSI2 8,3, fechamento 77.180 > SMA200 73.114), mas a regra real permite **1 posição por vez**. Não comprou.
 - **Paper:** a R2 mantém ETH virtual e abre BTC virtual na abertura de 31/10. Total de R$ 50,09 (+0,19%).
+
+## ATV-147 — Trading diário + resumo de domingo (01/11/2026 06:40 BRT)
+- **Real (OP-003 aberta):** sem ordem. Fechamento do ETH em 31/10: 2.252,66, abaixo da SMA(5) de 2.289,19.
+  - Bid de 2.268,03.
+  - Bruto +0,01676; taxa de compra −0,00124; taxa de venda estimada −0,00126. **Líquido se vendesse agora: +0,01426 USDC (+1,15%).**
+- **Conta:** 0,8488 USDC + 0,00055412 ETH. Valor líquido estimado de 2,1043 USDC, ou **+0,0525 (+2,56%) sobre o bônus de 2,0518**.
+  - Realizado: +0,0374 (OP-001/002) e +0,0008 de provável rendimento.
+- **Paper (semana 1):** total de R$ 50,17 (+0,33%).
+  - R2: BTC +0,77% (estresse +0,04%) e ETH +0,57% (estresse −0,15%), com 4 operações (2 fechadas e 2 abertas).
+  - R1 sem operações.
+  - Comprar e segurar no mesmo período: BTC −4,1% e ETH −4,4%. A R2 ficou à frente.
