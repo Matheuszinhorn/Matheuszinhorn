@@ -1325,3 +1325,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - R2: BTC +0,77% (estresse +0,04%) e ETH +0,57% (estresse −0,15%), com 4 operações (2 fechadas e 2 abertas).
   - R1 sem operações.
   - Comprar e segurar no mesmo período: BTC −4,1% e ETH −4,4%. A R2 ficou à frente.
+
+## ATV-148 — Trading diário (02/11/2026 06:40 BRT)
+- **Real (OP-003 aberta):** sem ordem. Fechamento do ETH em 01/11: 2.272,23, **por pouco abaixo** da SMA(5) de 2.274,24.
+  - Bid de 2.288,16.
+  - Bruto +0,02792; taxa de compra −0,00124; taxa de venda estimada −0,00127. **Líquido se vendesse agora: +0,02541 USDC (+2,05%).**
+- **Conta:** valor líquido estimado de 2,1154 USDC, ou **+0,0636 (+3,10%) sobre o bônus**.
+- **Paper:** R$ 50,41 (+0,82%). R2: BTC +1,82% e ETH +1,45%, ambas compradas.
