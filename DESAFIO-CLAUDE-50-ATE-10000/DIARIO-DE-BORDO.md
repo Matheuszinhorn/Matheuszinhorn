@@ -1353,3 +1353,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Empacotamento:** em um notebook privado do Kaggle (`gemma4-dev-agent-submission`), que roda e gera o `submission.zip`.
   - O conteúdo **não vai para o repositório público**: pelas regras, código da competição só pode ser compartilhado no próprio Kaggle.
 - **Bloqueio no envio:** "You don't have access to this resource", tanto por upload quanto pelo notebook. Causa provável: falta **verificar o telefone** na conta, que o Kaggle exige para submeter. Ação do proprietário.
+
+## ATV-151 — Trading diário (03/11/2026 06:40 BRT)
+- **Real (OP-003 aberta):** sem ordem. Fechamento do ETH em 02/11: 2.249,66, abaixo da SMA(5) de 2.252,79.
+  - Bid de 2.262,13.
+  - Bruto +0,01349; taxa de compra −0,00124; taxa de venda estimada −0,00125. **Líquido se vendesse agora: +0,01100 USDC (+0,89%).**
+- **Paper:** R$ 50,03 (+0,06%).
