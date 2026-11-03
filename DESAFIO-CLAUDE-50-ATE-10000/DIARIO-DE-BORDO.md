@@ -1332,3 +1332,9 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Bruto +0,02792; taxa de compra −0,00124; taxa de venda estimada −0,00127. **Líquido se vendesse agora: +0,02541 USDC (+2,05%).**
 - **Conta:** valor líquido estimado de 2,1154 USDC, ou **+0,0636 (+3,10%) sobre o bônus**.
 - **Paper:** R$ 50,41 (+0,82%). R2: BTC +1,82% e ETH +1,45%, ambas compradas.
+
+## ATV-149 — Kaggle: acesso pela API confirmado (03/11/2026)
+- **Token:** o proprietário enviou um token da API do Kaggle. Ficou guardado **só no contêiner temporário** (`~/.kaggle`, permissão 600), **nunca no repositório**. Recomendado gerar um novo token depois da competição.
+- **Kaggle CLI 2.2.5 funcionando:** `gemma-4-developer-agent` aparece com prazo em 02/12/2026, US$ 75 mil e **4.456 equipes**. O Paper Track tem prazo em 12/11.
+- **Placar público:** o líder tem 0,29; muitos estão em 0,24; o 10º tem 0,22.
+- **Bloqueio:** o download dos arquivos pede **aceitar as regras** (userHasEntered = False). Ação do proprietário: "Join Competition" na página.
