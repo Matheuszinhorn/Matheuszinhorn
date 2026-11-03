@@ -486,3 +486,18 @@ _Ainda sem dados de mercado._
   2. verificar o telefone no Kaggle;
   3. criar o token da API e salvá-lo como **segredo do ambiente** (`KAGGLE_USERNAME` e `KAGGLE_KEY`), **nunca no chat**.
 - A API do Kaggle responde daqui (HTTP 401 sem token, o que é o esperado).
+
+## DEC-054 — Mais duas competições no Kaggle (03/11/2026; o proprietário entrou nas duas)
+### EXP-022 — Squares in Squares (US$ 50 mil; prazo em jul/2027; prêmio de US$ 5 mil para o líder em 17/01/2027)
+- **Problema:** empacotar n quadrados unitários (n = 1 a 1.000) no menor quadrado possível. Nota = Σ (L/√n − 1); quanto menor, melhor.
+  - Grade trivial: 28,94.
+  - Melhor notebook público: ≈ 22,256.
+  - Líder: 22,054.
+- **Envio:** arquivo CSV direto, 10 por dia. Roda no **processador deste servidor**, sem GPU.
+- **Plano:**
+  1. combinar as melhores soluções públicas por n, validadas com o **avaliador oficial** (aritmética de intervalos);
+  2. aplicar otimização própria nos n de maior folga;
+  3. enviar melhorias diárias.
+- **Regras:** usar só material **publicado no Kaggle**, conforme as regras de compartilhamento. Toda solução passa pelo avaliador oficial antes do envio.
+### EXP-023 — Gemma 4 Developer Agent: Paper Track (US$ 35 mil; prazo em 12/11/2026)
+- Artigo de até 3.000 palavras sobre o nosso agente, usando os resultados reais das submissões da trilha principal (EXP-021).
