@@ -1383,3 +1383,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - As configurações públicas (faixa a 45°, de Göbel) estão **travadas**: não encolhem nem 0,002 com compressão local (n = 911).
   - A melhoria precisa ser **estrutural** (outra geometria de faixa), não um ajuste fino.
 - **Próximo passo:** pesquisar famílias com faixa inclinada em ângulo ≠ 45° e linhas de falha, com construção paramétrica em f, validando cada uma no avaliador oficial.
+
+## ATV-155 — Squares in Squares, n = 911: primeiras tentativas estruturais (03/11/2026)
+- **Referências:** líder em L = 30,66092; nossa solução pública em 30,70711 (Göbel, faixa a 45°). A pública de n = 909 tem L = 25 + 4√2 = 30,65685 (bloco largo a 45°).
+- **Teste 1 — inserir 2 quadrados na solução de 909 + relaxação L-BFGS (otimizador próprio):** não converge nem com L = 30,75 (sobreposição residual 0,015). A configuração está travada.
+- **Teste 2 — pilhas levemente inclinadas (tipo Erdős–Graham/McClenagan):** os triângulos das pontas desperdiçam cerca de 35 de área. Melhor contagem: 901 com f = 0,7. Inviável para K = 30.
+- **Teste 3 — família "bloco p×q girado + escadas axiais"** (busca em tamanho, ângulo de 40° a 50° e posição):
+  - reproduz n = 912 em 30,70711 (validação do modelo);
+  - em L = 30,66092, o máximo é **904** quadrados, contra 911 necessários.
+- **Conclusão:** a vantagem do líder vem de defeitos finos (deslocamentos de escada, ângulos fora de 45°, quadrados soltos nos cantos) que nenhum modelo construtivo simples captura.
+- **Próximo passo:** busca estocástica de estrutura (remover/reinserir quadrados na zona da faixa + relaxação) a partir das soluções públicas de 909/910, com o avaliador oficial como juiz.
