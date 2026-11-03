@@ -1393,3 +1393,41 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - em L = 30,66092, o máximo é **904** quadrados, contra 911 necessários.
 - **Conclusão:** a vantagem do líder vem de defeitos finos (deslocamentos de escada, ângulos fora de 45°, quadrados soltos nos cantos) que nenhum modelo construtivo simples captura.
 - **Próximo passo:** busca estocástica de estrutura (remover/reinserir quadrados na zona da faixa + relaxação) a partir das soluções públicas de 909/910, com o avaliador oficial como juiz.
+
+## ATV-156 — Protótipo da busca local na faixa inclinada (03/11/2026)
+- **Motor próprio:** energia = penetração SAT² + paredes; relaxação FIRE local (numba); recozimento simulado.
+  - 6 operadores: reinserir, trocar, deslocar grupo, perturbar ângulo/posição, perturbar contatos, reconstruir bloco.
+  - Pesos adaptativos; log de cada movimento (moves.csv) e checkpoints.
+  - Toda solução é validada pelo avaliador oficial (aritmética intervalar).
+  - O código fica fora do repositório público (regra da Kaggle).
+- **Critérios — instâncias pequenas, partindo da grade trivial:**
+
+  | n | início | resultado | melhor conhecido | movimentos | tempo |
+  |---|---|---|---|---|---|
+  | 10 | 4 | 3,70721 | 3,70711 | 22.213 | 90 s |
+  | 17 | 5 | **4,67766** | 4,67553 | 49.451 | 360 s |
+  | 26 | 6 | 5,70736 | 5,62132 | 28.831 | 240 s |
+  | 37 | 7 | 6,70762 | 6,59862 | 24.339 | 240 s |
+  | 50 | 8 | 7,70790 | 7,57143 | 19.033 | 240 s |
+
+  - Todas as soluções válidas (0 sobreposição, dentro do contêiner, aprovadas pelo avaliador oficial).
+- **Fase 2 — inteligência:**
+  - Encolher aos poucos sempre trava na solução de Göbel (K + 0,7071). Variar temperatura, ângulos ou passo não muda isso: 4 variantes deram 4,7074 em n = 17.
+  - Trocar o operador de alto nível para **partida aleatória com L fixo abaixo do patamar + encolhimento** quebrou a trava em n = 17: 4,6900 → 4,67766. Uma de 4 sementes achou solução em 31 s.
+  - Para n ≥ 26, a partida aleatória não encontrou solução em 6 min.
+- **Fase 4 — execução curta em n = 911** (4 × 600 s, cerca de 88 mil movimentos no total, 0 soluções válidas):
+
+  | semente | L alvo | energia inicial → final | sobreposição máx. final |
+  |---|---|---|---|
+  | 909 + 2 | 30,66092 | 2,3e-1 → 1,2e-2 | 0,0195 |
+  | 910 + 1 | 30,66092 | 1,5e-1 → 7,4e-3 | 0,0122 |
+  | 909 + 2 | 30,69 | 2,8e-1 → 1,2e-2 | 0,0173 |
+  | 911 (Göbel) | 30,69 | 1,0e-3 → 5,3e-4 | 0,00097 |
+
+  - As curvas ficaram planas após cerca de 100 s.
+  - **Busca interrompida** por falta de progresso, conforme a regra.
+- **Diagnóstico:** cada quadrado extra exige cerca de 1 unidade de área livre. Essa folga existe (cerca de 29 de área desperdiçada), mas está espalhada em dezenas de buracos pequenos ao longo da faixa. Movimentos locais (raio de cerca de 3) não transportam essa folga por distâncias longas. É preciso um operador de longo alcance.
+- **Próximos operadores:**
+  - (a) **Transporte de vacância:** deslocar uma cadeia inteira de quadrados ao longo de uma linha ou coluna para levar a folga até o defeito.
+  - (b) **Busca em vizinhança grande (LNS):** congelar tudo fora de uma janela de cerca de 6×6 na faixa e resolver a janela com o método que funcionou em n = 17 (partida aleatória + L fixo).
+  - (c) Ajustar o ângulo da faixa inteira como variável coletiva.
