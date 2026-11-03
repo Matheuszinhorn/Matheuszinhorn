@@ -1363,3 +1363,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 ## ATV-152 — Kaggle: 1ª submissão enviada (03/11/2026 11:25 BRT)
 - O proprietário verificou o telefone. O envio pelo notebook funcionou: **submissão 57950779** (v1, modelo 31B, só prompts), status PENDING.
 - A cota é de 1 envio por dia. A avaliação pode levar até 12 h. Conferência automática agendada para daqui a 6 h.
+
+## ATV-153 — Squares in Squares: 1ª submissão (03/11/2026 11:53 BRT)
+- **Avaliador oficial** (aritmética de intervalos) extraído do notebook de métrica do Kaggle. Ele **reproduziu exatamente** a nota pública de 22,2569679.
+- **Combinação por n** de 7 notebooks públicos: **22,2558219**. Submissão 57951551 enviada (cota de 10 por dia).
+- **Diagnóstico com o banco público por n** (perpuzzle_best):
+  - a soma dos melhores L de cada n entre todas as equipes dá 22,0677;
+  - a nossa folga é de **0,188**, espalhada em 410 valores de n, quase toda **acima de n = 300**;
+  - 353 desses n são da equipe líder, "Cats and boxes".
+  - Exemplo: n = 911 = 30² + 11. Eles usam uma faixa de 0,661 além de 30; a construção pública usa 1/√2 ≈ 0,707.
+- **Próximo passo:** estudar construções com faixa inclinada para n = K² + D (D pequeno) e otimizar o ângulo. É aí que estão os ganhos.
