@@ -1338,3 +1338,18 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Kaggle CLI 2.2.5 funcionando:** `gemma-4-developer-agent` aparece com prazo em 02/12/2026, US$ 75 mil e **4.456 equipes**. O Paper Track tem prazo em 12/11.
 - **Placar público:** o líder tem 0,29; muitos estão em 0,24; o 10º tem 0,22.
 - **Bloqueio:** o download dos arquivos pede **aceitar as regras** (userHasEntered = False). Ação do proprietário: "Join Competition" na página.
+
+## ATV-150 — Kaggle: 1ª versão do agente pronta (03/11/2026)
+- **Regras lidas na API:**
+  - limite de **12 h no total** para ≈ 120 tarefas, com o preparo dos contêineres incluído;
+  - prompts simples (≈ 400 caracteres em média; muitos são só o título de um PR);
+  - patch de referência com mediana de 12 linhas, 91 de 129 tocando 1 arquivo;
+  - **prêmio extra de US$ 10 mil** para o melhor modelo pequeno (E2B/E4B).
+- **v1 montada:**
+  - modelo 31B, só prompts, sem sub-agente;
+  - fluxo "grep primeiro";
+  - orçamento de 5 min e 35 chamadas por tarefa;
+  - thinking de 2.048 e saída máxima de 8.192 tokens.
+- **Empacotamento:** em um notebook privado do Kaggle (`gemma4-dev-agent-submission`), que roda e gera o `submission.zip`.
+  - O conteúdo **não vai para o repositório público**: pelas regras, código da competição só pode ser compartilhado no próprio Kaggle.
+- **Bloqueio no envio:** "You don't have access to this resource", tanto por upload quanto pelo notebook. Causa provável: falta **verificar o telefone** na conta, que o Kaggle exige para submeter. Ação do proprietário.
