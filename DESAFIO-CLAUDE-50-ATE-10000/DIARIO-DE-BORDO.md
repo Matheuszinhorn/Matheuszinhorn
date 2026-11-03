@@ -1373,3 +1373,13 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - 353 desses n são da equipe líder, "Cats and boxes".
   - Exemplo: n = 911 = 30² + 11. Eles usam uma faixa de 0,661 além de 30; a construção pública usa 1/√2 ≈ 0,707.
 - **Próximo passo:** estudar construções com faixa inclinada para n = K² + D (D pequeno) e otimizar o ângulo. É aí que estão os ganhos.
+
+## ATV-154 — Squares in Squares: como o líder ganha (03/11/2026)
+- **Curva de folga f(D)** para n = K² + D (comparada com o banco público por n):
+  - o líder tem **f suave e crescente**: um valor distinto para cada D;
+  - as construções públicas têm **f em degraus** (o mesmo f para D e D+1, por exemplo 0,7071 em D = 11 e D = 12 com K = 30).
+  - Conclusão: o líder tem uma **família construtiva paramétrica**, e não só mais otimização local.
+- **Teste:** compressor próprio (numba; penetração SAT + paredes; descida de gradiente).
+  - As configurações públicas (faixa a 45°, de Göbel) estão **travadas**: não encolhem nem 0,002 com compressão local (n = 911).
+  - A melhoria precisa ser **estrutural** (outra geometria de faixa), não um ajuste fino.
+- **Próximo passo:** pesquisar famílias com faixa inclinada em ângulo ≠ 45° e linhas de falha, com construção paramétrica em f, validando cada uma no avaliador oficial.
