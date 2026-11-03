@@ -479,8 +479,7 @@ _Ainda sem dados de mercado._
   - 1 submissão por dia.
   - Prêmios de US$ 37 mil / 18 mil / 10 mil.
   - Entrada até 25/11; envio final em 02/12 (23:59 UTC).
-- **Estratégia:** sem treinar modelo. Engenharia de agente (prompts, *skills*, laço de verificação com testes e sub-agente revisor), testada com as submissões diárias. Avaliação e GPU ficam por conta do Kaggle.
-- **Expectativa honesta:** chance de pódio **baixa**, porque os líderes fazem *fine-tuning*. O custo para nós é só trabalho de Claude.
+- **Estratégia:** registrada no ambiente privado da competição.
 - **Depende do proprietário (uma vez):**
   1. "Join Competition" e aceitar as regras na página;
   2. verificar o telefone no Kaggle;
@@ -494,10 +493,7 @@ _Ainda sem dados de mercado._
   - Melhor notebook público: ≈ 22,256.
   - Líder: 22,054.
 - **Envio:** arquivo CSV direto, 10 por dia. Roda no **processador deste servidor**, sem GPU.
-- **Plano:**
-  1. combinar as melhores soluções públicas por n, validadas com o **avaliador oficial** (aritmética de intervalos);
-  2. aplicar otimização própria nos n de maior folga;
-  3. enviar melhorias diárias.
+- **Plano:** registrado no ambiente privado da competição.
 - **Regras:** usar só material **publicado no Kaggle**, conforme as regras de compartilhamento. Toda solução passa pelo avaliador oficial antes do envio.
 ### EXP-023 — Gemma 4 Developer Agent: Paper Track (US$ 35 mil; prazo em 12/11/2026)
-- Artigo de até 3.000 palavras sobre o nosso agente, usando os resultados reais das submissões da trilha principal (EXP-021).
+- Artigo de até 3.000 palavras. Planejamento no ambiente privado da competição.

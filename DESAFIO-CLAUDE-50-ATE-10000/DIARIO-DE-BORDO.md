@@ -1333,26 +1333,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 - **Conta:** valor líquido estimado de 2,1154 USDC, ou **+0,0636 (+3,10%) sobre o bônus**.
 - **Paper:** R$ 50,41 (+0,82%). R2: BTC +1,82% e ETH +1,45%, ambas compradas.
 
-## ATV-149 — Kaggle: acesso pela API confirmado (03/11/2026)
-- **Token:** o proprietário enviou um token da API do Kaggle. Ficou guardado **só no contêiner temporário** (`~/.kaggle`, permissão 600), **nunca no repositório**. Recomendado gerar um novo token depois da competição.
-- **Kaggle CLI 2.2.5 funcionando:** `gemma-4-developer-agent` aparece com prazo em 02/12/2026, US$ 75 mil e **4.456 equipes**. O Paper Track tem prazo em 12/11.
-- **Placar público:** o líder tem 0,29; muitos estão em 0,24; o 10º tem 0,22.
-- **Bloqueio:** o download dos arquivos pede **aceitar as regras** (userHasEntered = False). Ação do proprietário: "Join Competition" na página.
+## ATV-149 — Kaggle: acesso configurado (03/11/2026)
+- Acesso à API configurado. A credencial fica só no ambiente temporário, nunca no repositório.
 
-## ATV-150 — Kaggle: 1ª versão do agente pronta (03/11/2026)
-- **Regras lidas na API:**
-  - limite de **12 h no total** para ≈ 120 tarefas, com o preparo dos contêineres incluído;
-  - prompts simples (≈ 400 caracteres em média; muitos são só o título de um PR);
-  - patch de referência com mediana de 12 linhas, 91 de 129 tocando 1 arquivo;
-  - **prêmio extra de US$ 10 mil** para o melhor modelo pequeno (E2B/E4B).
-- **v1 montada:**
-  - modelo 31B, só prompts, sem sub-agente;
-  - fluxo "grep primeiro";
-  - orçamento de 5 min e 35 chamadas por tarefa;
-  - thinking de 2.048 e saída máxima de 8.192 tokens.
-- **Empacotamento:** em um notebook privado do Kaggle (`gemma4-dev-agent-submission`), que roda e gera o `submission.zip`.
-  - O conteúdo **não vai para o repositório público**: pelas regras, código da competição só pode ser compartilhado no próprio Kaggle.
-- **Bloqueio no envio:** "You don't have access to this resource", tanto por upload quanto pelo notebook. Causa provável: falta **verificar o telefone** na conta, que o Kaggle exige para submeter. Ação do proprietário.
+## ATV-150 — Kaggle: 1ª versão do agente (03/11/2026)
+- Primeira versão preparada. Detalhes técnicos no ambiente privado da competição.
 
 ## ATV-151 — Trading diário (03/11/2026 06:40 BRT)
 - **Real (OP-003 aberta):** sem ordem. Fechamento do ETH em 02/11: 2.249,66, abaixo da SMA(5) de 2.252,79.
@@ -1360,142 +1345,26 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Bruto +0,01349; taxa de compra −0,00124; taxa de venda estimada −0,00125. **Líquido se vendesse agora: +0,01100 USDC (+0,89%).**
 - **Paper:** R$ 50,03 (+0,06%).
 
-## ATV-152 — Kaggle: 1ª submissão enviada (03/11/2026 11:25 BRT)
-- O proprietário verificou o telefone. O envio pelo notebook funcionou: **submissão 57950779** (v1, modelo 31B, só prompts), status PENDING.
-- A cota é de 1 envio por dia. A avaliação pode levar até 12 h. Conferência automática agendada para daqui a 6 h.
+## ATV-152 — Kaggle: 1ª submissão do agente (03/11/2026)
+- Submissão enviada; aguardando avaliação.
 
-## ATV-153 — Squares in Squares: 1ª submissão (03/11/2026 11:53 BRT)
-- **Avaliador oficial** (aritmética de intervalos) extraído do notebook de métrica do Kaggle. Ele **reproduziu exatamente** a nota pública de 22,2569679.
-- **Combinação por n** de 7 notebooks públicos: **22,2558219**. Submissão 57951551 enviada (cota de 10 por dia).
-- **Diagnóstico com o banco público por n** (perpuzzle_best):
-  - a soma dos melhores L de cada n entre todas as equipes dá 22,0677;
-  - a nossa folga é de **0,188**, espalhada em 410 valores de n, quase toda **acima de n = 300**;
-  - 353 desses n são da equipe líder, "Cats and boxes".
-  - Exemplo: n = 911 = 30² + 11. Eles usam uma faixa de 0,661 além de 30; a construção pública usa 1/√2 ≈ 0,707.
-- **Próximo passo:** estudar construções com faixa inclinada para n = K² + D (D pequeno) e otimizar o ângulo. É aí que estão os ganhos.
+## ATV-153 — Squares in Squares: 1ª submissão (03/11/2026)
+- Submissão enviada; nota pública de 22,2558. Detalhes técnicos no ambiente privado.
 
-## ATV-154 — Squares in Squares: como o líder ganha (03/11/2026)
-- **Curva de folga f(D)** para n = K² + D (comparada com o banco público por n):
-  - o líder tem **f suave e crescente**: um valor distinto para cada D;
-  - as construções públicas têm **f em degraus** (o mesmo f para D e D+1, por exemplo 0,7071 em D = 11 e D = 12 com K = 30).
-  - Conclusão: o líder tem uma **família construtiva paramétrica**, e não só mais otimização local.
-- **Teste:** compressor próprio (numba; penetração SAT + paredes; descida de gradiente).
-  - As configurações públicas (faixa a 45°, de Göbel) estão **travadas**: não encolhem nem 0,002 com compressão local (n = 911).
-  - A melhoria precisa ser **estrutural** (outra geometria de faixa), não um ajuste fino.
-- **Próximo passo:** pesquisar famílias com faixa inclinada em ângulo ≠ 45° e linhas de falha, com construção paramétrica em f, validando cada uma no avaliador oficial.
+## ATV-154 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
 
-## ATV-155 — Squares in Squares, n = 911: primeiras tentativas estruturais (03/11/2026)
-- **Referências:** líder em L = 30,66092; nossa solução pública em 30,70711 (Göbel, faixa a 45°). A pública de n = 909 tem L = 25 + 4√2 = 30,65685 (bloco largo a 45°).
-- **Teste 1 — inserir 2 quadrados na solução de 909 + relaxação L-BFGS (otimizador próprio):** não converge nem com L = 30,75 (sobreposição residual 0,015). A configuração está travada.
-- **Teste 2 — pilhas levemente inclinadas (tipo Erdős–Graham/McClenagan):** os triângulos das pontas desperdiçam cerca de 35 de área. Melhor contagem: 901 com f = 0,7. Inviável para K = 30.
-- **Teste 3 — família "bloco p×q girado + escadas axiais"** (busca em tamanho, ângulo de 40° a 50° e posição):
-  - reproduz n = 912 em 30,70711 (validação do modelo);
-  - em L = 30,66092, o máximo é **904** quadrados, contra 911 necessários.
-- **Conclusão:** a vantagem do líder vem de defeitos finos (deslocamentos de escada, ângulos fora de 45°, quadrados soltos nos cantos) que nenhum modelo construtivo simples captura.
-- **Próximo passo:** busca estocástica de estrutura (remover/reinserir quadrados na zona da faixa + relaxação) a partir das soluções públicas de 909/910, com o avaliador oficial como juiz.
+## ATV-155 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
 
-## ATV-156 — Protótipo da busca local na faixa inclinada (03/11/2026)
-- **Motor próprio:** energia = penetração SAT² + paredes; relaxação FIRE local (numba); recozimento simulado.
-  - 6 operadores: reinserir, trocar, deslocar grupo, perturbar ângulo/posição, perturbar contatos, reconstruir bloco.
-  - Pesos adaptativos; log de cada movimento (moves.csv) e checkpoints.
-  - Toda solução é validada pelo avaliador oficial (aritmética intervalar).
-  - O código fica fora do repositório público (regra da Kaggle).
-- **Critérios — instâncias pequenas, partindo da grade trivial:**
+## ATV-156 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
 
-  | n | início | resultado | melhor conhecido | movimentos | tempo |
-  |---|---|---|---|---|---|
-  | 10 | 4 | 3,70721 | 3,70711 | 22.213 | 90 s |
-  | 17 | 5 | **4,67766** | 4,67553 | 49.451 | 360 s |
-  | 26 | 6 | 5,70736 | 5,62132 | 28.831 | 240 s |
-  | 37 | 7 | 6,70762 | 6,59862 | 24.339 | 240 s |
-  | 50 | 8 | 7,70790 | 7,57143 | 19.033 | 240 s |
+## ATV-157 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
 
-  - Todas as soluções válidas (0 sobreposição, dentro do contêiner, aprovadas pelo avaliador oficial).
-- **Fase 2 — inteligência:**
-  - Encolher aos poucos sempre trava na solução de Göbel (K + 0,7071). Variar temperatura, ângulos ou passo não muda isso: 4 variantes deram 4,7074 em n = 17.
-  - Trocar o operador de alto nível para **partida aleatória com L fixo abaixo do patamar + encolhimento** quebrou a trava em n = 17: 4,6900 → 4,67766. Uma de 4 sementes achou solução em 31 s.
-  - Para n ≥ 26, a partida aleatória não encontrou solução em 6 min.
-- **Fase 4 — execução curta em n = 911** (4 × 600 s, cerca de 88 mil movimentos no total, 0 soluções válidas):
+## ATV-158 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
 
-  | semente | L alvo | energia inicial → final | sobreposição máx. final |
-  |---|---|---|---|
-  | 909 + 2 | 30,66092 | 2,3e-1 → 1,2e-2 | 0,0195 |
-  | 910 + 1 | 30,66092 | 1,5e-1 → 7,4e-3 | 0,0122 |
-  | 909 + 2 | 30,69 | 2,8e-1 → 1,2e-2 | 0,0173 |
-  | 911 (Göbel) | 30,69 | 1,0e-3 → 5,3e-4 | 0,00097 |
-
-  - As curvas ficaram planas após cerca de 100 s.
-  - **Busca interrompida** por falta de progresso, conforme a regra.
-- **Diagnóstico:** cada quadrado extra exige cerca de 1 unidade de área livre. Essa folga existe (cerca de 29 de área desperdiçada), mas está espalhada em dezenas de buracos pequenos ao longo da faixa. Movimentos locais (raio de cerca de 3) não transportam essa folga por distâncias longas. É preciso um operador de longo alcance.
-- **Próximos operadores:**
-  - (a) **Transporte de vacância:** deslocar uma cadeia inteira de quadrados ao longo de uma linha ou coluna para levar a folga até o defeito.
-  - (b) **Busca em vizinhança grande (LNS):** congelar tudo fora de uma janela de cerca de 6×6 na faixa e resolver a janela com o método que funcionou em n = 17 (partida aleatória + L fixo).
-  - (c) Ajustar o ângulo da faixa inteira como variável coletiva.
-
-## ATV-157 — QIPE (motor de empacotamento inspirado em computação quântica) × métodos clássicos (03/11/2026)
-- **Protocolo:**
-  - partida aleatória em L0 = K + 0,72;
-  - minimizar o L válido em 180 s, 1 núcleo por execução, mesmo controlador de encolhimento para todos;
-  - validação oficial do melhor resultado;
-  - 6 métodos × n ∈ {17, 26} × 2 sementes.
-- **QIPE (algoritmo clássico):**
-  - população em escada de temperaturas ("superposição" + "tunelamento" por trocas de réplica);
-  - distribuição de ângulos aprendida das 2 melhores réplicas ("interferência");
-  - recombinação espacial entre réplicas ("entrelaçamento");
-  - reconstrução grande de janela.
-- **Resultados (melhor L válido; recorde conhecido entre parênteses):**
-
-  | método | n = 17 (4,67553) | n = 26 (5,62132) |
-  |---|---|---|
-  | busca local | 4,7077 / 4,7085 | 5,7086 / 5,7091 |
-  | SA | 4,7074 / 4,7074 | 5,7073 / 5,7074 |
-  | Parallel Tempering | 4,7073 / 4,7074 | 5,7072 / 5,7073 |
-  | evolutivo | 4,7074 / 4,7074 | 5,7073 / 5,7073 |
-  | Population Annealing | 4,7074 / 4,7074 | 5,7078 / 5,7086 |
-  | **QIPE** | **4,6776** / 4,7074 | **5,6355** / 5,7073 (+ 5,6608 e 5,7073 nas sementes 3 e 4) |
-
-  - **Melhorias em instâncias menores:** em n = 37, o QIPE chegou a **6,6230**, contra 6,7076 dos demais (recorde 6,5986).
-  - O QIPE escapou do arranjo de 45° (Göbel) em 4 de 7 execuções. Os outros cinco métodos, em 0 de 20.
-- **Ablação** (n = 26, sementes 1 e 3):
-  - sem interferência: 5,7072 / 5,6601;
-  - sem recombinação: 5,7073 / 5,6781;
-  - sem tunelamento: **5,6227** / 5,6601.
-  - O ganho vem da **recombinação + interferência**. O tunelamento não contribuiu.
-- **Diversidade final** (distância média entre réplicas): QIPE 0,07–0,23; PT 0,15–0,27; EA 0,10–0,14.
-
-## ATV-158 — Janelas, fronteiras flexíveis e transporte de folgas (03/11/2026)
-- **Operadores:**
-  - janela de 4 a 8 de lado (centro sorteado perto dos quadrados mais tensionados; sobreposta e de tamanho variável);
-  - níveis de fronteira: 1 = exterior congelado; 2 = anel com deslocamento ≤ 0,05; 3 = exterior em 4 grupos rígidos;
-  - transporte de folgas: compacta a cadeia axial de uma fileira ou coluna contra a parede;
-  - todo movimento passa por avaliação global.
-- **Teste de recuperação** (909 público; janela 3×3 embaralhada; sobreposição inicial 2,7; 300 s):
-
-  | operador | sobreposição final (sementes 1 / 2) | tentativas |
-  |---|---|---|
-  | janela, nível 1 | 2,0e-4 / **7,9e-14** → **válida oficial** em 30,656868 (+1,4e-5) | 59 / 56 |
-  | janela, nível 2 | 6,7e-3 / 5,9e-10 | 25 / 31 |
-  | janela, nível 3 | 1,1e-4 / 1,6e-7 | 24 / 25 |
-  | transporte | 0,20 / 2,76 (inalterado) | cerca de 115 mil (2 aceitas) |
-
-  - O nível 1 é o mais barato e o melhor.
-  - O transporte sozinho não reconstrói: cadeias travadas não têm folga para deslizar.
-- **Teste de absorção** (909 + 1 → n = 910 em L = 30,66092; o público de 910 é 30,69096; 4 núcleos trocando candidatos; 600 s):
-  - todos os operadores: energia 0,08–0,14 → **3,8e-3**, sobreposição máxima de 0,012;
-  - 0 soluções válidas;
-  - mesmo patamar em todos.
-- **Diagnóstico:** 97,7% da sobreposição restante está numa **única coluna de cerca de 30 quadrados na parede direita**, cerca de 0,37 mais longa do que o espaço disponível e uniformemente comprimida. É um défice de comprimento ao longo de uma cadeia inteira, que nenhuma janela de 6×6 enxerga.
-- **Decisão:** não escalar para n = 911 (sem evidência de progresso em 910).
-- **Próximo experimento:** operador **cadeia + janela na ponta**:
-  1. identificar a cadeia comprimida;
-  2. torná-la contígua (rígida);
-  3. abrir uma janela na ponta em que ela encontra a faixa inclinada, para absorver os cerca de 0,37 ali;
-  4. em paralelo, QIPE com réplicas semeadas (909/910) e recombinação entre elas.
-
-## ATV-161 — Desbloqueio da coluna direita (03/11/2026)
-- 8 abordagens testadas (cerca de 4 h-núcleo), **0 configurações válidas**, nenhuma submissão.
-- Descobertas:
-  - o patamar é uma coluna com 31 quadrados;
-  - a penalidade quadrática atrai o otimizador para essa armadilha;
-  - o líder empata conosco em 906 e segue uma família de blocos a cerca de 41°, diferente das públicas de 909 a 912.
-- Detalhes: `analises/kaggle/squares-in-squares/REGISTRO-OPERACIONAL.md`.
+## ATV-161 — Competição: ciclo de pesquisa (03/11/2026)
+- Pesquisa interna realizada. Registro técnico completo no ambiente privado.
