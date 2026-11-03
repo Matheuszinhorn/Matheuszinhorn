@@ -1431,3 +1431,63 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - (a) **Transporte de vacância:** deslocar uma cadeia inteira de quadrados ao longo de uma linha ou coluna para levar a folga até o defeito.
   - (b) **Busca em vizinhança grande (LNS):** congelar tudo fora de uma janela de cerca de 6×6 na faixa e resolver a janela com o método que funcionou em n = 17 (partida aleatória + L fixo).
   - (c) Ajustar o ângulo da faixa inteira como variável coletiva.
+
+## ATV-157 — QIPE (motor de empacotamento inspirado em computação quântica) × métodos clássicos (03/11/2026)
+- **Protocolo:**
+  - partida aleatória em L0 = K + 0,72;
+  - minimizar o L válido em 180 s, 1 núcleo por execução, mesmo controlador de encolhimento para todos;
+  - validação oficial do melhor resultado;
+  - 6 métodos × n ∈ {17, 26} × 2 sementes.
+- **QIPE (algoritmo clássico):**
+  - população em escada de temperaturas ("superposição" + "tunelamento" por trocas de réplica);
+  - distribuição de ângulos aprendida das 2 melhores réplicas ("interferência");
+  - recombinação espacial entre réplicas ("entrelaçamento");
+  - reconstrução grande de janela.
+- **Resultados (melhor L válido; recorde conhecido entre parênteses):**
+
+  | método | n = 17 (4,67553) | n = 26 (5,62132) |
+  |---|---|---|
+  | busca local | 4,7077 / 4,7085 | 5,7086 / 5,7091 |
+  | SA | 4,7074 / 4,7074 | 5,7073 / 5,7074 |
+  | Parallel Tempering | 4,7073 / 4,7074 | 5,7072 / 5,7073 |
+  | evolutivo | 4,7074 / 4,7074 | 5,7073 / 5,7073 |
+  | Population Annealing | 4,7074 / 4,7074 | 5,7078 / 5,7086 |
+  | **QIPE** | **4,6776** / 4,7074 | **5,6355** / 5,7073 (+ 5,6608 e 5,7073 nas sementes 3 e 4) |
+
+  - **Melhorias em instâncias menores:** em n = 37, o QIPE chegou a **6,6230**, contra 6,7076 dos demais (recorde 6,5986).
+  - O QIPE escapou do arranjo de 45° (Göbel) em 4 de 7 execuções. Os outros cinco métodos, em 0 de 20.
+- **Ablação** (n = 26, sementes 1 e 3):
+  - sem interferência: 5,7072 / 5,6601;
+  - sem recombinação: 5,7073 / 5,6781;
+  - sem tunelamento: **5,6227** / 5,6601.
+  - O ganho vem da **recombinação + interferência**. O tunelamento não contribuiu.
+- **Diversidade final** (distância média entre réplicas): QIPE 0,07–0,23; PT 0,15–0,27; EA 0,10–0,14.
+
+## ATV-158 — Janelas, fronteiras flexíveis e transporte de folgas (03/11/2026)
+- **Operadores:**
+  - janela de 4 a 8 de lado (centro sorteado perto dos quadrados mais tensionados; sobreposta e de tamanho variável);
+  - níveis de fronteira: 1 = exterior congelado; 2 = anel com deslocamento ≤ 0,05; 3 = exterior em 4 grupos rígidos;
+  - transporte de folgas: compacta a cadeia axial de uma fileira ou coluna contra a parede;
+  - todo movimento passa por avaliação global.
+- **Teste de recuperação** (909 público; janela 3×3 embaralhada; sobreposição inicial 2,7; 300 s):
+
+  | operador | sobreposição final (sementes 1 / 2) | tentativas |
+  |---|---|---|
+  | janela, nível 1 | 2,0e-4 / **7,9e-14** → **válida oficial** em 30,656868 (+1,4e-5) | 59 / 56 |
+  | janela, nível 2 | 6,7e-3 / 5,9e-10 | 25 / 31 |
+  | janela, nível 3 | 1,1e-4 / 1,6e-7 | 24 / 25 |
+  | transporte | 0,20 / 2,76 (inalterado) | cerca de 115 mil (2 aceitas) |
+
+  - O nível 1 é o mais barato e o melhor.
+  - O transporte sozinho não reconstrói: cadeias travadas não têm folga para deslizar.
+- **Teste de absorção** (909 + 1 → n = 910 em L = 30,66092; o público de 910 é 30,69096; 4 núcleos trocando candidatos; 600 s):
+  - todos os operadores: energia 0,08–0,14 → **3,8e-3**, sobreposição máxima de 0,012;
+  - 0 soluções válidas;
+  - mesmo patamar em todos.
+- **Diagnóstico:** 97,7% da sobreposição restante está numa **única coluna de cerca de 30 quadrados na parede direita**, cerca de 0,37 mais longa do que o espaço disponível e uniformemente comprimida. É um défice de comprimento ao longo de uma cadeia inteira, que nenhuma janela de 6×6 enxerga.
+- **Decisão:** não escalar para n = 911 (sem evidência de progresso em 910).
+- **Próximo experimento:** operador **cadeia + janela na ponta**:
+  1. identificar a cadeia comprimida;
+  2. torná-la contígua (rígida);
+  3. abrir uma janela na ponta em que ela encontra a faixa inclinada, para absorver os cerca de 0,37 ali;
+  4. em paralelo, QIPE com réplicas semeadas (909/910) e recombinação entre elas.
