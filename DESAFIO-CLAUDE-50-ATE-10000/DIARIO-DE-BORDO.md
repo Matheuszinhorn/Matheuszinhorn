@@ -1491,3 +1491,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   2. torná-la contígua (rígida);
   3. abrir uma janela na ponta em que ela encontra a faixa inclinada, para absorver os cerca de 0,37 ali;
   4. em paralelo, QIPE com réplicas semeadas (909/910) e recombinação entre elas.
+
+## ATV-161 — Desbloqueio da coluna direita (03/11/2026)
+- 8 abordagens testadas (cerca de 4 h-núcleo), **0 configurações válidas**, nenhuma submissão.
+- Descobertas:
+  - o patamar é uma coluna com 31 quadrados;
+  - a penalidade quadrática atrai o otimizador para essa armadilha;
+  - o líder empata conosco em 906 e segue uma família de blocos a cerca de 41°, diferente das públicas de 909 a 912.
+- Detalhes: `analises/kaggle/squares-in-squares/REGISTRO-OPERACIONAL.md`.
