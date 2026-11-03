@@ -1359,3 +1359,7 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - Bid de 2.262,13.
   - Bruto +0,01349; taxa de compra −0,00124; taxa de venda estimada −0,00125. **Líquido se vendesse agora: +0,01100 USDC (+0,89%).**
 - **Paper:** R$ 50,03 (+0,06%).
+
+## ATV-152 — Kaggle: 1ª submissão enviada (03/11/2026 11:25 BRT)
+- O proprietário verificou o telefone. O envio pelo notebook funcionou: **submissão 57950779** (v1, modelo 31B, só prompts), status PENDING.
+- A cota é de 1 envio por dia. A avaliação pode levar até 12 h. Conferência automática agendada para daqui a 6 h.
