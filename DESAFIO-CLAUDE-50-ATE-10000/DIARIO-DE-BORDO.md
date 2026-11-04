@@ -1368,3 +1368,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
 
 ## ATV-161 — Competição: ciclo de pesquisa (03/11/2026)
 - Pesquisa interna realizada. Registro técnico completo no ambiente privado.
+
+## ATV-162 — Trading diário (04/11/2026 06:39 BRT)
+- **Real (OP-003 aberta, 0,00055412 ETH):**
+  - **sinal de SAÍDA ativo**: fechamento do ETH em 03/11 = 2.271,64 > SMA(5) = 2.257,45;
+  - **ordem NÃO executada**: o conector da Coinbase está desautorizado nesta sessão (precisa ser reautorizado pelo proprietário nas configurações de conectores do claude.ai);
+  - estimativa pelo livro público (bid 2.317,62): bruto 1,2842396; taxa de venda ≈ 0,0012842; **líquido ≈ +0,0417 USDC (+3,36%)** se vendesse agora. Estimativa, não resultado.
+- **Paper:** R$ 50,26 (+0,52%). Na R2, os dois ativos (BTC e ETH) fecharam operação no fechamento de 03/11 (BTC +0,20%, ETH +1,03% bruto) e voltaram a ficar comprados. A R1 segue em caixa.
