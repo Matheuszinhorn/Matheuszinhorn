@@ -1375,3 +1375,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - **ordem NÃO executada**: o conector da Coinbase está desautorizado nesta sessão (precisa ser reautorizado pelo proprietário nas configurações de conectores do claude.ai);
   - estimativa pelo livro público (bid 2.317,62): bruto 1,2842396; taxa de venda ≈ 0,0012842; **líquido ≈ +0,0417 USDC (+3,36%)** se vendesse agora. Estimativa, não resultado.
 - **Paper:** R$ 50,26 (+0,52%). Na R2, os dois ativos (BTC e ETH) fecharam operação no fechamento de 03/11 (BTC +0,20%, ETH +1,03% bruto) e voltaram a ficar comprados. A R1 segue em caixa.
+
+## ATV-163 — Trading diário (05/11/2026 06:39 BRT)
+- **Real (OP-003 aberta, 0,00055412 ETH):**
+  - **sinal de SAÍDA ativo** (2º dia): fechamento do ETH em 04/11 = 2.422,27 > SMA(5) = 2.293,69;
+  - **ordem NÃO executada**: o conector da Coinbase continua desautorizado nesta sessão (reautorização pelo proprietário nas configurações de conectores do claude.ai);
+  - estimativa pelo livro público ETH-USD (bid 2.413,23): bruto ≈ 1,3372; taxa ≈ 0,0013; **líquido ≈ +0,095 USDC (+7,6%)** se vendesse agora. Estimativa, não resultado.
+  - Indicadores (velas fechadas de 04/11): BTC 80.428,31 · SMA5 78.018,74 · SMA200 73.179,1 · RSI2 88,4; ETH 2.422,27 · SMA5 2.293,69 · SMA200 2.156,8 · RSI2 95,6.
+- **Paper:** R$ 50,76 (+1,53%). R2: ETH fechou operação (+1,03% bruto) e está em caixa; BTC segue comprado (+4,2% marcado). R1 em caixa.
