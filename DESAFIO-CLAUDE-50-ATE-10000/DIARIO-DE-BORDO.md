@@ -1391,3 +1391,10 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   - marcação pelo livro público ETH-USD (bid 2.239,82): ≈ 1,2411 USDC, praticamente igual ao custo (1,2412). Sem queda de −10%.
   - Indicadores (velas fechadas de 05/11): BTC 75.969,06 · SMA5 77.727,76 · SMA200 73.189,8 · RSI2 27,4; ETH 2.234,61 · SMA5 2.290,08 · SMA200 2.156,6 · RSI2 30,1.
 - **Paper:** R$ 50,76 (+1,53%). R2: **BTC fechou operação** (entrada 31/10 a 77.180,42; saída 05/11 a 80.428,30; +4,21% bruto) e está em caixa. ETH e R1 em caixa.
+
+## ATV-165 — Trading diário (07/11/2026 06:39 BRT)
+- **Real (OP-003 aberta, 0,00055412 ETH):** sem sinal de saída — fechamento do ETH em 06/11 = 2.235,37 < SMA(5) = 2.282,71.
+  Conector da Coinbase **pedindo autenticação nesta sessão** (não foi possível ler saldo/ordens). Marcação pelo livro público
+  ETH-USD (bid 2.243,90): ≈ 1,2434 USDC (+0,2% sobre o custo 1,2412). Sem queda de −10%.
+  Indicadores (velas fechadas de 06/11): BTC 75.731,04 · SMA5 77.227,86 · SMA200 73.189,2 · RSI2 25,5; ETH 2.235,37 · SMA5 2.282,71 · SMA200 2.156,2 · RSI2 30,5.
+- **Paper:** R$ 50,76 (+1,53%), todas as carteiras em caixa; nenhuma operação aberta ou fechada.
