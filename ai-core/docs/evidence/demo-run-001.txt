@@ -1,0 +1,79 @@
+# Saída real de scripts/demo_cycle.py --auditor claude-auditor (2026-11-08)
+# Linhas de log INFO omitidas. Nenhum segredo presente.
+[probe] claude-code     role=implementer instalado=True autenticado=True loggedIn=True; método=oauth_token
+[probe] codex           role=auditor     instalado=True autenticado=False não autenticado: rode `codex login --device-auth` com sua conta ChatGPT
+[probe] claude-auditor  role=auditor     instalado=True autenticado=True loggedIn=True; método=oauth_token
+
+[task] 7f2be043d06f workspace=/home/user/Matheuszinhorn/ai-core/workspaces/demo-leap
+
+[run] adf2ba7f7cf9 status=completed outcome=approved ciclos=2 branch=aicore/task-7f2be043d06f-adf2ba7f7cf9
+  ciclo 0: start              branch isolada aicore/task-7f2be043d06f-adf2ba7f7cf9 a partir de a5182e09d7; implementador=claude-code; auditor=claude-auditor; máx. ciclos=5
+  ciclo 1: commit             commit 43bd46d498
+  ciclo 1: rejected           Reprovado. leap.py:3 usa apenas `year % 4 == 0`, então ignora a regra dos séculos e não valida o tipo da entrada. test_leap.py tem só 2 testes (2024 e 2023) e n
+  ciclo 2: commit             commit e0295196d3
+  ciclo 2: approved           A implementação em leap.py segue corretamente a regra gregoriana. Ela usa `year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)` e rejeita com TypeError tudo 
+
+[auditoria ciclo 1] verdict=rejected: Reprovado. leap.py:3 usa apenas `year % 4 == 0`, então ignora a regra dos séculos e não valida o tipo da entrada. test_leap.py tem só 2 testes (2024 e 2023) e não cobre nem os séculos nem o TypeError. Os testes passam apenas porque não exercitam os casos exigidos.
+   - [blocker] leap.py: A regra dos séculos não foi implementada: 1900 e 2100 retornam True.
+   - [blocker] leap.py: Não há validação de tipo: 2024.0 e True não levantam TypeError.
+   - [blocker] test_leap.py: Faltam testes para os casos de século (1900, 2100, 2000, 2400) e para TypeError ('2024', 2024.0, True).
+
+[auditoria ciclo 2] verdict=approved: A implementação em leap.py segue corretamente a regra gregoriana. Ela usa `year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)` e rejeita com TypeError tudo que não for int, inclusive bool, via `type(year) is not int`. O arquivo test_leap.py manteve os 2 testes originais e acrescentou casos de sé
+
+[uso] [{"agent": "claude-auditor", "day": "2026-11-08", "calls": 2, "input_tokens": 10, "output_tokens": 2502, "reported_cost_usd": 0.1419544}, {"agent": "claude-code", "day": "2026-11-08", "calls": 2, "input_tokens": 8, "output_tokens": 1565, "reported_cost_usd": 0.08226544}]
+
+# git log do workspace de teste
+e029519 aicore: ciclo 2 - is_leap_year
+43bd46d aicore: ciclo 1 - is_leap_year
+a5182e0 aicore: baseline
+
+# leap.py final
+def is_leap_year(year: int) -> bool:
+    """Retorna True se `year` for bissexto no calendário gregoriano.
+
+    Regras: divisível por 4, exceto séculos; séculos só são bissextos
+    se divisíveis por 400. Entradas que não sejam int (incluindo bool)
+    levantam TypeError.
+    """
+    if type(year) is not int:
+        raise TypeError(f"year must be int, got {type(year).__name__}")
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+# test_leap.py final (escrito pelo Claude)
+import pytest
+
+from leap import is_leap_year
+
+
+def test_basic_leap():
+    assert is_leap_year(2024) is True
+
+
+def test_basic_common():
+    assert is_leap_year(2023) is False
+
+
+@pytest.mark.parametrize("year", [1900, 2100, 1800, 2200])
+def test_century_not_divisible_by_400_is_common(year):
+    assert is_leap_year(year) is False
+
+
+@pytest.mark.parametrize("year", [2000, 2400, 1600])
+def test_century_divisible_by_400_is_leap(year):
+    assert is_leap_year(year) is True
+
+
+@pytest.mark.parametrize("year", [1996, 2004, 2008])
+def test_divisible_by_4_non_century_is_leap(year):
+    assert is_leap_year(year) is True
+
+
+@pytest.mark.parametrize("year", [2019, 2021, 2022, 1901])
+def test_not_divisible_by_4_is_common(year):
+    assert is_leap_year(year) is False
+
+
+@pytest.mark.parametrize("value", ["2024", 2024.0, True, False, None, [2024]])
+def test_non_int_raises_type_error(value):
+    with pytest.raises(TypeError):
+        is_leap_year(value)

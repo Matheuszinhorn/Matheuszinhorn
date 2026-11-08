@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+# Estado local (banco, logs, workspaces) nunca vai para o Git
+data/
+workspaces/
+.env
+.env.*
+# Credenciais dos CLIs ficam em ~/.claude e ~/.codex, fora do repositório
