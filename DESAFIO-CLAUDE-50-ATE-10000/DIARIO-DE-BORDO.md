@@ -1406,3 +1406,11 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   Indicadores (velas fechadas de 07/11): BTC 75.753,96 · SMA5 77.043,82 · SMA200 73.186,2 · RSI2 26,5; ETH 2.236,55 · SMA5 2.280,09 · SMA200 2.155,8 · RSI2 31,7.
 - **Paper:** R$ 50,76 (+1,53%), todas as carteiras em caixa; nenhuma operação aberta ou fechada.
 - **Resumo semanal (domingo):** real — 1 posição aberta (OP-003) desde 30/10, praticamente no zero a zero; saída pendente de sinal e de reautorização do conector. Paper — +1,53% acumulado (R2-BTC fechou +4,21% bruto em 05/11).
+
+## ATV-167 — Trading diário (09/11/2026 06:38 BRT)
+- **Real (OP-003 aberta, 0,00055412 ETH):** sem sinal de saída — fechamento do ETH em 08/11 = 2.125,32 < SMA(5) = 2.250,82.
+  Conector da Coinbase **ainda pedindo autenticação** (não foi possível ler saldo/ordens). Marcação pelo livro público
+  ETH-USD (bid 2.107,57): ≈ 1,1678 USDC (−5,9% sobre o custo 1,2412). Valor total estimado ≈ 2,017 USDC (acima do limite de 1,60). Sem queda de −10%.
+  Indicadores (velas fechadas de 08/11): BTC 74.754,08 · SMA5 76.527,29 · SMA200 73.168,9 · RSI2 12,4; ETH 2.125,32 · SMA5 2.250,82 · SMA200 2.154,5 · RSI2 7,6
+  (ETH com RSI2 < 10, mas abaixo da SMA200 — não seria sinal de entrada de qualquer forma; há posição aberta).
+- **Paper:** R$ 50,76 (+1,53%), todas as carteiras em caixa; nenhuma operação aberta ou fechada.
