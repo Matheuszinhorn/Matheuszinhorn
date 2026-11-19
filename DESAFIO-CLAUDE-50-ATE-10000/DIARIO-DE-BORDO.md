@@ -1414,3 +1414,25 @@ Registros nunca são apagados. Correções entram como novas atividades que cita
   Indicadores (velas fechadas de 08/11): BTC 74.754,08 · SMA5 76.527,29 · SMA200 73.168,9 · RSI2 12,4; ETH 2.125,32 · SMA5 2.250,82 · SMA200 2.154,5 · RSI2 7,6
   (ETH com RSI2 < 10, mas abaixo da SMA200 — não seria sinal de entrada de qualquer forma; há posição aberta).
 - **Paper:** R$ 50,76 (+1,53%), todas as carteiras em caixa; nenhuma operação aberta ou fechada.
+
+**Nota:** sem registros no DIÁRIO entre 10/11 e 18/11 (o pipeline parece ter continuado rodando —
+`operacoes-paper.csv`/`estado.json` seguiram atualizados — mas sem lançamento diário aqui nesse
+intervalo). Não reconstruído retroativamente nesta execução.
+
+## ATV-168 — Trading diário (19/11/2026 09:39 UTC)
+- **Real (OP-003 aberta desde 30/10, 0,00055412 ETH):** **conector da Coinbase respondeu
+  normalmente hoje** (saldo e ordens lidos com sucesso). Sem sinal de saída — fechamento do ETH
+  em 18/11 = 1.774,64 < SMA(5) = 1.803,75. Nenhuma ordem executada.
+  - Saldo real: 8,96851106443 USDC + 0,00055412 ETH (≈ 0,9834 USDC ao preço de fechamento) ≈
+    **9,95 USDC total** — bem acima do piso de proteção (1,60 USDC).
+  - **⚠️ Posição em −20,78% sobre o custo de entrada** (1,2412387 USDC → ≈0,9834 USDC) — passou
+    do limiar de aviso de −10%. Avisando o proprietário nesta execução.
+  - Saldo em USDC (8,9685) é bem maior que o registrado ao final da OP-003 (0,8488) — diferença
+    não explicada por nenhuma operação em `operacoes-reais.csv` (possível depósito ou outro
+    crédito na conta; não investigada nesta execução, registrada para verificação).
+  - Indicadores (velas diárias fechadas de 18/11/2026): BTC 62.981,71 · SMA5 64.421,16 ·
+    SMA200 72.718,27 · RSI2 6,95 (RSI2<10, mas close<SMA200 — sem sinal de entrada, e já há
+    posição aberta); ETH 1.774,64 · SMA5 1.803,75 · SMA200 2.135,26 · RSI2 13,16 (sem sinal).
+  - Nenhuma ordem pendente (`orders_list status=OPEN` vazio).
+- **Paper:** R$ 50,76 (+1,53% acumulado), todas as 4 carteiras em caixa; nenhuma operação aberta
+  ou fechada hoje.
