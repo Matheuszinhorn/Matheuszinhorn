@@ -1436,3 +1436,21 @@ intervalo). Não reconstruído retroativamente nesta execução.
   - Nenhuma ordem pendente (`orders_list status=OPEN` vazio).
 - **Paper:** R$ 50,76 (+1,53% acumulado), todas as 4 carteiras em caixa; nenhuma operação aberta
   ou fechada hoje.
+
+## ATV-169 — Trading diário (20/11/2026 09:38 UTC)
+- **Real (OP-003 aberta desde 30/10, 0,00055412 ETH):** conector da Coinbase respondeu
+  normalmente. Sem sinal de saída — fechamento do ETH em 19/11 = 1.755,38 < SMA(5) = 1.801,15.
+  Nenhuma ordem executada.
+  - Saldo real: 8,98015606443 USDC + 0,00055412 ETH (≈ 0,9728 USDC ao preço de fechamento de
+    19/11) ≈ **9,953 USDC total** — acima do piso de proteção (1,60 USDC).
+  - **⚠️ Posição em −21,63% sobre o custo de entrada** (1,2412387 USDC → ≈0,9728 USDC pelo
+    fechamento de 19/11), piorando frente aos −20,78% de ontem. Pelo livro público em tempo
+    real (bid 1.595,96, bem mais baixo que o fechamento diário usado no sinal) a marcação cai
+    para ≈0,8847 USDC, ou **≈−28,7%** — avisando o proprietário nesta execução.
+  - Indicadores (velas diárias fechadas de 19/11/2026): BTC 61.913,23 · SMA5 63.980,05 ·
+    SMA200 72.635,04 · RSI2 3,82 (RSI2<10, mas close<SMA200 — sem sinal de entrada, e já há
+    posição aberta); ETH 1.755,38 · SMA5 1.801,15 · SMA200 2.132,43 · RSI2 8,70 (mesma situação).
+  - Nenhuma ordem pendente (`orders_list status=OPEN` vazio).
+- **Paper:** R$ 50,76 (+1,525% acumulado). R2-BTC +4,676% (mdd −1,99%), R2-ETH +1,423%
+  (mdd −0,993%), R1-BTC e R1-ETH em caixa desde o início (0%). Todas as 4 carteiras em caixa
+  hoje; nenhuma operação aberta ou fechada.
